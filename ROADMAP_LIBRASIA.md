@@ -155,6 +155,13 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [ ] Revisar com pessoas fluentes a adequação das comparações, frases e variantes regionais. Em piloto, observar se as dicas ajudam na tentativa seguinte e verificar o uso da revisão adaptativa.
 - [ ] Retestar a expansão com pessoas fora do treino, incluindo sinais desconhecidos. Revisar a cobertura anunciada a partir dos resultados.
 
+### M10 · Checklist de sinalização contínua
+
+- [x] Treinar e medir geração experimental de texto em gravações de frases, com partição reservada. Registrar erros de inserção, omissão e troca e reproduzir a inferência no Chromium. [Avaliação de geração](docs/sinalizacao-continua.md)
+- [x] Treinar e comparar segmentação supervisionada de fronteiras com uma regra de movimento, usando duplas diferentes em treino, validação e teste. [Protocolo e condições de uso](docs/fronteiras.md)
+- [ ] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo com webcam. Medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada.
+- [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
+
 ### M11 · Checklist de publicação e compatibilidade
 
 - [ ] **Git e ambiente.** Configurar o build da Vercel, a prévia e a versão de produção. Verificar o carregamento do modelo, dos arquivos WebAssembly e do avatar no ambiente publicado. [Deploy a partir de Git na Vercel](https://vercel.com/docs/git)

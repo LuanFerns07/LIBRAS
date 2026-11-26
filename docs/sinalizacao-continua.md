@@ -68,7 +68,7 @@ Também extraímos os mesmos dois recortes no Chromium 156 com o MediaPipe Holis
 | Espaço de sinalização do aplicativo | 42 | 8 | 2 | 25,00% | 4,76% | 8,00% |
 | Atividade por movimento | 42 | 34 | 4 | 11,76% | 9,52% | 10,53% |
 
-O teste evidencia baixa cobertura de fronteiras lexicais. As duas regras propõem intervalos. A edição de glosas, a qualidade do sentido com revisão humana e o reconhecimento de uma sequência livre integrada à webcam ficam em aberto.
+O teste evidencia baixa cobertura de fronteiras lexicais. As duas regras propõem intervalos. O ensaio seguinte treina a detecção de fronteiras com anotações e compara os métodos em outras duplas. A edição de glosas, a qualidade do sentido com revisão humana e o reconhecimento de uma sequência livre integrada à webcam ficam em aberto. [Segmentação supervisionada e condições de uso](fronteiras.md)
 
 ## Reprodução
 
