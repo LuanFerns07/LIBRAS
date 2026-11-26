@@ -32,13 +32,15 @@ def prepare(manifest_path):
 
         filename = PurePosixPath(clip["file"]).name
         archive = f"Sinalizador{signer:02d}"
-        if (clip["file"] != f"raw/{filename}" or not filename.endswith(".mp4")
+        recording = clip["recording"]
+        if (clip["file"] != f"raw/{filename}" or type(recording) is not int
+                or not filename.endswith(f"{archive}-{recording}.mp4")
                 or clip["archive"] != f"{archive}.zip"
                 or clip["member"] != f"{archive}/Canon/{filename}"):
             raise ValueError(f"Caminho ou origem inválidos para {clip['file']}.")
 
         digest = clip["sha256"]
-        identity = (signer, clip["sourceLabel"], clip["recording"])
+        identity = (signer, clip["sourceLabel"], recording)
         if (not re.fullmatch(r"[0-9a-f]{64}", digest) or filename in files
                 or digest in hashes or identity in identities):
             raise ValueError(f"Identidade ou SHA-256 inválido ou repetido para {filename}.")
