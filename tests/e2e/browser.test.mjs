@@ -79,8 +79,12 @@ const appUrl = process.env.LIBRASIA_TEST_URL
 test('aplicação compilada navega, reproduz o avatar, traduz e controla a câmera', {
   skip: !appUrl,
 }, async () => {
-  const base = new URL('/', appUrl).href
-  const origin = new URL(base).origin
+  const url = new URL('/', appUrl)
+  const base = url.href
+  const origin = url.origin
+  const physical = process.env.LIBRASIA_TEST_PHYSICAL === '1'
+  const voiceEnabled = process.env.LIBRASIA_TEST_VOICE === '1'
+  if (physical) assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname), 'Use a prévia local para a câmera física.')
   await withChromium(async ({ page, navigate, evaluate, waitUntil, permission, key }) => {
     const click = selector => evaluate('document.querySelector(' + JSON.stringify(selector) + ').click()', true)
     const text = selector => evaluate('document.querySelector(' + JSON.stringify(selector) + ').textContent.trim()')
@@ -100,16 +104,26 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await click('[data-quiz] input[value="0"]')
     await click('.practice-activity [type="submit"]')
     assert.match(await text('[data-quiz-status]'), /Resposta correta/)
+    await click('[data-review]')
+    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
+    assert.equal(await evaluate('document.activeElement.dataset.stage'), '1')
+    await evaluate('window.oldDocument = true')
+    await page('Page.reload')
+    await waitUntil('!window.oldDocument && document.readyState === "complete" && !!document.querySelector("[data-review]")')
+    await click('[data-review]')
+    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
 
     await open('alfabeto', 'Alfabeto manual')
     assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
-    assert.equal(await evaluate('Array.from(document.querySelectorAll(".letter-grid button"), el => el.textContent).join("")'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    assert.equal(await evaluate('Array.from(document.querySelectorAll(".letter-grid button"), el => el.textContent).join("")'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ')
     await key('Tab', 9)
     assert.equal(await evaluate('document.activeElement.textContent'), 'A')
     assert.equal(await evaluate('document.activeElement.matches(":focus-visible") && getComputedStyle(document.activeElement).outlineStyle !== "none"'), true)
     await key('ArrowRight', 39)
     assert.equal(await text('[aria-pressed="true"]'), 'B')
     await key('End', 35)
+    assert.equal(await text('[aria-pressed="true"]'), 'Ç')
+    await key('ArrowLeft', 37)
     assert.equal(await text('[aria-pressed="true"]'), 'Z')
     await click('[data-play]')
     assert.equal(await text('[data-play]'), 'Pausar')
@@ -118,6 +132,9 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await evaluate('document.querySelector("[data-speed]").value = ".65"; document.querySelector("[data-speed]").dispatchEvent(new Event("change"))')
     await click('[data-restart]')
     assert.equal(await text('[data-play]'), 'Pausar')
+    await click('[data-comparison="0"]')
+    assert.match(await text('[data-comparison-status]'), /Em A.*Em S/)
+    assert.equal(await text('[data-player-step]'), 'A')
 
     await open('tradutor', 'Português para Libras')
     const fill = value => evaluate('document.querySelector("#translate-input").value = ' + JSON.stringify(value) +
@@ -130,6 +147,12 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await submit()
     assert.equal(await evaluate('document.querySelector("[data-translation-status]").dataset.state'), 'ready')
     assert.equal(await text('[data-player-step]'), 'Nome')
+    await fill('Bom dia')
+    await submit()
+    assert.match(await text('[data-translation-status]'), /BOM DIA/)
+    assert.equal(await text('[data-player-step]'), 'Bom')
+    await click('[data-student="fortaleza"]')
+    assert.match(await text('[data-player-step]'), /Aluno · Forma histórica/)
     await fill('Entrada fora do catálogo')
     assert.equal(await evaluate('document.querySelector("[data-play]").disabled'), true)
     await submit()
@@ -139,6 +162,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await submit()
     assert.equal(await text('[data-player-step]'), 'A')
 
+    if (!voiceEnabled) await evaluate('Object.defineProperty(window, "speechSynthesis", { value: undefined, configurable: true }); true')
     await open('area-livre', 'Libras para texto e voz')
     await permission(origin, 'denied')
     await click('[data-camera-toggle]')
@@ -149,11 +173,15 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await waitUntil('document.querySelector("video").srcObject?.getVideoTracks()[0]?.readyState === "live"')
     await evaluate('window.previousCameraTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
     await evaluate('document.querySelector("#transcription").value = "Texto editado do LibrasIA."')
-    if (process.env.LIBRASIA_TEST_VOICE === '1') {
+    if (voiceEnabled) {
       await waitUntil('speechSynthesis.getVoices().some(v => v.localService && v.lang.replaceAll("_", "-").toLowerCase() === "pt-br")')
       await click('[data-speak]')
       await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "accepted"')
       assert.equal(await text('[data-voice-status]'), 'Leitura concluída.')
+    } else {
+      await click('[data-speak]')
+      assert.equal(await evaluate('document.querySelector("[data-voice-status]").dataset.state'), 'unavailable')
+      assert.equal(await evaluate('document.querySelector("#transcription").value'), 'Texto editado do LibrasIA.')
     }
     await click('[data-clear]')
     assert.equal(await evaluate('document.activeElement.id'), 'transcription')
@@ -177,5 +205,5 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       const { writeFile } = await import('node:fs/promises')
       await writeFile(process.env.LIBRASIA_TEST_SCREENSHOT, Buffer.from(data, 'base64'))
     }
-  }, { fakeCamera: process.env.LIBRASIA_TEST_PHYSICAL !== '1' })
+  }, { fakeCamera: !physical })
 })
