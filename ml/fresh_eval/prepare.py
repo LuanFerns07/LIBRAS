@@ -56,8 +56,8 @@ def make_clip(source, sample, output):
         temporary.unlink(missing_ok=True)
 
 
-def prepare(root, context):
-    protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+def prepare(root, context, protocol_path=PROTOCOL):
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
     raw = root / "raw"
     sources = root / "source"
     raw.mkdir(parents=True, exist_ok=True)
@@ -73,7 +73,7 @@ def prepare(root, context):
     if len({clip["sha256"] for clip in clips}) != len(clips):
         raise ValueError("A seleção contém recortes duplicados.")
     manifest = {
-        "protocolSha256": sha256(PROTOCOL),
+        "protocolSha256": sha256(protocol_path),
         "ffmpeg": subprocess.check_output(["ffmpeg", "-version"], text=True).splitlines()[0],
         "clips": clips,
     }
@@ -86,11 +86,12 @@ def prepare(root, context):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--protocol", type=Path, default=PROTOCOL)
     parser.add_argument("--out", type=Path, default=Path("data/fresh-sign"))
     parser.add_argument("--ca-file", type=Path, help="Bundle de CAs para verificação TLS dos downloads.")
     args = parser.parse_args()
     context = ssl.create_default_context(cafile=str(args.ca_file)) if args.ca_file else ssl.create_default_context()
-    prepare(args.out, context)
+    prepare(args.out, context, args.protocol)
 
 
 if __name__ == "__main__":

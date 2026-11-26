@@ -36,12 +36,12 @@ def case_decision(case, prediction, available):
     return "correct" if prediction == case["expected"] else "wrong-label"
 
 
-def evaluate(manifest_path, features_path, runs):
-    protocol = load_json(PROTOCOL)
+def evaluate(manifest_path, features_path, runs, protocol_path=PROTOCOL):
+    protocol = load_json(protocol_path)
     manifest = load_json(manifest_path)
     features = load_json(features_path)
     manifest_sha = digest(manifest_path)
-    if (manifest["protocolSha256"] != digest(PROTOCOL) or features["sourceManifestSha256"] != manifest_sha
+    if (manifest["protocolSha256"] != digest(protocol_path) or features["sourceManifestSha256"] != manifest_sha
             or features["preprocess"] != PREPROCESS or features["mediapipe"] != "0.10.32"):
         raise ValueError("Versão inesperada da preparação ou extração.")
     if len(manifest["clips"]) != len(protocol["clips"]) or len(features["clips"]) != len(protocol["clips"]):
@@ -80,7 +80,7 @@ def evaluate(manifest_path, features_path, runs):
         }
     return {
         "scope": "exploratory-external-didactic-clips", "device": "CPUExecutionProvider",
-        "protocolSha256": digest(PROTOCOL), "manifestSha256": manifest_sha,
+        "protocolSha256": digest(protocol_path), "manifestSha256": manifest_sha,
         "extractorRecipe": features["recipe"], "featuresManifestSha256": digest(features_path),
         "models": result,
     }
@@ -88,12 +88,13 @@ def evaluate(manifest_path, features_path, runs):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--protocol", type=Path, default=PROTOCOL)
     parser.add_argument("--manifest", type=Path, default=Path("data/fresh-sign/manifest.json"))
     parser.add_argument("--features", type=Path, default=Path("data/fresh-sign/features/index.json"))
     parser.add_argument("--runs", type=Path, default=Path("data/models"))
     parser.add_argument("--out", type=Path, default=Path("data/fresh-sign/report.json"))
     args = parser.parse_args()
-    report = evaluate(args.manifest, args.features, args.runs)
+    report = evaluate(args.manifest, args.features, args.runs, args.protocol)
     write_json(args.out, report)
     for version, results in report["models"].items():
         print(version, results["perLabel"])
