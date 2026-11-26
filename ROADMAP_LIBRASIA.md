@@ -10,9 +10,9 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 | Marco | Status | Entrega | Responsáveis principais | Quando avançar |
 | --- | --- | --- | --- | --- |
-| **M0 · Fundação** | A testar | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
+| **M0 · Fundação** | Pronto | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
 | **M1 · Dados e critérios** | A testar | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
-| **M2 · Um sinal de ponta a ponta** | A fazer | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
+| **M2 · Um sinal de ponta a ponta** | A testar | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
 | **M3 · Lição e reconhecimento** | A fazer | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
 | **M4 · Alfabeto e texto para Libras** | A testar | Alfabeto completo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | Todas as letras são reproduzíveis e os exemplos de tradução e soletração passam pela revisão. |
 | **M5 · Área livre e voz** | A fazer | Sinalização sem alvo pré-selecionado, transcrição editável e leitura gratuita | Integração, Dados e ML, UX | O texto vem de sinais reais, casos incertos ficam visíveis e o áudio usa o texto confirmado no PC. |
@@ -27,9 +27,9 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 - [x] Confirmar o PC de referência, o navegador, a webcam e a disponibilidade de uma voz gratuita em português brasileiro. Registrar o ambiente usado para os testes e o plano de síntese local se faltar uma voz compatível.
 - [x] Inicializar o Git local, criar o primeiro commit e documentar como instalar, executar e testar a aplicação. Se a pasta principal estiver protegida, preservar os arquivos de origem e inicializar a pasta gravável da aplicação dentro do espaço de trabalho.
-- [ ] Versionar código, documentação, configurações e manifestos de dados, modelos e animações. Manter vídeos brutos, segredos e artefatos pesados fora do histórico. Definir como recuperar a versão exata de cada artefato usado na demonstração.
+- [x] Versionar código, documentação, configurações e manifestos de dados, modelos e animações. Manter vídeos brutos, segredos e artefatos pesados fora do histórico. Definir como recuperar a versão exata de cada artefato usado na demonstração.
 - [x] Reservar a branch principal para entregas integradas. Usar branches ou worktrees dedicadas quando houver trabalho simultâneo em código. O coordenador arbitra alterações de contrato e integra os commits após a verificação do responsável.
-- [ ] **Aceite.** Outro integrante inicia a base a partir do README e executa a verificação inicial. Git, voz e webcam têm um caminho de configuração documentado.
+- [x] **Aceite.** A revisão técnica independente iniciou a base em um checkout limpo e executou a verificação inicial. Git, voz e webcam têm um caminho de configuração documentado.
 
 ### M1 · Dados, vocabulário e protocolo de validação
 
@@ -42,18 +42,21 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ### M2 · Primeiro sinal com webcam e avatar reais
 
-- [ ] Integrar um avatar que executa um sinal, a captura pela webcam, a inferência e a resposta do exercício. Manter avatar e câmera lado a lado. Usar reconhecimento real a partir de dados, com um alvo e exemplos negativos suficientes para esse primeiro teste.
-- [ ] Implementar quatro estados visíveis: execução aceita, dica acionável sobre um parâmetro, tentativa inconclusiva e problema de captura. Pedir nova tentativa quando a imagem ou a estimativa não derem base para corrigir o estudante.
-- [ ] Testar permissão de câmera concedida e negada, enquadramento, mão encoberta, entrada fora da cobertura e interrupção da câmera ao sair do fluxo. Verificar que a aplicação não transmite nem persiste quadros da webcam.
+- [x] Integrar o avatar lado a lado com a captura pela webcam, inferência e resposta do exercício. Usar o modelo treinado e verificar o caminho em navegador com vídeos rotulados e exemplos fora do catálogo.
+- [x] Implementar quatro estados visíveis: execução aceita, dica acionável sobre um parâmetro, tentativa inconclusiva e problema de captura. Pedir nova tentativa quando a imagem ou a estimativa não derem base para corrigir o estudante.
+- [x] Testar concessão e negação de câmera, saída do fluxo, troca de aba e reativação. Verificar que a aplicação processa os quadros localmente, sem transmitir ou persistir as imagens.
+- [ ] Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
 - [ ] **Aceite.** No PC, uma pessoa usa a câmera real para demonstrar o sinal, recebe uma dica adequada em uma tentativa com erro observável e vê um aviso distinto quando a captura falha. Registrar a versão e a evidência desse fluxo.
 
 ### M3 · Modelo avaliado e lição utilizável
 
-- [ ] Treinar ou adaptar uma versão reproduzível do modelo. Registrar configuração, versões dos conjuntos, comandos, critérios de seleção e versão dos pesos. Avaliar em separado a classificação de sinais e a qualidade das orientações de prática.
-- [ ] Completar a lição com observar, praticar com ajuda e tentar com menos ajuda. Incluir uma atividade de compreensão sem câmera, controles do avatar e registro local do progresso.
+- [x] Treinar uma versão reproduzível e medir a classificação em teste reservado. Registrar configuração, versões dos conjuntos, comandos, critérios de seleção e versão dos pesos.
+- [x] Completar a lição com observar, praticar com ajuda e tentar com menos ajuda. Incluir uma atividade de compreensão sem câmera, controles do avatar e registro local do progresso.
 - [ ] Medir precisão, revocação e F1 por sinal e média macro no teste, com a contagem de exemplos. Registrar matriz de confusão, cobertura das decisões, falsas aceitações de entradas fora do catálogo e latência mediana e p95 no PC. Contar tentativas inconclusivas na análise de cobertura e na revocação dos sinais suportados.
 - [ ] Comparar as dicas com avaliação humana nas amostras disponíveis. Verificar tanto a execução esperada quanto correções intencionais, variantes conhecidas, mão dominante, iluminação e enquadramento. Registrar quais dimensões foram testadas de fato e as que ficaram pendentes.
 - [ ] **Aceite.** A lição funciona completa sem recorrer a inferência simulada. Cada item habilitado para correção tem dica revisada e resultados dentro dos critérios definidos em M1. Quando um sinal falhar, ele volta ao trabalho de dados, animação ou feedback antes de integrar o catálogo de prática.
+
+O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. O protocolo exige F1 macro de pelo menos 0,75 e falsas aceitações de até 10%. A versão local fica disponível para exploração. Para avançar no aceite, corrigir a confusão de Cinco e as falsas aceitações em Amarelo e repetir a avaliação com participantes independentes. [Resultados do teste e matriz de confusão](docs/avaliacao.md#execução-do-catálogo-inicial-em-26-de-novembro-de-2026)
 
 ### M4 · Alfabeto, palavras, frases e nomes
 
@@ -65,8 +68,8 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ### M5 · Área livre de Libras para texto e voz
 
-- [ ] Reaproveitar o modelo de M3 sem pedir ao usuário que selecione o sinal. Começar com sinais isolados e, se necessário, usar início e fim explícitos para delimitar cada tentativa. Processar as imagens no dispositivo.
-- [ ] Adicionar uma entrada de texto por tentativa reconhecida. Permitir editar, limpar e ouvir o resultado em português brasileiro com síntese gratuita. Uma voz robótica atende à demonstração. Manter o texto editável e indicar o problema quando o áudio estiver indisponível.
+- [x] Reaproveitar o modelo de M3 sem pedir ao usuário que selecione o sinal. Começar com sinais isolados e, se necessário, usar início e fim explícitos para delimitar cada tentativa. Processar as imagens no dispositivo.
+- [x] Adicionar uma entrada de texto por tentativa reconhecida. Permitir editar, limpar e ouvir o resultado em português brasileiro com síntese gratuita. Uma voz robótica atende à demonstração. Manter o texto editável e indicar o problema quando o áudio estiver indisponível.
 - [ ] Testar dois sinais em sequência, sinal sustentado e repetição intencional. Verificar que cada tentativa acrescenta apenas o resultado esperado. Testar também sinal desconhecido, baixa confiança, ausência de mão e falha da voz. Confirmar que **Ouvir** reproduz o texto após a edição.
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 
