@@ -18,7 +18,8 @@ Anote a versão de catálogo e a revisão do avatar da compilação testada. Reg
 
 ~~~bash
 git rev-parse HEAD
-sha256sum public/models/isolated.onnx public/models/isolated.json
+curl -fsS http://127.0.0.1:4173/models/isolated.onnx | sha256sum
+curl -fsS http://127.0.0.1:4173/models/isolated.json | sha256sum
 ~~~
 
 Use a resolução da trilha observada e o intervalo de amostragem da versão instalada. No reconhecedor atual, o intervalo configurado é 100 ms. Para conferir a resolução, após a pessoa ligar a câmera, leia os valores width e height no console da aba do aplicativo.

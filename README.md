@@ -18,7 +18,7 @@ Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se
 ./scripts/executar-local.sh
 ```
 
-Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando necessário, verifica o extrator de visão, instala os pesos locais disponíveis e inicia a versão compilada. Use Ctrl+C no terminal para encerrar. Se precisar de outra porta, execute `LIBRASIA_PORTA=4175 ./scripts/executar-local.sh`.
+Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando necessário, verifica o extrator de visão e compila com os pesos locais disponíveis. Use Ctrl+C no terminal para encerrar. Cada execução tem sua própria cópia dos arquivos compilados. Para comparar com o modelo expandido em uma segunda janela, execute `LIBRASIA_PORTA=4175 LIBRASIA_MODELO=data/models/isolated-expanded ./scripts/executar-local.sh`.
 
 No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto** ou **Tradutor** para abrir o avatar, e **Área livre** para editar e ouvir o texto. Autorize a câmera ao usar **Ativar câmera**. O endereço de loopback permite o uso local da webcam.
 

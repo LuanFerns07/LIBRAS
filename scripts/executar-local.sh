@@ -16,6 +16,9 @@ node --input-type=module -e '
 '
 
 mkdir -p .cache
+previa=$(mktemp -d "$PWD/.cache/previa.XXXXXX")
+trap 'rm -rf -- "$previa"' EXIT
+mkdir -p "$previa/public"
 (
   flock 9
   if [[ ! -x node_modules/.bin/vite ||
@@ -25,17 +28,26 @@ mkdir -p .cache
     npm ci --prefer-offline --no-fund
     sha256sum package-lock.json > node_modules/.librasia-lock.sha256
   fi
+  npm run setup:vision
+  cp -aL --reflink=auto public/. "$previa/public/"
 ) 9> .cache/librasia-deps.lock
 
-npm run setup:vision
 modelo="${LIBRASIA_MODELO:-data/models/isolated-v1}"
 if [[ -n "${LIBRASIA_MODELO:-}" || -f "$modelo/isolated.onnx" || -f "$modelo/isolated.json" ]]; then
-  npm run setup:model -- "$modelo"
-elif [[ ! -f public/models/isolated.onnx || ! -f public/models/isolated.json ]]; then
+  npm run setup:model -- "$modelo" "$previa/public/models"
+elif [[ -f "$previa/public/models/isolated.onnx" && -f "$previa/public/models/isolated.json" ]]; then
+  npm run setup:model -- "$previa/public/models" "$previa/public/models"
+else
   printf '%s\n' 'O avatar e as atividades sem câmera estão disponíveis. Para reconhecer sinais, instale os pesos descritos em docs/avaliacao.md.'
 fi
 
-npm run build
+node --input-type=module - "$previa" <<'JS'
+import { join } from 'node:path'
+import { build } from 'vite'
+
+const directory = process.argv[2]
+await build({ publicDir: join(directory, 'public'), build: { outDir: join(directory, 'dist') } })
+JS
 porta="${LIBRASIA_PORTA:-4173}"
 printf 'Abra http://127.0.0.1:%s/ no Chromium. Use Ctrl+C para encerrar.\n' "$porta"
-exec npm run preview -- --host 127.0.0.1 --port "$porta" --strictPort
+npm run preview -- --host 127.0.0.1 --port "$porta" --strictPort --outDir "$previa/dist"
