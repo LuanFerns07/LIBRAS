@@ -70,6 +70,8 @@ A combinação de geometria e flexão chegou a F1 macro de 0,761 e 3/42 falsas a
 
 A média de geometria e movimento com treino suplementar elevou Espelho a 16/21. Amarelo acertou 12/21 e oito das nove perdas já tinham outra classe em primeiro lugar antes do limiar. A combinação registrou 6/42 falsos aceites. [Diagnóstico por sinal](docs/avaliacao.md#geometria-combinada-com-o-treino-suplementar)
 
+O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em Amarelo, contra 13/21 no controle, e baixou de 5/42 para 3/42 os falsos aceites. A precisão de Amarelo ficou em 73,7%, abaixo da meta de 75%. A validação com participantes segue pendente. [Comparação por pessoa](docs/avaliacao.md#posição-da-mão-em-relação-ao-nariz)
+
 ### M4 · Alfabeto, palavras, frases e nomes
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)

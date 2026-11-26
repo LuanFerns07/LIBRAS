@@ -318,3 +318,14 @@ Compare `ConvSequenceNose` com `ConvSequenceNoseMasked`. Os dois usam a mesma ar
   --reference ConvSequenceNoseMasked --candidate ConvSequenceNose \
   --out data/models/isolated-nose/cross-validation.json
 ```
+
+### Comparação por pessoa
+
+As três rodadas usaram as sete pessoas da partição de treino, com 80 épocas por rodada na RTX 4060, semente 7391 e lote de 12. A extração manteve os mesmos 192 canais nos 119 clipes utilizáveis. Nos dois esquemas, o mesmo clipe fora do catálogo ficou inconclusivo por rastreamento insuficiente. [Recorte e integridade](rosto-dados.md) · [Matrizes e diagnóstico por rodada](../ml/evidence/isolated-nose/cross-validation.json)
+
+| Condição | Cinco | Espelho | Amarelo | Aluno | Cobertura | Falsas aceitações | F1 macro |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Controle com relações zeradas | 15/18 | 18/21 | 13/21 | 13/18 | 61/78 | 5/42 | 0,818 |
+| Relações com o nariz | 15/18 | 17/21 | 14/21 | 13/18 | 66/78 | 3/42 | 0,806 |
+
+As relações com o nariz levaram a revocação de Amarelo de 61,9% a 66,7% e baixaram os falsos aceites de 11,9% a 7,1%. A precisão de Amarelo caiu de 81,3% a 73,7%, abaixo da meta de 75%. As sete perdas do candidato tiveram a classe fora do catálogo em primeiro lugar. Cinco delas se concentram nas pessoas 03 e 06. O efeito observado sobre Amarelo é de um acerto adicional e um F1 por sinal praticamente igual, de 0,703 para 0,700. A prévia local segue com o modelo combinado de geometria e flexão. [Metas](protocolo-aceite.md#metas-de-aceite) · [Prévia local](previa-estavel.md)
