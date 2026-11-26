@@ -1,0 +1,48 @@
+# Inscrição no Prêmio Inteligência Artificial e Formação Universitária
+
+- **Título** · LibrasIA — Inteligência Artificial para a Democratização do Ensino da Língua Brasileira de Sinais
+- **Categoria III** · Soluções Tecnológicas
+- **Eixo III** · IA e Inovação Pedagógica
+- **Área 5** · Linguagens, Artes e Multidisciplinar
+- **Fechamento interno** · 29 de novembro de 2026
+- **Prazo do edital** · 30 de novembro de 2026 às 23h59, horário de Brasília. O item 5.2.1 fixa o horário e o Aditivo nº 1 prorroga a data. [Edital](https://catedraldt.virtual.ufc.br/wp-content/uploads/2026/11/edital-premio-catedra-ia-2026.pdf) · [Aditivo](https://ufcinforma.ufc.br/storage/ufc-media/docs/doc-261105-aditivo-premio-catedra-luiza-teodoro.pdf)
+
+## Resumo preliminar para o documento 3
+
+**Integrantes** · Luan Fernandes e Wellington Sales. A equipe deve conferir os nomes completos, o título e a classificação antes da inscrição.
+
+O LibrasIA é uma iniciativa educacional sem fins lucrativos que propõe prática guiada de Língua Brasileira de Sinais em computadores com webcam. Um avatar tridimensional apresenta o alfabeto manual e sinais de um vocabulário limitado. A prática usa pontos corporais extraídos das imagens no dispositivo para reconhecer tentativas isoladas. A saída em texto permanece editável antes da leitura em português brasileiro. O mesmo avatar apresenta sequências catalogadas e soletra nomes. A avaliação distingue o reconhecimento de sinais da qualidade das dicas pedagógicas e prevê partições por pessoa sinalizante, teste de entradas fora da cobertura e medidas de latência. O memorial registra as versões, os resultados efetivamente observados e as limitações da demonstração.
+
+Atualize o resumo depois do aceite. Conte os caracteres de todo o documento 3, incluindo suas identificações. O limite é 1.500 sem espaços.
+
+## Conferência do arquivo único
+
+| Ordem | Documento | Situação ou conferência |
+| --- | --- | --- |
+| 1 | Identificação oficial com foto de todos os integrantes | Obter dos titulares. Conferir legibilidade. |
+| 2 | Comprovante de vínculo ativo com a UFC | Obter dos integrantes, preferencialmente via SIGAA. |
+| 3 | Resumo identificado | Usar o texto acima como base e conferir o limite. |
+| 4 | Memorial técnico descritivo | Completar a [base do memorial](memorial.tex) com as evidências da versão escolhida. |
+| 5 | Anexo II do edital | Preencher o modelo oficial e coletar as assinaturas digitais ou eletrônicas de todos. |
+| 6 | Anexo III do edital | Marcar o uso de IA generativa no modelo oficial e coletar as assinaturas digitais ou eletrônicas de todos. |
+| 7 | Anexo IV do edital | Preencher o modelo oficial e obter a assinatura digital ou eletrônica do responsável e/ou dos demais integrantes. |
+| 8 | Links complementares opcionais | Usar apenas URLs autorizadas e confirmar acesso anônimo. |
+
+- Confirmar a instituição ou unidade acadêmica da capa e a pessoa responsável no formulário. Usar os mesmos título, categoria, eixo e área no resumo, anexos e formulário.
+- Conferir o memorial de até 20 laudas com a fonte Times New Roman 12, entrelinhas 1,5, margens de 3 cm e texto justificado. Preservar a avaliação cega no memorial quando possível e manter a identificação no documento 3.
+- Descrever o uso de IA e registrar as contribuições intelectuais humanas comprováveis, inclusive decisões, análises, revisões e validações que a equipe tiver executado.
+- Reunir os documentos legíveis em um PDF de até 40 MB. Preservar as assinaturas e conferir o arquivo final no validador adotado pela equipe. Documentos pessoais e PDFs assinados devem ficar fora do Git.
+- Enviar pelo formulário oficial somente após a conferência do arquivo. O edital não prevê complementação após o envio. [Formulário da UFC](https://docs.google.com/forms/d/e/1FAIpQLSem93yeY1QOBkT1mt5tSGcnIkrqwwj30tpPGj3fGmCO6xYlGQ/viewform?usp=header)
+
+## Gerar uma prévia do memorial
+
+Com XeLaTeX e os pacotes indicados no arquivo, execute na raiz:
+
+~~~bash
+mkdir -p /tmp/librasia-memorial
+xelatex -halt-on-error -output-directory=/tmp/librasia-memorial docs/memorial.tex
+pdfinfo /tmp/librasia-memorial/memorial.pdf
+pdffonts /tmp/librasia-memorial/memorial.pdf
+~~~
+
+A compilação usa Tinos como substituta quando Times New Roman não está instalada. Nesse caso o próprio documento sinaliza que o PDF serve apenas para revisão. Gere o arquivo de inscrição em um ambiente com Times New Roman e confirme a fonte com pdffonts.

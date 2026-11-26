@@ -1,0 +1,92 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{fontspec}
+\usepackage[brazil]{babel}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+
+\newif\ifsubmissionfont
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}
+  \submissionfonttrue
+}{
+  \IfFontExistsTF{Tinos}{\setmainfont{Tinos}}{}
+}
+\onehalfspacing
+
+\newcommand{\projecttitle}{LibrasIA — Inteligência Artificial para a Democratização do Ensino da Língua Brasileira de Sinais}
+\hypersetup{pdftitle={\projecttitle},pdfsubject={Memorial descritivo}}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  Universidade Federal do Ceará\par
+  \vfill
+  \textbf{\projecttitle}\par
+  \medskip
+  Memorial técnico descritivo\par
+  Categoria III — Soluções Tecnológicas\par
+  Eixo III — IA e Inovação Pedagógica\par
+  Área 5 — Linguagens, Artes e Multidisciplinar\par
+  \medskip
+  \textit{Minuta para revisão da equipe}\par
+  \ifsubmissionfont\else
+    \textit{Prévia com fonte substituta. A versão de inscrição requer Times New Roman.}\par
+  \fi
+  \vfill
+  Fortaleza\par
+  2026
+\end{titlepage}
+
+\section*{Resumo}
+
+O LibrasIA propõe a prática guiada de Língua Brasileira de Sinais em computadores com webcam. Um avatar tridimensional demonstra o alfabeto manual e sinais selecionados. O reconhecimento parte de pontos corporais calculados localmente e se restringe a tentativas isoladas dentro do vocabulário do modelo. No modo livre, as decisões aceitas alimentam uma transcrição editável que pode ser lida em português brasileiro. O protocolo analisa classificação em pessoas fora do treinamento, rejeição de entradas desconhecidas, latência e adequação das dicas. O memorial deve incorporar os resultados auditados da versão apresentada e as limitações observadas em sua execução.
+
+\section{Introdução}
+
+O exercício de uma língua visual-espacial envolve observar as mãos, o corpo e o movimento e repetir os sinais em contexto. A proposta emprega um avatar para demonstrar execuções e oferece prática com a própria webcam, em ritmo controlado pelo estudante. O projeto se relaciona ao Eixo III, IA e Inovação Pedagógica, pela aplicação de visão computacional e feedback em exercícios de formação inicial. O público inicial inclui estudantes universitários em contato com Libras.
+
+\section{Desenvolvimento}
+
+\subsection{Experiência de aprendizagem}
+
+A lição propõe observar, praticar com ajuda e tentar com menos ajuda. Uma atividade de compreensão complementa a prática sem solicitar acesso à câmera. O estudante pode pausar, repetir e reduzir a velocidade do avatar. O alfabeto e a soletração utilizam o mesmo player. A tradução a partir do português é restrita ao catálogo de palavras, frases e modelos de frase, com comunicação explícita da cobertura.
+
+\subsection{Arquitetura proposta}
+
+A aplicação é executada no navegador. O avatar 3D utiliza Three.js. O fluxo de reconhecimento recebe imagens da câmera, extrai pontos das mãos e do corpo pelo MediaPipe Holistic e forma uma janela temporal normalizada. Uma rede pequena de convolução unidimensional é treinada em PyTorch e exportada para ONNX, com inferência no navegador pelo ONNX Runtime Web. A etapa de decisão combina a qualidade da captura e a confiança do classificador. O exercício usa um parâmetro observável para orientar uma correção quando há evidência suficiente. As imagens são processadas no dispositivo e o progresso da lição é registrado localmente.
+
+\subsection{Dados e avaliação}
+
+A seleção dos sinais precisa considerar dados licenciados, a cobertura entre pessoas e uma demonstração fiel no avatar. O MINDS-Libras é a primeira fonte candidata. A partição por pessoa sinalizante preserva todos os registros e derivações de uma pessoa no mesmo grupo. A validação escolhe os parâmetros de decisão e o teste reservado mede precisão, revocação e F1 por sinal, F1 macro, cobertura das decisões e falsas aceitações de amostras fora do catálogo. As métricas devem indicar as contagens e o denominador. A avaliação mede também a latência mediana e o percentil 95 no PC, com o avatar ativo.
+
+A orientação pedagógica precisa de uma verificação própria com amostras intencionalmente corrigíveis, execuções esperadas e variações de mão dominante, iluminação e enquadramento. O critério de acerto da dica deve ser uma avaliação humana. O teste do classificador é insuficiente para medir aprendizagem.
+
+\subsection{Evidências da versão}
+
+O levantamento de ambiente em 26 de novembro de 2026 identificou Debian 13.8, Chromium 156.0.8078.79, webcam ACER HD User Facing, GPU NVIDIA GeForce RTX 4060 Laptop com 8.188 MiB e voz local Portuguese (Brazil) no módulo eSpeak NG do Speech Dispatcher. A inspeção confirmou a disponibilidade dos componentes no sistema operacional. O teste integrado precisa comprovar captura, reprodução de voz e inferência no navegador durante a demonstração.
+
+Preencher esta seção com o commit, a revisão dos dados, as versões e somas de verificação dos modelos e o catálogo usado. Incorporar a matriz de confusão, o desempenho por classe e as métricas de rejeição e latência do teste reservado. Acrescentar as evidências do roteiro no PC, com os resultados observados e as limitações de cada etapa. A revisão linguística do avatar, das frases e das dicas precisa de registro próprio.
+
+\subsection{Uso de inteligência artificial generativa na elaboração}
+
+O Codex, da OpenAI, auxiliou a organização do roteiro de testes, a elaboração desta minuta, a implementação do protótipo e a preparação de verificações técnicas. Os números e achados apresentados devem ser rastreáveis a execuções registradas. A equipe deve rever o documento, registrar as próprias contribuições intelectuais com evidências e assumir a responsabilidade pela versão submetida. A equipe forneceu a proposta, o roteiro inicial do produto e os critérios de aceite versionados no repositório.
+
+\section{Conclusão}
+
+A execução no navegador torna possível propor atividades que processam vídeo no dispositivo e usam hardware convencional. A versão da demonstração deve declarar o vocabulário e as condições que seus testes cobriram. Ampliação regional do vocabulário, reconhecimento de sinalização contínua, validação pedagógica com estudantes e publicação móvel são etapas posteriores que precisam de avaliação própria.
+
+\section*{Referências}
+
+UNIVERSIDADE FEDERAL DO CEARÁ. \textbf{Edital nº 1/2026. Prêmio Inteligência Artificial e Formação Universitária}. Fortaleza, 2026. Disponível no \href{https://catedraldt.virtual.ufc.br/wp-content/uploads/2026/11/edital-premio-catedra-ia-2026.pdf}{portal da Cátedra Luíza de Teodoro}. Acesso em 26 nov. 2026.
+
+UNIVERSIDADE FEDERAL DO CEARÁ. \textbf{Aditivo nº 1 ao Edital nº 1/2026}. Fortaleza, 2026. Disponível no \href{https://ufcinforma.ufc.br/storage/ufc-media/docs/doc-261105-aditivo-premio-catedra-luiza-teodoro.pdf}{portal UFC Informa}. Acesso em 26 nov. 2026.
+
+UNIVERSIDADE FEDERAL DE MINAS GERAIS. \textbf{MINDS-Libras}. Registro disponível no \href{https://repositorio.ufmg.br/items/b4a21355-8b2d-445f-a610-d95f07e28b2a}{Repositório Institucional da UFMG}. Acesso em 26 nov. 2026.
+
+GOOGLE AI EDGE. \textbf{MediaPipe Holistic Landmarker}. Exemplo de integração disponível no \href{https://github.com/google-ai-edge/mediapipe-samples-web/blob/main/src/workers/holistic-landmarker.worker.ts}{repositório de exemplos para web}. Acesso em 26 nov. 2026.
+
+ONNX RUNTIME. \textbf{ONNX Runtime Web}. Documentação disponível no \href{https://onnxruntime.ai/docs/tutorials/web/}{portal do projeto}. Acesso em 26 nov. 2026.
+
+\end{document}
