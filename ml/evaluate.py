@@ -10,7 +10,7 @@ import numpy as np
 import onnxruntime as ort
 import torch
 
-from dataset import CATALOGS, FEATURES, FRAMES, LABELS, digest, load_features, write_json
+from dataset import CATALOGS, FEATURE_COUNTS, FEATURES, FRAMES, LABELS, digest, load_features, write_json
 from metrics import checks, decide, measure
 from model import ARCHITECTURES
 
@@ -38,10 +38,13 @@ def verified_inputs(features, run):
         raise ValueError("Manifesto do artefato incompatível.")
     if manifest["labels"] != training.get("labels", list(LABELS)):
         raise ValueError("O catálogo do treino difere do manifesto.")
+    if (manifest.get("features") != FEATURE_COUNTS.get(manifest.get("preprocess"))
+            or manifest["features"] != ARCHITECTURES[training["arch"]].raw_features):
+        raise ValueError("O pré-processamento difere do contrato da arquitetura.")
     return training, manifest, paths
 
 
-def create_session(path, labels=LABELS):
+def create_session(path, labels=LABELS, feature_count=FEATURES):
     options = ort.SessionOptions()
     options.intra_op_num_threads = 1
     options.inter_op_num_threads = 1
@@ -51,7 +54,7 @@ def create_session(path, labels=LABELS):
     inputs, outputs = session.get_inputs(), session.get_outputs()
     if len(inputs) != 1 or len(outputs) != 1 or inputs[0].name != "landmarks" or outputs[0].name != "logits":
         raise ValueError("Contrato dos nomes do ONNX incompatível.")
-    if inputs[0].shape != [1, FRAMES, FEATURES] or outputs[0].shape != [1, len(labels)]:
+    if inputs[0].shape != [1, FRAMES, feature_count] or outputs[0].shape != [1, len(labels)]:
         raise ValueError("Contrato das dimensões do ONNX incompatível.")
     return session, elapsed
 
@@ -61,14 +64,15 @@ def run_inference(rows, model, session, threshold):
     max_error = 0.0
     disagreements = 0
     durations = []
-    warmup = {"landmarks": np.zeros((1, FRAMES, FEATURES), dtype=np.float32)}
+    shape = (1, FRAMES, model.raw_features)
+    warmup = {"landmarks": np.zeros(shape, dtype=np.float32)}
     for _ in range(5):
         session.run(["logits"], warmup)
 
     for row in rows:
         if row.values is None:
             continue
-        input_value = row.values.reshape(1, FRAMES, FEATURES)
+        input_value = row.values.reshape(shape)
         start = perf_counter_ns()
         (output,) = session.run(["logits"], {"landmarks": input_value})
         durations.append((perf_counter_ns() - start) / 1_000_000)
@@ -114,7 +118,7 @@ def main():
     threshold = manifest["threshold"]
     model = ARCHITECTURES[training["arch"]](len(labels)).eval()
     model.load_state_dict(torch.load(paths["checkpointSha256"], map_location="cpu", weights_only=True))
-    session, model_load_ms = create_session(paths["modelSha256"], labels)
+    session, model_load_ms = create_session(paths["modelSha256"], labels, manifest["features"])
     logits_by_index, max_error, durations = run_inference(selected, model, session, threshold)
     results, details = measure(selected, logits_by_index, threshold, labels)
     capture = dict(Counter(row.state for row in selected))

@@ -17,6 +17,7 @@ class ProbabilityAverage(torch.nn.Module):
     def __init__(self, models):
         super().__init__()
         self.models = torch.nn.ModuleList(models)
+        self.raw_features = models[0].raw_features
 
     def forward(self, frames):
         scores = torch.stack([model(frames).log_softmax(dim=1) for model in self.models], dim=0)
@@ -51,7 +52,7 @@ def main():
     _, threshold, _ = choose_threshold(rows, collect(model, rows, "cpu"), labels)
     args.out.mkdir(parents=True, exist_ok=True)
     onnx_path = export(model, args.out)
-    session, _ = create_session(onnx_path, labels)
+    session, _ = create_session(onnx_path, labels, manifest["features"])
     logits, error, _ = run_inference(rows, model, session, threshold)
     metrics, _ = measure(rows, logits, threshold, labels)
     manifest.update(threshold=threshold, modelSha256=digest(onnx_path))

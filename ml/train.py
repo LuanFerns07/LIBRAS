@@ -13,7 +13,7 @@ import numpy as np
 import onnx
 import torch
 
-from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, add_training_positives, digest, load_features, write_json
+from dataset import CATALOGS, FEATURE_COUNTS, FEATURES, FRAMES, LABELS, add_training_positives, digest, load_features, write_json
 from metrics import checks, choose_threshold
 from model import ARCHITECTURES
 from partial_negatives import load_partial_negatives
@@ -22,10 +22,13 @@ SEED = 7391
 
 
 def augment(inputs, random):
-    shaped = inputs.reshape(-1, FRAMES, 48, 4).clone()
+    width = inputs.shape[-1]
+    shaped = inputs.reshape(-1, FRAMES, width // 4, 4).clone()
     # Espelha o sinal inteiro e troca os lados anatômicos.
     mirror = torch.rand(len(shaped), generator=random) < 0.5
     permutation = [1, 0, 3, 2, 5, 4, *range(27, 48), *range(6, 27)]
+    if width > FEATURES:
+        permutation.append(48)
     shaped[mirror] = shaped[mirror][:, :, permutation]
     shaped[mirror, :, :, 0] *= -1
 
@@ -33,7 +36,7 @@ def augment(inputs, random):
     scale = .9 + .2 * torch.rand((len(shaped), 1, 1, 1), generator=random)
     noise = 0.012 * torch.randn(shaped[:, :, :, :3].shape, generator=random)
     shaped[:, :, :, :3] = (shaped[:, :, :, :3] * scale + noise) * shaped[:, :, :, 3:]
-    return shaped.reshape(-1, FRAMES, FEATURES)
+    return shaped.reshape(-1, FRAMES, width)
 
 
 def collect(model, rows, device):
@@ -54,6 +57,8 @@ def train(rows, device, epochs, batch_size, seed, catalog=LABELS, arch="ConvSequ
     validation = [row for row in rows if row.partition == "val"]
     examples = [row for row in rows if row.partition == "train" and row.values is not None]
     features = torch.from_numpy(np.stack([row.values for row in examples]))
+    if features.shape[-1] != ARCHITECTURES[arch].raw_features:
+        raise ValueError(f"A arquitetura {arch} exige {ARCHITECTURES[arch].raw_features} canais por quadro.")
     variants = []
     for position, example in enumerate(examples):
         pair = (partial_negatives or {}).get(example.index, {})
@@ -118,7 +123,7 @@ def export(model, output):
     temporary = output / "isolated.onnx.tmp"
     with torch.inference_mode():
         torch.onnx.export(
-            model, torch.zeros(1, FRAMES, FEATURES), str(temporary),
+            model, torch.zeros(1, FRAMES, model.raw_features), str(temporary),
             input_names=["landmarks"], output_names=["logits"], opset_version=17, dynamo=False,
         )
     onnx.checker.check_model(onnx.load(temporary))
@@ -163,7 +168,7 @@ def main():
     torch.save(model.state_dict(), checkpoint)
     onnx_path = export(model, args.out)
     manifest = {
-        "preprocess": PREPROCESS, "frames": FRAMES, "features": FEATURES,
+        "preprocess": index["preprocess"], "frames": FRAMES, "features": FEATURE_COUNTS[index["preprocess"]],
         "inputName": "landmarks", "outputName": "logits", "labels": list(catalog),
         "threshold": best["threshold"], "modelSha256": digest(onnx_path),
         "extratorSha256": index["modelSha256"], "license": "CC-BY-4.0",

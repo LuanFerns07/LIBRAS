@@ -14,6 +14,8 @@ FRAMES = 24
 FEATURES = 192
 SHAPE = (FRAMES, FEATURES)
 PREPROCESS = "holistic-shoulders-v1"
+NOSE_PREPROCESS = "holistic-shoulders-nose-v1"
+FEATURE_COUNTS = {PREPROCESS: FEATURES, NOSE_PREPROCESS: FEATURES + 4}
 
 
 @dataclass(frozen=True)
@@ -41,7 +43,8 @@ def load_features(index_path, partitions, labels=LABELS, *, training_negatives=F
     if not required or not required.issubset(labels):
         raise ValueError("As classes exigidas devem pertencer ao catálogo.")
     index = json.loads(index_path.read_text(encoding="utf-8"))
-    if index.get("preprocess") != PREPROCESS or index.get("mediapipe") != "0.10.32":
+    feature_count = FEATURE_COUNTS.get(index.get("preprocess"))
+    if feature_count is None or index.get("mediapipe") != "0.10.32":
         raise ValueError("Versão de pré-processamento ou extrator inesperada.")
     seen = set()
     inputs = set()
@@ -72,7 +75,7 @@ def load_features(index_path, partitions, labels=LABELS, *, training_negatives=F
             raise ValueError(f"Estado de extração inválido para {checksum}.")
         values = None
         if state == "ready":
-            values = np.asarray(computed["values"], dtype=np.float32).reshape(SHAPE)
+            values = np.asarray(computed["values"], dtype=np.float32).reshape(FRAMES, feature_count)
             if not np.isfinite(values).all() or not np.isin(values[:, 3::4], [0.0, 1.0]).all():
                 raise ValueError(f"Valores ou máscaras inválidos para {checksum}.")
             tensor = values.tobytes()

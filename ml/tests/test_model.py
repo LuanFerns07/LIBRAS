@@ -9,7 +9,8 @@ import torch
 
 from dataset import Clip
 from evaluate import create_session, run_inference
-from model import ARCHITECTURES, ConvSequenceFlexion, ConvSequenceGated, ConvSequenceGeometry, ConvSequenceMotion
+from model import (ARCHITECTURES, ConvSequenceFlexion, ConvSequenceGated, ConvSequenceGeometry,
+                   ConvSequenceMotion, ConvSequenceNose, ConvSequenceNoseMasked)
 from train import augment, export
 
 
@@ -24,13 +25,14 @@ class ModelTests(TestCase):
 
     def test_export_preserves_outputs_and_decisions(self):
         torch.set_num_threads(1)
-        inputs = np.random.default_rng(7391).normal(size=(24, 192)).astype(np.float32)
-        inputs[:, 3::4] = 1
-        row = Clip(0, 1, 1, "test", "fixture", "cinco", "ready", inputs, [])
         for architecture in ARCHITECTURES.values():
             with self.subTest(architecture=architecture.__name__), TemporaryDirectory() as directory:
+                width = architecture.raw_features
+                inputs = np.random.default_rng(7391).normal(size=(24, width)).astype(np.float32)
+                inputs[:, 3::4] = 1
+                row = Clip(0, 1, 1, "test", "fixture", "cinco", "ready", inputs, [])
                 model = architecture(4).eval()
-                session, _ = create_session(export(model, Path(directory)))
+                session, _ = create_session(export(model, Path(directory)), feature_count=width)
                 outputs, maximum, latencies = run_inference([row], model, session, .5)
                 self.assertEqual(outputs[0].shape, (4,))
                 self.assertLess(maximum, 1e-5)
@@ -97,3 +99,17 @@ class ModelTests(TestCase):
         torch.testing.assert_close(measured[0, 1, 8:12], torch.tensor([0., -.2, 0., 1.]))
         self.assertEqual(measured[0, 2:4, 8:12].count_nonzero().item(), 0)
         self.assertEqual(measured[..., 16:].count_nonzero().item(), 0)
+
+    def test_nose_reference_recovers_relative_hand_location_and_respects_missing_points(self):
+        sample = torch.zeros(1, 24, 196)
+        sample[..., 192:] = torch.tensor([.2, -.7, -.1, 1.])
+        sample[..., 24:28] = torch.tensor([.3, -.2, .5, 1.])
+        sample[..., 56:60] = torch.tensor([.4, -.6, .2, 1.])
+        present = ConvSequenceNose(4).nose_channels(sample)
+        torch.testing.assert_close(present[0, 0, :4], torch.tensor([.1, .5, .6, 1.]))
+        torch.testing.assert_close(present[0, 0, 4:8], torch.tensor([.2, .1, .3, 1.]))
+        self.assertEqual(present[..., 8:].count_nonzero().item(), 0)
+        self.assertEqual(ConvSequenceNoseMasked(4).nose_channels(sample).count_nonzero().item(), 0)
+        sample[..., 195] = 0
+        self.assertEqual(ConvSequenceNose(4).nose_channels(sample).count_nonzero().item(), 0)
+        self.assertTrue(bool((augment(sample, torch.Generator().manual_seed(2))[..., 192:] == 0).all()))

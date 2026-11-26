@@ -305,3 +305,16 @@ Entre as nove perdas de Amarelo, a classe fora do catálogo ficou em primeiro lu
   --candidate-positives data/minds-extra/features/index.json \
   --out data/models/isolated-geometry-motion-extra/cross-validation.json
 ```
+
+## Posição da mão em relação ao nariz
+
+O protocolo experimental acrescenta a posição normalizada do nariz e uma máscara de presença aos 192 canais existentes. A rede recebe a posição do pulso e da ponta do indicador de cada mão em relação a esse ponto. Quando faltar o nariz ou o ponto da mão, os canais correspondentes ficam zerados. Isso permite testar a hipótese de que a posição em relação ao rosto ajuda a distinguir Amarelo do repertório fora do catálogo.
+
+Compare `ConvSequenceNose` com `ConvSequenceNoseMasked`. Os dois usam a mesma arquitetura, os mesmos vetores de 196 números por quadro e as mesmas rodadas de desenvolvimento. No controle, somente as relações com o nariz ficam zeradas. O limiar é escolhido na validação de cada rodada. Registre acertos de Amarelo, F1 macro, cobertura e falsos aceites. Os clipes do teste reservado ficam fora da extração usada neste ensaio.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda \
+  --features data/minds-expanded/features-nose-train/index.json \
+  --reference ConvSequenceNoseMasked --candidate ConvSequenceNose \
+  --out data/models/isolated-nose/cross-validation.json
+```

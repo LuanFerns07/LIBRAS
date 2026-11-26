@@ -2,8 +2,12 @@
 
 import torch
 
+from dataset import FEATURE_COUNTS, FEATURES, NOSE_PREPROCESS
+
 
 class ConvSequence(torch.nn.Module):
+    raw_features = FEATURES
+
     def __init__(self, classes, input_features=192):
         super().__init__()
         self.temporal = torch.nn.Sequential(
@@ -82,8 +86,8 @@ class ConvSequenceFlexion(ConvSequenceGeometry):
 class ConvSequenceMotion(ConvSequenceFlexion):
     """Expõe orientação da palma e deslocamentos entre instantes rastreados."""
 
-    def __init__(self, classes):
-        super().__init__(classes, extra_features=2 * 16)
+    def __init__(self, classes, extra_features=0):
+        super().__init__(classes, extra_features=2 * 16 + extra_features)
 
     @staticmethod
     def hand_motion(video):
@@ -107,6 +111,36 @@ class ConvSequenceMotion(ConvSequenceFlexion):
         return torch.cat((super().hand_channels(video), self.hand_motion(video)), dim=-1)
 
 
+class ConvSequenceNose(ConvSequenceMotion):
+    """Acrescenta o pulso e o indicador de cada mão em relação ao nariz."""
+
+    raw_features = FEATURE_COUNTS[NOSE_PREPROCESS]
+    use_nose = True
+
+    def __init__(self, classes):
+        super().__init__(classes, extra_features=2 * 2 * 4)
+        self.register_buffer("nose_joints", torch.tensor([0, 8]), persistent=False)
+
+    def nose_channels(self, video):
+        hands = video[..., 24:FEATURES].reshape(video.shape[0], video.shape[1], 2, 21, 4)
+        joints = hands.index_select(-2, self.nose_joints)
+        nose = video[..., FEATURES:].unsqueeze(-2).unsqueeze(-2)
+        present = joints[..., 3:] * nose[..., 3:]
+        offset = (joints[..., :3] - nose[..., :3]) * present
+        result = torch.cat((offset, present), dim=-1).flatten(start_dim=2)
+        return result if self.use_nose else torch.zeros_like(result)
+
+    def forward(self, video):
+        body = video[..., :FEATURES]
+        return ConvSequence.forward(self, torch.cat((body, self.hand_channels(body), self.nose_channels(video)), dim=-1))
+
+
+class ConvSequenceNoseMasked(ConvSequenceNose):
+    """Controle com a mesma rede, com os canais relativos ao nariz zerados."""
+
+    use_nose = False
+
+
 class ConvSequenceGated(ConvSequenceGeometry):
     """Estima se a entrada é conhecida e classifica o sinal dado esse evento."""
 
@@ -122,5 +156,6 @@ class ConvSequenceGated(ConvSequenceGeometry):
 
 ARCHITECTURES = {
     model.__name__: model
-    for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated, ConvSequenceFlexion, ConvSequenceMotion)
+    for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated, ConvSequenceFlexion,
+                  ConvSequenceMotion, ConvSequenceNose, ConvSequenceNoseMasked)
 }
