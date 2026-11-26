@@ -14,9 +14,9 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 | **M1 · Dados e critérios** | A fazer | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
 | **M2 · Um sinal de ponta a ponta** | A fazer | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
 | **M3 · Lição e reconhecimento** | A fazer | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
-| **M4 · Alfabeto e texto para Libras** | A fazer | Alfabeto completo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | Todas as letras são reproduzíveis e os exemplos de tradução e soletração passam pela revisão. |
+| **M4 · Alfabeto e texto para Libras** | A testar | Alfabeto completo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | Todas as letras são reproduzíveis e os exemplos de tradução e soletração passam pela revisão. |
 | **M5 · Área livre e voz** | A fazer | Sinalização sem alvo pré-selecionado, transcrição editável e leitura gratuita | Integração, Dados e ML, UX | O texto vem de sinais reais, casos incertos ficam visíveis e o áudio usa o texto confirmado no PC. |
-| **M6 · Saiba mais e créditos** | A fazer | Links externos, créditos e declaração sem fins lucrativos | UX, revisão independente | Os destinos conferem com os títulos e a mensagem aparece no app e no README. |
+| **M6 · Saiba mais e créditos** | Pronto | Links externos, créditos e declaração sem fins lucrativos | UX, revisão independente | Os destinos conferem com os títulos e a mensagem aparece no app e no README. |
 | **M7 · Demonstração validada** | A fazer | Versão marcada no Git, evidências, roteiro e memorial técnico | Revisão independente, Git e ambiente, coordenador | A equipe repete a demonstração seguindo o README e fecha os defeitos que impedem o uso. |
 
 **Caminho principal** · M0 → M1 → M2 → M3 → M5 → M7. A preparação das animações de M4 pode começar junto com M1, e a integração de M4 pode avançar após o player de M2. M6 pode ser feito em paralelo com M3 a M5. M7 depende do aceite de M3, M4, M5 e M6.
@@ -25,7 +25,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ### M0 · Fundação e versionamento
 
-- [ ] Confirmar o PC de referência, o navegador, a webcam e a disponibilidade de uma voz gratuita em português brasileiro. Registrar o ambiente usado para os testes e o plano de síntese local se faltar uma voz compatível.
+- [x] Confirmar o PC de referência, o navegador, a webcam e a disponibilidade de uma voz gratuita em português brasileiro. Registrar o ambiente usado para os testes e o plano de síntese local se faltar uma voz compatível.
 - [x] Inicializar o Git local, criar o primeiro commit e documentar como instalar, executar e testar a aplicação. Se a pasta principal estiver protegida, preservar os arquivos de origem e inicializar a pasta gravável da aplicação dentro do espaço de trabalho.
 - [ ] Versionar código, documentação, configurações e manifestos de dados, modelos e animações. Manter vídeos brutos, segredos e artefatos pesados fora do histórico. Definir como recuperar a versão exata de cada artefato usado na demonstração.
 - [x] Reservar a branch principal para entregas integradas. Usar branches ou worktrees dedicadas quando houver trabalho simultâneo em código. O coordenador arbitra alterações de contrato e integra os commits após a verificação do responsável.
@@ -58,7 +58,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 ### M4 · Alfabeto, palavras, frases e nomes
 
 - [ ] Construir as animações de todas as letras do alfabeto manual, com referências adequadas à sua execução. Validar detalhes das mãos, orientação, movimento, visibilidade e transições conforme cada letra. Conferir o resultado com revisão em Libras.
-- [ ] Implementar a grade navegável por teclado, seleção de letra, pausa, repetição e velocidade. Reusar o player 3D no tradutor.
+- [x] Implementar a grade navegável por teclado, seleção de letra, pausa, repetição e velocidade. Reusar o player 3D no tradutor.
 - [ ] Implementar a tradução das palavras e frases curtas catalogadas com sequências revisadas em Libras. Exibir mensagens de cobertura e indicar trechos que a plataforma não consegue apresentar. Soletrar nomes isolados e em frases suportadas, como “Meu nome é [nome]”, com uma opção manual para nomes ambíguos.
 - [ ] Testar todas as letras, a diferença entre demonstração individual e sequência, letras repetidas, nomes compostos, acentos conforme a regra revisada, texto vazio, frase fora do catálogo e reinício do player ao trocar de entrada.
 - [ ] **Aceite.** O revisor percorre o alfabeto completo, traduz palavras e uma frase suportada, soletra um nome isolado e um nome em frase. Uma entrada fora da cobertura recebe uma mensagem clara.
@@ -74,7 +74,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 - [x] Implementar **Saiba mais** como lista de redirecionamentos para as fontes originais do prompt. Exibir título e autoria ou instituição. Esse fluxo consiste apenas em links externos.
 - [x] Publicar no rodapé e no README a mensagem “O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.” Manter o acesso gratuito, sem monetização ou afiliação comercial.
-- [ ] **Aceite.** O revisor abre cada link, confere título, autoria e destino e encontra a mesma declaração no aplicativo e no README.
+- [x] **Aceite.** O revisor abre cada link, confere título, autoria e destino e encontra a mesma declaração no aplicativo e no README.
 
 ### M7 · Validação independente e versão de demonstração
 
@@ -112,7 +112,7 @@ O marco de publicação na Vercel pode começar assim que M7 for aceito e o repo
 
 | Próximo marco | Status | O que implementar e como validar |
 | --- | --- | --- |
-| **M8 · Aprendizagem e engajamento** | A fazer | Adicionar pares de sinais parecidos, revisão baseada em tentativas e gamificação por progresso. Testar quais exercícios voltam na revisão, persistência do progresso e se as dicas ajudam na tentativa seguinte. |
+| **M8 · Aprendizagem e engajamento** | A testar | Adicionar pares de sinais parecidos, revisão baseada em tentativas e gamificação por progresso. Testar quais exercícios voltam na revisão, persistência do progresso e se as dicas ajudam na tentativa seguinte. |
 | **M9 · Cobertura e variantes** | A fazer | Ampliar vocabulário e frases e apresentar variantes regionais contextualizadas com revisão em Libras. Repetir os testes por pessoa sinalizante, acompanhar confusões novas e rejeição de sinais desconhecidos e explicitar a cobertura na interface. |
 | **M10 · Sinalização contínua** | A fazer | Usar dados de sequências com condições de uso verificadas. Desenvolver segmentação automática, reconhecimento de sinais em sequência e geração de texto em português. Medir segmentação, inserções, omissões, trocas e qualidade do sentido traduzido com revisão humana. |
 | **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |

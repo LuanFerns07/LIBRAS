@@ -14,6 +14,7 @@ Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se
 
 ```bash
 npm ci
+npm run setup:vision
 npm run dev
 ```
 
@@ -25,12 +26,15 @@ No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher list
 
 ```bash
 npm test
+python3 -m unittest discover -s tests -p 'test_*.py'
 npm run build
 npm run check:status
 npm run preview
 ```
 
 O build gera `dist/`. Use `npm run preview` para verificar essa versão em localhost. O comando de painel requer Python 3.
+
+Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). A [prévia na Vercel](docs/publicacao.md) depende do aceite no PC e da autorização de publicação.
 
 O desenvolvimento é integrado localmente na branch `main`. As frentes de implementação simultânea usam worktrees de branches dedicadas. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
 
