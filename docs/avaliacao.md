@@ -8,6 +8,7 @@ npm run setup:vision
 python3 -m venv .venv
 .venv/bin/python -m pip install -r ml/requirements.txt
 python3 scripts/download_minds.py
+cmp ml/manifests/minds-v1.json data/minds/manifest.json
 node ml/extract.mjs --workers 3
 .venv/bin/python ml/train.py --device auto
 .venv/bin/python ml/evaluate.py

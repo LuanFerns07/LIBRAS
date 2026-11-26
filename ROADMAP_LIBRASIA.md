@@ -11,7 +11,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 | Marco | Status | Entrega | Responsáveis principais | Quando avançar |
 | --- | --- | --- | --- | --- |
 | **M0 · Fundação** | A testar | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
-| **M1 · Dados e critérios** | A fazer | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
+| **M1 · Dados e critérios** | A testar | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
 | **M2 · Um sinal de ponta a ponta** | A fazer | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
 | **M3 · Lição e reconhecimento** | A fazer | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
 | **M4 · Alfabeto e texto para Libras** | A testar | Alfabeto completo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | Todas as letras são reproduzíveis e os exemplos de tradução e soletração passam pela revisão. |
@@ -33,11 +33,11 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ### M1 · Dados, vocabulário e protocolo de validação
 
-- [ ] Levantar os conjuntos públicos candidatos e registrar origem, versão, licença, termos de uso, cobertura de sinais, qualidade dos rótulos e identificação de pessoas sinalizantes. Conferir separadamente as permissões para uso em treino, demonstração e distribuição dos pesos ou ativos.
-- [ ] Escolher três a cinco sinais pela utilidade pedagógica, qualidade dos exemplos e viabilidade de animação. Começar por um sinal cujo parâmetro principal seja observável pela webcam. Incluir movimento se houver dados e referência suficientes.
-- [ ] Definir o catálogo compartilhado com identificador de letra ou sinal, saída textual, referência, animação, versão e status da revisão. Para os exercícios, identificar o parâmetro avaliado, as variantes contempladas e as dicas permitidas.
+- [x] Levantar os conjuntos públicos candidatos e registrar origem, versão, licença, termos de uso, cobertura de sinais, qualidade dos rótulos e identificação de pessoas sinalizantes. Conferir separadamente as permissões para uso em treino, demonstração e distribuição dos pesos ou ativos.
+- [x] Escolher três a cinco sinais pela utilidade pedagógica, qualidade dos exemplos e viabilidade de animação. Começar por um sinal cujo parâmetro principal seja observável pela webcam. Incluir movimento se houver dados e referência suficientes.
+- [x] Definir o catálogo compartilhado com identificador de letra ou sinal, saída textual, referência, animação, versão e status da revisão. Para os exercícios, identificar o parâmetro avaliado, as variantes contempladas e as dicas permitidas.
 - [ ] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado, verificar duplicatas e manter amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição.
-- [ ] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
+- [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
 
 ### M2 · Primeiro sinal com webcam e avatar reais
