@@ -65,10 +65,10 @@ O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em
 
 ### M4 · Alfabeto, palavras, frases e nomes
 
-- [ ] Construir as animações de todas as letras do alfabeto manual, com referências adequadas à sua execução. Validar detalhes das mãos, orientação, movimento, visibilidade e transições conforme cada letra. Conferir o resultado com revisão em Libras.
+- [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
 - [x] Implementar a grade navegável por teclado, seleção de letra, pausa, repetição e velocidade. Reusar o player 3D no tradutor.
-- [ ] Implementar a tradução das palavras e frases curtas catalogadas com sequências revisadas em Libras. Exibir mensagens de cobertura e indicar trechos que a plataforma não consegue apresentar. Soletrar nomes isolados e em frases suportadas, como “Meu nome é [nome]”, com uma opção manual para nomes ambíguos.
-- [ ] Testar todas as letras, a diferença entre demonstração individual e sequência, letras repetidas, nomes compostos, acentos conforme a regra revisada, texto vazio, frase fora do catálogo e reinício do player ao trocar de entrada.
+- [x] Implementar as sequências de palavras e frases do catálogo, as mensagens de cobertura e a soletração de nomes isolados ou em frases suportadas.
+- [ ] Revisar em Libras configuração, orientação, movimento e transição de cada letra e das sequências catalogadas. Conferir também letras repetidas, nomes compostos, tratamento de acentos e soletração em frase.
 - [ ] **Aceite.** O revisor percorre o alfabeto completo, traduz palavras e uma frase suportada, soletra um nome isolado e um nome em frase. Uma entrada fora da cobertura recebe uma mensagem clara.
 
 ### M5 · Área livre de Libras para texto e voz
@@ -148,9 +148,17 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | **M10 · Sinalização contínua** | A fazer | Usar dados de sequências com condições de uso verificadas. Desenvolver segmentação automática, reconhecimento de sinais em sequência e geração de texto em português. Medir segmentação, inserções, omissões, trocas e qualidade do sentido traduzido com revisão humana. |
 | **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |
 
+### M8 e M9 · Checklist de conteúdo e aprendizagem
+
+- [x] Disponibilizar a comparação de itens no avatar, o progresso da lição e a revisão local que prioriza tentativas pendentes. Verificar a ordem depois de um acerto e a persistência após recarga.
+- [x] Ampliar o catálogo experimental da área livre com Aluno e incluir a referência histórica de Fortaleza no avatar. Registrar a cobertura de frases e as métricas do modelo expandido. [Escopo das animações](docs/animacoes.md) · [Avaliação expandida](docs/avaliacao.md)
+- [ ] Revisar com pessoas fluentes a adequação das comparações, frases e variantes regionais. Em piloto, observar se as dicas ajudam na tentativa seguinte e verificar o uso da revisão adaptativa.
+- [ ] Retestar a expansão com pessoas fora do treino, incluindo sinais desconhecidos. Revisar a cobertura anunciada a partir dos resultados.
+
 ### M11 · Checklist de publicação e compatibilidade
 
 - [ ] **Git e ambiente.** Configurar o build da Vercel, a prévia e a versão de produção. Verificar o carregamento do modelo, dos arquivos WebAssembly e do avatar no ambiente publicado. [Deploy a partir de Git na Vercel](https://vercel.com/docs/git)
-- [ ] **UX e integração.** Adaptar o layout para toque e telas estreitas. Manter a câmera e a inferência no navegador e medir a latência com o avatar aberto. Verificar recuperação ao voltar para a aba e mensagens para câmera ou voz indisponível.
+- [x] Adaptar o layout para toque e telas estreitas. Verificar o encaixe em 390 px, a recuperação após voltar à aba e os avisos de câmera e voz na prévia local do Chromium.
+- [ ] Medir a latência da câmera à decisão com o avatar aberto nos aparelhos de referência e conferir as mensagens e a recuperação de câmera e voz nesses aparelhos.
 - [ ] **Revisão independente.** Testar a prévia no PC e em pelo menos um Android com Chrome e um iPhone com Safari. Confirmar permissão de câmera, reconhecimento, animação 3D, soletração, transcrição editável e voz gratuita em português brasileiro. Registrar aparelhos, navegadores e limitações.
 - [ ] **Aceite.** Repetir os fluxos essenciais na URL de produção e acrescentar o link ao README. Manter a versão web como acesso comum entre desktop e celular.

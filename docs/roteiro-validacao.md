@@ -97,6 +97,12 @@ Em uma prévia separada, o classificador expandido com SHA-256 fc50063cb217efbb7
 
 A prévia oficial continuou com o modelo de três palavras. O log da expansão está no arquivo local data/evidence/qa-expandido-aluno.log.
 
+## Reteste da medição e do candidato com geometria
+
+O Chromium verificou os tempos registrados em memória pela aplicação. A tentativa sem mãos mediu o carregamento inicial e os quadros processados. A lição com avatar em reprodução reconheceu Cinco S09-1 e registrou o tempo da decisão com o modelo carregado. Uma prévia local separada, com o modelo experimental de geometria e limiar 0,640, reconheceu Cinco S11-1 em duas reproduções do mesmo clipe. Esse clipe havia sido confundido com Espelho pelo modelo inicial. Os logs ficam em data/evidence com os nomes qa-medicao-browser.log, qa-medicao-cinco.log e qa-geometria-cinco11.log.
+
+O reteste do caso conhecido serve para verificar a integração no navegador. A sessão ao vivo e a avaliação de pessoas independentes permanecem pendentes. [Ficha local e instruções de medição](validacao-ao-vivo.md)
+
 ## Reproduzir uma tentativa com o classificador
 
 Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.
