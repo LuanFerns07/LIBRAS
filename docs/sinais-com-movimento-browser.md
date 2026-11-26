@@ -13,6 +13,19 @@ Os quatro controles foram fixados antes da inferência. Escolhemos a primeira gr
 
 Cada controle tem duas tentativas manuais. O teste espera a palavra da glosa correta em cada tentativa e exige que o texto anterior permaneça intacto. Registra também o intervalo entregue, os quadros processados, o estado exibido e o tempo da conclusão à decisão.
 
+## Resultado com a combinação
+
+O Chromium 156.0.8078.79 carregou a combinação ONNX de SHA-256 `a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63`. O limiar foi 0,525 e o manifesto servido tinha SHA-256 `036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b`. Os tempos da tabela medem a duração desde o início marcado e o intervalo entre o clique de conclusão e a decisão.
+
+| Controle | Janela real, duas tentativas | Tempo da decisão, duas tentativas | Estado e palavra por tentativa | Log local em data/evidence |
+| --- | --- | --- | --- | --- |
+| Amarelo S01-1 | 4.233 e 4.233 ms | 23,5 e 2,9 ms | Reconhecido, Amarelo em 2/2 | qa-movimento-combined-amarelo-s01.log |
+| Amarelo S04-1 | 4.233 e 4.200 ms | 22,5 e 3,1 ms | Reconhecido, Amarelo em 2/2 | qa-movimento-combined-amarelo-s04.log |
+| Espelho S01-1 | 4.233 e 4.200 ms | 22,6 e 1,8 ms | Reconhecido, Espelho em 2/2 | qa-movimento-combined-espelho-s01.log |
+| Espelho S04-1 | 4.267 e 4.200 ms | 22,0 e 1,7 ms | Reconhecido, Espelho em 2/2 | qa-movimento-combined-espelho-s04.log |
+
+Nos quatro controles, o texto “Texto conferido.” foi preservado e a palavra esperada foi acrescentada uma vez por tentativa. As oito reproduções também passaram nas verificações de captura e rede. O ensaio comprova o percurso da interface nestas gravações de treino. O aceite com pessoas independentes permanece pendente.
+
 ## Reproduzir
 
 Prepare os Y4M a partir dos MP4 de treino. O FFmpeg inicia o vídeo no ponto inspecionado e conserva a velocidade da gravação, com escala de 640 px de largura, 30 fps e marcador verde no começo.
