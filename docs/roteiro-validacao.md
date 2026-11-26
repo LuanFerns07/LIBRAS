@@ -65,6 +65,10 @@ Prévia do commit 51d9829 verificada pela frente independente de QA em um checko
 
 O classificador e o catálogo ainda aguardavam validação quando essa prévia foi executada. As métricas de classificação e latência, o roteiro de sinais com participantes e a revisão das animações, traduções e dicas permanecem pendentes neste registro. A largura estreita foi testada no Chromium de PC por emulação. O teste em aparelhos Android e iOS permanece pendente.
 
+## Reteste integrado de 26/11/2026
+
+O checkout limpo de 78fa4b9 concluiu npm ci, a instalação do MediaPipe, 31 testes unitários, o build e a verificação do painel. No Chromium do PC, quatro testes de ponta a ponta passaram com a webcam física e a voz local habilitadas. O reteste cobriu ainda a cedilha, a comparação de letras, a revisão adaptativa após recarga, a saudação Bom dia e a forma histórica de ALUNO. A corrida ao remover perfis temporários foi corrigida no executor de teste antes do reteste. A inspeção dos sete destinos também foi repetida por cliques na página Saiba mais em um perfil temporário.
+
 ## Reproduzir uma tentativa com o classificador
 
 Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.

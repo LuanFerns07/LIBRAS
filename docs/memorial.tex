@@ -65,7 +65,9 @@ A orientação pedagógica precisa de uma verificação própria com amostras in
 
 \subsection{Evidências da versão}
 
-O levantamento de ambiente em 26 de novembro de 2026 identificou Debian 13.8, Chromium 156.0.8078.79, webcam ACER HD User Facing, GPU NVIDIA GeForce RTX 4060 Laptop com 8.188 MiB e voz local Portuguese (Brazil) no módulo eSpeak NG do Speech Dispatcher. A inspeção confirmou a disponibilidade dos componentes no sistema operacional. O teste integrado precisa comprovar captura, reprodução de voz e inferência no navegador durante a demonstração.
+O levantamento de ambiente em 26 de novembro de 2026 identificou Debian 13.8, Chromium 156.0.8078.79, webcam ACER HD User Facing, GPU NVIDIA GeForce RTX 4060 Laptop com 8.188 MiB e voz local Portuguese (Brazil) no módulo eSpeak NG do Speech Dispatcher. A inspeção confirmou a disponibilidade dos componentes no sistema operacional.
+
+A instalação limpa da prévia no commit 78fa4b9 concluiu a compilação, 31 testes unitários e a verificação do painel do projeto. Quatro verificações de ponta a ponta passaram no mesmo PC. O Chromium abriu a webcam física em 640 por 480 na sonda de captura, e a aplicação liberou a trilha de vídeo ao sair da área livre. A voz local em português brasileiro concluiu a síntese de texto editado segundo o evento do navegador. A audição por um revisor permanece pendente. Os testes também percorreram as cinco telas, os controles do avatar, o foco por teclado, a soletração de nomes e a recomposição da interface a 390 pixels CSS.
 
 Preencher esta seção com o commit, a revisão dos dados, as versões e somas de verificação dos modelos e o catálogo usado. Incorporar a matriz de confusão, o desempenho por classe e as métricas de rejeição e latência do teste reservado. Acrescentar as evidências do roteiro no PC, com os resultados observados e as limitações de cada etapa. A revisão linguística do avatar, das frases e das dicas precisa de registro próprio.
 
