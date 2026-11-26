@@ -1,6 +1,6 @@
 # Experimentos de sinalização contínua (M10)
 
-Os experimentos usam gravações contínuas reais. A tradução inicial é avaliada em frases roteirizadas do setor de energia. A segmentação é avaliada em trilhas temporais de uma entrevista pública do Corpus Libras. São experimentos de pesquisa locais e o aplicativo mantém o fluxo de sinais isolados.
+Os experimentos usam gravações contínuas reais. A tradução inicial é avaliada em frases roteirizadas do setor de energia. A segmentação é avaliada em trilhas temporais de uma entrevista pública do Corpus Libras. O aplicativo oferece sinais isolados e um modo experimental de sequências separadas por pausas. Os modelos deste estudo permanecem em pesquisa local enquanto a equivalência das coordenadas e o desempenho na webcam estão em avaliação.
 
 ## Base de frases
 
@@ -32,6 +32,18 @@ O denominador de teste foi 3.678 palavras de referência. WER pode ultrapassar 1
 
 O gerador foi exportado em dois grafos ONNX opset 17. O encoder recebe `[1, 126, 64]` com normalização incorporada. O decoder recebe um token e o estado recorrente, junto com a memória e as chaves do encoder. Em 12 clipes espaçados do teste, PyTorch e ONNX Runtime CPU 1.23.2 coincidiram nos 74 passos de geração, com erro absoluto máximo de 9,54 × 10⁻⁶ nos tensores. O backend WASM do ONNX Runtime Web 1.24.3 em Node também produziu os mesmos tokens. A paridade usa os landmarks EQT e não valida a webcam do aplicativo.
 
+No RGB de treino `IMG_3311.mp4`, a extração Holistic Web de 82 quadros a 30 fps teve 92,68% de concordância de presença (152/164 quadro-mãos) com os landmarks do release para a ordem esquerda/direita. Nos 105 pares de mãos detectadas em ambas as fontes, o erro absoluto médio (x, y, z) foi (0,00214, 0,00397, 0,00311). Inverter a ordem aumentou o erro médio em x para 0,172. A diferença de 12 detecções indica que o contrato precisa de validação em mais clipes. O clipe confirma a estrutura e a ordem apenas para essa amostra.
+
+
+O ensaio de ponta a ponta em Chromium 156 com ONNX Runtime Web 1.24.3 usou os mesmos 12 clipes RGB do teste reservado e 62 palavras de referência. Nos 483 quadros amostrados a 10 fps, o Holistic Web detectou ao menos uma mão em 425. Os dois caminhos produziram a mesma hipótese em 11 dos 12 clipes.
+
+| Entrada do mesmo modelo ONNX no Chromium | WER | Frases exatas | Inserções | Omissões | Trocas |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Landmarks originais EQT | 29,03% | 6/12 | 4 | 4 | 10 |
+| RGB reextraído pelo Holistic Web | 30,65% | 6/12 | 4 | 4 | 11 |
+
+O ensaio comprova que a extração web e o gerador ONNX funcionam juntos nesses clipes completos. O recorte tem 12 gravações de frases conhecidas. A diferença entre os caminhos inclui detecção, escala de entrada e frequência de amostragem. A confirmação em webcam, sinais contínuos fora do roteiro e julgamento de sentido por pessoas fluentes ainda precisam de avaliação.
+
 ## Segmentação temporal
 
 A fonte é Quadros, Schmitt, Lohn e Leite, *Corpus de Libras*, UFSC, 2020. Os experimentos usam localmente os vídeos públicos UFSC 159521 e 159522 e a transcrição ELAN da mesma entrevista, vinculada oficialmente no acervo do Inventário Nacional da Libras. O FAQ oficial permite baixar e usar as gravações MP4 e transcrições ELAN para pesquisa e ensino. Os registros individuais dos vídeos não indicam licença adicional. Conservamos os dados de origem e as coordenadas no ambiente local de pesquisa. [Condições de uso do Corpus Libras](https://corpuslibras.ufsc.br/espacointerativo/perguntas/view/7) · [Como citar](https://corpuslibras.ufsc.br/espacointerativo/perguntas/view/9) · [Acervo e transcrição da entrevista](https://corpuslibras.ufsc.br/dados/dado/porprojeto/Invent%C3%A1rio%20Libras) · [Registro da câmera 2](https://repositorio.ufsc.br/handle/123456789/159521?show=full) · [Registro da câmera 3](https://repositorio.ufsc.br/handle/123456789/159522?show=full)
@@ -47,11 +59,20 @@ O experimento compara intervalos de atividade manual com anotações de sinal da
 | 0,50 | Teste | 42 | 27 | 8 | 29,63% | 19,05% | 23,19% |
 | 0,75 | Teste | 42 | 27 | 2 | 7,41% | 4,76% | 5,80% |
 
-Para os oito pares de teste com IoU ≥ 0,50, o IoU médio dos pares foi 0,639. Os desvios absolutos medianos de início e fim foram 87 e 165 ms. O teste evidencia baixa cobertura de fronteiras lexicais. O segmentador só propõe intervalos de movimento. A edição de glosas, a qualidade do sentido com revisão humana e o reconhecimento de uma sequência livre integrada à webcam ficam em aberto.
+Para os oito pares de teste com IoU ≥ 0,50, o IoU médio dos pares foi 0,639. Os desvios absolutos medianos de início e fim foram 87 e 165 ms.
+
+Também extraímos os mesmos dois recortes no Chromium 156 com o MediaPipe Holistic do aplicativo, um quadro a cada 100 ms, e usamos os mesmos landmarks para avaliar as duas regras. A regra do aplicativo agrupa presença de mãos no espaço de sinalização. A regra de movimento seleciona na validação seus próprios parâmetros para essa extração. A cobertura de pelo menos uma mão no vídeo de teste foi 595/600 quadros.
+
+| Regra em teste com Holistic Web | Referências | Propostas | Pares IoU ≥ 0,50 | Precisão | Revocação | F1 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Espaço de sinalização do aplicativo | 42 | 8 | 2 | 25,00% | 4,76% | 8,00% |
+| Atividade por movimento | 42 | 34 | 4 | 11,76% | 9,52% | 10,53% |
+
+O teste evidencia baixa cobertura de fronteiras lexicais. As duas regras propõem intervalos. A edição de glosas, a qualidade do sentido com revisão humana e o reconhecimento de uma sequência livre integrada à webcam ficam em aberto.
 
 ## Reprodução
 
-Dados, modelos, predições individuais e arquivos da partição ficam em `data/`, fora do Git. Reproduza os experimentos na raiz do repositório com o ambiente de `ml/requirements.txt`. A extração da avaliação UFSC usa também `mediapipe==0.10.32` e OpenCV `4.12.0`.
+Dados, modelos, predições individuais e arquivos da partição ficam em `data/`, fora do Git. Reproduza os experimentos na raiz do repositório com o ambiente de `ml/requirements.txt`. A extração da avaliação UFSC usa também `mediapipe==0.10.32` e `opencv-contrib-python==4.12.0.88`.
 
 ```bash
 python -m ml.continuous_experiment.acquire_eqt data/eqt-v4
@@ -78,11 +99,34 @@ O script `ufsc_eval` registra SHA-256 dos vídeos, da transcrição e do modelo.
 Para comparar a regra de espaço de sinalização do aplicativo e o método por movimento sobre a mesma extração, prepare os ativos locais do MediaPipe, execute `npm run dev` e abra `/ml/continuous_experiment/web-segments.html` no navegador. Salve os resultados em `data/continuous-ufsc/web-segments.json`.
 
 ```bash
-python -m ml.continuous_experiment.score_web   data/continuous-ufsc/FLN_G1_D1_1entrevista_VIDEOS123-5.eaf   data/continuous-ufsc/web-segments.json   data/continuous-ufsc/web-scores.json
+python -m ml.continuous_experiment.score_web \
+  data/continuous-ufsc/FLN_G1_D1_1entrevista_VIDEOS123-5.eaf \
+  data/continuous-ufsc/web-segments.json \
+  data/continuous-ufsc/web-scores.json
 ```
 
 Para diagnosticar as coordenadas do gerador na entrada web, baixe um vídeo RGB equivalente do treino com `python -m ml.continuous_experiment.acquire_eqt data/eqt-v4 --annotations-only --rgb-reference`. Abra `/ml/continuous_experiment/eqt-reference.html` e salve `eqt-reference-holistic.json` em `data/eqt-v4`. A comparação mede cobertura bilateral e erros por eixo nos mesmos 82 quadros, para as duas ordens possíveis das mãos.
 
 ```bash
-python -m ml.continuous_experiment.compare_eqt_features   data/eqt-v4/Landmarks-hands.zip   data/eqt-v4/eqt-reference-holistic.json   data/eqt-v4/feature-comparison.json
+python -m ml.continuous_experiment.compare_eqt_features \
+  data/eqt-v4/Landmarks-hands.zip \
+  data/eqt-v4/eqt-reference-holistic.json \
+  data/eqt-v4/feature-comparison.json
+```
+
+### Ensaio Holistic → ONNX no navegador
+
+A aquisição a seguir baixa somente os 12 vídeos RGB correspondentes às amostras espaçadas do teste de paridade. A identificação combina item do acervo, rótulo local do informante e nome do vídeo. O CRC de cada membro ZIP é conferido. Execute o exportador antes de abrir o ensaio.
+
+```bash
+python -m ml.continuous_experiment.acquire_web_subset data/eqt-v4 data/eqt-v4/web-test
+```
+
+Com o servidor local em execução, abra `/ml/continuous_experiment/eqt-web-test.html`. O teste usa 10 fps e reamostra 64 quadros para cada vídeo. As coordenadas x, y e z seguem a ordem mão esquerda e mão direita, com zeros para a mão ausente. O mesmo encoder e decoder em ONNX Runtime Web executam os landmarks originais e a extração Holistic. Salve o resultado em `data/eqt-v4/eqt-web-predictions.json` e meça a edição de palavras.
+
+```bash
+python -m ml.continuous_experiment.score_generator_web \
+  data/eqt-v4 \
+  data/eqt-v4/eqt-web-predictions.json \
+  data/eqt-v4/eqt-web-scores.json
 ```

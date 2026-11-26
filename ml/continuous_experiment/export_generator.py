@@ -11,7 +11,7 @@ import onnxruntime as ort
 import torch
 from torch import nn
 
-from .eqt import FRAMES, prepare
+from .eqt import FRAMES, prepare, spaced_test_samples
 from .model import TokenGenerator
 from .train import BOS, EOS
 
@@ -81,8 +81,8 @@ def export(checkpoint, directory, samples):
     decoder_steps = 0
     fixture = []
     with torch.inference_mode():
-        for features in samples:
-            feature_array = np.ascontiguousarray(features.T[None])
+        for sample in samples:
+            feature_array = np.ascontiguousarray(sample.values.T[None])
             memory_p, keys_p, hidden_p = encoder(torch.from_numpy(feature_array))
             memory_o, keys_o, hidden_o = onnx_encoder.run(None, {"features": feature_array})
             for left, right in zip((memory_p, keys_p, hidden_p), (memory_o, keys_o, hidden_o)):
@@ -107,7 +107,8 @@ def export(checkpoint, directory, samples):
                 if predicted_o == EOS:
                     break
                 token[0, 0] = predicted_o
-            fixture.append({"features": feature_array.reshape(-1).tolist(), "tokens": expected_tokens})
+            fixture.append({"features": feature_array.reshape(-1).tolist(), "tokens": expected_tokens,
+                            "landmark_sha256": sample.digest})
 
     report = {
         "architecture": "temporal encoder and one-step autoregressive GRU attention decoder",
@@ -142,11 +143,7 @@ def main():
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
     samples, _ = prepare(args.dataset, args.dataset / "Landmarks-hands.zip")
-    test = [sample.values for sample in samples if sample.split == "test"]
-    if len(test) < 12:
-        raise ValueError("São necessárias ao menos 12 sequências reais de teste para a paridade.")
-    indices = np.rint(np.linspace(0, len(test) - 1, 12)).astype(np.intp)
-    export(args.checkpoint, args.output, [test[index] for index in indices])
+    export(args.checkpoint, args.output, spaced_test_samples(samples))
 
 
 if __name__ == "__main__":

@@ -155,3 +155,11 @@ def prepare(directory: Path, archive_path: Path):
         "globally_signer_independent": False,
     }
     return kept, evidence
+
+
+def spaced_test_samples(samples, count=12):
+    test = [sample for sample in samples if sample.split == "test"]
+    if count <= 0 or count > len(test):
+        raise ValueError("Quantidade de clipes de teste inválida para o recorte.")
+    indices = np.rint(np.linspace(0, len(test) - 1, count)).astype(np.intp)
+    return [test[index] for index in indices]
