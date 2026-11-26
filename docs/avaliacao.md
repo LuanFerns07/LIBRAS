@@ -292,3 +292,16 @@ As 14 tomadas produziram vetores utilizáveis. As gravações adicionais aumenta
   --candidate-positives data/minds-extra/features/index.json \
   --out data/models/isolated-motion-extra/cross-validation.json
 ```
+
+## Geometria combinada com o treino suplementar
+
+A média das probabilidades do modelo de geometria e do modelo de movimento com quartas gravações atingiu F1 macro de 0,734, cobertura de 66/78 e 6/42 falsos aceites nas três rodadas de desenvolvimento. Acertou 16/21 de Espelho e 12/21 de Amarelo. Cada limiar foi escolhido na validação da própria rodada. [Matrizes e diagnóstico por rodada](../ml/evidence/isolated-geometry-motion-extra/cross-validation.json)
+
+Entre as nove perdas de Amarelo, a classe fora do catálogo ficou em primeiro lugar seis vezes, outra glosa duas vezes e Amarelo ficou em primeiro lugar abaixo do limiar uma vez. Todas as 21 tentativas tiveram pontos utilizáveis. Para esta combinação, o limiar pode recuperar, no máximo, uma das nove perdas sem trocar a regra que escolhe a classe. O diagnóstico direciona o treino para distinguir Amarelo de outras entradas e da classe fora do catálogo.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --combine \
+  --reference ConvSequenceGeometry --candidate ConvSequenceMotion \
+  --candidate-positives data/minds-extra/features/index.json \
+  --out data/models/isolated-geometry-motion-extra/cross-validation.json
+```
