@@ -10,7 +10,7 @@ import re
 from shutil import copyfileobj
 from tempfile import NamedTemporaryFile
 import unicodedata
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from ..eqt import words
 
@@ -48,8 +48,9 @@ def acquire(path):
     if path.exists():
         check_csv(path)
         return
+    request = Request(URL, headers={"User-Agent": "LibrasIA/1.0 (public dataset reproduction)"})
     with NamedTemporaryFile(dir=path.parent, delete_on_close=False) as pending:
-        with urlopen(URL, timeout=45) as response:
+        with urlopen(request, timeout=45) as response:
             copyfileobj(response, pending)
         pending.flush()
         check_csv(Path(pending.name))
