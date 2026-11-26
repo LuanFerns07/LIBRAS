@@ -8,7 +8,7 @@ import numpy as np
 import torch
 
 from dataset import CATALOGS, add_training_negatives, add_training_positives, digest, load_features, write_json
-from metrics import choose_threshold, describe, measure
+from metrics import choose_threshold, describe, measure, recognition_breakdown
 from model import ARCHITECTURES
 from train import SEED, collect, train
 
@@ -29,6 +29,18 @@ def average_probabilities(left, right):
         a, b = (np.asarray(logits, dtype=np.float64) for logits in (left[index], right[index]))
         combined[index] = np.logaddexp(a - np.logaddexp.reduce(a), b - np.logaddexp.reduce(b)) - np.log(2)
     return combined
+
+
+def summarize_folds(folds, labels):
+    matrix = np.sum([fold["results"]["matrix"] for fold in folds], axis=0)
+    breakdown = {
+        label: {
+            reason: sum(fold["recognitionBreakdown"][label][reason] for fold in folds)
+            for reason in folds[0]["recognitionBreakdown"][label]
+        }
+        for label in labels[1:]
+    }
+    return {"folds": folds, "pooled": describe(matrix, labels), "recognitionBreakdown": breakdown}
 
 
 def main():
@@ -96,6 +108,7 @@ def main():
             evaluations.append({
                 **placement,
                 "selectedEpoch": selected["epoch"], "threshold": selected["threshold"], "results": metrics,
+                "recognitionBreakdown": recognition_breakdown(holdout, logits, selected["threshold"], labels),
                 **({"extraTrainingClips": len(additional)} if related else {}),
             })
             if args.combine:
@@ -107,13 +120,15 @@ def main():
                     reference_calibration, reference_logits = reference_scores[fold_index]
                     calibration_scores = average_probabilities(reference_calibration, calibration_logits)
                     _, threshold, _ = choose_threshold(calibration, calibration_scores, labels)
-                    combined, _ = measure(holdout, average_probabilities(reference_logits, logits), threshold, labels)
-                    ensemble_folds.append({**placement, "threshold": threshold, "results": combined})
-        matrix = np.sum([fold["results"]["matrix"] for fold in evaluations], axis=0)
-        comparisons[name] = {"folds": evaluations, "pooled": describe(matrix, labels)}
+                    scores = average_probabilities(reference_logits, logits)
+                    combined, _ = measure(holdout, scores, threshold, labels)
+                    ensemble_folds.append({
+                        **placement, "threshold": threshold, "results": combined,
+                        "recognitionBreakdown": recognition_breakdown(holdout, scores, threshold, labels),
+                    })
+        comparisons[name] = summarize_folds(evaluations, labels)
     if args.combine:
-        matrix = np.sum([fold["results"]["matrix"] for fold in ensemble_folds], axis=0)
-        comparisons["média das probabilidades"] = {"folds": ensemble_folds, "pooled": describe(matrix, labels)}
+        comparisons["média das probabilidades"] = summarize_folds(ensemble_folds, labels)
     write_json(args.out, {
         "inputPartition": "train", "sourceManifestSha256": index["sourceManifestSha256"],
         "featuresManifestSha256": digest(args.features), "labels": list(labels), "seed": args.seed,

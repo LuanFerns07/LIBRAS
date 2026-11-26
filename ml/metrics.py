@@ -69,6 +69,27 @@ def measure(rows, logits_by_index, threshold, labels=LABELS):
     return describe(matrix, labels), details
 
 
+def recognition_breakdown(rows, logits_by_index, threshold, labels=LABELS):
+    reasons = ("correct", "capture", "belowThreshold", "outOfCatalogWinner", "wrongLabelWinner")
+    counts = {label: dict.fromkeys(reasons, 0) for label in labels[1:]}
+    for row in rows:
+        if row.label == 0:
+            continue
+        logits = logits_by_index.get(row.index)
+        if logits is None:
+            reason = "capture"
+        else:
+            winner, confidence = decide(logits, 0)
+            if winner == 0:
+                reason = "outOfCatalogWinner"
+            elif winner != row.label:
+                reason = "wrongLabelWinner"
+            else:
+                reason = "belowThreshold" if confidence < threshold else "correct"
+        counts[labels[row.label]][reason] += 1
+    return counts
+
+
 def checks(metrics):
     return {
         "f1Macro": metrics["f1Macro"] >= 0.75,

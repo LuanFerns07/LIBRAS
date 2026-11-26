@@ -6,7 +6,7 @@ from unittest import TestCase
 import numpy as np
 
 from dataset import Clip
-from metrics import checks, choose_threshold, decide, measure
+from metrics import checks, choose_threshold, decide, measure, recognition_breakdown
 
 
 def clip(index, label, state="ready"):
@@ -43,6 +43,18 @@ class MetricsTests(TestCase):
     def test_equal_logits_select_first_class(self):
         self.assertEqual(decide(np.ones(4), .25), (0, .25))
         self.assertEqual(decide([0., 3., 3., 0.], .6)[0], 0)
+
+    def test_diagnosis_distinguishes_threshold_from_incorrect_winner_and_capture(self):
+        rows = [clip(index, 3) for index in range(5)] + [clip(5, 0)]
+        scores = {
+            1: [0, 0, 0, 6], 2: [0, 0, 0, .2], 3: [4, 0, 0, 3],
+            4: [0, 0, .3, .2], 5: [0, 0, 0, 3],
+        }
+        breakdown = recognition_breakdown(rows, scores, .7)
+        self.assertEqual(breakdown["amarelo"], {
+            "correct": 1, "capture": 1, "belowThreshold": 1, "outOfCatalogWinner": 1, "wrongLabelWinner": 1,
+        })
+        self.assertEqual(sum(breakdown["espelho"].values()), 0)
 
     def test_threshold_uses_middle_of_equally_effective_validation_range(self):
         rows = [clip(0, 1), clip(1, 2), clip(2, 3), clip(3, 0)]
