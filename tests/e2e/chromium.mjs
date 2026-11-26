@@ -110,8 +110,11 @@ export async function withChromium(check, { fakeCamera = true, videoFile } = {})
     const listen = (method, handler) => listeners.set(method, handler)
     return await check({ page, evaluate, waitUntil, navigate, permission, key, listen })
   } finally {
-    child.kill()
+    if (child.exitCode === null && child.signalCode === null) {
+      await command('Browser.close').catch(() => {})
+      child.kill()
+    }
     await closed
-    await rm(profile, { recursive: true, force: true })
+    await rm(profile, { recursive: true, force: true, maxRetries: 5 })
   }
 }
