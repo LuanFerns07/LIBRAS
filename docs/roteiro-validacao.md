@@ -64,3 +64,16 @@ Prévia do commit 51d9829 verificada pela frente independente de QA em um checko
 | Saiba mais | As sete URLs originais retornaram HTTP 200 sem redirecionamento em consultas com identificação do Chromium, e os títulos e a autoria ou instituição foram conferidos nas fontes. A aplicação exibiu os sete destinos e a declaração de autoria. |
 
 O classificador e o catálogo ainda aguardavam validação quando essa prévia foi executada. As métricas de classificação e latência, o roteiro de sinais com participantes e a revisão das animações, traduções e dicas permanecem pendentes neste registro. A largura estreita foi testada no Chromium de PC por emulação. O teste em aparelhos Android e iOS permanece pendente.
+
+## Reproduzir uma tentativa com o classificador
+
+Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 node --test tests/e2e/recognition.test.mjs
+mkdir -p data/evidence/camera-fixtures
+ffmpeg -i data/minds/raw/12EspelhoSinalizador11-1.mp4 -an -vf 'scale=640:-2,fps=30' -pix_fmt yuv420p data/evidence/camera-fixtures/espelho.y4m
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/espelho.y4m LIBRASIA_EXPECT_TEXT=espelho node --test tests/e2e/recognition.test.mjs
+~~~
+
+Guarde os clipes fora do Git. Registre a identificação do clipe, o resultado esperado, a decisão obtida e as versões. A latência desta tentativa mede a área livre. Repita a medição da lição com o avatar aberto para o aceite do protocolo.

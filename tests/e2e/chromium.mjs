@@ -2,27 +2,30 @@ import { spawn } from 'node:child_process'
 import { once } from 'node:events'
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve as resolvePath } from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 
-export async function withChromium(check, { fakeCamera = true } = {}) {
+export async function withChromium(check, { fakeCamera = true, videoFile } = {}) {
   const profile = await mkdtemp(join(tmpdir(), 'librasia-chromium-'))
   const flags = [
     '--headless',
     '--no-first-run',
+    '--disable-background-networking',
     '--no-default-browser-check',
     '--remote-debugging-pipe',
     '--enable-speech-dispatcher',
     '--enable-unsafe-swiftshader',
     '--user-data-dir=' + profile,
   ]
-  if (fakeCamera) flags.push('--use-fake-device-for-media-stream')
+  if (fakeCamera || videoFile) flags.push('--use-fake-device-for-media-stream')
+  if (videoFile) flags.push('--use-file-for-fake-video-capture=' + resolvePath(videoFile))
 
   const child = spawn(process.env.LIBRASIA_CHROMIUM || 'chromium', flags, {
     stdio: ['ignore', 'ignore', 'inherit', 'pipe', 'pipe'],
   })
   const [requests, responses] = child.stdio.slice(3)
   const pending = new Map()
+  const listeners = new Map()
   const closed = once(child, 'close').catch(() => {})
   let nextId = 0
   let buffered = ''
@@ -40,6 +43,10 @@ export async function withChromium(check, { fakeCamera = true } = {}) {
     buffered = messages.pop()
     for (const message of messages) {
       const response = JSON.parse(message)
+      if (response.method) {
+        listeners.get(response.method)?.(response.params)
+        continue
+      }
       const request = pending.get(response.id)
       if (!request) continue
       if (response.error) request.reject(new Error(response.error.message))
@@ -81,7 +88,7 @@ export async function withChromium(check, { fakeCamera = true } = {}) {
       while (Date.now() < deadline) {
         const value = await evaluate(expression).catch(error => {
           // A navegação pode substituir o contexto em que a expressão foi enviada.
-          if (!/context|inspected target/i.test(error.message)) throw error
+          if (!/cannot find context|execution context was destroyed|inspected target/i.test(error.message)) throw error
         })
         if (value) return value
         await delay(50)
@@ -100,7 +107,8 @@ export async function withChromium(check, { fakeCamera = true } = {}) {
       await page('Input.dispatchKeyEvent', { type: 'rawKeyDown', key: keyName, code: keyName, windowsVirtualKeyCode: code })
       await page('Input.dispatchKeyEvent', { type: 'keyUp', key: keyName, code: keyName, windowsVirtualKeyCode: code })
     }
-    return await check({ page, evaluate, waitUntil, navigate, permission, key })
+    const listen = (method, handler) => listeners.set(method, handler)
+    return await check({ page, evaluate, waitUntil, navigate, permission, key, listen })
   } finally {
     child.kill()
     await closed
