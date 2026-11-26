@@ -13,7 +13,7 @@ import numpy as np
 import onnx
 import torch
 
-from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
+from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, add_training_positives, digest, load_features, write_json
 from metrics import checks, choose_threshold
 from model import ARCHITECTURES
 from partial_negatives import load_partial_negatives
@@ -138,6 +138,7 @@ def main():
     parser.add_argument("--arch", choices=tuple(ARCHITECTURES), default="ConvSequence")
     parser.add_argument("--partial-negatives", type=Path,
                         help="Usa janelas temporais de negativos como alternativas de treino.")
+    parser.add_argument("--extra-positives", type=Path, help="Inclui quartas gravações de pessoas do treino.")
     args = parser.parse_args()
     if args.epochs <= 0 or args.batch_size <= 0:
         parser.error("Épocas e tamanho de lote devem ser positivos.")
@@ -150,8 +151,11 @@ def main():
     catalog = CATALOGS[args.catalogo]
     index, data = load_features(args.features, {"train", "val"}, catalog)
     partial, provenance = (None, None)
+    extra = None
     if args.partial_negatives is not None:
         partial, provenance = load_partial_negatives(args.partial_negatives, index, data, catalog)
+    if args.extra_positives is not None:
+        data, extra = add_training_positives(args.extra_positives, index, data, catalog)
     print(f"Treino no dispositivo {device} com Torch {torch.__version__}.", flush=True)
     model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog, args.arch, partial)
     args.out.mkdir(parents=True, exist_ok=True)
@@ -180,6 +184,7 @@ def main():
         "modelSha256": manifest["modelSha256"], "validation": best["validation"],
         "validationChecks": checks(best["validation"]), "history": history,
         **({"partialNegatives": provenance} if provenance is not None else {}),
+        **({"extraPositives": extra} if extra is not None else {}),
     })
     print(f"ONNX exportado em {onnx_path}, época {best['epoch']} e limiar {best['threshold']:.6f}.")
 

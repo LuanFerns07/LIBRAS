@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from dataset import CATALOGS, add_training_negatives, digest, load_features, write_json
+from dataset import CATALOGS, add_training_negatives, add_training_positives, digest, load_features, write_json
 from metrics import choose_threshold, describe, measure
 from model import ARCHITECTURES
 from train import SEED, collect, train
@@ -40,6 +40,8 @@ def main():
     parser.add_argument("--candidate", default="ConvSequenceGeometry", choices=tuple(ARCHITECTURES))
     parser.add_argument("--candidate-negatives", type=Path,
                         help="Vetores rotulados apenas como negativos, restritos ao treino do candidato.")
+    parser.add_argument("--candidate-positives", type=Path,
+                        help="Quartas gravações de Espelho e Amarelo, somente para as pessoas do treino.")
     parser.add_argument("--combine", action="store_true",
                         help="Avalia também a média das probabilidades com limiar próprio de validação.")
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
@@ -47,8 +49,9 @@ def main():
     parser.add_argument("--batch-size", type=int, default=12)
     parser.add_argument("--seed", type=int, default=SEED)
     args = parser.parse_args()
-    if (args.candidate == args.reference and args.candidate_negatives is None) or min(args.epochs, args.batch_size) <= 0:
-        parser.error("Use arquiteturas distintas ou negativos adicionais e valores positivos para épocas e lote.")
+    if (args.candidate == args.reference and not (args.candidate_negatives or args.candidate_positives)
+            or min(args.epochs, args.batch_size) <= 0):
+        parser.error("Use arquiteturas distintas ou exemplos adicionais e valores positivos para épocas e lote.")
     if args.device == "cuda" and not torch.cuda.is_available():
         parser.error("CUDA não está disponível nesta instalação do PyTorch.")
     torch.set_num_threads(2)
@@ -56,16 +59,24 @@ def main():
     index, rows = load_features(args.features, {"train"}, labels)
     candidate_rows = rows
     provenance = None
+    positive_provenance = None
+    negatives, positives = [], []
     candidate_name = args.candidate
     if args.candidate_negatives is not None:
         candidate_rows, provenance = add_training_negatives(args.candidate_negatives, index, rows, labels)
+        negatives = candidate_rows[len(rows):]
         candidate_name += " + negativos complementares"
-    extras = candidate_rows[len(rows):]
+    if args.candidate_positives is not None:
+        supplemented, positive_provenance = add_training_positives(args.candidate_positives, index, candidate_rows, labels)
+        positives = supplemented[len(candidate_rows):]
+        candidate_name += " + quartas gravações"
     folds = signer_folds(row.signer for row in rows)
     comparisons = {}
     reference_scores = []
     ensemble_folds = []
-    for name, arch, additional in ((args.reference, args.reference, []), (candidate_name, args.candidate, extras)):
+    for name, arch, outside, related in (
+        (args.reference, args.reference, [], []), (candidate_name, args.candidate, negatives, positives)
+    ):
         evaluations = []
         for fold_index, (training, validation, measurement) in enumerate(folds):
             development = [
@@ -73,6 +84,7 @@ def main():
                 for row in rows if row.signer in training or row.signer in validation
             ]
             holdout = [row for row in rows if row.signer in measurement]
+            additional = [*outside, *(row for row in related if row.signer in training)]
             print(f"{name} · treino {training} · validação {validation} · medição {measurement}", flush=True)
             model, selected, _, _ = train([*development, *additional], args.device, args.epochs,
                                          args.batch_size, args.seed, labels, arch)
@@ -84,6 +96,7 @@ def main():
             evaluations.append({
                 **placement,
                 "selectedEpoch": selected["epoch"], "threshold": selected["threshold"], "results": metrics,
+                **({"extraTrainingClips": len(additional)} if related else {}),
             })
             if args.combine:
                 calibration = [row for row in development if row.partition == "val"]
@@ -106,6 +119,7 @@ def main():
         "featuresManifestSha256": digest(args.features), "labels": list(labels), "seed": args.seed,
         "epochs": args.epochs, "batchSize": args.batch_size, "device": args.device, "torch": torch.__version__,
         "comparisons": comparisons, "candidateTrainingNegatives": provenance,
+        **({"candidateTrainingPositives": positive_provenance} if positive_provenance is not None else {}),
     })
 
 

@@ -34,9 +34,12 @@ def digest(path):
         return file_digest(handle, "sha256").hexdigest()
 
 
-def load_features(index_path, partitions, labels=LABELS, *, training_negatives=False):
+def load_features(index_path, partitions, labels=LABELS, *, training_negatives=False, required_labels=None):
     if training_negatives and set(partitions) != {"train"}:
         raise ValueError("Negativos complementares só podem ser usados para treino.")
+    required = set(labels if required_labels is None else required_labels)
+    if not required or not required.issubset(labels):
+        raise ValueError("As classes exigidas devem pertencer ao catálogo.")
     index = json.loads(index_path.read_text(encoding="utf-8"))
     if index.get("preprocess") != PREPROCESS or index.get("mediapipe") != "0.10.32":
         raise ValueError("Versão de pré-processamento ou extrator inesperada.")
@@ -50,7 +53,7 @@ def load_features(index_path, partitions, labels=LABELS, *, training_negatives=F
         partition = item["partition"]
         checksum = item["sha256"]
         feature_file = item["features"]
-        if label not in labels or type(signer) is not int or partition not in {"train", "val", "test"}:
+        if label not in required or type(signer) is not int or partition not in {"train", "val", "test"}:
             raise ValueError(f"Rótulo ou partição inválido na entrada {number}.")
         if training_negatives and (label is not None or partition != "train"):
             raise ValueError("O conjunto complementar deve conter apenas negativos de treino.")
@@ -90,7 +93,7 @@ def load_features(index_path, partitions, labels=LABELS, *, training_negatives=F
         if len(signers) < 2:
             raise ValueError(f"São necessárias pelo menos duas pessoas em {split}.")
         classes = {row.label for row in rows if row.partition == split}
-        if len(classes) != len(labels):
+        if classes != {labels.index(label) for label in required}:
             raise ValueError(f"Há classes ausentes na partição {split}.")
     return index, rows
 
@@ -112,6 +115,31 @@ def add_training_negatives(index_path, base_index, rows, labels=LABELS):
     }
     offset = len(base_index["clips"])
     return [*rows, *(replace(row, index=offset + row.index) for row in negatives)], provenance
+
+
+def add_training_positives(index_path, base_index, rows, labels=LABELS):
+    extra_index, extra = load_features(index_path, {"train"}, labels, required_labels=("espelho", "amarelo"))
+    if any(extra_index[key] != base_index[key] for key in ("recipe", "modelSha256", "preprocess")):
+        raise ValueError("A extração complementar deve usar a mesma receita do conjunto principal.")
+    train_people = {clip["signer"] for clip in base_index["clips"] if clip["partition"] == "train"}
+    used_hashes = {clip["sha256"] for clip in base_index["clips"]} | {row.checksum for row in rows}
+    used_values = {row.values.tobytes() for row in rows if row.values is not None}
+    seen = set()
+    for row in extra:
+        metadata = extra_index["clips"][row.index]
+        key = row.signer, row.label
+        if (row.signer not in train_people or row.checksum in used_hashes or key in seen
+                or metadata["recording"] != 4 or metadata["sensor"] != "Canon"
+                or row.source_label != labels[row.label]
+                or (row.values is not None and row.values.tobytes() in used_values)):
+            raise ValueError("Gravação complementar duplicada, incompatível ou fora das pessoas de treino.")
+        seen.add(key)
+    offset = max(len(base_index["clips"]), max((row.index + 1 for row in rows), default=0))
+    return [*rows, *(replace(row, index=offset + row.index) for row in extra)], {
+        "featuresManifestSha256": digest(index_path), "sourceManifestSha256": extra_index["sourceManifestSha256"],
+        "clips": len(extra), "eligible": sum(row.values is not None for row in extra),
+        "signers": sorted({row.signer for row in extra}),
+    }
 
 
 def write_json(path: Path, payload):

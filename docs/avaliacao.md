@@ -255,3 +255,9 @@ A comparação conserva as três rodadas por pessoa do treino original e inclui 
   --reference ConvSequenceFlexion --candidate ConvSequenceMotion \
   --out data/models/isolated-motion/cross-validation.json
 ```
+
+## Gravações adicionais de Espelho e Amarelo
+
+O recorte complementar seleciona a quarta tomada completa de Espelho e de Amarelo para as sete pessoas do treino original. Os vídeos Canon das repetições 1 a 3, usados nas medições anteriores, continuam como referência. Em cada rodada, apenas as quartas tomadas das pessoas que ajustam os pesos são disponibilizadas ao treino. A validação e a medição mantêm as amostras originais. A quinta tomada e as partições reservadas ficam fora do ensaio.
+
+A comparação usa a mesma arquitetura nas duas condições, com e sem as gravações extras. A avaliação mostra se os acertos de Espelho e Amarelo aumentam e se a cobertura e a rejeição dos vídeos originais se mantêm. Os denominadores de teste continuam os mesmos, pois repetir uma pessoa em outra tomada amplia seus exemplos de treino.
