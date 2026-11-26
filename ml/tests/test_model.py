@@ -9,7 +9,7 @@ import torch
 
 from dataset import Clip
 from evaluate import create_session, run_inference
-from model import ARCHITECTURES, ConvSequenceGated, ConvSequenceGeometry
+from model import ARCHITECTURES, ConvSequenceFlexion, ConvSequenceGated, ConvSequenceGeometry
 from train import augment, export
 
 
@@ -65,3 +65,19 @@ class ModelTests(TestCase):
             missing_reference[..., index, 3] = 0
             masked = ConvSequenceGeometry.local_hand_features(missing_reference.flatten(start_dim=2))
             self.assertEqual(masked.count_nonzero().item(), 0)
+
+    def test_flexion_tracks_turns_and_masks_a_missing_joint(self):
+        model = ConvSequenceFlexion(5)
+        video = torch.zeros(1, 24, 48, 4)
+        video[..., 6:11, :] = torch.tensor([
+            [0., 0., 0., 1.], [.1, 0., 0., 1.], [.1, .1, 0., 1.],
+            [.1, .2, 0., 1.], [.1, .3, 0., 1.],
+        ])
+        source = model.finger_flexion(video.flatten(start_dim=2))
+        torch.testing.assert_close(source[0, 0, :6], torch.tensor([0., 1., 1., 1., 1., 1.]))
+        moved = video.clone()
+        moved[..., :3] = video[..., [1, 0, 2]] * 2 + 1
+        torch.testing.assert_close(source, model.finger_flexion(moved.flatten(start_dim=2)))
+        video[..., 8, 3] = 0
+        masked = model.finger_flexion(video.flatten(start_dim=2))
+        self.assertEqual(masked.count_nonzero().item(), 0)

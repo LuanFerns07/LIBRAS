@@ -35,8 +35,8 @@ class ConvSequence(torch.nn.Module):
 class ConvSequenceGeometry(ConvSequence):
     """Combina o contexto corporal com o formato de cada mão em escala própria."""
 
-    def __init__(self, classes):
-        super().__init__(classes, input_features=192 + 2 * 21 * 4)
+    def __init__(self, classes, extra_features=0):
+        super().__init__(classes, input_features=192 + 2 * 21 * 4 + extra_features)
 
     @staticmethod
     def local_hand_features(video):
@@ -49,9 +49,34 @@ class ConvSequenceGeometry(ConvSequence):
         mask = mask * hands[..., 9:10, 3:]
         return torch.cat((relative / scale * mask, mask), dim=-1).flatten(start_dim=2)
 
+    def hand_channels(self, video):
+        return self.local_hand_features(video)
+
     def forward(self, video):
-        local = self.local_hand_features(video)
-        return super().forward(torch.cat((video, local), dim=-1))
+        return super().forward(torch.cat((video, self.hand_channels(video)), dim=-1))
+
+
+class ConvSequenceFlexion(ConvSequenceGeometry):
+    """Representa ângulos de flexão dos dedos e a presença dos pontos usados."""
+
+    def __init__(self, classes):
+        super().__init__(classes, extra_features=2 * 5 * 3 * 2)
+        digits = [joint for finger in range(5) for joint in (0, *range(4 * finger + 1, 4 * finger + 5))]
+        self.register_buffer("digit_joints", torch.tensor(digits), persistent=False)
+
+    def finger_flexion(self, video):
+        hands = video[..., 24:].reshape(video.shape[0], video.shape[1], 2, 21, 4)
+        joints = hands.index_select(-2, self.digit_joints).reshape(video.shape[0], video.shape[1], 2, 5, 5, 4)
+        bones = joints[..., 1:, :3] - joints[..., :-1, :3]
+        lengths_squared = bones.square().sum(dim=-1, keepdim=True)
+        unit_vectors = bones / lengths_squared.clamp_min(1e-6).sqrt()
+        presence = joints[..., 1:, 3:] * joints[..., :-1, 3:] * (lengths_squared > 1e-6)
+        valid = presence[..., 1:, :] * presence[..., :-1, :]
+        cosines = (unit_vectors[..., 1:, :] * unit_vectors[..., :-1, :]).sum(dim=-1, keepdim=True)
+        return torch.cat((cosines * valid, valid), dim=-1).flatten(start_dim=2)
+
+    def hand_channels(self, video):
+        return torch.cat((super().hand_channels(video), self.finger_flexion(video)), dim=-1)
 
 
 class ConvSequenceGated(ConvSequenceGeometry):
@@ -68,5 +93,5 @@ class ConvSequenceGated(ConvSequenceGeometry):
 
 
 ARCHITECTURES = {
-    model.__name__: model for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated)
+    model.__name__: model for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated, ConvSequenceFlexion)
 }

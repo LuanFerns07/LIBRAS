@@ -153,3 +153,15 @@ Compare a arquitetura nova e a anterior com a mesma semente, as mesmas três rod
 | Geometria com decisão de pertencimento | 0,579 | 5/18 | 53/78 | 7/42 |
 
 A variante reduziu a cobertura e perdeu oito acertos de Cinco. O resultado ficou abaixo do critério. [Comparação por pessoa](../ml/evidence/isolated-gated/cross-validation.json)
+
+## Experimento com flexão dos dedos
+
+A forma de Cinco documentada no MINDS flexiona o indicador e o médio em V. O candidato `ConvSequenceFlexion` acrescenta à geometria o cosseno entre ossos vizinhos de cada dedo e a máscara dos pontos necessários para esse cálculo. Isso representa flexão mesmo quando a mão muda de escala ou de posição. A rede recebe também as coordenadas no referencial dos ombros e dos pulsos para distinguir posição, orientação e movimento. [Referências dos sinais](animacoes.md)
+
+A comparação usa as três rodadas por pessoa do conjunto de treino, a mesma semente e os mesmos critérios de seleção da referência. O candidato deve preservar pelo menos os 13 acertos de Cinco da referência em 18, manter F1 macro igual ou superior e reduzir falsas aceitações. Os demais conjuntos ficam fora da escolha.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda \
+  --reference ConvSequenceGeometry --candidate ConvSequenceFlexion \
+  --out data/models/isolated-flexion/cross-validation.json
+```
