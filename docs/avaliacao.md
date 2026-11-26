@@ -256,6 +256,14 @@ A comparação conserva as três rodadas por pessoa do treino original e inclui 
   --out data/models/isolated-motion/cross-validation.json
 ```
 
+| Condição | Espelho | Amarelo | Cobertura | Falsas aceitações | F1 macro |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Flexão | 14/21 | 12/21 | 52/78 | 5/42 | 0,679 |
+| Orientação e movimento | 14/21 | 10/21 | 51/78 | 5/42 | 0,766 |
+| Média de flexão e movimento | 13/21 | 10/21 | 53/78 | 3/42 | 0,761 |
+
+A representação de movimento chegou à meta de revocação de Espelho. As cinco falsas aceitações da arquitetura ocorreram em Amarelo. A baixa cobertura e a revocação de Amarelo seguem como limites. Em uma análise adicional, combinamos a arquitetura de movimento com a geometria, que tinha maior cobertura nas rodadas anteriores. A divisão de pessoas e a regra de calibração ficam iguais. [Rodadas de flexão e movimento](../ml/evidence/isolated-motion/cross-validation.json)
+
 ## Gravações adicionais de Espelho e Amarelo
 
 O recorte complementar seleciona a quarta tomada completa de Espelho e de Amarelo para as sete pessoas do treino original. Os vídeos Canon das repetições 1 a 3, usados nas medições anteriores, continuam como referência. Em cada rodada, apenas as quartas tomadas das pessoas que ajustam os pesos são disponibilizadas ao treino. A validação e a medição mantêm as amostras originais. A quinta tomada e as partições reservadas ficam fora do ensaio.
