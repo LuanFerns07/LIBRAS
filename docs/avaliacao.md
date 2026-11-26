@@ -204,6 +204,17 @@ O Holistic extraiu 82 vetores utilizáveis de 84 janelas, de 42 gravações de s
 
 A falsa aceitação em prefixos caiu de 7 para 1 em 42. Em sufixos, caiu de 12 para 2 em 42. A cobertura dos positivos completos ficou em 71,8%, abaixo da meta de 75%. As métricas descrevem as rodadas de desenvolvimento e seus recortes. A versão local segue com os pesos iniciais. [Matrizes e contagens por rodada](../ml/evidence/isolated-partials/cross-validation.json)
 
+O candidato exportado com limiar 0,600 acertou 24/24 sinais e rejeitou 12/12 negativos na validação que selecionou o limiar. As decisões coincidiram entre PyTorch e ONNX nos 36 clipes, e entre o ONNX de referência e o WebAssembly em cinco amostras. No recorte já conhecido do CLAD, houve uma falsa aceitação em 12 trechos, no gesto de digitar e tocar o queixo. Uma prévia separada rejeitou o recorte original de Banco em 2/2 reproduções e reconheceu Cinco e Espelho em 2/2 cada. [Validação](../ml/evidence/isolated-partials/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-partials/wasm-parity.json) · [Resultados no CLAD](../ml/evidence/isolated-partials/clad-evaluation.json)
+
+```bash
+.venv/bin/python ml/train.py --arch ConvSequenceGeometry --catalogo expandido --device cuda \
+  --partial-negatives data/minds-partial/features-negative/index.json \
+  --features data/minds-expanded/features/index.json --out data/models/isolated-partials
+.venv/bin/python ml/evaluate.py --split val \
+  --features data/minds-expanded/features/index.json --run data/models/isolated-partials
+node ml/verify-wasm.mjs --run data/models/isolated-partials
+```
+
 ## Combinação de geometria e flexão
 
 A terceira condição atribui peso igual às probabilidades dos modelos de geometria e de flexão, treinados separadamente nas mesmas três rodadas de desenvolvimento. A média inclui a classe de rejeição. A validação de cada rodada escolhe um limiar para a combinação, com as mesmas regras dos modelos isolados. Verifique se a combinação melhora a cobertura e preserva a rejeição. Use as metas de classificação e rejeição do [protocolo](protocolo-aceite.md) para avaliar a possibilidade de abrir um teste com novas pessoas.
@@ -224,8 +235,11 @@ A média passou as metas de F1 macro, cobertura e falsas aceitações dentro da 
 
 O ONNX combina os dois checkpoints locais. A validação que definiu o limiar 0,525 teve 24/24 acertos e 0/12 falsas aceitações. Nos 36 clipes, os logits de PyTorch e ONNX tiveram diferença máxima de 1,91 × 10⁻⁶ e as decisões coincidiram. A paridade WebAssembly foi conferida em cinco exemplos, também com decisões iguais. Os artefatos do aplicativo permanecem os do modelo inicial. [Calibração e paridade ONNX](../ml/evidence/isolated-combined/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-combined/wasm-parity.json)
 
+No Chromium, a combinação rejeitou as dez reproduções parciais de Banco e preservou todos os textos já digitados. Reconheceu também as quatro reproduções de Cinco e Espelho. Nos 12 negativos já conhecidos do CLAD, houve um falso aceite, o mesmo gesto de digitar e tocar o queixo que foi aceito pelo modelo de geometria. [Resultados de Banco por janela](janelas-area-livre.md) · [Resultados no CLAD](../ml/evidence/isolated-combined/clad-evaluation.json)
+
 ```bash
 .venv/bin/python ml/export_combined.py --out data/models/isolated-combined \
   data/models/isolated-geometry data/models/isolated-flexion
 node ml/verify-wasm.mjs --run data/models/isolated-combined
+LIBRASIA_PORTA=4175 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
 ```

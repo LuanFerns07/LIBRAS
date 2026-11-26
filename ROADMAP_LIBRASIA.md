@@ -82,7 +82,8 @@ A combinação de geometria e flexão chegou a F1 macro de 0,761 e 3/42 falsas a
 - [x] Adicionar uma entrada de texto por tentativa reconhecida. Permitir editar, limpar e ouvir o resultado em português brasileiro com síntese gratuita. Uma voz robótica atende à demonstração. Manter o texto editável e indicar o problema quando o áudio estiver indisponível.
 - [x] Verificar no Chromium que uma sustentação acrescenta uma palavra, duas tentativas intencionais acrescentam duas e o texto continua editável após falha ou ausência de voz. Verificar a preservação do texto em tentativas inconclusivas. [Resultados com clipes de teste](docs/regressao-area-livre.md)
 - [x] Medir o treino com janelas de sinais fora do catálogo. Nas rodadas por pessoa, a falsa aceitação em pelo menos um recorte passou de 15/42 para 3/42 gravações. [Treino e resultados por gravação](docs/avaliacao.md#treino-com-janelas-parciais-de-negativos)
-- [ ] Corrigir a falsa aceitação observada no clipe de Banco com captura parcial e repetir os ensaios de sinais fora do catálogo. Conferir em webcam dois sinais suportados, sustentação, repetição e audição do texto editado.
+- [x] Corrigir a regressão de Banco em um candidato local e verificar o controle com Cinco e Espelho. O combinado rejeitou 10/10 janelas de Banco e acertou 4/4 controles. [Reteste de regressão no Chromium](docs/janelas-area-livre.md)
+- [ ] Qualificar o candidato para substituir o modelo inicial com participantes fora do treino. Testar entradas desconhecidas, dois sinais suportados, sustentação, repetição e audição do texto editado em webcam real.
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 
 ### M6 · Saiba mais, autoria e caráter sem fins lucrativos
