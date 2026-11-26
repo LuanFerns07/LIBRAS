@@ -77,7 +77,7 @@ def split_key(purpose, number):
     return hashlib.sha256(f"{SPLIT_SEED}/{purpose}/{number}".encode()).hexdigest()
 
 
-def partition(pairs):
+def sentence_components(pairs):
     # Frases iguais estão no mesmo componente, mesmo em lados distintos ou via uma terceira linha.
     roots = list(range(len(pairs)))
     first_seen = {}
@@ -97,7 +97,11 @@ def partition(pairs):
                 previous = first_seen.setdefault(key, index)
                 left, right = sorted((find(index), find(previous)))
                 roots[right] = left
+    return keys, [pairs[find(index)].row for index in range(len(pairs))]
 
+
+def partition(pairs):
+    keys, components = sentence_components(pairs)
     candidates = {split: [] for split in SPLIT_LIMITS}
     seen = set()
     duplicates = 0
@@ -110,8 +114,7 @@ def partition(pairs):
             duplicates += 1
             continue
         seen.add(endpoints)
-        root_row = pairs[find(index)].row
-        bucket = int(split_key("component", root_row)[:16], 16) % 100
+        bucket = int(split_key("component", components[index])[:16], 16) % 100
         split = "train" if bucket < 80 else "dev" if bucket < 90 else "test"
         candidates[split].append((split_key("sample", pair.row), index))
 
