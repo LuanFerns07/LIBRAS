@@ -6,7 +6,6 @@ import { tmpdir } from 'node:os'
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
-import { finished } from 'node:stream/promises'
 
 const { values: options } = parseArgs({ options: {
   project: { type: 'string', default: '.' },
@@ -140,15 +139,15 @@ if (pending) {
   const count = pending
   let elapsed = 0
   const children = []
+  let finish
+  let fail
+  let idleTimer
+  const done = new Promise((resolve, reject) => { finish = resolve; fail = reject })
+  function resetIdleTimer() {
+    clearTimeout(idleTimer)
+    idleTimer = setTimeout(() => fail(new Error('Chromium sem progresso de extração por 120 segundos.')), 120000)
+  }
   const profile = await mkdtemp(resolve(tmpdir(), 'librasia-extract-'))
-  const { promise: done, resolve: finish, reject: fail } = Promise.withResolvers
-    ? Promise.withResolvers()
-    : (() => {
-        let complete
-        let stop
-        const promise = new Promise((onComplete, onStop) => { complete = onComplete; stop = onStop })
-        return { promise, resolve: complete, reject: stop }
-      })()
   const { createServer } = await import(pathToFileURL(resolve(project, 'node_modules/vite/dist/node/index.js')))
   const server = await createServer({
     root: project,
@@ -192,6 +191,7 @@ if (pending) {
                 console.log(`[${elapsed}/${count}] ${item.partition} ${item.signer} ${basename(item.file)} ${data.state}`)
                 send(res, 200, '{}')
                 if (elapsed === count) finish()
+                else resetIdleTimer()
                 return
               }
             }
@@ -214,7 +214,7 @@ if (pending) {
   try {
     await server.listen()
     const { port } = server.httpServer.address()
-    const oneHour = setTimeout(() => fail(new Error('Tempo limite geral de extração excedido.')), 3600000)
+    resetIdleTimer()
     try {
       for (let index = 0; index < Math.min(workers, count); index += 1) {
         const child = spawn(options.browser, [
@@ -229,21 +229,18 @@ if (pending) {
         child.once('exit', (code, signal) => {
           if (elapsed < count) fail(new Error(`Chromium encerrado (${code ?? signal}): ${errors}`))
         })
-        children.push(child)
+        const closed = new Promise((complete) => child.once('close', complete))
+        children.push({ child, closed })
       }
       await done
     } finally {
-      clearTimeout(oneHour)
+      clearTimeout(idleTimer)
     }
   } finally {
-    const exits = children.map(async (child) => {
-      if (child.exitCode !== null || child.signalCode !== null) return
-      const closed = new Promise((complete) => child.once('close', complete))
-      child.kill()
-      await closed
-      await finished(child.stderr).catch(() => {})
-    })
-    await Promise.all(exits)
+    await Promise.all(children.map(({ child, closed }) => {
+      if (child.exitCode === null && child.signalCode === null) child.kill()
+      return closed
+    }))
     await server.close()
     await rm(profile, { recursive: true, force: true, maxRetries: 2 })
   }
