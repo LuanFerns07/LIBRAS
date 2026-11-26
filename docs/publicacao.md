@@ -1,5 +1,7 @@
 # Prévia e publicação web
 
+A aplicação permanece local nesta rodada, conforme orientação dos responsáveis em 26/11/2026. O [README](../README.md) apresenta o comando de execução no Linux. Use este roteiro quando houver autorização para hospedar a aplicação.
+
 O LibrasIA é uma aplicação Vite estática. O repositório inclui `vercel.json` para usar `npm ci`, preparar o extrator MediaPipe e servir `dist/`. A câmera só é solicitada depois de uma ação, sem microfone. O build configura o compartilhamento da câmera com a própria origem e restringe conexões à mesma origem.
 
 A prévia local do Vite aplica os mesmos cabeçalhos da Vercel para testar o carregamento de WebAssembly e o acesso à câmera com a política de segurança de produção.

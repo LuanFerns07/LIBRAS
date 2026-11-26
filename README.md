@@ -8,9 +8,19 @@ O protótipo web reúne prática de Libras, alfabeto manual e tradução nos doi
 
 [Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prompt de implementação](PROMPT_LIBRASIA.md)
 
-## Executar no PC
+## Executar neste Linux
 
 Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se Chromium com WebGL 2, câmera e voz local pt-BR.
+
+```bash
+./scripts/executar-local.sh
+```
+
+Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando necessário, verifica o extrator de visão, instala os pesos locais disponíveis e inicia a versão compilada. Use Ctrl+C no terminal para encerrar. Se precisar de outra porta, execute `LIBRASIA_PORTA=4174 ./scripts/executar-local.sh`.
+
+No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto** ou **Tradutor** para abrir o avatar, e **Área livre** para editar e ouvir o texto. Autorize a câmera ao usar **Ativar câmera**. O endereço de loopback permite o uso local da webcam.
+
+### Desenvolvimento
 
 ```bash
 npm ci
@@ -28,7 +38,13 @@ npm run setup:model -- data/models/isolated-v1
 
 Os pontos da câmera são processados na própria página. Os sinais e as dicas da lição estão em revisão linguística. Na área livre, o modo experimental de sequência delimita os sinais quando a pessoa abaixa as mãos entre eles.
 
-No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher lista a voz local pt-BR do eSpeak NG. Se a lista de vozes do navegador estiver vazia, confira o Speech Dispatcher e o módulo eSpeak NG, reinicie o navegador e reabra a área livre. A transcrição fica disponível para edição quando a voz falha.
+No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher lista a voz local pt-BR do eSpeak NG. Se o navegador não apresentar essa voz, abra um perfil dedicado com a integração do Speech Dispatcher:
+
+```bash
+chromium --enable-speech-dispatcher --user-data-dir="$PWD/.cache/chromium-librasia" http://127.0.0.1:4173/
+```
+
+A transcrição fica disponível para edição quando a voz falha.
 
 ## Verificar e compilar
 
@@ -44,7 +60,7 @@ O build gera `dist/`. Use `npm run preview` para verificar essa versão em local
 
 Com Chromium instalado e a prévia em execução, rode `LIBRASIA_TEST_URL=http://127.0.0.1:4173 npm run test:e2e`. O roteiro de validação descreve as opções para câmera física, voz local e vídeos de teste.
 
-Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). A [prévia na Vercel](docs/publicacao.md) depende do aceite no PC e da autorização de publicação.
+Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). A execução da aplicação está restrita ao ambiente local nesta rodada.
 
 O desenvolvimento é integrado localmente na branch `main`. As frentes de implementação simultânea usam worktrees de branches dedicadas. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
 

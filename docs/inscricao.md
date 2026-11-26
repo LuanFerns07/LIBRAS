@@ -34,6 +34,17 @@ Atualize o resumo depois do aceite. Conte os caracteres de todo o documento 3, i
 - Reunir os documentos legíveis em um PDF de até 40 MB. Se a ferramenta de fusão invalidar assinaturas, reúna primeiro os documentos e assine os campos dos anexos no PDF combinado, preservando as assinaturas anteriores. Confira todas as assinaturas no arquivo final. Documentos pessoais e PDFs assinados devem ficar fora do Git.
 - Enviar pelo formulário oficial somente após a conferência do arquivo. O edital não prevê complementação após o envio. [Formulário da UFC](https://docs.google.com/forms/d/e/1FAIpQLSem93yeY1QOBkT1mt5tSGcnIkrqwwj30tpPGj3fGmCO6xYlGQ/viewform?usp=header)
 
+## Separar os modelos oficiais dos anexos
+
+Em Linux, use o PDF original do edital e o utilitário `pdfseparate` do Poppler. O comando preserva as páginas oficiais 16, 17 e 18 como os modelos dos Anexos II, III e IV. Prepare os arquivos em `private/inscricao`, que está fora do Git.
+
+~~~bash
+mkdir -p private/inscricao
+curl -fLsS 'https://catedraldt.virtual.ufc.br/wp-content/uploads/2026/11/edital-premio-catedra-ia-2026.pdf' \
+  -o private/inscricao/edital-1-2026.pdf
+pdfseparate -f 16 -l 18 private/inscricao/edital-1-2026.pdf private/inscricao/anexo-pagina-%d.pdf
+~~~
+
 ## Gerar uma prévia do memorial
 
 Com XeLaTeX e os pacotes indicados no arquivo, execute na raiz:
