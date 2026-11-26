@@ -18,9 +18,9 @@ def ratio(numerator, denominator):
     return float(numerator / denominator) if denominator else 0.0
 
 
-def describe(matrix):
+def describe(matrix, labels=LABELS):
     by_label = {}
-    for label, name in enumerate(LABELS[1:], start=1):
+    for label, name in enumerate(labels[1:], start=1):
         true_positive = int(matrix[label, label])
         predicted = int(matrix[:, label].sum())
         support = int(matrix[label].sum())
@@ -42,8 +42,8 @@ def describe(matrix):
     rejected = int(matrix[:, 0].sum())
     total = int(matrix.sum())
     return {
-        "expectedLabels": ["fora do catálogo", *LABELS[1:]],
-        "decisionLabels": ["rejeitado", *LABELS[1:]],
+        "expectedLabels": ["fora do catálogo", *labels[1:]],
+        "decisionLabels": ["rejeitado", *labels[1:]],
         "matrix": matrix.tolist(),
         "byLabel": by_label,
         "f1Macro": float(np.mean([item["f1"] for item in by_label.values()])),
@@ -53,18 +53,18 @@ def describe(matrix):
     }
 
 
-def measure(rows, logits_by_index, threshold):
-    matrix = np.zeros((len(LABELS), len(LABELS)), dtype=int)
+def measure(rows, logits_by_index, threshold, labels=LABELS):
+    matrix = np.zeros((len(labels), len(labels)), dtype=int)
     details = []
     for row in rows:
         decision, confidence = decide(logits_by_index.get(row.index), threshold)
         matrix[row.label, decision] += 1
         details.append({
             "sha256": row.checksum, "signer": row.signer, "sourceLabel": row.source_label,
-            "expected": LABELS[row.label], "predicted": LABELS[decision],
+            "expected": labels[row.label], "predicted": labels[decision],
             "confidence": confidence, "captureState": row.state,
         })
-    return describe(matrix), details
+    return describe(matrix, labels), details
 
 
 def checks(metrics):
@@ -77,14 +77,14 @@ def checks(metrics):
     }
 
 
-def choose_threshold(rows, logits_by_index):
+def choose_threshold(rows, logits_by_index, labels=LABELS):
     """Calibra só com validação. Prioriza rejeição e F1 macro."""
     if {row.partition for row in rows} != {"val"}:
         raise ValueError("O limiar deve ser escolhido exclusivamente em validação.")
     best = None
     for hundredths in range(25, 101):
         threshold = hundredths / 100
-        metrics, _ = measure(rows, logits_by_index, threshold)
+        metrics, _ = measure(rows, logits_by_index, threshold, labels)
         gate = checks(metrics)
         score = (
             all(gate.values()), gate["falseAcceptance"],

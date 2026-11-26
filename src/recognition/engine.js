@@ -55,6 +55,7 @@ export async function openEngine() {
   }
 
   return {
+    catalog: manifest.labels.slice(1),
     captureOptions: { intervalMs: 100, limitMs: 4500 },
     detect: extractor.detect,
     recognize,

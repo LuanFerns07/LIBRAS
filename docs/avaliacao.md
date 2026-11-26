@@ -42,3 +42,20 @@ A cada época, o treino seleciona limiar de 0,25 a 1,00 em passos de 0,01 usando
 ```bash
 PYTHONPATH=ml .venv/bin/python -m unittest discover -s ml/tests -v
 ```
+
+## Experimento de expansão com ALUNO
+
+O catálogo expandido acrescenta ALUNO à área livre. A forma histórica de Fortaleza aparece no avatar para comparação, com escopo descrito em [Animações](animacoes.md). A execução do experimento abaixo mantém o modelo inicial e o catálogo de prática. Execute cada treino de GPU separadamente.
+
+```bash
+mkdir -p data/minds-expanded/raw data/minds-expanded/features
+cp -aln data/minds/raw/. data/minds-expanded/raw/
+python3 scripts/download_minds.py --catalogo expandido
+cp -aln data/minds/features/*.json data/minds-expanded/features/
+node ml/extract.mjs --manifest data/minds-expanded/manifest.json --out data/minds-expanded/features --workers 3
+.venv/bin/python ml/train.py --catalogo expandido --features data/minds-expanded/features/index.json --out data/models/isolated-expanded
+.venv/bin/python ml/evaluate.py --features data/minds-expanded/features/index.json --run data/models/isolated-expanded
+node ml/verify-wasm.mjs --run data/models/isolated-expanded
+```
+
+Compare as matrizes de confusão e a taxa de falsa aceitação em seus denominadores originais. O manifesto do modelo instalado informa a cobertura da área livre. Para executar separadamente o modelo expandido em Linux, use `LIBRASIA_MODELO=data/models/isolated-expanded ./scripts/executar-local.sh`.

@@ -96,4 +96,6 @@ export const studentFortaleza = {
   review: 'pending',
 }
 
+export const recognitionCatalog = [...lesson, student]
+
 export const spellingPause = Object.freeze({ id: 'pause', label: 'Pausa' })

@@ -18,6 +18,7 @@ import zlib
 BASE = "https://zenodo.org/api/records/2667329/files/"
 DOI = "10.5281/zenodo.2667329"
 ALLOWED = {"03": "amarelo", "10": "cinco", "12": "espelho"}
+EXPANDED = {**ALLOWED, "02": "aluno"}
 NEGATIVES = {
     "01": "acontecer", "04": "américa", "07": "banco",
     "09": "barulho", "11": "conhecer", "13": "esquina",
@@ -99,7 +100,7 @@ def recover_zip32_offsets(directory, central_start):
         previous_end = offset + LOCAL_HEADER.size + info.compress_size
 
 
-def candidates(signer, archive_entries, reps, negatives):
+def candidates(signer, archive_entries, reps, negatives, labels=ALLOWED):
     by_class = {}
     for info in archive_entries:
         member = PurePosixPath(info.filename)
@@ -109,7 +110,7 @@ def candidates(signer, archive_entries, reps, negatives):
         if match and int(match[2]) == signer:
             by_class.setdefault(match[1], []).append((int(match[3]), info))
 
-    for source in ALLOWED:
+    for source in labels:
         for rep, info in sorted(by_class.get(source, []), key=lambda entry: entry[0])[:reps]:
             yield source, rep, info
 
@@ -181,7 +182,7 @@ def extract(signer, total, info, destination):
     return digest.hexdigest()
 
 
-def download(root, signer, total, source, rep, info, cached_only=False):
+def download(root, signer, total, source, rep, info, labels, cached_only=False):
     name = PurePosixPath(info.filename).name
     output = root / "raw" / name
     if output.is_file() and output.stat().st_size == info.file_size:
@@ -198,8 +199,8 @@ def download(root, signer, total, source, rep, info, cached_only=False):
         digest = retried(lambda: extract(signer, total, info, output))
     return {
         "file": f"raw/{name}",
-        "label": ALLOWED.get(source),
-        "sourceLabel": ALLOWED.get(source) or NEGATIVES[source],
+        "label": labels.get(source),
+        "sourceLabel": labels.get(source) or NEGATIVES[source],
         "signer": signer,
         "partition": PARTITIONS[signer],
         "sha256": digest,
@@ -211,13 +212,17 @@ def download(root, signer, total, source, rep, info, cached_only=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=Path("data/minds"))
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--catalogo", choices=("inicial", "expandido"), default="inicial")
     parser.add_argument("--reps", type=int, choices=range(1, 6), default=3)
     parser.add_argument("--negatives", type=int, choices=range(1, len(NEGATIVES) + 1), default=6)
     parser.add_argument("--workers", type=int, choices=range(1, 17), default=8)
     parser.add_argument("--signers", type=int, choices=tuple(PARTITIONS), nargs="+", default=sorted(PARTITIONS))
     parser.add_argument("--manifest-parcial", action="store_true", help="Lista somente clipes já verificados em manifest-in-progress.json, sem baixar vídeos.")
     args = parser.parse_args()
+    labels = ALLOWED if args.catalogo == "inicial" else EXPANDED
+    if args.output is None:
+        args.output = Path("data/minds" if args.catalogo == "inicial" else "data/minds-expanded")
     (args.output / "raw").mkdir(parents=True, exist_ok=True)
 
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
@@ -228,11 +233,11 @@ def main():
         selection = []
         for signer, result in directories.items():
             total, directory = result.result()
-            for source, rep, info in candidates(signer, directory, args.reps, args.negatives):
+            for source, rep, info in candidates(signer, directory, args.reps, args.negatives, labels):
                 selection.append((signer, total, source, rep, info))
-        selection.sort(key=lambda item: (item[2] not in ALLOWED, item[3], item[2], item[0]))
+        selection.sort(key=lambda item: (item[2] not in labels, item[3], item[2], item[0]))
         tasks = {
-            executor.submit(download, args.output, *item, args.manifest_parcial): item[-1].filename
+            executor.submit(download, args.output, *item, labels, args.manifest_parcial): item[-1].filename
             for item in selection
         }
         clips = []

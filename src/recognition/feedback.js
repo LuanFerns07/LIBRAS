@@ -1,6 +1,6 @@
-import { lesson } from '../catalog.js'
+import { recognitionCatalog } from '../catalog.js'
 
-const signals = new Map(lesson.map(signal => [signal.id, signal]))
+const signals = new Map(recognitionCatalog.map(signal => [signal.id, signal]))
 
 function palmFacingCamera(hand, side) {
   const [wrist, index, pinky] = [hand[0], hand[5], hand[17]]

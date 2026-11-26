@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 LABELS = (None, "cinco", "espelho", "amarelo")
+CATALOGS = {"inicial": LABELS, "expandido": (*LABELS, "aluno")}
 FRAMES = 24
 FEATURES = 192
 SHAPE = (FRAMES, FEATURES)
@@ -33,7 +34,7 @@ def digest(path):
         return file_digest(handle, "sha256").hexdigest()
 
 
-def load_features(index_path, partitions):
+def load_features(index_path, partitions, labels=LABELS):
     index = json.loads(index_path.read_text(encoding="utf-8"))
     if index.get("preprocess") != PREPROCESS or index.get("mediapipe") != "0.10.32":
         raise ValueError("Versão de pré-processamento ou extrator inesperada.")
@@ -47,7 +48,7 @@ def load_features(index_path, partitions):
         partition = item["partition"]
         checksum = item["sha256"]
         feature_file = item["features"]
-        if label not in LABELS or type(signer) is not int or partition not in {"train", "val", "test"}:
+        if label not in labels or type(signer) is not int or partition not in {"train", "val", "test"}:
             raise ValueError(f"Rótulo ou partição inválido na entrada {number}.")
         if people.setdefault(signer, partition) != partition:
             raise ValueError(f"Sinalizante {signer} aparece em mais de uma partição.")
@@ -73,7 +74,7 @@ def load_features(index_path, partitions):
             inputs.add(tensor)
         elif computed["values"] is not None:
             raise ValueError(f"Extração inconclusiva contém vetor em {checksum}.")
-        rows.append(Clip(number, LABELS.index(label), signer, partition, checksum, item.get("sourceLabel", ""), state,
+        rows.append(Clip(number, labels.index(label), signer, partition, checksum, item.get("sourceLabel", ""), state,
                          values, computed["extractionMs"]))
     actual = {row.partition for row in rows}
     if actual != set(partitions):
@@ -83,7 +84,7 @@ def load_features(index_path, partitions):
         if len(signers) < 2:
             raise ValueError(f"São necessárias pelo menos duas pessoas em {split}.")
         classes = {row.label for row in rows if row.partition == split}
-        if len(classes) != len(LABELS):
+        if len(classes) != len(labels):
             raise ValueError(f"Há classes ausentes na partição {split}.")
     return index, rows
 

@@ -13,7 +13,7 @@ import numpy as np
 import onnx
 import torch
 
-from dataset import FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
+from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
 from metrics import checks, choose_threshold
 from model import ConvSequence
 
@@ -46,7 +46,7 @@ def collect(model, rows, device):
     return {row.index: output for row, output in zip(eligible, predictions, strict=True)}
 
 
-def train(rows, device, epochs, batch_size, seed):
+def train(rows, device, epochs, batch_size, seed, catalog=LABELS):
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True)
     random = torch.Generator().manual_seed(seed)
@@ -54,13 +54,13 @@ def train(rows, device, epochs, batch_size, seed):
     examples = [row for row in rows if row.partition == "train" and row.values is not None]
     features = torch.from_numpy(np.stack([row.values for row in examples]))
     labels = torch.tensor([row.label for row in examples], dtype=torch.long)
-    counts = torch.bincount(labels, minlength=len(LABELS))
+    counts = torch.bincount(labels, minlength=len(catalog))
     if not bool(counts.all()):
         raise ValueError(f"Classes sem amostras elegíveis no treino: {counts.tolist()}")
     weights = counts.float().rsqrt()
     weights /= weights.mean()
     criterion = torch.nn.CrossEntropyLoss(weight=weights.to(device))
-    model = ConvSequence(len(LABELS)).to(device)
+    model = ConvSequence(len(catalog)).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.002, weight_decay=0.01)
     best = None
     history = []
@@ -76,7 +76,7 @@ def train(rows, device, epochs, batch_size, seed):
             loss.backward()
             optimizer.step()
             losses.append(float(loss.detach()))
-        score, threshold, validation_metrics = choose_threshold(validation, collect(model, validation, device))
+        score, threshold, validation_metrics = choose_threshold(validation, collect(model, validation, device), catalog)
         history.append({
             "epoch": epoch, "trainLoss": float(np.mean(losses)), "threshold": threshold,
             "validationF1Macro": validation_metrics["f1Macro"],
@@ -116,6 +116,7 @@ def main():
     parser.add_argument("--batch-size", type=int, default=12)
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    parser.add_argument("--catalogo", choices=tuple(CATALOGS), default="inicial")
     args = parser.parse_args()
     if args.epochs <= 0 or args.batch_size <= 0:
         parser.error("Épocas e tamanho de lote devem ser positivos.")
@@ -125,16 +126,17 @@ def main():
         args.device if args.device != "auto" else "cpu"
     )
     torch.set_num_threads(min(4, os.cpu_count() or 1))
-    index, data = load_features(args.features, {"train", "val"})
+    catalog = CATALOGS[args.catalogo]
+    index, data = load_features(args.features, {"train", "val"}, catalog)
     print(f"Treino no dispositivo {device} com Torch {torch.__version__}.", flush=True)
-    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed)
+    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog)
     args.out.mkdir(parents=True, exist_ok=True)
     checkpoint = args.out / "isolated.pt"
     torch.save(model.state_dict(), checkpoint)
     onnx_path = export(model, args.out)
     manifest = {
         "preprocess": PREPROCESS, "frames": FRAMES, "features": FEATURES,
-        "inputName": "landmarks", "outputName": "logits", "labels": list(LABELS),
+        "inputName": "landmarks", "outputName": "logits", "labels": list(catalog),
         "threshold": best["threshold"], "modelSha256": digest(onnx_path),
         "extratorSha256": index["modelSha256"], "license": "CC-BY-4.0",
         "source": "https://doi.org/10.5281/zenodo.2667329",
@@ -145,6 +147,7 @@ def main():
         "arch": "ConvSequence", "onnxOpset": 17, "seed": args.seed, "epochs": args.epochs,
         "batchSize": args.batch_size, "optimizer": {"type": "AdamW", "learningRate": .002, "weightDecay": .01},
         "device": device, "cuda": torch.version.cuda, "gpu": torch.cuda.get_device_name() if device == "cuda" else None,
+        "labels": list(catalog),
         "platform": platform.platform(), "python": sys.version.split()[0], "torch": torch.__version__,
         "numpy": np.__version__, "onnx": onnx.__version__, "eligibleTrainCounts": counts,
         "selectedEpoch": best["epoch"], "checkpointSha256": digest(checkpoint),

@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import patch
 import zipfile
 
-from scripts.download_minds import ZIP32_LIMIT, candidates, extract, fetch_range, recover_zip32_offsets, sha256
+from scripts.download_minds import EXPANDED, ZIP32_LIMIT, candidates, extract, fetch_range, recover_zip32_offsets, sha256
 
 
 class FakeResponse(BytesIO):
@@ -31,6 +31,9 @@ class DownloadMindsTests(unittest.TestCase):
         ]
         selection = list(candidates(1, members, reps=1, negatives=1))
         self.assertEqual([(code, rep) for code, rep, _ in selection], [("03", 1), ("09", 1)])
+        members += [zipfile.ZipInfo("Sinalizador01/Canon/02AlunoSinalizador01-1.mp4")]
+        expanded = list(candidates(1, members, reps=1, negatives=1, labels=EXPANDED))
+        self.assertEqual([item[0] for item in expanded], ["03", "02", "09"])
 
     def test_extract_validates_and_recovers_one_member(self):
         for compression in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED):

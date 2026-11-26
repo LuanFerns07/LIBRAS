@@ -10,7 +10,7 @@ import numpy as np
 import onnxruntime as ort
 import torch
 
-from dataset import FEATURES, FRAMES, LABELS, digest, load_features, write_json
+from dataset import CATALOGS, FEATURES, FRAMES, LABELS, digest, load_features, write_json
 from metrics import checks, decide, measure
 from model import ConvSequence
 
@@ -34,12 +34,14 @@ def verified_inputs(features, run):
         if digest(path) != training[key]:
             raise ValueError(f"Arquivo difere da versão treinada: {path}")
     manifest = json.loads(paths["modelManifestSha256"].read_text(encoding="utf-8"))
-    if tuple(manifest["labels"]) != LABELS or manifest["modelSha256"] != training["modelSha256"]:
+    if tuple(manifest["labels"]) not in CATALOGS.values() or manifest["modelSha256"] != training["modelSha256"]:
         raise ValueError("Manifesto do artefato incompatível.")
+    if manifest["labels"] != training.get("labels", list(LABELS)):
+        raise ValueError("O catálogo do treino difere do manifesto.")
     return training, manifest, paths
 
 
-def create_session(path):
+def create_session(path, labels=LABELS):
     options = ort.SessionOptions()
     options.intra_op_num_threads = 1
     options.inter_op_num_threads = 1
@@ -49,7 +51,7 @@ def create_session(path):
     inputs, outputs = session.get_inputs(), session.get_outputs()
     if len(inputs) != 1 or len(outputs) != 1 or inputs[0].name != "landmarks" or outputs[0].name != "logits":
         raise ValueError("Contrato dos nomes do ONNX incompatível.")
-    if inputs[0].shape != [1, FRAMES, FEATURES] or outputs[0].shape != [1, len(LABELS)]:
+    if inputs[0].shape != [1, FRAMES, FEATURES] or outputs[0].shape != [1, len(labels)]:
         raise ValueError("Contrato das dimensões do ONNX incompatível.")
     return session, elapsed
 
@@ -81,7 +83,7 @@ def run_inference(rows, model, session, threshold):
     return logits_by_index, max_error, durations
 
 
-def write_parity_fixture(path, rows, logits_by_index, threshold):
+def write_parity_fixture(path, rows, logits_by_index, threshold, labels=LABELS):
     selected = {}
     for row in rows:
         if row.index in logits_by_index and row.label not in selected:
@@ -90,7 +92,7 @@ def write_parity_fixture(path, rows, logits_by_index, threshold):
             selected[row.label] = {
                 "clipSha256": row.checksum,
                 "values": row.values.flatten().tolist(), "logits": logits.tolist(),
-                "expectedLabel": LABELS[actual], "confidence": confidence,
+                "expectedLabel": labels[actual], "confidence": confidence,
             }
     write_json(path, {"tolerance": 1e-4, "samples": list(selected.values())})
 
@@ -103,15 +105,16 @@ def main():
     torch.set_num_threads(1)
 
     training, manifest, paths = verified_inputs(args.features, args.run)
-    index, rows = load_features(args.features, {"train", "val", "test"})
+    labels = tuple(manifest["labels"])
+    index, rows = load_features(args.features, {"train", "val", "test"}, labels)
     test = [row for row in rows if row.partition == "test"]
     val = [row for row in rows if row.partition == "val"]
     threshold = manifest["threshold"]
-    model = ConvSequence(len(LABELS)).eval()
+    model = ConvSequence(len(labels)).eval()
     model.load_state_dict(torch.load(paths["checkpointSha256"], map_location="cpu", weights_only=True))
-    session, model_load_ms = create_session(paths["modelSha256"])
+    session, model_load_ms = create_session(paths["modelSha256"], labels)
     logits_by_index, max_error, durations = run_inference(test, model, session, threshold)
-    results, details = measure(test, logits_by_index, threshold)
+    results, details = measure(test, logits_by_index, threshold, labels)
     capture = dict(Counter(row.state for row in test))
     negatives = dict(Counter(row.source_label for row in test if row.label == 0))
     by_split = {
@@ -122,7 +125,7 @@ def main():
         for split in ("train", "val", "test")
     }
     validation_logits, _, _ = run_inference(val, model, session, threshold)
-    write_parity_fixture(args.run / "parity-web.json", val, validation_logits, threshold)
+    write_parity_fixture(args.run / "parity-web.json", val, validation_logits, threshold, labels)
     write_json(args.run / "evaluation.json", {
         "datasetManifestSha256": index["sourceManifestSha256"], "featuresManifestSha256": digest(args.features),
         "modelSha256": manifest["modelSha256"], "checkpointSha256": training["checkpointSha256"],

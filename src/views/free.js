@@ -1,4 +1,4 @@
-import { lesson } from '../catalog.js'
+import { lesson, recognitionCatalog } from '../catalog.js'
 import { captureMarkup, mountCapture } from '../capture-panel.js'
 import { appendTranscription, freeFeedback } from '../recognition/feedback.js'
 import { mountSpeech } from '../speech.js'
@@ -26,7 +26,7 @@ export function mountFree(main, openEngine) {
         <p class="inline-status" role="status" data-voice-status hidden></p>
         <div class="coverage">
           <h3>Catálogo experimental</h3>
-          <p>${lesson.map(signal => signal.label).join(', ')}. Cada tentativa reconhecida acrescenta uma palavra.</p>
+          <p data-recognition-coverage>Modelo inicial: ${lesson.map(signal => signal.label).join(', ')}.</p>
         </div>
       </section>
     </div>`
@@ -35,11 +35,16 @@ export function mountFree(main, openEngine) {
   const voiceStatus = main.querySelector('[data-voice-status]')
   const sequence = main.querySelector('[data-sequence-mode]')
   const modeHelp = main.querySelector('[data-mode-help]')
+  const coverage = main.querySelector('[data-recognition-coverage]')
   const voice = mountSpeech(voiceStatus)
   const capture = mountCapture(main, {
     openEngine,
     sequenceMode: () => sequence.checked,
     interpret: freeFeedback,
+    onReady(engine) {
+      const names = recognitionCatalog.filter(signal => engine.catalog.includes(signal.text)).map(signal => signal.label)
+      coverage.textContent = `Modelo local em uso: ${names.join(', ')}.`
+    },
     onResult(result) { transcription.value = appendTranscription(transcription.value, result) },
   })
   sequence.addEventListener('change', () => {

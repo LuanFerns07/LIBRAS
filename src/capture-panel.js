@@ -34,7 +34,7 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
-export function mountCapture(main, { openEngine, interpret, onResult, sequenceMode, enabled = true }) {
+export function mountCapture(main, { openEngine, interpret, onResult, onReady, sequenceMode, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -147,6 +147,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, sequenceMo
       return
     }
     if (current !== ticket || disposed) return
+    onReady?.(engine)
     phase = 'recording'
     renderButtons()
     show('recording', multiple ? 'Faça os sinais e abaixe as mãos entre eles. Conclua a sequência ao terminar.'

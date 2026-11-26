@@ -1,7 +1,7 @@
-import { lesson } from '../catalog.js'
+import { recognitionCatalog } from '../catalog.js'
 import { featureCount, preprocessId, sequenceLength } from './preprocess.js'
 
-const signals = new Map(lesson.map(({ text, id }) => [text, id]))
+const signals = new Map(recognitionCatalog.map(({ text, id }) => [text, id]))
 
 export function readModelManifest(data) {
   const { labels, threshold, frames, features, inputName, outputName, preprocess, modelSha256 } = data

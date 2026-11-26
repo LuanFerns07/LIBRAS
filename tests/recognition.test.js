@@ -55,6 +55,13 @@ test('o classificador só aceita classes suportadas acima de confiança fixada',
   assert.equal(decide([8, 0, 2, 1], manifest).state, 'inconclusive')
   assert.equal(decide([0, 2, 1, 1], manifest).state, 'inconclusive')
   assert.throws(() => decide([0, 2, 1, Number.NaN], manifest), /Saída/)
+  const expanded = readModelManifest({
+    ...manifest,
+    labels: [...manifest.labels, 'aluno'],
+    inputName: 'landmarks', outputName: 'logits',
+    frames: sequenceLength, features: featureCount, preprocess: preprocessId,
+  })
+  assert.equal(decide([0, 1, 2, 3, 6], expanded).id, 'signal-aluno')
 })
 
 test('a segmentação separa sinais com pausa, preserva sustentações e descarta trechos curtos', () => {

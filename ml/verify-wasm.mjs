@@ -49,8 +49,8 @@ const server = createServer((request, response) => {
 async function inBrowser() {
   const { env, InferenceSession, Tensor } = await import('/ort.wasm.min.mjs')
   const { decide, readModelManifest } = await import('/src/recognition/decision.js')
-  const { lesson } = await import('/src/catalog.js')
-  const signalText = new Map(lesson.map((signal) => [signal.id, signal.text]))
+  const { recognitionCatalog } = await import('/src/catalog.js')
+  const signalText = new Map(recognitionCatalog.map((signal) => [signal.id, signal.text]))
   const localAsset = async (path) => {
     const response = await fetch(path)
     if (!response.ok) throw new Error(`Arquivo local indisponível: ${path}.`)
