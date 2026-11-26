@@ -1,0 +1,22 @@
+{
+  "name": "librasia",
+  "version": "0.1.0-dev",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "^20.19.0 || >=22.12.0" },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.js",
+    "check:status": "python3 scripts/update_status.py --check"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.32",
+    "onnxruntime-web": "1.24.3",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "vite": "6.4.6"
+  }
+}

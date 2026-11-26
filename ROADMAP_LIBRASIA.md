@@ -10,7 +10,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 | Marco | Status | Entrega | Responsáveis principais | Quando avançar |
 | --- | --- | --- | --- | --- |
-| **M0 · Fundação** | A fazer | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
+| **M0 · Fundação** | A testar | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
 | **M1 · Dados e critérios** | A fazer | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
 | **M2 · Um sinal de ponta a ponta** | A fazer | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
 | **M3 · Lição e reconhecimento** | A fazer | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
@@ -26,9 +26,9 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 ### M0 · Fundação e versionamento
 
 - [ ] Confirmar o PC de referência, o navegador, a webcam e a disponibilidade de uma voz gratuita em português brasileiro. Registrar o ambiente usado para os testes e o plano de síntese local se faltar uma voz compatível.
-- [ ] Inicializar o Git local, criar o primeiro commit e documentar como instalar, executar e testar a aplicação. Se a pasta principal estiver protegida, preservar os arquivos de origem e inicializar a pasta gravável da aplicação dentro do espaço de trabalho.
+- [x] Inicializar o Git local, criar o primeiro commit e documentar como instalar, executar e testar a aplicação. Se a pasta principal estiver protegida, preservar os arquivos de origem e inicializar a pasta gravável da aplicação dentro do espaço de trabalho.
 - [ ] Versionar código, documentação, configurações e manifestos de dados, modelos e animações. Manter vídeos brutos, segredos e artefatos pesados fora do histórico. Definir como recuperar a versão exata de cada artefato usado na demonstração.
-- [ ] Reservar a branch principal para entregas integradas. Usar branches ou worktrees dedicadas quando houver trabalho simultâneo em código. O coordenador arbitra alterações de contrato e integra os commits após a verificação do responsável.
+- [x] Reservar a branch principal para entregas integradas. Usar branches ou worktrees dedicadas quando houver trabalho simultâneo em código. O coordenador arbitra alterações de contrato e integra os commits após a verificação do responsável.
 - [ ] **Aceite.** Outro integrante inicia a base a partir do README e executa a verificação inicial. Git, voz e webcam têm um caminho de configuração documentado.
 
 ### M1 · Dados, vocabulário e protocolo de validação
@@ -72,8 +72,8 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ### M6 · Saiba mais, autoria e caráter sem fins lucrativos
 
-- [ ] Implementar **Saiba mais** como lista de redirecionamentos para as fontes originais do prompt. Exibir título e autoria ou instituição. Esse fluxo consiste apenas em links externos.
-- [ ] Publicar no rodapé e no README a mensagem “O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.” Manter o acesso gratuito, sem monetização ou afiliação comercial.
+- [x] Implementar **Saiba mais** como lista de redirecionamentos para as fontes originais do prompt. Exibir título e autoria ou instituição. Esse fluxo consiste apenas em links externos.
+- [x] Publicar no rodapé e no README a mensagem “O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.” Manter o acesso gratuito, sem monetização ou afiliação comercial.
 - [ ] **Aceite.** O revisor abre cada link, confere título, autoria e destino e encontra a mesma declaração no aplicativo e no README.
 
 ### M7 · Validação independente e versão de demonstração
