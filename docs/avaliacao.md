@@ -51,6 +51,7 @@ O catálogo expandido acrescenta ALUNO à área livre. A forma histórica de For
 mkdir -p data/minds-expanded/raw data/minds-expanded/features
 cp -aln data/minds/raw/. data/minds-expanded/raw/
 python3 scripts/download_minds.py --catalogo expandido
+cmp ml/manifests/minds-expanded-v1.json data/minds-expanded/manifest.json
 cp -aln data/minds/features/*.json data/minds-expanded/features/
 node ml/extract.mjs --manifest data/minds-expanded/manifest.json --out data/minds-expanded/features --workers 3
 .venv/bin/python ml/train.py --catalogo expandido --features data/minds-expanded/features/index.json --out data/models/isolated-expanded

@@ -26,6 +26,8 @@ O [manifesto MINDS v1](../ml/manifests/minds-v1.json) fixa o recorte adquirido e
 
 A classe de rejeição é formada por outras glosas disponíveis no MINDS-Libras. Clipes fora do catálogo na validação e no teste podem representar glosas do mesmo repertório de negativos do treino, com pessoas distintas. Para estimar generalização a gestos comuns e sinais inéditos, ainda são necessárias amostras de repouso, sinais fora do vocabulário, oclusão, bordas do enquadramento e movimentos cotidianos em webcam.
 
+O [manifesto expandido](../ml/manifests/minds-expanded-v1.json) mantém os 174 clipes anteriores e acrescenta 33 execuções de ALUNO (glosa 02). São 18 de treino, 6 de validação e 9 de teste, com os mesmos grupos de pessoas. O SHA-256 do manifesto de 207 clipes é `3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be`.
+
 ## Atribuição dos artefatos de reconhecimento
 
 ALMEIDA, Sílvia G. M. et al. *MINDS-Libras Dataset*. Versão 1. Zenodo, 2019. DOI 10.5281/zenodo.2667329. Extração local de pontos, normalização, recorte de classes e treinamento do LibrasIA a partir da fonte sob CC BY 4.0. [Dataset](https://doi.org/10.5281/zenodo.2667329) · [Licença CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
