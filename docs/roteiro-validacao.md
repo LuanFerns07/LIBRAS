@@ -16,7 +16,7 @@ A inspeção local de 26/11/2026 identificou Debian GNU/Linux 13.8, Intel Core i
 | Ordem | Fluxo | Procedimento e resultado esperado | Resultado e evidência |
 | --- | --- | --- | --- |
 | 1 | Abrir uma letra | Acesse **Alfabeto** por teclado. Use Tab para entrar na grade, setas e Home/End. Selecione uma letra com movimento e teste reprodução, pausa, velocidade e repetição. O foco é visível. | Pendente |
-| 2 | Frase catalogada | Em **Tradutor**, digite “Meu nome é Anna” e gere a demonstração. Observe a sequência MEU, NOME, pausa e A, N, N, A. | Pendente |
+| 2 | Frase catalogada | Em **Tradutor**, digite “Meu nome é Anna” e gere a demonstração. Observe a sequência NOME, MEU, pausa e A, N, N, A. | Pendente |
 | 3 | Nome isolado | Ative **Soletrar como nome** e digite “Ânna Clara”. Observe a letra base, os dois N e a pausa entre os nomes. | Pendente |
 | 4 | Lição | Em **Praticar**, resolva a atividade sem câmera, escolha **Praticar com ajuda** e faça o sinal esperado de **Cinco**. Em nova tentativa, mude a orientação da palma conforme a referência de teste. Confira o aceite e a dica específica. Repita sem avatar em **Tentar com menos ajuda** e confira a persistência do progresso ao recarregar. | Pendente |
 | 5 | Área livre | Em **Área livre**, faça dois sinais do catálogo em tentativas distintas sem escolher classe. Confirme duas palavras, edite o texto e use **Ouvir**. A saída de voz usa o texto após a edição. | Pendente |
@@ -43,6 +43,24 @@ Com Chromium e Node instalados, execute:
 
 ~~~bash
 node --test tests/e2e/browser.test.mjs
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 node --test tests/e2e/browser.test.mjs
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_PHYSICAL=1 LIBRASIA_TEST_VOICE=1 node --test tests/e2e/browser.test.mjs
 ~~~
 
-Se o executável tiver outro nome, informe o caminho em LIBRASIA_CHROMIUM. O teste usa um perfil temporário, servidor HTTP restrito ao loopback e a câmera simulada do navegador. Ele confere WebGL 2 e as respostas reais da API de permissão do Chromium. Para validar captura física, execução de sinais e reprodução audível, faça a sequência principal no PC.
+Se o executável tiver outro nome, informe o caminho em LIBRASIA_CHROMIUM. O teste usa um perfil temporário, servidor HTTP restrito ao loopback e a câmera simulada do navegador. A URL ativa as verificações contra a prévia da aplicação. Ajuste a porta conforme a saída do Vite. As opções PHYSICAL e VOICE ativam respectivamente a captura da webcam sem persistência e a reprodução audível de uma frase de teste. A validação das decisões do classificador e das dicas depende da execução com pessoas sinalizantes.
+
+## Registro da prévia de 26/11/2026
+
+Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.
+
+| Verificação | Observado |
+| --- | --- |
+| Instalação e compilação | npm ci, instalação do MediaPipe Holistic float16/1, 26 testes unitários, build de produção e verificação do painel concluídos. O Vite advertiu sobre o tamanho do pacote principal. |
+| Navegação e avatar | As cinco rotas abriram, o foco voltou ao conteúdo e a grade A–Z respondeu a Tab, seta e End com foco visível. O canvas usou WebGL 2. Reproduzir, pausar, diminuir a velocidade e repetir responderam aos controles. |
+| Tradutor e lição sem câmera | A frase catalogada e a soletração do nome composto criaram sequências. Entrada vazia e fora da cobertura exibiram estados distintos e a troca de texto limpou o player. A resposta correta na atividade sem câmera foi aceita. |
+| Captura de mídia | A câmera simulada passou pelos casos de permissão concedida e negada. A webcam física ACER abriu em 640 × 480 na sonda WebRTC. O aplicativo mostrou o erro de negação, retomou após a concessão e liberou a trilha física ao sair da área livre. |
+| Voz | A voz Portuguese (Brazil) eSpeak NG foi selecionada com o Speech Dispatcher, e o Chromium sinalizou conclusão ao sintetizar o texto editado na área livre. A edição, o botão de limpar e o retorno do foco à transcrição também passaram. A compreensão do áudio pelo revisor permanece pendente. |
+| Largura estreita | A 390 CSS px, a navegação se reorganizou, não houve rolagem horizontal e os painéis de avatar e câmera ficaram em coluna. A captura sem imagem da webcam está em data/evidence/pratica-mobile.png no ambiente local. |
+| Saiba mais | As sete URLs originais retornaram HTTP 200 sem redirecionamento em consultas com identificação do Chromium, e os títulos e a autoria ou instituição foram conferidos nas fontes. A aplicação exibiu os sete destinos e a declaração de autoria. |
+
+O classificador e o catálogo ainda aguardavam validação quando essa prévia foi executada. As métricas de classificação e latência, o roteiro de sinais com participantes e a revisão das animações, traduções e dicas permanecem pendentes neste registro. A largura estreita foi testada no Chromium de PC por emulação. O teste em aparelhos Android e iOS permanece pendente.
