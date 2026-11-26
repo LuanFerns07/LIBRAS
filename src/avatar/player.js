@@ -60,11 +60,11 @@ export function createPlayer(container, { onStep, onState } = {}) {
   }
 
   function paint(pose) {
-    rig.applyPose(pose, neutralPose.digits);
+    rig.applyPose(pose);
     draw();
   }
 
-  rig.applyPose(neutralPose, neutralPose.digits);
+  rig.applyPose(neutralPose);
   container.append(renderer.domElement);
   const observer = new ResizeObserver(resize);
   observer.observe(container);

@@ -2,6 +2,7 @@ import {
   CapsuleGeometry, CatmullRomCurve3, CylinderGeometry, Euler, Group, LatheGeometry,
   Mesh, MeshStandardMaterial, SphereGeometry, TubeGeometry, Vector2, Vector3,
 } from 'three';
+import { leftRest } from './clips.js';
 
 const upperLength = 0.65;
 const foreLength = 0.60;
@@ -187,9 +188,9 @@ export function createRig() {
 
   return {
     model,
-    applyPose({ wrist, rotation, digits }, restingDigits) {
+    applyPose({ wrist, rotation, digits, left = leftRest }) {
       rightArm(wrist, rotation, digits);
-      leftArm([0.60, 0.39, 0.11], [9, -20, -163], restingDigits);
+      leftArm(left.wrist, left.rotation, left.digits);
     },
     dispose() {
       const geometries = new Set();

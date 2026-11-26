@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { Box3 } from 'three';
-import { clips, neutralPose, sampleClip } from '../src/avatar/clips.js';
+import { clips, interpolatePose, leftRest, neutralPose, sampleClip } from '../src/avatar/clips.js';
 import { createPlayback } from '../src/avatar/playback.js';
 import { AVATAR_FRAME } from '../src/avatar/player.js';
 import { createRig } from '../src/avatar/rig.js';
@@ -10,7 +10,7 @@ test('o catálogo cobre A–Z, a cedilha e os sinais da lição e apresentação
   for (const letter of 'abcdefghijklmnopqrstuvwxyzç') {
     assert.ok(clips[`letter-${letter}`], letter);
   }
-  for (const name of ['cinco', 'espelho', 'amarelo', 'meu', 'nome']) {
+  for (const name of ['cinco', 'espelho', 'amarelo', 'meu', 'nome', 'aluno', 'aluno-fortaleza-historico', 'bom', 'dia']) {
     assert.ok(clips[`signal-${name}`], name);
   }
   assert.equal(clips['letter-ç'], clips['letter-cedilha']);
@@ -52,7 +52,7 @@ test('todos os quadros amostrados produzem articulações e coordenadas finitas'
       const pose = sampleClip(clip, fraction);
       assert.equal(pose.digits.length, 5, id);
       assert.ok(pose.digits.every((digit) => digit.length === 4), id);
-      rig.applyPose(pose, neutralPose.digits);
+      rig.applyPose(pose);
       rig.model.updateMatrixWorld(true);
       rig.model.traverse((node) => assert.ok(node.matrixWorld.elements.every(Number.isFinite), id));
     }
@@ -67,7 +67,7 @@ test('o enquadramento mínimo contém o corpo e as mãos nos quadros amostrados'
   for (const [id, clip] of Object.entries(clips)) {
     for (let position = 0; position <= 20; position++) {
       const progress = position / 20;
-      rig.applyPose(sampleClip(clip, progress), neutralPose.digits);
+      rig.applyPose(sampleClip(clip, progress));
       const { min, max } = box.setFromObject(rig.model, true);
       assert.ok(min.x >= -halfWidth && max.x <= halfWidth, `${id} em ${progress} no eixo X`);
       assert.ok(min.y >= centerY - halfHeight && max.y <= centerY + halfHeight,
@@ -75,6 +75,25 @@ test('o enquadramento mínimo contém o corpo e as mãos nos quadros amostrados'
     }
   }
   rig.dispose();
+});
+
+test('a variante histórica de aluno articula as duas mãos com trajetória espelhada', () => {
+  const animation = clips['signal-aluno-fortaleza-historico'];
+  const start = sampleClip(animation, 0);
+  const end = sampleClip(animation, 1);
+  assert.ok(end.wrist[0] < start.wrist[0]);
+  for (const t of [0, 0.23, 0.6, 1]) {
+    const { wrist, left } = sampleClip(animation, t);
+    assert.ok(Math.abs(wrist[0] + left.wrist[0]) < 1e-10);
+    assert.deepEqual(wrist.slice(1), left.wrist.slice(1));
+  }
+
+  const oneHanded = sampleClip(clips['signal-aluno'], 1);
+  assert.equal(oneHanded.left, undefined);
+  assert.deepEqual(interpolatePose(oneHanded, start, 0).left, leftRest);
+  const halfway = interpolatePose(oneHanded, start, 0.5);
+  assert.ok(halfway.left.wrist[1] > leftRest.wrist[1]);
+  assert.ok(halfway.left.wrist[1] < start.left.wrist[1]);
 });
 
 function setup() {

@@ -1,4 +1,4 @@
-export const ANIMATION_VERSION = '0.1.0-preliminar';
+export const ANIMATION_VERSION = '0.2.0-preliminar';
 
 // Cada dedo usa graus: flexão da base, articulação média, distal e abertura lateral.
 const straight = [2, 3, 2, 0];
@@ -39,6 +39,7 @@ const v = fingers(thumbAcross, spread(straight, -20), spread(straight, 13), clos
 const w = fingers(thumbAcross, spread(straight, -22), straight, spread(straight, 22), closed);
 const x = fingers([5, 15, 12, -56], spread(hooked, 0), closed, closed, closed);
 const y = fingers(thumbOut, closed, closed, closed, spread(straight, 12));
+const thumbExtendedFist = fingers(thumbOut, closed, closed, closed, closed);
 
 const relaxed = fingers(thumbOpen, curved, curved, curved, curved);
 const open = fingers(
@@ -47,6 +48,13 @@ const open = fingers(
   straight,
   spread(straight, 8),
   spread(straight, 19),
+);
+const together = fingers(
+  [18, 23, 22, -10],
+  [24, 34, 18, 11],
+  [25, 44, 18, 1],
+  [29, 40, 19, -5],
+  [36, 33, 23, -11],
 );
 const five = fingers(
   thumbAcross,
@@ -60,10 +68,17 @@ const letterWrist = [-0.63, 1.61, 0.48];
 const front = [0, 0, 0];
 const down = [47, 0, 180];
 
-function pose(digits, wrist = letterWrist, rotation = front) {
-  return { digits, wrist, rotation };
+function pose(digits, wrist = letterWrist, rotation = front, bilateral = false) {
+  const body = { digits, wrist, rotation };
+  if (bilateral) {
+    const [x, y, z] = wrist;
+    const [pitch, yaw, roll] = rotation;
+    body.left = { digits, wrist: [-x, y, z], rotation: [pitch, -yaw, -roll] };
+  }
+  return body;
 }
 
+export const leftRest = pose(relaxed, [0.60, 0.39, 0.11], [9, -20, -163]);
 export const neutralPose = pose(relaxed, [-0.62, 0.45, 0.15], [10, 35, 162]);
 
 function hold(bodyPose, seconds = 0.82) {
@@ -171,6 +186,32 @@ export const clips = {
     [0.61, pose(b, [-0.37, 1.40, 0.36], [3, 180, 69])],
     [1, pose(b, [-0.39, 1.40, 0.44], [3, 180, 69])],
   ]),
+  'signal-aluno': motion(1.08, [
+    [0, pose(a, [-0.16, 1.31, 0.47], [15, 171, 59])],
+    [0.52, pose(a, [0.10, 1.46, 0.45], [10, 176, 81])],
+    [0.72, pose(a, [0.10, 1.46, 0.45], [10, 176, 81])],
+    [1, pose(a, [0.03, 1.39, 0.46], [14, 174, 73])],
+  ]),
+  'signal-aluno-fortaleza-historico': motion(1.36, [
+    [0, pose(thumbExtendedFist, [-0.22, 0.93, 0.69], [-76, -8, 6], true)],
+    [0.21, pose(thumbExtendedFist, [-0.26, 0.99, 0.68], [-86, -13, 6], true)],
+    [0.41, pose(thumbExtendedFist, [-0.30, 0.92, 0.66], [-74, -15, 3], true)],
+    [0.59, pose(thumbExtendedFist, [-0.37, 0.97, 0.64], [-86, -17, 5], true)],
+    [0.84, pose(thumbExtendedFist, [-0.45, 0.89, 0.61], [-76, -19, 4], true)],
+    [1, pose(thumbExtendedFist, [-0.45, 0.89, 0.61], [-76, -19, 4], true)],
+  ]),
+  'signal-bom': motion(1.03, [
+    [0, pose(together, [-0.11, 1.60, 0.34], [13, 170, 6])],
+    [0.29, pose(together, [-0.11, 1.61, 0.34], [13, 170, 6])],
+    [0.77, pose(open, [-0.15, 1.48, 0.69], [-65, 8, 161])],
+    [1, pose(open, [-0.15, 1.48, 0.69], [-65, 8, 161])],
+  ]),
+  'signal-dia': motion(1.02, [
+    [0, pose(l, [-0.51, 1.84, 0.24], [0, 10, -30])],
+    [0.29, pose(l, [-0.52, 1.84, 0.24], [0, 10, -29])],
+    [0.80, pose(l, [-0.69, 1.88, 0.30], [0, 10, -21])],
+    [1, pose(l, [-0.69, 1.88, 0.30], [0, 10, -21])],
+  ]),
   'signal-nome': motion(1.09, [
     [0, pose(n, [-0.15, 1.39, 0.44], [0, 32, -39])],
     [0.67, pose(n, [-0.63, 1.45, 0.48], [0, 1, 12])],
@@ -178,7 +219,7 @@ export const clips = {
   ]),
 };
 
-export function interpolatePose(start, end, amount) {
+function interpolateHand(start, end, amount) {
   const lerp = (a, b) => a + (b - a) * amount;
   return {
     wrist: start.wrist.map((value, index) => lerp(value, end.wrist[index])),
@@ -190,6 +231,14 @@ export function interpolatePose(start, end, amount) {
       joint.map((value, axis) => lerp(value, end.digits[finger][axis])),
     ),
   };
+}
+
+export function interpolatePose(start, end, amount) {
+  const pose = interpolateHand(start, end, amount);
+  if (start.left || end.left) {
+    pose.left = interpolateHand(start.left ?? leftRest, end.left ?? leftRest, amount);
+  }
+  return pose;
 }
 
 export function sampleClip(clip, progress) {
