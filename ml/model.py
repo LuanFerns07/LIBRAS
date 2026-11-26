@@ -54,4 +54,19 @@ class ConvSequenceGeometry(ConvSequence):
         return super().forward(torch.cat((video, local), dim=-1))
 
 
-ARCHITECTURES = {model.__name__: model for model in (ConvSequence, ConvSequenceGeometry)}
+class ConvSequenceGated(ConvSequenceGeometry):
+    """Estima se a entrada é conhecida e classifica o sinal dado esse evento."""
+
+    def forward(self, video):
+        scores = super().forward(video)
+        known = scores[:, :1]
+        signs = torch.log_softmax(scores[:, 1:], dim=1)
+        return torch.cat((
+            torch.nn.functional.logsigmoid(-known),
+            torch.nn.functional.logsigmoid(known) + signs,
+        ), dim=1)
+
+
+ARCHITECTURES = {
+    model.__name__: model for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated)
+}

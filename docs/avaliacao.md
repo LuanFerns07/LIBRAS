@@ -134,3 +134,15 @@ Em um recorte externo de 12 clipes com três pessoas, a geometria teve 1 falsa a
   --run data/models/isolated-geometry
 node ml/verify-wasm.mjs --run data/models/isolated-geometry
 ```
+
+## Experimento de rejeição separada
+
+A arquitetura `ConvSequenceGated` usa as mesmas entradas e a mesma rede temporal do modelo com geometria. A primeira saída estima a probabilidade de a tentativa pertencer ao catálogo. As demais estimam a distribuição dos sinais, condicionada a esse pertencimento. O ONNX devolve log-probabilidades com a classe de rejeição em primeiro lugar. A decisão no navegador continua usando softmax e o limiar do manifesto.
+
+Compare a arquitetura nova e a anterior com a mesma semente, as mesmas três rodadas por pessoa e o mesmo procedimento de escolha de época e limiar. Use apenas a partição original de treino. O candidato deve reduzir as falsas aceitações mantendo ao menos 13 acertos de Cinco em 18 e F1 macro no mínimo igual ao da geometria. Esta comparação orienta o desenvolvimento. Os clipes reservados MINDS e CLAD ficam fora do ajuste e uma avaliação com pessoas novas continua necessária.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda \
+  --reference ConvSequenceGeometry --candidate ConvSequenceGated \
+  --out data/models/isolated-gated/cross-validation.json
+```

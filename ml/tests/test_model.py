@@ -9,7 +9,7 @@ import torch
 
 from dataset import Clip
 from evaluate import create_session, run_inference
-from model import ConvSequence, ConvSequenceGeometry
+from model import ARCHITECTURES, ConvSequenceGated, ConvSequenceGeometry
 from train import augment, export
 
 
@@ -27,7 +27,7 @@ class ModelTests(TestCase):
         inputs = np.random.default_rng(7391).normal(size=(24, 192)).astype(np.float32)
         inputs[:, 3::4] = 1
         row = Clip(0, 1, 1, "test", "fixture", "cinco", "ready", inputs, [])
-        for architecture in (ConvSequence, ConvSequenceGeometry):
+        for architecture in ARCHITECTURES.values():
             with self.subTest(architecture=architecture.__name__), TemporaryDirectory() as directory:
                 model = architecture(4).eval()
                 session, _ = create_session(export(model, Path(directory)))
@@ -35,6 +35,21 @@ class ModelTests(TestCase):
                 self.assertEqual(outputs[0].shape, (4,))
                 self.assertLess(maximum, 1e-5)
                 self.assertEqual(len(latencies), 1)
+
+    def test_gate_controls_total_probability_of_catalog(self):
+        model = ConvSequenceGated(5).eval()
+        head = model.classify[-1]
+        with torch.no_grad():
+            head.weight.zero_()
+            head.bias.copy_(torch.tensor([-2., 1., 2., 3., 4.]))
+            probabilities = model(torch.zeros(1, 24, 192)).exp()[0]
+            head.bias[1:].mul_(3)
+            sharper = model(torch.zeros(1, 24, 192)).exp()[0]
+        known = torch.sigmoid(torch.tensor(-2.0))
+        for result in (probabilities, sharper):
+            torch.testing.assert_close(result[0], 1 - known)
+            torch.testing.assert_close(result[1:].sum(), known)
+        self.assertGreater(sharper[-1], probabilities[-1])
 
     def test_hand_geometry_is_local_and_requires_wrist_and_palm(self):
         video = torch.zeros((1, 24, 48, 4))
