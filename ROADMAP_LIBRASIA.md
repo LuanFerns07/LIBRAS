@@ -36,7 +36,8 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 - [x] Levantar os conjuntos públicos candidatos e registrar origem, versão, licença, termos de uso, cobertura de sinais, qualidade dos rótulos e identificação de pessoas sinalizantes. Conferir separadamente as permissões para uso em treino, demonstração e distribuição dos pesos ou ativos.
 - [x] Escolher três a cinco sinais pela utilidade pedagógica, qualidade dos exemplos e viabilidade de animação. Começar por um sinal cujo parâmetro principal seja observável pela webcam. Incluir movimento se houver dados e referência suficientes.
 - [x] Definir o catálogo compartilhado com identificador de letra ou sinal, saída textual, referência, animação, versão e status da revisão. Para os exercícios, identificar o parâmetro avaliado, as variantes contempladas e as dicas permitidas.
-- [ ] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado, verificar duplicatas e manter amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição.
+- [x] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado e verificar duplicatas.
+- [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição durante o uso da webcam.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
 
@@ -52,11 +53,14 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 - [x] Treinar uma versão reproduzível e medir a classificação em teste reservado. Registrar configuração, versões dos conjuntos, comandos, critérios de seleção e versão dos pesos.
 - [x] Completar a lição com observar, praticar com ajuda e tentar com menos ajuda. Incluir uma atividade de compreensão sem câmera, controles do avatar e registro local do progresso.
-- [ ] Medir precisão, revocação e F1 por sinal e média macro no teste, com a contagem de exemplos. Registrar matriz de confusão, cobertura das decisões, falsas aceitações de entradas fora do catálogo e latência mediana e p95 no PC. Contar tentativas inconclusivas na análise de cobertura e na revocação dos sinais suportados.
+- [x] Medir precisão, revocação e F1 por sinal e média macro no teste reservado. Registrar matriz de confusão, cobertura, falsas aceitações e latência mediana e p95 no PC com clipes de teste. Contar tentativas inconclusivas na análise de cobertura e na revocação dos sinais suportados.
+- [ ] Medir as mesmas métricas com participantes independentes usando a webcam no PC, incluindo tempo de extração e carregamento.
 - [ ] Comparar as dicas com avaliação humana nas amostras disponíveis. Verificar tanto a execução esperada quanto correções intencionais, variantes conhecidas, mão dominante, iluminação e enquadramento. Registrar quais dimensões foram testadas de fato e as que ficaram pendentes.
 - [ ] **Aceite.** A lição funciona completa sem recorrer a inferência simulada. Cada item habilitado para correção tem dica revisada e resultados dentro dos critérios definidos em M1. Quando um sinal falhar, ele volta ao trabalho de dados, animação ou feedback antes de integrar o catálogo de prática.
 
 O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. O protocolo exige F1 macro de pelo menos 0,75 e falsas aceitações de até 10%. A versão local fica disponível para exploração. Para avançar no aceite, corrigir a confusão de Cinco e as falsas aceitações em Amarelo e repetir a avaliação com participantes independentes. [Resultados do teste e matriz de confusão](docs/avaliacao.md#execução-do-catálogo-inicial-em-26-de-novembro-de-2026)
+
+O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em 18 clipes na comparação interna por pessoa. As falsas aceitações subiram de 5 para 8 em 42. A avaliação com novo grupo reservado continua pendente. [Resultados do experimento](docs/avaliacao.md#experimento-com-geometria-das-mãos)
 
 ### M4 · Alfabeto, palavras, frases e nomes
 
@@ -81,7 +85,8 @@ O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 1
 
 ### M7 · Validação independente e versão de demonstração
 
-- [ ] Executar instalação limpa, compilação e testes automatizados. Em seguida, fazer a verificação manual no PC, com câmera e áudio reais, incluindo negação de permissão, navegação por teclado, indicador de foco, mensagens compreensíveis e retomada após erro.
+- [x] Executar instalação limpa, compilação e testes automatizados, incluindo navegação por teclado, foco, mensagens, liberação da câmera e retomada após erro.
+- [ ] Fazer a verificação manual no PC com participantes, câmera e áudio reais. Verificar a compreensão das mensagens, a sinalização e a audição do texto editado.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
 - [ ] Fechar e retestar defeitos que bloqueiam os fluxos principais ou comprometem a privacidade, a correção em Libras ou a confiabilidade da demonstração. Registrar as limitações restantes no README e no memorial. Identificar o commit, o modelo e as animações usados nos testes.
 - [x] Preparar roteiro, registrar resultados medidos e compilar a minuta do memorial com as limitações e evidências disponíveis.

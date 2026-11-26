@@ -1,0 +1,20 @@
+{
+  "preprocess": "holistic-shoulders-v1",
+  "frames": 24,
+  "features": 192,
+  "inputName": "landmarks",
+  "outputName": "logits",
+  "labels": [
+    null,
+    "cinco",
+    "espelho",
+    "amarelo",
+    "aluno"
+  ],
+  "threshold": 0.64,
+  "modelSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+  "extratorSha256": "e2dab61191e2dcd0a15f943d8e3ed1dce13c82dfa597b9dd39f562975a50c3f8",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.2667329",
+  "status": "exploratório"
+}

@@ -110,3 +110,25 @@ No teste de 51 clipes, o F1 macro foi 0,814, com cobertura de 29/33, 20/51 tenta
 A paridade PyTorch e ONNX Runtime CPU cobriu os 51 clipes, com diferença máxima de 7,63 × 10⁻⁶ nos logits e decisões iguais. Cinco entradas de validação no Chromium deram as mesmas decisões e diferença máxima de 1,43 × 10⁻⁶. [Paridade WASM](../ml/evidence/isolated-expanded/wasm-parity.json)
 
 Na prévia do Chromium, a repetição do clipe Aluno S09-1 acrescentou `aluno aluno` em duas tentativas, com mediana de 4,9 ms e p95 de 8,6 ms do clique de conclusão à resposta. A revisão independente repetiu a verificação com um clipe de outra pessoa da partição reservada. [Roteiro de validação](roteiro-validacao.md)
+
+## Experimento com geometria das mãos
+
+Uma variante da Conv1D recebe a posição no espaço de sinalização e coordenadas adicionais relativas ao próprio pulso. As coordenadas locais usam a distância do pulso à base do dedo médio como escala e preservam as máscaras de ausências. A transformação faz parte do ONNX e o navegador continua enviando o mesmo tensor.
+
+A comparação usou somente os 120 clipes da partição de treino do catálogo expandido. Dividimos as sete pessoas em três grupos. Em cada rodada, um grupo ajustou os pesos, outro escolheu a época e o limiar e o terceiro mediu o resultado. Somamos as matrizes da medição para contabilizar cada clipe uma vez.
+
+| Arquitetura | F1 macro | Acertos de Cinco | Cobertura | Falsas aceitações |
+| --- | ---: | ---: | ---: | ---: |
+| Conv1D original | 0,543 | 3/18 | 48/78 | 5/42 |
+| Conv1D com geometria | 0,668 | 13/18 | 61/78 | 8/42 |
+
+A geometria aumentou a revocação de Cinco e também elevou os falsos aceites. A rodagem com todas as pessoas do treino obteve 24/24 acertos e 0/12 falsos aceites nos clipes da validação que também definiu a época e o limiar. A concordância de cinco entradas no Chromium foi integral, com erro máximo de 4,77 × 10⁻⁷ nos logits. Os dois resultados orientam o desenvolvimento. O novo modelo ainda precisa de teste final independente, sobretudo para a rejeição. [Rodadas por pessoa](../ml/evidence/isolated-geometry/cross-validation.json) · [Validação](../ml/evidence/isolated-geometry/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-geometry/wasm-parity.json)
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --out data/models/isolated-geometry/cross-validation.json
+.venv/bin/python ml/train.py --arch ConvSequenceGeometry --catalogo expandido --device cuda \
+  --features data/minds-expanded/features/index.json --out data/models/isolated-geometry
+.venv/bin/python ml/evaluate.py --split val --features data/minds-expanded/features/index.json \
+  --run data/models/isolated-geometry
+node ml/verify-wasm.mjs --run data/models/isolated-geometry
+```
