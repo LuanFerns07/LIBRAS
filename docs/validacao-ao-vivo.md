@@ -54,6 +54,17 @@ Ao terminar, use **Exportar sessão em JSON**. Salve a cópia de trabalho em dat
 
 O JSON identifica a origem como live-manual-observation e inclui versão, ambiente, tentativas, estados do roteiro e contagem por cenário. Mantenha sessões ao vivo separadas das evidências de câmera simulada, terminais automatizados e reproduções de clipes.
 
+## Resumir as fichas
+
+Use o manifesto exato da sessão e passe os JSONs exportados no mesmo comando. Use sempre o mesmo código para uma pessoa que participe de mais de uma sessão.
+
+~~~bash
+.venv/bin/python ml/live_review.py --manifest public/models/isolated.json \
+  --out data/evidence/resumo-ao-vivo.json data/evidence/librasia-validacao-S*.json
+~~~
+
+O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
+
 ## Teste da lógica
 
 ~~~bash
