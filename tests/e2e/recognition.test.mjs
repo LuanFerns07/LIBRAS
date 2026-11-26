@@ -15,41 +15,68 @@ const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
 const expectedReason = process.env.LIBRASIA_EXPECT_REASON
 const prefix = process.env.LIBRASIA_TEST_TRANSCRIPT_PREFIX ?? ''
 const voiceMode = process.env.LIBRASIA_TEST_VOICE_MODE
+const fixedCaptureMs = process.env.LIBRASIA_TEST_CAPTURE_MS === undefined
+  ? null : Number(process.env.LIBRASIA_TEST_CAPTURE_MS)
+const markerOffsetMs = Number(process.env.LIBRASIA_TEST_START_OFFSET_MS ?? 0)
+const windowToleranceMs = 300
 
-const finish = (automatic => new Promise(resolve => {
+const finish = ((automatic, endAtMediaMs) => new Promise(resolve => {
   const status = document.querySelector('[data-capture-status]')
-  const start = performance.now()
+  const video = document.querySelector('video')
+  let start
+  let endMs
+  let pending
   const observer = new MutationObserver(() => {
     if (['busy', 'recording'].includes(status.dataset.state)) return
     observer.disconnect()
+    if (pending !== undefined) video.cancelVideoFrameCallback(pending)
     const timing = JSON.parse(status.dataset.timing ?? 'null')
     resolve({
-      state: status.dataset.state, reason: status.dataset.reason, message: status.textContent,
-      elapsedMs: automatic ? timing?.decisionMs : performance.now() - start,
-      timing,
+      state: status.dataset.state, reason: status.dataset.reason, message: status.textContent, timing, endMs,
+      elapsedMs: automatic ? timing?.decisionMs : start === undefined ? null : performance.now() - start,
     })
   })
   observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
   if (status.dataset.state !== 'recording') {
     observer.disconnect()
-    resolve({ state: status.dataset.state, elapsedMs: 0, message: status.textContent })
+    resolve({ state: status.dataset.state, elapsedMs: null, message: status.textContent })
     return
   }
-  if (!automatic) document.querySelector('[data-attempt]').click()
+  if (automatic) return
+  function conclude(mediaTime) {
+    endMs = Math.round(mediaTime * 1000)
+    start = performance.now()
+    document.querySelector('[data-attempt]').click()
+  }
+  function checkEnd(_, { mediaTime }) {
+    pending = undefined
+    if (Math.round(mediaTime * 1000) >= endAtMediaMs) conclude(mediaTime)
+    else pending = video.requestVideoFrameCallback(checkEnd)
+  }
+  if (endAtMediaMs == null) conclude(video.currentTime)
+  else pending = video.requestVideoFrameCallback(checkEnd)
 })).toString()
 
-const beginAtGreenMarker = (() => new Promise(resolve => {
+const beginAtGreenMarker = ((offsetMs, waitForMarkerEdge) => new Promise(resolve => {
   const video = document.querySelector('video')
   const canvas = document.createElement('canvas')
   canvas.width = 2
   canvas.height = 2
   const ctx = canvas.getContext('2d', { willReadFrequently: true })
-  function checkFrame() {
-    ctx.drawImage(video, 0, 0, 2, 2)
-    const [red, green, blue] = ctx.getImageData(0, 0, 1, 1).data
-    if (green > 170 && red < 35 && blue < 35) {
+  let markerMs
+  let seenOutsideMarker = !waitForMarkerEdge
+  function checkFrame(_, { mediaTime }) {
+    const startMs = Math.round(mediaTime * 1000)
+    if (markerMs === undefined) {
+      ctx.drawImage(video, 0, 0, 2, 2)
+      const [red, green, blue] = ctx.getImageData(0, 0, 1, 1).data
+      const isMarker = green > 170 && red < 35 && blue < 35
+      if (isMarker && seenOutsideMarker) markerMs = startMs
+      if (!isMarker) seenOutsideMarker = true
+    }
+    if (markerMs !== undefined && startMs - markerMs >= offsetMs) {
       document.querySelector('[data-attempt]').click()
-      resolve()
+      resolve({ markerMs, startMs })
     } else video.requestVideoFrameCallback(checkFrame)
   }
   video.requestVideoFrameCallback(checkFrame)
@@ -88,6 +115,15 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
   if (expectedReason) assert.ok(!expected, 'O motivo esperado deve corresponder a uma tentativa inconclusiva.')
+  assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
+    'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
+  if (fixedCaptureMs !== null) {
+    assert.ok(Number.isInteger(fixedCaptureMs) && fixedCaptureMs >= 500 && fixedCaptureMs <= 4200,
+      'Informe uma duração de captura de 500 a 4200 ms.')
+    assert.ok(sync && !autoFinish && !multiple && !target, 'Use clipe sincronizado e tentativa manual na área livre.')
+  } else {
+    assert.equal(markerOffsetMs, 0, 'Defina a duração da captura para deslocar o início.')
+  }
   if (voiceMode) assert.ok(['missing', 'error'].includes(voiceMode) && expected && !target &&
     process.env.LIBRASIA_TEST_VOICE !== '1', 'Escolha um único cenário de voz após reconhecimento na área livre.')
   assert.ok(Number.isInteger(trials) && trials >= 1 && trials <= 30, 'Informe de 1 a 30 tentativas.')
@@ -139,21 +175,30 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     const captureMs = multiple ? 10300 : videoFile ? 3850 : 1600
     const decisions = []
     for (let trial = 0; trial < trials; trial += 1) {
+      let marked
       if (sync) {
-        await evaluate('(' + beginAtGreenMarker + ')()', true)
+        marked = await evaluate('(' + beginAtGreenMarker + ')(' + markerOffsetMs + ',' + (fixedCaptureMs !== null) + ')', true)
         await record()
       } else if (trial > 0) {
         await startAttempt()
         await record()
       }
-      await evaluate('new Promise(resolve => setTimeout(resolve, ' + (autoFinish ? 800 : captureMs) + '))')
+      if (fixedCaptureMs === null) {
+        await evaluate('new Promise(resolve => setTimeout(resolve, ' + (autoFinish ? 800 : captureMs) + '))')
+      }
       if (autoFinish) {
         assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording')
         assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
       }
       if (target) await evaluate('document.querySelector("[data-restart]").click()', true)
-      const decision = await evaluate('(' + finish + ')(' + autoFinish + ')', true)
+      const endAtMediaMs = fixedCaptureMs === null ? null : marked.startMs + fixedCaptureMs
+      const decision = await evaluate('(' + finish + ')(' + autoFinish + ',' + endAtMediaMs + ')', true)
       const transcript = target ? null : await getTranscript()
+      const window = fixedCaptureMs === null || !Number.isFinite(decision.endMs) ? null : {
+        offsetMs: marked.startMs - marked.markerMs,
+        durationMs: decision.endMs - marked.startMs,
+        endMs: decision.endMs - marked.markerMs,
+      }
       if (autoFinish) {
         const mediaTime = await evaluate('document.querySelector("video").currentTime')
         await evaluate('new Promise(resolve => setTimeout(resolve, 1200))')
@@ -161,8 +206,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.equal(await getTranscript(), transcript)
         assert.equal(await evaluate('document.querySelector("[data-attempt]").textContent'), 'Iniciar tentativa')
       }
-      decisions.push({ ...decision, transcript })
+      decisions.push({ ...decision, transcript, window })
       context.diagnostic('Tentativa ' + (trial + 1) + '/' + trials + ' · ' + decision.message +
+        (window ? ' · janela real ' + window.offsetMs.toFixed(0) + '–' + window.endMs.toFixed(0) +
+          ' ms · ' + (decision.timing?.extractionMs.length ?? 0) + ' quadros · texto ' + JSON.stringify(transcript) : '') +
         ' · ' + (autoFinish ? 'fim do tempo até resposta: ' : 'conclusão até resposta: ') +
         (decision.elapsedMs?.toFixed(1) ?? 'indisponível') + ' ms')
     }
@@ -176,23 +223,48 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         (autoFinish ? 'por fim do tempo' : 'manuais') + ' · mediana ' +
         median.toFixed(1) + ' ms e p95 ' + p95.toFixed(1) + ' ms (posto mais próximo).')
     }
+    const mismatches = []
     for (const [index, decision] of decisions.entries()) {
-      assert.ok(Number.isFinite(decision.elapsedMs), 'A tentativa deve registrar o tempo da decisão.')
-      assert.equal(decision.timing?.trigger, autoFinish ? 'time-limit' : 'manual')
-      assert.ok(Number.isFinite(decision.timing.decisionMs) && decision.timing.decisionMs >= 0)
-      assert.ok(decision.timing.decisionMs <= decision.elapsedMs)
-      assert.ok(decision.timing.extractionMs.length > 0)
-      assert.ok(decision.timing.extractionMs.every(time => Number.isFinite(time) && time >= 0))
-      if (!sync && index === 0) assert.ok(decision.timing.initialLoadMs > 0)
-      else assert.equal(decision.timing.initialLoadMs, null)
-      assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message)
-      if (expectedReason) assert.equal(decision.reason, expectedReason, decision.message)
+      const check = (field, assertion) => {
+        try {
+          assertion()
+        } catch (error) {
+          mismatches.push('Tentativa ' + (index + 1) + ' · ' + field + ' · ' + error.message)
+        }
+      }
+      check('medição', () => {
+        assert.ok(Number.isFinite(decision.elapsedMs), 'A tentativa deve registrar o tempo da decisão.')
+        assert.equal(decision.timing?.trigger, autoFinish ? 'time-limit' : 'manual')
+        assert.ok(Number.isFinite(decision.timing.decisionMs) && decision.timing.decisionMs >= 0)
+        assert.ok(decision.timing.decisionMs <= decision.elapsedMs)
+        assert.ok(decision.timing.extractionMs.length > 0)
+        assert.ok(decision.timing.extractionMs.every(time => Number.isFinite(time) && time >= 0))
+        if (!sync && index === 0) assert.ok(decision.timing.initialLoadMs > 0)
+        else assert.equal(decision.timing.initialLoadMs, null)
+      })
+      if (fixedCaptureMs !== null) check('janela', () => {
+        assert.ok(decision.window, 'A conclusão manual deve registrar o fim da janela no vídeo.')
+        const { offsetMs, durationMs } = decision.window
+        assert.ok(offsetMs >= markerOffsetMs && offsetMs <= markerOffsetMs + windowToleranceMs,
+          'O início real divergiu do deslocamento planejado.')
+        assert.ok(durationMs >= fixedCaptureMs && durationMs <= fixedCaptureMs + windowToleranceMs,
+          'A duração real divergiu da janela planejada.')
+      })
+      check('estado', () => assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message))
+      if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
       if (!target) {
         const addition = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''
         const spacer = prefix && addition && !/\s$/u.test(prefix) ? ' ' : ''
-        assert.equal(decision.transcript, prefix + spacer + addition)
+        check('texto', () => assert.equal(decision.transcript, prefix + spacer + addition))
       }
     }
+
+    for (const path of ['/models/isolated.json', '/models/isolated.onnx', '/runtime/holistic_landmarker.task']) {
+      assert.ok(seenAssets.has(path), 'Ativo carregado: ' + path)
+    }
+    assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
+    assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
+    assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
 
     if (voiceMode) {
       const edit = decisions.at(-1).transcript + '. Texto revisado.'
@@ -230,10 +302,5 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       context.diagnostic('A voz local em pt-BR concluiu a leitura da edição após o reconhecimento.')
     }
 
-    for (const path of ['/models/isolated.json', '/models/isolated.onnx', '/runtime/holistic_landmarker.task']) {
-      assert.ok(seenAssets.has(path), 'Ativo carregado: ' + path)
-    }
-    assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
-    assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
   }, { videoFile })
 })
