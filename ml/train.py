@@ -1,0 +1,160 @@
+"""Treina no MINDS-Libras, calibra em validação e exporta ONNX estático."""
+
+import argparse
+import copy
+import os
+from pathlib import Path
+import platform
+import sys
+
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+
+import numpy as np
+import onnx
+import torch
+
+from dataset import FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
+from metrics import checks, choose_threshold
+from model import ConvSequence
+
+SEED = 7391
+
+
+def augment(inputs, random):
+    shaped = inputs.reshape(-1, FRAMES, 48, 4).clone()
+    # Espelha o sinal inteiro e troca os lados anatômicos.
+    mirror = torch.rand(len(shaped), generator=random) < 0.5
+    permutation = [1, 0, 3, 2, 5, 4, *range(27, 48), *range(6, 27)]
+    shaped[mirror] = shaped[mirror][:, :, permutation]
+    shaped[mirror, :, :, 0] *= -1
+
+    # Pequenas variações de escala em torno do referencial dos ombros.
+    scale = .9 + .2 * torch.rand((len(shaped), 1, 1, 1), generator=random)
+    noise = 0.012 * torch.randn(shaped[:, :, :, :3].shape, generator=random)
+    shaped[:, :, :, :3] = (shaped[:, :, :, :3] * scale + noise) * shaped[:, :, :, 3:]
+    return shaped.reshape(-1, FRAMES, FEATURES)
+
+
+def collect(model, rows, device):
+    eligible = [row for row in rows if row.values is not None]
+    if not eligible:
+        return {}
+    values = np.stack([row.values for row in eligible])
+    model.eval()
+    with torch.inference_mode():
+        predictions = model(torch.from_numpy(values).to(device)).cpu().numpy()
+    return {row.index: output for row, output in zip(eligible, predictions, strict=True)}
+
+
+def train(rows, device, epochs, batch_size, seed):
+    torch.manual_seed(seed)
+    torch.use_deterministic_algorithms(True)
+    random = torch.Generator().manual_seed(seed)
+    validation = [row for row in rows if row.partition == "val"]
+    examples = [row for row in rows if row.partition == "train" and row.values is not None]
+    features = torch.from_numpy(np.stack([row.values for row in examples]))
+    labels = torch.tensor([row.label for row in examples], dtype=torch.long)
+    counts = torch.bincount(labels, minlength=len(LABELS))
+    if not bool(counts.all()):
+        raise ValueError(f"Classes sem amostras elegíveis no treino: {counts.tolist()}")
+    weights = counts.float().rsqrt()
+    weights /= weights.mean()
+    criterion = torch.nn.CrossEntropyLoss(weight=weights.to(device))
+    model = ConvSequence(len(LABELS)).to(device)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.002, weight_decay=0.01)
+    best = None
+    history = []
+
+    for epoch in range(1, epochs + 1):
+        losses = []
+        model.train()
+        permutation = torch.randperm(len(examples), generator=random)
+        for indices in permutation.split(batch_size):
+            optimizer.zero_grad(set_to_none=True)
+            input_values = augment(features[indices], random).to(device)
+            loss = criterion(model(input_values), labels[indices].to(device))
+            loss.backward()
+            optimizer.step()
+            losses.append(float(loss.detach()))
+        score, threshold, validation_metrics = choose_threshold(validation, collect(model, validation, device))
+        history.append({
+            "epoch": epoch, "trainLoss": float(np.mean(losses)), "threshold": threshold,
+            "validationF1Macro": validation_metrics["f1Macro"],
+            "validationFalseAcceptance": validation_metrics["falseAcceptance"]["rate"],
+            "validationCoverage": validation_metrics["coverage"]["rate"],
+        })
+        if best is None or score > best["score"]:
+            best = {
+                "score": score, "epoch": epoch, "threshold": threshold, "validation": validation_metrics,
+                "weights": copy.deepcopy(model.state_dict()),
+            }
+        if epoch == 1 or epoch % 10 == 0:
+            print(f"época {epoch:3d} perda={np.mean(losses):.3f} F1 validação={validation_metrics['f1Macro']:.3f}", flush=True)
+
+    model.load_state_dict(best["weights"])
+    return model.cpu().eval(), best, history, counts.tolist()
+
+
+def export(model, output):
+    onnx_path = output / "isolated.onnx"
+    temporary = output / "isolated.onnx.tmp"
+    with torch.inference_mode():
+        torch.onnx.export(
+            model, torch.zeros(1, FRAMES, FEATURES), str(temporary),
+            input_names=["landmarks"], output_names=["logits"], opset_version=17, dynamo=False,
+        )
+    onnx.checker.check_model(onnx.load(temporary))
+    temporary.replace(onnx_path)
+    return onnx_path
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--features", type=Path, default=Path("data/minds/features/index.json"))
+    parser.add_argument("--out", type=Path, default=Path("data/models/isolated-v1"))
+    parser.add_argument("--epochs", type=int, default=80)
+    parser.add_argument("--batch-size", type=int, default=12)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    args = parser.parse_args()
+    if args.epochs <= 0 or args.batch_size <= 0:
+        parser.error("Épocas e tamanho de lote devem ser positivos.")
+    if args.device == "cuda" and not torch.cuda.is_available():
+        parser.error("CUDA não está disponível nesta instalação do PyTorch.")
+    device = "cuda" if args.device == "auto" and torch.cuda.is_available() else (
+        args.device if args.device != "auto" else "cpu"
+    )
+    torch.set_num_threads(min(4, os.cpu_count() or 1))
+    index, data = load_features(args.features, {"train", "val"})
+    print(f"Treino no dispositivo {device} com Torch {torch.__version__}.", flush=True)
+    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed)
+    args.out.mkdir(parents=True, exist_ok=True)
+    checkpoint = args.out / "isolated.pt"
+    torch.save(model.state_dict(), checkpoint)
+    onnx_path = export(model, args.out)
+    manifest = {
+        "preprocess": PREPROCESS, "frames": FRAMES, "features": FEATURES,
+        "inputName": "landmarks", "outputName": "logits", "labels": list(LABELS),
+        "threshold": best["threshold"], "modelSha256": digest(onnx_path),
+        "extratorSha256": index["modelSha256"], "license": "CC-BY-4.0",
+        "source": "https://doi.org/10.5281/zenodo.2667329",
+        "status": "exploratório",
+    }
+    write_json(args.out / "isolated.json", manifest)
+    write_json(args.out / "training.json", {
+        "arch": "ConvSequence", "onnxOpset": 17, "seed": args.seed, "epochs": args.epochs,
+        "batchSize": args.batch_size, "optimizer": {"type": "AdamW", "learningRate": .002, "weightDecay": .01},
+        "device": device, "cuda": torch.version.cuda, "gpu": torch.cuda.get_device_name() if device == "cuda" else None,
+        "platform": platform.platform(), "python": sys.version.split()[0], "torch": torch.__version__,
+        "numpy": np.__version__, "onnx": onnx.__version__, "eligibleTrainCounts": counts,
+        "selectedEpoch": best["epoch"], "checkpointSha256": digest(checkpoint),
+        "datasetManifestSha256": index["sourceManifestSha256"],
+        "featuresManifestSha256": digest(args.features), "modelManifestSha256": digest(args.out / "isolated.json"),
+        "modelSha256": manifest["modelSha256"], "validation": best["validation"],
+        "validationChecks": checks(best["validation"]), "history": history,
+    })
+    print(f"ONNX exportado em {onnx_path}, época {best['epoch']} e limiar {best['threshold']:.6f}.")
+
+
+if __name__ == "__main__":
+    main()
