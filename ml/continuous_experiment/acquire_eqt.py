@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import struct
 import tempfile
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 import zipfile
 import zlib
@@ -30,7 +31,7 @@ CHUNK_SIZE = 16 * 1024 * 1024
 
 def fetch_range(archive, start, end, total):
     expected = end - start + 1
-    request = Request(f"{BASE}/{archive}/content", headers={
+    request = Request(f"{BASE}/{quote(archive)}/content", headers={
         "Range": f"bytes={start}-{end}",
         "Accept-Encoding": "identity",
     })
@@ -106,14 +107,32 @@ def acquire_hands(directory, prefix_source=None):
             temporary.unlink(missing_ok=True)
 
 
+def acquire_rgb_reference(directory):
+    block = fetch_range("Libras-EQT-UECE (RGB).zip", 316_587_483, 318_111_693, 8_971_968_030)
+    signature, _, _, method, *rest = LOCAL_HEADER.unpack_from(block)
+    filename_length, extra_length = rest[-2:]
+    header_end = LOCAL_HEADER.size
+    name = block[header_end:header_end + filename_length].decode("utf-8")
+    if signature != b"PK\x03\x04" or method != 8 or not name.endswith("/INFORMANTE 3/IMG_3311.mp4"):
+        raise ValueError("Membro RGB de referência inesperado.")
+    start = header_end + filename_length + extra_length
+    clip = zlib.decompress(block[start:start + 1_523_810], -15)
+    if len(clip) != 1_525_649 or zlib.crc32(clip) != 1_157_515_907:
+        raise ValueError("CRC ou tamanho do membro RGB de referência inválido.")
+    (directory / "IMG_3311.mp4").write_bytes(clip)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--annotations-only", action="store_true")
+    parser.add_argument("--rgb-reference", action="store_true")
     parser.add_argument("--prefix-from", type=Path, help="Reutiliza começo de um download do Landmarks.zip.")
     args = parser.parse_args()
     args.directory.mkdir(parents=True, exist_ok=True)
     acquire_annotations(args.directory)
+    if args.rgb_reference:
+        acquire_rgb_reference(args.directory)
     if not args.annotations_only:
         acquire_hands(args.directory, args.prefix_from)
 
