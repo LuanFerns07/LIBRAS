@@ -42,6 +42,8 @@ Os pontos da câmera são processados na própria página. Os sinais e as dicas 
 
 O modelo inicial treinado na RTX 4060 reconhece candidatos a Cinco, Espelho e Amarelo. No teste reservado, teve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. A versão permanece experimental. [Avaliação e limites](docs/avaliacao.md)
 
+O estudo de sinalização contínua usa dados de frases e anotações temporais em experimentos locais de pesquisa. [Método e resultados](docs/sinalizacao-continua.md)
+
 No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher lista a voz local pt-BR do eSpeak NG. Se o navegador não apresentar essa voz, abra um perfil dedicado com a integração do Speech Dispatcher:
 
 ```bash

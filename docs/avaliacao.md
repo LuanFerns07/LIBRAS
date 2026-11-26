@@ -66,6 +66,8 @@ O F1 macro foi 0,612, com cobertura 22/24, 15/42 tentativas inconclusivas e 5/18
 
 O teste de paridade PyTorch × ONNX Runtime CPU cobriu as 42 entradas com erro máximo absoluto nos logits de 2,86 × 10⁻⁶ e decisões idênticas. O runtime WASM na versão 156 do Chromium produziu o mesmo resultado para quatro entradas de validação com erro máximo de 9,54 × 10⁻⁷. A mediana de inferência isolada em CPU foi 0,071 ms e o p95 0,085 ms. A extração offline concorrente mediu 271 ms de mediana e 436 ms no p95 por quadro em 2.170 quadros do teste. Os números correspondem às etapas informadas. A latência entre o fim da tentativa e a resposta com webcam e avatar é medida separadamente no roteiro de demonstração. [Paridade WASM](../ml/evidence/isolated-v1/wasm-parity.json)
 
+O manifesto exato da execução fica versionado, e os pesos permanecem em `data/models/isolated-v1` neste PC. [Manifesto do modelo](../ml/evidence/isolated-v1/model.json)
+
 ## Experimento de expansão com ALUNO
 
 O catálogo expandido acrescenta ALUNO à área livre. A forma histórica de Fortaleza aparece no avatar para comparação, com escopo descrito em [Animações](animacoes.md). A execução do experimento abaixo mantém o modelo inicial e o catálogo de prática. Execute cada treino de GPU separadamente.
