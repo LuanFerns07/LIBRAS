@@ -11,16 +11,22 @@ const multiple = process.env.LIBRASIA_TEST_SEQUENCE === '1'
 const sync = multiple || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
+const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
+const expectedReason = process.env.LIBRASIA_EXPECT_REASON
+const prefix = process.env.LIBRASIA_TEST_TRANSCRIPT_PREFIX ?? ''
+const voiceMode = process.env.LIBRASIA_TEST_VOICE_MODE
 
-const finish = (() => new Promise(resolve => {
+const finish = (automatic => new Promise(resolve => {
   const status = document.querySelector('[data-capture-status]')
   const start = performance.now()
   const observer = new MutationObserver(() => {
     if (['busy', 'recording'].includes(status.dataset.state)) return
     observer.disconnect()
+    const timing = JSON.parse(status.dataset.timing ?? 'null')
     resolve({
-      state: status.dataset.state, elapsedMs: performance.now() - start, message: status.textContent,
-      timing: JSON.parse(status.dataset.timing ?? 'null'),
+      state: status.dataset.state, reason: status.dataset.reason, message: status.textContent,
+      elapsedMs: automatic ? timing?.decisionMs : performance.now() - start,
+      timing,
     })
   })
   observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
@@ -29,7 +35,7 @@ const finish = (() => new Promise(resolve => {
     resolve({ state: status.dataset.state, elapsedMs: 0, message: status.textContent })
     return
   }
-  document.querySelector('[data-attempt]').click()
+  if (!automatic) document.querySelector('[data-attempt]').click()
 })).toString()
 
 const beginAtGreenMarker = (() => new Promise(resolve => {
@@ -49,6 +55,29 @@ const beginAtGreenMarker = (() => new Promise(resolve => {
   video.requestVideoFrameCallback(checkFrame)
 })).toString()
 
+const useVoiceFixture = (mode => {
+  window.testSpeechCalls = 0
+  Object.defineProperty(window, 'speechSynthesis', {
+    configurable: true,
+    value: {
+      getVoices: () => mode === 'missing' ? [] : [{ lang: 'pt-BR', localService: true }],
+      cancel() {},
+      speak(utterance) {
+        window.testSpeechCalls += 1
+        window.testUtterance = utterance.text
+        queueMicrotask(() => utterance.onerror?.({ error: 'synthesis-failed' }))
+      },
+    },
+  })
+  Object.defineProperty(window, 'SpeechSynthesisUtterance', {
+    configurable: true,
+    value: class {
+      constructor(text) { this.text = text }
+    },
+  })
+  window.location.hash = 'area-livre'
+}).toString()
+
 test('a prévia faz a extração e a decisão no navegador sem transmitir quadros', {
   skip: !appUrl || !enabled,
 }, async context => {
@@ -57,6 +86,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (sync) assert.ok(videoFile, 'A sincronização usa um Y4M com marcador inicial verde.')
   if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
+  if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
+  if (expectedReason) assert.ok(!expected, 'O motivo esperado deve corresponder a uma tentativa inconclusiva.')
+  if (voiceMode) assert.ok(['missing', 'error'].includes(voiceMode) && expected && !target &&
+    process.env.LIBRASIA_TEST_VOICE !== '1', 'Escolha um único cenário de voz após reconhecimento na área livre.')
   assert.ok(Number.isInteger(trials) && trials >= 1 && trials <= 30, 'Informe de 1 a 30 tentativas.')
   if (trials > 1 && videoFile) assert.ok(sync, 'Use o marcador de sincronização para repetir um clipe.')
   const base = new URL('/', appUrl)
@@ -71,7 +104,11 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       seenAssets.add(url.pathname)
     })
     await page('Network.enable')
-    await navigate(base.href + (target ? '#praticar' : '#area-livre'))
+    await navigate(base.href + (target ? '#praticar' : voiceMode ? '#saiba-mais' : '#area-livre'))
+    if (voiceMode) {
+      await evaluate('(' + useVoiceFixture + ')(' + JSON.stringify(voiceMode) + ')')
+      await waitUntil('!!document.querySelector("#transcription")')
+    }
     if (target) {
       const select = '(id => { const field = document.querySelector("[data-signal]"); field.value = id; field.dispatchEvent(new Event("change")); })'
       await evaluate(select + '(' + JSON.stringify(target) + ')')
@@ -97,6 +134,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       if (multiple) await evaluate('document.querySelector("[data-sequence-mode]").click()', true)
     }
 
+    const getTranscript = () => evaluate('document.querySelector("#transcription").value')
+    if (!target && prefix) await evaluate('document.querySelector("#transcription").value = ' + JSON.stringify(prefix))
     const captureMs = multiple ? 10300 : videoFile ? 3850 : 1600
     const decisions = []
     for (let trial = 0; trial < trials; trial += 1) {
@@ -107,13 +146,25 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         await startAttempt()
         await record()
       }
-      await evaluate('new Promise(resolve => setTimeout(resolve, ' + captureMs + '))')
+      await evaluate('new Promise(resolve => setTimeout(resolve, ' + (autoFinish ? 800 : captureMs) + '))')
+      if (autoFinish) {
+        assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording')
+        assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
+      }
       if (target) await evaluate('document.querySelector("[data-restart]").click()', true)
-      const decision = await evaluate('(' + finish + ')()', true)
-      const transcript = target ? null : await evaluate('document.querySelector("#transcription").value')
+      const decision = await evaluate('(' + finish + ')(' + autoFinish + ')', true)
+      const transcript = target ? null : await getTranscript()
+      if (autoFinish) {
+        const mediaTime = await evaluate('document.querySelector("video").currentTime')
+        await evaluate('new Promise(resolve => setTimeout(resolve, 1200))')
+        assert.ok(await evaluate('document.querySelector("video").currentTime') > mediaTime)
+        assert.equal(await getTranscript(), transcript)
+        assert.equal(await evaluate('document.querySelector("[data-attempt]").textContent'), 'Iniciar tentativa')
+      }
       decisions.push({ ...decision, transcript })
       context.diagnostic('Tentativa ' + (trial + 1) + '/' + trials + ' · ' + decision.message +
-        ' · conclusão até resposta: ' + decision.elapsedMs.toFixed(1) + ' ms')
+        ' · ' + (autoFinish ? 'fim do tempo até resposta: ' : 'conclusão até resposta: ') +
+        (decision.elapsedMs?.toFixed(1) ?? 'indisponível') + ' ms')
     }
 
     const times = decisions.map(({ elapsedMs }) => elapsedMs).filter(elapsedMs => elapsedMs > 0).sort((a, b) => a - b)
@@ -121,12 +172,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       const middle = times.length >> 1
       const median = times.length % 2 ? times[middle] : (times[middle - 1] + times[middle]) / 2
       const p95 = times[Math.ceil(times.length * .95) - 1]
-      context.diagnostic('Latência de ' + times.length + '/' + trials + ' tentativas manuais · mediana ' +
+      context.diagnostic('Latência de ' + times.length + '/' + trials + ' tentativas ' +
+        (autoFinish ? 'por fim do tempo' : 'manuais') + ' · mediana ' +
         median.toFixed(1) + ' ms e p95 ' + p95.toFixed(1) + ' ms (posto mais próximo).')
     }
     for (const [index, decision] of decisions.entries()) {
-      assert.ok(decision.elapsedMs > 0, 'A tentativa deve terminar pelo botão para medir a latência.')
-      assert.equal(decision.timing?.trigger, 'manual')
+      assert.ok(Number.isFinite(decision.elapsedMs), 'A tentativa deve registrar o tempo da decisão.')
+      assert.equal(decision.timing?.trigger, autoFinish ? 'time-limit' : 'manual')
       assert.ok(Number.isFinite(decision.timing.decisionMs) && decision.timing.decisionMs >= 0)
       assert.ok(decision.timing.decisionMs <= decision.elapsedMs)
       assert.ok(decision.timing.extractionMs.length > 0)
@@ -134,10 +186,29 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       if (!sync && index === 0) assert.ok(decision.timing.initialLoadMs > 0)
       else assert.equal(decision.timing.initialLoadMs, null)
       assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message)
+      if (expectedReason) assert.equal(decision.reason, expectedReason, decision.message)
       if (!target) {
-        const expectedTranscript = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''
-        assert.equal(decision.transcript.toLocaleLowerCase('pt-BR'), expectedTranscript)
+        const addition = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''
+        const spacer = prefix && addition && !/\s$/u.test(prefix) ? ' ' : ''
+        assert.equal(decision.transcript, prefix + spacer + addition)
       }
+    }
+
+    if (voiceMode) {
+      const edit = decisions.at(-1).transcript + '. Texto revisado.'
+      await evaluate('document.querySelector("#transcription").value = ' + JSON.stringify(edit))
+      await evaluate('document.querySelector("[data-speak]").click()', true)
+      await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "unavailable"')
+      assert.match(await evaluate('document.querySelector("[data-voice-status]").textContent'),
+        voiceMode === 'missing' ? /voz local.*indisponível/u : /leitura falhou/u)
+      assert.equal(await getTranscript(), edit)
+      assert.equal(await evaluate('window.testSpeechCalls'), voiceMode === 'missing' ? 0 : 1)
+      if (voiceMode === 'error') assert.equal(await evaluate('window.testUtterance'), edit)
+      await evaluate('const field = document.querySelector("#transcription"); field.focus(); field.setSelectionRange(field.value.length, field.value.length)')
+      await page('Input.insertText', { text: ' Nova edição.' })
+      assert.equal(await getTranscript(), edit + ' Nova edição.')
+      context.diagnostic('Texto editado preservado e ainda editável após ' +
+        (voiceMode === 'missing' ? 'ausência simulada de voz local.' : 'erro simulado da síntese.'))
     }
 
     if (!target && expected && process.env.LIBRASIA_TEST_VOICE === '1') {
