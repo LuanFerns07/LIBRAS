@@ -32,7 +32,7 @@ A rede usa três camadas Conv1D com normalização, agregação máxima temporal
 
 A cada época, o treino seleciona limiar de 0,25 a 1,00 em passos de 0,01 usando a validação. A regra verifica primeiro o conjunto de metas da classificação, depois o limite de falsos aceites, F1 macro e cobertura. Após a seleção de pesos e limiar, `evaluate.py` abre o teste por pessoa. O teste contabiliza extrações insuficientes como rejeições. As métricas de classe e a matriz têm suporte e denominadores para separar rejeições corretas de tentativas de sinais válidos perdidas.
 
-`evaluate.py` compara os logits e as decisões da rede PyTorch aos do ONNX Runtime em CPU para cada tentativa elegível no teste. Ele grava `parity-web.json` com amostras de validação para `verify-wasm.mjs`. O verificador usa o runtime WASM e a função de decisão do app, medindo a divergência de logits e saídas. O tempo do classificador CPU e a extração de quadros offline têm campos separados no relatório. O aceite de latência com webcam e avatar é avaliado no roteiro de demonstração em outra medição.
+`evaluate.py` compara os logits e as decisões da rede PyTorch aos do ONNX Runtime em CPU para cada tentativa elegível no teste. Ele grava `parity-web.json` com amostras de validação para `verify-wasm.mjs`. O verificador abre Chromium e usa o runtime WASM e a função de decisão do app, medindo a divergência de logits e saídas. O tempo do classificador CPU e a extração de quadros offline têm campos separados no relatório. O aceite de latência com webcam e avatar é avaliado no roteiro de demonstração em outra medição.
 
 ## Saídas locais
 
