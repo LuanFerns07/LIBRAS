@@ -51,6 +51,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
   function show(state, message) {
     status.dataset.state = state
     delete status.dataset.reason
+    delete status.dataset.timing
     const title = resultLabels[state]
     status.textContent = title ? `${title}. ${message}` : message
   }
@@ -102,7 +103,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     else void camera.start()
   })
 
-  async function complete(engine, frames, current, multiple) {
+  async function complete(engine, frames, current, multiple, timing, initialLoadMs) {
     if (current !== ticket || disposed) return
     phase = 'inferring'
     capture = undefined
@@ -123,6 +124,12 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     if (result.reason) status.dataset.reason = result.reason
     renderButtons()
     onResult?.(result)
+    status.dataset.timing = JSON.stringify({
+      trigger: timing.trigger,
+      decisionMs: performance.now() - timing.finishedAt,
+      initialLoadMs,
+      extractionMs: timing.extractionMs,
+    })
   }
 
   async function attempt() {
@@ -137,6 +144,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     renderButtons()
     show('busy', 'Preparando o reconhecimento no dispositivo.')
     let engine
+    const loadStartedAt = enginePromise ? null : performance.now()
     try {
       enginePromise ??= openEngine()
       engine = await enginePromise
@@ -149,6 +157,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
       return
     }
     if (current !== ticket || disposed) return
+    const initialLoadMs = loadStartedAt === null ? null : performance.now() - loadStartedAt
     onReady?.(engine)
     phase = 'recording'
     renderButtons()
@@ -157,7 +166,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
       ...(multiple ? { limitMs: 12_000, limitFrames: 125 } : {}),
-      onFinish(frames) { void complete(engine, frames, current, multiple) },
+      onFinish(frames, timing) { void complete(engine, frames, current, multiple, timing, initialLoadMs) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
   }

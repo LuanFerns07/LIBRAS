@@ -37,6 +37,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 - [x] Escolher três a cinco sinais pela utilidade pedagógica, qualidade dos exemplos e viabilidade de animação. Começar por um sinal cujo parâmetro principal seja observável pela webcam. Incluir movimento se houver dados e referência suficientes.
 - [x] Definir o catálogo compartilhado com identificador de letra ou sinal, saída textual, referência, animação, versão e status da revisão. Para os exercícios, identificar o parâmetro avaliado, as variantes contempladas e as dicas permitidas.
 - [x] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado e verificar duplicatas.
+- [x] Medir a rejeição dos modelos congelados em gravações externas de repouso e movimentos cotidianos. [Teste com 12 trechos do CLAD](docs/negativos.md#resultado-de-26-de-novembro-de-2026)
 - [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição durante o uso da webcam.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
@@ -60,7 +61,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. O protocolo exige F1 macro de pelo menos 0,75 e falsas aceitações de até 10%. A versão local fica disponível para exploração. Para avançar no aceite, corrigir a confusão de Cinco e as falsas aceitações em Amarelo e repetir a avaliação com participantes independentes. [Resultados do teste e matriz de confusão](docs/avaliacao.md#execução-do-catálogo-inicial-em-26-de-novembro-de-2026)
 
-O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em 18 clipes na comparação interna por pessoa. As falsas aceitações subiram de 5 para 8 em 42. A avaliação com novo grupo reservado continua pendente. [Resultados do experimento](docs/avaliacao.md#experimento-com-geometria-das-mãos)
+O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em 18 clipes na comparação interna por pessoa. As falsas aceitações subiram de 5 para 8 em 42. Em 12 trechos externos de repouso e movimentos cotidianos, a geometria produziu uma falsa aceitação e cada modelo anterior produziu cinco. A avaliação de sinais válidos com novo grupo reservado e com webcam continua pendente. [Comparação interna](docs/avaliacao.md#experimento-com-geometria-das-mãos) · [Negativos externos](docs/negativos.md)
 
 ### M4 · Alfabeto, palavras, frases e nomes
 
@@ -86,6 +87,7 @@ O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em
 ### M7 · Validação independente e versão de demonstração
 
 - [x] Executar instalação limpa, compilação e testes automatizados, incluindo navegação por teclado, foco, mensagens, liberação da câmera e retomada após erro.
+- [x] Preparar o formulário local de validação, com versão dos ativos, observação humana, decisão do app, dicas, latência e audição. [Ficha e instruções](docs/validacao-ao-vivo.md)
 - [ ] Fazer a verificação manual no PC com participantes, câmera e áudio reais. Verificar a compreensão das mensagens, a sinalização e a audição do texto editado.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
 - [ ] Fechar e retestar defeitos que bloqueiam os fluxos principais ou comprometem a privacidade, a correção em Libras ou a confiabilidade da demonstração. Registrar as limitações restantes no README e no memorial. Identificar o commit, o modelo e as animações usados nos testes.

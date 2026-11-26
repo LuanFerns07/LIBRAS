@@ -18,7 +18,10 @@ const finish = (() => new Promise(resolve => {
   const observer = new MutationObserver(() => {
     if (['busy', 'recording'].includes(status.dataset.state)) return
     observer.disconnect()
-    resolve({ state: status.dataset.state, elapsedMs: performance.now() - start, message: status.textContent })
+    resolve({
+      state: status.dataset.state, elapsedMs: performance.now() - start, message: status.textContent,
+      timing: JSON.parse(status.dataset.timing ?? 'null'),
+    })
   })
   observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
   if (status.dataset.state !== 'recording') {
@@ -123,6 +126,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     }
     for (const [index, decision] of decisions.entries()) {
       assert.ok(decision.elapsedMs > 0, 'A tentativa deve terminar pelo botão para medir a latência.')
+      assert.equal(decision.timing?.trigger, 'manual')
+      assert.ok(Number.isFinite(decision.timing.decisionMs) && decision.timing.decisionMs >= 0)
+      assert.ok(decision.timing.decisionMs <= decision.elapsedMs)
+      assert.ok(decision.timing.extractionMs.length > 0)
+      assert.ok(decision.timing.extractionMs.every(time => Number.isFinite(time) && time >= 0))
+      if (!sync && index === 0) assert.ok(decision.timing.initialLoadMs > 0)
+      else assert.equal(decision.timing.initialLoadMs, null)
       assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message)
       if (!target) {
         const expectedTranscript = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''

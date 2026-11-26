@@ -18,7 +18,7 @@ Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se
 ./scripts/executar-local.sh
 ```
 
-Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando necessário, verifica o extrator de visão, instala os pesos locais disponíveis e inicia a versão compilada. Use Ctrl+C no terminal para encerrar. Se precisar de outra porta, execute `LIBRASIA_PORTA=4174 ./scripts/executar-local.sh`.
+Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando necessário, verifica o extrator de visão, instala os pesos locais disponíveis e inicia a versão compilada. Use Ctrl+C no terminal para encerrar. Se precisar de outra porta, execute `LIBRASIA_PORTA=4175 ./scripts/executar-local.sh`.
 
 No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto** ou **Tradutor** para abrir o avatar, e **Área livre** para editar e ouvir o texto. Autorize a câmera ao usar **Ativar câmera**. O endereço de loopback permite o uso local da webcam.
 
@@ -66,7 +66,7 @@ O build gera `dist/`. Use `npm run preview` para verificar essa versão em local
 
 Com Chromium instalado e a prévia em execução, rode `LIBRASIA_TEST_URL=http://127.0.0.1:4173 npm run test:e2e`. O roteiro de validação descreve as opções para câmera física, voz local e vídeos de teste.
 
-Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). A execução da aplicação está restrita ao ambiente local nesta rodada.
+Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). Para a sessão com participantes, use o [formulário local de validação](docs/validacao-ao-vivo.md). A execução da aplicação está restrita ao ambiente local nesta rodada.
 
 O desenvolvimento é integrado localmente na branch `main`. As frentes de implementação simultânea usam worktrees de branches dedicadas. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
 

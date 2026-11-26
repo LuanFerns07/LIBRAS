@@ -3,6 +3,7 @@ export function captureSequence(video, extractor, {
 }) {
   const hasVideoCallback = typeof video.requestVideoFrameCallback === 'function'
   const frames = []
+  const extractionMs = []
   let pending
   let timer
   let lastMediaTime = -Infinity
@@ -15,11 +16,12 @@ export function captureSequence(video, extractor, {
     else cancelAnimationFrame(pending)
   }
 
-  function finish() {
+  function finish(trigger) {
     if (!running) return
+    const finishedAt = performance.now()
     running = false
     clear()
-    onFinish(frames.splice(0))
+    onFinish(frames.splice(0), { trigger, finishedAt, extractionMs })
   }
 
   function sample(now, metadata) {
@@ -29,7 +31,9 @@ export function captureSequence(video, extractor, {
     if (video.readyState >= 2 && mediaTime - lastMediaTime >= intervalMs - 0.5) {
       lastMediaTime = mediaTime
       try {
+        const startedAt = performance.now()
         const landmarks = extractor.detect(video, now)
+        extractionMs.push(performance.now() - startedAt)
         frames.push({ ...landmarks, timestamp: mediaTime, aspect: video.videoWidth / video.videoHeight })
       } catch (error) {
         abort()
@@ -37,7 +41,7 @@ export function captureSequence(video, extractor, {
         return
       }
       if (frames.length >= limitFrames) {
-        finish()
+        finish('frame-limit')
         return
       }
     }
@@ -54,7 +58,7 @@ export function captureSequence(video, extractor, {
     clear()
   }
 
-  timer = setTimeout(finish, limitMs)
+  timer = setTimeout(() => finish('time-limit'), limitMs)
   schedule()
-  return { finish, abort }
+  return { finish() { finish('manual') }, abort }
 }

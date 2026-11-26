@@ -122,7 +122,9 @@ A comparação usou somente os 120 clipes da partição de treino do catálogo e
 | Conv1D original | 0,543 | 3/18 | 48/78 | 5/42 |
 | Conv1D com geometria | 0,668 | 13/18 | 61/78 | 8/42 |
 
-A geometria aumentou a revocação de Cinco e também elevou os falsos aceites. A rodagem com todas as pessoas do treino obteve 24/24 acertos e 0/12 falsos aceites nos clipes da validação que também definiu a época e o limiar. A concordância de cinco entradas no Chromium foi integral, com erro máximo de 4,77 × 10⁻⁷ nos logits. Os dois resultados orientam o desenvolvimento. O novo modelo ainda precisa de teste final independente, sobretudo para a rejeição. [Rodadas por pessoa](../ml/evidence/isolated-geometry/cross-validation.json) · [Validação](../ml/evidence/isolated-geometry/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-geometry/wasm-parity.json)
+A geometria aumentou a revocação de Cinco e também elevou os falsos aceites nessas rodadas. A rodagem com todas as pessoas do treino obteve 24/24 acertos e 0/12 falsos aceites nos clipes da validação que também definiu a época e o limiar. A concordância de cinco entradas no Chromium foi integral, com erro máximo de 4,77 × 10⁻⁷ nos logits. [Rodadas por pessoa](../ml/evidence/isolated-geometry/cross-validation.json) · [Validação](../ml/evidence/isolated-geometry/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-geometry/wasm-parity.json)
+
+Em um recorte externo de 12 clipes com três pessoas, a geometria teve 1 falsa aceitação, ante 5 em cada um dos dois modelos anteriores. A avaliação externa cobre a rejeição de repouso e de movimentos cotidianos. Um novo grupo independente com sinais do catálogo e entradas fora dele ainda é necessário para avaliar a versão de demonstração. [Protocolo e resultados no CLAD](negativos.md)
 
 ```bash
 .venv/bin/python ml/cross_validate.py --device cuda --out data/models/isolated-geometry/cross-validation.json

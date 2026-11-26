@@ -38,6 +38,16 @@ const { width, height } = document.querySelector('video').srcObject.getVideoTrac
 
 Para uma avaliação independente, mantenha a referência humana separada da decisão do app durante a observação. Use várias pessoas fora do treino e inclua, no relatório, quantas pessoas e tentativas sustentam cada cenário e medida. As contagens do formulário mostram os estratos registrados. A análise segue os critérios do protocolo.
 
+### Medir no Chromium
+
+Depois que a tentativa mostrar sua resposta, leia os tempos no console da aba do LibrasIA, antes de iniciar a próxima tentativa.
+
+~~~js
+JSON.parse(document.querySelector('[data-capture-status]').dataset.timing ?? 'null')
+~~~
+
+Quando `trigger` for `manual`, copie `decisionMs` para a ficha e selecione o método instrumentado. É o intervalo entre acionar **Concluir tentativa** e atualizar a decisão. Use as tentativas manuais com o avatar em reprodução para o critério de latência da lição. `initialLoadMs` mede o primeiro carregamento dos modelos após ativar a câmera e fica vazio nas tentativas seguintes. `extractionMs` contém as durações por quadro processado. Guarde esses tempos junto ao código da tentativa para a análise. A página mantém somente os tempos da última decisão em memória.
+
 ## Exportar
 
 Ao terminar, use **Exportar sessão em JSON**. Salve a cópia de trabalho em data/evidence e confira seu conteúdo. Registre apenas os códigos de sessão e os metadados de observação. A página não solicita câmera nem microfone, não grava quadros, áudio, pontos corporais ou frases e não usa armazenamento persistente. O download é local. Após conferir a exportação, recarregue a página para iniciar outro registro.
