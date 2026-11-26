@@ -6,6 +6,12 @@ import { neutralPose } from './clips.js';
 import { createPlayback } from './playback.js';
 import { createRig } from './rig.js';
 
+export const AVATAR_FRAME = Object.freeze({
+  centerY: 1.26,
+  halfHeight: 1.34,
+  halfWidth: 1.23,
+});
+
 export function createPlayer(container, { onStep, onState } = {}) {
   const renderer = new WebGLRenderer({ antialias: true, powerPreference: 'low-power' });
   renderer.domElement.setAttribute('role', 'img');
@@ -14,8 +20,8 @@ export function createPlayer(container, { onStep, onState } = {}) {
   const scene = new Scene();
   scene.background = new Color(0xeee9fb);
   const camera = new OrthographicCamera(-2, 2, 1.33, -1.33, 0.1, 20);
-  camera.position.set(0, 1.35, 6);
-  camera.lookAt(0, 1.35, 0);
+  camera.position.set(0, AVATAR_FRAME.centerY, 6);
+  camera.lookAt(0, AVATAR_FRAME.centerY, 0);
 
   const rig = createRig();
   scene.add(rig.model);
@@ -42,8 +48,7 @@ export function createPlayer(container, { onStep, onState } = {}) {
     const width = Math.max(1, container.clientWidth);
     const height = Math.max(1, container.clientHeight);
     const ratio = width / height;
-    const baseHalfHeight = 1.28;
-    const halfHeight = Math.max(baseHalfHeight, 0.98 / ratio);
+    const halfHeight = Math.max(AVATAR_FRAME.halfHeight, AVATAR_FRAME.halfWidth / ratio);
     camera.top = halfHeight;
     camera.bottom = -halfHeight;
     camera.left = -halfHeight * ratio;

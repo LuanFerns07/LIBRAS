@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { Box3 } from 'three';
 import { clips, neutralPose, sampleClip } from '../src/avatar/clips.js';
 import { createPlayback } from '../src/avatar/playback.js';
+import { AVATAR_FRAME } from '../src/avatar/player.js';
 import { createRig } from '../src/avatar/rig.js';
 
 test('o catálogo cobre A–Z, a cedilha e os sinais da lição e apresentação', () => {
@@ -53,6 +55,23 @@ test('todos os quadros amostrados produzem articulações e coordenadas finitas'
       rig.applyPose(pose, neutralPose.digits);
       rig.model.updateMatrixWorld(true);
       rig.model.traverse((node) => assert.ok(node.matrixWorld.elements.every(Number.isFinite), id));
+    }
+  }
+  rig.dispose();
+});
+
+test('o enquadramento mínimo contém o corpo e as mãos nos quadros amostrados', () => {
+  const rig = createRig();
+  const { centerY, halfHeight, halfWidth } = AVATAR_FRAME;
+  const box = new Box3();
+  for (const [id, clip] of Object.entries(clips)) {
+    for (let position = 0; position <= 20; position++) {
+      const progress = position / 20;
+      rig.applyPose(sampleClip(clip, progress), neutralPose.digits);
+      const { min, max } = box.setFromObject(rig.model, true);
+      assert.ok(min.x >= -halfWidth && max.x <= halfWidth, `${id} em ${progress} no eixo X`);
+      assert.ok(min.y >= centerY - halfHeight && max.y <= centerY + halfHeight,
+        `${id} em ${progress} no eixo Y`);
     }
   }
   rig.dispose();

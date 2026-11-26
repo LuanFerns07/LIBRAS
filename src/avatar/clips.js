@@ -7,6 +7,7 @@ const curved = [22, 41, 31, 0];
 const hooked = [6, 83, 45, 0];
 const thumbSide = [8, 10, 9, -19];
 const thumbAcross = [37, 22, 18, 43];
+const thumbOnPalm = [20, 10, 8, 53];
 const thumbOut = [3, 6, 5, -77];
 const thumbOpen = [5, 10, 5, -45];
 
@@ -19,21 +20,21 @@ function fingers(thumb, index, middle, ring, little) {
 }
 
 const a = fingers(thumbSide, closed, closed, closed, closed);
-const b = fingers(thumbAcross, straight, straight, straight, straight);
-const c = fingers([11, 18, 11, -65], curved, curved, curved, curved);
+const b = fingers(thumbOnPalm, straight, straight, straight, straight);
+const c = fingers([11, 18, 11, -44], curved, curved, curved, curved);
 const d = fingers([28, 15, 25, 24], straight, [47, 61, 35, 0], curved, curved);
-const e = fingers([35, 16, 13, 47], hooked, hooked, hooked, hooked);
-const f = fingers([14, 14, 26, -23], [31, 55, 30, -10], straight, straight, straight);
+const e = fingers([25, 9, 10, 61], [33, 84, 51, 2], [43, 85, 52, 0], [42, 83, 48, -1], [34, 82, 49, 0]);
+const f = fingers([25, 12, 15, -10], [31, 55, 30, -10], straight, straight, straight);
 const g = fingers(thumbSide, straight, closed, closed, closed);
 const h = fingers([27, 11, 8, 17], spread(straight, -17), spread(straight, 7), closed, closed);
 const i = fingers(thumbAcross, closed, closed, closed, straight);
 const l = fingers(thumbOut, straight, closed, closed, closed);
 const m = fingers(thumbAcross, straight, straight, straight, closed);
 const n = fingers(thumbAcross, straight, straight, closed, closed);
-const o = fingers([8, 25, 25, -50], [42, 59, 34, 0], [42, 59, 34, 0], [43, 60, 36, 0], curved);
-const r = fingers(thumbAcross, spread(straight, 22), [10, 3, 2, -15], closed, closed);
+const o = fingers([29, 20, 12, 0], [42, 59, 34, 0], [42, 59, 34, 0], [43, 60, 36, 0], curved);
+const r = fingers(thumbAcross, spread(straight, 22), [35, 0, 2, -20], closed, closed);
 const s = fingers(thumbAcross, closed, closed, closed, closed);
-const t = fingers([38, 28, 23, 27], [33, 61, 25, -8], straight, straight, straight);
+const t = fingers([27, 12, 15, 8], [33, 61, 25, -8], straight, straight, straight);
 const v = fingers(thumbAcross, spread(straight, -20), spread(straight, 13), closed, closed);
 const w = fingers(thumbAcross, spread(straight, -22), straight, spread(straight, 22), closed);
 const x = fingers([5, 15, 12, -56], spread(hooked, 0), closed, closed, closed);
