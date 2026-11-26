@@ -16,3 +16,10 @@ python3 -m unittest ml.partial_eval.test_prepare
 ```
 
 O manifesto contém o SHA-256 da fonte, o hash das janelas e seu intervalo de origem em milissegundos. Os vídeos, manifestos gerados e pontos corporais ficam em `data/minds-partial`.
+
+## Extração registrada
+
+O extrator retornou rastreamento utilizável em 82 das 84 janelas. Os dois recortes de Vontade S06-1 ficaram com rastreamento insuficiente. O carregador verificou a receita `15c372f09ab235e71d9634c2b8d9a8962d67b670d66743c360fa69e244a19391`, igual à do MINDS expandido.
+
+- Manifesto `cf11c0ddfe625ff0d0a6db17f5a6f246871ecd69c96e9d36e47c04445738c465`
+- Índice de pontos `31de9416fcf9760aa20c948a5c1809aabdacc625ae813753af448b33b7f7dd17`
