@@ -205,5 +205,11 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       const { writeFile } = await import('node:fs/promises')
       await writeFile(process.env.LIBRASIA_TEST_SCREENSHOT, Buffer.from(data, 'base64'))
     }
+
+    await page('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 })
+    const touchPoint = await evaluate('(() => { const rect = document.querySelector("[data-page=alfabeto]").getBoundingClientRect(); return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }; })()')
+    await page('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touchPoint] })
+    await page('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+    await waitUntil('document.querySelector("main h1")?.textContent === "Alfabeto manual"')
   }, { fakeCamera: !physical })
 })

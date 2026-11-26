@@ -113,4 +113,6 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 \
   node --test tests/e2e/recognition.test.mjs
 ~~~
 
+Para repetir um caso no mesmo navegador, defina LIBRASIA_TEST_TRIALS de 1 a 30. Em clipes rotulados, use o marcador verde para delimitar cada repetição. O relatório lista a decisão e latência de cada tentativa, quantidade medida, mediana e p95 pelo posto mais próximo. Na lição, o avatar volta a reproduzir antes da medição. Na área livre, o teste compara a transcrição cumulativa após cada tentativa.
+
 O ensaio com clipes unidos mede um cenário controlado com pausa. A validação com sinalização contínua natural requer dados anotados para medir erros de segmentação e revisão humana do sentido traduzido.
