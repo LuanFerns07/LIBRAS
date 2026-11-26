@@ -195,6 +195,15 @@ No candidato, cada negativo elegível contribui com somente uma entrada por épo
   --out data/models/isolated-partials/cross-validation.json
 ```
 
+O Holistic extraiu 82 vetores utilizáveis de 84 janelas, de 42 gravações de sete pessoas. O prefixo e o sufixo de Vontade S06-1 ficaram com rastreamento insuficiente. Na avaliação, essas tentativas permanecem no denominador como rejeições. [Preparação](janelas-parciais.md) · [Manifesto das janelas](../ml/evidence/isolated-partials/manifest.json)
+
+| Condição de treino | Gravações com falso aceite em pelo menos uma janela | Falsas aceitações dos vídeos completos | Acertos de Cinco completo | Cobertura dos positivos completos | F1 macro nos vídeos completos |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Só vídeos completos | 15/42 | 8/42 | 13/18 | 61/78 | 0,668 |
+| Com janelas negativas | 3/42 | 4/42 | 14/18 | 56/78 | 0,722 |
+
+A falsa aceitação em prefixos caiu de 7 para 1 em 42. Em sufixos, caiu de 12 para 2 em 42. A cobertura dos positivos completos ficou em 71,8%, abaixo da meta de 75%. As métricas descrevem as rodadas de desenvolvimento e seus recortes. A versão local segue com os pesos iniciais. [Matrizes e contagens por rodada](../ml/evidence/isolated-partials/cross-validation.json)
+
 ## Combinação de geometria e flexão
 
 A terceira condição atribui peso igual às probabilidades dos modelos de geometria e de flexão, treinados separadamente nas mesmas três rodadas de desenvolvimento. A média inclui a classe de rejeição. A validação de cada rodada escolhe um limiar para a combinação, com as mesmas regras dos modelos isolados. Verifique se a combinação melhora a cobertura e preserva a rejeição. Use as metas de classificação e rejeição do [protocolo](protocolo-aceite.md) para avaliar a possibilidade de abrir um teste com novas pessoas.
