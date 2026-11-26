@@ -17,16 +17,7 @@ Atualize o resumo depois do aceite. Conte os caracteres de todo o documento 3, i
 
 ## Conferência do arquivo único
 
-| Ordem | Documento | Situação ou conferência |
-| --- | --- | --- |
-| 1 | Identificação oficial com foto de todos os integrantes | Obter dos titulares. Conferir legibilidade. |
-| 2 | Comprovante de vínculo ativo com a UFC | Obter dos integrantes, preferencialmente via SIGAA. |
-| 3 | Resumo identificado | Usar o texto acima como base e conferir o limite. |
-| 4 | Memorial técnico descritivo | Completar a [base do memorial](memorial.tex) com as evidências da versão escolhida. |
-| 5 | Anexo II do edital | Preencher o modelo oficial e coletar as assinaturas digitais ou eletrônicas de todos. |
-| 6 | Anexo III do edital | Marcar o uso de IA generativa no modelo oficial e coletar as assinaturas digitais ou eletrônicas de todos. |
-| 7 | Anexo IV do edital | Preencher o modelo oficial e obter a assinatura digital ou eletrônica do responsável e/ou dos demais integrantes. |
-| 8 | Links complementares opcionais | Usar apenas URLs autorizadas e confirmar acesso anônimo. |
+Use a [checklist da inscrição no roadmap](../ROADMAP_LIBRASIA.md#checklist-da-inscrição--edital-nº-12026) para acompanhar os documentos obrigatórios e a verificação do PDF final. A lista foi conferida no [guia HTML da pasta](<../Guia do Prêmio Cátedra IA.html>), no item 6.1 do edital e no Anexo I. Na Categoria III, a peça obrigatória é o **memorial técnico descritivo**. Use os relatórios de treinamento e testes para preencher os resultados e limitações na [minuta do memorial](memorial.tex).
 
 - Confirmar a instituição ou unidade acadêmica da capa e a pessoa responsável no formulário. Usar os mesmos título, categoria, eixo e área no resumo, anexos e formulário.
 - Conferir o memorial de até 20 laudas com a fonte Times New Roman 12, entrelinhas 1,5, margens de 3 cm e texto justificado. Preservar a avaliação cega no memorial quando possível e manter a identificação no documento 3.

@@ -106,9 +106,26 @@ O prazo confirmado é **30 de novembro de 2026 às 23h59, horário de Brasília*
 
 Para a **Categoria III**, apresentar a solução funcional acompanhada do memorial técnico. Usar os resultados disponíveis para explicar arquitetura, contribuições humanas, uso de IA, aplicabilidade e limitações. Se o fluxo funcional não passar pelos testes, registrar o bloqueio antes de tratar o material como protótipo pronto. Usar o [guia do prêmio](<Guia do Prêmio Cátedra IA.html>) para a conferência e o edital oficial para requisitos da inscrição.
 
+### Checklist da inscrição · Edital nº 1/2026
+
+- [x] Confirmar Categoria III, Eixo III, Área 5 e o prazo pelo edital e pelo aditivo.
+- [x] Preparar a minuta do resumo identificado e do memorial técnico. Separar as páginas oficiais dos Anexos II, III e IV.
+- [ ] Designar a pessoa responsável pela inscrição. Conferir os nomes completos, a unidade acadêmica e o e-mail institucional. Confirmar o vínculo ativo e regular de todos na data da inscrição e as demais condições de elegibilidade.
+- [ ] **Documento 1.** Reunir a identificação oficial com foto de cada integrante.
+- [ ] **Documento 2.** Reunir os comprovantes de vínculo com a UFC. Usar declaração ou atestado de matrícula para discentes e declaração funcional ou portaria para docentes e pesquisadores. O edital dá preferência ao SIGAA.
+- [ ] **Documento 3.** Fechar o resumo identificado com título, categoria, eixo temático e integrantes. Conferir o limite de 1.500 caracteres sem contar espaços.
+- [ ] **Documento 4.** Finalizar o **memorial técnico descritivo** da solução funcional. Informar a versão demonstrada, o método, os testes, os resultados medidos, as limitações, o uso de IA generativa e as contribuições intelectuais humanas verificáveis. Revisar a capa, o resumo de até 1.500 caracteres sem espaços, a introdução, o desenvolvimento, a conclusão e as referências. Conferir o Anexo I com até 20 laudas, Times New Roman 12, entrelinhas 1,5, margens de 3 cm e texto justificado.
+- [ ] **Documento 5.** Preencher o Anexo II de originalidade e autoria. Coletar assinatura digital ou eletrônica de todos os integrantes.
+- [ ] **Documento 6.** Preencher o Anexo III de uso de IA generativa, marcando **Sim** pelo uso do Codex. Coletar assinatura digital ou eletrônica de todos os integrantes. Conferir também a declaração explícita no corpo do memorial.
+- [ ] **Documento 7.** Preencher o Anexo IV de ciência e concordância. Coletar assinatura digital ou eletrônica do responsável e/ou dos demais integrantes, conforme o item 6.1.
+- [ ] Reunir os documentos obrigatórios em um único PDF legível, sem rasuras e de até **40 MB**. Verificar assinaturas, ordem dos documentos e consistência do título e da classificação com o formulário oficial.
+- [ ] Com o PDF conferido pelos responsáveis, enviar pelo formulário oficial dentro do prazo. Guardar a confirmação e acompanhar pedidos de complemento. O item 6.3 dá três dias úteis para responder quando a comissão solicitar.
+
+O item 6.1 exige o memorial como documento principal da Categoria III. Os relatórios do modelo e dos testes servem de evidência para o memorial. **Documento 8, opcional.** Caso a equipe inclua vídeo, fotos, protótipo navegável ou repositório, conferir a autoria e testar o acesso público de cada link. A versão web segue local conforme orientação da equipe. [Edital, itens 4.2, 5.1, 6.1 a 6.3, 7 e Anexo I](https://catedraldt.virtual.ufc.br/wp-content/uploads/2026/11/edital-premio-catedra-ia-2026.pdf) · [Como preparar os documentos](docs/inscricao.md)
+
 ## Depois da demonstração no PC
 
-O marco de publicação na Vercel pode começar assim que M7 for aceito e o repositório estiver disponível no GitHub, em paralelo com os outros marcos de expansão.
+O marco de publicação na Vercel depende do aceite de M7 e da autorização dos responsáveis. A execução permanece local nesta rodada.
 
 | Próximo marco | Status | O que implementar e como validar |
 | --- | --- | --- |

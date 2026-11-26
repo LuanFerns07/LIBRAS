@@ -8,6 +8,8 @@ O protótipo web reúne prática de Libras, alfabeto manual e tradução nos doi
 
 [Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prompt de implementação](PROMPT_LIBRASIA.md)
 
+[Checklist da inscrição no prêmio](ROADMAP_LIBRASIA.md#checklist-da-inscrição--edital-nº-12026) · [Preparação do memorial e dos anexos](docs/inscricao.md)
+
 ## Executar neste Linux
 
 Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se Chromium com WebGL 2, câmera e voz local pt-BR.
