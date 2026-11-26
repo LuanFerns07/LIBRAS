@@ -1,0 +1,25 @@
+{
+  "manifest_sha256": "556131fe63d105c0613a06431bacc9ce51acc1e9be80545361b7fa4c7ef8d3dc",
+  "checkpoint_sha256": "e771d65fafd761f3f9c5dba415eae93dc27ee2d1d31794fd26f24a384f1e83fa",
+  "checkpoint_epoch": 5,
+  "copy_glosses": {
+    "examples": 1800,
+    "exact_matches": 25,
+    "exact_match_rate": 0.013888888888888888,
+    "insertions": 263,
+    "deletions": 2332,
+    "substitutions": 3525,
+    "reference_units": 9829,
+    "error_rate": 0.62264726828772
+  },
+  "generator": {
+    "examples": 1800,
+    "exact_matches": 70,
+    "exact_match_rate": 0.03888888888888889,
+    "insertions": 490,
+    "deletions": 1756,
+    "substitutions": 3829,
+    "reference_units": 9829,
+    "error_rate": 0.6180689795503103
+  }
+}

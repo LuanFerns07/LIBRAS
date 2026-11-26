@@ -1,0 +1,96 @@
+{
+  "manifest_sha256": "556131fe63d105c0613a06431bacc9ce51acc1e9be80545361b7fa4c7ef8d3dc",
+  "checkpoint_sha256": "e771d65fafd761f3f9c5dba415eae93dc27ee2d1d31794fd26f24a384f1e83fa",
+  "elapsed_seconds": 26.367005330999746,
+  "pytorch": "2.6.0+cu124",
+  "python": "3.13.5",
+  "seed": 20261126,
+  "torch_threads": 2,
+  "checkpoint_epoch": 5,
+  "source_vocab": 7804,
+  "target_vocab": 2804,
+  "baseline": {
+    "examples": 1200,
+    "exact_matches": 13,
+    "exact_match_rate": 0.010833333333333334,
+    "insertions": 200,
+    "deletions": 1623,
+    "substitutions": 2332,
+    "reference_units": 6576,
+    "error_rate": 0.6318430656934306
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 3.695333681379046,
+      "examples": 1200,
+      "exact_matches": 2,
+      "exact_match_rate": 0.0016666666666666668,
+      "insertions": 76,
+      "deletions": 2465,
+      "substitutions": 2372,
+      "reference_units": 6576,
+      "error_rate": 0.747110705596107
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.001343349456787,
+      "examples": 1200,
+      "exact_matches": 24,
+      "exact_match_rate": 0.02,
+      "insertions": 175,
+      "deletions": 1843,
+      "substitutions": 2386,
+      "reference_units": 6576,
+      "error_rate": 0.6697080291970803
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.696906985419137,
+      "examples": 1200,
+      "exact_matches": 34,
+      "exact_match_rate": 0.028333333333333332,
+      "insertions": 189,
+      "deletions": 1605,
+      "substitutions": 2408,
+      "reference_units": 6576,
+      "error_rate": 0.6389902676399026
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.4599167739323207,
+      "examples": 1200,
+      "exact_matches": 42,
+      "exact_match_rate": 0.035,
+      "insertions": 264,
+      "deletions": 1332,
+      "substitutions": 2609,
+      "reference_units": 6576,
+      "error_rate": 0.6394464720194647
+    },
+    {
+      "epoch": 5,
+      "train_loss": 2.25432075718471,
+      "examples": 1200,
+      "exact_matches": 40,
+      "exact_match_rate": 0.03333333333333333,
+      "insertions": 316,
+      "deletions": 1260,
+      "substitutions": 2526,
+      "reference_units": 6576,
+      "error_rate": 0.6237834549878345
+    },
+    {
+      "epoch": 6,
+      "train_loss": 2.0741122850690568,
+      "examples": 1200,
+      "exact_matches": 42,
+      "exact_match_rate": 0.035,
+      "insertions": 319,
+      "deletions": 1237,
+      "substitutions": 2609,
+      "reference_units": 6576,
+      "error_rate": 0.6333637469586375
+    }
+  ]
+}

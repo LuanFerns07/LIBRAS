@@ -164,6 +164,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Treinar e medir geração experimental de texto em gravações de frases, com partição reservada. Registrar erros de inserção, omissão e troca e reproduzir a inferência no Chromium. [Avaliação de geração](docs/sinalizacao-continua.md)
 - [x] Treinar e comparar segmentação supervisionada de fronteiras com uma regra de movimento, usando duplas diferentes em treino, validação e teste. [Protocolo e condições de uso](docs/fronteiras.md)
 - [x] Verificar quais fontes de vídeo oferecem glosas, texto em português, identificação de sinalizantes e condições de acesso. [Triagem e fontes candidatas](docs/dados-glosas.md)
+- [x] Treinar o componente glosas para português com pares textuais e medir WER e frases exatas em uma partição reservada. [Resultado em 1.800 pares do VLibrasBD](docs/glosas-texto.md)
 - [ ] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo com webcam. Medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada.
 - [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
 
