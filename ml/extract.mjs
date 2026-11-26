@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
+import { preprocessFeatureCounts, preprocessId, sequenceLength } from '../src/recognition/preprocess.js'
 
 const { values: options } = parseArgs({ options: {
   project: { type: 'string', default: '.' },
@@ -13,6 +14,7 @@ const { values: options } = parseArgs({ options: {
   out: { type: 'string', default: 'data/minds/features' },
   browser: { type: 'string', default: 'chromium' },
   workers: { type: 'string', default: '2' },
+  preprocess: { type: 'string', default: preprocessId },
 } })
 const project = resolve(options.project)
 const manifestPath = resolve(options.manifest)
@@ -20,6 +22,8 @@ const manifest = JSON.parse(await readFile(manifestPath))
 const featureDir = resolve(options.out)
 const workers = Number(options.workers)
 if (!Number.isInteger(workers) || workers < 1 || workers > 6) throw new Error('Escolha de 1 a 6 navegadores.')
+if (!Object.hasOwn(preprocessFeatureCounts, options.preprocess)) throw new Error('Esquema de extração inválido.')
+const valueCount = sequenceLength * preprocessFeatureCounts[options.preprocess]
 
 const workerModule = fileURLToPath(new URL('./browser-extract.js', import.meta.url))
 const scope = '/__librasia_extract'
@@ -33,7 +37,7 @@ const fileDigest = async (path) => {
   return hash.digest('hex')
 }
 const identity = {
-  preprocess: 'holistic-shoulders-v1',
+  preprocess: options.preprocess,
   preprocessSha256: await fileDigest(resolve(project, 'src/recognition/preprocess.js')),
   extractorSha256: await fileDigest(resolve(project, 'src/recognition/holistic.js')),
   workerSha256: await fileDigest(workerModule),
@@ -73,7 +77,7 @@ for (const [index, clip] of manifest.clips.entries()) {
   records.push({ ...clip, features: name })
   try {
     const cached = JSON.parse(await readFile(featurePath))
-    if (cached.recipe === recipe && cached.clipSha256 === sha256) continue
+    if (cached?.recipe === recipe && cached.clipSha256 === sha256 && validResult(cached)) continue
   } catch (error) {
     if (error.code !== 'ENOENT' && !(error instanceof SyntaxError)) throw error
   }
@@ -122,14 +126,13 @@ async function body(req) {
   return JSON.parse(Buffer.concat(chunks))
 }
 
-function verifyResult(data) {
-  if (!['ready', 'no-hand', 'insufficient'].includes(data.state)
-      || !Array.isArray(data.extractionMs) || !data.extractionMs.length
-      || !data.extractionMs.every((elapsed) => Number.isFinite(elapsed) && elapsed >= 0)
-      || (data.state === 'ready' && (!Array.isArray(data.values) || data.values.length !== 24 * 192
-        || !data.values.every(Number.isFinite))) || (data.state !== 'ready' && data.values !== null)) {
-    throw new Error('Representação de extração inválida.')
-  }
+function validResult(data) {
+  return !!data && ['ready', 'no-hand', 'insufficient'].includes(data.state)
+    && Array.isArray(data.extractionMs) && data.extractionMs.length > 0
+    && data.extractionMs.every((elapsed) => Number.isFinite(elapsed) && elapsed >= 0)
+    && (data.state === 'ready'
+      ? Array.isArray(data.values) && data.values.length === valueCount && data.values.every(Number.isFinite)
+      : data.values === null)
 }
 
 const pending = queue.length
@@ -171,7 +174,7 @@ if (pending) {
               const item = queue.shift()
               if (!item) return send(res, 204)
               claimed.add(item.index)
-              return send(res, 200, text({ index: item.index }))
+              return send(res, 200, text({ index: item.index, preprocess: options.preprocess }))
             }
             const match = new RegExp(`^${scope}/(video|result)/(\\d+)$`, 'u').exec(path)
             if (match) {
@@ -182,7 +185,7 @@ if (pending) {
               if (req.method === 'GET' && kind === 'video') return streamVideo(req, res, item)
               if (req.method === 'POST' && kind === 'result') {
                 const data = await body(req)
-                verifyResult(data)
+                if (!validResult(data)) throw new Error('Representação de extração inválida.')
                 const temporary = `${item.featurePath}.tmp`
                 await writeFile(temporary, text({ recipe, clipSha256: item.sha256, ...data }))
                 await rename(temporary, item.featurePath)

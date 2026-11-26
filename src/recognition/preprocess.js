@@ -1,6 +1,11 @@
 export const preprocessId = 'holistic-shoulders-v1'
+export const nosePreprocessId = 'holistic-shoulders-nose-v1'
 export const sequenceLength = 24
 export const featureCount = 192
+export const preprocessFeatureCounts = Object.freeze({
+  [preprocessId]: featureCount,
+  [nosePreprocessId]: featureCount + 4,
+})
 
 const validPoint = point => point && [point.x, point.y, point.z].every(Number.isFinite)
 const validPose = point => validPoint(point) && (point.visibility ?? 1) >= .5 && (point.presence ?? 1) >= .5
@@ -20,7 +25,7 @@ function shoulderReference(pose, aspect) {
   }
 }
 
-function writeFrame(values, offset, frame, reference) {
+function writeFrame(values, offset, frame, reference, withNose) {
   if (!reference) return
   const aspect = frame.aspect
   const { x, y, z, scale } = reference
@@ -50,9 +55,18 @@ function writeFrame(values, offset, frame, reference) {
       else write(null)
     }
   }
+  if (withNose) {
+    const nose = frame.pose[0]
+    if (validPose(nose)) write(nose, nose.z - z)
+  }
 }
 
-export function preprocessFrames(frames) {
+export function preprocessFrames(frames, schema = preprocessId) {
+  if (!Object.hasOwn(preprocessFeatureCounts, schema)) {
+    throw new TypeError('Esquema de pré-processamento Holistic inválido.')
+  }
+  const frameSize = preprocessFeatureCounts[schema]
+  const withNose = schema === nosePreprocessId
   let previous = -Infinity
   const withReference = frames.map(frame => {
     if (!Number.isFinite(frame.timestamp) || frame.timestamp <= previous ||
@@ -74,14 +88,14 @@ export function preprocessFrames(frames) {
 
   const startTime = window[0].frame.timestamp
   const duration = window.at(-1).frame.timestamp - startTime
-  const values = new Float32Array(sequenceLength * featureCount)
+  const values = new Float32Array(sequenceLength * frameSize)
   let cursor = 0
   for (let index = 0; index < sequenceLength; index += 1) {
     const time = startTime + duration * index / (sequenceLength - 1)
     const distance = ({ frame }) => Math.abs(frame.timestamp - time)
     while (cursor < window.length - 1 && distance(window[cursor + 1]) < distance(window[cursor])) cursor += 1
     const entry = window[cursor]
-    if (distance(entry) <= 150) writeFrame(values, index * featureCount, entry.frame, entry.reference)
+    if (distance(entry) <= 150) writeFrame(values, index * frameSize, entry.frame, entry.reference, withNose)
   }
   return { state: 'ready', values }
 }

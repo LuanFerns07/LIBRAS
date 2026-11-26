@@ -34,7 +34,7 @@ async function openVideo(index) {
   }
 }
 
-async function extract(index) {
+async function extract(index, preprocess) {
   await openVideo(index)
   const extractor = await openHolistic()
   try {
@@ -53,7 +53,7 @@ async function extract(index) {
       extractionMs.push(performance.now() - start)
       frames.push({ timestamp, aspect, pose, leftHand, rightHand })
     }
-    const result = preprocessFrames(frames)
+    const result = preprocessFrames(frames, preprocess)
     return {
       state: result.state,
       values: result.values ? Array.from(result.values) : null,
@@ -85,8 +85,9 @@ try {
     const response = await fetch(`${server}/work`, { cache: 'no-store' })
     if (response.status === 204) break
     if (!response.ok) throw new Error(`Falha ao obter o próximo vídeo (${response.status}).`)
-    ;({ index } = await response.json())
-    await post(`result/${index}`, await extract(index))
+    const work = await response.json()
+    index = work.index
+    await post(`result/${index}`, await extract(index, work.preprocess))
   }
 } catch (error) {
   await post('failure', { index, message: String(error?.stack ?? error) })
