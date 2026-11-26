@@ -32,3 +32,14 @@ PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate \
   --protocol "$protocolo" --manifest "$ensaio/manifest.json" \
   --features "$ensaio/features/index.json" --out "$ensaio/report.json"
 ```
+
+## Resultado de 27 de novembro de 2026
+
+O extrator Holistic no Chromium 156.0.8078.79 amostrou 18 quadros e aceitou a extração. A avaliação usou os modelos ONNX congelados em CPU. A maior probabilidade excedeu o limiar em ambos os casos e correspondeu à classe de rejeição.
+
+| Modelo | Limiar | Confiança da classe de rejeição | Decisão para o recorte |
+| --- | ---: | ---: | --- |
+| Combinado `a8e991d9` | 0,525 | 0,5901 | Inconclusiva |
+| Janelas parciais `0aae75ca` | 0,600 | 0,9557 | Inconclusiva |
+
+O recorte de Amarelo do Cederj permaneceu inconclusivo nos dois modelos, mesmo com rastreamento disponível e uma trajetória visualmente próxima da referência do MINDS. A consulta não confirmou uma gravação de Espelho com licença e trecho verificáveis para esta avaliação. As decisões registram o comportamento nesse recorte. [Manifesto](../ml/fresh_eval/evidence-moving/manifest.json) · [Resultado por tentativa](../ml/fresh_eval/evidence-moving/report.json)

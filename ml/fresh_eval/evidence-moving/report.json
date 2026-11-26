@@ -1,0 +1,64 @@
+{
+  "scope": "exploratory-external-didactic-clips",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "846d1c13b97ebef79cb988e4039cb007a430ac77c34e6328a5bb8ed29d51e27d",
+  "manifestSha256": "39ff1019eb9f6dd9bc05a34d25e146f50743777da099420dbaec099358623fd8",
+  "extractorRecipe": "15c372f09ab235e71d9634c2b8d9a8962d67b670d66743c360fa69e244a19391",
+  "featuresManifestSha256": "291b889d1655c99c286caa7235a17060fd6d0e62a761b93ce9bac5a7692a3936",
+  "models": {
+    "combined": {
+      "threshold": 0.525,
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "perLabel": {
+        "amarelo": {
+          "examples": 1,
+          "signers": 1,
+          "correct": 0,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        }
+      },
+      "decisions": [
+        {
+          "id": "cecierj-12-amarelo",
+          "signer": 201,
+          "expected": "amarelo",
+          "predicted": null,
+          "confidence": 0.5900960907590669,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        }
+      ]
+    },
+    "partials": {
+      "threshold": 0.6,
+      "onnxSha256": "0aae75ca27ef370ccc8c6f846035b9d3c03a9b9b2a7a86ccf966145e01af0f5a",
+      "manifestSha256": "68dce0ae3d95075fc0f54f82a1fec356a6b7d3efdf00a6a06b8ddc2df5647e3a",
+      "perLabel": {
+        "amarelo": {
+          "examples": 1,
+          "signers": 1,
+          "correct": 0,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        }
+      },
+      "decisions": [
+        {
+          "id": "cecierj-12-amarelo",
+          "signer": 201,
+          "expected": "amarelo",
+          "predicted": null,
+          "confidence": 0.9557313346767146,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        }
+      ]
+    }
+  }
+}
