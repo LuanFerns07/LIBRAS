@@ -1,0 +1,18 @@
+{
+  "provider": "Corpus de Libras, Quadros, Schmitt, Lohn e Leite, UFSC, 2020",
+  "collection": "Inventário Nacional de Libras — Grande Florianópolis",
+  "seconds": 60,
+  "camera": 3,
+  "tier": "2SinaisD",
+  "cases": [
+    {"id": 415, "split": "train", "dyad": 2, "interview": 1, "catalog_participants": [212], "repository_item": 159050, "eaf": "FLN_G1_D2_1entrevista_VIDEO123"},
+    {"id": 414, "split": "train", "dyad": 2, "interview": 2, "catalog_participants": [213], "repository_item": 159057, "eaf": "FLN_G1_D2_2entrevista_VIDEOS123"},
+    {"id": 330, "split": "train", "dyad": 3, "interview": 1, "catalog_participants": [206], "repository_item": 159931, "eaf": "FLN_G1_D3_1entrevista_VIDEOS123"},
+    {"id": 331, "split": "train", "dyad": 3, "interview": 2, "catalog_participants": [207], "repository_item": 159935, "eaf": "FLN_G1_D3_2entrevista_VIDEOS123"},
+    {"id": 361, "split": "dev", "dyad": 4, "interview": 1, "catalog_participants": [208], "repository_item": 160223, "eaf": "FLN_G1_D4_1entrevista_VIDEOS123"},
+    {"id": 362, "split": "dev", "dyad": 4, "interview": 2, "catalog_participants": [209], "repository_item": 160855, "eaf": "FLN_G1_D4_2entrevista_VIDEO123"},
+    {"id": 460, "split": "test", "dyad": 5, "interview": 1, "catalog_participants": [217, 218], "repository_item": 161089, "eaf": "FLN_G1_D5_1entrevista_VIDEOS123"},
+    {"id": 459, "split": "test", "dyad": 5, "interview": 2, "catalog_participants": [217, 218], "repository_item": 161093, "eaf": "FLN_G1_D5_2entrevista_VIDEOS123"},
+    {"id": 462, "split": "test", "dyad": 6, "interview": 1, "catalog_participants": [219, 220], "repository_item": 161394, "eaf": "FLN_G1_D6_1entrevista_VIDEO123"}
+  ]
+}
