@@ -135,6 +135,15 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await click('[data-comparison="0"]')
     assert.match(await text('[data-comparison-status]'), /Em A.*Em S/)
     assert.equal(await text('[data-player-step]'), 'A')
+    const selectLetters = (() => Array.from(document.querySelectorAll('.letter-grid button'), button => {
+      button.click()
+      return {
+        letter: document.querySelector('[data-player-step]').textContent.trim(),
+        playable: !document.querySelector('[data-play]').disabled,
+      }
+    })).toString()
+    assert.deepEqual(await evaluate('(' + selectLetters + ')()', true),
+      Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÇ', letter => ({ letter, playable: true })))
 
     await open('tradutor', 'Português para Libras')
     const fill = value => evaluate('document.querySelector("#translate-input").value = ' + JSON.stringify(value) +
@@ -170,7 +179,17 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.match(await text('[data-capture-status]'), /bloqueada|permissão/i)
     await permission(origin, 'granted')
     await click('[data-camera-toggle]')
-    await waitUntil('document.querySelector("video").srcObject?.getVideoTracks()[0]?.readyState === "live"')
+    await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
+    await evaluate('window.hiddenCameraTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
+    const blank = await page('Target.createTarget', { url: 'about:blank', background: false })
+    await page('Target.activateTarget', { targetId: blank.targetId })
+    await waitUntil('document.hidden && window.hiddenCameraTrack.readyState === "ended"')
+    assert.match(await text('[data-capture-status]'), /Câmera desativada ao sair da aba/)
+    await page('Page.bringToFront')
+    await waitUntil('!document.hidden')
+    await page('Target.closeTarget', { targetId: blank.targetId })
+    await click('[data-camera-toggle]')
+    await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
     await evaluate('window.previousCameraTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
     await evaluate('document.querySelector("#transcription").value = "Texto editado do LibrasIA."')
     if (voiceEnabled) {
