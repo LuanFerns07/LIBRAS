@@ -264,6 +264,14 @@ A comparação conserva as três rodadas por pessoa do treino original e inclui 
 
 A representação de movimento chegou à meta de revocação de Espelho. As cinco falsas aceitações da arquitetura ocorreram em Amarelo. A baixa cobertura e a revocação de Amarelo seguem como limites. Em uma análise adicional, combinamos a arquitetura de movimento com a geometria, que tinha maior cobertura nas rodadas anteriores. A divisão de pessoas e a regra de calibração ficam iguais. [Rodadas de flexão e movimento](../ml/evidence/isolated-motion/cross-validation.json)
 
+A média de geometria e movimento obteve F1 macro de 0,758, cobertura de 55/78 e 3/42 falsas aceitações. Acertou 13/21 de Espelho e 11/21 de Amarelo. Em relação à média de geometria e flexão, a nova composição perdeu quatro aceitações nos positivos completos e um acerto de Amarelo. [Rodadas de geometria e movimento](../ml/evidence/isolated-motion/geometry-comparison.json)
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --combine \
+  --reference ConvSequenceGeometry --candidate ConvSequenceMotion \
+  --out data/models/isolated-motion/geometry-comparison.json
+```
+
 ## Gravações adicionais de Espelho e Amarelo
 
 O recorte complementar seleciona a quarta tomada completa de Espelho e de Amarelo para as sete pessoas do treino original. Os vídeos Canon das repetições 1 a 3, usados nas medições anteriores, continuam como referência. Em cada rodada, apenas as quartas tomadas das pessoas que ajustam os pesos são disponibilizadas ao treino. A validação e a medição mantêm as amostras originais. A quinta tomada e as partições reservadas ficam fora do ensaio.
