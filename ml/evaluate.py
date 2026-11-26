@@ -12,7 +12,7 @@ import torch
 
 from dataset import CATALOGS, FEATURES, FRAMES, LABELS, digest, load_features, write_json
 from metrics import checks, decide, measure
-from model import ConvSequence
+from model import ARCHITECTURES
 
 
 def timing(measurements):
@@ -101,32 +101,39 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--features", type=Path, default=Path("data/minds/features/index.json"))
     parser.add_argument("--run", type=Path, default=Path("data/models/isolated-v1"))
+    parser.add_argument("--split", choices=("test", "val"), default="test",
+                        help="Use val para avaliar um experimento sem ler vetores do teste.")
     args = parser.parse_args()
     torch.set_num_threads(1)
 
     training, manifest, paths = verified_inputs(args.features, args.run)
     labels = tuple(manifest["labels"])
-    index, rows = load_features(args.features, {"train", "val", "test"}, labels)
-    test = [row for row in rows if row.partition == "test"]
-    val = [row for row in rows if row.partition == "val"]
+    partitions = {"val"} if args.split == "val" else {"train", "val", "test"}
+    index, rows = load_features(args.features, partitions, labels)
+    selected = [row for row in rows if row.partition == args.split]
     threshold = manifest["threshold"]
-    model = ConvSequence(len(labels)).eval()
+    model = ARCHITECTURES[training["arch"]](len(labels)).eval()
     model.load_state_dict(torch.load(paths["checkpointSha256"], map_location="cpu", weights_only=True))
     session, model_load_ms = create_session(paths["modelSha256"], labels)
-    logits_by_index, max_error, durations = run_inference(test, model, session, threshold)
-    results, details = measure(test, logits_by_index, threshold, labels)
-    capture = dict(Counter(row.state for row in test))
-    negatives = dict(Counter(row.source_label for row in test if row.label == 0))
+    logits_by_index, max_error, durations = run_inference(selected, model, session, threshold)
+    results, details = measure(selected, logits_by_index, threshold, labels)
+    capture = dict(Counter(row.state for row in selected))
+    negatives = dict(Counter(row.source_label for row in selected if row.label == 0))
     by_split = {
         split: {
             "clips": sum(row.partition == split for row in rows),
             "signers": sorted({row.signer for row in rows if row.partition == split}),
         }
-        for split in ("train", "val", "test")
+        for split in ("train", "val", "test") if split in partitions
     }
-    validation_logits, _, _ = run_inference(val, model, session, threshold)
+    val = [row for row in rows if row.partition == "val"]
+    validation_logits = logits_by_index
+    if args.split == "test":
+        validation_logits, _, _ = run_inference(val, model, session, threshold)
     write_parity_fixture(args.run / "parity-web.json", val, validation_logits, threshold, labels)
-    write_json(args.run / "evaluation.json", {
+    report = "evaluation.json" if args.split == "test" else "validation-evaluation.json"
+    write_json(args.run / report, {
+        "evaluationSplit": args.split,
         "datasetManifestSha256": index["sourceManifestSha256"], "featuresManifestSha256": digest(args.features),
         "modelSha256": manifest["modelSha256"], "checkpointSha256": training["checkpointSha256"],
         "threshold": threshold, "onnxruntime": ort.__version__, "partitions": by_split,
@@ -134,10 +141,10 @@ def main():
         "checks": checks(results), "onnxParity": {"samples": len(logits_by_index), "maxAbsLogitError": max_error,
                                                  "differencesInDecision": 0, "target": "onnxruntime-cpu"},
         "modelCpuOnly": timing(durations), "modelCpuLoadMs": model_load_ms,
-        "extractionSample": timing([duration for row in test for duration in row.extraction_ms]),
+        "extractionSample": timing([duration for row in selected for duration in row.extraction_ms]),
         "clips": details,
     })
-    print(f"Teste reservado salvo em {args.run / 'evaluation.json'}")
+    print(f"Avaliação salva em {args.run / report}")
     print(f"F1 macro={results['f1Macro']:.3f}; cobertura={results['coverage']['rate']:.3f}; "
           f"falsas aceitações={results['falseAcceptance']['rate']:.3f}")
     print(f"Paridade em {len(logits_by_index)} clipes, erro máximo {max_error:.3g}.")

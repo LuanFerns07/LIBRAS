@@ -15,7 +15,7 @@ import torch
 
 from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
 from metrics import checks, choose_threshold
-from model import ConvSequence
+from model import ARCHITECTURES
 
 SEED = 7391
 
@@ -46,7 +46,7 @@ def collect(model, rows, device):
     return {row.index: output for row, output in zip(eligible, predictions, strict=True)}
 
 
-def train(rows, device, epochs, batch_size, seed, catalog=LABELS):
+def train(rows, device, epochs, batch_size, seed, catalog=LABELS, arch="ConvSequence"):
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True)
     random = torch.Generator().manual_seed(seed)
@@ -60,7 +60,7 @@ def train(rows, device, epochs, batch_size, seed, catalog=LABELS):
     weights = counts.float().rsqrt()
     weights /= weights.mean()
     criterion = torch.nn.CrossEntropyLoss(weight=weights.to(device))
-    model = ConvSequence(len(catalog)).to(device)
+    model = ARCHITECTURES[arch](len(catalog)).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.002, weight_decay=0.01)
     best = None
     history = []
@@ -117,6 +117,7 @@ def main():
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--catalogo", choices=tuple(CATALOGS), default="inicial")
+    parser.add_argument("--arch", choices=tuple(ARCHITECTURES), default="ConvSequence")
     args = parser.parse_args()
     if args.epochs <= 0 or args.batch_size <= 0:
         parser.error("Épocas e tamanho de lote devem ser positivos.")
@@ -129,7 +130,7 @@ def main():
     catalog = CATALOGS[args.catalogo]
     index, data = load_features(args.features, {"train", "val"}, catalog)
     print(f"Treino no dispositivo {device} com Torch {torch.__version__}.", flush=True)
-    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog)
+    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog, args.arch)
     args.out.mkdir(parents=True, exist_ok=True)
     checkpoint = args.out / "isolated.pt"
     torch.save(model.state_dict(), checkpoint)
@@ -144,7 +145,7 @@ def main():
     }
     write_json(args.out / "isolated.json", manifest)
     write_json(args.out / "training.json", {
-        "arch": "ConvSequence", "onnxOpset": 17, "seed": args.seed, "epochs": args.epochs,
+        "arch": args.arch, "onnxOpset": 17, "seed": args.seed, "epochs": args.epochs,
         "batchSize": args.batch_size, "optimizer": {"type": "AdamW", "learningRate": .002, "weightDecay": .01},
         "device": device, "cuda": torch.version.cuda, "gpu": torch.cuda.get_device_name() if device == "cuda" else None,
         "labels": list(catalog),

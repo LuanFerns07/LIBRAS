@@ -4,10 +4,10 @@ import torch
 
 
 class ConvSequence(torch.nn.Module):
-    def __init__(self, classes):
+    def __init__(self, classes, input_features=192):
         super().__init__()
         self.temporal = torch.nn.Sequential(
-            torch.nn.Conv1d(192, 64, kernel_size=5, padding=2),
+            torch.nn.Conv1d(input_features, 64, kernel_size=5, padding=2),
             torch.nn.BatchNorm1d(64),
             torch.nn.ReLU(),
             torch.nn.Conv1d(64, 64, kernel_size=3, padding=1, dilation=1),
@@ -30,3 +30,28 @@ class ConvSequence(torch.nn.Module):
             encoded[:, :, :12].mean(dim=2),
             encoded[:, :, 12:].mean(dim=2),
         ), dim=1))
+
+
+class ConvSequenceGeometry(ConvSequence):
+    """Combina o contexto corporal com o formato de cada mão em escala própria."""
+
+    def __init__(self, classes):
+        super().__init__(classes, input_features=192 + 2 * 21 * 4)
+
+    @staticmethod
+    def local_hand_features(video):
+        hands = video[..., 24:].reshape(video.shape[0], video.shape[1], 2, 21, 4)
+        xyz = hands[..., :3]
+        mask = hands[..., 3:] * hands[..., :1, 3:]
+        relative = xyz - xyz[..., :1, :]
+        palm = relative[..., 9:10, :]
+        scale = palm.square().sum(dim=-1, keepdim=True).clamp_min(.0025).sqrt()
+        mask = mask * hands[..., 9:10, 3:]
+        return torch.cat((relative / scale * mask, mask), dim=-1).flatten(start_dim=2)
+
+    def forward(self, video):
+        local = self.local_hand_features(video)
+        return super().forward(torch.cat((video, local), dim=-1))
+
+
+ARCHITECTURES = {model.__name__: model for model in (ConvSequence, ConvSequenceGeometry)}

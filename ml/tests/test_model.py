@@ -9,7 +9,7 @@ import torch
 
 from dataset import Clip
 from evaluate import create_session, run_inference
-from model import ConvSequence
+from model import ConvSequence, ConvSequenceGeometry
 from train import augment, export
 
 
@@ -24,12 +24,29 @@ class ModelTests(TestCase):
 
     def test_export_preserves_outputs_and_decisions(self):
         torch.set_num_threads(1)
-        model = ConvSequence(4).eval()
-        row = Clip(0, 1, 1, "test", "fixture", "cinco", "ready",
-                   np.random.default_rng(7391).normal(size=(24, 192)).astype(np.float32), [])
-        with TemporaryDirectory() as directory:
-            session, _ = create_session(export(model, Path(directory)))
-            outputs, maximum, latencies = run_inference([row], model, session, .5)
-        self.assertEqual(outputs[0].shape, (4,))
-        self.assertLess(maximum, 1e-5)
-        self.assertEqual(len(latencies), 1)
+        inputs = np.random.default_rng(7391).normal(size=(24, 192)).astype(np.float32)
+        inputs[:, 3::4] = 1
+        row = Clip(0, 1, 1, "test", "fixture", "cinco", "ready", inputs, [])
+        for architecture in (ConvSequence, ConvSequenceGeometry):
+            with self.subTest(architecture=architecture.__name__), TemporaryDirectory() as directory:
+                model = architecture(4).eval()
+                session, _ = create_session(export(model, Path(directory)))
+                outputs, maximum, latencies = run_inference([row], model, session, .5)
+                self.assertEqual(outputs[0].shape, (4,))
+                self.assertLess(maximum, 1e-5)
+                self.assertEqual(len(latencies), 1)
+
+    def test_hand_geometry_is_local_and_requires_wrist_and_palm(self):
+        video = torch.zeros((1, 24, 48, 4))
+        video[..., 6:27, 0] = torch.arange(21, dtype=torch.float32) / 10
+        video[..., 6:27, 3] = 1
+        original = ConvSequenceGeometry.local_hand_features(video.flatten(start_dim=2))
+        moved = video.clone()
+        moved[..., 6:27, :3] = video[..., 6:27, :3] * 1.5 + 2
+        torch.testing.assert_close(original, ConvSequenceGeometry.local_hand_features(moved.flatten(start_dim=2)))
+        self.assertEqual(original[..., 84:].count_nonzero().item(), 0)
+        for index in (6, 15):
+            missing_reference = video.clone()
+            missing_reference[..., index, 3] = 0
+            masked = ConvSequenceGeometry.local_hand_features(missing_reference.flatten(start_dim=2))
+            self.assertEqual(masked.count_nonzero().item(), 0)
