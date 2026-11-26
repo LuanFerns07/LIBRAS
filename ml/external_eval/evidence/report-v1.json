@@ -1,0 +1,209 @@
+{
+  "dataset": "10.5518/249",
+  "manifestSha256": "3b4d83b9cb61d37e831cc0c007bf63bca37086375c201dfdb1b9074107fc5145",
+  "protocolSha256": "1f8741a151cb89a5fe99792edb7ee29d99134d7dfe47c7b89138e867450f540f",
+  "featuresManifestSha256": "45439738d3ce0abea10ce444c2a31e194f95b0f2b8b00103fc6221f1e75f852e",
+  "extractorRecipe": "15c372f09ab235e71d9634c2b8d9a8962d67b670d66743c360fa69e244a19391",
+  "modelSha256": "52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a",
+  "modelManifestSha256": "8d2e30c7c20d243f717c4fc86d1ac533988cdbb862adf8abff6a1b3fa0818b33",
+  "threshold": 0.495,
+  "runtime": {
+    "device": "CPUExecutionProvider",
+    "onnxruntime": "1.23.2"
+  },
+  "overall": {
+    "captureStates": {
+      "ready": 12
+    },
+    "falseAcceptance": {
+      "count": 5,
+      "total": 12,
+      "rate": 0.4166666666666667
+    },
+    "falseAcceptanceGivenUsableTracking": {
+      "count": 5,
+      "total": 12,
+      "rate": 0.4166666666666667
+    },
+    "subjectsWithAnyFalseAcceptance": {
+      "count": 3,
+      "total": 3,
+      "rate": 1.0
+    },
+    "falsePredictions": {
+      "cinco": 4,
+      "espelho": 1
+    }
+  },
+  "byStratum": {
+    "repouso": {
+      "captureStates": {
+        "ready": 6
+      },
+      "falseAcceptance": {
+        "count": 4,
+        "total": 6,
+        "rate": 0.6666666666666666
+      },
+      "falseAcceptanceGivenUsableTracking": {
+        "count": 4,
+        "total": 6,
+        "rate": 0.6666666666666666
+      },
+      "subjectsWithAnyFalseAcceptance": {
+        "count": 3,
+        "total": 3,
+        "rate": 1.0
+      },
+      "falsePredictions": {
+        "cinco": 3,
+        "espelho": 1
+      }
+    },
+    "movimento-comum": {
+      "captureStates": {
+        "ready": 6
+      },
+      "falseAcceptance": {
+        "count": 1,
+        "total": 6,
+        "rate": 0.16666666666666666
+      },
+      "falseAcceptanceGivenUsableTracking": {
+        "count": 1,
+        "total": 6,
+        "rate": 0.16666666666666666
+      },
+      "subjectsWithAnyFalseAcceptance": {
+        "count": 1,
+        "total": 3,
+        "rate": 0.3333333333333333
+      },
+      "falsePredictions": {
+        "cinco": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "clad-repouso-01a",
+      "subject": 1,
+      "video": 2,
+      "stratum": "repouso",
+      "sha256": "adb38e13b9ca4d7d6d08cabe14f7732ad6372d6d2950bc4241ca1a4aee69fe3c",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.6962223972494876
+    },
+    {
+      "id": "clad-repouso-01b",
+      "subject": 1,
+      "video": 3,
+      "stratum": "repouso",
+      "sha256": "16b42609bda5b683df52011565c7770fd1b40ad167238285fb782e34095fd8d0",
+      "captureState": "ready",
+      "predicted": "cinco",
+      "confidence": 0.7084892681343317
+    },
+    {
+      "id": "clad-repouso-02a",
+      "subject": 2,
+      "video": 6,
+      "stratum": "repouso",
+      "sha256": "f82cdf39f45c08234d6793801cf70a81e71822137a689e58809e216b1e538a1e",
+      "captureState": "ready",
+      "predicted": "espelho",
+      "confidence": 0.6379090695111492
+    },
+    {
+      "id": "clad-repouso-02b",
+      "subject": 2,
+      "video": 7,
+      "stratum": "repouso",
+      "sha256": "186107a2efcf1dbbb0c2abb032a1ab331fd6b4580efafec54d7d0064f8792006",
+      "captureState": "ready",
+      "predicted": "cinco",
+      "confidence": 0.5682521615115393
+    },
+    {
+      "id": "clad-repouso-03a",
+      "subject": 3,
+      "video": 11,
+      "stratum": "repouso",
+      "sha256": "6dbd498ba154ea5a98cc679aa03ffee4dc37967a45737b7ca380297d09ae68a0",
+      "captureState": "ready",
+      "predicted": "cinco",
+      "confidence": 0.5400648933312697
+    },
+    {
+      "id": "clad-repouso-03b",
+      "subject": 3,
+      "video": 13,
+      "stratum": "repouso",
+      "sha256": "43a17a1f207481ac68e767c9560c743749fca1245536731d586dda05eb7ecfed",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.5951466464721172
+    },
+    {
+      "id": "clad-movimento-01a",
+      "subject": 1,
+      "video": 1,
+      "stratum": "movimento-comum",
+      "sha256": "7d38b09065af6429275cf521d5d7ddc669b058a15d3bc290b299fa3c43b1d748",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.9069526101494955
+    },
+    {
+      "id": "clad-movimento-01b",
+      "subject": 1,
+      "video": 43,
+      "stratum": "movimento-comum",
+      "sha256": "3e3fc0e73e8d9eaa174db1de0cecefc7b6e9a4ab8f3e35d7d9a621ac9c26150d",
+      "captureState": "ready",
+      "predicted": "cinco",
+      "confidence": 0.7861835356679115
+    },
+    {
+      "id": "clad-movimento-02a",
+      "subject": 2,
+      "video": 6,
+      "stratum": "movimento-comum",
+      "sha256": "7da5de002b702eb097ec6661d40ee4ae323331ca21f7d72d219ad375c44a4db3",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.4057060461269796
+    },
+    {
+      "id": "clad-movimento-02b",
+      "subject": 2,
+      "video": 48,
+      "stratum": "movimento-comum",
+      "sha256": "4b7b2c9b4b865ffb79d26b94409f60e340eee0abfcb64482c750c63f64ff9055",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.7362715890490423
+    },
+    {
+      "id": "clad-movimento-03a",
+      "subject": 3,
+      "video": 11,
+      "stratum": "movimento-comum",
+      "sha256": "85f435ce814e1308f02889d6a08934798c283e1977e3898d36f542da92039cb9",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.6167728247125915
+    },
+    {
+      "id": "clad-movimento-03b",
+      "subject": 3,
+      "video": 53,
+      "stratum": "movimento-comum",
+      "sha256": "1a3ca7572a9beca3aec194b905530efa14ffd04a1e6647f6f2a525ce492863f5",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.9374898850959439
+    }
+  ]
+}

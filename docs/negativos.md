@@ -20,4 +20,18 @@ PYTHONPATH=ml .venv/bin/python -m unittest ml.external_eval.test_external_eval
 
 A amostra é agrupada por ator e foi produzida em um único tipo de ambiente e câmera. A taxa de falsas aceitações nestes clipes descreve o recorte. O aceite da demonstração exige também entradas negativas de pessoas independentes em webcam, com controle de enquadramento, oclusão e iluminação, além do teste de sinais suportados.
 
-TAYYUB, Jawad; HAWASLY, Majd; COHN, Anthony G. *Complex and Long Activities Dataset*. University of Leeds, 2017. Foram feitos recortes espaciais e temporais dos MP4s e removidas as trilhas de áudio. [Dataset](https://doi.org/10.5518/249) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+## Resultado de 26 de novembro de 2026
+
+O Chromium 156.0.8078.79 extraiu os pontos dos 12 clipes. Todos tiveram rastreamento utilizável. A inferência usou ONNX Runtime 1.23.2 em CPU, com o limiar original de cada modelo. O [manifesto de execução](../ml/external_eval/evidence/manifest.json) contém os 12 SHA-256 dos recortes. Seu SHA-256 é `3b4d83b9cb61d37e831cc0c007bf63bca37086375c201dfdb1b9074107fc5145`.
+
+| Modelo congelado | Limiar | Repouso | Movimento comum | Falsos aceites | Pessoas com algum falso aceite |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [Inicial `52bfe58f`](../ml/external_eval/evidence/report-v1.json) | 0,495 | 4/6 | 1/6 | 5/12 (41,7%) | 3/3 |
+| [Expandido `fc50063c`](../ml/external_eval/evidence/report-expanded.json) | 0,475 | 2/6 | 3/6 | 5/12 (41,7%) | 3/3 |
+| [Geometria manual `f1bdefcc`](../ml/external_eval/evidence/report-geometry.json) | 0,640 | 0/6 | 1/6 | 1/12 (8,3%) | 1/3 |
+
+O inicial previu Cinco em quatro falsos aceites e Espelho em um. O expandido previu Aluno em três e Cinco em dois. O cenário remanescente de geometria manual foi a pessoa que digitou no laptop e levou a mão ao queixo, com rótulo Aluno e confiança 0,988. Os relatórios têm o resultado por clipe e por estrato. Para inspecionar um dos candidatos com o mesmo protocolo, acrescente `--run data/models/isolated-expanded` ou `--run data/models/isolated-geometry` ao comando de avaliação.
+
+Este conjunto negativo foi aberto depois de fixar os três modelos, os limiares e os recortes. A geometria manual teve a menor taxa observada no conjunto, com três pessoas e seis trechos por estrato. O teste mede apenas rejeição nesses contextos e fica separado do teste reservado MINDS e de qualquer coleta futura em webcam. Os IDs 1–3 e seus clipes permanecem reservados a avaliação.
+
+TAYYUB, Jawad, HAWASLY, Majd e COHN, Anthony G. *Complex and Long Activities Dataset*. University of Leeds, 2017. Foram feitos recortes espaciais e temporais dos MP4s e removidas as trilhas de áudio. [Dataset](https://doi.org/10.5518/249) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
