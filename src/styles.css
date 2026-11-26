@@ -173,6 +173,8 @@ p { line-height: 1.55; }
 }
 .camera-placeholder p { margin: .75rem 0 0; }
 .capture-privacy { margin: 0 1rem .65rem; color: var(--muted); font-size: .88rem; }
+.capture-mode { margin: -1rem 0 .85rem; }
+.capture-mode p { margin: .2rem 0 0; font-size: .9rem; }
 
 .toolbar { display: flex; flex-wrap: wrap; gap: .58rem; align-items: center; }
 .panel-toolbar { padding: .75rem 1rem; }

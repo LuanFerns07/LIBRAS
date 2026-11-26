@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { lesson } from '../src/catalog.js'
 import { markAttempt, readProgress, reviewOrder, writeProgress } from '../src/progress.js'
-import { appendTranscription, freeFeedback, observePalm, practiceFeedback } from '../src/recognition/feedback.js'
+import { appendTranscription, freeFeedback, observePalm, observeVerticalTrajectory, practiceFeedback } from '../src/recognition/feedback.js'
 import { brazilianVoice, mountSpeech } from '../src/speech.js'
 
 const acceptedCinco = { state: 'accepted', id: 'signal-cinco', palm: 'front' }
@@ -25,14 +25,30 @@ test('uma observação da palma requer quadros suficientes e orientação consis
 })
 
 test('a prática distingue reconhecimento, dica, incerteza e falhas', () => {
-  const [cinco, espelho] = lesson
+  const [cinco, espelho, amarelo] = lesson
   assert.equal(practiceFeedback(acceptedCinco, cinco, 1).state, 'accepted')
   assert.equal(practiceFeedback(acceptedCinco, espelho, 1).state, 'inconclusive')
   assert.equal(practiceFeedback({ ...acceptedCinco, palm: 'away' }, cinco, 1).state, 'hint')
   assert.equal(practiceFeedback({ ...acceptedCinco, palm: 'away' }, cinco, 2).state, 'accepted')
+  assert.equal(practiceFeedback({ ...acceptedCinco, id: espelho.id }, espelho, 1).state, 'hint')
+  assert.equal(practiceFeedback({ state: 'accepted', id: amarelo.id, trajectory: 'upward' }, amarelo, 1).state, 'hint')
   assert.deepEqual(practiceFeedback(inconclusive, cinco, 1), inconclusive)
   const captureError = { state: 'capture-error', message: 'Câmera desligada.' }
   assert.deepEqual(practiceFeedback(captureError, cinco, 1), captureError)
+})
+
+test('a trajetória do indicador usa referência ao nariz e requer evidência temporal', () => {
+  const frames = Array.from({ length: 6 }, (_, index) => {
+    const pose = [{ x: .5, y: .5, visibility: .9 }]
+    pose[11] = { x: .7, y: .7 }
+    pose[12] = { x: .3, y: .7 }
+    const rightHand = []
+    rightHand[8] = { x: .5, y: .51 - index * .03 }
+    return { pose, rightHand, leftHand: [], aspect: 4 / 3 }
+  })
+  assert.equal(observeVerticalTrajectory(frames), 'upward')
+  assert.equal(observeVerticalTrajectory([...frames].reverse()), 'downward')
+  assert.equal(observeVerticalTrajectory(frames.slice(0, 3)), 'uncertain')
 })
 
 test('a área livre mantém a edição e acrescenta uma palavra por decisão aceita', () => {
@@ -42,6 +58,15 @@ test('a área livre mantém a edição e acrescenta uma palavra por decisão ace
   assert.equal(appendTranscription('Cinco. ', freeFeedback({ state: 'accepted', id: 'signal-amarelo' })), 'Cinco. amarelo')
   assert.equal(appendTranscription('texto editado', freeFeedback(inconclusive)), 'texto editado')
   assert.equal(appendTranscription('texto editado', freeFeedback({ state: 'accepted', id: 'fora' })), 'texto editado')
+})
+
+test('a área livre preserva a ordem e informa incerteza na sequência', () => {
+  const espelho = { state: 'accepted', id: 'signal-espelho' }
+  assert.equal(freeFeedback({ state: 'sequence', segments: [acceptedCinco, espelho] }).text, 'cinco espelhos')
+  const incomplete = freeFeedback({ state: 'sequence', segments: [espelho, inconclusive, acceptedCinco] })
+  assert.equal(incomplete.text, 'espelho cinco')
+  assert.match(incomplete.message, /Trechos inconclusivos: 1/)
+  assert.equal(freeFeedback({ state: 'sequence', segments: [inconclusive] }).state, 'inconclusive')
 })
 
 test('apenas a voz pt-BR local lê a edição atual e a falha mantém a mensagem visível', () => {

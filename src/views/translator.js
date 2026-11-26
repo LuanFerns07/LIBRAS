@@ -1,4 +1,4 @@
-import { lesson } from '../catalog.js'
+import { lesson, student, studentFortaleza } from '../catalog.js'
 import { mountPlayerControls, playerMarkup } from '../player-controls.js'
 import { translate } from '../translate.js'
 
@@ -22,7 +22,16 @@ export function mountTranslator(main, createPlayer) {
         <p class="inline-status" data-translation-status role="status" hidden></p>
         <div class="coverage" id="translation-coverage">
           <h3>O que o protótipo cobre</h3>
-          <p>${lesson.map(entry => entry.label).join(', ')} e a frase “Meu nome é [nome]”. As sequências do avatar estão em revisão linguística.</p>
+          <p>${[...lesson, student].map(entry => entry.label).join(', ')} e as frases “Bom dia” e “Meu nome é [nome]”. As sequências do avatar estão em revisão linguística.</p>
+        </div>
+        <div class="coverage">
+          <h3>Formas de ALUNO</h3>
+          <p>Compare a forma do MINDS-Libras e uma forma bimanual registrada em Fortaleza, descrita como em desuso na pesquisa publicada em 2016.</p>
+          <div class="toolbar">
+            <button type="button" class="button" data-student="minds">Forma do MINDS</button>
+            <button type="button" class="button" data-student="fortaleza">Forma histórica de Fortaleza</button>
+          </div>
+          <p><a href="${studentFortaleza.reference}">Consultar a pesquisa sobre as variantes</a></p>
         </div>
       </section>
       ${playerMarkup('Demonstração em Libras')}
@@ -41,6 +50,15 @@ export function mountTranslator(main, createPlayer) {
   }
   input.addEventListener('input', reset)
   mode.addEventListener('change', reset)
+  for (const button of main.querySelectorAll('[data-student]')) {
+    button.addEventListener('click', () => {
+      const entry = button.dataset.student === 'minds' ? student : studentFortaleza
+      player.setSequence([entry], true)
+      status.hidden = false
+      status.dataset.state = 'ready'
+      status.textContent = entry.label
+    })
+  }
   form.addEventListener('submit', event => {
     event.preventDefault()
     const result = translate(input.value, mode.checked ? 'name' : 'text')

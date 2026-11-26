@@ -7,7 +7,11 @@ export function mountFree(main, openEngine) {
   main.innerHTML = `
     <div class="page-heading">
       <h1>Libras para texto e voz</h1>
-      <p>Mostre um sinal por tentativa. Edite o resultado antes de ouvir em português.</p>
+      <p>Sinalize, confira a transcrição e edite o resultado antes de ouvir em português brasileiro.</p>
+    </div>
+    <div class="capture-mode">
+      <label class="check-label"><input type="checkbox" data-sequence-mode> Sequência com pausas entre sinais</label>
+      <p class="muted" data-mode-help>Por padrão, faça um sinal por tentativa.</p>
     </div>
     <div class="media-layout">
       ${captureMarkup()}
@@ -29,11 +33,20 @@ export function mountFree(main, openEngine) {
 
   const transcription = main.querySelector('#transcription')
   const voiceStatus = main.querySelector('[data-voice-status]')
+  const sequence = main.querySelector('[data-sequence-mode]')
+  const modeHelp = main.querySelector('[data-mode-help]')
   const voice = mountSpeech(voiceStatus)
   const capture = mountCapture(main, {
     openEngine,
+    sequenceMode: () => sequence.checked,
     interpret: freeFeedback,
     onResult(result) { transcription.value = appendTranscription(transcription.value, result) },
+  })
+  sequence.addEventListener('change', () => {
+    capture.reset()
+    modeHelp.textContent = sequence.checked
+      ? 'Função experimental. Abaixe as mãos entre os sinais do catálogo.'
+      : 'Por padrão, faça um sinal por tentativa.'
   })
   main.querySelector('[data-speak]').addEventListener('click', () => voice.speak(transcription.value))
   main.querySelector('[data-clear]').addEventListener('click', () => {

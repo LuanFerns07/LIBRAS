@@ -34,7 +34,7 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
-export function mountCapture(main, { openEngine, interpret, onResult, enabled = true }) {
+export function mountCapture(main, { openEngine, interpret, onResult, sequenceMode, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -101,7 +101,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, enabled = 
     else void camera.start()
   })
 
-  async function complete(engine, frames, current) {
+  async function complete(engine, frames, current, multiple) {
     if (current !== ticket || disposed) return
     phase = 'inferring'
     capture = undefined
@@ -109,7 +109,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, enabled = 
     show('busy', 'Analisando a tentativa.')
     let analysis
     try {
-      analysis = await engine.recognize(frames)
+      analysis = await (multiple ? engine.recognizeSequence(frames) : engine.recognize(frames))
     } catch {
       analysis = { state: 'unavailable', message: 'Tente novamente após reativar a câmera.' }
     } finally {
@@ -130,6 +130,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, enabled = 
     }
     if (!camera.active || phase !== 'idle') return
     const current = ++ticket
+    const multiple = sequenceMode?.() === true
     phase = 'loading'
     renderButtons()
     show('busy', 'Preparando o reconhecimento no dispositivo.')
@@ -148,10 +149,12 @@ export function mountCapture(main, { openEngine, interpret, onResult, enabled = 
     if (current !== ticket || disposed) return
     phase = 'recording'
     renderButtons()
-    show('recording', 'Faça um único sinal agora e conclua a tentativa.')
+    show('recording', multiple ? 'Faça os sinais e abaixe as mãos entre eles. Conclua a sequência ao terminar.'
+      : 'Faça um único sinal agora e conclua a tentativa.')
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
-      onFinish(frames) { void complete(engine, frames, current) },
+      ...(multiple ? { limitMs: 12_000, limitFrames: 125 } : {}),
+      onFinish(frames) { void complete(engine, frames, current, multiple) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
   }

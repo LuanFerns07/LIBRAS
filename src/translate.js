@@ -1,26 +1,26 @@
-import { alphabet, lesson, namePrefix, spellingPause } from './catalog.js'
+import { alphabet, cedilla, greeting, lesson, namePrefix, spellingPause, student } from './catalog.js'
 
-const letters = new Map(alphabet.map(item => [item.label, item]))
-const words = new Map(lesson.map(item => [item.text, item]))
+const letters = new Map([...alphabet, cedilla].map(item => [item.label, item]))
+const words = new Map([...lesson, student].map(item => [item.text, item]))
 
 function unaccent(text) {
-  return text.normalize('NFD').replace(/\p{M}/gu, '')
+  return text.normalize('NFD').replace(/[cC]\u0327/gu, 'Ç').replace(/\p{M}/gu, '')
 }
 
 function spellName(text) {
-  const normalized = unaccent(text).toUpperCase().trim()
-  if (!/^[A-Z]+(?:[\s'’\-]+[A-Z]+)*$/u.test(normalized)) {
-    return { state: 'unsupported', unsupported: text, steps: [], message: 'Use letras A a Z, espaços, hífens ou apóstrofos para soletrar um nome.' }
+  const plain = unaccent(text).trim()
+  if (!/^[A-Za-zÇ]+(?:[\s'’\-]+[A-Za-zÇ]+)*$/u.test(plain)) {
+    return { state: 'unsupported', unsupported: text, steps: [], message: 'Use as letras do alfabeto português, espaços, hífens ou apóstrofos para soletrar um nome.' }
   }
   const steps = []
-  for (const part of normalized.split(/[\s'’\-]+/u)) {
+  for (const part of plain.toUpperCase().split(/[\s'’\-]+/u)) {
     if (steps.length) steps.push(spellingPause)
     steps.push(...Array.from(part, letter => letters.get(letter)))
   }
   return {
     state: 'ready',
     steps,
-    message: 'Soletração pelo alfabeto manual. Letras acentuadas usam a letra base.',
+    message: 'A soletração apresenta a cedilha e usa a letra base para os demais acentos.',
   }
 }
 
@@ -32,6 +32,9 @@ export function translate(input, mode = 'text') {
   const word = text.replace(/[.!?]+$/u, '').toLocaleLowerCase('pt-BR')
   if (words.has(word)) {
     return { state: 'ready', steps: [words.get(word)], message: 'Palavra do catálogo do protótipo.' }
+  }
+  if (word === 'bom dia') {
+    return { state: 'ready', steps: greeting, message: 'A frase apresenta a sequência BOM DIA.' }
   }
   const name = /^meu nome (?:é|e) (.+?)[.!?]*$/iu.exec(text)?.[1]
   if (name) {
