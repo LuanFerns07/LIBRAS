@@ -4,7 +4,7 @@ import argparse
 from collections import Counter
 from pathlib import Path
 
-from dataset import PREPROCESS, digest, write_json
+from dataset import FEATURE_COUNTS, digest, write_json
 from ml.external_eval.evaluate import classified, load_json, verified_model
 from ml.fresh_eval.prepare import PROTOCOL
 
@@ -42,7 +42,7 @@ def evaluate(manifest_path, features_path, runs, protocol_path=PROTOCOL):
     features = load_json(features_path)
     manifest_sha = digest(manifest_path)
     if (manifest["protocolSha256"] != digest(protocol_path) or features["sourceManifestSha256"] != manifest_sha
-            or features["preprocess"] != PREPROCESS or features["mediapipe"] != "0.10.32"):
+            or features["preprocess"] not in FEATURE_COUNTS or features["mediapipe"] != "0.10.32"):
         raise ValueError("Versão inesperada da preparação ou extração.")
     if len(manifest["clips"]) != len(protocol["clips"]) or len(features["clips"]) != len(protocol["clips"]):
         raise ValueError("Clipes ausentes na preparação ou extração.")
@@ -68,7 +68,7 @@ def evaluate(manifest_path, features_path, runs, protocol_path=PROTOCOL):
             raise ValueError(f"Modelo diferente da versão congelada: {version}.")
         decisions = []
         for clip, extraction in extractions:
-            prediction, confidence = classified(session, extraction, model["labels"], model["threshold"])
+            prediction, confidence = classified(session, extraction, model["labels"], model["threshold"], model["features"])
             case = {
                 "id": clip["id"], "signer": clip["signer"], "expected": clip["label"],
                 "predicted": prediction, "confidence": confidence, "captureState": extraction["state"],

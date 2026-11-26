@@ -4,6 +4,7 @@ from unittest import TestCase
 
 import numpy as np
 
+from dataset import FEATURE_COUNTS, FEATURES, FRAMES, NOSE_PREPROCESS
 from ml.external_eval.evaluate import classified, summarize
 from ml.external_eval.prepare import DEVELOPMENT, SOURCE, prepare, validate_clips
 
@@ -24,14 +25,24 @@ class ExternalMetricsTests(TestCase):
 
     def test_capture_failed_skips_session_and_confidence_matches_threshold(self):
         class Session:
+            def __init__(self, feature_count):
+                self.feature_count = feature_count
+
             def run(self, outputs, inputs):
+                if inputs["landmarks"].shape != (1, FRAMES, self.feature_count):
+                    raise AssertionError("Entrada ONNX tem dimensões inesperadas.")
                 return (np.array([[0., .5]]),)
 
         labels = [None, "cinco"]
         self.assertEqual(classified(None, {"state": "no-hand", "values": None}, labels, .75), (None, None))
-        sample = {"state": "ready", "values": [0.] * (24 * 192)}
-        self.assertIsNone(classified(Session(), sample, labels, .75)[0])
-        self.assertEqual(classified(Session(), sample, labels, .60)[0], "cinco")
+        sample = {"state": "ready", "values": [0.] * (FRAMES * FEATURES)}
+        self.assertIsNone(classified(Session(FEATURES), sample, labels, .75)[0])
+        self.assertEqual(classified(Session(FEATURES), sample, labels, .60)[0], "cinco")
+        nose_count = FEATURE_COUNTS[NOSE_PREPROCESS]
+        nose_sample = {"state": "ready", "values": [0.] * (FRAMES * nose_count)}
+        self.assertEqual(classified(Session(nose_count), nose_sample, labels, .60, nose_count)[0], "cinco")
+        with self.assertRaisesRegex(ValueError, "Forma ou valores"):
+            classified(Session(nose_count), sample, labels, .60, nose_count)
 
     def test_protocol_has_independent_non_overlapping_windows(self):
         def example(id_, start, group, subject):

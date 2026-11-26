@@ -9,7 +9,7 @@ import re
 import numpy as np
 import onnxruntime as ort
 
-from dataset import FEATURES, FRAMES, PREPROCESS, digest, write_json
+from dataset import FEATURE_COUNTS, FEATURES, FRAMES, digest, write_json
 from metrics import decide
 from ml.external_eval.prepare import SOURCE, STRATA
 
@@ -24,10 +24,12 @@ def verified_model(run, features):
     model_info = load_json(manifest_path)
     labels = model_info["labels"]
     threshold = model_info["threshold"]
+    preprocess = features["preprocess"]
+    feature_count = FEATURE_COUNTS.get(preprocess)
     if model_info["modelSha256"] != digest(model):
         raise ValueError("O modelo difere da versão congelada.")
-    if (model_info["preprocess"] != PREPROCESS or model_info["frames"] != FRAMES
-            or model_info["features"] != FEATURES or model_info["inputName"] != "landmarks"
+    if (feature_count is None or model_info["preprocess"] != preprocess or model_info["frames"] != FRAMES
+            or model_info["features"] != feature_count or model_info["inputName"] != "landmarks"
             or model_info["outputName"] != "logits"
             or model_info["extratorSha256"] != features["modelSha256"]
             or len(labels) < 2 or labels[0] is not None
@@ -40,13 +42,13 @@ def verified_model(run, features):
     session = ort.InferenceSession(str(model), options, providers=["CPUExecutionProvider"])
     inputs, outputs = session.get_inputs(), session.get_outputs()
     if (len(inputs) != 1 or len(outputs) != 1
-            or (inputs[0].name, inputs[0].type, inputs[0].shape) != ("landmarks", "tensor(float)", [1, FRAMES, FEATURES])
+            or (inputs[0].name, inputs[0].type, inputs[0].shape) != ("landmarks", "tensor(float)", [1, FRAMES, feature_count])
             or (outputs[0].name, outputs[0].type, outputs[0].shape) != ("logits", "tensor(float)", [1, len(labels)])):
         raise ValueError("O contrato ONNX não confere.")
     return session, model_info, digest(manifest_path)
 
 
-def classified(session, features, labels, threshold):
+def classified(session, features, labels, threshold, feature_count=FEATURES):
     state = features["state"]
     values = features["values"]
     if state in {"no-hand", "insufficient"} and values is None:
@@ -54,9 +56,9 @@ def classified(session, features, labels, threshold):
     if state != "ready":
         raise ValueError("Estado de extração inválido.")
     features_array = np.asarray(values, dtype=np.float32)
-    if features_array.shape != (FRAMES * FEATURES,) or not np.isfinite(features_array).all():
+    if features_array.shape != (FRAMES * feature_count,) or not np.isfinite(features_array).all():
         raise ValueError("Forma ou valores das coordenadas inválidos.")
-    (logits,) = session.run(["logits"], {"landmarks": features_array.reshape(1, FRAMES, FEATURES)})
+    (logits,) = session.run(["logits"], {"landmarks": features_array.reshape(1, FRAMES, feature_count)})
     if not np.isfinite(logits).all():
         raise ValueError("Saída ONNX inválida.")
     prediction, confidence = decide(logits[0], threshold)
@@ -89,7 +91,7 @@ def evaluate(manifest_path, features_path, run):
     manifest = load_json(manifest_path)
     features = load_json(features_path)
     if (manifest["protocolSha256"] != digest(SOURCE) or features["sourceManifestSha256"] != digest(manifest_path)
-            or features["preprocess"] != PREPROCESS or features["mediapipe"] != "0.10.32"):
+            or features["preprocess"] not in FEATURE_COUNTS or features["mediapipe"] != "0.10.32"):
         raise ValueError("Manifesto ou versão da extração incompatível.")
     expected = {clip["sha256"]: clip for clip in manifest["clips"]}
     if len(expected) != len(manifest["clips"]) or len(expected) != len(features["clips"]):
@@ -108,7 +110,7 @@ def evaluate(manifest_path, features_path, run):
         extraction = load_json(features_path.parent / clip["features"])
         if extraction["recipe"] != features["recipe"] or extraction["clipSha256"] != checksum:
             raise ValueError(f"Extração não corresponde ao trecho: {checksum}.")
-        predicted, confidence = classified(session, extraction, model["labels"], model["threshold"])
+        predicted, confidence = classified(session, extraction, model["labels"], model["threshold"], model["features"])
         decisions.append({
             "id": clip["id"], "subject": clip["signer"], "video": clip["video"],
             "stratum": clip["stratum"], "sha256": checksum, "captureState": extraction["state"],
