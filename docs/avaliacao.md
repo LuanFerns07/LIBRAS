@@ -146,3 +146,10 @@ Compare a arquitetura nova e a anterior com a mesma semente, as mesmas três rod
   --reference ConvSequenceGeometry --candidate ConvSequenceGated \
   --out data/models/isolated-gated/cross-validation.json
 ```
+
+| Arquitetura | F1 macro | Acertos de Cinco | Cobertura | Falsas aceitações |
+| --- | ---: | ---: | ---: | ---: |
+| Geometria das mãos | 0,668 | 13/18 | 61/78 | 8/42 |
+| Geometria com decisão de pertencimento | 0,579 | 5/18 | 53/78 | 7/42 |
+
+A variante reduziu a cobertura e perdeu oito acertos de Cinco. O resultado ficou abaixo do critério. [Comparação por pessoa](../ml/evidence/isolated-gated/cross-validation.json)
