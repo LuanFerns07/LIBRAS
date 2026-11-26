@@ -1,0 +1,643 @@
+{
+  "datasetManifestSha256": "3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be",
+  "featuresManifestSha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "modelSha256": "fc50063cb217efbb71cff5758df723ccc643a59b1673ffc54e0e0815c5233e27",
+  "checkpointSha256": "760eaf5bb3d89ba25debfe18206c7df02c1817ce7feb4fafc220d60805bce8cb",
+  "threshold": 0.475,
+  "onnxruntime": "1.23.2",
+  "partitions": {
+    "train": {
+      "clips": 120,
+      "signers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "val": {
+      "clips": 36,
+      "signers": [
+        8,
+        10
+      ]
+    },
+    "test": {
+      "clips": 51,
+      "signers": [
+        9,
+        11,
+        12
+      ]
+    }
+  },
+  "capture": {
+    "ready": 51
+  },
+  "negatives": {
+    "acontecer": 2,
+    "américa": 3,
+    "banco": 3,
+    "barulho": 3,
+    "ruim": 1,
+    "vontade": 1,
+    "conhecer": 2,
+    "esquina": 2,
+    "maçã": 1
+  },
+  "results": {
+    "expectedLabels": [
+      "fora do catálogo",
+      "cinco",
+      "espelho",
+      "amarelo",
+      "aluno"
+    ],
+    "decisionLabels": [
+      "rejeitado",
+      "cinco",
+      "espelho",
+      "amarelo",
+      "aluno"
+    ],
+    "matrix": [
+      [
+        16,
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        4,
+        3,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        9
+      ]
+    ],
+    "byLabel": {
+      "cinco": {
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "f1": 0.5,
+        "support": 9,
+        "accepted": 5,
+        "predicted": 3,
+        "truePositives": 3
+      },
+      "espelho": {
+        "precision": 0.8181818181818182,
+        "recall": 1.0,
+        "f1": 0.9,
+        "support": 9,
+        "accepted": 9,
+        "predicted": 11,
+        "truePositives": 9
+      },
+      "amarelo": {
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571,
+        "support": 6,
+        "accepted": 6,
+        "predicted": 8,
+        "truePositives": 6
+      },
+      "aluno": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 9,
+        "accepted": 9,
+        "predicted": 9,
+        "truePositives": 9
+      }
+    },
+    "f1Macro": 0.8142857142857143,
+    "coverage": {
+      "count": 29,
+      "total": 33,
+      "rate": 0.8787878787878788
+    },
+    "falseAcceptance": {
+      "count": 2,
+      "total": 18,
+      "rate": 0.1111111111111111
+    },
+    "inconclusive": {
+      "count": 20,
+      "total": 51,
+      "rate": 0.39215686274509803
+    }
+  },
+  "checks": {
+    "f1Macro": true,
+    "recall": false,
+    "precision": true,
+    "coverage": true,
+    "falseAcceptance": false
+  },
+  "onnxParity": {
+    "samples": 51,
+    "maxAbsLogitError": 7.62939453125e-06,
+    "differencesInDecision": 0,
+    "target": "onnxruntime-cpu"
+  },
+  "modelCpuOnly": {
+    "count": 51,
+    "medianMs": 0.069519,
+    "p95Ms": 0.092052
+  },
+  "modelCpuLoadMs": 6.970684,
+  "extractionSample": {
+    "count": 2675,
+    "medianMs": 193.5,
+    "p95Ms": 416.9100000001721
+  },
+  "clips": [
+    {
+      "sha256": "bc2cebc72d546e85dc58309c9bade1068aa11b8cff95624dea49c1fc78659a90",
+      "signer": 9,
+      "sourceLabel": "acontecer",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9582610408415093,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "978e08f48855f9bab058b6f978646e02cb90679cb7f68057fffeedf7f4549d79",
+      "signer": 9,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.9987835649616236,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "90118b17e3df5daccd4be13de43869ae59e355eae3ef773fd40b5ba26b269c2c",
+      "signer": 9,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.9966561002741142,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "147207b44b15ff3db65ecba614e215757ac1025547b6af9d7887e572ec107509",
+      "signer": 9,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.998160659074197,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "f91046b8d3e0be1d58ca4e35b877f5be3387497221607b457e8c9a56794a5ebd",
+      "signer": 9,
+      "sourceLabel": "américa",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9965233289912172,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "b0a29520c30472b0149e9aebe72b1c95e98b80d2ff4005f2a1a7fc3a648e2f5f",
+      "signer": 9,
+      "sourceLabel": "banco",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9223967657779775,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "0e6b15306983bbeb00cf6c5328eb9666aa0e6f77f332a448503d18c8daf17f17",
+      "signer": 9,
+      "sourceLabel": "barulho",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.6469863867288508,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "307c7cf850d2e3442c2a6547dc94ec231aecfb39ba6ac8436a3f14912c83bca4",
+      "signer": 9,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9563550805887504,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "b8606a69c187a8c670290070a85af5a037956ef29a06c28cd44f6d9827935414",
+      "signer": 9,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9757687428714277,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "4844f12d1982806baa45174bbdc79dd45516f2c504e7881ccafa99701e8db916",
+      "signer": 9,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9907463946290069,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "6ea6659a4543f254e78528596ecddb37f45f05e4b52f223f57f2f627d5f57d73",
+      "signer": 9,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.889850652022163,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "4d7847f2f2ebbbe2e123f95e32ecb995c463f600d77237dc41247d8672bfa11b",
+      "signer": 9,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.7604577433845149,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "d87abb4975d8f4ff659a365ddb2e03c3545d8236b86708c47948cc4e4df1e962",
+      "signer": 9,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.7173494752906453,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "f3c4b83cd22ea6456a3aa1762c0f45b8bd4874aa45c90e5be60e4927fe4c9b1e",
+      "signer": 9,
+      "sourceLabel": "ruim",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9266301390472755,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "12ff1ef42cadd94a2789951ed6fda39f464038b976e6df7bf5eabebcab679be4",
+      "signer": 9,
+      "sourceLabel": "vontade",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.5682572936319333,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "24ffa81cb3a20b46036e875ea7f45da44306553efc5005db857938abafdd6015",
+      "signer": 11,
+      "sourceLabel": "acontecer",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9961769185231258,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "d7d3c1ff10a436737f36d87ed4f8436ff65b11a60e35b4bf7e0a3d7007de5f94",
+      "signer": 11,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.8380122722248682,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "ff380eb96dafde2bf968c99db8c559b6e28e08f1020f2aa8a9e77e0e457455cc",
+      "signer": 11,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.9181622664577899,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "d98c66f100c06a1c335afe73f20ff568ebf43644e35b6c8539c9df8c34441d0f",
+      "signer": 11,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.8919460811080298,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "8b6bc3b50f8622b0cf4c7ff012b34e43e55e3e9bab7df4b745d725ca7efc9647",
+      "signer": 11,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9972342160618688,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "2c4e618db0ef18d8e88dd9991967083ef5efac8a435314af352cb43bed037016",
+      "signer": 11,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9959741874036583,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "0c411ba043f18a814a4af54b246c72daf05999034392e443c96db0c96a2069ca",
+      "signer": 11,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9951723827786506,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "f74c5d2d6bd983d1b489a1c0d9afb68bed918c873bb5426ac4b0c2458e20dfaf",
+      "signer": 11,
+      "sourceLabel": "américa",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9978228547430811,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "fe5bd3ed21cb16c4b920f31fe6c080d9bc6925a88594457aad02014b87032fbb",
+      "signer": 11,
+      "sourceLabel": "banco",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.8835157239986262,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "3a0abc0298ed024af0f4f20fcc73fdaec65a1702ace5158b7c92b9d600c4f577",
+      "signer": 11,
+      "sourceLabel": "barulho",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.8755796964242003,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "ccee74e0ee607b73d8746c00cdf7d8d23ef0159a5ea41b84ed23e62558a1cfe0",
+      "signer": 11,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.6725026538724989,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "ac597b4c69a312082648810037498c137a605a873cea7c55cda1f7f3cde34b85",
+      "signer": 11,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": "espelho",
+      "confidence": 0.48019765004028825,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "fd1fe6e03d2de032beab4844209062520f9972bbf3e6c95f434123318bf23e56",
+      "signer": 11,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": "espelho",
+      "confidence": 0.4862595899871228,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "5f03937b7ee81c169b4e3a4dd53d678d834dd370904a117ee7d8b39b9318c009",
+      "signer": 11,
+      "sourceLabel": "conhecer",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.8026622649368319,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "f1182e9b50cf59d39b4216eb8da72398c7e1ceb6d65191662552d466c6fc74e3",
+      "signer": 11,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.9010898966929377,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "c07f49e5f70f07f4305d22d163c7ca4878212d0c598f9c5cb6f0c328f59f603b",
+      "signer": 11,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.8651258689605662,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "9ad43177d8b124ea1999cc689e95f1fa50d7e03d14e50ec0ea2ea5ff8efe73f2",
+      "signer": 11,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.9427853152997613,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "93aa1215196b78fdd1a0bf68d074723770c12bcd8c25148b8bd8d48c72656228",
+      "signer": 11,
+      "sourceLabel": "esquina",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9691649771923354,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "4b210ca2fd1b66d6f91d4e19f5ea327d8a0157964b7f7a161dc7250f6f1fd43f",
+      "signer": 12,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.8678992236603011,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "311a9cf08a67e31d85740da9d14d50212c2c00c2ad5fa17495024f5fc44bb1d5",
+      "signer": 12,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.9097182401632724,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "d77ad8903c7f1753e8f4557bc7d575a537eaa2ca3bc81170e292982308c35294",
+      "signer": 12,
+      "sourceLabel": "aluno",
+      "expected": "aluno",
+      "predicted": "aluno",
+      "confidence": 0.9134956869585377,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "42d066a09a46ba811cdda70a2fa8abc7b824ba43cecc54840d5af1dfad8c9519",
+      "signer": 12,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9724677669368056,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "0a7ec5d737fde9f7aa77ff30c11affc5410293b8fa5ce397ddb19abf033d9bc7",
+      "signer": 12,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9800269053698926,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "dfbe6d1cc274adc3b6049b275fde4de4ac5a470a5679d6127341cf6d2ba484be",
+      "signer": 12,
+      "sourceLabel": "amarelo",
+      "expected": "amarelo",
+      "predicted": "amarelo",
+      "confidence": 0.9804699979159576,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "ed185153dfd8145a2d8534da47bbb9a0123766d4602e2aa685869d2e1bc92ff3",
+      "signer": 12,
+      "sourceLabel": "américa",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.9979238000340804,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "128bc200991777f65b4185c48a8c5e14fecfecbcf40293c269813077a6ca2e7a",
+      "signer": 12,
+      "sourceLabel": "banco",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.6131469633004475,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "c3b63449036d5d236338ec1dd20aca201d6eca300c85ba0a43cbcf08dfccaed2",
+      "signer": 12,
+      "sourceLabel": "barulho",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.784145701037229,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "2f47038df45a50c255ce92aba19235acd6d437465f3daa9d354c6db48c89a1aa",
+      "signer": 12,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.47141132693705273,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "3043bb6560a3e3c1bc8a4d2c89de3989c3b093b7b9dab76e5772e1a92ed52f44",
+      "signer": 12,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.6633408235531795,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "681983ea1634a79fa5fae565c59317dee73e1dc0a84e2a1571ac044979598417",
+      "signer": 12,
+      "sourceLabel": "cinco",
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.5380979315464514,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "640bb911032c0bd98fe14fc31f82d42e96182fde40119fbf060a27366919f488",
+      "signer": 12,
+      "sourceLabel": "conhecer",
+      "expected": null,
+      "predicted": "amarelo",
+      "confidence": 0.4939781991906743,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "8902e2df9fd5cf9d6967d86287ede68611ace6b9f8651d411dee33a9217df36c",
+      "signer": 12,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.9574706641113958,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "fa33e4d740156e6c58a9bd7b9e3bd0aea70074e7349b321968c7e0714f705c19",
+      "signer": 12,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.9742644716205726,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "fb9b3e5b12fbe790780c2acc6c4d0b7d6d992e7d2cb73f6f046f3888a0943183",
+      "signer": 12,
+      "sourceLabel": "espelho",
+      "expected": "espelho",
+      "predicted": "espelho",
+      "confidence": 0.856527961693618,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "9120392223c276c6f4758280994c3e434b2fea03a81834ba3a0da0ee8a1e0f75",
+      "signer": 12,
+      "sourceLabel": "esquina",
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.989850008215005,
+      "captureState": "ready"
+    },
+    {
+      "sha256": "dd14da3ea1f7e84d7e9a4d867985a7c64ec0cb9433e62c1b81869850b4d5399d",
+      "signer": 12,
+      "sourceLabel": "maçã",
+      "expected": null,
+      "predicted": "amarelo",
+      "confidence": 0.6191681852273435,
+      "captureState": "ready"
+    }
+  ]
+}

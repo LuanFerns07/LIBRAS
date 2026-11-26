@@ -85,3 +85,28 @@ node ml/verify-wasm.mjs --run data/models/isolated-expanded
 ```
 
 Compare as matrizes de confusão e a taxa de falsa aceitação em seus denominadores originais. O manifesto do modelo instalado informa a cobertura da área livre. Para executar separadamente o modelo expandido em Linux, use `LIBRASIA_MODELO=data/models/isolated-expanded ./scripts/executar-local.sh`.
+
+### Resultado da expansão em 26 de novembro de 2026
+
+O treino na RTX 4060 usou 119 clipes elegíveis entre 120 clipes de treino. A validação usou 36 clipes. A configuração manteve a semente 7391, 80 épocas e lote 12. A validação selecionou a época 64 e o limiar 0,475, com F1 macro 0,935 e 0/12 falsas aceitações. O ONNX tem SHA-256 `fc50063cb217efbb71cff5758df723ccc643a59b1673ffc54e0e0815c5233e27`. [Manifesto do modelo](../ml/evidence/isolated-expanded/model.json) · [Configuração e histórico](../ml/evidence/isolated-expanded/training.json)
+
+| Sinal no teste | Suporte | Precisão | Revocação | F1 |
+| --- | ---: | ---: | ---: | ---: |
+| Cinco | 9 | 100,0% | 33,3% | 50,0% |
+| Espelho | 9 | 81,8% | 100,0% | 90,0% |
+| Amarelo | 6 | 75,0% | 100,0% | 85,7% |
+| Aluno | 9 | 100,0% | 100,0% | 100,0% |
+
+| Esperado no teste | Rejeitado | Cinco | Espelho | Amarelo | Aluno |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Fora do catálogo | 16 | 0 | 0 | 2 | 0 |
+| Cinco | 4 | 3 | 2 | 0 | 0 |
+| Espelho | 0 | 0 | 9 | 0 | 0 |
+| Amarelo | 0 | 0 | 0 | 6 | 0 |
+| Aluno | 0 | 0 | 0 | 0 | 9 |
+
+No teste de 51 clipes, o F1 macro foi 0,814, com cobertura de 29/33, 20/51 tentativas inconclusivas e 2/18 falsas aceitações. As duas falsas aceitações foram previstas como Amarelo. Cinco manteve 3/9 acertos, com quatro rejeições e duas trocas para Espelho. O desempenho abaixo das metas de revocação de Cinco e de falsa aceitação mantém o modelo experimental. O teste de Aluno cobre a execução presente no MINDS-Libras. A variante histórica de Fortaleza permanece em revisão linguística no avatar. [Métricas do teste reservado](../ml/evidence/isolated-expanded/evaluation.json)
+
+A paridade PyTorch e ONNX Runtime CPU cobriu os 51 clipes, com diferença máxima de 7,63 × 10⁻⁶ nos logits e decisões iguais. Cinco entradas de validação no Chromium deram as mesmas decisões e diferença máxima de 1,43 × 10⁻⁶. [Paridade WASM](../ml/evidence/isolated-expanded/wasm-parity.json)
+
+Na prévia do Chromium, a repetição do clipe Aluno S09-1 acrescentou `aluno aluno` em duas tentativas, com mediana de 4,9 ms e p95 de 8,6 ms do clique de conclusão à resposta. A revisão independente repetiu a verificação com um clipe de outra pessoa da partição reservada. [Roteiro de validação](roteiro-validacao.md)

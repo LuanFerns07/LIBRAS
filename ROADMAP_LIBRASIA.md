@@ -84,7 +84,8 @@ O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 1
 - [ ] Executar instalação limpa, compilação e testes automatizados. Em seguida, fazer a verificação manual no PC, com câmera e áudio reais, incluindo negação de permissão, navegação por teclado, indicador de foco, mensagens compreensíveis e retomada após erro.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
 - [ ] Fechar e retestar defeitos que bloqueiam os fluxos principais ou comprometem a privacidade, a correção em Libras ou a confiabilidade da demonstração. Registrar as limitações restantes no README e no memorial. Identificar o commit, o modelo e as animações usados nos testes.
-- [ ] Criar a tag local da versão validada, por exemplo `v0.1.0`, e preparar roteiro, resultados medidos e memorial. Publicação, push e compartilhamento externo seguem a autorização dos responsáveis.
+- [x] Preparar roteiro, registrar resultados medidos e compilar a minuta do memorial com as limitações e evidências disponíveis.
+- [ ] Criar a tag local da versão validada, por exemplo `v0.1.0`, depois de cumprir os aceites. Publicação e compartilhamento externo seguem a autorização dos responsáveis.
 - [ ] **Aceite.** Um revisor consegue reproduzir o roteiro a partir da versão marcada. O memorial distingue o que foi medido, o que foi observado na demonstração e o que ainda está planejado.
 
 ## Ordem de validação e registro
@@ -133,7 +134,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | Próximo marco | Status | O que implementar e como validar |
 | --- | --- | --- |
 | **M8 · Aprendizagem e engajamento** | A testar | Adicionar pares de sinais parecidos, revisão baseada em tentativas e gamificação por progresso. Testar quais exercícios voltam na revisão, persistência do progresso e se as dicas ajudam na tentativa seguinte. |
-| **M9 · Cobertura e variantes** | A fazer | Ampliar vocabulário e frases e apresentar variantes regionais contextualizadas com revisão em Libras. Repetir os testes por pessoa sinalizante, acompanhar confusões novas e rejeição de sinais desconhecidos e explicitar a cobertura na interface. |
+| **M9 · Cobertura e variantes** | A testar | Ampliar vocabulário e frases e apresentar variantes regionais contextualizadas com revisão em Libras. Repetir os testes por pessoa sinalizante, acompanhar confusões novas e rejeição de sinais desconhecidos e explicitar a cobertura na interface. |
 | **M10 · Sinalização contínua** | A fazer | Usar dados de sequências com condições de uso verificadas. Desenvolver segmentação automática, reconhecimento de sinais em sequência e geração de texto em português. Medir segmentação, inserções, omissões, trocas e qualidade do sentido traduzido com revisão humana. |
 | **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |
 
