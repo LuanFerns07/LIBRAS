@@ -20,6 +20,14 @@ npm run dev
 
 Abra a URL de localhost indicada pelo Vite. Conceda acesso à webcam apenas ao ativar a câmera dentro da prática ou da área livre. O navegador exige localhost ou HTTPS para capturar vídeo.
 
+Para usar reconhecimento, instale um classificador depois de reproduzir o [treinamento e a avaliação](docs/avaliacao.md):
+
+```bash
+npm run setup:model -- data/models/isolated-v1
+```
+
+Os pontos da câmera são processados na própria página. Os sinais e as dicas da lição estão em revisão linguística. Na área livre, o modo experimental de sequência delimita os sinais quando a pessoa abaixa as mãos entre eles.
+
 No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher lista a voz local pt-BR do eSpeak NG. Se a lista de vozes do navegador estiver vazia, confira o Speech Dispatcher e o módulo eSpeak NG, reinicie o navegador e reabra a área livre. A transcrição fica disponível para edição quando a voz falha.
 
 ## Verificar e compilar
@@ -33,6 +41,8 @@ npm run preview
 ```
 
 O build gera `dist/`. Use `npm run preview` para verificar essa versão em localhost. O comando de painel requer Python 3.
+
+Com Chromium instalado e a prévia em execução, rode `LIBRASIA_TEST_URL=http://127.0.0.1:4173 npm run test:e2e`. O roteiro de validação descreve as opções para câmera física, voz local e vídeos de teste.
 
 Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). A [prévia na Vercel](docs/publicacao.md) depende do aceite no PC e da autorização de publicação.
 

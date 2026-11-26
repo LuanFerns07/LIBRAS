@@ -20,7 +20,7 @@ Para a RTX 4060 com driver compatível com CUDA 12.4, instale a variante corresp
 
 O Chromium executa o mesmo `openHolistic()` e `preprocessFrames()` importados pelo aplicativo. Isso mantém versão do extrator, modelo e implementação de normalização em comum. A tarefa Holistic da versão 0.10.32 está no pacote Web. A inspeção do wheel Python oficial da mesma versão encontrou extratores individuais de pose, mãos e rosto, sem a classe Holistic dessa API. PyTorch recebe as janelas prontas do código web. [MediaPipe Holistic Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/holistic_landmarker) · [MediaPipe 0.10.32 no PyPI](https://pypi.org/project/mediapipe/0.10.32/)
 
-O extrator local serve um único vídeo por vez a cada instância de navegador em loopback. O vídeo é decodificado no Chromium, reamostrado a 100 ms e redimensionado a no máximo 640 px de largura proporcionalmente antes da tarefa. A webcam seleciona o próximo quadro disponível após o intervalo de 90 ms. Num vídeo de 30 fps, esse intervalo produz cerca de um quadro por 100 ms. Gravamos metadados e vetores normalizados em `data/minds/features`, com o SHA-256 do clipe e da receita de extração para recuperar o cache ao repetir o comando. Nenhuma janela atravessa vídeos ou pessoas.
+O extrator local serve um único vídeo por vez a cada instância de navegador em loopback. O vídeo é decodificado no Chromium, reamostrado a 100 ms e redimensionado a no máximo 640 px de largura proporcionalmente antes da tarefa. A webcam solicita 640 × 480 e seleciona o próximo quadro disponível após o mesmo intervalo de 100 ms. Os metadados e vetores normalizados são gravados em `data/minds/features`, com o SHA-256 do clipe e da receita de extração. Nenhuma janela atravessa vídeos ou pessoas.
 
 O tensor `landmarks` é `float32[1,24,192]`. Cada quadro contém os índices 11–16 da pose, seguidos dos 21 pontos de cada mão, esquerda antes da direita. Cada ponto traz `x, y, z, presença`. A posição é centrada entre os ombros e escalada pela distância entre eles com correção da proporção da imagem. O eixo Z das mãos é relativo ao próprio pulso e usa o Z do pulso da pose quando disponível. Ausência produz quatro zeros. A janela vai do primeiro ao último quadro com ombros e uma mão observáveis e requer cinco quadros rastreados e 55% de cobertura. A reamostragem usa 24 instantes uniformes e o vizinho temporal até 150 ms. Entrada insuficiente é inconclusiva antes do classificador.
 
@@ -36,7 +36,7 @@ A cada época, o treino seleciona limiar de 0,25 a 1,00 em passos de 0,01 usando
 
 ## Saídas locais
 
-`data/models/isolated-v1` contém `isolated.pt`, `isolated.onnx`, `isolated.json`, `training.json`, `evaluation.json` e `parity-web.json`. Guarde o manifesto do recorte e os relatórios para vincular pesos, configuração, versão dos dados e métricas. O manifesto do modelo identifica a licença e o SHA-256 do arquivo ONNX. Use apenas os pesos autorizados e avaliados ao instalar os dois arquivos de execução em `public/models`.
+`data/models/isolated-v1` contém `isolated.pt`, `isolated.onnx`, `isolated.json`, `training.json`, `evaluation.json` e `parity-web.json`. Guarde o manifesto do recorte e os relatórios para vincular pesos, configuração, versão dos dados e métricas. O manifesto do modelo identifica a licença e o SHA-256 do arquivo ONNX. Instale a versão avaliada com `npm run setup:model -- data/models/isolated-v1`.
 
 ```bash
 PYTHONPATH=ml .venv/bin/python -m unittest discover -s ml/tests -v

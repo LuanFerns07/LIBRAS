@@ -2,6 +2,8 @@
 
 O LibrasIA é uma aplicação Vite estática. O repositório inclui `vercel.json` para usar `npm ci`, preparar o extrator MediaPipe e servir `dist/`. A câmera só é solicitada depois de uma ação, sem microfone. O build configura o compartilhamento da câmera com a própria origem e restringe conexões à mesma origem.
 
+A prévia local do Vite aplica os mesmos cabeçalhos da Vercel para testar o carregamento de WebAssembly e o acesso à câmera com a política de segurança de produção.
+
 O MediaPipe usa o [Holistic Landmarker float16/1 indicado pelo exemplo do Google](https://github.com/google-ai-edge/mediapipe-samples-web/blob/main/src/tasks/holistic-landmarker.ts). O instalador verifica o SHA-256 `e2dab61191e2dcd0a15f943d8e3ed1dce13c82dfa597b9dd39f562975a50c3f8` e copia o runtime WebAssembly da versão fixada no lockfile. O site busca a cópia local do extrator ao iniciar o reconhecimento. Para usar um arquivo já baixado, defina `LIBRASIA_HOLISTIC_FILE` antes de `npm run setup:vision`.
 
 ## Prévia
