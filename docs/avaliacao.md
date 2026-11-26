@@ -165,3 +165,20 @@ A comparação usa as três rodadas por pessoa do conjunto de treino, a mesma se
   --reference ConvSequenceGeometry --candidate ConvSequenceFlexion \
   --out data/models/isolated-flexion/cross-validation.json
 ```
+
+| Arquitetura | F1 macro | Acertos de Cinco | Acertos de Aluno | Cobertura | Falsas aceitações |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Geometria das mãos | 0,668 | 13/18 | 13/18 | 61/78 | 8/42 |
+| Geometria e flexão dos dedos | 0,679 | 15/18 | 6/18 | 52/78 | 5/42 |
+
+A flexão melhorou a classificação de Cinco e as falsas aceitações nesta comparação. A revocação de Aluno caiu de 13 para 6 em 18 e a cobertura ficou abaixo da meta de 75%. A rodada com 119 exemplos elegíveis de treino acertou os 24 positivos e rejeitou os 12 negativos na validação que também selecionou a época 11 e o limiar 0,500. O erro máximo de logits foi 2,38 × 10⁻⁶ entre PyTorch e ONNX em 36 clipes de validação. No Chromium com WebAssembly, foi 4,77 × 10⁻⁷ em cinco amostras, com decisões iguais. [Rodadas e matrizes](../ml/evidence/isolated-flexion/cross-validation.json) · [Validação](../ml/evidence/isolated-flexion/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-flexion/wasm-parity.json)
+
+No conjunto de 12 negativos do CLAD já usado para comparar outros modelos, o candidato fixado aceitou três clipes indevidamente. O modelo com geometria havia aceitado um. Em uma prévia separada do Chromium, a flexão também classificou como Espelho duas reproduções da captura parcial do clipe conhecido Banco S12-2. O modelo inicial segue instalado no aplicativo local. [Resultados no CLAD](../ml/evidence/isolated-flexion/clad-evaluation.json) · [Regressão do Banco](regressao-area-livre.md)
+
+```bash
+.venv/bin/python ml/train.py --arch ConvSequenceFlexion --catalogo expandido --device cuda \
+  --features data/minds-expanded/features/index.json --out data/models/isolated-flexion
+.venv/bin/python ml/evaluate.py --split val \
+  --features data/minds-expanded/features/index.json --run data/models/isolated-flexion
+node ml/verify-wasm.mjs --run data/models/isolated-flexion
+```

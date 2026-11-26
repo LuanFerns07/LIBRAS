@@ -38,6 +38,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 - [x] Definir o catálogo compartilhado com identificador de letra ou sinal, saída textual, referência, animação, versão e status da revisão. Para os exercícios, identificar o parâmetro avaliado, as variantes contempladas e as dicas permitidas.
 - [x] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado e verificar duplicatas.
 - [x] Medir a rejeição dos modelos congelados em gravações externas de repouso e movimentos cotidianos. [Teste com 12 trechos do CLAD](docs/negativos.md#resultado-de-26-de-novembro-de-2026)
+- [x] Verificar os modelos congelados em amostras de sinais de videoaulas licenciadas. Registrar variantes, falhas de rastreamento e tamanho da amostra. [Verificação externa de Cinco e Amarelo](docs/sinais-independentes.md)
 - [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição durante o uso da webcam.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
@@ -63,6 +64,8 @@ O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 1
 
 O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em 18 clipes na comparação interna por pessoa. As falsas aceitações subiram de 5 para 8 em 42. Em 12 trechos externos de repouso e movimentos cotidianos, a geometria produziu uma falsa aceitação e cada modelo anterior produziu cinco. A avaliação de sinais válidos com novo grupo reservado e com webcam continua pendente. [Comparação interna](docs/avaliacao.md#experimento-com-geometria-das-mãos) · [Negativos externos](docs/negativos.md)
 
+O candidato com ângulos dos dedos elevou os acertos de Cinco a 15/18 e reduziu as falsas aceitações a 5/42 na comparação interna. A cobertura caiu para 52/78 e a confusão com Banco permaneceu no navegador. [Flexão dos dedos, métricas e paridade](docs/avaliacao.md#experimento-com-flexão-dos-dedos)
+
 ### M4 · Alfabeto, palavras, frases e nomes
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -75,7 +78,8 @@ O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em
 
 - [x] Reaproveitar o modelo de M3 sem pedir ao usuário que selecione o sinal. Começar com sinais isolados e, se necessário, usar início e fim explícitos para delimitar cada tentativa. Processar as imagens no dispositivo.
 - [x] Adicionar uma entrada de texto por tentativa reconhecida. Permitir editar, limpar e ouvir o resultado em português brasileiro com síntese gratuita. Uma voz robótica atende à demonstração. Manter o texto editável e indicar o problema quando o áudio estiver indisponível.
-- [ ] Testar dois sinais em sequência, sinal sustentado e repetição intencional. Verificar que cada tentativa acrescenta apenas o resultado esperado. Testar também sinal desconhecido, baixa confiança, ausência de mão e falha da voz. Confirmar que **Ouvir** reproduz o texto após a edição.
+- [x] Verificar no Chromium que uma sustentação acrescenta uma palavra, duas tentativas intencionais acrescentam duas e o texto continua editável após falha ou ausência de voz. Verificar a preservação do texto em tentativas inconclusivas. [Resultados com clipes de teste](docs/regressao-area-livre.md)
+- [ ] Corrigir a falsa aceitação observada no clipe de Banco com captura parcial e repetir os ensaios de sinais fora do catálogo. Conferir em webcam dois sinais suportados, sustentação, repetição e audição do texto editado.
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 
 ### M6 · Saiba mais, autoria e caráter sem fins lucrativos
@@ -87,7 +91,7 @@ O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em
 ### M7 · Validação independente e versão de demonstração
 
 - [x] Executar instalação limpa, compilação e testes automatizados, incluindo navegação por teclado, foco, mensagens, liberação da câmera e retomada após erro.
-- [x] Preparar o formulário local de validação, com versão dos ativos, observação humana, decisão do app, dicas, latência e audição. [Ficha e instruções](docs/validacao-ao-vivo.md)
+- [x] Preparar o formulário local com versão dos ativos, observação humana, decisão do app, dicas, latência e audição. Calcular métricas a partir das fichas elegíveis, separadas por versão. [Ficha e instruções](docs/validacao-ao-vivo.md)
 - [ ] Fazer a verificação manual no PC com participantes, câmera e áudio reais. Verificar a compreensão das mensagens, a sinalização e a audição do texto editado.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
 - [ ] Fechar e retestar defeitos que bloqueiam os fluxos principais ou comprometem a privacidade, a correção em Libras ou a confiabilidade da demonstração. Registrar as limitações restantes no README e no memorial. Identificar o commit, o modelo e as animações usados nos testes.
@@ -159,6 +163,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 
 - [x] Treinar e medir geração experimental de texto em gravações de frases, com partição reservada. Registrar erros de inserção, omissão e troca e reproduzir a inferência no Chromium. [Avaliação de geração](docs/sinalizacao-continua.md)
 - [x] Treinar e comparar segmentação supervisionada de fronteiras com uma regra de movimento, usando duplas diferentes em treino, validação e teste. [Protocolo e condições de uso](docs/fronteiras.md)
+- [x] Verificar quais fontes de vídeo oferecem glosas, texto em português, identificação de sinalizantes e condições de acesso. [Triagem e fontes candidatas](docs/dados-glosas.md)
 - [ ] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo com webcam. Medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada.
 - [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
 
