@@ -1,0 +1,38 @@
+{
+  "scope": "exploratory-external-didactic-clips",
+  "sources": {
+    "cecierj-12": {
+      "filename": "aula-12.mp4",
+      "title": "Libras aula 12 -estação do ano, meses, dias da semana e cores",
+      "credits": "Fundação Cecierj/Consórcio Cederj e UFF. Roteiro Mariana da Cunha Teixeira de Souza; atuação Vanessa Rodrigues Ildefonso e Cíntia Ingrid Macedo Ribeiro.",
+      "page": "https://canal.cecierj.edu.br/recurso/13766",
+      "licensePage": "https://www.youtube.com/watch?v=4NVpij6RvGg",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "license": "CC-BY-3.0",
+      "url": "https://canal.cecierj.edu.br/012016/8f96e3c6238f88dd167ee2b5a8818e80.mp4",
+      "sha256": "288c24e947b08c7c3e3fc6156cef6e64ea3e828107d8d9e43559d56aeeebfe9a"
+    }
+  },
+  "clips": [
+    {
+      "id": "cecierj-12-amarelo",
+      "source": "cecierj-12",
+      "signer": 201,
+      "label": "amarelo",
+      "startMs": 118000,
+      "durationMs": 1750
+    }
+  ],
+  "models": {
+    "nose-masked": {
+      "threshold": 0.405,
+      "onnxSha256": "3cbb141859f29bb5fc2a1e5502b940fecb8394d40cb36f3ccd2106017a6ecb8e",
+      "manifestSha256": "c2850d38a6fe235f95666c1420984e255ed18f887c80595e0f23a3c94e827839"
+    },
+    "nose": {
+      "threshold": 0.7,
+      "onnxSha256": "af37c84061844297c29b8232ddf332f73e447809073a4e28cbfe24ba4ed85f93",
+      "manifestSha256": "d4111b91cb7c8e83ce70d261d9f197a2ce3aa0de0405b447ecb907165b43cea8"
+    }
+  }
+}

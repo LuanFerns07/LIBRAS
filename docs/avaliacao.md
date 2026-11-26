@@ -329,3 +329,31 @@ As três rodadas usaram as sete pessoas da partição de treino, com 80 épocas 
 | Relações com o nariz | 15/18 | 17/21 | 14/21 | 13/18 | 66/78 | 3/42 | 0,806 |
 
 As relações com o nariz levaram a revocação de Amarelo de 61,9% a 66,7% e baixaram os falsos aceites de 11,9% a 7,1%. A precisão de Amarelo caiu de 81,3% a 73,7%, abaixo da meta de 75%. As sete perdas do candidato tiveram a classe fora do catálogo em primeiro lugar. Cinco delas se concentram nas pessoas 03 e 06. O efeito observado sobre Amarelo é de um acerto adicional e um F1 por sinal praticamente igual, de 0,703 para 0,700. A prévia local segue com o modelo combinado de geometria e flexão. [Metas](protocolo-aceite.md#metas-de-aceite) · [Prévia local](previa-estavel.md)
+
+### Exportação e verificação
+
+Os dois modelos usaram os 120 clipes das pessoas 01–07 para treino e os 36 das pessoas 08 e 10 para escolher época e limiar. Ambos acertaram os 36 clipes de validação usados nessa escolha. A paridade entre PyTorch e ONNX em CPU teve zero divergências de decisão em 36 clipes por modelo. O WASM no Chromium repetiu cinco decisões por modelo, com diferença máxima de 9,54 × 10⁻⁷ nos logits. [Controle em ONNX](../ml/evidence/isolated-nose-masked/validation-evaluation.json) · [Controle em WASM](../ml/evidence/isolated-nose-masked/wasm-parity.json) · [Candidato em ONNX](../ml/evidence/isolated-nose/validation-evaluation.json) · [Candidato em WASM](../ml/evidence/isolated-nose/wasm-parity.json)
+
+| ONNX congelado | Época | Limiar | Amarelo do Cederj | Falsos aceites nos 12 trechos do CLAD |
+| --- | ---: | ---: | --- | ---: |
+| Controle | 14 | 0,405 | Reconhecido, confiança 0,9482 | 0/12 |
+| Relações com o nariz | 27 | 0,700 | Inconclusivo, Amarelo em primeiro lugar com 0,6590 | 1/12 |
+
+O falso aceite foi Amarelo em um trecho de repouso. Os 13 trechos externos tiveram rastreamento utilizável. Esses recortes já haviam sido avaliados com modelos anteriores, e o Cederj oferece aqui um único exemplo de Amarelo. O controle merece comparação em um novo grupo de participantes antes de uma mudança na versão de demonstração. [Relatório Cederj](../ml/fresh_eval/evidence-nose/report.json) · [CLAD, controle](../ml/evidence/isolated-nose-masked/clad-evaluation.json) · [CLAD, candidato](../ml/evidence/isolated-nose/clad-evaluation.json)
+
+No percurso completo do Chromium, o candidato reconheceu Amarelo S01-1 em uma tentativa de 4.200 ms, com 42 quadros e 22,1 ms entre o botão de concluir e a decisão. Os pontos das mãos apareceram sobre o vídeo e responderam ao controle de exibição. O clipe integra o treino e foi reproduzido como entrada de câmera. [Configuração do ensaio no Chromium](sinais-com-movimento-browser.md#reproduzir)
+
+Após a extração do recorte de desenvolvimento, exporte as duas arquiteturas e confira o ONNX e o WASM localmente. Os manifestos de modelo registram os pesos e limiares congelados para a avaliação externa. [Manifesto do controle](../ml/evidence/isolated-nose-masked/model.json) · [Manifesto do candidato](../ml/evidence/isolated-nose/model.json)
+
+```bash
+recorte=data/minds-expanded/features-nose-development/index.json
+for variante in nose-masked nose; do
+  pasta="data/models/isolated-$variante"
+  arquitetura=ConvSequenceNose
+  if [ "$variante" = nose-masked ]; then arquitetura=ConvSequenceNoseMasked; fi
+  .venv/bin/python ml/train.py --device cuda --catalogo expandido \
+    --arch "$arquitetura" --features "$recorte" --out "$pasta"
+  .venv/bin/python ml/evaluate.py --split val --features "$recorte" --run "$pasta"
+  node ml/verify-wasm.mjs --run "$pasta"
+done
+```

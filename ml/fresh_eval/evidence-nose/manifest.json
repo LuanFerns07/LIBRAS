@@ -1,0 +1,17 @@
+{
+  "protocolSha256": "490538d416f819418a9fdc2d64d9bc3ae6718fe0866af04557d6eb4894274187",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "clips": [
+    {
+      "id": "cecierj-12-amarelo",
+      "source": "cecierj-12",
+      "signer": 201,
+      "label": "amarelo",
+      "startMs": 118000,
+      "durationMs": 1750,
+      "file": "raw/cecierj-12-amarelo.mp4",
+      "sha256": "5a01bf54423f8cf2e537ebc53009f44297b8491f547ba80769f0b0c65f9cb29a",
+      "partition": "test"
+    }
+  ]
+}

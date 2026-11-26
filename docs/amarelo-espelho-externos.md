@@ -43,3 +43,7 @@ O extrator Holistic no Chromium 156.0.8078.79 amostrou 18 quadros e aceitou a ex
 | Janelas parciais `0aae75ca` | 0,600 | 0,9557 | Inconclusiva |
 
 O recorte de Amarelo do Cederj permaneceu inconclusivo nos dois modelos, mesmo com rastreamento disponível e uma trajetória visualmente próxima da referência do MINDS. A consulta não confirmou uma gravação de Espelho com licença e trecho verificáveis para esta avaliação. As decisões registram o comportamento nesse recorte. [Manifesto](../ml/fresh_eval/evidence-moving/manifest.json) · [Resultado por tentativa](../ml/fresh_eval/evidence-moving/report.json)
+
+## Reteste com as arquiteturas de 196 canais
+
+No mesmo recorte, o modelo de controle reconheceu Amarelo com confiança de 0,9482 e limiar de 0,405. O candidato que usa a posição da mão em relação ao nariz deu 0,6590 a Amarelo, a maior probabilidade do clipe. O resultado permaneceu inconclusivo com limiar de 0,700. Os dois modelos foram treinados no MINDS-Libras antes do reteste. [Protocolo e pesos congelados](../ml/fresh_eval/protocol-nose.json) · [Manifesto do reteste](../ml/fresh_eval/evidence-nose/manifest.json) · [Resultado do reteste](../ml/fresh_eval/evidence-nose/report.json) · [Comparação por pessoa](avaliacao.md#posição-da-mão-em-relação-ao-nariz)
