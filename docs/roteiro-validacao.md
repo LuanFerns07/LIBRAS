@@ -89,6 +89,14 @@ No tensor da extração offline, Cinco S11-1 também foi classificado como Espel
 
 Os registros ficam no diretório local data/evidence, nos logs qa-oficial. A avaliação independente reproduziu as métricas da versão oficial. Uma rodada exploratória anterior com limiar 0,48 consta dos logs qa-modelo e do relatório de avaliação. A correção intencional de uma execução e a interpretação do áudio ainda requerem verificação por pessoas no PC.
 
+O mesmo build oficial passou quatro testes de navegador com a webcam física e a voz local habilitadas. A captura abriu em 640 × 480 e a trilha encerrou ao ocultar a aba ou deixar a área. O teste também percorreu as 27 demonstrações selecionáveis, retomada da captura, navegação por teclado e toque emulado. A webcam física foi verificada quanto à captura e ao ciclo de vida. Os ensaios de classificação usaram a reprodução de clipes na câmera simulada.
+
+## Verificação do modelo expandido
+
+Em uma prévia separada, o classificador expandido com SHA-256 fc50063cb217efbb71cff5758df723ccc643a59b1673ffc54e0e0815c5233e27 e limiar 0,475 foi carregado sob a mesma política de conteúdo. Três repetições do clipe reservado Aluno S11-1 acrescentaram uma palavra por tentativa. A mediana foi 2,3 ms e o p95 foi 8,2 ms, com três medições do clique de conclusão à decisão. O resultado do navegador cobre esse clipe. O teste reservado do modelo expandido continua com pendências de revocação de Cinco e rejeição.
+
+A prévia oficial continuou com o modelo de três palavras. O log da expansão está no arquivo local data/evidence/qa-expandido-aluno.log.
+
 ## Reproduzir uma tentativa com o classificador
 
 Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.
