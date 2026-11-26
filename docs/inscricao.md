@@ -31,7 +31,7 @@ Atualize o resumo depois do aceite. Conte os caracteres de todo o documento 3, i
 - Confirmar a instituição ou unidade acadêmica da capa e a pessoa responsável no formulário. Usar os mesmos título, categoria, eixo e área no resumo, anexos e formulário.
 - Conferir o memorial de até 20 laudas com a fonte Times New Roman 12, entrelinhas 1,5, margens de 3 cm e texto justificado. Preservar a avaliação cega no memorial quando possível e manter a identificação no documento 3.
 - Descrever o uso de IA e registrar as contribuições intelectuais humanas comprováveis, inclusive decisões, análises, revisões e validações que a equipe tiver executado.
-- Reunir os documentos legíveis em um PDF de até 40 MB. Preservar as assinaturas e conferir o arquivo final no validador adotado pela equipe. Documentos pessoais e PDFs assinados devem ficar fora do Git.
+- Reunir os documentos legíveis em um PDF de até 40 MB. Se a ferramenta de fusão invalidar assinaturas, reúna primeiro os documentos e assine os campos dos anexos no PDF combinado, preservando as assinaturas anteriores. Confira todas as assinaturas no arquivo final. Documentos pessoais e PDFs assinados devem ficar fora do Git.
 - Enviar pelo formulário oficial somente após a conferência do arquivo. O edital não prevê complementação após o envio. [Formulário da UFC](https://docs.google.com/forms/d/e/1FAIpQLSem93yeY1QOBkT1mt5tSGcnIkrqwwj30tpPGj3fGmCO6xYlGQ/viewform?usp=header)
 
 ## Gerar uma prévia do memorial
@@ -46,3 +46,30 @@ pdffonts /tmp/librasia-memorial/memorial.pdf
 ~~~
 
 A compilação usa Tinos como substituta quando Times New Roman não está instalada. Nesse caso o próprio documento sinaliza que o PDF serve apenas para revisão. Gere o arquivo de inscrição em um ambiente com Times New Roman e confirme a fonte com pdffonts.
+
+## Compilar com Times New Roman no Debian
+
+Se a fonte estiver disponível no Fontconfig, XeLaTeX a escolhe automaticamente. Em um Debian sem a família, o procedimento abaixo usa a distribuição Microsoft TrueType Core Fonts for the Web referenciada pelo instalador Debian. A soma publicada pelo Debian confirma o arquivo antes da extração. O binário funciona como arquivo de origem e não é executado. [Instalador Debian](https://packages.debian.org/trixie/ttf-mscorefonts-installer) · [Código-fonte do instalador](https://sources.debian.org/src/msttcorefonts/3.8.1/update-ms-fonts/)
+
+~~~bash
+(
+set -eu
+librasia_font_dir=$(mktemp -d)
+curl -fL https://downloads.sourceforge.net/corefonts/times32.exe -o "$librasia_font_dir/times32.exe"
+printf '%s  %s\n' db56595ec6ef5d3de5c24994f001f03b2a13e37cee27bc25c58f6f43e8f807ab "$librasia_font_dir/times32.exe" | sha256sum -c -
+7z e -o"$librasia_font_dir/ttf" "$librasia_font_dir/times32.exe" '*.TTF'
+cat > "$librasia_font_dir/fonts.conf" <<EOF
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+  <include>/etc/fonts/fonts.conf</include>
+  <dir>$librasia_font_dir/ttf</dir>
+</fontconfig>
+EOF
+mkdir -p /tmp/librasia-memorial
+FONTCONFIG_FILE="$librasia_font_dir/fonts.conf" xelatex -halt-on-error -output-directory=/tmp/librasia-memorial docs/memorial.tex
+pdffonts /tmp/librasia-memorial/memorial.pdf
+)
+~~~
+
+Confira a presença de TimesNewRomanPSMT e das variantes usadas. A configuração temporária aplica-se a essa compilação e os arquivos das fontes ficam fora do repositório.
