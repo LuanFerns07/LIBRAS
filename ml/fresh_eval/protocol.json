@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-26",
+  "scope": "exploratorio",
+  "sources": {
+    "ufsm-numeros": {
+      "name": "Números",
+      "publisher": "Universidade Federal de Santa Maria, NTE, Programa Libras ON e Núcleo de Acessibilidade",
+      "credits": "Libras ON. Câmera e edição Matheus Fighera. Produção Ronaldo Palma.",
+      "page": "https://ntetube.nte.ufsm.br/v/1527001532",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license": "CC-BY-NC-SA-4.0",
+      "url": "https://ntetube.nte.ufsm.br/repositorio/11b999f96d7b60ba26f2942df892728f/480p.mp4",
+      "sha256": "ac5765376c4ec290d1963e105e08e9a1d314a69c9f561459a6d532810b66443b",
+      "filename": "ufsm-numeros-480.mp4"
+    },
+    "fiocruz-numeros": {
+      "name": "Números Cardinais",
+      "publisher": "Fundação Oswaldo Cruz, Campus Virtual, Icict",
+      "credits": "Thiago Cardoso Alves, professor de Libras. Curso Acessibilidade e os Princípios do SUS, módulo 6.",
+      "page": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/modulo_6_video_3.html",
+      "licenseUrl": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/",
+      "license": "CC-BY-NC-SA",
+      "url": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/downloads/modulo_6/004-Numeros-cardinais.mp4",
+      "sha256": "259a28f593df2f690435c5337f187a56a00fef89a3e145770eb1e721f013971f",
+      "filename": "fiocruz-cardinais.mp4"
+    },
+    "ufsm-cores": {
+      "name": "Cores",
+      "publisher": "Universidade Federal de Santa Maria, NTE",
+      "credits": "Grupo de Produção de Material Didático em Língua de Sinais. Câmera e edição Matheus Fighera. Câmera Julien Moretto. Produção Ronaldo Palma.",
+      "page": "https://ntetube.nte.ufsm.br/v/1536678082",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license": "CC-BY-NC-SA-4.0",
+      "url": "https://ntetube.nte.ufsm.br/repositorio/b803553b06fe9d3affc2a30614598f71/480p.mp4",
+      "sha256": "6d1511cb40c9f7b589c87f397639ec276d9bd505d45e9391db9c8e58b7674561",
+      "filename": "ufsm-cores-480.mp4"
+    }
+  },
+  "clips": [
+    {
+      "id": "ufsm-cinco",
+      "source": "ufsm-numeros",
+      "signer": 1,
+      "label": "cinco",
+      "startMs": 11500,
+      "durationMs": 930,
+      "cue": "Algarismo 5 na legenda do material e configuração do cardinal mantida durante a janela. Quadro apertado com cabeça cortada."
+    },
+    {
+      "id": "fiocruz-cinco",
+      "source": "fiocruz-numeros",
+      "signer": 2,
+      "label": "cinco",
+      "startMs": 61000,
+      "durationMs": 3550,
+      "cue": "Algarismo 5 na tela e configuração cardinal estabilizada, sem os números adjacentes. Cabeça, ombros e mão completos."
+    },
+    {
+      "id": "ufsm-amarelo",
+      "source": "ufsm-cores",
+      "signer": 3,
+      "label": "amarelo",
+      "startMs": 36000,
+      "durationMs": 2350,
+      "cue": "Identificação AMARELO inserida pelos autores. Forma articulada junto à bochecha com movimento lateral. Apresentação de variante do material."
+    }
+  ],
+  "models": {
+    "v1": {
+      "threshold": 0.495,
+      "onnxSha256": "52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a",
+      "manifestSha256": "8d2e30c7c20d243f717c4fc86d1ac533988cdbb862adf8abff6a1b3fa0818b33"
+    },
+    "expanded": {
+      "threshold": 0.475,
+      "onnxSha256": "fc50063cb217efbb71cff5758df723ccc643a59b1673ffc54e0e0815c5233e27",
+      "manifestSha256": "54ee3c8036d39c3905b476508d42c2d4a14cf841b86553de4b4a5229204fa63f"
+    },
+    "geometry": {
+      "threshold": 0.64,
+      "onnxSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifestSha256": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac"
+    }
+  }
+}
