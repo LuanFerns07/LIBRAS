@@ -15,6 +15,7 @@ const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
 const expectedReason = process.env.LIBRASIA_EXPECT_REASON
 const prefix = process.env.LIBRASIA_TEST_TRANSCRIPT_PREFIX ?? ''
 const voiceMode = process.env.LIBRASIA_TEST_VOICE_MODE
+const offline = process.env.LIBRASIA_TEST_OFFLINE === '1'
 const fixedCaptureMs = process.env.LIBRASIA_TEST_CAPTURE_MS === undefined
   ? null : Number(process.env.LIBRASIA_TEST_CAPTURE_MS)
 const markerOffsetMs = Number(process.env.LIBRASIA_TEST_START_OFFSET_MS ?? 0)
@@ -114,6 +115,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
+  if (offline) assert.ok(expected && sync && !multiple && !target && trials >= 2,
+    'Use um sinal confirmado na área livre, com clipe sincronizado e pelo menos duas tentativas.')
   if (expectedReason) assert.ok(!expected, 'O motivo esperado deve corresponder a uma tentativa inconclusiva.')
   assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
     'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
@@ -131,13 +134,26 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   const base = new URL('/', appUrl)
   assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname), 'Use uma prévia local em loopback para este teste de vídeo.')
   const otherRequests = []
+  const offlineRequests = []
   const seenAssets = new Set()
+  const probeUrl = offline ? new URL('?librasia-test-offline-probe=1', base).href : null
+  let offlineActive = false
+  let probeRequestId
+  let probeError
   await withChromium(async ({ page, evaluate, waitUntil, navigate, permission, listen }) => {
-    listen('Network.requestWillBeSent', ({ request }) => {
+    listen('Network.requestWillBeSent', ({ request, requestId }) => {
+      if (request.url === probeUrl) {
+        probeRequestId = requestId
+        return
+      }
       const url = new URL(request.url)
       if (url.protocol === 'blob:' || url.protocol === 'data:') return
       if (url.origin !== base.origin || request.method !== 'GET') otherRequests.push([request.method, url.origin])
+      if (offlineActive) offlineRequests.push([request.method, url.pathname])
       seenAssets.add(url.pathname)
+    })
+    if (offline) listen('Network.loadingFailed', ({ requestId, errorText }) => {
+      if (requestId === probeRequestId) probeError = errorText
     })
     await page('Network.enable')
     await navigate(base.href + (target ? '#praticar' : voiceMode ? '#saiba-mais' : '#area-livre'))
@@ -175,6 +191,18 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     const captureMs = multiple ? 10300 : videoFile ? 3850 : 1600
     const decisions = []
     for (let trial = 0; trial < trials; trial += 1) {
+      if (offline && trial === 1) {
+        assert.equal(decisions[0].state, 'accepted', 'Confirme o reconhecimento antes de desconectar.')
+        await evaluate('window.testCameraTrack = document.querySelector("video").srcObject.getVideoTracks()[0]; true')
+        const state = { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 }
+        offlineActive = true
+        await page('Network.emulateNetworkConditionsByRule', {
+          emulateOfflineServiceWorker: true,
+          matchedNetworkConditions: [{ urlPattern: '', ...state }],
+        })
+        await page('Network.overrideNetworkState', state)
+        await waitUntil('navigator.onLine === false')
+      }
       let marked
       if (sync) {
         marked = await evaluate('(' + beginAtGreenMarker + ')(' + markerOffsetMs + ',' + (fixedCaptureMs !== null) + ')', true)
@@ -265,6 +293,17 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
     assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
+
+    if (offline) {
+      const unchangedCamera = 'document.querySelector("video").srcObject?.getVideoTracks()[0] === window.testCameraTrack'
+      assert.equal(await evaluate('navigator.onLine === false && ' + unchangedCamera +
+        ' && window.testCameraTrack.readyState === "live"'), true)
+      const blocked = await evaluate('fetch(' + JSON.stringify(probeUrl) + ', { cache: "no-store" }).then(() => false, () => true)')
+      assert.equal(blocked, true, 'A rede emulada deve bloquear até a sonda para o servidor local.')
+      assert.equal(probeError, 'net::ERR_INTERNET_DISCONNECTED')
+      assert.deepEqual(offlineRequests, [], 'O reconhecimento offline deve usar apenas os ativos já carregados.')
+      context.diagnostic('A câmera permaneceu ativa, a transcrição foi atualizada offline e a página não fez novas requisições.')
+    }
 
     if (voiceMode) {
       const edit = decisions.at(-1).transcript + '. Texto revisado.'

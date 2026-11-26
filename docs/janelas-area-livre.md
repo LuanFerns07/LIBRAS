@@ -81,3 +81,13 @@ captura "$cinco" 0 3850 cinco
 ```
 
 A saída mostra o intervalo entregue pelo navegador, a quantidade de quadros processados, a decisão e a transcrição. Execute uma janela por vez para evitar concorrência entre navegadores.
+
+## Reconhecimento após desconectar
+
+Com a mesma prévia e o mesmo clipe Cinco S09-1, repita o controle abaixo. O primeiro reconhecimento ocorre com rede disponível. Antes do segundo, o DevTools aplica uma regra global de bloqueio de rede e expõe o estado offline ao navegador. O teste acompanha a mesma trilha de vídeo e registra as requisições da página a partir da desconexão. [Protocolo DevTools para as regras e o estado de rede](https://chromedevtools.github.io/devtools-protocol/tot/Network/)
+
+```bash
+LIBRASIA_TEST_OFFLINE=1 captura "$cinco" 0 3850 cinco
+```
+
+Na execução com o Chromium 156.0.8078.79, a primeira tentativa acrescentou Cinco em 0–3.933 ms e a segunda acrescentou Cinco offline em 0–4.033 ms. O texto final ficou “Texto conferido. cinco cinco”. A câmera simulada continuou com a mesma trilha ativa e a página fez zero novas requisições. Depois do reconhecimento, a sonda explícita do teste ao servidor local foi bloqueada com `net::ERR_INTERNET_DISCONNECTED`. O arquivo local é `data/evidence/qa-janelas-v1-cinco-offline.log`. O cenário reproduz a privacidade técnica com os ativos carregados e a página aberta.
