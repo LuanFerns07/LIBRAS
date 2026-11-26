@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { lesson } from '../src/catalog.js'
-import { markAttempt, readProgress, writeProgress } from '../src/progress.js'
+import { markAttempt, readProgress, reviewOrder, writeProgress } from '../src/progress.js'
 import { appendTranscription, freeFeedback, observePalm, practiceFeedback } from '../src/recognition/feedback.js'
 import { brazilianVoice, mountSpeech } from '../src/speech.js'
 
@@ -81,4 +81,15 @@ test('o progresso local persiste somente os contadores e estados do catálogo', 
   assert.equal(entry.accepted, 1)
   assert.equal(entry.independent, true)
   assert.equal(entry.guided, false)
+})
+
+test('a revisão prioriza tentativas pendentes e atualiza a sugestão após acerto', () => {
+  const progress = readProgress()
+  const [cinco, espelho] = lesson
+  markAttempt(progress[espelho.id], 1, inconclusive)
+  markAttempt(progress[espelho.id], 1, inconclusive)
+  markAttempt(progress[cinco.id], 1, inconclusive)
+  assert.equal(reviewOrder(progress)[0], espelho)
+  markAttempt(progress[espelho.id], 1, { state: 'accepted' })
+  assert.equal(reviewOrder(progress)[0], cinco)
 })

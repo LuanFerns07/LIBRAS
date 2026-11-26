@@ -228,6 +228,8 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); width
 .practice-heading p:last-child { margin-bottom: 0; }
 .page-heading .eyebrow { color: var(--accent-dark); font-size: .87rem; font-weight: 750; margin-bottom: .52rem; }
 .progress-badge { color: var(--accent-dark); background: var(--lavender); border-radius: 99rem; padding: .55rem .85rem; font-size: .86rem; font-weight: 700; }
+.lesson-progress { display: grid; gap: .45rem; }
+.lesson-progress progress { width: 100%; height: .5rem; accent-color: var(--accent); }
 .lesson-settings { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .65rem; padding: .78rem; }
 .signal-picker { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--muted); font-size: .9rem; font-weight: 700; }
 .signal-picker select { color: var(--ink); }

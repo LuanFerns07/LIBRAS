@@ -1,6 +1,11 @@
 import { alphabet } from '../catalog.js'
 import { mountPlayerControls, playerMarkup } from '../player-controls.js'
 
+const comparisons = [
+  ['A', 'S', 'Em A, o polegar fica ao lado dos dedos fechados. Em S, ele cruza à frente dos dedos.'],
+  ['I', 'J', 'I mantém a configuração com o dedo mínimo estendido. J usa essa configuração com movimento.'],
+]
+
 export function mountAlphabet(main, createPlayer) {
   main.innerHTML = `
     <div class="page-heading">
@@ -16,6 +21,13 @@ export function mountAlphabet(main, createPlayer) {
             `<button class="letter-button" type="button" aria-pressed="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${label}</button>`).join('')}
         </div>
         <p class="inline-status subtle">As demonstrações estão em revisão linguística.</p>
+        <div class="coverage">
+          <h3>Compare letras parecidas</h3>
+          <div class="toolbar">
+            ${comparisons.map(([first, second], index) => `<button type="button" class="button" data-comparison="${index}">${first} e ${second}</button>`).join('')}
+          </div>
+          <p class="inline-status" data-comparison-status role="status" hidden></p>
+        </div>
       </section>
       ${playerMarkup('Demonstração da letra')}
     </div>`
@@ -23,6 +35,7 @@ export function mountAlphabet(main, createPlayer) {
   const player = mountPlayerControls(main, createPlayer)
   const grid = main.querySelector('.letter-grid')
   const buttons = Array.from(grid.querySelectorAll('button'))
+  const comparisonStatus = main.querySelector('[data-comparison-status]')
   let selected = 0
 
   function select(index, autoplay) {
@@ -31,10 +44,22 @@ export function mountAlphabet(main, createPlayer) {
     selected = index
     buttons[selected].setAttribute('aria-pressed', 'true')
     buttons[selected].tabIndex = 0
+    comparisonStatus.hidden = true
     player.setSequence([alphabet[selected]], autoplay)
   }
 
   buttons.forEach((button, index) => button.addEventListener('click', () => select(index, true)))
+  for (const button of main.querySelectorAll('[data-comparison]')) {
+    button.addEventListener('click', () => {
+      const [first, second, description] = comparisons[Number(button.dataset.comparison)]
+      const firstIndex = alphabet.findIndex(letter => letter.label === first)
+      select(firstIndex, false)
+      buttons[firstIndex].setAttribute('aria-pressed', 'false')
+      player.setSequence([alphabet[firstIndex], alphabet.find(letter => letter.label === second)], true)
+      comparisonStatus.textContent = description
+      comparisonStatus.hidden = false
+    })
+  }
   grid.addEventListener('keydown', event => {
     const current = buttons.indexOf(event.target)
     if (current < 0) return

@@ -1,7 +1,7 @@
 import { lesson } from '../catalog.js'
 import { captureMarkup, mountCapture } from '../capture-panel.js'
 import { mountPlayerControls, playerMarkup } from '../player-controls.js'
-import { markAttempt, readProgress, writeProgress } from '../progress.js'
+import { isComplete, markAttempt, readProgress, reviewOrder, writeProgress } from '../progress.js'
 import { practiceFeedback } from '../recognition/feedback.js'
 
 const stages = [
@@ -30,7 +30,10 @@ export function mountPractice(main, { createPlayer, openEngine }) {
         <h1>Pratique Libras</h1>
         <p>Observe o avatar e pratique sinais isolados com a webcam.</p>
       </div>
-      <span class="progress-badge" data-progress></span>
+      <div class="lesson-progress">
+        <span class="progress-badge" data-progress></span>
+        <progress aria-label="Progresso da lição" max="${lesson.length}" value="0"></progress>
+      </div>
     </div>
     <div class="lesson-settings panel">
       <label class="signal-picker">Sinal da lição
@@ -60,6 +63,11 @@ export function mountPractice(main, { createPlayer, openEngine }) {
       </form>
       <p class="inline-status" data-quiz-status role="status" hidden></p>
     </section>
+    <section class="panel content-panel practice-activity" aria-labelledby="review-heading">
+      <h2 id="review-heading">Revisão</h2>
+      <p class="muted" data-review-reason></p>
+      <button class="button" type="button" data-review></button>
+    </section>
     <p class="inline-status subtle">Protótipo experimental. Os sinais e as dicas estão em revisão linguística.</p>`
 
   const player = mountPlayerControls(main, createPlayer)
@@ -67,17 +75,29 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   const fieldset = main.querySelector('[data-quiz]')
   const quizStatus = main.querySelector('[data-quiz-status]')
   const progressLabel = main.querySelector('[data-progress]')
+  const progressBar = main.querySelector('progress')
+  const reviewButton = main.querySelector('[data-review]')
+  const reviewReason = main.querySelector('[data-review-reason]')
   const observation = main.querySelector('[data-observation]')
   const title = main.querySelector('[data-stage-title]')
   const intro = main.querySelector('[data-step-intro]')
   const tabs = [...main.querySelectorAll('[data-stage]')]
   const picker = main.querySelector('[data-signal]')
   const current = () => lesson[signal]
+  let reviewTarget
 
   function store() {
     writeProgress(storage, progress)
-    const count = Object.values(progress).filter(entry => entry.observed && entry.guided && entry.independent && entry.understood).length
+    const count = Object.values(progress).filter(isComplete).length
     progressLabel.textContent = `${count} de ${lesson.length} sinais concluídos`
+    progressBar.value = count
+    reviewTarget = reviewOrder(progress)[0]
+    const entry = progress[reviewTarget.id]
+    reviewButton.textContent = `Revisar ${reviewTarget.label}`
+    reviewReason.textContent = entry.retryStreak > 0
+      ? 'A sugestão prioriza sinais que ainda precisam de uma nova tentativa.'
+      : count === lesson.length ? 'Você concluiu as etapas da lição e pode praticar de novo.'
+        : 'A sugestão prioriza sinais com etapas pendentes.'
   }
 
   const camera = mountCapture(main, {
@@ -120,6 +140,13 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     signal = lesson.findIndex(entry => entry.id === picker.value)
     step = 0
     render()
+  })
+  reviewButton.addEventListener('click', () => {
+    signal = lesson.indexOf(reviewTarget)
+    picker.value = reviewTarget.id
+    step = progress[reviewTarget.id].understood ? 1 : 0
+    render()
+    tabs[step].focus()
   })
   main.querySelector('form').addEventListener('submit', event => {
     event.preventDefault()
