@@ -9,7 +9,7 @@ import torch
 
 from dataset import Clip
 from evaluate import create_session, run_inference
-from model import ARCHITECTURES, ConvSequenceFlexion, ConvSequenceGated, ConvSequenceGeometry
+from model import ARCHITECTURES, ConvSequenceFlexion, ConvSequenceGated, ConvSequenceGeometry, ConvSequenceMotion
 from train import augment, export
 
 
@@ -81,3 +81,19 @@ class ModelTests(TestCase):
         video[..., 8, 3] = 0
         masked = model.finger_flexion(video.flatten(start_dim=2))
         self.assertEqual(masked.count_nonzero().item(), 0)
+
+    def test_motion_uses_adjacent_points_and_masks_occlusion(self):
+        video = torch.zeros(1, 24, 48, 4)
+        video[..., 6, :] = torch.tensor([0., 0., 0., 1.])
+        video[..., 11, :] = torch.tensor([.2, 0., 0., 1.])
+        video[..., 23, :] = torch.tensor([0., .2, 0., 1.])
+        video[..., 14, :] = torch.tensor([.4, 0., 0., 1.])
+        video[:, 1:, 14, 1] = -.2
+        video[:, 2, 14, 3] = 0.
+        measured = ConvSequenceMotion.hand_motion(video.flatten(start_dim=2))
+        self.assertEqual(measured.shape, (1, 24, 32))
+        torch.testing.assert_close(measured[0, 0, :4], torch.tensor([0., 0., 1., 1.]))
+        self.assertEqual(measured[0, 0, 4:].count_nonzero().item(), 0)
+        torch.testing.assert_close(measured[0, 1, 8:12], torch.tensor([0., -.2, 0., 1.]))
+        self.assertEqual(measured[0, 2:4, 8:12].count_nonzero().item(), 0)
+        self.assertEqual(measured[..., 16:].count_nonzero().item(), 0)

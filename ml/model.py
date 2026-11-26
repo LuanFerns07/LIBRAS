@@ -59,8 +59,8 @@ class ConvSequenceGeometry(ConvSequence):
 class ConvSequenceFlexion(ConvSequenceGeometry):
     """Representa ângulos de flexão dos dedos e a presença dos pontos usados."""
 
-    def __init__(self, classes):
-        super().__init__(classes, extra_features=2 * 5 * 3 * 2)
+    def __init__(self, classes, extra_features=0):
+        super().__init__(classes, extra_features=2 * 5 * 3 * 2 + extra_features)
         digits = [joint for finger in range(5) for joint in (0, *range(4 * finger + 1, 4 * finger + 5))]
         self.register_buffer("digit_joints", torch.tensor(digits), persistent=False)
 
@@ -79,6 +79,34 @@ class ConvSequenceFlexion(ConvSequenceGeometry):
         return torch.cat((super().hand_channels(video), self.finger_flexion(video)), dim=-1)
 
 
+class ConvSequenceMotion(ConvSequenceFlexion):
+    """Expõe orientação da palma e deslocamentos entre instantes rastreados."""
+
+    def __init__(self, classes):
+        super().__init__(classes, extra_features=2 * 16)
+
+    @staticmethod
+    def hand_motion(video):
+        hands = video[..., 24:].reshape(video.shape[0], video.shape[1], 2, 21, 4)
+        wrist = hands[..., 0, :]
+        index = hands[..., 5, :]
+        little = hands[..., 17, :]
+        normal = torch.cross(index[..., :3] - wrist[..., :3], little[..., :3] - wrist[..., :3], dim=-1)
+        amplitude = normal.square().sum(dim=-1, keepdim=True)
+        mask = wrist[..., 3:] * index[..., 3:] * little[..., 3:] * (amplitude > 1e-8)
+        palm = torch.cat((normal * amplitude.clamp_min(1e-8).rsqrt() * mask, mask), dim=-1)
+
+        points = torch.stack((wrist, hands[..., 8, :], palm), dim=-2)
+        joint = points[:, 1:, ..., 3:] * points[:, :-1, ..., 3:]
+        delta = (points[:, 1:, ..., :3] - points[:, :-1, ..., :3]) * joint
+        change = torch.cat((delta, joint), dim=-1).flatten(start_dim=3)
+        change = torch.cat((torch.zeros_like(change[:, :1]), change), dim=1)
+        return torch.cat((palm, change), dim=-1).flatten(start_dim=2)
+
+    def hand_channels(self, video):
+        return torch.cat((super().hand_channels(video), self.hand_motion(video)), dim=-1)
+
+
 class ConvSequenceGated(ConvSequenceGeometry):
     """Estima se a entrada é conhecida e classifica o sinal dado esse evento."""
 
@@ -93,5 +121,6 @@ class ConvSequenceGated(ConvSequenceGeometry):
 
 
 ARCHITECTURES = {
-    model.__name__: model for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated, ConvSequenceFlexion)
+    model.__name__: model
+    for model in (ConvSequence, ConvSequenceGeometry, ConvSequenceGated, ConvSequenceFlexion, ConvSequenceMotion)
 }

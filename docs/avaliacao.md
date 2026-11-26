@@ -243,3 +243,15 @@ No Chromium, a combinação rejeitou as dez reproduções parciais de Banco e pr
 node ml/verify-wasm.mjs --run data/models/isolated-combined
 LIBRASIA_PORTA=4175 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
 ```
+
+## Orientação e movimento de pontos das mãos
+
+Espelho combina a orientação e a rotação da palma. Amarelo combina a configuração da mão e o deslocamento do indicador na região do rosto. O candidato `ConvSequenceMotion` acrescenta a normal da palma e a variação entre instantes consecutivos dessa normal, do pulso e da ponta do indicador. Cada variação requer os pontos presentes nos dois quadros. A entrada do modelo no navegador segue sendo o tensor Holistic de 24 × 192. [Descrição dos sinais](animacoes.md)
+
+A comparação conserva as três rodadas por pessoa do treino original e inclui o modelo de flexão e a média das probabilidades. A calibração usa exclusivamente a validação de cada rodada. Para justificar um reteste do candidato, a análise acompanha as metas do protocolo para Espelho, Amarelo, cobertura e falsas aceitações. O teste reservado original fica fora da escolha.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --combine \
+  --reference ConvSequenceFlexion --candidate ConvSequenceMotion \
+  --out data/models/isolated-motion/cross-validation.json
+```
