@@ -182,3 +182,15 @@ No conjunto de 12 negativos do CLAD já usado para comparar outros modelos, o ca
   --features data/minds-expanded/features/index.json --run data/models/isolated-flexion
 node ml/verify-wasm.mjs --run data/models/isolated-flexion
 ```
+
+## Treino com janelas parciais de negativos
+
+Uma captura pode conter só parte de um sinal desconhecido. Para avaliar a rejeição nessa situação, o protocolo fixa o primeiro e o último 60% de cada vídeo negativo da partição original de treino. Os dois trechos conservam a velocidade, a pessoa e a classe do original. A avaliação usa três rodadas por pessoa, com as mesmas pessoas de treino, validação e medição nas duas condições. A validação que escolhe época e limiar recebe vídeos completos.
+
+No candidato, cada negativo elegível contribui com somente uma entrada por época, sorteada entre o vídeo completo e os recortes com extração válida. Isso mantém a contagem por classe e o peso total de cada exemplo. Os sinais conhecidos entram inteiros no treino. Na medição de negativos parciais, um vídeo conta uma vez quando pelo menos um de seus dois recortes é aceito. O candidato precisa reduzir essa contagem, manter pelo menos 75% de cobertura nos positivos completos e preservar os acertos de Cinco da referência. O recorte de Banco usado no navegador fica fora da seleção.
+
+```bash
+.venv/bin/python ml/compare_partial_negatives.py --device cuda \
+  --partial-negatives data/minds-partial/features-negative/index.json \
+  --out data/models/isolated-partials/cross-validation.json
+```

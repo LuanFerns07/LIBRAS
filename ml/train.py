@@ -16,6 +16,7 @@ import torch
 from dataset import CATALOGS, FEATURES, FRAMES, LABELS, PREPROCESS, digest, load_features, write_json
 from metrics import checks, choose_threshold
 from model import ARCHITECTURES
+from partial_negatives import load_partial_negatives
 
 SEED = 7391
 
@@ -46,13 +47,24 @@ def collect(model, rows, device):
     return {row.index: output for row, output in zip(eligible, predictions, strict=True)}
 
 
-def train(rows, device, epochs, batch_size, seed, catalog=LABELS, arch="ConvSequence"):
+def train(rows, device, epochs, batch_size, seed, catalog=LABELS, arch="ConvSequence", partial_negatives=None):
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True)
     random = torch.Generator().manual_seed(seed)
     validation = [row for row in rows if row.partition == "val"]
     examples = [row for row in rows if row.partition == "train" and row.values is not None]
     features = torch.from_numpy(np.stack([row.values for row in examples]))
+    variants = []
+    for position, example in enumerate(examples):
+        pair = (partial_negatives or {}).get(example.index, {})
+        if not pair:
+            continue
+        if example.label != 0:
+            raise ValueError("Somente exemplos negativos podem receber recortes de treino.")
+        choices = [clip.values for clip in pair.values() if clip.values is not None]
+        if choices:
+            variants.append((position, torch.from_numpy(np.stack([example.values, *choices]))))
+    variant_random = torch.Generator().manual_seed(seed + 1)
     labels = torch.tensor([row.label for row in examples], dtype=torch.long)
     counts = torch.bincount(labels, minlength=len(catalog))
     if not bool(counts.all()):
@@ -68,10 +80,16 @@ def train(rows, device, epochs, batch_size, seed, catalog=LABELS, arch="ConvSequ
     for epoch in range(1, epochs + 1):
         losses = []
         model.train()
+        epoch_features = features
+        if variants:
+            epoch_features = features.clone()
+            for position, choices in variants:
+                index = torch.randint(len(choices), (), generator=variant_random).item()
+                epoch_features[position] = choices[index]
         permutation = torch.randperm(len(examples), generator=random)
         for indices in permutation.split(batch_size):
             optimizer.zero_grad(set_to_none=True)
-            input_values = augment(features[indices], random).to(device)
+            input_values = augment(epoch_features[indices], random).to(device)
             loss = criterion(model(input_values), labels[indices].to(device))
             loss.backward()
             optimizer.step()
@@ -118,6 +136,8 @@ def main():
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--catalogo", choices=tuple(CATALOGS), default="inicial")
     parser.add_argument("--arch", choices=tuple(ARCHITECTURES), default="ConvSequence")
+    parser.add_argument("--partial-negatives", type=Path,
+                        help="Usa janelas temporais de negativos como alternativas de treino.")
     args = parser.parse_args()
     if args.epochs <= 0 or args.batch_size <= 0:
         parser.error("Épocas e tamanho de lote devem ser positivos.")
@@ -129,8 +149,11 @@ def main():
     torch.set_num_threads(min(4, os.cpu_count() or 1))
     catalog = CATALOGS[args.catalogo]
     index, data = load_features(args.features, {"train", "val"}, catalog)
+    partial, provenance = (None, None)
+    if args.partial_negatives is not None:
+        partial, provenance = load_partial_negatives(args.partial_negatives, index, data, catalog)
     print(f"Treino no dispositivo {device} com Torch {torch.__version__}.", flush=True)
-    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog, args.arch)
+    model, best, history, counts = train(data, device, args.epochs, args.batch_size, args.seed, catalog, args.arch, partial)
     args.out.mkdir(parents=True, exist_ok=True)
     checkpoint = args.out / "isolated.pt"
     torch.save(model.state_dict(), checkpoint)
@@ -156,6 +179,7 @@ def main():
         "featuresManifestSha256": digest(args.features), "modelManifestSha256": digest(args.out / "isolated.json"),
         "modelSha256": manifest["modelSha256"], "validation": best["validation"],
         "validationChecks": checks(best["validation"]), "history": history,
+        **({"partialNegatives": provenance} if provenance is not None else {}),
     })
     print(f"ONNX exportado em {onnx_path}, época {best['epoch']} e limiar {best['threshold']:.6f}.")
 
