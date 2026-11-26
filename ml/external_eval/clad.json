@@ -1,0 +1,41 @@
+{
+  "reviewedOn": "2026-11-26",
+  "source": {
+    "title": "Complex and Long Activities Dataset",
+    "authors": ["Jawad Tayyub", "Majd Hawasly", "Anthony G. Cohn"],
+    "publisher": "University of Leeds",
+    "year": 2017,
+    "doi": "10.5518/249",
+    "record": "https://archive.researchdata.leeds.ac.uk/254/",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "archives": {
+      "videos": {
+        "name": "videos.zip",
+        "url": "https://archive.researchdata.leeds.ac.uk/254/2/videos.zip",
+        "sha256": "71fdb6c614ecc4ad4afac10a55e1530cd3534011a571d3a5489897b0bd5312ce"
+      },
+      "annotations": {
+        "name": "annotations.zip",
+        "url": "https://archive.researchdata.leeds.ac.uk/254/1/annotations.zip",
+        "sha256": "4df8e9dd3df2a6a4abe13cbce524c2322de69bf81b55dc3549fa72ff3e5edc35"
+      }
+    }
+  },
+  "testSubjectIds": [1, 2, 3],
+  "developmentReservedSubjectIds": [4, 5],
+  "clips": [
+    {"id": "clad-repouso-01a", "subject": 1, "video": 2, "startMs": 225600, "stratum": "repouso", "observation": "Pausa sentado, segurando a tigela próxima à mesa."},
+    {"id": "clad-repouso-01b", "subject": 1, "video": 3, "startMs": 261600, "stratum": "repouso", "observation": "Pausa sentado, com tigela e utensílio mantidos na mesma região."},
+    {"id": "clad-repouso-02a", "subject": 2, "video": 6, "startMs": 12000, "stratum": "repouso", "observation": "Pausa olhando a mesa, segurando embalagem e colher baixas."},
+    {"id": "clad-repouso-02b", "subject": 2, "video": 7, "startMs": 16000, "stratum": "repouso", "observation": "Leitura sentada com jornal apoiado e mãos sem ação ampla."},
+    {"id": "clad-repouso-03a", "subject": 3, "video": 11, "startMs": 194600, "stratum": "repouso", "observation": "Pausa sentada com olhar baixo e mãos mantidas junto à mesa."},
+    {"id": "clad-repouso-03b", "subject": 3, "video": 13, "startMs": 167400, "stratum": "repouso", "observation": "Pessoa sentada com mãos juntas e pequena variação de postura."},
+    {"id": "clad-movimento-01a", "subject": 1, "video": 1, "startMs": 8000, "stratum": "movimento-comum", "observation": "Manipulação bimanual de um pote de café."},
+    {"id": "clad-movimento-01b", "subject": 1, "video": 43, "startMs": 23000, "stratum": "movimento-comum", "observation": "Desloca a mão com caneta e escreve no papel junto ao laptop."},
+    {"id": "clad-movimento-02a", "subject": 2, "video": 6, "startMs": 6000, "stratum": "movimento-comum", "observation": "Transição entre embalagens e líquido colocado na tigela."},
+    {"id": "clad-movimento-02b", "subject": 2, "video": 48, "startMs": 18000, "stratum": "movimento-comum", "observation": "Ergue o copo à boca, retorna à mesa e manuseia o papel."},
+    {"id": "clad-movimento-03a", "subject": 3, "video": 11, "startMs": 8000, "stratum": "movimento-comum", "observation": "Ergue, gira e inclina uma caixa de cereal."},
+    {"id": "clad-movimento-03b", "subject": 3, "video": 53, "startMs": 1500, "stratum": "movimento-comum", "observation": "Digita no laptop e leva uma mão ao queixo."}
+  ]
+}
