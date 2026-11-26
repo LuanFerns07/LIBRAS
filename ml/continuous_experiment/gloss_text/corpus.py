@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import re
 from shutil import copyfileobj
-from tempfile import NamedTemporaryFile
+from tempfile import TemporaryDirectory
 import unicodedata
 from urllib.request import Request, urlopen
 
@@ -49,12 +49,12 @@ def acquire(path):
         check_csv(path)
         return
     request = Request(URL, headers={"User-Agent": "LibrasIA/1.0 (public dataset reproduction)"})
-    with NamedTemporaryFile(dir=path.parent, delete_on_close=False) as pending:
-        with urlopen(request, timeout=45) as response:
+    with TemporaryDirectory(dir=path.parent) as directory:
+        temporary = Path(directory) / path.name
+        with urlopen(request, timeout=45) as response, temporary.open("wb") as pending:
             copyfileobj(response, pending)
-        pending.flush()
-        check_csv(Path(pending.name))
-        Path(pending.name).replace(path)
+        check_csv(temporary)
+        temporary.replace(path)
 
 
 def read_pairs(path, selected=None):
@@ -137,9 +137,10 @@ def partition(pairs):
 
 
 def write_json(path, payload):
-    with path.open("x", encoding="utf-8") as stream:
-        json.dump(payload, stream, indent=2, ensure_ascii=False)
-        stream.write("\n")
+    with TemporaryDirectory(dir=path.parent) as directory:
+        temporary = Path(directory) / path.name
+        temporary.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        path.hardlink_to(temporary)
 
 
 def main():
