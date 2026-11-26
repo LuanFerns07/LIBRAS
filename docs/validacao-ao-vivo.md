@@ -17,10 +17,12 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
 Anote a versão de catálogo e a revisão do avatar da compilação testada. Registre o commit e as somas dos arquivos instalados antes de começar. Conferir as duas somas identifica mudanças de limiar que preservem os mesmos pesos.
 
 ~~~bash
-git rev-parse HEAD
+curl -fsS http://127.0.0.1:4173/commit.txt
 curl -fsS http://127.0.0.1:4173/models/isolated.onnx | sha256sum
 curl -fsS http://127.0.0.1:4173/models/isolated.json | sha256sum
 ~~~
+
+Se iniciou a aplicação diretamente de um checkout, registre o resultado de `git rev-parse HEAD` na hora de compilar. A prévia empacotada serve o commit da compilação em `/commit.txt`.
 
 Use a resolução da trilha observada e o intervalo de amostragem da versão instalada. No reconhecedor atual, o intervalo configurado é 100 ms. Para conferir a resolução, após a pessoa ligar a câmera, leia os valores width e height no console da aba do aplicativo.
 
