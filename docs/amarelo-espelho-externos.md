@@ -47,3 +47,27 @@ O recorte de Amarelo do Cederj permaneceu inconclusivo nos dois modelos, mesmo c
 ## Reteste com as arquiteturas de 196 canais
 
 No mesmo recorte, o modelo de controle reconheceu Amarelo com confiança de 0,9482 e limiar de 0,405. O candidato que usa a posição da mão em relação ao nariz deu 0,6590 a Amarelo, a maior probabilidade do clipe. O resultado permaneceu inconclusivo com limiar de 0,700. Os dois modelos foram treinados no MINDS-Libras antes do reteste. [Protocolo e pesos congelados](../ml/fresh_eval/protocol-nose.json) · [Manifesto do reteste](../ml/fresh_eval/evidence-nose/manifest.json) · [Resultado do reteste](../ml/fresh_eval/evidence-nose/report.json) · [Comparação por pessoa](avaliacao.md#posição-da-mão-em-relação-ao-nariz)
+
+### Comparação na área livre do Chromium
+
+O controle de SHA `3cbb1418` e a prévia estável com o modelo `a8e991d9` receberam os mesmos clipes Y4M pela câmera simulada. O trecho do Cederj ganhou um marcador inicial para sincronizar uma janela de 2.250 ms. Os clipes do MINDS e do CLAD usaram 4.200 ms, incluindo o marcador. Os casos do CLAD incluem 3,70 s dos 4,00 s de cada recorte original.
+
+| Controle de vídeo | Acertos da prévia estável | Acertos do controle |
+| --- | ---: | ---: |
+| Amarelo do Cederj | 0/2 | 2/2 |
+| Amarelo S01-1 do treino | 1/1 | 1/1 |
+| Espelho S04-1 do treino | 3/3 | 1/3 |
+| Repouso CLAD 01a | 1/1 rejeitado | 1/1 rejeitado |
+| Movimento cotidiano CLAD 01a | 1/1 rejeitado | 1/1 rejeitado |
+
+Com o controle, as duas perdas de Espelho foram por rastreamento insuficiente. No Cederj, o controle acrescentou Amarelo ao texto nas duas tentativas e a prévia manteve o texto anterior. O reteste usa recortes conhecidos e registra resultados da interface. A prévia de câmera segue com a combinação de geometria e flexão. Os registros de execução ficam em `data/evidence/controle-nariz-browser`. [Prévia local](previa-estavel.md) · [Reprodução das tentativas sincronizadas](sinais-com-movimento-browser.md#reproduzir)
+
+Para preparar a entrada do Cederj a partir do recorte de 1.750 ms, use o mesmo marcador dos controles do MINDS.
+
+```bash
+mkdir -p data/evidence/controle-nariz-browser
+ffmpeg -threads 1 -filter_threads 1 \
+  -i data/external-moving-signs/nose/raw/cecierj-12-amarelo.mp4 -an \
+  -vf 'scale=640:-2,fps=30,tpad=start_duration=0.5:color=lime' \
+  -pix_fmt yuv420p data/evidence/controle-nariz-browser/cecierj-amarelo.y4m
+```
