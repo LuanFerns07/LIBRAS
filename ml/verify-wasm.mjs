@@ -67,7 +67,7 @@ async function inBrowser() {
   let worst = 0
   try {
     for (const sample of samples) {
-      const input = new Tensor('float32', Float32Array.from(sample.values), [1, 24, 192])
+      const input = new Tensor('float32', Float32Array.from(sample.values), [1, manifest.frames, manifest.features])
       const { logits } = await session.run({ landmarks: input })
       const result = decide(logits.data, manifest)
       const actual = result.state === 'accepted' ? signalText.get(result.id) : null

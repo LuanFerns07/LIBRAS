@@ -1,5 +1,5 @@
 import { recognitionCatalog } from '../catalog.js'
-import { featureCount, preprocessId, sequenceLength } from './preprocess.js'
+import { preprocessFeatureCounts, sequenceLength } from './preprocess.js'
 
 const signals = new Map(recognitionCatalog.map(({ text, id }) => [text, id]))
 
@@ -8,11 +8,12 @@ export function readModelManifest(data) {
   if (!Array.isArray(labels) || labels.length < 2 || labels[0] !== null ||
       new Set(labels).size !== labels.length || !labels.slice(1).every(label => signals.has(label)) ||
       typeof threshold !== 'number' || !(threshold > 0 && threshold <= 1) ||
-      frames !== sequenceLength || features !== featureCount || preprocess !== preprocessId ||
+      frames !== sequenceLength || typeof preprocess !== 'string' || !Object.hasOwn(preprocessFeatureCounts, preprocess) ||
+      features !== preprocessFeatureCounts[preprocess] ||
       inputName !== 'landmarks' || outputName !== 'logits' || !/^[a-f0-9]{64}$/u.test(modelSha256)) {
     throw new TypeError('Manifesto do classificador incompatível.')
   }
-  return { labels, threshold, modelSha256 }
+  return { labels, threshold, frames, features, preprocess, modelSha256 }
 }
 
 export function decide(logits, manifest) {

@@ -4,7 +4,7 @@ import ortModule from 'onnxruntime-web/ort-wasm-simd-threaded.mjs?url'
 import { decide, readModelManifest } from './decision.js'
 import { observePalm, observeVerticalTrajectory } from './feedback.js'
 import { openHolistic } from './holistic.js'
-import { featureCount, preprocessFrames, sequenceLength } from './preprocess.js'
+import { preprocessFrames } from './preprocess.js'
 import { segmentFrames } from './segmentation.js'
 
 async function localAsset(path) {
@@ -36,7 +36,7 @@ export async function openEngine() {
   let inference = Promise.resolve()
 
   function recognize(frames) {
-    const processed = preprocessFrames(frames)
+    const processed = preprocessFrames(frames, manifest.preprocess)
     if (processed.state === 'no-hand') {
       return { state: 'inconclusive', reason: 'no-hand', message: 'Mostre a mão e os ombros no quadro para tentar de novo.' }
     }
@@ -45,7 +45,7 @@ export async function openEngine() {
     }
     const palm = observePalm(frames)
     const trajectory = observeVerticalTrajectory(frames)
-    const input = new Tensor('float32', processed.values, [1, sequenceLength, featureCount])
+    const input = new Tensor('float32', processed.values, [1, manifest.frames, manifest.features])
     const run = inference.then(async () => {
       const { logits } = await session.run({ landmarks: input })
       return { ...decide(logits.data, manifest), palm, trajectory }
