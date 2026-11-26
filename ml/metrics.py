@@ -1,5 +1,7 @@
 """Decisão compatível com o navegador e métricas incluindo rejeições."""
 
+from statistics import median
+
 import numpy as np
 
 from dataset import LABELS
@@ -81,7 +83,9 @@ def choose_threshold(rows, logits_by_index, labels=LABELS):
     """Calibra só com validação. Prioriza rejeição e F1 macro."""
     if {row.partition for row in rows} != {"val"}:
         raise ValueError("O limiar deve ser escolhido exclusivamente em validação.")
-    best = None
+    best_score = None
+    best_thresholds = []
+    best_metrics = None
     for hundredths in range(25, 101):
         threshold = hundredths / 100
         metrics, _ = measure(rows, logits_by_index, threshold, labels)
@@ -89,8 +93,12 @@ def choose_threshold(rows, logits_by_index, labels=LABELS):
         score = (
             all(gate.values()), gate["falseAcceptance"],
             metrics["f1Macro"], metrics["coverage"]["rate"],
-            -metrics["falseAcceptance"]["rate"], -threshold,
+            -metrics["falseAcceptance"]["rate"],
         )
-        if best is None or score > best[0]:
-            best = (score, threshold, metrics)
-    return best
+        if best_score is None or score > best_score:
+            best_score = score
+            best_thresholds = [threshold]
+            best_metrics = metrics
+        elif score == best_score:
+            best_thresholds.append(threshold)
+    return best_score, median(best_thresholds), best_metrics

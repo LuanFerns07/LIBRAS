@@ -106,7 +106,7 @@ O prazo confirmado é **30 de novembro de 2026 às 23h59, horário de Brasília*
 
 Para a **Categoria III**, apresentar a solução funcional acompanhada do memorial técnico. Usar os resultados disponíveis para explicar arquitetura, contribuições humanas, uso de IA, aplicabilidade e limitações. Se o fluxo funcional não passar pelos testes, registrar o bloqueio antes de tratar o material como protótipo pronto. Usar o [guia do prêmio](<Guia do Prêmio Cátedra IA.html>) para a conferência e o edital oficial para requisitos da inscrição.
 
-### Checklist da inscrição · Edital nº 1/2026
+### Checklist da inscrição
 
 - [x] Confirmar Categoria III, Eixo III, Área 5 e o prazo pelo edital e pelo aditivo.
 - [x] Preparar a minuta do resumo identificado e do memorial técnico. Separar as páginas oficiais dos Anexos II, III e IV.

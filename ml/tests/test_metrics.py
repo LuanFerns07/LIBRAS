@@ -43,3 +43,10 @@ class MetricsTests(TestCase):
     def test_equal_logits_select_first_class(self):
         self.assertEqual(decide(np.ones(4), .25), (0, .25))
         self.assertEqual(decide([0., 3., 3., 0.], .6)[0], 0)
+
+    def test_threshold_uses_middle_of_equally_effective_validation_range(self):
+        rows = [clip(0, 1), clip(1, 2), clip(2, 3), clip(3, 0)]
+        scores = {0: [0, 5, 0, 0], 1: [0, 0, 5, 0], 2: [0, 0, 0, 5], 3: [5, 0, 0, 0]}
+        _, threshold, result = choose_threshold(rows, scores)
+        self.assertAlmostEqual(threshold, (.25 + .98) / 2)
+        self.assertEqual(result["f1Macro"], 1)

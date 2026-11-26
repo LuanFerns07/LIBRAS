@@ -153,7 +153,7 @@ if (pending) {
     root: project,
     configFile: false,
     clearScreen: false,
-    server: { host: '127.0.0.1', port: 0, hmr: false },
+    server: { host: '127.0.0.1', port: 0, hmr: false, watch: null },
     plugins: [{
       name: 'librasia-extract',
       resolveId(id) {
