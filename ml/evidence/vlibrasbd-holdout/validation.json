@@ -1,0 +1,107 @@
+{
+  "protocol": "vlibrasbd-v2-heldout-components-01",
+  "manifest_sha256": "5bbbe1d19ecaf4207e285eb328f9fd775d4b830f9638548e3cdc454188830cbd",
+  "selected": 4,
+  "copy_glosses": {
+    "examples": 1200,
+    "exact_matches": 23,
+    "exact_match_rate": 0.019166666666666665,
+    "insertions": 204,
+    "deletions": 1666,
+    "substitutions": 2484,
+    "reference_units": 6976,
+    "error_rate": 0.6241399082568807
+  },
+  "candidates": [
+    {
+      "parameters": {
+        "language": 0.0,
+        "length": 0.0,
+        "copy": 1.0
+      },
+      "examples": 1200,
+      "exact_matches": 65,
+      "exact_match_rate": 0.05416666666666667,
+      "insertions": 171,
+      "deletions": 1843,
+      "substitutions": 1766,
+      "reference_units": 6976,
+      "error_rate": 0.5418577981651376
+    },
+    {
+      "parameters": {
+        "language": 0.08,
+        "length": 0.25,
+        "copy": 1.0
+      },
+      "examples": 1200,
+      "exact_matches": 79,
+      "exact_match_rate": 0.06583333333333333,
+      "insertions": 242,
+      "deletions": 1657,
+      "substitutions": 1823,
+      "reference_units": 6976,
+      "error_rate": 0.5335435779816514
+    },
+    {
+      "parameters": {
+        "language": 0.16,
+        "length": 0.45,
+        "copy": 1.0
+      },
+      "examples": 1200,
+      "exact_matches": 80,
+      "exact_match_rate": 0.06666666666666667,
+      "insertions": 284,
+      "deletions": 1579,
+      "substitutions": 1837,
+      "reference_units": 6976,
+      "error_rate": 0.5303899082568807
+    },
+    {
+      "parameters": {
+        "language": 0.24,
+        "length": 0.67,
+        "copy": 1.0
+      },
+      "examples": 1200,
+      "exact_matches": 81,
+      "exact_match_rate": 0.0675,
+      "insertions": 339,
+      "deletions": 1523,
+      "substitutions": 1906,
+      "reference_units": 6976,
+      "error_rate": 0.5401376146788991
+    },
+    {
+      "parameters": {
+        "language": 0.16,
+        "length": 0.45,
+        "copy": 3.0
+      },
+      "examples": 1200,
+      "exact_matches": 88,
+      "exact_match_rate": 0.07333333333333333,
+      "insertions": 204,
+      "deletions": 1743,
+      "substitutions": 1664,
+      "reference_units": 6976,
+      "error_rate": 0.517631880733945
+    },
+    {
+      "parameters": {
+        "language": 0.16,
+        "length": 0.68,
+        "copy": 0.4
+      },
+      "examples": 1200,
+      "exact_matches": 74,
+      "exact_match_rate": 0.06166666666666667,
+      "insertions": 473,
+      "deletions": 1313,
+      "substitutions": 2061,
+      "reference_units": 6976,
+      "error_rate": 0.5514621559633027
+    }
+  ]
+}

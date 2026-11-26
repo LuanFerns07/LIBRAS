@@ -35,4 +35,4 @@ Os três métodos foram medidos nos mesmos 1.800 pares. O denominador do WER foi
 
 O tradutor monotônico reduziu o WER em 10,91 pontos percentuais frente ao gerador congelado. Houve 1.480 trocas a menos e 562 omissões a mais. O erro residual de 50,66% limita a fidelidade da saída. Cada frase tem uma única referência e a tokenização ignora pontuação. Os resultados se aplicam a frases curtas e glosas prontas do VLibrasBD. A avaliação integrada com reconhecimento em vídeo continua pendente.
 
-O arquivo agregado local `data/vlibrasbd-holdout/test.json` tem SHA-256 `44db482e77fedad12f64faf165b50d1bdf46e61426bf4a2af06a566506c2810f`. Os dados, o manifesto e os pesos permanecem fora do Git.
+O relatório agregado de teste tem SHA-256 `44db482e77fedad12f64faf165b50d1bdf46e61426bf4a2af06a566506c2810f`. Os dados, o manifesto e os pesos permanecem em `data/`. [Relatório de validação](../ml/evidence/vlibrasbd-holdout/validation.json) · [Relatório de teste](../ml/evidence/vlibrasbd-holdout/test.json)

@@ -1,0 +1,42 @@
+{
+  "protocol": "vlibrasbd-v2-heldout-components-01",
+  "csv_sha256": "de0f1ddf8368b7f343b07c00e5f122ac46193d1aea2c36b642e0805c5c73fcbf",
+  "manifest_sha256": "5bbbe1d19ecaf4207e285eb328f9fd775d4b830f9638548e3cdc454188830cbd",
+  "validation_sha256": "1d642aa20a6427cc93b16ce154f674e994cfe4efd76be9d86aa82077a40a40ee",
+  "frozen_generator_sha256": "e771d65fafd761f3f9c5dba415eae93dc27ee2d1d31794fd26f24a384f1e83fa",
+  "monotone_parameters": {
+    "language": 0.16,
+    "length": 0.45,
+    "copy": 3.0
+  },
+  "copy_glosses": {
+    "examples": 1800,
+    "exact_matches": 28,
+    "exact_match_rate": 0.015555555555555555,
+    "insertions": 300,
+    "deletions": 2518,
+    "substitutions": 3660,
+    "reference_units": 10394,
+    "error_rate": 0.6232441793342313
+  },
+  "frozen_generator": {
+    "examples": 1800,
+    "exact_matches": 66,
+    "exact_match_rate": 0.03666666666666667,
+    "insertions": 499,
+    "deletions": 1989,
+    "substitutions": 3912,
+    "reference_units": 10394,
+    "error_rate": 0.6157398499134116
+  },
+  "monotone": {
+    "examples": 1800,
+    "exact_matches": 134,
+    "exact_match_rate": 0.07444444444444444,
+    "insertions": 283,
+    "deletions": 2551,
+    "substitutions": 2432,
+    "reference_units": 10394,
+    "error_rate": 0.506638445256879
+  }
+}

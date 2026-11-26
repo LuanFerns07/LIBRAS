@@ -21,6 +21,8 @@ O caso sustentado foi construído a partir dos primeiros 2,4 s de Cinco S09-1. O
 
 O candidato com flexão dos dedos, de SHA-256 `8e38930e3fb1ef7cbc308cd736f70a49a6882941bb9cbbd424c06d598b1b980c`, também aceitou incorretamente a captura parcial de Banco como Espelho em duas reproduções. Esse reteste usou uma prévia separada da aplicação e ficou registrado no log local qa-flexao-banco.log.
 
+Uma reprodução posterior, com tempo de mídia observado e cinco janelas predefinidas, registrou dez falsas aceitações com o modelo inicial. Os controles de Cinco e Espelho passaram nas duas tentativas de cada sinal. [Protocolo e resultados por janela](janelas-area-livre.md)
+
 ## Reproduzir localmente
 
 Instale os ativos e inicie a prévia na porta 4193, em um checkout reservado à verificação.

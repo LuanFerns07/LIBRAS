@@ -2,6 +2,8 @@
 
 O gerador textual alcançou **61,81% de WER** e **3,89% de frases exatas** em 1.800 pares reservados do VLibrasBD v2. Copiar as glosas obteve **62,26% de WER** e **1,39% de frases exatas**. Os pares têm glosas preparadas por intérpretes a partir de texto escrito. O ensaio avalia texto de entrada e de saída.
 
+Um ensaio seguinte compara o mesmo gerador congelado com um tradutor monotônico em outros 1.800 pares. [Comparação em componentes inéditos](comparacao-glosas.md)
+
 ## Fonte e preparação
 
 Foi usado apenas o CSV `pt_br2libras_gloss.csv` da Universidade Federal da Paraíba, DOI `10.17632/ryj88ckjww.2`, CC BY-SA 4.0. O arquivo tem 31.292.736 bytes e SHA-256 `de0f1ddf8368b7f343b07c00e5f122ac46193d1aea2c36b642e0805c5c73fcbf`. O leitor usa as colunas `libras-gloss` e `pt-br`. [Depósito e licença](https://data.mendeley.com/datasets/ryj88ckjww/2) · [Metadados do arquivo](https://data.mendeley.com/public-api/datasets/ryj88ckjww/files?folder_id=root&version=2)
