@@ -29,7 +29,7 @@ mkdir -p .cache
 
 npm run setup:vision
 modelo="${LIBRASIA_MODELO:-data/models/isolated-v1}"
-if [[ -f "$modelo/isolated.onnx" || -f "$modelo/isolated.json" ]]; then
+if [[ -n "${LIBRASIA_MODELO:-}" || -f "$modelo/isolated.onnx" || -f "$modelo/isolated.json" ]]; then
   npm run setup:model -- "$modelo"
 elif [[ ! -f public/models/isolated.onnx || ! -f public/models/isolated.json ]]; then
   printf '%s\n' 'O avatar e as atividades sem câmera estão disponíveis. Para reconhecer sinais, instale os pesos descritos em docs/avaliacao.md.'
