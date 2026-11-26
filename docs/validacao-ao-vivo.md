@@ -1,0 +1,50 @@
+# Registro da validação ao vivo
+
+Use o registro para acompanhar pessoas sinalizantes e reunir observações da demonstração no PC. A referência humana, o resultado exibido pelo aplicativo e a audição são campos separados. O registro deixa os critérios de aceite e as etapas pendentes para revisão da equipe. [Protocolo de aceite](protocolo-aceite.md) · [Roteiro da demonstração](roteiro-validacao.md)
+
+## Abrir no Linux
+
+1. Inicie o LibrasIA conforme o README. Abra a prévia em uma janela do Chromium.
+2. Na raiz do projeto, sirva o formulário em outra porta. O comando expõe somente a pasta qa no endereço local.
+
+   ~~~bash
+   python3 -m http.server 4174 --bind 127.0.0.1 --directory qa
+   ~~~
+
+3. Abra http://127.0.0.1:4174 em uma segunda janela. Coloque as duas lado a lado. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
+4. Confirme o consentimento da pessoa participante. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
+
+Anote a versão de catálogo e a revisão do avatar da compilação testada. Registre o commit e as somas dos arquivos instalados antes de começar. Conferir as duas somas identifica mudanças de limiar que preservem os mesmos pesos.
+
+~~~bash
+git rev-parse HEAD
+sha256sum public/models/isolated.onnx public/models/isolated.json
+~~~
+
+Use a resolução da trilha observada e o intervalo de amostragem da versão instalada. No reconhecedor atual, o intervalo configurado é 100 ms. Para conferir a resolução, após a pessoa ligar a câmera, leia os valores width e height no console da aba do aplicativo.
+
+~~~js
+document.querySelector('video').srcObject.getVideoTracks()[0].getSettings()
+~~~
+
+## Observar e registrar
+
+- **Execução e condições**. Registre uma linha por tentativa. Na lição, indique o alvo selecionado. Na área livre, faça dois sinais em tentativas distintas e compare cada palavra. Registre execução esperada e ajuste intencional. Inclua repouso, gesto comum, sinal fora do vocabulário, oclusão, mãos ausentes e perda de enquadramento. Repita com mãos dominantes, iluminação e variantes pertinentes.
+- **Referência humana**. O revisor observa a glosa e indica o ajuste apropriado, quando houver. Em seguida, compara a dica exibida com essa referência. Se a imagem não sustentar uma correção, escolha o estado de referência correspondente e avalie a resposta segundo o protocolo.
+- **Aplicativo**. Anote o estado literal e a palavra exibida quando o aplicativo reconhecer o sinal. Um erro de captura ou uma dica sem palavra ficam registrados com predição vazia. Para medir latência, use apenas valores efetivamente obtidos. A cronometragem manual fica identificada e não substitui a medição instrumentada a partir do clique de conclusão.
+- **Voz**. Depois da transcrição, edite o texto e acione **Ouvir**. Registre o estado apresentado pelo aplicativo e, separadamente, se foi possível ouvir e compreender o texto. Confira a correspondência com a edição sem copiar a frase para a ficha. Uma mensagem de leitura concluída sozinha deixa a audição pendente.
+- **Roteiro**. Marque as etapas confirmadas na sessão. Teste permissão negada e retomada. Verifique a rede e o armazenamento do aplicativo durante a captura antes de marcar privacidade. O resultado de um ensaio com clipe gravado continua no roteiro técnico.
+
+Para uma avaliação independente, mantenha a referência humana separada da decisão do app durante a observação. Use várias pessoas fora do treino e inclua, no relatório, quantas pessoas e tentativas sustentam cada cenário e medida. As contagens do formulário mostram os estratos registrados. A análise segue os critérios do protocolo.
+
+## Exportar
+
+Ao terminar, use **Exportar sessão em JSON**. Salve a cópia de trabalho em data/evidence e confira seu conteúdo. Registre apenas os códigos de sessão e os metadados de observação. A página não solicita câmera nem microfone, não grava quadros, áudio, pontos corporais ou frases e não usa armazenamento persistente. O download é local. Após conferir a exportação, recarregue a página para iniciar outro registro.
+
+O JSON identifica a origem como live-manual-observation e inclui versão, ambiente, tentativas, estados do roteiro e contagem por cenário. Mantenha sessões ao vivo separadas das evidências de câmera simulada, terminais automatizados e reproduções de clipes.
+
+## Teste da lógica
+
+~~~bash
+node --test tests/validacao-ao-vivo.test.js
+~~~
