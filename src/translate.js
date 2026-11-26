@@ -25,7 +25,7 @@ function spellName(text) {
 }
 
 export function translate(input, mode = 'text') {
-  const text = input.trim().replace(/\s+/gu, ' ')
+  const text = input.normalize('NFC').trim().replace(/\s+/gu, ' ')
   if (!text) return { state: 'empty', steps: [], message: 'Digite uma palavra, uma frase ou um nome.' }
   if (mode === 'name') return spellName(text)
 

@@ -26,6 +26,7 @@ test('palavras e a apresentação do nome seguem sequências explícitas', () =>
   assert.deepEqual(ids(translate('MEU NOME É   Léo.')), [
     'signal-nome', 'signal-meu', 'pause', 'letter-l', 'letter-e', 'letter-o',
   ])
+  assert.deepEqual(ids(translate('Meu nome e\u0301 Le\u0301o.')), ids(translate('Meu nome é Léo.')))
   assert.deepEqual(ids(translate('Bom dia!')), ['signal-bom', 'signal-dia'])
   assert.deepEqual(ids(translate('aluno')), ['signal-aluno'])
   assert.deepEqual(ids(translate('Graça', 'name')), ['letter-g', 'letter-r', 'letter-a', 'letter-ç', 'letter-a'])
