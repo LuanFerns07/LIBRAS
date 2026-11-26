@@ -1,0 +1,42 @@
+{
+  "protocolSha256": "1771aeffa3515e4af571024446f8871ce722d1d04765923def795e69e5113fc5",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "clips": [
+    {
+      "id": "ufsm-cinco",
+      "source": "ufsm-numeros",
+      "signer": 1,
+      "label": "cinco",
+      "startMs": 11500,
+      "durationMs": 930,
+      "cue": "Algarismo 5 na legenda do material e configuração do cardinal mantida durante a janela. Quadro apertado com cabeça cortada.",
+      "file": "raw/ufsm-cinco.mp4",
+      "sha256": "a621c3417f3bfe53d04db9d1e25570d914bb14784bd7eff3ed1c319058af8a07",
+      "partition": "test"
+    },
+    {
+      "id": "fiocruz-cinco",
+      "source": "fiocruz-numeros",
+      "signer": 2,
+      "label": "cinco",
+      "startMs": 61000,
+      "durationMs": 3550,
+      "cue": "Algarismo 5 na tela e configuração cardinal estabilizada, sem os números adjacentes. Cabeça, ombros e mão completos.",
+      "file": "raw/fiocruz-cinco.mp4",
+      "sha256": "733c486ff3cb5811b70d1d389e95071e8538aaa7df72b93736603957d9d2ecbc",
+      "partition": "test"
+    },
+    {
+      "id": "ufsm-amarelo",
+      "source": "ufsm-cores",
+      "signer": 3,
+      "label": "amarelo",
+      "startMs": 36000,
+      "durationMs": 2350,
+      "cue": "Identificação AMARELO inserida pelos autores. Forma articulada junto à bochecha com movimento lateral. Apresentação de variante do material.",
+      "file": "raw/ufsm-amarelo.mp4",
+      "sha256": "af9f6619ee7505197d665324ee256ec112d971787b27c6325669e3f735b8e574",
+      "partition": "test"
+    }
+  ]
+}

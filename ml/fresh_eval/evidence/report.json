@@ -1,0 +1,172 @@
+{
+  "scope": "exploratory-external-didactic-clips",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "1771aeffa3515e4af571024446f8871ce722d1d04765923def795e69e5113fc5",
+  "manifestSha256": "c85296e146f4593a0e5d70977689ab9b035992edbd3c252b4cf914024a1d94ca",
+  "extractorRecipe": "15c372f09ab235e71d9634c2b8d9a8962d67b670d66743c360fa69e244a19391",
+  "featuresManifestSha256": "8b16cce249d578027d578824dde6930c7ad470baf7dc3276eaa658a241abfafd",
+  "models": {
+    "v1": {
+      "threshold": 0.495,
+      "onnxSha256": "52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a",
+      "manifestSha256": "8d2e30c7c20d243f717c4fc86d1ac533988cdbb862adf8abff6a1b3fa0818b33",
+      "perLabel": {
+        "amarelo": {
+          "examples": 1,
+          "signers": 1,
+          "correct": 0,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        },
+        "cinco": {
+          "examples": 2,
+          "signers": 2,
+          "correct": 1,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 1
+        }
+      },
+      "decisions": [
+        {
+          "id": "ufsm-cinco",
+          "signer": 1,
+          "expected": "cinco",
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive"
+        },
+        {
+          "id": "fiocruz-cinco",
+          "signer": 2,
+          "expected": "cinco",
+          "predicted": "cinco",
+          "confidence": 0.6674261891654332,
+          "captureState": "ready",
+          "decision": "correct"
+        },
+        {
+          "id": "ufsm-amarelo",
+          "signer": 3,
+          "expected": "amarelo",
+          "predicted": null,
+          "confidence": 0.5494353895338038,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        }
+      ]
+    },
+    "expanded": {
+      "threshold": 0.475,
+      "onnxSha256": "fc50063cb217efbb71cff5758df723ccc643a59b1673ffc54e0e0815c5233e27",
+      "manifestSha256": "54ee3c8036d39c3905b476508d42c2d4a14cf841b86553de4b4a5229204fa63f",
+      "perLabel": {
+        "amarelo": {
+          "examples": 1,
+          "signers": 1,
+          "correct": 0,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        },
+        "cinco": {
+          "examples": 2,
+          "signers": 2,
+          "correct": 1,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 1
+        }
+      },
+      "decisions": [
+        {
+          "id": "ufsm-cinco",
+          "signer": 1,
+          "expected": "cinco",
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive"
+        },
+        {
+          "id": "fiocruz-cinco",
+          "signer": 2,
+          "expected": "cinco",
+          "predicted": "cinco",
+          "confidence": 0.9013672890226117,
+          "captureState": "ready",
+          "decision": "correct"
+        },
+        {
+          "id": "ufsm-amarelo",
+          "signer": 3,
+          "expected": "amarelo",
+          "predicted": null,
+          "confidence": 0.8644722720535016,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        }
+      ]
+    },
+    "geometry": {
+      "threshold": 0.64,
+      "onnxSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifestSha256": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac",
+      "perLabel": {
+        "amarelo": {
+          "examples": 1,
+          "signers": 1,
+          "correct": 0,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        },
+        "cinco": {
+          "examples": 2,
+          "signers": 2,
+          "correct": 1,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 1
+        }
+      },
+      "decisions": [
+        {
+          "id": "ufsm-cinco",
+          "signer": 1,
+          "expected": "cinco",
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive"
+        },
+        {
+          "id": "fiocruz-cinco",
+          "signer": 2,
+          "expected": "cinco",
+          "predicted": "cinco",
+          "confidence": 0.9973765699953668,
+          "captureState": "ready",
+          "decision": "correct"
+        },
+        {
+          "id": "ufsm-amarelo",
+          "signer": 3,
+          "expected": "amarelo",
+          "predicted": null,
+          "confidence": 0.6490506198550056,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        }
+      ]
+    }
+  }
+}
