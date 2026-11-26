@@ -103,6 +103,8 @@ O Chromium verificou os tempos registrados em memória pela aplicação. A tenta
 
 O reteste do caso conhecido serve para verificar a integração no navegador. A sessão ao vivo e a avaliação de pessoas independentes permanecem pendentes. [Ficha local e instruções de medição](validacao-ao-vivo.md)
 
+As regressões da área livre com sustentação, repetição, casos inconclusivos e falhas de voz estão documentadas em um roteiro técnico próprio. [Regressões da área livre](regressao-area-livre.md)
+
 ## Reproduzir uma tentativa com o classificador
 
 Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.
