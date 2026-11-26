@@ -24,7 +24,7 @@ test('palavras e a apresentação do nome seguem sequências explícitas', () =>
     assert.deepEqual(ids(translate(` ${signal.label}! `)), [signal.id])
   }
   assert.deepEqual(ids(translate('MEU NOME É   Léo.')), [
-    'signal-meu', 'signal-nome', 'pause', 'letter-l', 'letter-e', 'letter-o',
+    'signal-nome', 'signal-meu', 'pause', 'letter-l', 'letter-e', 'letter-o',
   ])
 })
 

@@ -29,7 +29,8 @@ export function captureSequence(video, extractor, {
     if (video.readyState >= 2 && mediaTime - lastMediaTime >= intervalMs - 0.5) {
       lastMediaTime = mediaTime
       try {
-        frames.push(extractor.detect(video, now))
+        const landmarks = extractor.detect(video, now)
+        frames.push({ ...landmarks, timestamp: mediaTime, aspect: video.videoWidth / video.videoHeight })
       } catch (error) {
         abort()
         onError(error)

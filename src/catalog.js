@@ -48,8 +48,8 @@ export const lesson = [
 }))
 
 export const namePrefix = [
-  { id: 'signal-meu', label: 'Meu' },
   { id: 'signal-nome', label: 'Nome' },
+  { id: 'signal-meu', label: 'Meu' },
 ]
 
 export const spellingPause = Object.freeze({ id: 'pause', label: 'Pausa' })

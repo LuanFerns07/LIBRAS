@@ -40,7 +40,7 @@ export function translate(input, mode = 'text') {
     return {
       ...result,
       steps: [...namePrefix, spellingPause, ...result.steps],
-      message: 'A frase apresenta a sequência MEU NOME e a soletração do nome.',
+      message: 'A frase apresenta a sequência NOME MEU e a soletração do nome.',
     }
   }
   return {
