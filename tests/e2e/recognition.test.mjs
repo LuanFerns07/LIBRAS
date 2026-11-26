@@ -130,6 +130,25 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       }
     }
 
+    if (!target && expected && process.env.LIBRASIA_TEST_VOICE === '1') {
+      await waitUntil('speechSynthesis.getVoices().some(v => v.localService && v.lang.replaceAll("_", "-").toLowerCase() === "pt-br")')
+      const edit = decisions.at(-1).transcript + '. Teste da transcrição editada.'
+      const observeVoice = (() => {
+        const synthesis = speechSynthesis
+        const speak = synthesis.speak.bind(synthesis)
+        synthesis.speak = utterance => {
+          window.testUtterance = utterance.text
+          speak(utterance)
+        }
+      }).toString()
+      await evaluate('(' + observeVoice + ')()')
+      await evaluate('document.querySelector("#transcription").value = ' + JSON.stringify(edit))
+      await evaluate('document.querySelector("[data-speak]").click()', true)
+      await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "accepted"')
+      assert.equal(await evaluate('window.testUtterance'), edit)
+      context.diagnostic('A voz local em pt-BR concluiu a leitura da edição após o reconhecimento.')
+    }
+
     for (const path of ['/models/isolated.json', '/models/isolated.onnx', '/runtime/holistic_landmarker.task']) {
       assert.ok(seenAssets.has(path), 'Ativo carregado: ' + path)
     }
