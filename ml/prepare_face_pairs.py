@@ -13,7 +13,11 @@ PARTITIONS = {
     "val": {8: 18, 10: 18},
     "test": {9: 15, 11: 18, 12: 18},
 }
-OUTPUTS = {"train": "face-train.json", "val": "face-validation.json"}
+OUTPUTS = {
+    "face-train.json": ("train",),
+    "face-validation.json": ("val",),
+    "face-development.json": ("train", "val"),
+}
 
 
 def prepare(manifest_path):
@@ -57,7 +61,7 @@ def prepare(manifest_path):
     raw_directory = manifest_path.parent / "raw"
     if raw_directory.is_symlink():
         raise ValueError(f"A pasta de clipes deve ser um diretório local: {raw_directory}")
-    for partition in OUTPUTS:
+    for partition in ("train", "val"):
         for clip in groups[partition]:
             path = manifest_path.parent / clip["file"]
             if path.is_symlink() or not path.is_file():
@@ -67,9 +71,10 @@ def prepare(manifest_path):
                     raise ValueError(f"SHA-256 divergente para {path}.")
 
     source_digest = sha256(content).hexdigest()
-    for partition, filename in OUTPUTS.items():
+    for filename, partitions in OUTPUTS.items():
         path = manifest_path.with_name(filename)
-        subset = {**manifest, "parentManifestSha256": source_digest, "clips": groups[partition]}
+        clips = [clip for partition in partitions for clip in groups[partition]]
+        subset = {**manifest, "parentManifestSha256": source_digest, "clips": clips}
         with NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as output:
             temporary_path = Path(output.name)
             try:
@@ -79,7 +84,7 @@ def prepare(manifest_path):
                 temporary_path.replace(path)
             finally:
                 temporary_path.unlink(missing_ok=True)
-        print(f"{path} ({len(groups[partition])} clipes)")
+        print(f"{path} ({len(clips)} clipes)")
 
 
 def main():

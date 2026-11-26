@@ -8,11 +8,20 @@ Rode na raiz do repositório, com Python 3.11 ou mais recente e o recorte expand
 python3 ml/prepare_face_pairs.py
 ```
 
-O comando gera dois manifestos em `data/minds-expanded/`.
+O comando gera três manifestos em `data/minds-expanded/`.
 
 | Manifesto | Pessoas | Clipes |
 | --- | --- | ---: |
 | `face-train.json` | 01–07 | 120 |
 | `face-validation.json` | 08 e 10 | 36 |
+| `face-development.json` | 01–08 e 10 | 156 |
 
-O script confere a partição por pessoa, as identidades e a unicidade dos registros, e calcula o SHA-256 de cada vídeo de treino e validação. As pessoas 09, 11 e 12 ficam reservadas para teste, com 51 registros conferidos apenas pelo manifesto. Cada saída mantém a ordem e os registros originais, com caminhos `raw/...` relativos à sua pasta e o campo `parentManifestSha256` vinculando os arquivos ao manifesto expandido de origem.
+O script confere a partição por pessoa, as identidades e a unicidade dos registros, e calcula o SHA-256 de cada vídeo de treino e validação. As pessoas 09, 11 e 12 ficam reservadas para teste, com 51 registros conferidos pelo manifesto. Cada saída mantém a ordem dentro de cada partição e os caminhos `raw/...` relativos à sua pasta. O campo `parentManifestSha256` vincula os arquivos ao manifesto expandido de origem.
+
+Use o recorte de treino para a comparação por pessoa. Para exportar um modelo com o treino e a validação originais, rode a extração com o manifesto de desenvolvimento. Se os dois recortes já foram extraídos com a mesma receita, copie seus arquivos por SHA-256 para a pasta de saída. O extrator confere o cache e gera o índice de desenvolvimento.
+
+```bash
+node ml/extract.mjs --manifest data/minds-expanded/face-development.json \
+  --out data/minds-expanded/features-nose-development --workers 4 \
+  --preprocess holistic-shoulders-nose-v1
+```
