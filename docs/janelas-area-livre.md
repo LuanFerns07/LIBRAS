@@ -34,6 +34,22 @@ O build local usou a árvore de aplicação de `c79333d`, o Chromium 156.0.8078.
 
 As dez reproduções de Banco falharam no estado e na transcrição, sempre com um acréscimo por tentativa. Com início em 2.400 ms, a palavra exibida passou de Espelho para Amarelo. A ocorrência em cinco janelas do mesmo vídeo ajuda a caracterizar o erro e fica pendente de correção. Os controles conservaram o prefixo e acrescentaram a palavra esperada em cada uma das quatro reproduções.
 
+## Reteste com a combinação de geometria e flexão
+
+A prévia separada na porta 4194 carregou o ONNX combinado de SHA-256 `a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63`, com limiar 0,525 e SHA-256 do manifesto `036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b`. A prévia da porta 4173 continuou com os pesos iniciais. Repetimos as sete condições fixadas, com os mesmos três Y4M em velocidade original e o Chromium 156.0.8078.79.
+
+| Clipe e janela planejada | Janelas reais desde o marcador, ms | Resultado das duas reproduções | Log local em data/evidence |
+| --- | --- | --- | --- |
+| Banco, 0 e 1.750 ms | 0–1.767 e 0–1.800 | Baixa confiança em 2/2 | qa-janelas-combined-banco-0-1750.log |
+| Banco, 0 e 2.800 ms | 0–2.800 e 0–2.833 | Baixa confiança em 2/2 | qa-janelas-combined-banco-0-2800.log |
+| Banco, 0 e 3.850 ms | 0–3.867 e 0–3.866 | Baixa confiança em 2/2 | qa-janelas-combined-banco-0-3850.log |
+| Banco, 1.200 e 3.850 ms | 1.200–5.100 nas duas | Baixa confiança em 2/2 | qa-janelas-combined-banco-1200-3850.log |
+| Banco, 2.400 e 3.800 ms | 2.400–6.200 nas duas | Fora do catálogo em 2/2 | qa-janelas-combined-banco-2400-3800.log |
+| Espelho, 0 e 3.850 ms | 0–3.866 e 0–3.900 | Acerto em 2/2 | qa-janelas-combined-espelho-0-3850.log |
+| Cinco, 0 e 3.850 ms | 0–3.900 e 0–3.867 | Acerto em 2/2 | qa-janelas-combined-cinco-0-3850.log |
+
+Todas as dez reproduções de Banco ficaram inconclusivas e preservaram “Texto conferido.”. Todos os controles acrescentaram a palavra esperada, com o mesmo prefixo. As 14 tentativas passaram nas verificações de janela, captura e rede. O resultado corrige a regressão dirigida nesses recortes e mantém pendentes a medição com pessoas independentes e os ensaios presenciais.
+
 ## Reproduzir
 
 Prepare os três Y4M a partir dos MP4 autorizados em `data/minds/raw`. O FFmpeg acrescenta o marcador inicial e ajusta escala e FPS, preservando a velocidade da mídia.
@@ -64,7 +80,7 @@ espelho=data/evidence/janelas-fixtures/espelho.y4m
 cinco=data/evidence/janelas-fixtures/cinco.y4m
 
 captura() {
-  env LIBRASIA_TEST_URL=http://127.0.0.1:4193 LIBRASIA_TEST_RECOGNITION=1 \
+  env "LIBRASIA_TEST_URL=${LIBRASIA_TEST_URL:-http://127.0.0.1:4193}" LIBRASIA_TEST_RECOGNITION=1 \
     LIBRASIA_TEST_SYNC=1 LIBRASIA_TEST_TRIALS=2 \
     "LIBRASIA_TEST_VIDEO=$1" "LIBRASIA_TEST_START_OFFSET_MS=$2" \
     "LIBRASIA_TEST_CAPTURE_MS=$3" "LIBRASIA_EXPECT_TEXT=${4-}" \
@@ -81,6 +97,14 @@ captura "$cinco" 0 3850 cinco
 ```
 
 A saída mostra o intervalo entregue pelo navegador, a quantidade de quadros processados, a decisão e a transcrição. Execute uma janela por vez para evitar concorrência entre navegadores.
+
+Para repetir com a combinação já exportada, use uma prévia separada.
+
+```bash
+LIBRASIA_PORTA=4194 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
+```
+
+Defina `LIBRASIA_TEST_URL=http://127.0.0.1:4194` no terminal do teste e repita as sete chamadas.
 
 ## Reconhecimento após desconectar
 
