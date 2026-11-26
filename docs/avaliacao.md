@@ -202,7 +202,7 @@ O Holistic extraiu 82 vetores utilizáveis de 84 janelas, de 42 gravações de s
 | Só vídeos completos | 15/42 | 8/42 | 13/18 | 61/78 | 0,668 |
 | Com janelas negativas | 3/42 | 4/42 | 14/18 | 56/78 | 0,722 |
 
-A falsa aceitação em prefixos caiu de 7 para 1 em 42. Em sufixos, caiu de 12 para 2 em 42. A cobertura dos positivos completos ficou em 71,8%, abaixo da meta de 75%. As métricas descrevem as rodadas de desenvolvimento e seus recortes. A versão local segue com os pesos iniciais. [Matrizes e contagens por rodada](../ml/evidence/isolated-partials/cross-validation.json)
+A falsa aceitação em prefixos caiu de 7 para 1 em 42. Em sufixos, caiu de 12 para 2 em 42. A cobertura dos positivos completos ficou em 71,8%, abaixo da meta de 75%. As métricas descrevem as rodadas de desenvolvimento e seus recortes. [Matrizes e contagens por rodada](../ml/evidence/isolated-partials/cross-validation.json)
 
 O candidato exportado com limiar 0,600 acertou 24/24 sinais e rejeitou 12/12 negativos na validação que selecionou o limiar. As decisões coincidiram entre PyTorch e ONNX nos 36 clipes, e entre o ONNX de referência e o WebAssembly em cinco amostras. No recorte já conhecido do CLAD, houve uma falsa aceitação em 12 trechos, no gesto de digitar e tocar o queixo. Uma prévia separada rejeitou o recorte original de Banco em 2/2 reproduções e reconheceu Cinco e Espelho em 2/2 cada. [Validação](../ml/evidence/isolated-partials/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-partials/wasm-parity.json) · [Resultados no CLAD](../ml/evidence/isolated-partials/clad-evaluation.json)
 
@@ -233,7 +233,7 @@ A terceira condição atribui peso igual às probabilidades dos modelos de geome
 
 A média passou as metas de F1 macro, cobertura e falsas aceitações dentro da comparação de desenvolvimento. Espelho acertou 13/21 e Amarelo 12/21, ambos abaixo da meta de 65% de revocação. A precisão de Amarelo foi 12/17, abaixo da meta de 75%. Os resultados ainda incluem pessoas da partição original de treino, agrupadas por rodada. [Matrizes por rodada](../ml/evidence/isolated-combined/cross-validation.json)
 
-O ONNX combina os dois checkpoints locais. A validação que definiu o limiar 0,525 teve 24/24 acertos e 0/12 falsas aceitações. Nos 36 clipes, os logits de PyTorch e ONNX tiveram diferença máxima de 1,91 × 10⁻⁶ e as decisões coincidiram. A paridade WebAssembly foi conferida em cinco exemplos, também com decisões iguais. Os artefatos do aplicativo permanecem os do modelo inicial. [Calibração e paridade ONNX](../ml/evidence/isolated-combined/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-combined/wasm-parity.json)
+O ONNX combina os dois checkpoints locais. A validação que definiu o limiar 0,525 teve 24/24 acertos e 0/12 falsas aceitações. Nos 36 clipes, os logits de PyTorch e ONNX tiveram diferença máxima de 1,91 × 10⁻⁶ e as decisões coincidiram. A paridade WebAssembly foi conferida em cinco exemplos, também com decisões iguais. [Calibração e paridade ONNX](../ml/evidence/isolated-combined/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-combined/wasm-parity.json) · [Prévia local com o combinado](previa-estavel.md)
 
 No Chromium, a combinação rejeitou as dez reproduções parciais de Banco e preservou todos os textos já digitados. Reconheceu também as quatro reproduções de Cinco e Espelho. Nos 12 negativos já conhecidos do CLAD, houve um falso aceite, o mesmo gesto de digitar e tocar o queixo que foi aceito pelo modelo de geometria. [Resultados de Banco por janela](janelas-area-livre.md) · [Resultados no CLAD](../ml/evidence/isolated-combined/clad-evaluation.json)
 
@@ -277,3 +277,18 @@ A média de geometria e movimento obteve F1 macro de 0,758, cobertura de 55/78 e
 O recorte complementar seleciona a quarta tomada completa de Espelho e de Amarelo para as sete pessoas do treino original. Os vídeos Canon das repetições 1 a 3, usados nas medições anteriores, continuam como referência. Em cada rodada, apenas as quartas tomadas das pessoas que ajustam os pesos são disponibilizadas ao treino. A validação e a medição mantêm as amostras originais. A quinta tomada e as partições reservadas ficam fora do ensaio.
 
 A comparação usa a mesma arquitetura nas duas condições, com e sem as gravações extras. A avaliação mostra se os acertos de Espelho e Amarelo aumentam e se a cobertura e a rejeição dos vídeos originais se mantêm. Os denominadores de teste continuam os mesmos, pois repetir uma pessoa em outra tomada amplia seus exemplos de treino.
+
+| Condição com arquitetura de movimento | Espelho | Amarelo | Cobertura | Falsas aceitações | F1 macro |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Treino original | 14/21 | 10/21 | 51/78 | 5/42 | 0,766 |
+| Quartas gravações adicionais | 16/21 | 10/21 | 64/78 | 3/42 | 0,720 |
+| Média das duas condições | 16/21 | 10/21 | 54/78 | 2/42 | 0,777 |
+
+As 14 tomadas produziram vetores utilizáveis. As gravações adicionais aumentaram os acertos de Espelho e a cobertura, com redução dos falsos aceites. Os acertos de Cinco passaram de 15/18 para 13/18. Amarelo permaneceu em 10/21. O modelo combinado de geometria e flexão tem a verificação mais completa na interface e foi escolhido para a prévia local. Em uma demonstração externa de Amarelo do Cederj, ele retornou inconclusivo com rastreamento válido. [Dados adicionais](tomadas-extras.md) · [Rodadas do treino](../ml/evidence/isolated-motion-extra/cross-validation.json) · [Caso externo de Amarelo](amarelo-espelho-externos.md)
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --combine \
+  --reference ConvSequenceMotion --candidate ConvSequenceMotion \
+  --candidate-positives data/minds-extra/features/index.json \
+  --out data/models/isolated-motion-extra/cross-validation.json
+```

@@ -12,6 +12,8 @@ O protótipo web reúne prática de Libras, alfabeto manual e tradução nos doi
 
 ## Executar neste Linux
 
+Para testar a câmera, os pontos das mãos e o modelo combinado na versão fixada, consulte a [prévia local v0.1.0-preview.1](docs/previa-estavel.md).
+
 Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se Chromium com WebGL 2, câmera e voz local pt-BR.
 
 ```bash

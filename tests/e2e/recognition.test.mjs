@@ -170,6 +170,29 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     await permission(base.origin, 'granted')
     await evaluate('document.querySelector("[data-camera-toggle]").click()', true)
     await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
+    if (process.env.LIBRASIA_TEST_POINTS === '1') {
+      assert.ok(videoFile && expected, 'Use um clipe rotulado para verificar os pontos da mão.')
+      const hasPoints = `(() => {
+        const canvas = document.querySelector('[data-hand-overlay]')
+        const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data
+        return new Uint32Array(pixels.buffer).some(pixel => pixel !== 0)
+      })()`
+      await waitUntil(hasPoints, 25000)
+      assert.equal(await evaluate(`(() => {
+        const canvas = document.querySelector('[data-hand-overlay]')
+        const video = document.querySelector('video')
+        return canvas.width === video.videoWidth && canvas.height === video.videoHeight &&
+          getComputedStyle(canvas).transform === getComputedStyle(video).transform &&
+          getComputedStyle(canvas).objectFit === getComputedStyle(video).objectFit
+      })()`), true)
+      const togglePoints = 'document.querySelector("[data-hand-points]").click()'
+      await evaluate(togglePoints)
+      assert.equal(await evaluate('document.querySelector("[data-hand-overlay]").hidden'), true)
+      assert.equal(await evaluate(hasPoints), false)
+      await evaluate(togglePoints)
+      await waitUntil(hasPoints, 15000)
+      context.diagnostic('Os pontos foram desenhados com a câmera ativa, apagados ao desmarcar e retomados ao marcar.')
+    }
     const record = async () => {
       await waitUntil('["recording", "unavailable", "capture-error"].includes(document.querySelector("[data-capture-status]").dataset.state)', 25000)
       assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording',

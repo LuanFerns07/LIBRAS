@@ -84,6 +84,7 @@ A combinação de geometria e flexão chegou a F1 macro de 0,761 e 3/42 falsas a
 - [x] Medir o treino com janelas de sinais fora do catálogo. Nas rodadas por pessoa, a falsa aceitação em pelo menos um recorte passou de 15/42 para 3/42 gravações. [Treino e resultados por gravação](docs/avaliacao.md#treino-com-janelas-parciais-de-negativos)
 - [x] Corrigir a regressão de Banco em um candidato local e verificar o controle com Cinco e Espelho. O combinado rejeitou 10/10 janelas de Banco e acertou 4/4 controles. [Reteste de regressão no Chromium](docs/janelas-area-livre.md)
 - [x] Verificar a transcrição do combinado com movimentos de Espelho e Amarelo em velocidade original. As oito reproduções de clipes de treino acertaram a glosa e preservaram o texto anterior. [Controles de movimento no Chromium](docs/sinais-com-movimento-browser.md)
+- [x] Adquirir 14 tomadas adicionais de treino e medir o efeito sem mudar as pessoas da validação e da medição. [Comparação por sinal](docs/avaliacao.md#gravações-adicionais-de-espelho-e-amarelo)
 - [ ] Qualificar o candidato para substituir o modelo inicial com participantes fora do treino. Testar entradas desconhecidas, dois sinais suportados, sustentação, repetição e audição do texto editado em webcam real.
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 
@@ -98,6 +99,7 @@ A combinação de geometria e flexão chegou a F1 macro de 0,761 e 3/42 falsas a
 - [x] Executar instalação limpa, compilação e testes automatizados, incluindo navegação por teclado, foco, mensagens, liberação da câmera e retomada após erro.
 - [x] Verificar uma tentativa no Chromium após desconectar a rede, com os modelos carregados e a mesma trilha de vídeo ativa. [Ensaio técnico e sonda de rede](docs/janelas-area-livre.md#reconhecimento-após-desconectar)
 - [x] Preparar o formulário local com versão dos ativos, observação humana, decisão do app, dicas, latência e audição. Calcular métricas a partir das fichas elegíveis, separadas por versão. [Ficha e instruções](docs/validacao-ao-vivo.md)
+- [x] Empacotar uma prévia local versionada para testar a webcam, os pontos das mãos e a classificação do modelo combinado. [Prévia v0.1.0-preview.1](docs/previa-estavel.md)
 - [ ] Fazer a verificação manual no PC com participantes, câmera e áudio reais. Verificar a compreensão das mensagens, a sinalização e a audição do texto editado.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
 - [ ] Fechar e retestar defeitos que bloqueiam os fluxos principais ou comprometem a privacidade, a correção em Libras ou a confiabilidade da demonstração. Registrar as limitações restantes no README e no memorial. Identificar o commit, o modelo e as animações usados nos testes.

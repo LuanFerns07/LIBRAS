@@ -1,27 +1,14 @@
-export function captureSequence(video, extractor, {
-  intervalMs = 90, limitMs = 4500, limitFrames = 64, onFinish, onError,
-}) {
+export function watchLandmarks(video, extractor, { intervalMs = 90, onFrame, onError }) {
   const hasVideoCallback = typeof video.requestVideoFrameCallback === 'function'
-  const frames = []
-  const extractionMs = []
   let pending
-  let timer
   let lastMediaTime = -Infinity
   let running = true
 
-  function clear() {
-    clearTimeout(timer)
+  function stop() {
+    running = false
     if (pending === undefined) return
     if (hasVideoCallback) video.cancelVideoFrameCallback(pending)
     else cancelAnimationFrame(pending)
-  }
-
-  function finish(trigger) {
-    if (!running) return
-    const finishedAt = performance.now()
-    running = false
-    clear()
-    onFinish(frames.splice(0), { trigger, finishedAt, extractionMs })
   }
 
   function sample(now, metadata) {
@@ -33,32 +20,56 @@ export function captureSequence(video, extractor, {
       try {
         const startedAt = performance.now()
         const landmarks = extractor.detect(video, now)
-        extractionMs.push(performance.now() - startedAt)
-        frames.push({ ...landmarks, timestamp: mediaTime, aspect: video.videoWidth / video.videoHeight })
+        const elapsed = performance.now() - startedAt
+        onFrame({ ...landmarks, timestamp: mediaTime, aspect: video.videoWidth / video.videoHeight }, elapsed)
       } catch (error) {
-        abort()
+        stop()
         onError(error)
         return
       }
-      if (frames.length >= limitFrames) {
-        finish('frame-limit')
-        return
-      }
     }
-    schedule()
+    if (running) schedule()
   }
 
   function schedule() {
     pending = hasVideoCallback ? video.requestVideoFrameCallback(sample) : requestAnimationFrame(sample)
   }
 
-  function abort() {
-    running = false
-    frames.length = 0
-    clear()
-  }
-
-  timer = setTimeout(() => finish('time-limit'), limitMs)
   schedule()
+  return stop
+}
+
+export function captureSequence(video, extractor, {
+  intervalMs = 90, limitMs = 4500, limitFrames = 64, onFinish, onError, onLandmarks,
+}) {
+  const frames = []
+  const extractionMs = []
+  let running = true
+  function clear() {
+    running = false
+    clearTimeout(timer)
+    stop()
+  }
+  function finish(trigger) {
+    if (!running) return
+    const finishedAt = performance.now()
+    clear()
+    onFinish(frames.splice(0), { trigger, finishedAt, extractionMs })
+  }
+  function abort() {
+    clear()
+    frames.length = 0
+  }
+  const stop = watchLandmarks(video, extractor, {
+    intervalMs,
+    onFrame(frame, elapsed) {
+      extractionMs.push(elapsed)
+      frames.push(frame)
+      onLandmarks?.(frame)
+      if (frames.length >= limitFrames) finish('frame-limit')
+    },
+    onError(error) { abort(); onError(error) },
+  })
+  const timer = setTimeout(() => finish('time-limit'), limitMs)
   return { finish() { finish('manual') }, abort }
 }

@@ -3,6 +3,15 @@ set -euo pipefail
 
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 
+pacote=
+if [[ $# -ne 0 ]]; then
+  if [[ $# -ne 2 || "$1" != --pacote || -z "$2" ]]; then
+    printf '%s\n' 'Uso: ./scripts/executar-local.sh [--pacote DIRETORIO]' >&2
+    exit 2
+  fi
+  pacote=$(realpath -m -- "$2")
+fi
+
 if ! command -v node >/dev/null || ! command -v npm >/dev/null; then
   printf '%s\n' 'Para executar o LibrasIA, instale Node.js 22 e npm.' >&2
   exit 1
@@ -48,6 +57,21 @@ import { build } from 'vite'
 const directory = process.argv[2]
 await build({ publicDir: join(directory, 'public'), build: { outDir: join(directory, 'dist') } })
 JS
+
+if [[ -n "$pacote" ]]; then
+  test -f "$previa/dist/models/isolated.json"
+  git rev-parse HEAD > "$previa/dist/commit.txt"
+  mkdir -p -- "$(dirname -- "$pacote")"
+  mkdir -- "$pacote"
+  trap 'rm -rf -- "$previa" "$pacote"' EXIT
+  cp -a "$previa/dist" "$pacote/site"
+  cp scripts/servir-previa.py "$pacote/iniciar.py"
+  cp vercel.json "$pacote/vercel.json"
+  trap 'rm -rf -- "$previa"' EXIT
+  printf 'Pacote pronto em %s. Abra com python3 %s/iniciar.py.\n' "$pacote" "$pacote"
+  exit
+fi
+
 porta="${LIBRASIA_PORTA:-4173}"
 printf 'Abra http://127.0.0.1:%s/ no Chromium. Use Ctrl+C para encerrar.\n' "$porta"
 npm run preview -- --host 127.0.0.1 --port "$porta" --strictPort --outDir "$previa/dist"

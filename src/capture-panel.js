@@ -1,6 +1,7 @@
 import { icon } from './shell.js'
 import { createCamera } from './recognition/camera.js'
-import { captureSequence } from './recognition/sequence.js'
+import { handOverlay } from './recognition/hand-overlay.js'
+import { captureSequence, watchLandmarks } from './recognition/sequence.js'
 
 export function captureMarkup() {
   return `
@@ -8,6 +9,7 @@ export function captureMarkup() {
       <div class="panel-header"><h2>Sua câmera</h2><span class="media-status" data-camera-state>Desligada</span></div>
       <div class="camera-stage">
         <video aria-label="Prévia da webcam" autoplay muted playsinline hidden></video>
+        <canvas data-hand-overlay aria-hidden="true" hidden></canvas>
         <div class="camera-placeholder">
           <span>${icon('camera')}</span>
           <p>Ative a câmera para sinalizar.</p>
@@ -16,6 +18,7 @@ export function captureMarkup() {
       <div class="toolbar panel-toolbar">
         <button class="button" type="button" data-camera-toggle>Ativar câmera</button>
         <button class="button primary" type="button" data-attempt disabled>Iniciar tentativa</button>
+        <label class="check-label"><input type="checkbox" data-hand-points checked> Mostrar pontos das mãos</label>
       </div>
       <p class="capture-privacy">A imagem fica no seu dispositivo.</p>
       <p class="inline-status" data-capture-status data-state="idle" role="status">Mostre a mão e a parte superior do corpo.</p>
@@ -41,9 +44,14 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
   const toggle = main.querySelector('[data-camera-toggle]')
   const button = main.querySelector('[data-attempt]')
   const status = main.querySelector('[data-capture-status]')
+  const canvas = main.querySelector('[data-hand-overlay]')
+  const points = main.querySelector('[data-hand-points]')
+  const overlay = handOverlay(canvas, video)
   let cameraState = 'idle'
   let phase = 'idle'
   let enginePromise
+  let engineLoadMs = null
+  let stopWatching
   let capture
   let ticket = 0
   let disposed = false
@@ -59,6 +67,8 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
   function renderButtons() {
     const ready = cameraState === 'ready'
     video.hidden = !ready
+    canvas.hidden = !ready || !points.checked
+    points.disabled = !enabled
     placeholder.hidden = ready
     stateLabel.textContent = cameraStates[cameraState]
     toggle.textContent = ready || cameraState === 'starting' ? 'Desativar câmera' : 'Ativar câmera'
@@ -69,6 +79,8 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
 
   function cancel() {
     ticket += 1
+    stopPreview()
+    overlay.clear()
     capture?.abort()
     capture = undefined
     phase = 'idle'
@@ -77,6 +89,42 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
   function closeEngine() {
     enginePromise?.then(engine => engine.close(), () => {}).catch(() => {})
     enginePromise = undefined
+    engineLoadMs = null
+  }
+
+  function getEngine() {
+    if (enginePromise) return enginePromise
+    const startedAt = performance.now()
+    const pending = Promise.resolve().then(openEngine)
+    enginePromise = pending
+    pending.then(engine => {
+      if (pending !== enginePromise) return
+      engineLoadMs = performance.now() - startedAt
+      onReady?.(engine)
+    }, () => {
+      if (pending === enginePromise) enginePromise = undefined
+    })
+    return pending
+  }
+
+  function stopPreview() {
+    stopWatching?.()
+    stopWatching = undefined
+  }
+
+  const canPreview = () => !disposed && camera.active && points.checked && phase === 'idle' && !stopWatching
+
+  async function startPreview() {
+    if (!canPreview()) return
+    const pending = getEngine()
+    let engine
+    try { engine = await pending } catch { return }
+    if (pending !== enginePromise || !canPreview()) return
+    stopWatching = watchLandmarks(video, engine, {
+      intervalMs: engine.captureOptions.intervalMs,
+      onFrame: overlay.paint,
+      onError() { stopPreview(); overlay.clear() },
+    })
   }
 
   const camera = createCamera(video, (state, message) => {
@@ -87,6 +135,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     }
     show(state === 'error' ? 'capture-error' : state, message)
     renderButtons()
+    if (state === 'ready') void startPreview()
   })
 
   function stop(message) {
@@ -101,6 +150,14 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
   toggle.addEventListener('click', () => {
     if (cameraState === 'ready' || cameraState === 'starting') stop('Câmera desativada.')
     else void camera.start()
+  })
+  points.addEventListener('change', () => {
+    renderButtons()
+    if (points.checked) void startPreview()
+    else {
+      stopPreview()
+      overlay.clear()
+    }
   })
 
   async function complete(engine, frames, current, multiple, timing, initialLoadMs) {
@@ -130,6 +187,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
       initialLoadMs,
       extractionMs: timing.extractionMs,
     })
+    void startPreview()
   }
 
   async function attempt() {
@@ -140,25 +198,23 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     if (!camera.active || phase !== 'idle') return
     const current = ++ticket
     const multiple = sequenceMode?.() === true
+    stopPreview()
     phase = 'loading'
     renderButtons()
     show('busy', 'Preparando o reconhecimento no dispositivo.')
     let engine
-    const loadStartedAt = enginePromise ? null : performance.now()
     try {
-      enginePromise ??= openEngine()
-      engine = await enginePromise
+      engine = await getEngine()
     } catch {
       if (current !== ticket || disposed) return
-      enginePromise = undefined
       phase = 'idle'
       renderButtons()
       show('unavailable', 'Verifique se os modelos locais estão instalados.')
       return
     }
     if (current !== ticket || disposed) return
-    const initialLoadMs = loadStartedAt === null ? null : performance.now() - loadStartedAt
-    onReady?.(engine)
+    const initialLoadMs = engineLoadMs
+    engineLoadMs = null
     phase = 'recording'
     renderButtons()
     show('recording', multiple ? 'Faça os sinais e abaixe as mãos entre eles. Conclua a sequência ao terminar.'
@@ -166,6 +222,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
       ...(multiple ? { limitMs: 12_000, limitFrames: 125 } : {}),
+      onLandmarks: overlay.paint,
       onFinish(frames, timing) { void complete(engine, frames, current, multiple, timing, initialLoadMs) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
@@ -192,6 +249,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
         renderButtons()
       }
       if (cameraState === 'ready') show('ready', 'Mostre a mão e a parte superior do corpo.')
+      void startPreview()
     },
     dispose() {
       disposed = true
