@@ -1,0 +1,181 @@
+{
+  "protocolSha256": "066615b7012384e81bea93100593e07910d48661ee951700aa87d3adc7fc0047",
+  "source": {
+    "title": "Complex and Long Activities Dataset",
+    "authors": [
+      "Jawad Tayyub",
+      "Majd Hawasly",
+      "Anthony G. Cohn"
+    ],
+    "publisher": "University of Leeds",
+    "year": 2017,
+    "doi": "10.5518/249",
+    "record": "https://archive.researchdata.leeds.ac.uk/254/",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "archives": {
+      "videos": {
+        "name": "videos.zip",
+        "url": "https://archive.researchdata.leeds.ac.uk/254/2/videos.zip",
+        "sha256": "71fdb6c614ecc4ad4afac10a55e1530cd3534011a571d3a5489897b0bd5312ce"
+      },
+      "annotations": {
+        "name": "annotations.zip",
+        "url": "https://archive.researchdata.leeds.ac.uk/254/1/annotations.zip",
+        "sha256": "4df8e9dd3df2a6a4abe13cbce524c2322de69bf81b55dc3549fa72ff3e5edc35"
+      }
+    }
+  },
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "transform": {
+    "crop": "crop=416:352:104:40",
+    "durationMs": 4000,
+    "audio": false
+  },
+  "clips": [
+    {
+      "id": "clad-dev-16a",
+      "subject": 4,
+      "video": 16,
+      "startMs": 0,
+      "stratum": "movimento-comum",
+      "observation": "Mão junto ao cabelo, seguida de alcance dos utensílios.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-16a.mp4",
+      "durationMs": 4000,
+      "sha256": "756a8dc8cedbe45148b99450a93e318976802ba98513ae1ddce078213d78c9e9",
+      "originalMember": "Videos/video_16.mp4"
+    },
+    {
+      "id": "clad-dev-16b",
+      "subject": 4,
+      "video": 16,
+      "startMs": 22400,
+      "stratum": "movimento-comum",
+      "observation": "Leva a caneca à boca e volta à mesa.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-16b.mp4",
+      "durationMs": 4000,
+      "sha256": "32fa65fa7b6ae08de1e031474417314ec9ab68a8300faaf6ee97289b4c78d575",
+      "originalMember": "Videos/video_16.mp4"
+    },
+    {
+      "id": "clad-dev-16c",
+      "subject": 4,
+      "video": 16,
+      "startMs": 36000,
+      "stratum": "movimento-comum",
+      "observation": "Bebe durante a leitura à mesa.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-16c.mp4",
+      "durationMs": 4000,
+      "sha256": "c970571773809af65a2694c55c2af6310c4b38bc4d024fa01350ba2ccf0d7eba",
+      "originalMember": "Videos/video_16.mp4"
+    },
+    {
+      "id": "clad-dev-16d",
+      "subject": 4,
+      "video": 16,
+      "startMs": 40800,
+      "stratum": "repouso",
+      "observation": "Pausa sentada com mãos apoiadas e olhar voltado à mesa.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "repouso",
+      "file": "raw/clad-dev-16d.mp4",
+      "durationMs": 4000,
+      "sha256": "db9330d447e40c6cf2823e0c3d971c97f6004053e15cadb78c6ffb15adada786",
+      "originalMember": "Videos/video_16.mp4"
+    },
+    {
+      "id": "clad-dev-58a",
+      "subject": 4,
+      "video": 58,
+      "startMs": 0,
+      "stratum": "movimento-comum",
+      "observation": "Coloca o headset e volta as mãos para o computador.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-58a.mp4",
+      "durationMs": 4000,
+      "sha256": "b004a869aa8edee809d88fd4c661404e45742f7f1b0a118dd41d9e4354d0506f",
+      "originalMember": "Videos/video_58.mp4"
+    },
+    {
+      "id": "clad-dev-58b",
+      "subject": 4,
+      "video": 58,
+      "startMs": 6000,
+      "stratum": "movimento-comum",
+      "observation": "Escreve com as mãos sobre a mesa.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-58b.mp4",
+      "durationMs": 4000,
+      "sha256": "1576db0c4c4946ebf8956ca0ef284dd2f9a491797799bc52029115ed61053f48",
+      "originalMember": "Videos/video_58.mp4"
+    },
+    {
+      "id": "clad-dev-58c",
+      "subject": 4,
+      "video": 58,
+      "startMs": 18000,
+      "stratum": "movimento-comum",
+      "observation": "Bebe e manuseia uma garrafa durante a tarefa.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-58c.mp4",
+      "durationMs": 4000,
+      "sha256": "b0947fbe21fd633b57885113b46a311fb7b021288ad74bd94a4eb0519b5ca1bc",
+      "originalMember": "Videos/video_58.mp4"
+    },
+    {
+      "id": "clad-dev-60a",
+      "subject": 4,
+      "video": 60,
+      "startMs": 0,
+      "stratum": "movimento-comum",
+      "observation": "Ajusta o headset e alterna entre o teclado e o papel.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-60a.mp4",
+      "durationMs": 4000,
+      "sha256": "dfadf00c352f03d164038a90427f342208e0007e11255141e6b6c53ad3f2aef0",
+      "originalMember": "Videos/video_60.mp4"
+    },
+    {
+      "id": "clad-dev-60b",
+      "subject": 4,
+      "video": 60,
+      "startMs": 7200,
+      "stratum": "movimento-comum",
+      "observation": "Leva uma garrafa à boca e volta ao laptop.",
+      "label": null,
+      "partition": "train",
+      "signer": 1004,
+      "sourceLabel": "movimento-comum",
+      "file": "raw/clad-dev-60b.mp4",
+      "durationMs": 4000,
+      "sha256": "32c4364c6060b1c75f660c279b9acad751c1de480225369670248e84fd0b78bc",
+      "originalMember": "Videos/video_60.mp4"
+    }
+  ]
+}

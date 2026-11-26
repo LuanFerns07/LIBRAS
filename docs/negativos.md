@@ -51,3 +51,5 @@ node ml/extract.mjs --manifest data/clad-development/manifest.json \
   --candidate-negatives data/clad-development/features/index.json \
   --out data/models/isolated-clad/cross-validation.json
 ```
+
+O extrator produziu vetores utilizáveis nos 9 trechos. Acumulando as três matrizes de medição, os negativos adicionais reduziram as falsas aceitações de 8 para 5 em 42 clipes e elevaram o F1 macro de 0,668 para 0,673. A cobertura passou de 61 para 60 em 78. Os acertos de Cinco caíram de 13 para 9 em 18, com sete trocas por Espelho. O ensaio ficou abaixo do critério de Cinco e o modelo local continua com os mesmos pesos. [Manifesto dos recortes](../ml/evidence/isolated-clad/manifest.json) · [Matrizes por rodada](../ml/evidence/isolated-clad/cross-validation.json)
