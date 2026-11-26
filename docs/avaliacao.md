@@ -43,6 +43,29 @@ A cada época, o treino testa limiares de 0,25 a 1,00 em passos de 0,01 usando a
 PYTHONPATH=ml .venv/bin/python -m unittest discover -s ml/tests -v
 ```
 
+## Execução do catálogo inicial em 26 de novembro de 2026
+
+O recorte completo tem 174 clipes Canon distribuídos por 12 pessoas. São 102 clipes para treino, 30 para validação e 42 para teste reservado. Houve um negativo de treino com rastreamento insuficiente. A otimização usou 101 exemplos elegíveis, RTX 4060 Laptop GPU, PyTorch 2.6.0+cu124, semente 7391, 80 épocas e lote 12. O conjunto ficou fixado no [manifesto de partição](../ml/manifests/minds-v1.json), de SHA-256 `467ebc1ee584b8e6587f2507d9d4e648266148beb48ee12d8b9630bf1c8ea5b4`.
+
+A validação selecionou a época 56 e limiar 0,495 com a regra da mediana do empate. O resultado de validação foi F1 macro 0,970, cobertura 17/18 e 0/12 falsos aceites. Às 22h06 em Paris, o ONNX e o limiar foram congelados antes da leitura do teste reservado. O SHA-256 do ONNX é `52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a`. Houve uma tentativa de treino interna com o mesmo modelo e limiar 0,48. O QA independente também executou a cópia com limiar 0,48 e registrou a mesma matriz no teste. Os relatórios desta seção usam o limiar 0,495 selecionado pela validação. [Configuração e histórico da execução](../ml/evidence/isolated-v1/training.json)
+
+| Sinal no teste | Suporte | Precisão | Revocação | F1 |
+| --- | ---: | ---: | ---: | ---: |
+| Cinco | 9 | 100,0% | 33,3% | 50,0% |
+| Espelho | 9 | 70,0% | 77,8% | 73,7% |
+| Amarelo | 6 | 42,9% | 100,0% | 60,0% |
+
+| Esperado no teste | Rejeitado | Cinco | Espelho | Amarelo |
+| --- | ---: | ---: | ---: | ---: |
+| Fora do catálogo | 13 | 0 | 0 | 5 |
+| Cinco | 0 | 3 | 3 | 3 |
+| Espelho | 2 | 0 | 7 | 0 |
+| Amarelo | 0 | 0 | 0 | 6 |
+
+O F1 macro foi 0,612, com cobertura 22/24, 15/42 tentativas inconclusivas e 5/18 falsos aceites. Todos os falsos aceites foram classificados como Amarelo. O teste ficou abaixo das metas de F1 macro, revocação por classe, precisão por classe e rejeição. O modelo serve como protótipo exploratório e requer uma nova avaliação com pessoas independentes após novas mudanças. Esses clipes contêm outras glosas MINDS como negativos. O acervo não cobre repouso, movimentos comuns e revisão da orientação dada pela lição em webcam. [Métricas e decisões do teste reservado](../ml/evidence/isolated-v1/evaluation.json)
+
+O teste de paridade PyTorch × ONNX Runtime CPU cobriu as 42 entradas com erro máximo absoluto nos logits de 2,86 × 10⁻⁶ e decisões idênticas. O runtime WASM na versão 156 do Chromium produziu o mesmo resultado para quatro entradas de validação com erro máximo de 9,54 × 10⁻⁷. A mediana de inferência isolada em CPU foi 0,071 ms e o p95 0,085 ms. A extração offline concorrente mediu 271 ms de mediana e 436 ms no p95 por quadro em 2.170 quadros do teste. Os números correspondem às etapas informadas. A latência entre o fim da tentativa e a resposta com webcam e avatar é medida separadamente no roteiro de demonstração. [Paridade WASM](../ml/evidence/isolated-v1/wasm-parity.json)
+
 ## Experimento de expansão com ALUNO
 
 O catálogo expandido acrescenta ALUNO à área livre. A forma histórica de Fortaleza aparece no avatar para comparação, com escopo descrito em [Animações](animacoes.md). A execução do experimento abaixo mantém o modelo inicial e o catálogo de prática. Execute cada treino de GPU separadamente.
