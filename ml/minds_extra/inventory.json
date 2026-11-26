@@ -1,0 +1,954 @@
+{
+  "source": "10.5281/zenodo.2667329",
+  "license": "CC-BY-4.0",
+  "baseManifestSha256": "3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be",
+  "archives": [
+    {
+      "signer": 1,
+      "archive": "Sinalizador01.zip",
+      "bytes": 4430252522,
+      "publishedChecksum": "md5:0259b309d2d5472f20d9842547d94a8c",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "5c705a87572ce3e6b43081281b8668ca038ed552eecaa8217854949ecaa5d6c0",
+      "videoFolders": {
+        "Canon": 100
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador01/Canon/03AmareloSinalizador01-1.mp4",
+          "crc32": "ce99c93f",
+          "bytes": 52045711,
+          "compressedBytes": 51999739,
+          "offset": 434535255
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador01/Canon/03AmareloSinalizador01-2.mp4",
+          "crc32": "d169dbc8",
+          "bytes": 58045602,
+          "compressedBytes": 57994442,
+          "offset": 486535361
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador01/Canon/03AmareloSinalizador01-3.mp4",
+          "crc32": "793791c7",
+          "bytes": 44537871,
+          "compressedBytes": 44499276,
+          "offset": 544530170
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador01/Canon/03AmareloSinalizador01-4.mp4",
+          "crc32": "7aad5059",
+          "bytes": 51269599,
+          "compressedBytes": 51224294,
+          "offset": 589029813
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador01/Canon/03AmareloSinalizador01-5.mp4",
+          "crc32": "7614fcdb",
+          "bytes": 46289898,
+          "compressedBytes": 46249661,
+          "offset": 640254474
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador01/Canon/12EspelhoSinalizador01-1.mp4",
+          "crc32": "31e7ebd9",
+          "bytes": 62794091,
+          "compressedBytes": 62738019,
+          "offset": 2474289969
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador01/Canon/12EspelhoSinalizador01-2.mp4",
+          "crc32": "3ca8666c",
+          "bytes": 46227151,
+          "compressedBytes": 46186969,
+          "offset": 2537028355
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador01/Canon/12EspelhoSinalizador01-3.mp4",
+          "crc32": "7c6db289",
+          "bytes": 47267643,
+          "compressedBytes": 47227604,
+          "offset": 2583215691
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador01/Canon/12EspelhoSinalizador01-4.mp4",
+          "crc32": "afb16301",
+          "bytes": 37688398,
+          "compressedBytes": 37656339,
+          "offset": 2630443662
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador01/Canon/12EspelhoSinalizador01-5.mp4",
+          "crc32": "a5b71ef8",
+          "bytes": 44933299,
+          "compressedBytes": 44894373,
+          "offset": 2668100368
+        }
+      ]
+    },
+    {
+      "signer": 2,
+      "archive": "Sinalizador02.zip",
+      "bytes": 4667467406,
+      "publishedChecksum": "md5:e2b8673264ba7fca4cfc071654a099e8",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "38fc12153385c25046650c96499d4179851e627423be7065206d39c124abd72b",
+      "videoFolders": {
+        "Canon": 100
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador02/Canon/03AmareloSinalizador02-1.mp4",
+          "crc32": "c0e9c281",
+          "bytes": 39906006,
+          "compressedBytes": 39870963,
+          "offset": 420113594
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador02/Canon/03AmareloSinalizador02-2.mp4",
+          "crc32": "0ec8ca5f",
+          "bytes": 52423582,
+          "compressedBytes": 52376839,
+          "offset": 459984924
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador02/Canon/03AmareloSinalizador02-3.mp4",
+          "crc32": "8708cf86",
+          "bytes": 49179809,
+          "compressedBytes": 49136270,
+          "offset": 512362130
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador02/Canon/03AmareloSinalizador02-4.mp4",
+          "crc32": "491c857c",
+          "bytes": 51812321,
+          "compressedBytes": 51766443,
+          "offset": 561498767
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador02/Canon/03AmareloSinalizador02-5.mp4",
+          "crc32": "1d1d2632",
+          "bytes": 33895275,
+          "compressedBytes": 33866536,
+          "offset": 613265577
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador02/Canon/12EspelhoSinalizador02-1.mp4",
+          "crc32": "4bb41728",
+          "bytes": 47624908,
+          "compressedBytes": 47583849,
+          "offset": 2458224367
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador02/Canon/12EspelhoSinalizador02-2.mp4",
+          "crc32": "38063e57",
+          "bytes": 44665944,
+          "compressedBytes": 44627321,
+          "offset": 2505808583
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador02/Canon/12EspelhoSinalizador02-3.mp4",
+          "crc32": "7e0d46c7",
+          "bytes": 54159767,
+          "compressedBytes": 54112815,
+          "offset": 2550436271
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador02/Canon/12EspelhoSinalizador02-4.mp4",
+          "crc32": "cf5105f4",
+          "bytes": 53698691,
+          "compressedBytes": 53651918,
+          "offset": 2604549453
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador02/Canon/12EspelhoSinalizador02-5.mp4",
+          "crc32": "580eaa1b",
+          "bytes": 56470790,
+          "compressedBytes": 56421115,
+          "offset": 2658201738
+        }
+      ]
+    },
+    {
+      "signer": 3,
+      "archive": "Sinalizador03.zip",
+      "bytes": 3709525923,
+      "publishedChecksum": "md5:18996a6bdc404e98a854bfd8a39d0268",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "7237483668e4d85a529d135b98d6b357d88a63cafb287bc408d0c3f0168b43ec",
+      "videoFolders": {
+        "Canon": 85
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador03/Canon/03AmareloSinalizador03-1.mp4",
+          "crc32": "63dfabb9",
+          "bytes": 36160604,
+          "compressedBytes": 36130182,
+          "offset": 226441278
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador03/Canon/03AmareloSinalizador03-2.mp4",
+          "crc32": "4ca75bf4",
+          "bytes": 44932950,
+          "compressedBytes": 44894220,
+          "offset": 262571827
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador03/Canon/03AmareloSinalizador03-3.mp4",
+          "crc32": "c96c0291",
+          "bytes": 47440459,
+          "compressedBytes": 47399259,
+          "offset": 307466414
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador03/Canon/03AmareloSinalizador03-4.mp4",
+          "crc32": "cf7a327a",
+          "bytes": 41369244,
+          "compressedBytes": 41333837,
+          "offset": 354866040
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador03/Canon/03AmareloSinalizador03-5.mp4",
+          "crc32": "f5e59e7a",
+          "bytes": 47432423,
+          "compressedBytes": 47391383,
+          "offset": 396200244
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador03/Canon/12EspelhoSinalizador03-1.mp4",
+          "crc32": "83469ab5",
+          "bytes": 36241670,
+          "compressedBytes": 36210871,
+          "offset": 1691146984
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador03/Canon/12EspelhoSinalizador03-2.mp4",
+          "crc32": "645be484",
+          "bytes": 59266534,
+          "compressedBytes": 59214255,
+          "offset": 1727358222
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador03/Canon/12EspelhoSinalizador03-3.mp4",
+          "crc32": "4d429f81",
+          "bytes": 39582881,
+          "compressedBytes": 39549189,
+          "offset": 1786572843
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador03/Canon/12EspelhoSinalizador03-4.mp4",
+          "crc32": "7b0234d1",
+          "bytes": 53531455,
+          "compressedBytes": 53484565,
+          "offset": 1826122398
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador03/Canon/12EspelhoSinalizador03-5.mp4",
+          "crc32": "31bf8b8d",
+          "bytes": 49321374,
+          "compressedBytes": 49277994,
+          "offset": 1879607329
+        }
+      ]
+    },
+    {
+      "signer": 4,
+      "archive": "Sinalizador04.zip",
+      "bytes": 5140642550,
+      "publishedChecksum": "md5:f244c4b3fbc99854b84d3e1c166c9361",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "a3aeec464927e5d523acb882ef8c0a42a8160c98aadd62b652276f780856edfe",
+      "videoFolders": {
+        "Canon": 95
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador04/Canon/03AmareloSinalizador04-1.mp4",
+          "crc32": "40e87b34",
+          "bytes": 52640212,
+          "compressedBytes": 52593265,
+          "offset": 503822076
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador04/Canon/03AmareloSinalizador04-2.mp4",
+          "crc32": "ac30db5b",
+          "bytes": 54360144,
+          "compressedBytes": 54311416,
+          "offset": 556415708
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador04/Canon/03AmareloSinalizador04-3.mp4",
+          "crc32": "26bd24d7",
+          "bytes": 41078138,
+          "compressedBytes": 41042456,
+          "offset": 610727491
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador04/Canon/03AmareloSinalizador04-4.mp4",
+          "crc32": "50f966ea",
+          "bytes": 57296154,
+          "compressedBytes": 57244843,
+          "offset": 651770313
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador04/Canon/03AmareloSinalizador04-5.mp4",
+          "crc32": "e7b71ce8",
+          "bytes": 54535604,
+          "compressedBytes": 54486595,
+          "offset": 709015523
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador04/Canon/12EspelhoSinalizador04-1.mp4",
+          "crc32": "754aa0bf",
+          "bytes": 51015699,
+          "compressedBytes": 50970025,
+          "offset": 2914195917
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador04/Canon/12EspelhoSinalizador04-2.mp4",
+          "crc32": "eeec77df",
+          "bytes": 43927812,
+          "compressedBytes": 43889270,
+          "offset": 2965166308
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador04/Canon/12EspelhoSinalizador04-3.mp4",
+          "crc32": "b987f055",
+          "bytes": 56545949,
+          "compressedBytes": 56495414,
+          "offset": 3009055944
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador04/Canon/12EspelhoSinalizador04-4.mp4",
+          "crc32": "2fe74a70",
+          "bytes": 54108209,
+          "compressedBytes": 54059556,
+          "offset": 3065551724
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador04/Canon/12EspelhoSinalizador04-5.mp4",
+          "crc32": "8a58441f",
+          "bytes": 66727523,
+          "compressedBytes": 66667473,
+          "offset": 3119611646
+        }
+      ]
+    },
+    {
+      "signer": 5,
+      "archive": "Sinalizador05.zip",
+      "bytes": 5557231873,
+      "publishedChecksum": "md5:0382984d3bd6b04d1120aebc3e6d637b",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "277c27a1cc9db69a566352ce201fd16c9d606103ddd2b69ff03a1a17b4ade9ba",
+      "videoFolders": {
+        "Canon": 100
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador05/Canon/03AmareloSinalizador05-1.mp4",
+          "crc32": "4e70e8fa",
+          "bytes": 69539905,
+          "compressedBytes": 69558390,
+          "offset": 604201798
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador05/Canon/03AmareloSinalizador05-2.mp4",
+          "crc32": "69c8350c",
+          "bytes": 61078082,
+          "compressedBytes": 61094456,
+          "offset": 673760555
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador05/Canon/03AmareloSinalizador05-3.mp4",
+          "crc32": "f3f20642",
+          "bytes": 42919268,
+          "compressedBytes": 42930459,
+          "offset": 734855378
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador05/Canon/03AmareloSinalizador05-4.mp4",
+          "crc32": "0b236ee8",
+          "bytes": 42030840,
+          "compressedBytes": 42041834,
+          "offset": 777786204
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador05/Canon/03AmareloSinalizador05-5.mp4",
+          "crc32": "e57a30c4",
+          "bytes": 50350802,
+          "compressedBytes": 50364136,
+          "offset": 819828405
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador05/Canon/12EspelhoSinalizador05-1.mp4",
+          "crc32": "40c41ca1",
+          "bytes": 51679231,
+          "compressedBytes": 51649370,
+          "offset": 2969213816
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador05/Canon/12EspelhoSinalizador05-2.mp4",
+          "crc32": "1bb17b90",
+          "bytes": 54203143,
+          "compressedBytes": 54172307,
+          "offset": 3020863552
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador05/Canon/12EspelhoSinalizador05-3.mp4",
+          "crc32": "3f92ab6c",
+          "bytes": 69410142,
+          "compressedBytes": 69369899,
+          "offset": 3075036226
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador05/Canon/12EspelhoSinalizador05-4.mp4",
+          "crc32": "4399c7ec",
+          "bytes": 50874946,
+          "compressedBytes": 50845868,
+          "offset": 3144406492
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador05/Canon/12EspelhoSinalizador05-5.mp4",
+          "crc32": "0ae3080d",
+          "bytes": 51834681,
+          "compressedBytes": 51805377,
+          "offset": 3195252726
+        }
+      ]
+    },
+    {
+      "signer": 6,
+      "archive": "Sinalizador06.zip",
+      "bytes": 6534136045,
+      "publishedChecksum": "md5:d530e828ab775046f9e1d0938525ab3f",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "de75d401bed9a86c01efb958944297517b657b98abcc43da029c53ef6ae45b20",
+      "videoFolders": {
+        "Canon": 100
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador06/Canon/03AmareloSinalizador06-1.mp4",
+          "crc32": "eba16d9f",
+          "bytes": 72012898,
+          "compressedBytes": 71976288,
+          "offset": 706884660
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador06/Canon/03AmareloSinalizador06-2.mp4",
+          "crc32": "c39b2c11",
+          "bytes": 61511529,
+          "compressedBytes": 61479567,
+          "offset": 778861315
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador06/Canon/03AmareloSinalizador06-3.mp4",
+          "crc32": "66a4d358",
+          "bytes": 62261398,
+          "compressedBytes": 62231159,
+          "offset": 840341249
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador06/Canon/03AmareloSinalizador06-4.mp4",
+          "crc32": "f729f52e",
+          "bytes": 63361358,
+          "compressedBytes": 63330375,
+          "offset": 902572775
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador06/Canon/03AmareloSinalizador06-5.mp4",
+          "crc32": "27701d07",
+          "bytes": 68920656,
+          "compressedBytes": 68885341,
+          "offset": 965903517
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador06/Canon/12EspelhoSinalizador06-1.mp4",
+          "crc32": "4a85fec7",
+          "bytes": 59250605,
+          "compressedBytes": 59219630,
+          "offset": 3586150540
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador06/Canon/12EspelhoSinalizador06-2.mp4",
+          "crc32": "615193b4",
+          "bytes": 63851525,
+          "compressedBytes": 63818024,
+          "offset": 3645370537
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador06/Canon/12EspelhoSinalizador06-3.mp4",
+          "crc32": "3ee154dd",
+          "bytes": 66285545,
+          "compressedBytes": 66250361,
+          "offset": 3709188928
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador06/Canon/12EspelhoSinalizador06-4.mp4",
+          "crc32": "10745df0",
+          "bytes": 66578341,
+          "compressedBytes": 66542850,
+          "offset": 3775439656
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador06/Canon/12EspelhoSinalizador06-5.mp4",
+          "crc32": "0a6fb51d",
+          "bytes": 69717655,
+          "compressedBytes": 69682022,
+          "offset": 3841982873
+        }
+      ]
+    },
+    {
+      "signer": 7,
+      "archive": "Sinalizador07.zip",
+      "bytes": 2531938069,
+      "publishedChecksum": "md5:8e885f5cb6823744a583f206e4d2051c",
+      "zipTailBytes": 524288,
+      "zipTailSha256": "b322d38f9fcda99860dc3a81e0996454d7e73d6d91ef981e0576321ccb3db53a",
+      "videoFolders": {
+        "Canon": 103
+      },
+      "members": [
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 1,
+          "member": "Sinalizador07/Canon/03AmareloSinalizador07-1.mp4",
+          "crc32": "3b9bb1bf",
+          "bytes": 27823110,
+          "compressedBytes": 27772400,
+          "offset": 236286208
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 2,
+          "member": "Sinalizador07/Canon/03AmareloSinalizador07-2.mp4",
+          "crc32": "0e4799c5",
+          "bytes": 29983336,
+          "compressedBytes": 29932937,
+          "offset": 264058975
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 3,
+          "member": "Sinalizador07/Canon/03AmareloSinalizador07-3.mp4",
+          "crc32": "37407727",
+          "bytes": 28140155,
+          "compressedBytes": 28093991,
+          "offset": 293992279
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 4,
+          "member": "Sinalizador07/Canon/03AmareloSinalizador07-4.mp4",
+          "crc32": "8ee36739",
+          "bytes": 23091485,
+          "compressedBytes": 23052763,
+          "offset": 322086637
+        },
+        {
+          "code": "03",
+          "label": "amarelo",
+          "take": 5,
+          "member": "Sinalizador07/Canon/03AmareloSinalizador07-5.mp4",
+          "crc32": "50f59d60",
+          "bytes": 25055901,
+          "compressedBytes": 25013578,
+          "offset": 345139767
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 1,
+          "member": "Sinalizador07/Canon/12EspelhoSinalizador07-1.mp4",
+          "crc32": "245980bc",
+          "bytes": 21788177,
+          "compressedBytes": 21752638,
+          "offset": 1384787559
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 2,
+          "member": "Sinalizador07/Canon/12EspelhoSinalizador07-2.mp4",
+          "crc32": "1498378f",
+          "bytes": 20582420,
+          "compressedBytes": 20548169,
+          "offset": 1406540564
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 3,
+          "member": "Sinalizador07/Canon/12EspelhoSinalizador07-3.mp4",
+          "crc32": "21461d24",
+          "bytes": 28964257,
+          "compressedBytes": 28915968,
+          "offset": 1427089100
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 4,
+          "member": "Sinalizador07/Canon/12EspelhoSinalizador07-4.mp4",
+          "crc32": "f0d3fd84",
+          "bytes": 23422926,
+          "compressedBytes": 23381313,
+          "offset": 1456005435
+        },
+        {
+          "code": "12",
+          "label": "espelho",
+          "take": 5,
+          "member": "Sinalizador07/Canon/12EspelhoSinalizador07-5.mp4",
+          "crc32": "7209e4c0",
+          "bytes": 23241362,
+          "compressedBytes": 23202902,
+          "offset": 1479387115
+        }
+      ]
+    }
+  ],
+  "selection": [
+    {
+      "signer": 1,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador01/Canon/03AmareloSinalizador01-4.mp4",
+      "crc32": "7aad5059",
+      "bytes": 51269599,
+      "compressedBytes": 51224294,
+      "offset": 589029813
+    },
+    {
+      "signer": 1,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador01/Canon/12EspelhoSinalizador01-4.mp4",
+      "crc32": "afb16301",
+      "bytes": 37688398,
+      "compressedBytes": 37656339,
+      "offset": 2630443662
+    },
+    {
+      "signer": 2,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador02/Canon/03AmareloSinalizador02-4.mp4",
+      "crc32": "491c857c",
+      "bytes": 51812321,
+      "compressedBytes": 51766443,
+      "offset": 561498767
+    },
+    {
+      "signer": 2,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador02/Canon/12EspelhoSinalizador02-4.mp4",
+      "crc32": "cf5105f4",
+      "bytes": 53698691,
+      "compressedBytes": 53651918,
+      "offset": 2604549453
+    },
+    {
+      "signer": 3,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador03/Canon/03AmareloSinalizador03-4.mp4",
+      "crc32": "cf7a327a",
+      "bytes": 41369244,
+      "compressedBytes": 41333837,
+      "offset": 354866040
+    },
+    {
+      "signer": 3,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador03/Canon/12EspelhoSinalizador03-4.mp4",
+      "crc32": "7b0234d1",
+      "bytes": 53531455,
+      "compressedBytes": 53484565,
+      "offset": 1826122398
+    },
+    {
+      "signer": 4,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador04/Canon/03AmareloSinalizador04-4.mp4",
+      "crc32": "50f966ea",
+      "bytes": 57296154,
+      "compressedBytes": 57244843,
+      "offset": 651770313
+    },
+    {
+      "signer": 4,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador04/Canon/12EspelhoSinalizador04-4.mp4",
+      "crc32": "2fe74a70",
+      "bytes": 54108209,
+      "compressedBytes": 54059556,
+      "offset": 3065551724
+    },
+    {
+      "signer": 5,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador05/Canon/03AmareloSinalizador05-4.mp4",
+      "crc32": "0b236ee8",
+      "bytes": 42030840,
+      "compressedBytes": 42041834,
+      "offset": 777786204
+    },
+    {
+      "signer": 5,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador05/Canon/12EspelhoSinalizador05-4.mp4",
+      "crc32": "4399c7ec",
+      "bytes": 50874946,
+      "compressedBytes": 50845868,
+      "offset": 3144406492
+    },
+    {
+      "signer": 6,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador06/Canon/03AmareloSinalizador06-4.mp4",
+      "crc32": "f729f52e",
+      "bytes": 63361358,
+      "compressedBytes": 63330375,
+      "offset": 902572775
+    },
+    {
+      "signer": 6,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador06/Canon/12EspelhoSinalizador06-4.mp4",
+      "crc32": "10745df0",
+      "bytes": 66578341,
+      "compressedBytes": 66542850,
+      "offset": 3775439656
+    },
+    {
+      "signer": 7,
+      "code": "03",
+      "label": "amarelo",
+      "take": 4,
+      "member": "Sinalizador07/Canon/03AmareloSinalizador07-4.mp4",
+      "crc32": "8ee36739",
+      "bytes": 23091485,
+      "compressedBytes": 23052763,
+      "offset": 322086637
+    },
+    {
+      "signer": 7,
+      "code": "12",
+      "label": "espelho",
+      "take": 4,
+      "member": "Sinalizador07/Canon/12EspelhoSinalizador07-4.mp4",
+      "crc32": "f0d3fd84",
+      "bytes": 23422926,
+      "compressedBytes": 23381313,
+      "offset": 1456005435
+    }
+  ]
+}
