@@ -1,0 +1,414 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Guia do Prêmio Cátedra IA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single reading column with a sticky index on wide screens; sections read like the chapters of the edital, each citing its item */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#16202E; --muted:#556274; --line:#D9DFE6;
+  --accent:#0F5E8C; --accent-soft:#E3EEF5; --warn:#8A4B00; --warn-soft:#FBEFD9;
+  --ok:#1F6B45; --ok-soft:#E2F1E8;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10161E; --surface:#172030; --ink:#E7ECF2; --muted:#9AA8B8; --line:#2A3647;
+  --accent:#6CB6E3; --accent-soft:#1B3347; --warn:#F2BE73; --warn-soft:#3A2C17;
+  --ok:#7FD0A3; --ok-soft:#183427; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161E; --surface:#172030; --ink:#E7ECF2; --muted:#9AA8B8; --line:#2A3647;
+  --accent:#6CB6E3; --accent-soft:#1B3347; --warn:#F2BE73; --warn-soft:#3A2C17;
+  --ok:#7FD0A3; --ok-soft:#183427; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:2.5rem 4rem;display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr);gap:1.5rem}nav.toc{position:static!important}}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1.5rem);align-self:start;font-size:.92rem}
+nav.toc p{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted);margin:0 0 .5rem}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:.15rem}
+nav.toc a{color:var(--ink);text-decoration:none;display:block;padding:.2rem .5rem;border-radius:4px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+@media (max-width:860px){nav.toc ol{display:flex;flex-wrap:wrap;gap:.35rem}nav.toc a{border:1px solid var(--line);font-size:.85rem}}
+main{min-width:0;max-width:760px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:700;margin-bottom:.9rem}
+h3{font-size:1.12rem;font-weight:700;margin-bottom:.35rem}
+p{margin:0 0 .9rem}
+section{padding-block:2.2rem;border-top:1px solid var(--line);scroll-margin-top:1rem}
+.eyebrow{font-family:var(--mono);font-size:.78rem;color:var(--muted);letter-spacing:.04em;margin-bottom:.5rem;display:block}
+.lede{font-size:1.15rem;color:var(--muted);margin-top:1rem;max-width:62ch}
+.deadline{margin-top:1.8rem;display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;background:var(--warn-soft);color:var(--warn);padding:1rem 1.25rem;border-radius:8px}
+.deadline strong{font-family:var(--display);font-size:1.5rem;color:var(--warn)}
+.deadline span{font-size:.98rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:1.5rem}
+.facts div{background:var(--surface);padding:.9rem 1rem}
+.facts b{display:block;font-family:var(--display);font-size:1.3rem}
+.facts small{color:var(--muted);font-size:.85rem}
+.cite{font-family:var(--mono);font-size:.74rem;color:var(--accent);background:var(--accent-soft);padding:.1rem .4rem;border-radius:4px;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-block:1rem}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.2rem;min-width:0}
+.item .tag{font-family:var(--mono);font-size:.75rem;color:var(--accent);display:block;margin-bottom:.3rem}
+.item p:last-child,.item ul:last-child{margin-bottom:0}
+.item ul{padding-left:1.1rem;margin:.4rem 0 0}
+.ex{color:var(--muted);font-size:.95rem}
+.ex b{color:var(--ink)}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-block:1rem}
+.warn{border-left:3px solid var(--warn);background:var(--warn-soft);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-block:1rem}
+.warn b{color:var(--warn)}
+.tbl{overflow-x:auto;margin-block:1rem;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem;min-width:520px}
+th,td{text-align:left;padding:.65rem .85rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;font-family:var(--mono);white-space:nowrap}
+s{color:var(--muted)}
+ol.steps{padding-left:1.3rem;margin:0 0 1rem}
+ol.steps li{margin-bottom:.55rem}
+ul.plain{padding-left:1.2rem;margin:0 0 1rem}
+ul.plain li{margin-bottom:.35rem}
+.bar{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:1rem 0 .4rem;font-family:var(--mono);font-size:.8rem}
+.bar div{display:flex;align-items:center;justify-content:center;color:var(--surface);background:var(--accent)}
+.bar div:nth-child(2){opacity:.82}.bar div:nth-child(3){opacity:.64}.bar div:nth-child(4){opacity:.48}
+.legend{display:grid;gap:.6rem;margin-top:1rem}
+.legend div{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:.75rem;align-items:baseline}
+.legend b{font-family:var(--mono);font-size:1rem;color:var(--accent)}
+.prize{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-block:1rem}
+@media (max-width:520px){.prize{grid-template-columns:minmax(0,1fr)}}
+.prize div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1rem;text-align:left}
+.prize b{display:block;font-family:var(--display);font-size:1.6rem;font-variant-numeric:tabular-nums}
+.prize small{color:var(--muted)}
+.check li{list-style:none;position:relative;padding-left:1.6rem}
+.check{padding-left:0}
+.check li::before{content:"";position:absolute;left:0;top:.45rem;width:.85rem;height:.85rem;border:2px solid var(--accent);border-radius:3px}
+.ok{color:var(--ok);background:var(--ok-soft);padding:.05rem .4rem;border-radius:4px;font-weight:600;font-size:.9rem}
+footer{margin-top:2rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:1.2rem}
+code{font-family:var(--mono);font-size:.85em}
+a{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Índice">
+  <p>Neste guia</p>
+  <ol>
+    <li><a href="#visao">Visão geral</a></li>
+    <li><a href="#quem">Quem pode participar</a></li>
+    <li><a href="#eixos">Os 4 eixos temáticos</a></li>
+    <li><a href="#categorias">As 3 categorias</a></li>
+    <li><a href="#areas">As 5 áreas e os prêmios</a></li>
+    <li><a href="#entrega">O que entregar</a></li>
+    <li><a href="#formato">Formatação do trabalho</a></li>
+    <li><a href="#ia">Regras sobre uso de IA</a></li>
+    <li><a href="#avaliacao">Como é a avaliação</a></li>
+    <li><a href="#cronograma">Cronograma</a></li>
+    <li><a href="#aditivo">O que o aditivo mudou</a></li>
+    <li><a href="#formulario">O formulário de inscrição</a></li>
+    <li><a href="#regras">Outras regras importantes</a></li>
+    <li><a href="#atencao">Pontos de atenção</a></li>
+  </ol>
+</nav>
+
+<main>
+<header>
+  <span class="eyebrow">UFC · Cátedra Luíza de Teodoro · Edital nº 1/2026 + Aditivo nº 1</span>
+  <h1>Prêmio Inteligência Artificial e Formação Universitária</h1>
+  <p class="lede">Explicação completa, em linguagem simples, de tudo o que o edital pede. Feita para a equipe entender no que está entrando antes de decidir o projeto.</p>
+  <div class="deadline">
+    <strong>Inscrições até 30/11/2026, 23h59</strong>
+    <span>Horário de Brasília. O edital recomenda não deixar para as últimas 24 horas, e depois de enviar não é possível corrigir nada.</span>
+  </div>
+  <div class="facts">
+    <div><b>15</b><small>prêmios no total</small></div>
+    <div><b>R$ 20 mil</b><small>para cada 1º lugar</small></div>
+    <div><b>até 5</b><small>pessoas por equipe</small></div>
+    <div><b>1 PDF</b><small>de até 40 MB, com tudo</small></div>
+    <div><b>Grátis</b><small>sem taxa de inscrição</small></div>
+  </div>
+</header>
+
+<section id="visao">
+  <h2>Visão geral</h2>
+  <p>Apesar de ser chamado às vezes de "hackathon", <b>não é uma maratona ao vivo</b>. É um prêmio: a equipe prepara um trabalho, junta os documentos num único PDF e envia por um formulário online. Uma comissão de professores e um especialista de fora da UFC avalia tudo e escolhe os vencedores. <span class="cite">item 1 e 5</span></p>
+  <p>O objetivo do prêmio é reconhecer trabalhos que usem a Inteligência Artificial de forma <b>inovadora, ética e relevante para a formação universitária</b>, ou seja, para melhorar como se ensina, se aprende, se pesquisa e se prepara o aluno para a profissão. <span class="cite">item 2.1</span></p>
+  <p>Ao se inscrever, a equipe faz três escolhas que definem como o trabalho será julgado:</p>
+  <ol class="steps">
+    <li><b>Um eixo temático</b>: o "assunto" do trabalho dentro do tema IA e universidade (4 opções).</li>
+    <li><b>Uma categoria</b>: o "tipo" de produto entregue, que pode ser artigo, projeto pedagógico ou solução tecnológica (3 opções).</li>
+    <li><b>Uma área do conhecimento</b>: o campo onde o trabalho concorre aos prêmios (5 opções). <b>É aqui que acontece a disputa</b>, porque os prêmios são divididos por área.</li>
+  </ol>
+  <p>Não existe premiação em troféu ou bolsa: o prêmio é só em dinheiro, depositado na conta do responsável pela equipe, e pode ter desconto de imposto. <span class="cite">itens 2.7 e 9.3</span></p>
+</section>
+
+<section id="quem">
+  <h2>Quem pode participar</h2>
+  <p>Podem participar pessoas com vínculo com a UFC: <span class="cite">item 3.1</span></p>
+  <ul class="plain">
+    <li><b>Docentes</b>: efetivos, substitutos ou visitantes.</li>
+    <li><b>Alunos</b> regularmente matriculados na graduação ou na pós-graduação (mestrado, doutorado ou especialização).</li>
+    <li><b>Pesquisadores</b> formalmente ligados a grupos de pesquisa certificados da UFC.</li>
+  </ul>
+  <p>Dá para participar sozinho ou em <b>equipe de até 5 pessoas</b>. A equipe pode misturar perfis, por exemplo alunos com um professor. Uma pessoa precisa ser indicada como <b>responsável</b>: ela fala com a comissão, recebe os e-mails e recebe o dinheiro em nome da equipe. Todos os integrantes aparecem no certificado e na divulgação. <span class="cite">item 3.2</span></p>
+  <h3>Condições obrigatórias</h3>
+  <ul class="plain">
+    <li>Ter vínculo ativo com a UFC <b>na data da inscrição</b>. Quem se formar depois disso continua concorrendo. <span class="cite">item 3.4, alterado pelo aditivo</span></li>
+    <li>Não ter punição ética ou disciplinar em processo concluído na UFC que impeça participar de seleções.</li>
+    <li>Concordar com todas as regras do edital.</li>
+  </ul>
+  <h3>Quem não pode</h3>
+  <p>Membros da comissão julgadora ou da coordenação da Cátedra, seus cônjuges e parentes até o 3º grau, e servidores que cuidam da parte administrativa e financeira do prêmio. <span class="cite">item 3.3</span></p>
+  <h3>Limites de inscrição</h3>
+  <p>Cada pessoa ou equipe pode mandar <b>no máximo 1 trabalho por categoria</b>. O mesmo trabalho não pode ir em duas categorias, nem ser enviado por duas equipes diferentes. <span class="cite">itens 4.3 e 5.2.2</span></p>
+</section>
+
+<section id="eixos">
+  <h2>Os 4 eixos temáticos</h2>
+  <p>O trabalho precisa se ligar a pelo menos um eixo, e na inscrição a equipe marca <b>o eixo de maior aderência</b>. Pense no eixo como a pergunta que o trabalho responde. Os exemplos abaixo são ideias nossas para ilustrar, não estão no edital. <span class="cite">itens 2.4 e 4.1</span></p>
+  <div class="grid2">
+    <div class="item"><span class="tag">Eixo I</span><h3>Fundamentos e Ética da IA</h3>
+      <p>Como os algoritmos funcionam por dentro, como os dados são governados, quais vieses os modelos carregam e qual o papel da universidade em definir princípios éticos para o uso de IA.</p>
+      <p class="ex"><b>Caberia:</b> uma análise de viés de um modelo usado na correção de redações; um guia de boas práticas de IA para um curso; uma ferramenta que mostra ao aluno de onde vem a resposta de um chatbot.</p></div>
+    <div class="item"><span class="tag">Eixo II</span><h3>IA e Transformação dos Saberes</h3>
+      <p>Como a IA, principalmente a generativa, muda a pesquisa e a própria noção de conhecimento: rigor científico, autoria, originalidade.</p>
+      <p class="ex"><b>Caberia:</b> um estudo sobre o uso de ChatGPT em TCCs; uma discussão sobre autoria em textos coescritos com IA; uma ferramenta que ajuda a checar referências inventadas por IA.</p></div>
+    <div class="item"><span class="tag">Eixo III</span><h3>IA e Inovação Pedagógica</h3>
+      <p>Usar IA no ensino e na aprendizagem: aprendizagem personalizada, metodologias novas, novas formas de avaliar.</p>
+      <p class="ex"><b>Caberia:</b> um tutor inteligente para uma disciplina difícil; uma sequência de aulas em que os alunos trabalham com IA; um sistema que gera exercícios adaptados ao nível de cada aluno.</p></div>
+    <div class="item"><span class="tag">Eixo IV</span><h3>Currículos e Profissões do Futuro</h3>
+      <p>Como a IA muda profissões e carreiras, e como os currículos dos cursos devem se adaptar.</p>
+      <p class="ex"><b>Caberia:</b> um levantamento de quais competências um curso precisa adicionar; uma plataforma que compara o currículo do curso com vagas de emprego; uma proposta de disciplina nova.</p></div>
+  </div>
+  <div class="note">O eixo vale pontos: o critério de maior peso na avaliação, <b>originalidade e relevância</b>, inclui a "aderência aos eixos temáticos". Escolha o eixo que o trabalho realmente responde, e deixe essa ligação explícita no texto.</div>
+</section>
+
+<section id="categorias">
+  <h2>As 3 categorias</h2>
+  <p>A categoria diz <b>que tipo de coisa</b> a equipe está entregando. Se a comissão achar que a categoria marcada não combina com o material, ela pode mudar a inscrição de categoria e avisa o responsável. <span class="cite">itens 4.2 e 4.4</span></p>
+
+  <div class="item" style="margin-bottom:1rem"><span class="tag">Categoria I</span><h3>Trabalhos Acadêmico-Científicos</h3>
+    <p><b>O que é:</b> um texto acadêmico que analisa, com rigor teórico e metodológico, como a IA é usada na formação universitária e que impactos ela causa.</p>
+    <p><b>Formatos aceitos:</b> artigo científico, ensaio acadêmico, capítulo de pesquisa em andamento ou concluída.</p>
+    <p class="ex"><b>Na prática:</b> é o caminho para quem já tem uma pesquisa, uma revisão de literatura ou dados de questionário. O que pesa é a fundamentação teórica e um método bem explicado.</p></div>
+
+  <div class="item" style="margin-bottom:1rem"><span class="tag">Categoria II</span><h3>Projetos de Inovação Pedagógica</h3>
+    <p><b>O que é:</b> uma proposta ou uma experiência já aplicada que usa IA para inovar a forma de ensinar, aprender ou avaliar.</p>
+    <p><b>Formatos aceitos:</b> plano de intervenção pedagógica, relato de experiência <b>com resultados mensuráveis</b>, sequência didática inovadora.</p>
+    <p class="ex"><b>Na prática:</b> combina com quem aplicou (ou vai aplicar) algo em sala de aula. Relatos com números, como notas antes e depois ou taxa de aprovação, tendem a ser mais fortes.</p></div>
+
+  <div class="item" style="margin-bottom:1rem"><span class="tag">Categoria III</span><h3>Soluções Tecnológicas</h3>
+    <p><b>O que é:</b> uma ferramenta, protótipo ou sistema que usa IA para resolver um problema concreto da comunidade acadêmica.</p>
+    <p><b>Formatos aceitos:</b> protótipo funcional, aplicativo, sistema ou plataforma, <b>sempre acompanhado de um memorial técnico descritivo</b>.</p>
+    <p class="ex"><b>Na prática:</b> é a categoria mais próxima de um hackathon. O documento principal é o memorial, que explica o problema, a solução, a arquitetura, como a IA é usada, testes e resultados. Vídeo de demonstração, link do protótipo e repositório de código entram como links opcionais, mas ajudam muito a mostrar que funciona. A comissão avalia a "funcionalidade técnica da solução".</p>
+    <p class="ex"><b>Propriedade intelectual:</b> a autoria é da equipe. Se a solução foi feita com estrutura, dinheiro ou orientação da UFC, a patente ou registro segue a política de inovação da universidade. <span class="cite">item 14.2</span></p></div>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Categoria</th><th>Você entrega</th><th>O que mais conta</th></tr></thead>
+    <tbody>
+      <tr><td>I · Acadêmico-Científico</td><td>Artigo, ensaio ou capítulo</td><td>Teoria e método</td></tr>
+      <tr><td>II · Inovação Pedagógica</td><td>Plano, relato ou sequência didática</td><td>Aplicação em ensino e resultados</td></tr>
+      <tr><td>III · Solução Tecnológica</td><td>Protótipo + memorial técnico</td><td>Funcionamento e utilidade real</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="areas">
+  <h2>As 5 áreas do conhecimento e os prêmios</h2>
+  <p>Os 15 prêmios são divididos igualmente entre 5 áreas, 3 por área. <b>Os trabalhos competem com os outros da mesma área</b>, misturando as três categorias. A notícia da UFC fala em "três primeiros de cada categoria", mas o edital é claro que a divisão é por área. <span class="cite">itens 9.1 e 9.2</span></p>
+  <div class="prize">
+    <div><small>1º lugar</small><b>R$ 20.000</b></div>
+    <div><small>2º lugar</small><b>R$ 15.000</b></div>
+    <div><small>3º lugar</small><b>R$ 7.000</b></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Área</th><th>Inclui</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Ciências Exatas, Naturais e Tecnológicas</td><td>Ciências Exatas e da Terra, Ciências Biológicas, Engenharias</td></tr>
+      <tr><td>2 · Ciências da Saúde e da Vida</td><td>Ciências da Saúde, Ciências Agrárias</td></tr>
+      <tr><td>3 · Ciências Sociais e Econômicas</td><td>Ciências Sociais Aplicadas (Direito, Economia, Administração, Comunicação etc.)</td></tr>
+      <tr><td>4 · Ciências Humanas e Educação</td><td>Ciências Humanas, Ensino e Educação</td></tr>
+      <tr><td>5 · Linguagens, Artes e Multidisciplinar</td><td>Linguística, Letras e Artes, Multidisciplinar</td></tr>
+    </tbody>
+  </table></div>
+  <p>Se uma área não tiver trabalhos bons o suficiente, a comissão pode não dar todos os prêmios dela, e o dinheiro pode ir para outras áreas. <span class="cite">item 9.4</span></p>
+  <div class="note"><b>Escolha estratégica:</b> a área é marcada pela equipe. Um projeto de computação aplicado à educação, por exemplo, poderia concorrer na Área 1 ou na Área 4, dependendo do foco. Vale escolher a área em que o trabalho se encaixa de verdade, porque a comissão pode questionar uma escolha forçada.</div>
+  <p>Trabalhos aprovados na 1ª fase que não ficarem entre os 3 primeiros entram numa <b>lista de suplência</b>: se um premiado desistir ou for desclassificado, o próximo da lista daquela área assume, até a cerimônia e o pagamento. <span class="cite">item 11</span></p>
+</section>
+
+<section id="entrega">
+  <h2>O que entregar</h2>
+  <p>Tudo vai junto, <b>num único arquivo PDF de até 40 MB</b>, legível e sem rasuras. Faltou um documento, a inscrição é eliminada na primeira fase. <span class="cite">item 6.1</span></p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Documento</th><th>Detalhes</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Documento com foto</td><td>RG, CNH, carteira de classe ou equivalente, <b>de todos os integrantes</b>.</td></tr>
+      <tr><td class="num">2</td><td>Comprovante de vínculo com a UFC</td><td>Alunos: declaração ou atestado de matrícula. Docentes e pesquisadores: declaração funcional ou portaria. De preferência emitido pelo SIGAA.</td></tr>
+      <tr><td class="num">3</td><td>Resumo</td><td>Até <b>1.500 caracteres sem contar espaços</b>, com título, categoria, eixo temático e integrantes.</td></tr>
+      <tr><td class="num">4</td><td>Trabalho completo</td><td>O artigo, o projeto detalhado ou o memorial descritivo, conforme a categoria. Até 20 laudas, nas normas do Anexo I.</td></tr>
+      <tr><td class="num">5</td><td>Anexo II · Declaração de originalidade e autoria</td><td>Modelo do edital, assinado digitalmente por <b>todos</b>.</td></tr>
+      <tr><td class="num">6</td><td>Anexo III · Declaração de uso de IA generativa</td><td>Modelo do edital, assinado digitalmente por <b>todos</b>.</td></tr>
+      <tr><td class="num">7</td><td>Anexo IV · Declaração de ciência e concordância</td><td>Modelo do edital, assinado digitalmente pelo responsável e/ou pelos integrantes.</td></tr>
+      <tr><td class="num">8</td><td>Links complementares <span class="ok">opcional</span></td><td>Vídeo de demonstração, fotos, protótipo navegável, repositório de código. Os links precisam estar <b>abertos ao público</b>.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Os três anexos (II, III e IV) pedem o mesmo cabeçalho: título, categoria, eixo e área. Cada um tem campos de nome e assinatura. A assinatura precisa ser <b>digital ou eletrônica</b>; o assinador gratuito do gov.br serve para isso.</p>
+  <div class="warn"><b>Não são aceitos:</b> documentos em papel, pen drive, links de nuvem sem acesso público ou qualquer formato diferente do pedido. A comissão também pode pedir documentos extras a qualquer momento, e a equipe tem <b>3 dias úteis</b> para responder, senão é desclassificada. <span class="cite">itens 6.2 e 6.3</span></div>
+</section>
+
+<section id="formato">
+  <h2>Formatação do trabalho</h2>
+  <p>O documento 4 (trabalho, projeto ou memorial) segue as normas ABNT (NBR 14724 para estrutura, NBR 10520 para citações e NBR 6023 para referências). <span class="cite">Anexo I</span></p>
+  <div class="grid2">
+    <div class="item"><h3>Formatação</h3>
+      <ul>
+        <li>Times New Roman, tamanho 12</li>
+        <li>Espaçamento 1,5 entre linhas</li>
+        <li>Margens de 3 cm nos quatro lados</li>
+        <li>Texto justificado</li>
+        <li>No máximo 20 laudas (páginas)</li>
+      </ul></div>
+    <div class="item"><h3>Estrutura obrigatória</h3>
+      <ul>
+        <li>Capa: instituição ou unidade, título, cidade e ano</li>
+        <li>Resumo de até 1.500 caracteres sem espaços</li>
+        <li>Introdução, Desenvolvimento e Conclusão</li>
+        <li>Referências, sempre que houver citação</li>
+        <li>Declaração de uso de IA no corpo do texto</li>
+      </ul></div>
+  </div>
+  <div class="note"><b>Avaliação cega:</b> a comissão deve avaliar, sempre que possível, sem saber quem são os autores. Então é prudente <b>não colocar nomes da equipe no trabalho em si</b> (documento 4). Os nomes já aparecem nos documentos pessoais, no resumo e nos anexos. <span class="cite">item 8.1.3</span></div>
+</section>
+
+<section id="ia">
+  <h2>Regras sobre uso de IA na elaboração</h2>
+  <p>O prêmio não proíbe usar ChatGPT, Copilot, Gemini, Claude ou outras IAs para escrever, revisar ou melhorar o material. Mas impõe três regras: <span class="cite">item 7</span></p>
+  <ol class="steps">
+    <li><b>Declarar no corpo do trabalho</b>, de forma clara, quais ferramentas foram usadas e para quê. Isso é além do Anexo III, que só tem um "Sim / Não".</li>
+    <li><b>A responsabilidade é toda da equipe.</b> É proibido usar IA para inventar, falsificar ou manipular dados, imagens, código ou resultados.</li>
+    <li><b>Material feito inteiramente por IA</b>, sem contribuição humana significativa e comprovável, é <b>desclassificado na hora</b> e pode gerar processo acadêmico.</li>
+  </ol>
+  <p>Ser transparente sobre o uso de IA <b>dá pontos</b>: faz parte do critério 4 da avaliação. Uma seção curta no trabalho, dizendo ferramenta, finalidade e como a equipe revisou o resultado, cobre isso bem.</p>
+  <p class="ex">Isto vale para o uso de IA na <i>elaboração</i> do material. A IA como <i>tema</i> ou como parte da solução é o próprio objetivo do prêmio.</p>
+</section>
+
+<section id="avaliacao">
+  <h2>Como é a avaliação</h2>
+  <p>A comissão julgadora tem professores ou pesquisadores da UFC que trabalham com IA ou formação universitária, mais pelo menos um especialista de fora. Quem tiver ligação com algum trabalho (coautor, orientador, parente) precisa se declarar impedido. A avaliação usa <b>só o que foi enviado na inscrição</b>. <span class="cite">itens 8.1 e 8.4</span></p>
+
+  <h3>1ª fase · eliminatória</h3>
+  <p>Aprovado ou reprovado, sem nota. A comissão confere se a equipe pode participar, se todos os documentos estão lá e no formato certo, e faz uma avaliação geral de mérito técnico-científico. <span class="cite">item 8.2</span></p>
+
+  <h3 style="margin-top:1.2rem">2ª fase · classificatória</h3>
+  <p>Os aprovados recebem nota de 0 a 10, e a classificação é feita <b>dentro de cada área</b>. <span class="cite">item 8.3</span></p>
+  <div class="bar" role="img" aria-label="Distribuição dos 10 pontos: originalidade 3, rigor 3, impacto 2, clareza e ética 2">
+    <div style="flex:3">3,0</div><div style="flex:3">3,0</div><div style="flex:2">2,0</div><div style="flex:2">2,0</div>
+  </div>
+  <div class="legend">
+    <div><b>3,0</b><span><b>Originalidade e relevância.</b> Quão inédita é a proposta e quanto ela se encaixa nos eixos da Cátedra.</span></div>
+    <div><b>3,0</b><span><b>Rigor metodológico, técnico ou científico.</b> Fundamentação teórica consistente, método adequado e, quando for o caso, se a solução funciona.</span></div>
+    <div><b>2,0</b><span><b>Aplicabilidade e potencial de impacto.</b> Se dá para implementar de verdade e quanto pode transformar a formação na UFC ou em outras universidades.</span></div>
+    <div><b>2,0</b><span><b>Clareza e uso ético da IA.</b> Qualidade da escrita e da apresentação, e transparência sobre as ferramentas de IA usadas.</span></div>
+  </div>
+  <h3 style="margin-top:1.4rem">Desempate</h3>
+  <p>Na ordem: maior nota em originalidade, depois em rigor, depois em impacto e, por último, quem tem <b>mais tempo de vínculo ininterrupto com a UFC</b> (o responsável pela inscrição). <span class="cite">item 8.5</span></p>
+  <h3 style="margin-top:1.2rem">Recursos</h3>
+  <p>Depois do resultado parcial de cada fase, há <b>2 dias corridos</b> para contestar, por e-mail à Cátedra, com argumentos técnicos. Não é possível mandar documentos novos nesse momento. Se a equipe mandar mais de um recurso, vale o último. <span class="cite">item 12</span></p>
+</section>
+
+<section id="cronograma">
+  <h2>Cronograma atualizado</h2>
+  <p>Datas já com o aditivo. A coordenação pode mudar datas avisando com 48 horas de antecedência. <span class="cite">item 13, Aditivo item 4</span></p>
+  <div class="tbl"><table>
+    <thead><tr><th>Etapa</th><th>Data nova</th><th>Data antiga</th></tr></thead>
+    <tbody>
+      <tr><td>Lançamento do edital</td><td class="num">10/09/2026</td><td class="num">10/09/2026</td></tr>
+      <tr><td><b>Inscrições</b></td><td class="num"><b>10/09 a 30/11/2026</b></td><td class="num"><s>até 31/10/2026</s></td></tr>
+      <tr><td>Avaliação da 1ª fase</td><td class="num">01/12 a 31/12/2026</td><td class="num"><s>01 a 15/11/2026</s></td></tr>
+      <tr><td>Resultado parcial · 1ª fase</td><td class="num">15/01/2027</td><td class="num"><s>16/11/2026</s></td></tr>
+      <tr><td>Recursos · 1ª fase</td><td class="num">16 e 17/01/2027</td><td class="num"><s>17 e 18/11/2026</s></td></tr>
+      <tr><td>Resposta aos recursos · 1ª fase</td><td class="num">20/01/2027</td><td class="num"><s>19/11/2026</s></td></tr>
+      <tr><td>Resultado final · 1ª fase</td><td class="num">31/01/2027</td><td class="num"><s>20/11/2026</s></td></tr>
+      <tr><td>Avaliação da 2ª fase</td><td class="num">01/02 a 28/02/2027</td><td class="num"><s>21/11 a 07/12/2026</s></td></tr>
+      <tr><td>Resultado parcial · 2ª fase</td><td class="num">15/03/2027</td><td class="num"><s>08/12/2026</s></td></tr>
+      <tr><td>Recursos · 2ª fase</td><td class="num">16 e 17/03/2027</td><td class="num"><s>09 e 10/12/2026</s></td></tr>
+      <tr><td>Resposta aos recursos · 2ª fase</td><td class="num">20/03/2027</td><td class="num"><s>11/12/2026</s></td></tr>
+      <tr><td>Resultado final · 2ª fase</td><td class="num">29/03/2027</td><td class="num"><s>12/12/2026</s></td></tr>
+      <tr><td><b>Divulgação dos premiados</b></td><td class="num"><b>31/03/2027</b></td><td class="num"><s>15/12/2026</s></td></tr>
+    </tbody>
+  </table></div>
+  <p>Depois disso, há uma <b>cerimônia presencial em Fortaleza</b>, com data e local a definir. O convite vai por e-mail ao responsável, que precisa confirmar presença. Os trabalhos também podem ser convidados para apresentações em eventos da Cátedra, presenciais ou online. <span class="cite">itens 5.2.4 e 10</span></p>
+</section>
+
+<section id="aditivo">
+  <h2>O que o aditivo mudou</h2>
+  <p>O Aditivo nº 1, publicado em 30/10/2026, fez quatro mudanças. Todo o resto do edital continua valendo.</p>
+  <div class="grid2">
+    <div class="item"><span class="tag">Preâmbulo</span><h3>Prazo prorrogado</h3><p>As inscrições, que fechariam em 31/10, agora vão até <b>30/11/2026</b>.</p></div>
+    <div class="item"><span class="tag">Item 1.4</span><h3>Validade estendida</h3><p>O processo agora termina em 2027, quando todas as etapas do cronograma forem concluídas.</p></div>
+    <div class="item"><span class="tag">Item 3.4</span><h3>Vínculo mais flexível</h3><p>Antes era preciso estar vinculado à UFC durante todo o processo. Agora basta estar vinculado <b>no dia da inscrição</b>. Quem colar grau depois continua no páreo.</p></div>
+    <div class="item"><span class="tag">Item 13.1</span><h3>Novo cronograma</h3><p>Todas as fases foram empurradas para dezembro de 2026 a março de 2027 (veja a tabela acima).</p></div>
+  </div>
+</section>
+
+<section id="formulario">
+  <h2>O formulário de inscrição</h2>
+  <p>A inscrição é feita <b>só pelo Google Forms oficial</b>, o mesmo link do edital e da notícia da UFC. E-mail ou entrega física não valem. O formulário pede login numa conta Google e registra nome, foto e e-mail dessa conta. <span class="cite">item 5.1</span></p>
+  <div class="tbl"><table>
+    <thead><tr><th>Bloco</th><th>Campo</th><th>O que colocar</th></tr></thead>
+    <tbody>
+      <tr><td>Início</td><td>E-mail</td><td>Para onde vai a cópia das respostas</td></tr>
+      <tr><td>1 · Identificação</td><td>1.1 Nome do responsável</td><td>Nome completo</td></tr>
+      <tr><td></td><td>1.2 WhatsApp do responsável</td><td>Telefone com DDD</td></tr>
+      <tr><td></td><td>1.3 Vínculo do responsável</td><td>Docente, discente de graduação, discente de pós ou pesquisador, ou "outro"</td></tr>
+      <tr><td></td><td>1.4 Nome dos integrantes</td><td>Nomes completos de todos, separados por vírgula</td></tr>
+      <tr><td></td><td>1.5 E-mail institucional</td><td>E-mail <code>@ufc.br</code> (ou <code>@alu.ufc.br</code>)</td></tr>
+      <tr><td></td><td>1.6 Unidade acadêmica</td><td>Ex.: Departamento de Computação</td></tr>
+      <tr><td>2 · Trabalho</td><td>2.1 Título</td><td>Igual ao do PDF</td></tr>
+      <tr><td></td><td>2.2 Categoria</td><td>I, II ou III</td></tr>
+      <tr><td></td><td>2.3 Eixo temático</td><td>I, II, III ou IV</td></tr>
+      <tr><td></td><td>2.4 Área do conhecimento</td><td>Área 1 a 5</td></tr>
+      <tr><td>3 · Arquivo</td><td>3.1 Upload</td><td>O PDF único com os 8 itens</td></tr>
+    </tbody>
+  </table></div>
+  <p class="ex">Duas observações. O cabeçalho do Bloco 2 menciona "resumo", mas não existe campo para ele: o resumo vai dentro do PDF. E o formulário aceita arquivos de até 100 MB, mas o limite que vale é o do edital, <b>40 MB</b>.</p>
+</section>
+
+<section id="regras">
+  <h2>Outras regras importantes</h2>
+  <ul class="plain">
+    <li><b>Sem correções depois de enviar.</b> Inscrições incompletas, atrasadas ou fora do formato são eliminadas. <span class="cite">item 5.3</span></li>
+    <li><b>Falhas técnicas são problema da equipe.</b> Internet caindo, navegador incompatível ou formulário sobrecarregado não dão direito a nova chance. <span class="cite">item 5.4</span></li>
+    <li><b>Uso de imagem e divulgação.</b> Ao se inscrever, a equipe autoriza a UFC a divulgar nome, título, resultados e o material dos premiados, de graça e sem prazo, sempre citando a autoria. <span class="cite">itens 5.4.1 e 14.3</span></li>
+    <li><b>Autoria continua da equipe.</b> Participar não transfere direitos autorais para a UFC. <span class="cite">item 14.1</span></li>
+    <li><b>Informação falsa anula tudo</b>, mesmo depois do pagamento, e o dinheiro precisa ser devolvido. <span class="cite">item 15.2</span></li>
+    <li><b>Sem vínculo empregatício.</b> Participar ou ganhar não cria nenhum vínculo com a UFC. <span class="cite">item 2.6</span></li>
+    <li><b>Dados pessoais</b> são tratados conforme a LGPD, só para o prêmio e estatísticas da Cátedra. <span class="cite">item 15.3</span></li>
+    <li><b>Dúvidas:</b> e-mail <b>catedraldt@ufc.br</b>. Casos não previstos são decididos pela coordenação da Cátedra. <span class="cite">itens 1.6 e 15.5</span></li>
+  </ul>
+</section>
+
+<section id="atencao">
+  <h2>Pontos de atenção para a equipe</h2>
+  <p>Resumo do que mais costuma eliminar ou tirar pontos, em forma de lista para conferir antes de enviar:</p>
+  <ul class="check">
+    <li>Todos os integrantes têm vínculo ativo com a UFC hoje e conseguem tirar o comprovante no SIGAA.</li>
+    <li>Todos têm documento com foto digitalizado e legível.</li>
+    <li>Todos conseguem assinar digitalmente (gov.br) os Anexos II, III e IV.</li>
+    <li>Categoria, eixo e área estão decididos e aparecem iguais no resumo, nos anexos e no formulário.</li>
+    <li>O resumo tem no máximo 1.500 caracteres sem espaços.</li>
+    <li>O trabalho tem no máximo 20 páginas, em ABNT, com capa, resumo, introdução, desenvolvimento, conclusão e referências.</li>
+    <li>O trabalho tem uma seção declarando como a IA generativa foi usada na elaboração.</li>
+    <li>O trabalho em si não traz os nomes dos autores (avaliação cega).</li>
+    <li>Na Categoria III, há vídeo e/ou link do protótipo ou repositório, todos abertos ao público.</li>
+    <li>Tudo foi juntado num único PDF de até 40 MB.</li>
+    <li>O envio acontece até 29/11, um dia antes do prazo, como o edital recomenda.</li>
+  </ul>
+  <div class="warn"><b>Tempo é o maior risco.</b> Com o prazo em 30/11, sobra pouco tempo para escrever até 20 páginas e juntar assinaturas de todos. Vale dividir as tarefas já: uma pessoa cuida de documentos e assinaturas, as outras do trabalho em si.</div>
+</section>
+
+<footer>
+  Guia preparado a partir do Edital nº 1/2026, do Aditivo nº 1, do formulário de inscrição e da notícia da UFC sobre a prorrogação. Em caso de dúvida, vale sempre o texto oficial do edital. Os exemplos de projetos para cada eixo são sugestões ilustrativas, não fazem parte do edital.
+</footer>
+</main>
+</div>
+
+</body></html>

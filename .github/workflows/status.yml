@@ -1,0 +1,27 @@
+name: Status do projeto
+
+on:
+  push:
+    paths:
+      - 'ROADMAP_LIBRASIA.md'
+      - 'assets/status.svg'
+      - 'scripts/update_status.py'
+      - '.github/workflows/status.yml'
+  pull_request:
+    paths:
+      - 'ROADMAP_LIBRASIA.md'
+      - 'assets/status.svg'
+      - 'scripts/update_status.py'
+      - '.github/workflows/status.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verificar-painel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - run: python3 scripts/update_status.py --check
