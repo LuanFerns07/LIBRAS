@@ -69,6 +69,26 @@ O classificador e o catálogo ainda aguardavam validação quando essa prévia f
 
 O checkout limpo de 78fa4b9 concluiu npm ci, a instalação do MediaPipe, 31 testes unitários, o build e a verificação do painel. No Chromium do PC, quatro testes de ponta a ponta passaram com a webcam física e a voz local habilitadas. O reteste cobriu ainda a cedilha, a comparação de letras, a revisão adaptativa após recarga, a saudação Bom dia e a forma histórica de ALUNO. A corrida ao remover perfis temporários foi corrigida no executor de teste antes do reteste. A inspeção dos sete destinos também foi repetida por cliques na página Saiba mais em um perfil temporário.
 
+## Ensaios com o classificador v1 em 26/11/2026
+
+A prévia local de e722978 foi compilada com o ONNX de SHA-256 52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a e o limiar de validação 0,495. Os testes usam Chromium no PC de referência, cabeçalhos da prévia de produção e clipes do teste reservado como câmera simulada em 640 × 360 a 30 fps. O marcador verde sincroniza as janelas. A sonda sem sinalizante usa a câmera simulada interna do Chromium.
+
+| Cenário | Resultado | Mediana | p95 |
+| --- | --- | ---: | ---: |
+| Sem sinalizante | 3/3 inconclusivas por ausência de rastreamento e sem acréscimo de texto | 0,3 ms | 0,8 ms |
+| Vontade S09-4, fora do catálogo | 3/3 inconclusivas por classe de rejeição e sem acréscimo de texto | 1,6 ms | 12,3 ms |
+| Cinco S09-1 na lição com avatar em reprodução | 5/5 reconhecidas como Cinco | 1,4 ms | 13,0 ms |
+| Cinco S09-1 repetido na área livre | 2/2 reconhecidas e uma palavra por tentativa. O resultado foi “cinco cinco”. | 4,7 ms | 8,4 ms |
+| Cinco S11-1 isolado | 0/2 corretas. O modelo classificou como Espelho nas duas. | 6,6 ms | 12,0 ms |
+| Cinco S11-1 seguido de Espelho S11-1 | 0/2 sequências corretas. O texto foi “espelho espelho” nas duas. | 6,2 ms | 9,0 ms |
+| Cinco S09-1 seguido de Espelho S11-1 | 2/2 com “cinco espelhos”. Caso adicional após diagnosticar o par S11. | 6,3 ms | 9,2 ms |
+
+Os tempos abrangem o clique de conclusão até a decisão, com os ativos já carregados. O p95 por posto mais próximo tem amostra pequena. As repetições reutilizam os mesmos clipes e não ampliam a quantidade de pessoas avaliadas. A instrumentação observou apenas solicitações GET locais e confirmou a carga do ONNX, WASM e Holistic. Após dois reconhecimentos na área livre, o texto editado foi enviado à voz local em pt-BR e a síntese informou conclusão.
+
+No tensor da extração offline, Cinco S11-1 também foi classificado como Espelho, com confiança 0,5637. Espelho S11-1 teve confiança 0,9525 na classe correta. A substituição da sequência ocorreu igualmente na classificação isolada. Vontade S09-4 foi falsamente aceito como Amarelo no tensor offline, com confiança 0,4987, logo acima do limiar 0,495. As janelas capturadas tiveram decisão diferente do clipe completo nessa entrada limítrofe. Nenhum limiar foi revisto com base nesses replays.
+
+Os registros ficam no diretório local data/evidence, nos logs qa-oficial. A avaliação independente reproduziu as métricas da versão oficial. Uma rodada exploratória anterior com limiar 0,48 consta dos logs qa-modelo e do relatório de avaliação. A correção intencional de uma execução e a interpretação do áudio ainda requerem verificação por pessoas no PC.
+
 ## Reproduzir uma tentativa com o classificador
 
 Com o manifesto e os pesos instalados, inicie a prévia compilada. O primeiro comando abaixo verifica a rejeição de um quadro sem sinalizante usando o vídeo de teste interno do Chromium. Para verificar uma decisão positiva com a câmera simulada, converta um clipe autorizado de teste em Y4M local. O exemplo usa a classe Espelho. A execução mede a latência do clique de conclusão até a resposta na área livre e verifica que as requisições da página se restringem a arquivos locais.
@@ -98,7 +118,7 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 \
 
 ### Caso exploratório de dois sinais e uma pausa
 
-O caso une dois clipes isolados da pessoa 11 da partição de teste, Cinco e Espelho, com 0,8 s de vídeo preto para representar a ausência de rastreamento. Um marcador verde no começo sincroniza a captura. O resultado esperado é “cinco espelhos”. A origem da mídia é o [MINDS-Libras, versão 1](https://zenodo.org/records/2667329).
+O caso une dois clipes isolados da pessoa 11 da partição de teste, Cinco e Espelho, com 0,8 s de vídeo preto para representar a ausência de rastreamento. Um marcador verde no começo sincroniza a captura. O esperado é “cinco espelhos”. A versão v1 trocou Cinco por Espelho neste caso e acertou o ensaio adicional com 10CincoSinalizador09-1.mp4 no primeiro trecho. A origem da mídia é o [MINDS-Libras, versão 1](https://zenodo.org/records/2667329).
 
 ~~~bash
 ffmpeg -f lavfi -t 0.4 -i 'color=c=lime:size=640x360:rate=30' \
