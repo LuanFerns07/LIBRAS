@@ -204,3 +204,19 @@ A terceira condição atribui peso igual às probabilidades dos modelos de geome
   --reference ConvSequenceGeometry --candidate ConvSequenceFlexion \
   --out data/models/isolated-combined/cross-validation.json
 ```
+
+| Condição | F1 macro | Acertos de Cinco | Acertos de Aluno | Cobertura | Falsas aceitações |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Geometria | 0,668 | 13/18 | 13/18 | 61/78 | 8/42 |
+| Flexão | 0,679 | 15/18 | 6/18 | 52/78 | 5/42 |
+| Média das probabilidades | 0,761 | 15/18 | 13/18 | 59/78 | 3/42 |
+
+A média passou as metas de F1 macro, cobertura e falsas aceitações dentro da comparação de desenvolvimento. Espelho acertou 13/21 e Amarelo 12/21, ambos abaixo da meta de 65% de revocação. A precisão de Amarelo foi 12/17, abaixo da meta de 75%. Os resultados ainda incluem pessoas da partição original de treino, agrupadas por rodada. [Matrizes por rodada](../ml/evidence/isolated-combined/cross-validation.json)
+
+O ONNX combina os dois checkpoints locais. A validação que definiu o limiar 0,525 teve 24/24 acertos e 0/12 falsas aceitações. Nos 36 clipes, os logits de PyTorch e ONNX tiveram diferença máxima de 1,91 × 10⁻⁶ e as decisões coincidiram. A paridade WebAssembly foi conferida em cinco exemplos, também com decisões iguais. Os artefatos do aplicativo permanecem os do modelo inicial. [Calibração e paridade ONNX](../ml/evidence/isolated-combined/validation-evaluation.json) · [Paridade WASM](../ml/evidence/isolated-combined/wasm-parity.json)
+
+```bash
+.venv/bin/python ml/export_combined.py --out data/models/isolated-combined \
+  data/models/isolated-geometry data/models/isolated-flexion
+node ml/verify-wasm.mjs --run data/models/isolated-combined
+```

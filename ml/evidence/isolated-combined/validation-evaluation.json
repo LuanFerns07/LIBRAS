@@ -1,0 +1,131 @@
+{
+  "evaluationSplit": "val",
+  "rule": "média das probabilidades",
+  "members": [
+    {
+      "architecture": "ConvSequenceGeometry",
+      "modelSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "checkpointSha256": "5f348fde741ca754a55cfbefece3de3988adb6d923619c575e825439676dbb9c"
+    },
+    {
+      "architecture": "ConvSequenceFlexion",
+      "modelSha256": "8e38930e3fb1ef7cbc308cd736f70a49a6882941bb9cbbd424c06d598b1b980c",
+      "checkpointSha256": "f40f9366d725670242501ffa9b972a3956b749f30998534b12ef83260ade479c"
+    }
+  ],
+  "featuresManifestSha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "threshold": 0.525,
+  "results": {
+    "expectedLabels": [
+      "fora do catálogo",
+      "cinco",
+      "espelho",
+      "amarelo",
+      "aluno"
+    ],
+    "decisionLabels": [
+      "rejeitado",
+      "cinco",
+      "espelho",
+      "amarelo",
+      "aluno"
+    ],
+    "matrix": [
+      [
+        12,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        6
+      ]
+    ],
+    "byLabel": {
+      "cinco": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "accepted": 6,
+        "predicted": 6,
+        "truePositives": 6
+      },
+      "espelho": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "accepted": 6,
+        "predicted": 6,
+        "truePositives": 6
+      },
+      "amarelo": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "accepted": 6,
+        "predicted": 6,
+        "truePositives": 6
+      },
+      "aluno": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 6,
+        "accepted": 6,
+        "predicted": 6,
+        "truePositives": 6
+      }
+    },
+    "f1Macro": 1.0,
+    "coverage": {
+      "count": 24,
+      "total": 24,
+      "rate": 1.0
+    },
+    "falseAcceptance": {
+      "count": 0,
+      "total": 12,
+      "rate": 0.0
+    },
+    "inconclusive": {
+      "count": 12,
+      "total": 36,
+      "rate": 0.3333333333333333
+    }
+  },
+  "onnxParity": {
+    "samples": 36,
+    "maxAbsLogitError": 1.9073486328125e-06,
+    "differencesInDecision": 0
+  }
+}

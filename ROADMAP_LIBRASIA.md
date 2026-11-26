@@ -66,6 +66,8 @@ O experimento com geometria da mão aumentou os acertos de Cinco de 3 para 13 em
 
 O candidato com ângulos dos dedos elevou os acertos de Cinco a 15/18 e reduziu as falsas aceitações a 5/42 na comparação interna. A cobertura caiu para 52/78 e a confusão com Banco permaneceu no navegador. [Flexão dos dedos, métricas e paridade](docs/avaliacao.md#experimento-com-flexão-dos-dedos)
 
+A combinação de geometria e flexão chegou a F1 macro de 0,761 e 3/42 falsas aceitações. Espelho e Amarelo ainda ficaram abaixo da revocação mínima por sinal. [Combinação e paridade](docs/avaliacao.md#combinação-de-geometria-e-flexão)
+
 ### M4 · Alfabeto, palavras, frases e nomes
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -91,6 +93,7 @@ O candidato com ângulos dos dedos elevou os acertos de Cinco a 15/18 e reduziu 
 ### M7 · Validação independente e versão de demonstração
 
 - [x] Executar instalação limpa, compilação e testes automatizados, incluindo navegação por teclado, foco, mensagens, liberação da câmera e retomada após erro.
+- [x] Verificar uma tentativa no Chromium após desconectar a rede, com os modelos carregados e a mesma trilha de vídeo ativa. [Ensaio técnico e sonda de rede](docs/janelas-area-livre.md#reconhecimento-após-desconectar)
 - [x] Preparar o formulário local com versão dos ativos, observação humana, decisão do app, dicas, latência e audição. Calcular métricas a partir das fichas elegíveis, separadas por versão. [Ficha e instruções](docs/validacao-ao-vivo.md)
 - [ ] Fazer a verificação manual no PC com participantes, câmera e áudio reais. Verificar a compreensão das mensagens, a sinalização e a audição do texto editado.
 - [ ] Rodar o roteiro principal na seguinte ordem: abrir uma letra, traduzir uma frase, soletrar um nome, aceitar e corrigir um exercício, produzir texto e voz pela área livre e abrir um link de Saiba mais. Registrar ambiente, resultado, limites e evidência de cada etapa.
