@@ -7,12 +7,52 @@ const appUrl = process.env.LIBRASIA_TEST_URL
 const enabled = process.env.LIBRASIA_TEST_RECOGNITION === '1'
 const videoFile = process.env.LIBRASIA_TEST_VIDEO
 const expected = process.env.LIBRASIA_EXPECT_TEXT?.trim()
+const multiple = process.env.LIBRASIA_TEST_SEQUENCE === '1'
+const sync = multiple || process.env.LIBRASIA_TEST_SYNC === '1'
+const target = process.env.LIBRASIA_TEST_TARGET?.trim()
+
+const finish = (() => new Promise(resolve => {
+  const status = document.querySelector('[data-capture-status]')
+  const start = performance.now()
+  const observer = new MutationObserver(() => {
+    if (['busy', 'recording'].includes(status.dataset.state)) return
+    observer.disconnect()
+    resolve({ state: status.dataset.state, elapsedMs: performance.now() - start, message: status.textContent })
+  })
+  observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
+  if (status.dataset.state !== 'recording') {
+    observer.disconnect()
+    resolve({ state: status.dataset.state, elapsedMs: 0, message: status.textContent })
+    return
+  }
+  document.querySelector('[data-attempt]').click()
+})).toString()
+
+const beginAtGreenMarker = (() => new Promise(resolve => {
+  const video = document.querySelector('video')
+  const canvas = document.createElement('canvas')
+  canvas.width = 2
+  canvas.height = 2
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  function checkFrame() {
+    ctx.drawImage(video, 0, 0, 2, 2)
+    const [red, green, blue] = ctx.getImageData(0, 0, 1, 1).data
+    if (green > 170 && red < 35 && blue < 35) {
+      document.querySelector('[data-attempt]').click()
+      resolve()
+    } else video.requestVideoFrameCallback(checkFrame)
+  }
+  video.requestVideoFrameCallback(checkFrame)
+})).toString()
 
 test('a prévia faz a extração e a decisão no navegador sem transmitir quadros', {
   skip: !appUrl || !enabled,
 }, async context => {
   if (videoFile) await access(videoFile)
   if (expected) assert.ok(videoFile, 'Informe o arquivo Y4M rotulado para verificar um sinal positivo.')
+  if (sync) assert.ok(videoFile, 'A sincronização usa um Y4M com marcador inicial verde.')
+  if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
+  if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   const base = new URL('/', appUrl)
   assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname), 'Use uma prévia local em loopback para este teste de vídeo.')
   const otherRequests = []
@@ -25,7 +65,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       seenAssets.add(url.pathname)
     })
     await page('Network.enable')
-    await navigate(base.href + '#area-livre')
+    await navigate(base.href + (target ? '#praticar' : '#area-livre'))
+    if (target) {
+      const select = '(id => { const field = document.querySelector("[data-signal]"); field.value = id; field.dispatchEvent(new Event("change")); })'
+      await evaluate(select + '(' + JSON.stringify(target) + ')')
+      await evaluate('document.querySelector(' + JSON.stringify('[data-stage="1"]') + ').click()', true)
+      assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
+    }
     await permission(base.origin, 'granted')
     await evaluate('document.querySelector("[data-camera-toggle]").click()', true)
     await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
@@ -34,31 +80,25 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording',
       await evaluate('document.querySelector("[data-capture-status]").textContent'))
 
-    // A câmera roda enquanto a tentativa é delimitada. Deixe o clipe ser capturado antes de finalizar.
-    const captureMs = videoFile ? 3850 : 1600
+    if (sync) {
+      // A primeira tentativa carrega o extrator e o classificador. A avaliação começa no marcador do clipe.
+      await evaluate('(' + finish + ')()', true)
+      if (!target) await evaluate('document.querySelector("[data-clear]").click()', true)
+      if (multiple) await evaluate('document.querySelector("[data-sequence-mode]").click()', true)
+      await evaluate('(' + beginAtGreenMarker + ')()', true)
+      await waitUntil('document.querySelector("[data-capture-status]").dataset.state === "recording"')
+    }
+
+    const captureMs = multiple ? 10300 : videoFile ? 3850 : 1600
     await evaluate('new Promise(resolve => setTimeout(resolve, ' + captureMs + '))')
-    const finish = (() => new Promise(resolve => {
-      const status = document.querySelector('[data-capture-status]')
-      const start = performance.now()
-      const observer = new MutationObserver(() => {
-        if (['busy', 'recording'].includes(status.dataset.state)) return
-        observer.disconnect()
-        resolve({ state: status.dataset.state, elapsedMs: performance.now() - start, message: status.textContent })
-      })
-      observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
-      if (status.dataset.state !== 'recording') {
-        observer.disconnect()
-        resolve({ state: status.dataset.state, elapsedMs: 0, message: status.textContent })
-        return
-      }
-      document.querySelector('[data-attempt]').click()
-    })).toString()
     const decision = await evaluate('(' + finish + ')()', true)
-    assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message)
-    const transcript = await evaluate('document.querySelector("#transcription").value')
-    assert.equal(transcript.toLocaleLowerCase('pt-BR'), expected?.toLocaleLowerCase('pt-BR') ?? '')
-    assert.ok(decision.elapsedMs > 0, 'A tentativa deve terminar pelo botão para medir a latência.')
     context.diagnostic(decision.message + ' · conclusão até resposta: ' + decision.elapsedMs.toFixed(1) + ' ms')
+    assert.ok(decision.elapsedMs > 0, 'A tentativa deve terminar pelo botão para medir a latência.')
+    assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message)
+    if (!target) {
+      const transcript = await evaluate('document.querySelector("#transcription").value')
+      assert.equal(transcript.toLocaleLowerCase('pt-BR'), expected?.toLocaleLowerCase('pt-BR') ?? '')
+    }
 
     for (const path of ['/models/isolated.json', '/models/isolated.onnx', '/runtime/holistic_landmarker.task']) {
       assert.ok(seenAssets.has(path), 'Ativo carregado: ' + path)

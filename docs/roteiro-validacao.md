@@ -77,3 +77,36 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 ~~~
 
 Guarde os clipes fora do Git. Registre a identificação do clipe, o resultado esperado, a decisão obtida e as versões. A latência desta tentativa mede a área livre. Repita a medição da lição com o avatar aberto para o aceite do protocolo.
+
+### Sincronizar a captura e verificar a lição
+
+Um marcador verde de meio segundo anterior à ação permite carregar o extrator antes de iniciar a tentativa medida. A captura continua lendo o clipe em tempo real. O modo de lição também exige que o avatar esteja disponível em WebGL 2.
+
+~~~bash
+ffmpeg -i data/minds/raw/10CincoSinalizador09-1.mp4 -an \
+  -vf 'scale=640:-2,fps=30,tpad=start_duration=0.5:color=lime' -pix_fmt yuv420p \
+  data/evidence/camera-fixtures/cinco-sincronizado.y4m
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 \
+  LIBRASIA_TEST_SYNC=1 LIBRASIA_TEST_TARGET=signal-cinco LIBRASIA_EXPECT_TEXT=cinco \
+  LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/cinco-sincronizado.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+### Caso exploratório de dois sinais e uma pausa
+
+O caso une dois clipes isolados da pessoa 11 da partição de teste, Cinco e Espelho, com 0,8 s de vídeo preto para representar a ausência de rastreamento. Um marcador verde no começo sincroniza a captura. O resultado esperado é “cinco espelhos”. A origem da mídia é o [MINDS-Libras, versão 1](https://zenodo.org/records/2667329).
+
+~~~bash
+ffmpeg -f lavfi -t 0.4 -i 'color=c=lime:size=640x360:rate=30' \
+  -i data/minds/raw/10CincoSinalizador11-1.mp4 \
+  -f lavfi -t 0.8 -i 'color=c=black:size=640x360:rate=30' \
+  -i data/minds/raw/12EspelhoSinalizador11-1.mp4 \
+  -filter_complex '[0:v]setsar=1[g];[1:v]scale=640:-2,fps=30,setsar=1[a];[2:v]setsar=1[p];[3:v]scale=640:-2,fps=30,setsar=1[b];[g][a][p][b]concat=n=4:v=1:a=0[out]' \
+  -map '[out]' -an -pix_fmt yuv420p data/evidence/camera-fixtures/cinco-pausa-espelho.y4m
+LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 \
+  LIBRASIA_TEST_SEQUENCE=1 LIBRASIA_EXPECT_TEXT='cinco espelhos' \
+  LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/cinco-pausa-espelho.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+O ensaio com clipes unidos mede um cenário controlado com pausa. A validação com sinalização contínua natural requer dados anotados para medir erros de segmentação e revisão humana do sentido traduzido.
