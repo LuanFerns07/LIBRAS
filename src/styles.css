@@ -224,6 +224,25 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); width
 .letter-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .4rem; }
 .letter-button { font-weight: 750; font-size: 1.05rem; padding: .15rem; }
 .letter-button[aria-pressed="true"] { border-color: var(--accent); background: var(--lavender); color: var(--accent-dark); }
+.practice-heading { display: flex; gap: 1rem; justify-content: space-between; align-items: start; flex-wrap: wrap; }
+.practice-heading p:last-child { margin-bottom: 0; }
+.page-heading .eyebrow { color: var(--accent-dark); font-size: .87rem; font-weight: 750; margin-bottom: .52rem; }
+.progress-badge { color: var(--accent-dark); background: var(--lavender); border-radius: 99rem; padding: .55rem .85rem; font-size: .86rem; font-weight: 700; }
+.lesson-settings { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .65rem; padding: .78rem; }
+.signal-picker { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--muted); font-size: .9rem; font-weight: 700; }
+.signal-picker select { color: var(--ink); }
+.stage-list { display: flex; flex-wrap: wrap; gap: .3rem; padding: 0; margin: 0; list-style: none; }
+.stage-button { display: flex; align-items: center; gap: .36rem; min-height: 44px; padding: .4rem .62rem; border: 0; border-radius: .62rem; background: var(--surface); color: var(--muted); font-weight: 700; font-size: .88rem; }
+.stage-button:hover { color: var(--accent-dark); }
+.stage-button[aria-current="step"] { background: var(--lavender); color: var(--accent-dark); }
+.stage-button span { display: grid; place-items: center; background: #f3eff8; border-radius: 50%; width: 1.55rem; height: 1.55rem; }
+.stage-button[aria-current="step"] span { color: white; background: var(--accent); }
+.lesson-instructions { margin: 1.24rem 0 .95rem; }
+.lesson-instructions :is(h2, p) { margin-bottom: .34rem; }
+.practice-activity { margin-top: 1.25rem; }
+.practice-activity fieldset { margin: .65rem 0; padding: .52rem .7rem; border: 1px solid var(--line); border-radius: .69rem; }
+.practice-activity legend { padding: 0 .2rem; }
+.practice-activity .check-label { display: flex; width: fit-content; }
 
 @media (max-width: 50rem) {
   .header-inner { flex-direction: column; align-items: flex-start; gap: .36rem; padding: .65rem 0; }

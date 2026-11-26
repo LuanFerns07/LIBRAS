@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "setup:vision": "node scripts/setup-vision.mjs",
     "test": "node --test tests/*.test.js",
     "check:status": "python3 scripts/update_status.py --check"
   },

@@ -34,7 +34,7 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
-export function mountCapture(main, { openEngine, interpret, onResult }) {
+export function mountCapture(main, { openEngine, interpret, onResult, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -60,7 +60,8 @@ export function mountCapture(main, { openEngine, interpret, onResult }) {
     placeholder.hidden = ready
     stateLabel.textContent = cameraStates[cameraState]
     toggle.textContent = ready || cameraState === 'starting' ? 'Desativar câmera' : 'Ativar câmera'
-    button.disabled = !ready || phase === 'loading' || phase === 'inferring'
+    toggle.disabled = !enabled
+    button.disabled = !enabled || !ready || phase === 'loading' || phase === 'inferring'
     button.textContent = phase === 'recording' ? 'Concluir tentativa' : 'Iniciar tentativa'
   }
 
@@ -159,11 +160,17 @@ export function mountCapture(main, { openEngine, interpret, onResult }) {
     if (document.hidden && cameraState !== 'idle') stop('Câmera desativada ao sair da aba. Ative-a para continuar.')
   }
   const onPageHide = () => stop('Câmera desativada. Ative-a para continuar.')
+  renderButtons()
   button.addEventListener('click', attempt)
   document.addEventListener('visibilitychange', onVisibility)
   window.addEventListener('pagehide', onPageHide)
 
   return {
+    setEnabled(next) {
+      enabled = next
+      if (enabled) renderButtons()
+      else stop('A câmera fica desligada na etapa de observação.')
+    },
     reset() {
       if (phase !== 'idle') {
         cancel()
