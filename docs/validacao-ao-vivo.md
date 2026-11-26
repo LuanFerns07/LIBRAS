@@ -11,7 +11,7 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
    python3 -m http.server 4174 --bind 127.0.0.1 --directory qa
    ~~~
 
-3. Abra http://127.0.0.1:4174 em uma segunda janela. Coloque as duas lado a lado. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
+3. Abra http://127.0.0.1:4174 em uma segunda janela. Coloque as duas lado a lado para manter a aba do aplicativo visível. O LibrasIA encerra a captura quando essa aba é ocultada. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
 4. Confirme o consentimento da pessoa participante. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
 
 Anote a versão de catálogo e a revisão do avatar da compilação testada. Registre o commit e as somas dos arquivos instalados antes de começar. Conferir as duas somas identifica mudanças de limiar que preservem os mesmos pesos.
@@ -24,7 +24,8 @@ sha256sum public/models/isolated.onnx public/models/isolated.json
 Use a resolução da trilha observada e o intervalo de amostragem da versão instalada. No reconhecedor atual, o intervalo configurado é 100 ms. Para conferir a resolução, após a pessoa ligar a câmera, leia os valores width e height no console da aba do aplicativo.
 
 ~~~js
-document.querySelector('video').srcObject.getVideoTracks()[0].getSettings()
+const { width, height } = document.querySelector('video').srcObject.getVideoTracks()[0].getSettings();
+({ width, height })
 ~~~
 
 ## Observar e registrar
