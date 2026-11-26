@@ -13,6 +13,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 SOURCE = Path(__file__).with_name("clad.json")
+DEVELOPMENT = Path(__file__).with_name("clad-development.json")
 STRATA = ("repouso", "movimento-comum")
 CLIP_MS = 4000
 CROP = "crop=416:352:104:40"
@@ -40,7 +41,7 @@ def verified_archive(specification, root):
     return output
 
 
-def validate_clips(clips):
+def validate_clips(clips, minimum_people=2):
     identifiers = set()
     seen_windows = defaultdict(list)
     people = defaultdict(set)
@@ -58,8 +59,8 @@ def validate_clips(clips):
         seen_windows[video].append(start)
         people[clip["stratum"]].add(person)
         identifiers.add(clip_id)
-    if set(people) != set(STRATA) or any(len(group) < 2 for group in people.values()):
-        raise ValueError("São necessárias pelo menos duas pessoas em cada estrato.")
+    if set(people) != set(STRATA) or any(len(group) < minimum_people for group in people.values()):
+        raise ValueError(f"São necessárias pelo menos {minimum_people} pessoas em cada estrato.")
 
 
 def clipped_file(video, start_ms, output):
@@ -84,14 +85,16 @@ def clipped_file(video, start_ms, output):
         temporary.unlink(missing_ok=True)
 
 
-def prepare(protocol, root):
-    validate_clips(protocol["clips"])
+def prepare(protocol, root, *, source_path=SOURCE, development=False, archives_dir=None):
     test_people = set(protocol["testSubjectIds"])
     reserved_people = set(protocol["developmentReservedSubjectIds"])
-    if test_people != {item["subject"] for item in protocol["clips"]} or test_people & reserved_people:
+    people = {item["subject"] for item in protocol["clips"]}
+    expected = reserved_people if development else test_people
+    if people - expected or test_people & reserved_people or (not development and people != expected):
         raise ValueError("As pessoas de avaliação devem estar separadas das de desenvolvimento.")
+    validate_clips(protocol["clips"], minimum_people=1 if development else 2)
     raw = root / "raw"
-    downloads = root / "source"
+    downloads = archives_dir if archives_dir is not None else root / "source"
     raw.mkdir(parents=True, exist_ok=True)
     downloads.mkdir(parents=True, exist_ok=True)
 
@@ -112,14 +115,15 @@ def prepare(protocol, root):
             output = raw / (item["id"] + ".mp4")
             clipped_file(original, item["startMs"], output)
             clips.append({
-                **item, "label": None, "partition": "test", "signer": item["subject"],
+                **item, "label": None, "partition": "train" if development else "test",
+                "signer": 1000 + item["subject"] if development else item["subject"],
                 "sourceLabel": item["stratum"], "file": output.relative_to(root).as_posix(),
                 "durationMs": CLIP_MS, "sha256": sha256(output), "originalMember": member,
             })
     if len({item["sha256"] for item in clips}) != len(clips):
         raise ValueError("Trechos duplicados no recorte.")
     manifest = {
-        "protocolSha256": sha256(SOURCE),
+        "protocolSha256": sha256(source_path),
         "source": source,
         "ffmpeg": subprocess.check_output(["ffmpeg", "-version"], text=True).splitlines()[0],
         "transform": {"crop": CROP, "durationMs": CLIP_MS, "audio": False},
@@ -134,11 +138,21 @@ def prepare(protocol, root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=Path, default=Path("data/external-negative"))
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--development", action="store_true", help="Prepara apenas as pessoas reservadas a treino.")
+    parser.add_argument("--archives", type=Path)
     args = parser.parse_args()
     protocol = json.loads(SOURCE.read_text(encoding="utf-8"))
-    count = prepare(protocol, args.out)
-    print(f"{count} negativos no manifesto {args.out / 'manifest.json'}.")
+    source_path = SOURCE
+    if args.development:
+        protocol["clips"] = json.loads(DEVELOPMENT.read_text(encoding="utf-8"))
+        source_path = DEVELOPMENT
+    directory = args.out or Path("data/clad-development" if args.development else "data/external-negative")
+    archives = args.archives
+    if archives is None and args.development:
+        archives = Path("data/external-negative/source")
+    count = prepare(protocol, directory, source_path=source_path, development=args.development, archives_dir=archives)
+    print(f"{count} negativos no manifesto {directory / 'manifest.json'}.")
 
 
 if __name__ == "__main__":

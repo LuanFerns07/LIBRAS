@@ -1,6 +1,6 @@
 """Carrega a extração versionada e verifica integridade das partições."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from hashlib import file_digest
 import json
 from pathlib import Path
@@ -34,7 +34,9 @@ def digest(path):
         return file_digest(handle, "sha256").hexdigest()
 
 
-def load_features(index_path, partitions, labels=LABELS):
+def load_features(index_path, partitions, labels=LABELS, *, training_negatives=False):
+    if training_negatives and set(partitions) != {"train"}:
+        raise ValueError("Negativos complementares só podem ser usados para treino.")
     index = json.loads(index_path.read_text(encoding="utf-8"))
     if index.get("preprocess") != PREPROCESS or index.get("mediapipe") != "0.10.32":
         raise ValueError("Versão de pré-processamento ou extrator inesperada.")
@@ -50,6 +52,8 @@ def load_features(index_path, partitions, labels=LABELS):
         feature_file = item["features"]
         if label not in labels or type(signer) is not int or partition not in {"train", "val", "test"}:
             raise ValueError(f"Rótulo ou partição inválido na entrada {number}.")
+        if training_negatives and (label is not None or partition != "train"):
+            raise ValueError("O conjunto complementar deve conter apenas negativos de treino.")
         if people.setdefault(signer, partition) != partition:
             raise ValueError(f"Sinalizante {signer} aparece em mais de uma partição.")
         if checksum in seen or not re.fullmatch(r"[a-f0-9]{64}", checksum) or feature_file != checksum + ".json":
@@ -79,6 +83,8 @@ def load_features(index_path, partitions, labels=LABELS):
     actual = {row.partition for row in rows}
     if actual != set(partitions):
         raise ValueError(f"Partições solicitadas {partitions}, disponíveis {actual}.")
+    if training_negatives:
+        return index, rows
     for split in partitions:
         signers = {row.signer for row in rows if row.partition == split}
         if len(signers) < 2:
@@ -87,6 +93,25 @@ def load_features(index_path, partitions, labels=LABELS):
         if len(classes) != len(labels):
             raise ValueError(f"Há classes ausentes na partição {split}.")
     return index, rows
+
+
+def add_training_negatives(index_path, base_index, rows, labels=LABELS):
+    extra_index, negatives = load_features(index_path, {"train"}, labels, training_negatives=True)
+    if any(extra_index[key] != base_index[key] for key in ("recipe", "modelSha256", "preprocess")):
+        raise ValueError("A extração complementar deve usar a mesma receita do conjunto principal.")
+    base_hashes = {row["sha256"] for row in base_index["clips"]}
+    base_signers = {row["signer"] for row in base_index["clips"]}
+    if any(row.checksum in base_hashes or row.signer in base_signers for row in negatives):
+        raise ValueError("Clipes ou pessoas complementares já aparecem no conjunto principal.")
+    provenance = {
+        "featuresManifestSha256": digest(index_path),
+        "sourceManifestSha256": extra_index["sourceManifestSha256"],
+        "clips": len(negatives),
+        "eligible": sum(row.values is not None for row in negatives),
+        "signers": sorted({row.signer for row in negatives}),
+    }
+    offset = len(base_index["clips"])
+    return [*rows, *(replace(row, index=offset + row.index) for row in negatives)], provenance
 
 
 def write_json(path: Path, payload):

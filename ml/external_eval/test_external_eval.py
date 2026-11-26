@@ -1,9 +1,11 @@
+import json
+from pathlib import Path
 from unittest import TestCase
 
 import numpy as np
 
 from ml.external_eval.evaluate import classified, summarize
-from ml.external_eval.prepare import validate_clips
+from ml.external_eval.prepare import DEVELOPMENT, SOURCE, prepare, validate_clips
 
 
 class ExternalMetricsTests(TestCase):
@@ -43,5 +45,13 @@ class ExternalMetricsTests(TestCase):
         validate_clips(clips)
         with self.assertRaisesRegex(ValueError, "sobrepostos"):
             validate_clips([*clips[:-1], {**clips[-1], "startMs": 3000}])
-        with self.assertRaisesRegex(ValueError, "duas pessoas"):
+        with self.assertRaisesRegex(ValueError, "2 pessoas"):
             validate_clips(clips[:-1])
+
+    def test_evaluation_actors_cannot_be_used_in_development(self):
+        protocol = json.loads(SOURCE.read_text(encoding="utf-8"))
+        development = json.loads(DEVELOPMENT.read_text(encoding="utf-8"))
+        self.assertEqual({row["subject"] for row in development}, {4})
+        validate_clips(development, minimum_people=1)
+        with self.assertRaisesRegex(ValueError, "separadas"):
+            prepare(protocol, Path("."), source_path=DEVELOPMENT, development=True)

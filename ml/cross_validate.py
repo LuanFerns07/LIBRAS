@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from dataset import CATALOGS, digest, load_features, write_json
+from dataset import CATALOGS, add_training_negatives, digest, load_features, write_json
 from metrics import describe, measure
 from model import ARCHITECTURES
 from train import SEED, collect, train
@@ -28,21 +28,30 @@ def main():
     parser.add_argument("--catalogo", choices=tuple(CATALOGS), default="expandido")
     parser.add_argument("--reference", default="ConvSequence", choices=tuple(ARCHITECTURES))
     parser.add_argument("--candidate", default="ConvSequenceGeometry", choices=tuple(ARCHITECTURES))
+    parser.add_argument("--candidate-negatives", type=Path,
+                        help="Vetores rotulados apenas como negativos, restritos ao treino do candidato.")
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     parser.add_argument("--epochs", type=int, default=80)
     parser.add_argument("--batch-size", type=int, default=12)
     parser.add_argument("--seed", type=int, default=SEED)
     args = parser.parse_args()
-    if args.candidate == args.reference or min(args.epochs, args.batch_size) <= 0:
-        parser.error("Escolha arquiteturas distintas e valores positivos para épocas e lote.")
+    if (args.candidate == args.reference and args.candidate_negatives is None) or min(args.epochs, args.batch_size) <= 0:
+        parser.error("Use arquiteturas distintas ou negativos adicionais e valores positivos para épocas e lote.")
     if args.device == "cuda" and not torch.cuda.is_available():
         parser.error("CUDA não está disponível nesta instalação do PyTorch.")
     torch.set_num_threads(2)
     labels = CATALOGS[args.catalogo]
     index, rows = load_features(args.features, {"train"}, labels)
+    candidate_rows = rows
+    provenance = None
+    candidate_name = args.candidate
+    if args.candidate_negatives is not None:
+        candidate_rows, provenance = add_training_negatives(args.candidate_negatives, index, rows, labels)
+        candidate_name += " + negativos complementares"
+    extras = candidate_rows[len(rows):]
     folds = signer_folds(row.signer for row in rows)
     comparisons = {}
-    for arch in (args.reference, args.candidate):
+    for name, arch, additional in ((args.reference, args.reference, []), (candidate_name, args.candidate, extras)):
         evaluations = []
         for training, validation, measurement in folds:
             development = [
@@ -50,20 +59,21 @@ def main():
                 for row in rows if row.signer in training or row.signer in validation
             ]
             holdout = [row for row in rows if row.signer in measurement]
-            print(f"{arch} · treino {training} · validação {validation} · medição {measurement}", flush=True)
-            model, selected, _, _ = train(development, args.device, args.epochs, args.batch_size, args.seed, labels, arch)
+            print(f"{name} · treino {training} · validação {validation} · medição {measurement}", flush=True)
+            model, selected, _, _ = train([*development, *additional], args.device, args.epochs,
+                                         args.batch_size, args.seed, labels, arch)
             metrics, _ = measure(holdout, collect(model, holdout, "cpu"), selected["threshold"], labels)
             evaluations.append({
                 "trainSigners": training, "validationSigners": validation, "measurementSigners": measurement,
                 "selectedEpoch": selected["epoch"], "threshold": selected["threshold"], "results": metrics,
             })
         matrix = np.sum([fold["results"]["matrix"] for fold in evaluations], axis=0)
-        comparisons[arch] = {"folds": evaluations, "pooled": describe(matrix, labels)}
+        comparisons[name] = {"folds": evaluations, "pooled": describe(matrix, labels)}
     write_json(args.out, {
         "inputPartition": "train", "sourceManifestSha256": index["sourceManifestSha256"],
         "featuresManifestSha256": digest(args.features), "labels": list(labels), "seed": args.seed,
         "epochs": args.epochs, "batchSize": args.batch_size, "device": args.device, "torch": torch.__version__,
-        "comparisons": comparisons,
+        "comparisons": comparisons, "candidateTrainingNegatives": provenance,
     })
 
 

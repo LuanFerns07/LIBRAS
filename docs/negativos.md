@@ -35,3 +35,19 @@ O inicial previu Cinco em quatro falsos aceites e Espelho em um. O expandido pre
 Este conjunto negativo foi aberto depois de fixar os três modelos, os limiares e os recortes. A geometria manual teve a menor taxa observada no conjunto, com três pessoas e seis trechos por estrato. O teste mede apenas rejeição nesses contextos e fica separado do teste reservado MINDS e de qualquer coleta futura em webcam. Os IDs 1–3 e seus clipes permanecem reservados a avaliação.
 
 TAYYUB, Jawad, HAWASLY, Majd e COHN, Anthony G. *Complex and Long Activities Dataset*. University of Leeds, 2017. Foram feitos recortes espaciais e temporais dos MP4s e removidas as trilhas de áudio. [Dataset](https://doi.org/10.5518/249) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Negativos complementares no treino
+
+O ensaio acrescenta ao treino do modelo com geometria nove trechos de quatro segundos, todos de Subject4. Os recortes foram escolhidos nas tomadas 16, 58 e 60 com base nas anotações das tarefas e inspeção do vídeo, antes da inferência. A seleção inclui alcance de objetos, mão junto ao cabelo, colocação de headset, bebida, escrita e uma pausa. Os IDs oficiais confirmam a presença de uma única pessoa por tomada, distinta dos atores 1 a 3 usados no teste externo. O manifesto conserva a origem, o início da janela, a observação e o SHA-256. [Seleção de janelas](../ml/external_eval/clad-development.json)
+
+A comparação usa a mesma arquitetura, a mesma semente e as mesmas três rodadas por pessoa descritas na avaliação do MINDS. A arquitetura de referência usa somente MINDS. O candidato adiciona os negativos do CLAD apenas no ajuste dos pesos. A validação e a medição de cada rodada continuam usando pessoas distintas do MINDS original. O candidato precisa reduzir as falsas aceitações, manter ao menos os 13 acertos de Cinco em 18 da referência e manter F1 macro igual ou maior. Nenhuma decisão usa os clipes de teste do CLAD ou do MINDS. [Avaliação e divisão dos dados](avaliacao.md)
+
+```bash
+python3 -m ml.external_eval.prepare --development
+node ml/extract.mjs --manifest data/clad-development/manifest.json \
+  --out data/clad-development/features --workers 2
+.venv/bin/python ml/cross_validate.py --device cuda \
+  --reference ConvSequenceGeometry --candidate ConvSequenceGeometry \
+  --candidate-negatives data/clad-development/features/index.json \
+  --out data/models/isolated-clad/cross-validation.json
+```

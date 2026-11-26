@@ -1,0 +1,11 @@
+[
+  {"id":"clad-dev-16a","subject":4,"video":16,"startMs":0,"stratum":"movimento-comum","observation":"Mão junto ao cabelo, seguida de alcance dos utensílios."},
+  {"id":"clad-dev-16b","subject":4,"video":16,"startMs":22400,"stratum":"movimento-comum","observation":"Leva a caneca à boca e volta à mesa."},
+  {"id":"clad-dev-16c","subject":4,"video":16,"startMs":36000,"stratum":"movimento-comum","observation":"Bebe durante a leitura à mesa."},
+  {"id":"clad-dev-16d","subject":4,"video":16,"startMs":40800,"stratum":"repouso","observation":"Pausa sentada com mãos apoiadas e olhar voltado à mesa."},
+  {"id":"clad-dev-58a","subject":4,"video":58,"startMs":0,"stratum":"movimento-comum","observation":"Coloca o headset e volta as mãos para o computador."},
+  {"id":"clad-dev-58b","subject":4,"video":58,"startMs":6000,"stratum":"movimento-comum","observation":"Escreve com as mãos sobre a mesa."},
+  {"id":"clad-dev-58c","subject":4,"video":58,"startMs":18000,"stratum":"movimento-comum","observation":"Bebe e manuseia uma garrafa durante a tarefa."},
+  {"id":"clad-dev-60a","subject":4,"video":60,"startMs":0,"stratum":"movimento-comum","observation":"Ajusta o headset e alterna entre o teclado e o papel."},
+  {"id":"clad-dev-60b","subject":4,"video":60,"startMs":7200,"stratum":"movimento-comum","observation":"Leva uma garrafa à boca e volta ao laptop."}
+]
