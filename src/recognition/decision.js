@@ -25,8 +25,11 @@ export function decide(logits, manifest) {
   }
   const confidence = 1 / logits.reduce((sum, logit) => sum + Math.exp(logit - logits[best]), 0)
   const label = manifest.labels[best]
-  if (label === null || confidence < manifest.threshold) {
-    return { state: 'inconclusive', confidence, message: 'Centralize a mão e tente um dos sinais do catálogo.' }
+  if (confidence < manifest.threshold) {
+    return { state: 'inconclusive', reason: 'low-confidence', confidence, message: 'A confiança foi baixa. Centralize a mão e tente de novo.' }
+  }
+  if (label === null) {
+    return { state: 'inconclusive', reason: 'out-of-catalog', confidence, message: 'O sinal parece estar fora do catálogo. Tente um dos sinais disponíveis.' }
   }
   return { state: 'accepted', id: signals.get(label), confidence }
 }

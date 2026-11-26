@@ -38,10 +38,10 @@ export async function openEngine() {
   function recognize(frames) {
     const processed = preprocessFrames(frames)
     if (processed.state === 'no-hand') {
-      return { state: 'inconclusive', message: 'Nenhuma mão com os ombros enquadrados foi rastreada.' }
+      return { state: 'inconclusive', reason: 'no-hand', message: 'Mostre a mão e os ombros no quadro para tentar de novo.' }
     }
     if (processed.state === 'insufficient') {
-      return { state: 'inconclusive', message: 'Mostre a mão durante toda a tentativa e repita o sinal.' }
+      return { state: 'inconclusive', reason: 'insufficient', message: 'Mostre a mão durante toda a tentativa e repita o sinal.' }
     }
     const palm = observePalm(frames)
     const trajectory = observeVerticalTrajectory(frames)

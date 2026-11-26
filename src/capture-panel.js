@@ -50,6 +50,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
 
   function show(state, message) {
     status.dataset.state = state
+    delete status.dataset.reason
     const title = resultLabels[state]
     status.textContent = title ? `${title}. ${message}` : message
   }
@@ -119,6 +120,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     const result = interpret?.(analysis) ?? analysis
     phase = 'idle'
     show(result.state, result.message)
+    if (result.reason) status.dataset.reason = result.reason
     renderButtons()
     onResult?.(result)
   }

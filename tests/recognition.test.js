@@ -52,8 +52,8 @@ test('o classificador só aceita classes suportadas acima de confiança fixada',
     modelSha256: 'a'.repeat(64),
   })
   assert.equal(decide([0, 8, 2, 1], manifest).id, 'signal-cinco')
-  assert.equal(decide([8, 0, 2, 1], manifest).state, 'inconclusive')
-  assert.equal(decide([0, 2, 1, 1], manifest).state, 'inconclusive')
+  assert.equal(decide([8, 0, 2, 1], manifest).reason, 'out-of-catalog')
+  assert.equal(decide([0, 2, 1, 1], manifest).reason, 'low-confidence')
   assert.throws(() => decide([0, 2, 1, Number.NaN], manifest), /Saída/)
   const expanded = readModelManifest({
     ...manifest,
