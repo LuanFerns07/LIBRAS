@@ -29,6 +29,7 @@ PARTITIONS = {signer: "train" for signer in range(1, 8)}
 PARTITIONS.update({8: "val", 10: "val", 9: "test", 11: "test", 12: "test"})
 TAIL_BYTES = 524_288
 LOCAL_HEADER = struct.Struct("<I5H3I2H")
+ZIP32_LIMIT = 2**32
 
 
 def archive_url(signer):
@@ -58,6 +59,10 @@ def retried(action):
         except HTTPError as error:
             if error.code not in (408, 429, 500, 502, 503, 504) or attempt == 3:
                 raise
+            if error.code == 429:
+                delay = error.headers.get("Retry-After", "")
+                time.sleep(max(6, int(delay)) if delay.isdecimal() else 6 * (attempt + 1))
+                continue
         except (URLError, OSError, EOFError, ValueError, zlib.error):
             if attempt == 3:
                 raise
@@ -73,7 +78,25 @@ def entries(signer):
         sparse.seek(start)
         sparse.write(tail)
         with zipfile.ZipFile(sparse) as archive:
-            return total, archive.infolist()
+            directory = archive.infolist()
+            recover_zip32_offsets(directory, archive.start_dir)
+            return total, directory
+
+
+def recover_zip32_offsets(directory, central_start):
+    # Alguns arquivos originais ultrapassam 4 GiB e têm offsets locais de 32 bits.
+    # zipfile atribui o ajuste do fim do ZIP a todos os membros, inclusive os primeiros.
+    if not directory or directory[0].header_offset != ZIP32_LIMIT:
+        return
+    previous_end = 0
+    for info in directory:
+        offset = info.header_offset % ZIP32_LIMIT
+        if offset < previous_end:
+            offset += ZIP32_LIMIT
+        if offset < previous_end or offset + LOCAL_HEADER.size + info.compress_size > central_start:
+            raise ValueError("Os offsets corrigidos do ZIP de 32 bits não são consistentes.")
+        info.header_offset = offset
+        previous_end = offset + LOCAL_HEADER.size + info.compress_size
 
 
 def candidates(signer, archive_entries, reps, negatives):
@@ -128,7 +151,10 @@ def extract(signer, total, info, destination):
             header = LOCAL_HEADER.unpack(read_exact(response, LOCAL_HEADER.size))
             if header[0] != 0x04034B50 or header[3] != info.compress_type:
                 raise ValueError("O cabeçalho local diverge do diretório ZIP.")
-            read_exact(response, header[-2] + header[-1])
+            filename = read_exact(response, header[-2]).decode("utf-8" if header[2] & 0x800 else "cp437")
+            if filename != info.orig_filename:
+                raise ValueError("O nome local diverge do diretório ZIP.")
+            read_exact(response, header[-1])
             decompressor = zlib.decompressobj(-zlib.MAX_WBITS) if info.compress_type == zipfile.ZIP_DEFLATED else None
             remaining = info.compress_size
 
@@ -155,7 +181,7 @@ def extract(signer, total, info, destination):
     return digest.hexdigest()
 
 
-def download(root, signer, total, source, rep, info):
+def download(root, signer, total, source, rep, info, cached_only=False):
     name = PurePosixPath(info.filename).name
     output = root / "raw" / name
     if output.is_file() and output.stat().st_size == info.file_size:
@@ -167,6 +193,8 @@ def download(root, signer, total, source, rep, info):
     else:
         digest = None
     if digest is None:
+        if cached_only:
+            return None
         digest = retried(lambda: extract(signer, total, info, output))
     return {
         "file": f"raw/{name}",
@@ -188,6 +216,7 @@ def main():
     parser.add_argument("--negatives", type=int, choices=range(1, len(NEGATIVES) + 1), default=6)
     parser.add_argument("--workers", type=int, choices=range(1, 17), default=8)
     parser.add_argument("--signers", type=int, choices=tuple(PARTITIONS), nargs="+", default=sorted(PARTITIONS))
+    parser.add_argument("--manifest-parcial", action="store_true", help="Lista somente clipes já verificados em manifest-in-progress.json, sem baixar vídeos.")
     args = parser.parse_args()
     (args.output / "raw").mkdir(parents=True, exist_ok=True)
 
@@ -196,19 +225,24 @@ def main():
             signer: executor.submit(retried, lambda person=signer: entries(person))
             for signer in sorted(set(args.signers))
         }
-        tasks = {}
+        selection = []
         for signer, result in directories.items():
             total, directory = result.result()
             for source, rep, info in candidates(signer, directory, args.reps, args.negatives):
-                future = executor.submit(download, args.output, signer, total, source, rep, info)
-                tasks[future] = info.filename
+                selection.append((signer, total, source, rep, info))
+        selection.sort(key=lambda item: (item[2] not in ALLOWED, item[3], item[2], item[0]))
+        tasks = {
+            executor.submit(download, args.output, *item, args.manifest_parcial): item[-1].filename
+            for item in selection
+        }
         clips = []
         errors = []
         for future in as_completed(tasks):
             try:
                 clip = future.result()
-                clips.append(clip)
-                print(f"{len(clips)}/{len(tasks)} {clip['partition']} {clip['file']}", flush=True)
+                if clip is not None:
+                    clips.append(clip)
+                    print(f"{len(clips)}/{len(tasks)} {clip['partition']} {clip['file']}", flush=True)
             except Exception as error:
                 errors.append(f"{tasks[future]}: {error}")
     if errors:
@@ -217,9 +251,12 @@ def main():
         raise SystemExit("Nenhum clipe ou arquivos duplicados no subconjunto.")
     clips.sort(key=lambda clip: (clip["signer"], clip["file"]))
     manifest = {"source": DOI, "license": "CC-BY-4.0", "clips": clips}
-    temporary = args.output / "manifest.part"
+    name = "manifest-in-progress" if args.manifest_parcial else "manifest"
+    if args.manifest_parcial:
+        manifest["partial"] = True
+    temporary = args.output / f"{name}.part"
     temporary.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    temporary.replace(args.output / "manifest.json")
+    temporary.replace(args.output / f"{name}.json")
     print(f"Manifesto salvo com {len(clips)} clipes.", flush=True)
 
 

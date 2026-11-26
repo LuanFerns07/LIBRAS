@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import patch
 import zipfile
 
-from scripts.download_minds import candidates, extract, fetch_range, sha256
+from scripts.download_minds import ZIP32_LIMIT, candidates, extract, fetch_range, recover_zip32_offsets, sha256
 
 
 class FakeResponse(BytesIO):
@@ -61,6 +61,13 @@ class DownloadMindsTests(unittest.TestCase):
                 self.assertEqual(path.read_bytes(), clip)
                 self.assertFalse(path.with_suffix(".part").exists())
 
+    def test_large_legacy_archives_recover_offsets_before_and_after_wraparound(self):
+        directory = [zipfile.ZipInfo(name) for name in ("first", "before", "after")]
+        for info, offset, size in zip(directory, (0, ZIP32_LIMIT - 200, 500), (100, 400, 100)):
+            info.header_offset = ZIP32_LIMIT + offset
+            info.compress_size = size
+        recover_zip32_offsets(directory, ZIP32_LIMIT + 1400)
+        self.assertEqual([info.header_offset for info in directory], [0, ZIP32_LIMIT - 200, ZIP32_LIMIT + 500])
 
 if __name__ == "__main__":
     unittest.main()
