@@ -23,7 +23,7 @@ Use a [checklist da inscrição no roadmap](../ROADMAP_LIBRASIA.md#checklist-da-
 - Conferir o memorial de até 20 laudas com a fonte Times New Roman 12, entrelinhas 1,5, margens de 3 cm e texto justificado. Preservar a avaliação cega no memorial quando possível e manter a identificação no documento 3.
 - Descrever o uso de IA e registrar as contribuições intelectuais humanas comprováveis, inclusive decisões, análises, revisões e validações que a equipe tiver executado.
 - Reunir os documentos legíveis em um PDF de até 40 MB. Se a ferramenta de fusão invalidar assinaturas, reúna primeiro os documentos e assine os campos dos anexos no PDF combinado, preservando as assinaturas anteriores. Confira todas as assinaturas no arquivo final. Documentos pessoais e PDFs assinados devem ficar fora do Git.
-- Enviar pelo formulário oficial somente após a conferência do arquivo. O edital não prevê complementação após o envio. [Formulário da UFC](https://docs.google.com/forms/d/e/1FAIpQLSem93yeY1QOBkT1mt5tSGcnIkrqwwj30tpPGj3fGmCO6xYlGQ/viewform?usp=header)
+- Enviar pelo formulário oficial após a conferência do arquivo. O envio definitivo encerra a edição da inscrição. Se a comissão solicitar esclarecimentos ou documentos complementares, responder em até três dias úteis. [Formulário da UFC](https://docs.google.com/forms/d/e/1FAIpQLSem93yeY1QOBkT1mt5tSGcnIkrqwwj30tpPGj3fGmCO6xYlGQ/viewform?usp=header)
 
 ## Separar os modelos oficiais dos anexos
 
