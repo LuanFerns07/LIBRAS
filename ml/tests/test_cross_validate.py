@@ -1,7 +1,9 @@
 from collections import Counter
 from unittest import TestCase
 
-from cross_validate import signer_folds
+import numpy as np
+
+from cross_validate import average_probabilities, signer_folds
 
 
 class CrossValidationTests(TestCase):
@@ -12,3 +14,7 @@ class CrossValidationTests(TestCase):
         for train, validation, measurement in folds:
             self.assertEqual(min(map(len, (train, validation, measurement))), 2)
             self.assertEqual(len(set(train + validation + measurement)), len(train + validation + measurement))
+
+    def test_ensemble_averages_probabilities_independently_of_logit_offsets(self):
+        scores = average_probabilities({0: [1000, 1001]}, {0: [-5000, -5001]})
+        np.testing.assert_allclose(np.exp(scores[0]), [.5, .5])

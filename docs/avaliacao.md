@@ -194,3 +194,13 @@ No candidato, cada negativo elegível contribui com somente uma entrada por épo
   --partial-negatives data/minds-partial/features-negative/index.json \
   --out data/models/isolated-partials/cross-validation.json
 ```
+
+## Combinação de geometria e flexão
+
+A terceira condição atribui peso igual às probabilidades dos modelos de geometria e de flexão, treinados separadamente nas mesmas três rodadas de desenvolvimento. A média inclui a classe de rejeição. A validação de cada rodada escolhe um limiar para a combinação, com as mesmas regras dos modelos isolados. Verifique se a combinação melhora a cobertura e preserva a rejeição. Use as metas de classificação e rejeição do [protocolo](protocolo-aceite.md) para avaliar a possibilidade de abrir um teste com novas pessoas.
+
+```bash
+.venv/bin/python ml/cross_validate.py --device cuda --combine \
+  --reference ConvSequenceGeometry --candidate ConvSequenceFlexion \
+  --out data/models/isolated-combined/cross-validation.json
+```
