@@ -1,11 +1,18 @@
+import { createFrameWatchdog } from './frame-watchdog.js'
+
 export function watchLandmarks(video, extractor, { intervalMs = 90, onFrame, onError }) {
   const hasVideoCallback = typeof video.requestVideoFrameCallback === 'function'
   let pending
   let lastMediaTime = -Infinity
   let running = true
+  const watchdog = createFrameWatchdog(() => {
+    stop()
+    onError(new Error('A câmera parou de enviar quadros.'))
+  })
 
   function stop() {
     running = false
+    watchdog.stop()
     if (pending === undefined) return
     if (hasVideoCallback) video.cancelVideoFrameCallback(pending)
     else cancelAnimationFrame(pending)
@@ -22,6 +29,7 @@ export function watchLandmarks(video, extractor, { intervalMs = 90, onFrame, onE
         const landmarks = extractor.detect(video, now)
         const elapsed = performance.now() - startedAt
         onFrame({ ...landmarks, timestamp: mediaTime, aspect: video.videoWidth / video.videoHeight }, elapsed)
+        if (running) watchdog.refresh()
       } catch (error) {
         stop()
         onError(error)
@@ -35,6 +43,7 @@ export function watchLandmarks(video, extractor, { intervalMs = 90, onFrame, onE
     pending = hasVideoCallback ? video.requestVideoFrameCallback(sample) : requestAnimationFrame(sample)
   }
 
+  watchdog.refresh()
   schedule()
   return stop
 }

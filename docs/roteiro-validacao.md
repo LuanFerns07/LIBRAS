@@ -46,6 +46,20 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 
 Para reproduzir a oclusão, substitua o filtro de vídeo por `drawbox=x=248:y=82:w=103:h=155:color=black:t=fill:enable='between(t,1.25,3.5)'`, gere `amarelo-mao-encoberta.y4m` e espere `insufficient`. Os logs do reteste estão na mesma pasta. O teste de enquadramento, oclusão e correção intencional com uma pessoa sinalizando na webcam segue no roteiro de aceite.
 
+### Interrupção do vídeo durante a prática
+
+Na compilação `a65817e`, o Chromium manteve a tentativa em andamento quando a trilha continuou ativa e deixou de enviar imagens. A prática agora encerra a tentativa após cerca de um segundo sem quadros, exibe **Problema de captura** e libera a câmera. Se o vídeo parar fora de uma tentativa, a sobreposição é apagada e volta a acompanhar a mão quando chegam novos quadros.
+
+O teste abre **Praticar com ajuda** e usa a gravação de Amarelo como fonte. Um canvas controla a entrega dos quadros para interromper e retomar o vídeo com a trilha ainda ativa. O teste confere o retorno dos pontos sem trocar de trilha na primeira interrupção. Na segunda, interrompe uma tentativa, confere a liberação da trilha e reativa a câmera para verificar a retomada. [Gravação de Amarelo](sinais-com-movimento-browser.md#reproduzir) · [Teste no Chromium](../tests/e2e/camera-stall.test.mjs)
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 \
+  LIBRASIA_TEST_STALL_VIDEO=data/evidence/moving-sign-fixtures/amarelo-s01.y4m \
+  node --test tests/e2e/camera-stall.test.mjs
+~~~
+
+Os logs estão em `data/evidence/demonstracao/m2-interrupcao-video/`. A revisão da dica e a execução dos sinais na webcam física permanecem na ficha de aceite.
+
 ## Sequência principal
 
 Os resultados da sessão com participantes ficam nesta tabela. A execução automatizada, com as mesmas telas na ordem do roteiro, está registrada abaixo. [Roteiro integrado](#roteiro-integrado-em-uma-sessão-do-chromium)

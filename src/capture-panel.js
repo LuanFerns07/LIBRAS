@@ -177,6 +177,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
           void reading?.reader?.read(frame)
         },
         onError: showPreviewError,
+        onStall: clearTracking,
       })
       preview?.setVisible(needed)
       if (!points.checked || !needed) overlay.clear()
@@ -222,6 +223,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     void prepareLetters()
   })
   function clearTracking() {
+    preview?.discard()
     overlay.clear()
     reading?.reader?.clear()
   }

@@ -1,4 +1,6 @@
-export function trackHands(video, { onFrame, onError, readLetters }) {
+import { createFrameWatchdog } from './frame-watchdog.js'
+
+export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
   // O carregador WASM do MediaPipe usa importScripts em um worker clássico.
   const url = new URL(`${import.meta.env.BASE_URL}hand-tracker.worker.js`, location.href)
   const worker = new Worker(url)
@@ -11,6 +13,13 @@ export function trackHands(video, { onFrame, onError, readLetters }) {
   let inFlight
   let latest
   let lastMediaTime = -Infinity
+  const watchdog = createFrameWatchdog(onStall)
+
+  function discard() {
+    generation += 1
+    latest = undefined
+    watchdog.stop()
+  }
 
   function cancelPending() {
     if (pending === undefined) return
@@ -22,6 +31,7 @@ export function trackHands(video, { onFrame, onError, readLetters }) {
   function close() {
     if (closed) return
     closed = true
+    watchdog.stop()
     cancelPending()
     worker.terminate()
   }
@@ -44,6 +54,7 @@ export function trackHands(video, { onFrame, onError, readLetters }) {
     const { videoWidth: width, videoHeight: height } = video
     if (video.readyState >= 2 && width && height && mediaTime !== lastMediaTime) {
       lastMediaTime = mediaTime
+      watchdog.refresh()
       latest = { generation, width, height, timestamp: now, mediaTime }
       void sendLatest()
     }
@@ -105,11 +116,11 @@ export function trackHands(video, { onFrame, onError, readLetters }) {
     setVisible(next) {
       if (visible === next || closed) return
       visible = next
-      generation += 1
-      latest = undefined
+      discard()
       cancelPending()
       schedule()
     },
+    discard,
     close,
   }
 }
