@@ -14,11 +14,11 @@ export function mountReferences(main) {
   main.innerHTML = `
     <div class="page-heading">
       <h1>Saiba mais</h1>
-      <p>Referências sobre Libras e cultura surda.</p>
+      <p>Referências sobre Libras e cultura surda. Os links abrem em outra aba.</p>
     </div>
     <ul class="reference-list">
       ${references.map(([title, author, url]) => `
-        <li><a href="${url}">
+        <li><a href="${url}" target="_blank" rel="noopener noreferrer">
           <div><strong>${title}</strong><span>${author}</span></div>
           ${icon('external')}
         </a></li>`).join('')}

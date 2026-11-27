@@ -91,15 +91,21 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
   const link = 'a[href="' + dictionary + '"]'
   assert.match(await evaluate('document.querySelector(' + JSON.stringify(link) + ').closest("li").textContent'),
     /Guilherme de Azambuja Lira.*Tanya Amara Felipe de Souza.*INES/su)
+  const { targetInfo: appTab } = await page('Target.getTargetInfo')
   await click(link)
   for (let turn = 0; turn < 30; turn += 1) {
     const { targetInfos } = await page('Target.getTargets')
-    const target = targetInfos.find(info => info.url === dictionary && /Dicionário Libras/iu.test(info.title))
+    const target = targetInfos.find(info => info.targetId !== appTab.targetId &&
+      info.url === dictionary && /Dicionário Libras/iu.test(info.title))
     if (target) {
+      assert.equal(await evaluate('location.hash'), '#saiba-mais')
+      await page('Page.bringToFront')
+      await open('area-livre', 'Libras para texto e voz')
+      assert.equal(await evaluate('document.querySelector("#transcription").value'), edited)
       report('6. Saiba mais · ' + target.title + ' · ' + target.url)
       return
     }
     await delay(500)
   }
-  assert.fail('O link de Saiba mais deve abrir o Dicionário Libras do INES.')
+  assert.fail('O link de Saiba mais deve abrir o Dicionário Libras do INES em outra aba.')
 }

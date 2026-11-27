@@ -292,6 +292,8 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       'indl.iphan.gov.br', 'editora.ufsc.br', 'm.grupoa.com.br', 'dicionario.ines.gov.br',
       'manuario.ines.gov.br', 'corpuslibras.ufsc.br', 'faced.ufc.br',
     ])
+    assert.equal(await evaluate(`Array.from(document.querySelectorAll('.reference-list a')).every(link =>
+      link.target === '_blank' && link.relList.contains('noopener') && link.relList.contains('noreferrer'))`), true)
     assert.match(await text('footer'), /sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales/u)
 
     await open('area-livre', 'Libras para texto e voz')
