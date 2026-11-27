@@ -1,0 +1,58 @@
+{
+  "manifest": "ml/alphabet/unintese-static-windows.json",
+  "manifestSha256": "f3561b7aecf7ba33bed344db57a250ac5b0fee11c98e775446d50282abdfa683",
+  "videoSha256": "1a9128d1d661fc912505a531f0e84240e4d0d966f2876e74d2c357905f5e89c7",
+  "split": "test",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "pointsSha256": "39f7d7f485633513fccaece48952de4870ff1c7a5ed27570cec561b7859e6509",
+  "sampleStepMs": 65,
+  "cpu": true,
+  "replay": null,
+  "extraction": [
+    {
+      "label": "A",
+      "startMs": 40500,
+      "endMs": 41400,
+      "anchorMs": 40950,
+      "sampledFrames": 14,
+      "oneHandFrames": 14,
+      "twoHandFrames": 0
+    },
+    {
+      "label": "C",
+      "startMs": 45400,
+      "endMs": 46300,
+      "anchorMs": 45850,
+      "sampledFrames": 14,
+      "oneHandFrames": 14,
+      "twoHandFrames": 0
+    },
+    {
+      "label": "E",
+      "startMs": 50560,
+      "endMs": 51260,
+      "anchorMs": 50920,
+      "sampledFrames": 11,
+      "oneHandFrames": 11,
+      "twoHandFrames": 0
+    },
+    {
+      "label": "O",
+      "startMs": 75320,
+      "endMs": 76200,
+      "anchorMs": 75760,
+      "sampledFrames": 14,
+      "oneHandFrames": 14,
+      "twoHandFrames": 0
+    },
+    {
+      "label": "S",
+      "startMs": 87380,
+      "endMs": 88620,
+      "anchorMs": 88100,
+      "sampledFrames": 20,
+      "oneHandFrames": 20,
+      "twoHandFrames": 0
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Segunda fonte reservada para O com abertura pouco visível de frente. Controles A, C, E e S da mesma sequência. As janelas foram marcadas pela letra em tela e pela pose estável, antes de qualquer replay ou classificação.",
+  "sources": [
+    {
+      "id": "unintese-ncfjw-0-mro",
+      "split": "test",
+      "title": "Aprenda as letras de A a Z no Alfabeto Manual - Parte 2 | Escola de Libras (eLibras)",
+      "project": "Escola de Libras (eLibras), Uníntese",
+      "credits": {
+        "publicação": "Uníntese",
+        "apresentação": "Patrícia Santos",
+        "demonstração": "A pessoa que interpreta a introdução para Libras demonstra as letras. Seu nome não consta nos créditos exibidos nem na descrição consultada."
+      },
+      "page": "https://www.youtube.com/watch?v=nCFjW-0-mro",
+      "published": "2022-02-08",
+      "file": "data/alphabet/independent/unintese-download/unintese-alfabeto.mp4",
+      "sha256": "1a9128d1d661fc912505a531f0e84240e4d0d966f2876e74d2c357905f5e89c7",
+      "downloadFormats": "YouTube 298 (H.264, 1280 × 720, 59,94 fps) + 140-2 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=nCFjW-0-mro&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação da Uníntese indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "A letra em amarelo aparece no rodapé branco durante toda a pose. As janelas excluem a formação e a soltura do gesto.",
+      "windows": [
+        { "label": "A", "startMs": 40500, "endMs": 41400, "anchorMs": 40950 },
+        { "label": "C", "startMs": 45400, "endMs": 46300, "anchorMs": 45850 },
+        { "label": "E", "startMs": 50560, "endMs": 51260, "anchorMs": 50920 },
+        { "label": "O", "startMs": 75320, "endMs": 76200, "anchorMs": 75760 },
+        { "label": "S", "startMs": 87380, "endMs": 88620, "anchorMs": 88100 }
+      ]
+    }
+  ]
+}
