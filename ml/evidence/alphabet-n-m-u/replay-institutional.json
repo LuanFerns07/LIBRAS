@@ -1,0 +1,107 @@
+{
+  "build": {
+    "commit": "4f2db541b48e4bfa408fe84214090ac1bbe359aa",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/institutional-static-n-m-u.json"
+  ],
+  "results": [
+    {
+      "source": "cecierj-13757",
+      "label": "M",
+      "startMs": 81300,
+      "endMs": 82950,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 274
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1720
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "N",
+      "startMs": 84000,
+      "endMs": 85750,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 250
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 31,
+      "lastHandAfterVideoMs": 1785
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 239
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 1029
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1577
+    },
+    {
+      "source": "unesp-222981",
+      "label": "M",
+      "startMs": 86850,
+      "endMs": 88200,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 335
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 1334
+    },
+    {
+      "source": "unesp-222981",
+      "label": "N",
+      "startMs": 88780,
+      "endMs": 90360,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 281
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1595
+    },
+    {
+      "source": "unesp-222981",
+      "label": "U",
+      "startMs": 105630,
+      "endMs": 106630,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 324
+        }
+      ],
+      "workerFrames": 82,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 979
+    }
+  ]
+}

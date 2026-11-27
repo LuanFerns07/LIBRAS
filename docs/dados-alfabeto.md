@@ -104,11 +104,13 @@ Na triagem do N em 27 de novembro de 2026, a prévia `0a36425` exibiu a letra es
 
 Nas aulas do Cecierj e da Unesp, o modelo estático anterior deixou o painel sem leitura em ambas as demonstrações de N apesar de rastrear a mão. Entre os 52 quadros de N das duas aulas, a rede principal preferiu Q em 45. A rede geométrica preferiu N em 52. O leitor exige concordância com probabilidade de pelo menos 0,80 em cada rede. [Triagem nas duas aulas](../ml/evidence/alphabet-n-m-u/report.json)
 
-O retreino acrescentou ao conjunto estático apenas os recortes de M, N e U do Cecierj e conservou a validação na segunda aula da UFSM. Na terceira aula da UFSM, os acertos estáticos passaram de 243 para 250 dos mesmos 290 quadros. Na Unesp, que ficou fora do treino e da seleção do modelo estático, os acertos de N passaram de 0 para 25 de 25 quadros. A prévia exibiu M, N e U em todos os seis replays institucionais. No recorte de U do Cecierj houve também uma leitura de H. Cada fonte fornece apenas um recorte de cada letra. Os modelos de trajetória já usavam outros recortes das aulas institucionais.
+O retreino acrescentou ao conjunto estático apenas os recortes de M, N e U do Cecierj e conservou a validação na segunda aula da UFSM. Na terceira aula da UFSM, os acertos estáticos passaram de 243 para 250 dos mesmos 290 quadros. Na Unesp, que ficou fora do treino e da seleção do modelo estático, os acertos de N passaram de 0 para 25 de 25 quadros. A prévia exibiu M, N e U em todos os seis replays institucionais. No recorte de U do Cecierj houve também uma leitura de H. Cada fonte fornece apenas um recorte de cada letra. Os modelos de trajetória já usavam outros recortes das aulas institucionais. [Métricas do retreino](../ml/evidence/alphabet-n-m-u/retraining-agreement.json) · [Replays institucionais](../ml/evidence/alphabet-n-m-u/replay-institutional.json)
 
 O leitor agora pede três confirmações seguidas antes de exibir Ç. O trecho estático de C passou por três replays automatizados no Chromium sem acionar Ç. O trecho rotulado de Ç e as sete janelas temporais da terceira aula da UFSM continuaram produzindo a letra esperada.
 
-O script abaixo percorre as 27 janelas isoladas de uma mesma aula pela Área livre e registra todas as letras exibidas, inclusive trocas momentâneas. A entrada da câmera é o vídeo gravado. O relatório só guarda metadados e leituras.
+Na prévia `4f2db54`, o replay exibiu a letra esperada em 25 das 27 janelas isoladas da terceira aula da UFSM. Em 24, exibiu só a letra esperada. No recorte de A apareceu X, no de E o painel ficou vazio e no de Z apareceu G antes de Z. O teste da sobreposição com as duas mãos passou nessa mesma prévia. [Leituras por janela](../ml/evidence/alphabet-n-m-u/replay-ufsm.json)
+
+Use o script abaixo para registrar todas as letras exibidas, inclusive trocas momentâneas. A entrada da câmera é o vídeo gravado. O relatório guarda somente metadados e leituras.
 
 ```bash
 node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
