@@ -145,6 +145,10 @@ p { line-height: 1.55; }
   align-items: start;
   gap: 1.25rem;
 }
+.media-layout:has(> .media-card[hidden]) {
+  grid-template-columns: minmax(0, 40rem);
+  justify-content: center;
+}
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);

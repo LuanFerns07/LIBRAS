@@ -1,5 +1,17 @@
 # Prévias locais do LibrasIA
 
+## Demonstração atual no PC
+
+Abra [Área livre](http://127.0.0.1:4177/#area-livre) ou [Praticar](http://127.0.0.1:4177/#praticar) no Chromium. Na Área livre, selecione **Alfabeto** para ler letras ao vivo ao lado da câmera. Em **Sinais**, inicie e conclua cada tentativa para acrescentar uma palavra.
+
+Se o servidor estiver encerrado, execute na raiz do projeto:
+
+~~~bash
+python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
+~~~
+
+O pacote serve apenas o endereço local e registra o código compilado em `site/commit.txt`. [Roteiro e resultados](roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
+
 ## Pontos das mãos ao vivo
 
 Abra **http://127.0.0.1:4175/#area-livre** no Chromium, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Acompanhe os pontos antes, durante e depois de iniciar uma tentativa. Durante a captura, desmarque e marque a opção para verificar a sobreposição.

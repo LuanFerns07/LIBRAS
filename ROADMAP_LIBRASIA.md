@@ -70,6 +70,7 @@ A prévia permanece no Linux local. A publicação na Vercel e a finalização d
 
 - [x] Treinar uma versão reproduzível e medir a classificação em teste reservado. Registrar configuração, versões dos conjuntos, comandos, critérios de seleção e versão dos pesos.
 - [x] Completar a lição com observar, praticar com ajuda e tentar com menos ajuda. Incluir uma atividade de compreensão sem câmera, controles do avatar e registro local do progresso.
+- [x] Completar as três etapas de Cinco no Chromium com vídeo gravado e inferência real. Verificar resposta incorreta e correta na atividade, reconhecimento com e sem avatar e progresso após recarregar. Abrir a etapa pendente ao usar a revisão. [Resultado e comandos](docs/roteiro-validacao.md#lição-completa-de-cinco-no-chromium)
 - [x] Medir precisão, revocação e F1 por sinal e média macro no teste reservado. Registrar matriz de confusão, cobertura, falsas aceitações e latência mediana e p95 no PC com clipes de teste. Contar tentativas inconclusivas na análise de cobertura e na revocação dos sinais suportados.
 - [x] Medir o modelo combinado congelado nos 51 clipes reservados do MINDS. Observar 32/33 acertos no catálogo, 1/18 falso aceite e F1 macro de 0,972. [Avaliação do combinado](docs/avaliacao.md#modelo-combinado-na-partição-reservada)
 - [ ] Medir as mesmas métricas com participantes independentes usando a webcam no PC, incluindo tempo de extração e carregamento.

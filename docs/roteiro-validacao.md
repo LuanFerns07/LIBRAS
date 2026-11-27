@@ -66,6 +66,21 @@ Os logs locais ficam em `data/evidence/demonstracao/`. O navegador abriu e liber
 
 Com gravação, os pontos acompanharam as duas mãos antes, durante e depois da tentativa. O teste verificou espelhamento, redimensionamento, perda e retorno da mão e o controle de exibição. O N e a passagem de M para N também passaram na Área livre e em Praticar com os clipes da Unesp. Logs locais `pontos.log` e `alfabeto-n.log`. [Sobreposição](teste-pontos-ao-vivo.md) · [Referência para o reteste de N](dados-alfabeto.md#confirmação-específica-de-n-na-prévia)
 
+### Lição completa de Cinco no Chromium
+
+O teste voltou à atividade após uma resposta incorreta, aceitou a resposta esperada e abriu **Praticar com ajuda** pela revisão. A prévia reconheceu o clipe Cinco S09-1 nessa etapa e em **Tentar com menos ajuda**, com o painel do avatar oculto e a câmera ativa na passagem entre etapas. O contador mostrou um sinal concluído. Depois de recarregar, o progresso reapareceu e a câmera voltou desligada. O teste unitário também confirmou que a revisão abre a prática de memória quando a etapa guiada já foi concluída. A correção intencional por uma pessoa sinalizante e a revisão linguística da dica continuam pendentes.
+
+Com o clipe preparado com o marcador verde, como na seção de sincronização abaixo, execute:
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_LESSON_FLOW=1 LIBRASIA_TEST_TRIALS=2 LIBRASIA_TEST_TARGET=signal-cinco LIBRASIA_EXPECT_TEXT=cinco \
+  LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/10CincoSinalizador09-1-sync.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+O modelo carregado foi o mesmo verificado na demonstração. O log da lição fica em `data/evidence/demonstracao/licao-completa.log`. [Clipe do MINDS-Libras](https://zenodo.org/records/2667329) · [Teste da lição](../tests/e2e/recognition.test.mjs)
+
 ## Registro da prévia de 26/11/2026
 
 Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.

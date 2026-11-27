@@ -47,6 +47,11 @@ export function isComplete(entry, kind = 'signal') {
   return entry.observed && entry.guided && entry.independent && (kind === 'letter' || entry.understood)
 }
 
+export function reviewStep(entry, kind = 'signal') {
+  if (!(kind === 'letter' ? entry.observed : entry.understood)) return 0
+  return entry.guided && !entry.independent ? 2 : 1
+}
+
 export function reviewOrder(progress, kind = 'signal') {
   return [...curricula[kind].items].sort((left, right) => {
     const a = progress[left.id]

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { lesson, manualAlphabet } from '../src/catalog.js'
-import { isComplete, markAttempt, readProgress, reviewOrder, writeProgress } from '../src/progress.js'
+import { isComplete, markAttempt, readProgress, reviewOrder, reviewStep, writeProgress } from '../src/progress.js'
 import { appendTranscription, freeFeedback, observePalm, observeVerticalTrajectory, practiceFeedback } from '../src/recognition/feedback.js'
 import { brazilianVoice, mountSpeech } from '../src/speech.js'
 import { letterPracticeFeedback } from '../src/views/practice.js'
@@ -118,6 +118,24 @@ test('a revisão prioriza tentativas pendentes e atualiza a sugestão após acer
   assert.equal(reviewOrder(progress)[0], espelho)
   markAttempt(progress[espelho.id], 1, { state: 'accepted' })
   assert.equal(reviewOrder(progress)[0], cinco)
+})
+
+test('a revisão abre a primeira etapa pendente do sinal ou da letra', () => {
+  const signal = readProgress()['signal-cinco']
+  assert.equal(reviewStep(signal), 0)
+  signal.observed = true
+  signal.understood = true
+  assert.equal(reviewStep(signal), 1)
+  markAttempt(signal, 1, acceptedCinco)
+  assert.equal(reviewStep(signal), 2)
+  markAttempt(signal, 2, acceptedCinco)
+  assert.equal(reviewStep(signal), 1)
+  const letter = readProgress(undefined, 'letter')['letter-a']
+  assert.equal(reviewStep(letter, 'letter'), 0)
+  letter.observed = true
+  assert.equal(reviewStep(letter, 'letter'), 1)
+  markAttempt(letter, 1, acceptedCinco)
+  assert.equal(reviewStep(letter, 'letter'), 2)
 })
 
 test('a prática de letras só aceita uma leitura do modelo compatível com o alvo', () => {

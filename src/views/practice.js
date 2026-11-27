@@ -1,7 +1,7 @@
 import { lesson, manualAlphabet } from '../catalog.js'
 import { captureMarkup, mountCapture } from '../capture-panel.js'
 import { mountPlayerControls, playerMarkup } from '../player-controls.js'
-import { isComplete, markAttempt, readProgress, reviewOrder, writeProgress } from '../progress.js'
+import { isComplete, markAttempt, readProgress, reviewOrder, reviewStep, writeProgress } from '../progress.js'
 import { practiceFeedback } from '../recognition/feedback.js'
 
 const stages = [
@@ -103,6 +103,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     <p class="inline-status subtle" data-practice-notice></p>`
 
   const player = mountPlayerControls(main, createPlayer)
+  const avatar = main.querySelector('[data-avatar]').closest('.media-card')
   const activity = main.querySelector('.practice-activity')
   const letterActivity = main.querySelector('[data-letter-observation]')
   const observeLetter = main.querySelector('[data-observe-letter]')
@@ -228,6 +229,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     letterActivity.hidden = !letters || step !== 0
     quizStatus.hidden = true
     player.setSequence(step === 2 ? [] : [entry])
+    avatar.hidden = step === 2
     camera.reset()
     camera.setEnabled(step !== 0)
     tabs.forEach((button, index) => {
@@ -257,8 +259,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   reviewButton.addEventListener('click', () => {
     selected[mode] = curricula[mode].indexOf(reviewTarget)
     picker.value = reviewTarget.id
-    const entry = progress[mode][reviewTarget.id]
-    step = (mode === 'letter' ? entry.observed : entry.understood) ? 1 : 0
+    step = reviewStep(progress[mode][reviewTarget.id], mode)
     render()
     tabs[step].focus()
   })

@@ -13,6 +13,7 @@ const continuous = process.env.LIBRASIA_TEST_CONTINUOUS === '1'
 const expectedGlosses = process.env.LIBRASIA_EXPECT_GLOSSES
 const sync = multiple || continuous || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
+const lessonFlow = process.env.LIBRASIA_TEST_LESSON_FLOW === '1'
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
 const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
 const expectedReason = process.env.LIBRASIA_EXPECT_REASON
@@ -120,6 +121,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     'Use duas tentativas isoladas e marcadores verde e azul para verificar sinais diferentes.')
   if (continuous) assert.ok(!multiple && !target && !autoFinish && !offline, 'Use a área livre no cenário contínuo.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
+  if (lessonFlow) assert.ok(target === 'signal-cinco' && expected === 'cinco' && sync && trials === 2,
+    'Use duas tentativas com o clipe sincronizado de Cinco para verificar a lição inteira.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
   if (offline) assert.ok(expected && sync && !multiple && !target && trials >= 2,
     'Use um sinal confirmado na área livre, com clipe sincronizado e pelo menos duas tentativas.')
@@ -171,7 +174,19 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     if (target) {
       const select = '(id => { const field = document.querySelector("[data-signal]"); field.value = id; field.dispatchEvent(new Event("change")); })'
       await evaluate(select + '(' + JSON.stringify(target) + ')')
-      await evaluate('document.querySelector(' + JSON.stringify('[data-stage="1"]') + ').click()', true)
+      if (lessonFlow) {
+        assert.equal(await evaluate('document.querySelector("[data-camera-toggle]").disabled'), true)
+        const answer = value => evaluate(`document.querySelector('[data-quiz] input[value="${value}"]').click();
+          document.querySelector('[data-quiz]').form.requestSubmit()`)
+        await answer(1)
+        assert.equal(await evaluate('document.querySelector("[data-quiz-status]").dataset.state'), 'inconclusive')
+        await answer(0)
+        assert.equal(await evaluate('document.querySelector("[data-quiz-status]").dataset.state'), 'accepted')
+        await evaluate('document.querySelector("[data-review]").click()', true)
+        assert.equal(await evaluate('document.activeElement.dataset.stage'), '1')
+      } else {
+        await evaluate('document.querySelector(\'[data-stage="1"]\').click()', true)
+      }
       assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
     }
     if (continuous) await evaluate('document.querySelector("[data-continuous-mode]").click()', true)
@@ -222,6 +237,12 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     const captureMs = multiple ? 10300 : videoFile ? 3850 : 1600
     const decisions = []
     for (let trial = 0; trial < trials; trial += 1) {
+      if (lessonFlow && trial === 1) {
+        assert.equal(decisions[0].state, 'accepted', 'A tentativa guiada deve ser reconhecida antes da etapa seguinte.')
+        await evaluate('document.querySelector(\'[data-stage="2"]\').click()', true)
+        assert.equal(await evaluate('document.querySelector("[data-avatar]").closest(".media-card").offsetWidth'), 0)
+        assert.equal(await evaluate('document.querySelector("video").srcObject.getVideoTracks()[0].readyState'), 'live')
+      }
       if (offline && trial === 1) {
         assert.equal(decisions[0].state, 'accepted', 'Confirme o reconhecimento antes de desconectar.')
         await evaluate('window.testCameraTrack = document.querySelector("video").srcObject.getVideoTracks()[0]; true')
@@ -250,7 +271,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording')
         assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
       }
-      if (target) await evaluate('document.querySelector("[data-restart]").click()', true)
+      if (target && !(lessonFlow && trial === 1)) await evaluate('document.querySelector("[data-restart]").click()', true)
       const endAtMediaMs = fixedCaptureMs === null ? null : marked.startMs + fixedCaptureMs
       const decision = await evaluate('(' + finish + ')(' + autoFinish + ',' + endAtMediaMs + ')', true)
       const transcript = target ? null : await getTranscript()
@@ -337,6 +358,16 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
     assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
+
+    if (lessonFlow) {
+      const progress = 'document.querySelector("[data-progress]").textContent === "1 de 3 sinais concluídos"'
+      await waitUntil(progress)
+      await evaluate('window.testLessonCompleted = true')
+      await page('Page.reload')
+      await waitUntil('!window.testLessonCompleted && ' + progress)
+      assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
+      context.diagnostic('A lição concluiu observação, tentativa guiada e tentativa de memória. O progresso voltou após recarregar.')
+    }
 
     if (offline) {
       const unchangedCamera = 'document.querySelector("video").srcObject?.getVideoTracks()[0] === window.testCameraTrack'
