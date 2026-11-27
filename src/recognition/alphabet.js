@@ -1,6 +1,5 @@
 export const alphabetFeatureCount = 63
 export const alphabetPathGapMs = 220
-export const alphabetZDropoutMs = 150
 
 export function oneHand(frame) {
   const hands = [frame.leftHand, frame.rightHand].filter(hand => hand?.length === 21)
@@ -15,9 +14,8 @@ function overlappingHands({ leftHand, rightHand, aspect }) {
   const distance = (a, b) => Math.hypot((a.x - b.x) * aspect, a.y - b.y)
   const scale = Math.max(distance(leftHand[0], leftHand[9]), distance(leftHand[5], leftHand[17]),
     distance(rightHand[0], rightHand[9]), distance(rightHand[5], rightHand[17]))
-  return scale > 1e-4 && distance(leftHand[0], rightHand[0]) <= .75 * scale &&
-    distance(leftHand[9], rightHand[9]) <= .50 * scale &&
-    distance(leftHand[8], rightHand[8]) <= .60 * scale
+  const palmJoints = [5, 9, 17]
+  return scale > 1e-4 && palmJoints.every(joint => distance(leftHand[joint], rightHand[joint]) <= .60 * scale)
 }
 
 export function letterFeatures(hand, aspect) {
@@ -89,7 +87,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
           resetReadings()
           motionStart = frame.timestamp
         } else if (findMotion && zDropout === null && history.length >= 6 &&
-            frame.timestamp - lastFrame <= alphabetZDropoutMs && overlappingHands(frame)) {
+            frame.timestamp - lastFrame <= alphabetPathGapMs && overlappingHands(frame)) {
           // Reinicie as leituras. Só o traçado de Z pode usar os pontos anteriores.
           resetReadings()
           motionStart = frame.timestamp
@@ -101,7 +99,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       }
       if (zDropout !== null && lastFrame < zDropout) {
         const previous = history.at(-1)
-        if (frame.timestamp - lastFrame > alphabetZDropoutMs ||
+        if (frame.timestamp - lastFrame > alphabetPathGapMs ||
             (hand === frame.leftHand) !== (oneHand(previous) === previous.leftHand)) clear()
       }
       if (frame.timestamp - lastFrame > 350) clear()

@@ -161,6 +161,6 @@ test('Z retoma um traço interrompido por uma sobreposição breve da mesma mão
   const other = before.rightHand.map(point => ({ ...point, x: point.x + .30 }))
   assert.deepEqual(await read([{ ...overlap, leftHand: other }, end]), ['G', null])
   assert.deepEqual(await read([overlap, { ...overlap, timestamp: 575 }, end]), ['G', null])
-  assert.deepEqual(await read([overlap, { ...end, timestamp: 675 }]), ['G', null])
+  assert.deepEqual(await read([overlap, { ...end, timestamp: 725 }]), ['G', null])
   assert.deepEqual(await read([overlap, { ...end, leftHand: end.rightHand, rightHand: [] }]), ['G', null])
 })

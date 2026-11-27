@@ -1,4 +1,4 @@
-import { alphabetFeatureCount, alphabetPathGapMs, alphabetZDropoutMs, letterFeatures, oneHand } from './alphabet.js'
+import { alphabetFeatureCount, alphabetPathGapMs, letterFeatures, oneHand } from './alphabet.js'
 
 const steps = 12
 const tips = [4, 8, 12, 16, 20]
@@ -223,7 +223,7 @@ function continuesZStroke(active, first, second, end, dropout, scale) {
   if (start.time >= dropout || finish.time <= dropout) return false
   const before = active.findLast(sample => sample.time < dropout)
   const after = active.find(sample => sample.time > dropout)
-  if (!before || !after || after.time - before.time > alphabetZDropoutMs) return false
+  if (!before || !after || after.time - before.time > alphabetPathGapMs) return false
   const approach = (before.positions[2][0] - start.positions[2][0]) / scale
   const continuation = (after.positions[2][0] - before.positions[2][0]) / scale
   return Math.abs(approach) >= .50 && Math.sign(approach) * continuation >= .50
