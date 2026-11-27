@@ -1,0 +1,154 @@
+{
+  "manifest": "ml/alphabet/ufac-static-windows.json",
+  "manifestSha256": "bd414bb4d819312bb420000e6259cccbf30d1140bc1b3eb6856139edc7a96a13",
+  "videoSha256": "ce2c475fdd4b8918f38db82a95eaa975cb7038f065428a00b7420624cf5745e5",
+  "split": "test",
+  "build": {
+    "commit": "dbda17e33b08deab9f2fa7d85a30957048e7909a",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "b4476c4aa73cd96e28396c7d65e1a086d3f56c39424cf9f2955c80b7888f4004",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "chromium": "156.0.8078.79",
+  "ffmpeg": "7.1.5-0+deb13u1",
+  "cpu": true,
+  "offlineExtraction": {
+    "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+    "pointsSha256": "99ac606f18ad72d27ccac1e8102eea8f80d73c5973b7bbccc1e7a895dfc329fb",
+    "framesWithOneHand": {
+      "A": 43,
+      "E": 35,
+      "M": 29,
+      "N": 32,
+      "O": 35,
+      "U": 0
+    },
+    "framesWithTwoHands": {
+      "A": 0,
+      "E": 0,
+      "M": 0,
+      "N": 0,
+      "O": 0,
+      "U": 26
+    }
+  },
+  "initialReplay": [
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "A",
+      "startMs": 80580,
+      "endMs": 83350,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 254
+        }
+      ],
+      "workerFrames": 121,
+      "framesWithHand": 56,
+      "lastHandAfterVideoMs": 2793
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "E",
+      "startMs": 117520,
+      "endMs": 119750,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 266
+        }
+      ],
+      "workerFrames": 109,
+      "framesWithHand": 45,
+      "lastHandAfterVideoMs": 2253
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "M",
+      "startMs": 181440,
+      "endMs": 183320,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 224
+        }
+      ],
+      "workerFrames": 117,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 1888
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "N",
+      "startMs": 189160,
+      "endMs": 191240,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 223
+        }
+      ],
+      "workerFrames": 121,
+      "framesWithHand": 54,
+      "lastHandAfterVideoMs": 2131
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "O",
+      "startMs": 197600,
+      "endMs": 199840,
+      "readings": [],
+      "workerFrames": 124,
+      "framesWithHand": 58,
+      "lastHandAfterVideoMs": 2297
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 1173
+        },
+        {
+          "letter": "U",
+          "afterVideoMs": 1590
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 45,
+      "lastHandAfterVideoMs": 1703
+    }
+  ],
+  "repeatReplay": [
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "O",
+      "startMs": 197600,
+      "endMs": 199840,
+      "readings": [],
+      "workerFrames": 125,
+      "framesWithHand": 58,
+      "lastHandAfterVideoMs": 2301
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 1604
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1679
+    }
+  ]
+}

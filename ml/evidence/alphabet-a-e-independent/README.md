@@ -25,3 +25,40 @@ PYTHONPATH=. python ml/evidence/alphabet-a-e-independent/diagnose_crop.py \
 ```
 
 O arquivo [ufsm-a-crop.json](ufsm-a-crop.json) registra as versões, os hashes e os resultados agregados de `summary.json`. `diagnosis.json` e os vídeos derivados são saídas locais.
+
+## Fonte independente da UFAC
+
+A aula **Datilologia ou Alfabeto Manual**, do professor Israel Queiroz de Lima, foi produzida pelo Niead/UFAC para Matemática EaD. O campo Licença do vídeo institucional registra Creative Commons de atribuição com reutilização permitida. A publicação do YouTube sobre a modalidade de licença aponta para CC BY 3.0. A gravação inteira está na partição de teste. [Aula da UFAC](https://www.youtube.com/watch?v=B2U7c6OXgBg&hl=pt-BR), [Referência institucional do IFAC, p. 19](https://repositorio.ifac.edu.br/jspui/bitstream/123456789/34/3/Chegou%20um%20aluno%20Surdo%2C%20e%20agora.%20Um%20roteiro%20de%20aprendizagem%20para%20professores%20do%20ensino%20de%20administra%C3%A7%C3%A3o%20para%20Surdos.pdf), [Termos da licença](https://creativecommons.org/licenses/by/3.0/), [Versão da licença adotada pelo YouTube](https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/).
+
+A letra impressa fica ao lado do sinalizante. No A, o polegar está visível ao lado do indicador e a face da palma fica mais exposta que no A da terceira aula da UFSM. No E, as pontas dos quatro dedos ficam visíveis e o polegar se dobra em frente à palma. Em M e N, o dorso da mão fica voltado para a câmera, com três e dois dedos voltados para baixo, respectivamente. Em U, o indicador e o médio ficam juntos e para cima.
+
+| Letra | Início–fim e âncora no vídeo (ms) | Leitura na Área livre | Primeira exibição após o início do trecho |
+| --- | --- | --- | ---: |
+| A | 80580–83350, 81960 | A | 254 ms |
+| E | 117520–119750, 118760 | E | 266 ms |
+| M | 181440–183320, 182400 | M | 224 ms |
+| N | 189160–191240, 190280 | N | 223 ms |
+| O | 197600–199840, 198720 | Sem letra em dois replays | — |
+| U | 251590–253240, 252240 | U nos dois replays, intermitente no primeiro | 1173 ms e 1604 ms |
+
+O navegador rastreou uma mão em 58 quadros da janela de O em cada reprodução. A extração em CPU do vídeo original também encontrou apenas a mão ativa nos 35 quadros amostrados de O. Em U, o extrator detectou a mão em repouso além da ativa, com separação vertical suficiente para escolher a mão superior nos 26 quadros. As duas execuções são da compilação `dbda17e` na câmera virtual e cobrem um único sinalizante. Os valores de tempo descrevem essas execuções.
+
+### Como repetir
+
+Baixe os formatos 137 e 140 da aula com `yt-dlp` e combine em MP4 sem recodificar. O SHA-256 do arquivo local está no [manifesto](../../alphabet/ufac-static-windows.json). O vídeo fonte e os pontos por quadro ficam em `data/`. A câmera virtual usa os trechos anotados, sem áudio, reduzidos a 640 pixels de largura e precedidos por uma tela preta.
+
+```bash
+mkdir -p data/alphabet/independent/ufac-download data/evidence/alphabet-a-e-independent
+yt-dlp --no-playlist --no-mtime -f '137+140' --merge-output-format mp4 \
+  -o 'data/alphabet/independent/ufac-download/ufac-alfabeto.%(ext)s' \
+  'https://www.youtube.com/watch?v=B2U7c6OXgBg'
+
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --manifest ml/alphabet/ufac-static-windows.json --source ufac-b2u7c6oxgbg --workers 1
+
+.venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/ufac-static-windows.json \
+  --out data/evidence/alphabet-a-e-independent/ufac-static-frames.json
+```
+
+A repetição do replay usou `--letters OU`. Nas duas execuções, o Chromium foi iniciado com `--disable-gpu`. O Hand Landmarker e os classificadores da prévia usaram CPU. Os hashes dos modelos, os resultados por janela e o hash dos pontos estão em [ufac-replay-dbda17e.json](ufac-replay-dbda17e.json).
