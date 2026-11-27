@@ -183,6 +183,7 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 ### M6 · Saiba mais, autoria e caráter sem fins lucrativos
 
 - [x] Implementar **Saiba mais** como lista de redirecionamentos para as fontes originais do prompt. Exibir título e autoria ou instituição. Esse fluxo consiste apenas em links externos.
+- [x] Abrir os links de **Saiba mais** em outra aba e conferir os sete destinos no Chromium. Retestar a volta à Área livre com o texto editado disponível. [Resultado por destino](docs/roteiro-validacao.md#conferência-dos-sete-links-de-saiba-mais)
 - [x] Publicar no rodapé e no README a mensagem “O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.” Manter o acesso gratuito, sem monetização ou afiliação comercial.
 - [x] **Aceite.** O revisor abre cada link, confere título, autoria e destino e encontra a mesma declaração no aplicativo e no README.
 

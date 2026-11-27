@@ -62,7 +62,7 @@ O teste usou a prévia `b95a5da` no Debian 13.8, em Chromium 156.0.8078.79 com p
 | 3. Nome isolado | A reprodução de “Ânna Clara” exibiu A → N → N → A → Pausa → C → L → A → R → A. | `browser-roteiro.log` |
 | 4. Lição | O exercício sem câmera aceitou a resposta e recuperou a sugestão de revisão após recarregar. O clipe Cinco S09-1 foi reconhecido com o avatar aberto. A regra da dica de palma passou no teste unitário. Falta observar a dica durante uma tentativa com correção intencional. | `browser-roteiro.log`, `licao-cinco.log` e `tests/lesson.test.js` |
 | 5. Área livre | Cinco e Espelho foram reconhecidos em tentativas isoladas. A transcrição gerada pôde ser editada e a voz local eSpeak NG em pt-BR sinalizou conclusão. Um ensaio adicional acrescentou “cinco espelhos” no modo com pausa. Banco S12-2 ficou inconclusivo em duas capturas e preservou o texto. A repetição de Cinco passou offline, com a mesma trilha ativa e sem novas requisições. | `dois-sinais-e-voz.log`, `area-livre-sequencia.log`, `area-livre-banco.log`, `area-livre-cinco.log` |
-| 6. Saiba mais | O clique no Dicionário do INES abriu o destino em outra aba. O Chromium mostrou o título “Dicionário Libras” e a lista do app exibiu a autoria. | `link-ines.log` e [Dicionário Libras](https://dicionario.ines.gov.br/) |
+| 6. Saiba mais | O clique no Dicionário do INES abriu o destino. O Chromium mostrou o título “Dicionário Libras” e a lista do app exibiu a autoria. | `link-ines.log` e [Dicionário Libras](https://dicionario.ines.gov.br/) |
 
 Os logs locais ficam em `data/evidence/demonstracao/`. O navegador abriu e liberou a webcam física Acer a 640 × 480 e retomou a captura após conceder a permissão. O classificador recebeu os clipes gravados do MINDS-Libras pelo dispositivo de teste do Chromium. A compreensão do áudio, o reconhecimento com sinalizantes ao vivo e a revisão linguística permanecem no aceite manual. [Origem dos clipes](https://zenodo.org/records/2667329) · [Testes de navegador](../tests/e2e/browser.test.mjs) · [Testes do reconhecimento](../tests/e2e/recognition.test.mjs)
 
@@ -114,7 +114,7 @@ Em 27/11/2026, a compilação `8430fe0` passou as seis etapas na mesma aba e com
 | 3 | “Ânna Clara” exibiu A → N → N → A → Pausa → C → L → A → R → A. |
 | 4 | Após a atividade sem câmera, a prática guiada reconheceu Amarelo no recorte original e mostrou a dica de trajetória no recorte invertido. |
 | 5 | Duas tentativas isoladas transcreveram “cinco espelho”. A voz local concluiu a leitura depois de editar o texto para “Cinco e espelho.” |
-| 6 | O botão de navegação manteve o foco no conteúdo. O link abriu o Dicionário Libras do INES em outra aba e a lista do app exibiu os autores. |
+| 6 | O botão de navegação manteve o foco no conteúdo. O link abriu o Dicionário Libras do INES e a lista do app exibiu os autores. |
 
 A passagem da prática para a Área livre encerrou a primeira trilha de câmera. A segunda foi encerrada ao abrir Saiba mais. Até o clique no link externo, o navegador solicitou apenas arquivos locais. Os sinais vieram de gravações e o Chromium informou a conclusão da voz. A compreensão do áudio e a adequação da dica com sinalizantes na webcam seguem na tabela de aceite manual. As duas execuções passaram, com logs em `data/evidence/demonstracao/roteiro-completo.log` e `data/evidence/demonstracao/roteiro-completo-reteste.log`. [Teste do navegador](../tests/e2e/browser.test.mjs) · [Dicionário Libras](https://dicionario.ines.gov.br/)
 
@@ -139,13 +139,29 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_DEMO_VIDEO="$fixtures/demo
   node --test tests/e2e/browser.test.mjs
 ~~~
 
+### Conferência dos sete links de Saiba mais
+
+Em 27/11/2026, o Chromium 156.0.8078.79 abriu os sete destinos abaixo a partir do pacote local `d473dc4`, em um perfil sem login. Cada destino abriu em outra aba e respondeu com HTTP 200. A linha de autoria ou instituição do aplicativo foi conferida no conteúdo das páginas.
+
+| Referência | Autoria ou instituição | Destino confirmado |
+| --- | --- | --- |
+| Perfil de Karin Strobel | Iphan, Inventário Nacional da Diversidade Linguística | [Karin Strobel](https://indl.iphan.gov.br/pessoas-de-referencia/karin-strobel/) |
+| As imagens do outro sobre a cultura surda | Karin Strobel, Editora da UFSC | [Editora da UFSC](https://editora.ufsc.br/2016/10/10/lancamento-as-imagens-do-outro-sobre-a-cultura-surda/) |
+| Língua de Sinais Brasileira | Ronice Müller de Quadros e Lodenir Becker Karnopp, Artmed | [Catálogo do Grupo A](https://m.grupoa.com.br/lingua-de-sinais-brasileira-estudos-9788536303086-p991033) |
+| Dicionário da Língua Brasileira de Sinais | Guilherme de Azambuja Lira e Tanya Amara Felipe de Souza, no INES | [Dicionário Libras](https://dicionario.ines.gov.br/) |
+| Manuário Acadêmico e Escolar | INES | [Manuário](https://manuario.ines.gov.br/) |
+| Corpus de Libras | UFSC | [Publicações do Corpus Libras](https://corpuslibras.ufsc.br/publicacoes) |
+| Clube de Libras | UFC, projeto de extensão | [Faculdade de Educação da UFC](https://faced.ufc.br/pt/extensao/programa-de-pos-graduacao-em-educacao/clube-de-libras-ufc/) |
+
+Na compilação `bdbccc4`, o clique no Dicionário do INES substituía a aplicação na mesma aba. No reteste integrado de `d473dc4`, o Chromium verificou a abertura da segunda aba, voltou à Área livre e recuperou o texto editado “Cinco e espelho.”. Os registros locais são `data/evidence/demonstracao/saiba-mais-d473dc4.json` e `data/evidence/demonstracao/roteiro-d473dc4.log`. [Teste de navegação e abertura](../tests/e2e/recorded-demo.mjs)
+
 ### Reteste do atalho de conteúdo
 
 Na compilação `aea5303`, pressionar Enter em **Ir para o conteúdo** movia o foco para o conteúdo da Área livre e mudava a URL para `#conteudo`. A recarga abria Praticar. Na compilação `aa32d96`, o atalho mantém `#area-livre`, preserva o histórico e deixa **Conteúdo** como próximo controle no Tab. A recarga manteve a Área livre e um único **Voltar** retornou para Praticar.
 
 No mesmo pacote, o Chromium abriu e liberou a webcam Acer e concluiu a síntese local com eSpeak NG em pt-BR. O controle com a gravação de duas mãos conferiu espelhamento, redimensionamento e o retorno dos pontos após ocultar uma mão. Os logs locais ficam em `data/evidence/demonstracao`, nos arquivos `fisico-aa32d96.log`, `atalho-recarregar-aa32d96.log` e `pontos-aa32d96.log`. A revisão visual com sinalização na webcam e a audição por participantes seguem pendentes. [Teste de navegador](../tests/e2e/browser.test.mjs) · [Controle com gravação](teste-pontos-ao-vivo.md)
 
-O roteiro integrado passou novamente com o Y4M de SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. O Chromium reproduziu a frase e o nome, reconheceu Amarelo, exibiu a dica de trajetória no recorte invertido, acrescentou “cinco espelho” em duas tentativas e concluiu a leitura de “Cinco e espelho.”. O link do INES abriu em outra aba, e as duas trilhas de câmera foram liberadas ao trocar de tela. Log local `roteiro-aa32d96.log`.
+O roteiro integrado passou novamente com o Y4M de SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. O Chromium reproduziu a frase e o nome, reconheceu Amarelo, exibiu a dica de trajetória no recorte invertido, acrescentou “cinco espelho” em duas tentativas e concluiu a leitura de “Cinco e espelho.”. O link do INES abriu o destino, e as duas trilhas de câmera foram liberadas ao trocar de tela. Log local `roteiro-aa32d96.log`.
 
 ### Latência da prática guiada no PC
 
