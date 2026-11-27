@@ -211,7 +211,8 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo experimental local com webcam. [Execução e ensaio no Chromium](docs/sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
 - [x] Comparar o detector original, a recalibração e o retreino com pontos do Holistic na validação. [Comparação de fronteiras](docs/fronteiras.md#comparação-com-pontos-do-holistic-web)
 - [x] Medir o controle de fragmentação do Holistic em três gravações reservadas. Com penalidade e piso de cinco posições, as referências fragmentadas caíram de 31 para 19 e os pareamentos de 71 para 64. [Teste reservado](docs/fronteiras.md#resultado-na-partição-reservada)
-- [ ] Testar o controle de fragmentação junto com o reconhecedor de glosas no Chromium. Medir a sequência de glosas e a tradução em gravações anotadas com cobertura do catálogo e incluir validação com webcam física.
+- [x] Integrar o controle de fragmentação como opção no Chromium e verificar a paridade com Python. Reproduzir a sequência de Amarelo e Espelho e o repouso sem alterar a transcrição em tentativas inconclusivas. [Resultado no navegador](docs/sinalizacao-continua.md#controle-de-fragmentação-no-navegador)
+- [ ] Medir a sequência de glosas e a tradução em gravações anotadas com cobertura do catálogo. Incluir validação com webcam física.
 - [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
 
 ### M11 · Checklist de publicação e compatibilidade

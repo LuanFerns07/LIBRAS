@@ -68,6 +68,23 @@ test('o limite de duração e o empate com a ausência de sinais seguem o Python
     { ...limitedConfig, proposalPenalty: .25, durationWeight: 0 }), [])
 })
 
+test('o corte fraco e a duração mínima reproduzem os controles do Python', () => {
+  const times = Array.from({ length: 8 }, (_, index) => index * 100)
+  const probabilities = new Float32Array(24)
+  for (let index = 1; index < 7; index += 1) probabilities[index * 3] = .85
+  probabilities[4] = probabilities[23] = .98
+  probabilities[13] = probabilities[14] = .10
+  const temporal = { ...config, version: 2, activityFloor: .60, cutPenalty: .25, minFrames: 1 }
+  assert.deepEqual(decodeBoundaries(times, probabilities, 300, temporal), [{ startMs: 100, endMs: 700 }])
+  probabilities[13] = probabilities[14] = .98
+  assert.deepEqual(decodeBoundaries(times, probabilities, 300, temporal),
+    [{ startMs: 100, endMs: 400 }, { startMs: 400, endMs: 700 }])
+  assert.deepEqual(decodeBoundaries(times, probabilities, 300, { ...temporal, minFrames: 5 }),
+    [{ startMs: 100, endMs: 700 }])
+  assert.deepEqual(decodeBoundaries(times.slice(0, 4), probabilities.slice(0, 12), 300,
+    { ...temporal, minFrames: 5 }), [])
+})
+
 test('grades irregulares e valores inválidos geram erro explícito', () => {
   const probabilities = new Float32Array(9)
   assert.throws(() => decodeBoundaries([0, 100, 250], probabilities, 300, config), /irregular/)

@@ -16,7 +16,7 @@ function boundaryManifest(data) {
       output?.name !== 'probabilities' || output.dtype !== 'float32' ||
       JSON.stringify(output.shape) !== JSON.stringify(['T', 3]) ||
       JSON.stringify(output.channels) !== JSON.stringify(['activity', 'start', 'end']) ||
-      decoder?.version !== 1) {
+      ![1, 2].includes(decoder?.version)) {
     throw new TypeError('Manifesto do detector de fronteiras incompatível.')
   }
   return { modelSha256, sampleMs, durationPriorMs, decoder }

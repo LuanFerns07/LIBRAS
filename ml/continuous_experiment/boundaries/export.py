@@ -58,7 +58,7 @@ def synthetic_hands(length, seed):
     return points
 
 
-def verify(graph, model_path, prior, decoder):
+def verify(graph, model_path, prior, decoder, controls):
     onnx.checker.check_model(str(model_path), full_check=True)
     options = ort.SessionOptions()
     options.intra_op_num_threads = 1
@@ -76,8 +76,8 @@ def verify(graph, model_path, prior, decoder):
             np.testing.assert_allclose(actual, expected, atol=ATOL, rtol=RTOL, equal_nan=False)
             max_error = max(max_error, float(np.max(np.abs(actual - expected))))
             times = np.arange(length) * SAMPLE_MS
-            segments = decode(times, expected, prior, decoder)
-            if decode(times, actual, prior, decoder) != segments:
+            segments = decode(times, expected, prior, decoder, **controls)
+            if decode(times, actual, prior, decoder, **controls) != segments:
                 raise ValueError(f"Os intervalos ONNX divergiram em {length} quadros.")
             if length <= 61:
                 fixtures.append({
@@ -95,7 +95,26 @@ def write_json(path, content, indent=None):
     path.write_text(json.dumps(content, ensure_ascii=False, allow_nan=False, indent=indent) + "\n", encoding="utf-8")
 
 
-def export(checkpoint, directory):
+def select_decoder(checkpoint, state, protocol, condition_name):
+    prior = float(state["duration_prior_ms"])
+    if protocol is None:
+        return prior, DecodeConfig(**state["decode"]), {}, {}
+    conditions = json.loads(protocol.read_text(encoding="utf-8"))
+    matches = [row for row in conditions["conditions"] if row["name"] == condition_name]
+    if len(matches) != 1:
+        raise ValueError("A condição escolhida precisa estar no protocolo uma única vez.")
+    row, = matches
+    if row["checkpointSha256"] != digest(checkpoint) or row["durationPriorMs"] != prior:
+        raise ValueError("Checkpoint ou duração não correspondem à condição escolhida.")
+    controls = row["controls"]
+    if not set(controls) <= {"min_frames", "cut_penalty"}:
+        raise ValueError("A condição usa controles sem equivalente no navegador.")
+    return prior, DecodeConfig(**row["decoder"]), controls, {
+        "decoderSelection": {"protocolSha256": digest(protocol), "condition": condition_name},
+    }
+
+
+def export(checkpoint, directory, protocol=None, condition_name=None):
     torch.set_num_threads(1)
     state = torch.load(checkpoint, map_location="cpu", weights_only=True)
     network = BoundaryModel(FEATURE_COUNT)
@@ -104,8 +123,7 @@ def export(checkpoint, directory):
     if any(tensor.shape != (1, FEATURE_COUNT, 1) or tensor.dtype != torch.float32 or
            not torch.isfinite(tensor).all() for tensor in (mean, std)) or not (std > 0).all():
         raise ValueError("Normalização do checkpoint incompatível com o detector temporal.")
-    prior = float(state["duration_prior_ms"])
-    decoder = DecodeConfig(**state["decode"])
+    prior, decoder, controls, selection = select_decoder(checkpoint, state, protocol, condition_name)
     if not isfinite(prior) or prior <= 0 or any(
         not isfinite(value) or value < 0 for value in asdict(decoder).values()
     ) or decoder.activity_floor > 1:
@@ -121,8 +139,14 @@ def export(checkpoint, directory):
             input_names=[INPUT_NAME], output_names=[OUTPUT_NAME], opset_version=OPSET,
             dynamic_axes={INPUT_NAME: {0: "T"}, OUTPUT_NAME: {0: "T"}}, dynamo=False,
         )
-        fixtures, parity = verify(graph, model_path, prior, decoder)
+        fixtures, parity = verify(graph, model_path, prior, decoder, controls)
         model_hash = digest(model_path)
+        decoding = {"version": 1, "maxDurationMs": 2100, "activityFloor": decoder.activity_floor,
+                    "boundaryWeight": decoder.boundary_weight, "proposalPenalty": decoder.proposal_penalty,
+                    "durationWeight": decoder.duration_weight}
+        if controls:
+            decoding.update(version=2, minFrames=controls.get("min_frames", 1),
+                            cutPenalty=controls.get("cut_penalty", 0))
         manifest = {
             "schemaVersion": 1,
             "modelVersion": "ufsc-boundary-conv1d-v1",
@@ -135,13 +159,12 @@ def export(checkpoint, directory):
                        "channels": ["activity", "start", "end"]},
             "sampleMs": SAMPLE_MS,
             "durationPriorMs": prior,
-            "decoder": {"version": 1, "maxDurationMs": 2100, "activityFloor": decoder.activity_floor,
-                        "boundaryWeight": decoder.boundary_weight, "proposalPenalty": decoder.proposal_penalty,
-                        "durationWeight": decoder.duration_weight},
+            "decoder": decoding,
             "provenance": {"trainingCorpus": "Corpus de Libras (UFSC), Inventário Nacional da Libras, G1",
                            "useConditions": "https://corpuslibras.ufsc.br/espacointerativo/perguntas/view/6",
                            "distribution": "local-only"},
             "parity": parity,
+            **selection,
         }
         write_json(staging / "boundary-parity.json", {"schemaVersion": 1, "modelSha256": model_hash,
                    "sampleMs": SAMPLE_MS, "atol": ATOL, "cases": fixtures})
@@ -155,8 +178,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("checkpoint", type=Path, nargs="?", default=Path("data/ufsc-boundaries/boundary-model.pt"))
     parser.add_argument("output", type=Path, nargs="?", default=Path("data/ufsc-boundaries/web"))
+    parser.add_argument("--decoder-protocol", type=Path)
+    parser.add_argument("--condition")
     args = parser.parse_args()
-    print(json.dumps(export(args.checkpoint, args.output), ensure_ascii=False, indent=2))
+    if bool(args.decoder_protocol) != bool(args.condition):
+        parser.error("Informe --decoder-protocol e --condition juntos.")
+    print(json.dumps(export(args.checkpoint, args.output, args.decoder_protocol, args.condition),
+                     ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

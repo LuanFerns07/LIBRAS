@@ -44,6 +44,30 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4201/ LIBRASIA_TEST_RECOGNITION=1 \
   node --test tests/e2e/recognition.test.mjs
 ```
 
+### Controle de fragmentação no navegador
+
+A exportação do detector aceita as condições congeladas do [protocolo](../ml/continuous_experiment/boundaries/fragmentation-reserved.json) para testar a penalidade de corte e, opcionalmente, o piso de cinco posições. O navegador aceita os dois formatos de decodificador. A prévia padrão usa os artefatos originais. [Medição reservada das fronteiras](fronteiras.md#resultado-na-partição-reservada)
+
+| Condição | Propostas em Amarelo e Espelho | Propostas em repouso |
+| --- | --- | --- |
+| Original | 7, com Amarelo e dois Espelhos | 7, todas inconclusivas |
+| Penalidade de corte | 7, com Amarelo e Espelho | 2, ambas inconclusivas |
+| Penalidade e piso de cinco posições | 6, com Amarelo e dois Espelhos | 3, todas inconclusivas |
+
+Cada linha corresponde a um replay de cada cenário no Chromium. A sequência usa dois clipes MINDS de treino unidos e não representa sinalização natural. As seis tentativas preservaram o texto anterior. Ainda é necessário avaliar o erro de glosas e de tradução em sequências anotadas dentro da cobertura do catálogo. [Leituras, janelas e versões](../ml/evidence/ufsc-boundaries/fragmentation-browser.json)
+
+```bash
+fronteiras=data/ufsc-boundaries/holistic/web-only-cut
+.venv/bin/python -m ml.continuous_experiment.boundaries.export \
+  data/ufsc-boundaries/holistic/boundary-model.pt "$fronteiras" \
+  --decoder-protocol ml/continuous_experiment/boundaries/fragmentation-reserved.json \
+  --condition holistic_weak_cut
+LIBRASIA_CONTINUO=1 LIBRASIA_FRONTEIRAS="$fronteiras" \
+  LIBRASIA_MODELO=data/models/isolated-combined LIBRASIA_PORTA=4201 ./scripts/executar-local.sh
+```
+
+Para acrescentar o piso de cinco posições ao ensaio, selecione `holistic_weak_cut_with_floor` na exportação.
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

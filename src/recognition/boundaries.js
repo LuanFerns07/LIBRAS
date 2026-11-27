@@ -79,7 +79,11 @@ export function decodeBoundaries(times, probabilities, durationPrior, config) {
     throw new TypeError('Cada quadro precisa de probabilidades finitas de atividade, início e fim.')
   }
   const { version, maxDurationMs, activityFloor, boundaryWeight, proposalPenalty, durationWeight } = config
-  if (version !== 1 || ![maxDurationMs, durationPrior, activityFloor, boundaryWeight, proposalPenalty, durationWeight]
+  const minFrames = version === 2 ? config.minFrames : 1
+  const cutPenalty = version === 2 ? config.cutPenalty : 0
+  if (![1, 2].includes(version) || !Number.isInteger(minFrames) || minFrames < 1 ||
+    !Number.isFinite(cutPenalty) || cutPenalty < 0 ||
+    ![maxDurationMs, durationPrior, activityFloor, boundaryWeight, proposalPenalty, durationWeight]
     .every(Number.isFinite) || maxDurationMs <= 0 || durationPrior <= 0) {
     throw new TypeError('Configuração inválida para decodificar fronteiras.')
   }
@@ -96,40 +100,64 @@ export function decodeBoundaries(times, probabilities, durationPrior, config) {
   const occupancy = new Float64Array(count + 1)
   const best = new Float64Array(count + 1)
   const starts = new Int32Array(count + 1).fill(-1)
+  const chosen = new Uint8Array(count + 1)
+  const ending = new Float64Array(count + 1).fill(-Infinity)
+  const touchingBest = new Uint8Array(count + 1)
   const maxLength = Math.min(count, Math.max(3, roundHalfEven(maxDurationMs / step)))
+  if (cutPenalty && probabilities.some(value => value < 0 || value > 1)) {
+    throw new TypeError('O custo de corte requer probabilidades entre zero e um.')
+  }
   const durationCosts = new Float64Array(maxLength + 1)
-  for (let length = 1; length <= maxLength; length += 1) {
+  for (let length = minFrames; length <= maxLength; length += 1) {
     durationCosts[length] = durationWeight * Math.abs(Math.log(length * step / durationPrior))
   }
   for (let end = 1; end <= count; end += 1) {
     occupancy[end] = occupancy[end - 1] + probabilities[(end - 1) * 3]
     best[end] = best[end - 1]
     const endProbability = probabilities[Math.min(end, count - 1) * 3 + 2]
-    for (let length = 1; length <= Math.min(end, maxLength); length += 1) {
+    for (let length = minFrames; length <= Math.min(end, maxLength); length += 1) {
       const start = end - length
       // A combinação das fronteiras usa float32 antes da soma com a atividade em float64.
       const edges = Math.fround(probabilities[start * 3 + 1] + endProbability)
       const edgeScore = Math.fround(Math.fround(boundaryWeight) * edges)
       const activity = (occupancy[end] - occupancy[start]) / length
       const weight = activity - activityFloor + edgeScore - proposalPenalty - durationCosts[length]
-      const score = best[start] + weight
-      if (score > best[end]) {
-        best[end] = score
-        starts[end] = start
+      let previous = best[start]
+      let touches = false
+      if (cutPenalty) {
+        // Uma fronteira compartilhada precisa de evidência de fim e de início.
+        const joint = Math.fround(probabilities[start * 3 + 1] * probabilities[start * 3 + 2])
+        const cost = Math.fround(Math.fround(cutPenalty) * Math.fround(1 - Math.fround(Math.sqrt(joint))))
+        const adjacent = ending[start] - cost
+        const gap = best[Math.max(0, start - 1)]
+        touches = adjacent > gap
+        previous = Math.max(adjacent, gap)
       }
+      const score = previous + weight
+      if (score > ending[end]) {
+        ending[end] = score
+        starts[end] = start
+        touchingBest[end] = Number(touches)
+      }
+    }
+    if (ending[end] > best[end]) {
+      best[end] = ending[end]
+      chosen[end] = 1
     }
   }
 
   const intervals = []
   let end = count
+  let mustEndHere = false
   while (end > 0) {
-    const start = starts[end]
-    if (start < 0) {
+    if (!chosen[end] && !mustEndHere) {
       end -= 1
       continue
     }
+    const start = starts[end]
     intervals.push({ startMs: times[start], endMs: end === count ? endTime : times[end] })
-    end = start
+    mustEndHere = Boolean(touchingBest[end])
+    end = cutPenalty && !mustEndHere ? start - 1 : start
   }
   return intervals.reverse()
 }

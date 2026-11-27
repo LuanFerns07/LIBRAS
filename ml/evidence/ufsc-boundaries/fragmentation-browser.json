@@ -1,0 +1,165 @@
+{
+  "scope": "Replays na Área livre com câmera simulada do Chromium. A sequência reúne dois clipes MINDS de treino.",
+  "browser": "Chromium 156.0.8078.79",
+  "sources": {
+    "src/recognition/boundaries.js": "d728aee2d01346fe7ed784d73b036d58fe770641f8de34bfd0d1cfc5e7a837cd",
+    "src/recognition/continuous.js": "ac26638080fae097608a262d7d109bfe552bcf608dda61bc9df39819d4c7baec",
+    "ml/continuous_experiment/boundaries/export.py": "0afb28d559942eadadc3fd65e49ddfdb6ea5aca340784dc5e505679652e5cbe3"
+  },
+  "fixtures": {
+    "sequencia": {
+      "sha256": "c9f36a49064ad0506ba7b78e5c9d661d8b66744a29e1eb59da15143bd0c0cda9"
+    },
+    "repouso": {
+      "sha256": "ba221a8c30469c9f7c2e85aeb39737cb1c8935814a7a80f5cf133ed3bbe45c79"
+    }
+  },
+  "isolatedSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "translatorSha256": "99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11",
+  "conditions": [
+    {
+      "condition": "original",
+      "modelSha256": "c6fc6ba3f013c2d551eb9e0614a1dff326bb028b2d81c84cb4442eed9154b610",
+      "decoder": {
+        "version": 1,
+        "maxDurationMs": 2100,
+        "activityFloor": 0.68,
+        "boundaryWeight": 0.3,
+        "proposalPenalty": 0.35,
+        "durationWeight": 0.25
+      },
+      "results": [
+        {
+          "scenario": "sequencia",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 7900,
+          "frames": 79,
+          "glosses": [
+            "amarelo",
+            null,
+            null,
+            "espelho",
+            null,
+            "espelho",
+            null
+          ],
+          "proposals": 7,
+          "text": "Texto conferido.",
+          "decisionMs": 27
+        },
+        {
+          "scenario": "repouso",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 4266,
+          "frames": 41,
+          "glosses": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "proposals": 7,
+          "text": "Texto conferido.",
+          "decisionMs": 36.4
+        }
+      ]
+    },
+    {
+      "condition": "corte",
+      "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb",
+      "decoder": {
+        "version": 2,
+        "maxDurationMs": 2100,
+        "activityFloor": 0.52,
+        "boundaryWeight": 0.3,
+        "proposalPenalty": 0.55,
+        "durationWeight": 0.25,
+        "minFrames": 1,
+        "cutPenalty": 0.25
+      },
+      "results": [
+        {
+          "scenario": "sequencia",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 7900,
+          "frames": 79,
+          "glosses": [
+            "amarelo",
+            null,
+            null,
+            "espelho",
+            null,
+            null,
+            null
+          ],
+          "proposals": 7,
+          "text": "Texto conferido.",
+          "decisionMs": 29.8
+        },
+        {
+          "scenario": "repouso",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 4233,
+          "frames": 40,
+          "glosses": [
+            null,
+            null
+          ],
+          "proposals": 2,
+          "text": "Texto conferido.",
+          "decisionMs": 23.2
+        }
+      ]
+    },
+    {
+      "condition": "corte-piso",
+      "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb",
+      "decoder": {
+        "version": 2,
+        "maxDurationMs": 2100,
+        "activityFloor": 0.68,
+        "boundaryWeight": 0.3,
+        "proposalPenalty": 0.35,
+        "durationWeight": 0.25,
+        "minFrames": 5,
+        "cutPenalty": 0.25
+      },
+      "results": [
+        {
+          "scenario": "sequencia",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 7933,
+          "frames": 79,
+          "glosses": [
+            "amarelo",
+            null,
+            null,
+            null,
+            "espelho",
+            "espelho"
+          ],
+          "proposals": 6,
+          "text": "Texto conferido.",
+          "decisionMs": 24
+        },
+        {
+          "scenario": "repouso",
+          "startAfterMarkerMs": 0,
+          "endAfterMarkerMs": 4233,
+          "frames": 40,
+          "glosses": [
+            null,
+            null,
+            null
+          ],
+          "proposals": 3,
+          "text": "Texto conferido.",
+          "decisionMs": 22.4
+        }
+      ]
+    }
+  ]
+}
