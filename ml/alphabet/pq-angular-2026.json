@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "milliseconds",
+  "windowEnd": "exclusive",
+  "selection": "Pares rotulados fixados antes da inferência. Os três pares da UFAC, UFF e Uníntese entram no ajuste; o Ifes é reservado por pessoa. As gravações da Unicentro, de Tel baixinha e de Paterno permanecem fora do treino.",
+  "sources": [
+    {
+      "id": "ufac-b2u7c6oxgbg",
+      "split": "train",
+      "title": "Datilologia ou Alfabeto Manual - Libras - Ufac",
+      "project": "Universidade Federal do Acre, Núcleo de Interiorização e Educação a Distância, Matemática EaD",
+      "credits": {
+        "professor": "Israel Queiroz de Lima",
+        "produção": "Niead/UFAC"
+      },
+      "page": "https://www.youtube.com/watch?v=B2U7c6OXgBg",
+      "published": "2019-07-22",
+      "file": "data/alphabet/independent/ufac-download/ufac-alfabeto.mp4",
+      "sha256": "ce2c475fdd4b8918f38db82a95eaa975cb7038f065428a00b7420624cf5745e5",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=B2U7c6OXgBg&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Niead Ufac indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "institutionalReference": "https://repositorio.ifac.edu.br/jspui/bitstream/123456789/34/3/Chegou%20um%20aluno%20Surdo%2C%20e%20agora.%20Um%20roteiro%20de%20aprendizagem%20para%20professores%20do%20ensino%20de%20administra%C3%A7%C3%A3o%20para%20Surdos.pdf",
+      "labelEvidence": "Cartela com P ou Q ao lado da pessoa. P depois da formação da mão e Q com o punho fletido diante do tronco.",
+      "windows": [
+        {
+          "label": "P",
+          "startMs": 206950,
+          "endMs": 208850,
+          "anchorMs": 207750,
+          "view": "Vista oblíqua dos dedos, braço atravessa a imagem na horizontal."
+        },
+        {
+          "label": "Q",
+          "startMs": 215300,
+          "endMs": 217200,
+          "anchorMs": 216300,
+          "view": "Vista frontal do antebraço levantado com o punho voltado para baixo."
+        }
+      ]
+    },
+    {
+      "id": "uff-nuedis-sdcvqodwh0o",
+      "split": "train",
+      "title": "Alfabeto manual em Libras",
+      "project": "Acessibilidade e os princípios do SUS, adaptado para o curso de Libras iniciantes do IB/UFF",
+      "credits": {
+        "publicação": "NUEDIS LIBRAS UFF",
+        "conteudistas": "Aline da Silva Alves, Margareth Prevot e Tatiane Militão de Sá",
+        "intérpretes nos créditos": "Elisangela Maroto Souza Guimarães e Gabriel Sampaio Veríssimo"
+      },
+      "page": "https://www.youtube.com/watch?v=SdCVqodwH0o",
+      "published": "2020-06-02",
+      "file": "data/alphabet/independent/uff-nuedis-download/uff-nuedis-alfabeto.mp4",
+      "sha256": "9201d1e548e85dbd85426808ea4e100de79768e37a9dbe322305f50370753bfc",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140-2 (AAC), combinados sem recodificação",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=SdCVqodwH0o&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação oficial indica Creative Commons de atribuição com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra impressa à esquerda durante a sustentação da mão. Os intervalos excluem as trocas entre os cartões.",
+      "windows": [
+        {
+          "label": "P",
+          "startMs": 70600,
+          "endMs": 72860,
+          "anchorMs": 71720,
+          "view": "Mão em vista frontal, junto à altura do ombro."
+        },
+        {
+          "label": "Q",
+          "startMs": 75100,
+          "endMs": 76960,
+          "anchorMs": 76000,
+          "view": "Palma voltada para o tronco e dedos em vista oblíqua."
+        }
+      ]
+    },
+    {
+      "id": "unintese-ncfjw-0-mro",
+      "split": "train",
+      "title": "Aprenda as letras de A a Z no Alfabeto Manual - Parte 2 | Escola de Libras (eLibras)",
+      "project": "Escola de Libras (eLibras), Uníntese",
+      "credits": {
+        "publicação": "Uníntese",
+        "apresentação": "Patrícia Santos",
+        "demonstração": "A pessoa que interpreta a introdução para Libras demonstra as letras. Seu nome não consta nos créditos exibidos nem na descrição consultada."
+      },
+      "page": "https://www.youtube.com/watch?v=nCFjW-0-mro",
+      "published": "2022-02-08",
+      "file": "data/alphabet/independent/unintese-download/unintese-alfabeto.mp4",
+      "sha256": "1a9128d1d661fc912505a531f0e84240e4d0d966f2876e74d2c357905f5e89c7",
+      "downloadFormats": "YouTube 298 (H.264, 1280 × 720, 59,94 fps) + 140-2 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=nCFjW-0-mro&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação da Uníntese indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letras P e Q em amarelo na faixa inferior durante cada demonstração.",
+      "windows": [
+        {
+          "label": "P",
+          "startMs": 78150,
+          "endMs": 79060,
+          "anchorMs": 78500,
+          "view": "Mão à frente do tronco em plano aberto, com visão dos dedos de lado."
+        },
+        {
+          "label": "Q",
+          "startMs": 81190,
+          "endMs": 82050,
+          "anchorMs": 81670,
+          "view": "Pulso fletido e mão oblíqua à direita anatômica."
+        }
+      ]
+    },
+    {
+      "id": "ifes-mfl8r4t36fe",
+      "split": "test",
+      "title": "Alfabeto em Libras",
+      "project": "Centro de Referência em Formação e em Educação a Distância (Cefor), Instituto Federal do Espírito Santo (Ifes)",
+      "credits": {
+        "sinalizante": "Edgar, identificado pelo primeiro nome na abertura",
+        "produção": "Cefor/Ifes"
+      },
+      "page": "https://www.youtube.com/watch?v=MFL8R4t36fE",
+      "published": "2020-07-15",
+      "file": "data/alphabet/independent/ifes-download/ifes-alfabeto.mp4",
+      "sha256": "e8306a310b059616a87fe150c30f93ff15ef8a7668d1e32b05cb405980be9f5e",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=MFL8R4t36fE&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Ifes Cefor indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "P e Q em branco, nos intervalos em que a mão está sustentada. Os trechos com X vermelho foram excluídos.",
+      "windows": [
+        {
+          "label": "P",
+          "startMs": 302900,
+          "endMs": 304580,
+          "anchorMs": 303720,
+          "view": "Vista oblíqua durante a primeira sustentação de P."
+        },
+        {
+          "label": "P",
+          "startMs": 313600,
+          "endMs": 314480,
+          "anchorMs": 314040,
+          "view": "Outra sustentação de P na mesma explicação."
+        },
+        {
+          "label": "Q",
+          "startMs": 323420,
+          "endMs": 324320,
+          "anchorMs": 323890,
+          "view": "Primeira sustentação de Q, com o cotovelo elevado."
+        },
+        {
+          "label": "Q",
+          "startMs": 334750,
+          "endMs": 335400,
+          "anchorMs": 335110,
+          "view": "Segunda sustentação de Q, após reaparecer a letra branca e antes de a outra mão se aproximar."
+        }
+      ]
+    }
+  ]
+}
