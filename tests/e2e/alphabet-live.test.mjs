@@ -56,6 +56,7 @@ test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra
   timeout: 35_000,
 }, async () => {
   const url = new URL('/#praticar', appUrl)
+  const target = letter === 'A' ? 'letter-b' : 'letter-a'
   assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
   await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
     await navigate(url.href)
@@ -69,11 +70,14 @@ test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra
     })()`)
     assert.equal(entries, 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ')
     await evaluate(`(() => {
+      const picker = document.querySelector('[data-signal]')
+      picker.value = ${JSON.stringify(target)}
+      picker.dispatchEvent(new Event('change'))
       document.querySelector('[data-stage="1"]').click()
       document.querySelector('[data-camera-toggle]').click()
     })()`, true)
     await waitUntil('document.querySelector("[data-live-character]").textContent === ' + JSON.stringify(letter), 18_000)
-    assert.equal(await evaluate('document.querySelector("[data-signal]").value'), 'letter-a')
+    assert.equal(await evaluate('document.querySelector("[data-signal]").value'), target)
     assert.equal(await evaluate('document.querySelector("[data-attempt]").hidden'), true)
   }, { videoFile })
 })
