@@ -37,7 +37,7 @@ export async function openAlphabetEngine() {
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
   const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256,
-    supplement, contrast, worldA } = await response.json()
+    supplement, contrast, worldA, worldQ, imageR } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
@@ -58,10 +58,17 @@ export async function openAlphabetEngine() {
     throw new TypeError('Manifesto da distinção de letras incompatível.')
   }
   const worldCandidates = ['A', 'Q', 'R']
-  if (worldA !== undefined && (!worldA || !agreementSha256 || worldCandidates.some(label => !labels.includes(label)) ||
-      worldA.preprocess !== 'hand-world-wrist-palm-v1' || !Number.isFinite(worldA.threshold) ||
-      !(worldA.threshold >= .5 && worldA.threshold <= 1) || !/^[a-f0-9]{64}$/u.test(worldA.modelSha256))) {
-    throw new TypeError('Manifesto do complemento 3D de A incompatível.')
+  const shapes = [
+    [worldA, worldCandidates, 'hand-world-wrist-palm-v1', 'alphabet-a-world.onnx'],
+    [worldQ, ['Q', 'N'], 'hand-world-wrist-palm-v1', 'alphabet-q-shape.onnx'],
+    [imageR, ['U', 'R'], 'hand-wrist-palm-v1', 'alphabet-r-shape.onnx'],
+  ]
+  for (const [shape, letters, reference] of shapes) {
+    if (shape !== undefined && (!shape || !agreementSha256 || letters.some(label => !labels.includes(label)) ||
+        shape.preprocess !== reference || !Number.isFinite(shape.threshold) ||
+        !(shape.threshold >= .5 && shape.threshold <= 1) || !/^[a-f0-9]{64}$/u.test(shape.modelSha256))) {
+      throw new TypeError('Manifesto da confirmação de forma do alfabeto incompatível.')
+    }
   }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
@@ -87,28 +94,31 @@ export async function openAlphabetEngine() {
   const recognizeTrajectory = trajectory ? createTrajectoryMatcher(trajectory) : null
   const legacyLetters = Object.keys(motion?.limits ?? {})
   const motionLetters = trajectory ? [...trajectoryLabels, 'J', 'Z', ...legacyLetters] : legacyLetters
-  const [bytes, checkBytes, supplementBytes, contrastBytes, worldBytes] = await Promise.all([
+  const [bytes, checkBytes, supplementBytes, contrastBytes, ...shapeBytes] = await Promise.all([
     verifiedBytes('models/alphabet.onnx', modelSha256),
     agreementSha256 ? verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null,
     supplement ? verifiedBytes('models/alphabet-supplement.onnx', supplement.modelSha256) : null,
     contrast ? verifiedBytes('models/alphabet-contrast.onnx', contrast.modelSha256) : null,
-    worldA ? verifiedBytes('models/alphabet-a-world.onnx', worldA.modelSha256) : null,
+    ...shapes.map(([shape, , , filename]) => shape ? verifiedBytes('models/' + filename, shape.modelSha256) : null),
   ])
   const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
   let verifier
   let refiner
   let contrastModel
-  let worldModel
+  const shapeModels = []
   try {
     if (checkBytes) verifier = await InferenceSession.create(checkBytes, { executionProviders: ['wasm'] })
     if (supplementBytes) refiner = await InferenceSession.create(supplementBytes, { executionProviders: ['wasm'] })
     if (contrastBytes) contrastModel = await InferenceSession.create(contrastBytes, { executionProviders: ['wasm'] })
-    if (worldBytes) worldModel = await InferenceSession.create(worldBytes, { executionProviders: ['wasm'] })
+    for (const asset of shapeBytes) {
+      shapeModels.push(asset ? await InferenceSession.create(asset, { executionProviders: ['wasm'] }) : null)
+    }
   } catch (error) {
     await Promise.allSettled([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release(),
-      worldModel?.release()])
+      ...shapeModels.map(model => model?.release())])
     throw error
   }
+  const [aModel, qModel, rModel] = shapeModels
   let pending = Promise.resolve()
 
   async function letterVote(model, input) {
@@ -121,13 +131,18 @@ export async function openAlphabetEngine() {
     return { label: labels[best], accepted: probability >= threshold }
   }
 
-  async function refinedLetter(letter, input) {
-    if (!contrastModel || letter !== contrast.from) return letter
-    const { scores } = await contrastModel.run({ hand: input })
+  async function confirmsShape(model, inputs, threshold) {
+    const { scores } = await model.run(inputs)
     if (scores?.data.length !== 1 || !scores.data.every(value => value >= 0 && value <= 1)) {
-      throw new TypeError('Saída da distinção de letras incompatível.')
+      throw new TypeError('Saída da confirmação de forma incompatível.')
     }
-    return scores.data[0] >= contrast.threshold ? contrast.to : letter
+    return scores.data[0] >= threshold
+  }
+
+  async function refinedLetter(letter, input) {
+    if (contrastModel && letter === contrast.from &&
+        await confirmsShape(contrastModel, { hand: input }, contrast.threshold)) return contrast.to
+    return letter
   }
 
   return {
@@ -138,9 +153,12 @@ export async function openAlphabetEngine() {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
         const first = await letterVote(session, input)
-        const checkWorld = worldModel && worldHand?.length === 21 && worldCandidates.includes(first.label)
-        const second = verifier && (first.accepted || checkWorld) ? await letterVote(verifier, input) : null
+        const hasWorld = worldHand?.length === 21
+        const checkA = aModel && hasWorld && worldCandidates.includes(first.label)
+        const checkQ = qModel && hasWorld && first.label === 'N'
+        const second = verifier && (first.accepted || checkA || checkQ) ? await letterVote(verifier, input) : null
         if (first.accepted && (!verifier || second.accepted && second.label === first.label)) {
+          if (rModel && first.label === 'U' && await confirmsShape(rModel, { hand: input }, imageR.threshold)) return 'R'
           return refinedLetter(first.label, input)
         }
         if (refiner) {
@@ -152,16 +170,18 @@ export async function openAlphabetEngine() {
           const best = scores.data.indexOf(Math.max(...scores.data))
           if (scores.data[best] >= supplement.threshold) return refinedLetter(supplement.labels[best], input)
         }
-        if (checkWorld && worldCandidates.includes(second.label)) {
+        const maybeA = checkA && worldCandidates.includes(second.label)
+        const maybeQ = checkQ && second.accepted && second.label === 'Q'
+        if (maybeA || maybeQ) {
           const world = letterFeatures(worldHand, 1)
           if (!world) return null
-          const { scores } = await worldModel.run({ world: new Tensor('float32', world, [1, features]) })
-          if (scores?.data.length !== 1 || !scores.data.every(value => value >= 0 && value <= 1)) {
-            throw new TypeError('Saída do complemento 3D de A incompatível.')
-          }
-          return scores.data[0] >= worldA.threshold ? 'A' : null
+          const inputWorld = { world: new Tensor('float32', world, [1, features]) }
+          const confirmed = await confirmsShape(maybeA ? aModel : qModel, inputWorld,
+            maybeA ? worldA.threshold : worldQ.threshold)
+          return confirmed ? (maybeA ? 'A' : 'Q') : null
         }
-        if (!alternateValues || !second || first.label !== 'N' || !['M', 'N'].includes(second.label)) return null
+        if (!alternateValues || !first.accepted || !second || first.label !== 'N' ||
+            !['M', 'N'].includes(second.label)) return null
         const alternate = new Tensor('float32', alternateValues, [1, features])
         for (const model of [session, verifier]) {
           const vote = await letterVote(model, alternate)
@@ -175,7 +195,7 @@ export async function openAlphabetEngine() {
     async close() {
       await pending
       await Promise.all([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release(),
-        worldModel?.release()])
+        ...shapeModels.map(model => model?.release())])
     },
   }
 }
