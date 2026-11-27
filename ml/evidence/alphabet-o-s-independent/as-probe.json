@@ -1,0 +1,436 @@
+{
+  "weights": {
+    "primary": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "verifier": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4"
+  },
+  "dataSha256": "a2995cb3af683a0bc65b14969e5b7675378aaaf8257e247392c3f08a9a04dbd6",
+  "referenceSha256": "d1b4e870933349b7a2e90f5c02fabf1e82f31f6a013c2435c3e4a4a164f05ede",
+  "inputSha256": [
+    "d1b4e870933349b7a2e90f5c02fabf1e82f31f6a013c2435c3e4a4a164f05ede",
+    "d67db7e71ec593ded05ead9f94f427c974ea93f9b1c18e82fcb05cd43ae0c085",
+    "f1c3d087c43462a3f4fd7cc47d8aca21ef723e7360038f257ddc5a235569e7dc",
+    "39f7d7f485633513fccaece48952de4870ff1c7a5ed27570cec561b7859e6509",
+    "de57a4ed58e9e7dbfbcc08d6bfca990e1ae6b84709fc8f08f2566ce2e2afbe39",
+    "99ac606f18ad72d27ccac1e8102eea8f80d73c5973b7bbccc1e7a895dfc329fb"
+  ],
+  "threshold": 0.95,
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "S",
+      "startMs": 33780,
+      "split": "train",
+      "observed": 17,
+      "oldA": 0,
+      "oldS": 17,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 15
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 15
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 15
+        }
+      }
+    },
+    {
+      "source": "1536677587",
+      "label": "S",
+      "startMs": 33570,
+      "split": "val",
+      "observed": 19,
+      "oldA": 0,
+      "oldS": 19,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 17
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 17
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 17
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "split": "test",
+      "observed": 11,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "label": "S",
+      "startMs": 33280,
+      "split": "test",
+      "observed": 14,
+      "oldA": 0,
+      "oldS": 14,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 12
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 12
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 12
+        }
+      }
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "S",
+      "startMs": 102680,
+      "split": "train",
+      "observed": 23,
+      "oldA": 0,
+      "oldS": 23,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 21
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 21
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 21
+        }
+      }
+    },
+    {
+      "source": "unesp-222981",
+      "label": "S",
+      "startMs": 101050,
+      "split": "test",
+      "observed": 24,
+      "oldA": 0,
+      "oldS": 24,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 22
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 22
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 22
+        }
+      }
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "S",
+      "startMs": 360220,
+      "split": "train",
+      "observed": 36,
+      "oldA": 0,
+      "oldS": 36,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 34
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 34
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 34
+        }
+      }
+    },
+    {
+      "source": "1527000916",
+      "label": "Z",
+      "startMs": 43820,
+      "split": "train",
+      "observed": 14,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "split": "val",
+      "observed": 20,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "split": "test",
+      "observed": 11,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "label": "Z",
+      "startMs": 43650,
+      "split": "test",
+      "observed": 30,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 2,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 1,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 2,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "split": "train",
+      "observed": 27,
+      "oldA": 4,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 6,
+          "changedA": 3,
+          "triplesS": 4
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 1,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 1,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "unesp-222981",
+      "label": "Z",
+      "startMs": 113560,
+      "split": "train",
+      "observed": 24,
+      "oldA": 0,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "A",
+      "startMs": 40500,
+      "split": "test",
+      "observed": 14,
+      "oldA": 14,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "S",
+      "startMs": 87380,
+      "split": "test",
+      "observed": 20,
+      "oldA": 4,
+      "oldS": 0,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 16,
+          "changedA": 0,
+          "triplesS": 14
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 16,
+          "changedA": 0,
+          "triplesS": 14
+        },
+        "eightMeasures": {
+          "addedS": 4,
+          "changedA": 0,
+          "triplesS": 0
+        }
+      }
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "S",
+      "startMs": 68340,
+      "split": "test",
+      "observed": 16,
+      "oldA": 0,
+      "oldS": 16,
+      "variants": {
+        "fourMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 14
+        },
+        "fourMeasuresWithVerifierS": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 14
+        },
+        "eightMeasures": {
+          "addedS": 0,
+          "changedA": 0,
+          "triplesS": 14
+        }
+      }
+    }
+  ],
+  "observedWindows": 128
+}

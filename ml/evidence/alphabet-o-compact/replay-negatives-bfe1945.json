@@ -1,0 +1,263 @@
+{
+  "build": {
+    "commit": "bfe194567ec9876c934b1e8b6089b3714b0cc9d0",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "bbe7a7d6d5211db99aa3bb59daffbf6faaae3e8a67eae9b490fb45bfd30bd1b2",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-o/negative-windows.json"
+  ],
+  "results": [
+    {
+      "source": "clad-repouso-01-mao-rosto",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 146,
+      "framesWithHand": 81,
+      "lastHandAfterVideoMs": 3936
+    },
+    {
+      "source": "clad-repouso-02-oclusao-rosto",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 129,
+      "framesWithHand": 67,
+      "lastHandAfterVideoMs": 3981
+    },
+    {
+      "source": "clad-repouso-03-celular",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 991
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1406
+        }
+      ],
+      "workerFrames": 147,
+      "framesWithHand": 14,
+      "lastHandAfterVideoMs": 2979
+    },
+    {
+      "source": "clad-movimento-01-headset",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 1953
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 3209
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 3591
+        }
+      ],
+      "workerFrames": 149,
+      "framesWithHand": 82,
+      "lastHandAfterVideoMs": 3992
+    },
+    {
+      "source": "clad-movimento-02-usb",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 139,
+      "framesWithHand": 66,
+      "lastHandAfterVideoMs": 4012
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1457
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2263
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3805
+        }
+      ],
+      "workerFrames": 143,
+      "framesWithHand": 75,
+      "lastHandAfterVideoMs": 4019
+    },
+    {
+      "source": "ufsm-cores-baixa",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1600,
+      "readings": [],
+      "workerFrames": 113,
+      "framesWithHand": 1,
+      "lastHandAfterVideoMs": 1598
+    },
+    {
+      "source": "ufsm-vermelho",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1400,
+      "readings": [],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1406
+    },
+    {
+      "source": "ufsm-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1600,
+      "readings": [],
+      "workerFrames": 100,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1410
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 239
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 980
+        }
+      ],
+      "workerFrames": 97,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1326
+    },
+    {
+      "source": "cecierj-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1550,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 756
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1576
+    },
+    {
+      "source": "cecierj-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 616
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1635
+    },
+    {
+      "source": "cecierj-vermelho",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [],
+      "workerFrames": 104,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1607
+    },
+    {
+      "source": "fiocruz-dois",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1900,
+      "readings": [],
+      "workerFrames": 111,
+      "framesWithHand": 45,
+      "lastHandAfterVideoMs": 1909
+    },
+    {
+      "source": "fiocruz-tres",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 2500,
+      "readings": [],
+      "workerFrames": 121,
+      "framesWithHand": 56,
+      "lastHandAfterVideoMs": 2488
+    },
+    {
+      "source": "fiocruz-seis",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 3200,
+      "readings": [],
+      "workerFrames": 112,
+      "framesWithHand": 47,
+      "lastHandAfterVideoMs": 3143
+    },
+    {
+      "source": "cecierj-rosa-marrom",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 1000
+    },
+    {
+      "source": "fiocruz-dois-tres",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1500,
+      "readings": [],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1479
+    },
+    {
+      "source": "fiocruz-sete-oito",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 2150,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 1160
+        }
+      ],
+      "workerFrames": 110,
+      "framesWithHand": 46,
+      "lastHandAfterVideoMs": 2159
+    }
+  ]
+}

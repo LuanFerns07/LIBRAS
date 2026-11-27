@@ -97,7 +97,20 @@ mkdir -p data/alphabet/institutional
   data/models/alphabet-n-candidate data/models/alphabet-ae-candidate \
   --letters E --threshold 0.95 --out data/models/alphabet-e-supplement
 .venv/bin/python -m ml.alphabet.refine_o data/models/alphabet-e-supplement \
-  --reference data/alphabet/static-video-a-e-s-o.json --out data/models/alphabet-live
+  --reference data/alphabet/static-video-a-e-s-o.json --out data/models/alphabet-o-candidate
+mkdir -p data/alphabet/o-compacto
+.venv/bin/python -m ml.alphabet.extract_motion --manifest ml/alphabet/ifes-static-windows.json \
+  --out data/alphabet/o-compacto/ifes-frames.json
+.venv/bin/python -m ml.alphabet.merge_reference \
+  data/alphabet/static-video-final.json data/alphabet/institutional/static-n-m-u.json \
+  data/alphabet/institutional/static-a-e-s-o.json data/alphabet/o-compacto/ifes-frames.json \
+  --train-source cecierj-13757 --train-source ifes-mfl8r4t36fe \
+  --out data/alphabet/o-compacto/referencia-ifes.json
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/o-compacto/referencia-ifes.json \
+  --geometry --device cuda --out data/models/alphabet-o-compact-verifier
+.venv/bin/python -m ml.alphabet.refine_o data/models/alphabet-o-candidate \
+  --reference data/alphabet/o-compacto/referencia-ifes.json \
+  --geometry-verifier data/models/alphabet-o-compact-verifier --out data/models/alphabet-live
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
 node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
@@ -106,6 +119,8 @@ python3 data/releases/librasia-alfabeto-ao-vivo/iniciar.py --porta 4177
 ```
 
 Os vídeos de origem, os pontos extraídos e os modelos ficam no ambiente local. Os manifestos documentam os créditos dos autores, os intervalos rotulados e os hashes em cada partição. [Janelas estáticas](../ml/alphabet/ufsm-static-windows.json) · [Janelas de movimento](../ml/alphabet/ufsm-temporal-windows.json)
+
+A gravação identificada no manifesto do Ifes entra no retreino de O compacto. Siga os formatos listados no manifesto e confira o SHA-256 antes de extrair os pontos. [Download e créditos do Ifes](../ml/evidence/alphabet-o-independent/README.md)
 
 ### Cobertura e verificação
 
@@ -195,3 +210,9 @@ for id in "${ids[@]}"; do args+=(--source "$id"); done
 node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
   --manifest "$manifest" "${args[@]}" --workers 2
 ```
+
+### O compacto com referências do Ifes
+
+A compilação `bfe1945` usa as demonstrações do Ifes para retreinar o classificador de forma e um novo verificador geométrico de O. O modelo novo só acrescenta O quando as redes principais e o complemento anterior ficam sem leitura. Os dois limiares continuam em 0,80 para a confirmação geométrica e 0,95 para a forma. A validação manteve os 70 O do LibraSign e os 16 O em vídeo aceitos pelo complemento anterior e registrou zero novos O em outras letras. A exportação conferiu a paridade com PyTorch e regenerou o complemento anterior com o mesmo SHA-256. [Verificador geométrico](../ml/evidence/alphabet-o-compact/verifier-training.json) · [Exportação e validação](../ml/evidence/alphabet-o-compact/training.json)
+
+No Chromium, a nova compilação exibiu a letra esperada em 57 das 60 janelas. As duas demonstrações do Ifes usadas no treino e a janela da Uníntese, mantida só para medir a regressão, passaram a exibir O. O da gravação reservada de Uéslei Paterno continuou a resultar em E e S da Unicentro exibiu S. A da UFSM e S da Uníntese continuam pendentes. O apareceu nos mesmos dois recortes entre os 19 controles fora do alfabeto. [Resultado por janela](../ml/evidence/alphabet-o-compact/replay-bfe1945.json) · [Controles fora do alfabeto](../ml/evidence/alphabet-o-compact/replay-negatives-bfe1945.json) · [Gravações reservadas](../ml/evidence/alphabet-o-s-independent/README.md)

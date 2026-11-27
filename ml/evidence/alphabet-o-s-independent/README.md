@@ -41,3 +41,21 @@ mkdir -p data/evidence/alphabet-o-s-independent
   --manifest ml/alphabet/institutional-static-o-s-holdout.json \
   --out data/evidence/alphabet-o-s-independent/static-frames.json
 ```
+## Replay das gravações reservadas
+
+As compilações `99f0e90` e `bfe1945` exibiram E na janela de O de Uéslei Paterno e S na janela da Unicentro. No O de Uéslei Paterno, os dois classificadores principais concordaram em E nos 16 quadros processados na extração em CPU. O complemento de O só atua depois de uma abstenção. O caso exige avaliar a distinção entre E e O quando os classificadores principais já aceitam E. [Compilação anterior](replay-99f0e90.json) · [Compilação com O compacto](../alphabet-o-compact/replay-bfe1945.json)
+
+## Distinção de A e S nos pontos
+
+A sonda treinou regressões logísticas para distinguir A de S a partir da posição lateral e longitudinal da ponta do polegar em relação à palma, sua distância à base do dedo médio e a abertura do polegar. Uma segunda versão acrescentou a flexão relativa dos quatro outros dedos. Ambas usaram apenas os blocos de treino do LibraSign e os recortes de treino da UFSM, do Cecierj e do Ifes. A análise só considera a forma de S quando as duas redes principais preferem alguma letra do par A/S. [Implementação da sonda](../../alphabet/probe_as.py)
+
+Nos 20 quadros de S da Uníntese, a regra com quatro medidas acrescentou 16 votos de S, com 14 trios consecutivos. A regra com oito medidas acrescentou quatro votos, sem trio. A regra com quatro medidas também formou quatro trios de S em Z do Cecierj. Exigir a confirmação de S pelo verificador eliminou esses trios e conservou os 16 votos de S da Uníntese. As quatro leituras por quadro já aceitas como A na mesma janela continuaram presentes. O ensaio usa os pontos extraídos e ainda precisa de replay na câmera para avaliar a sucessão de letras. [Resultado e hashes](as-probe.json)
+
+```bash
+reference=data/alphabet/o-compacto/referencia-ifes.json
+.venv/bin/python -m ml.alphabet.probe_as --reference "$reference" "$reference" \
+  data/alphabet/motion-final.json data/alphabet/institutional/motion-frames.json \
+  data/evidence/alphabet-o-compact/unintese-static-frames.json \
+  data/evidence/alphabet-o-s-independent/static-frames.json \
+  data/evidence/alphabet-a-e-independent/ufac-static-frames.json
+```
