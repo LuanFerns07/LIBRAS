@@ -61,3 +61,9 @@ OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extrac
 .venv/bin/python -m ml.alphabet.probe_qr data/releases/librasia-n-confirmacao/site/models \
   data/alphabet/a-oculto/referencia-3d.json data/alphabet/q-r-diagnostico/mnuq-3d.json
 ```
+
+## Compilação experimental no Chromium
+
+A compilação experimental `c8193b8` exporta os dois complementos em ONNX e aplica a confirmação apenas às saídas elegíveis. O Chromium usou um recorte de Q e um de R da mesma gravação de Tel baixinha. Cada recorte foi reproduzido três vezes com câmera virtual e 28 quadros com mão em cada reprodução. O painel exibiu somente a letra esperada nos seis replays. Os testes automatizados também verificaram Q e R na Área livre e em Praticar, a troca M → N na Unesp e o movimento de duas mãos na sobreposição. [Manifesto das repetições](tel-qr-repetido.json) · [Replays e hashes](tel-qr-c8193b8.json)
+
+O ensaio verifica esses dois recortes. A adoção na prévia local depende dos controles com outras pessoas e de U em perfil.
