@@ -19,7 +19,7 @@ A Escola de Libras da Uníntese publicou o material em 8 de fevereiro de 2022. A
 
 ## Extração
 
-O Hand Landmarker em CPU encontrou a mão em todos os quadros amostrados, com intervalo de 65 ms. Foram 14 quadros de A, 14 de C, 11 de E, 14 de O e 20 de S. O ensaio desta fonte termina na extração. Os hashes da mídia, da anotação, do modelo de mãos e dos pontos estão no [registro](unintese-extraction.json).
+O Hand Landmarker em CPU encontrou a mão em todos os quadros amostrados, com intervalo de 65 ms. Foram 14 quadros de A, 14 de C, 11 de E, 14 de O e 20 de S. A extração foi registrada antes do replay. O registro inclui os hashes da mídia, da anotação, do modelo de mãos e dos pontos. [Resultado da extração](unintese-extraction.json)
 
 ```bash
 mkdir -p data/alphabet/independent/unintese-download data/evidence/alphabet-o-compact
@@ -31,3 +31,7 @@ yt-dlp --no-playlist --no-mtime -f '298+140-2' --merge-output-format mp4 \
   --manifest ml/alphabet/unintese-static-windows.json \
   --out data/evidence/alphabet-o-compact/unintese-static-frames.json
 ```
+
+## Replay com dois modelos congelados
+
+A gravação ficou fora do treino e da escolha do complemento de O. No Chromium, as duas compilações mostraram A, C e E nas janelas correspondentes. Nas duas, S produziu A, e O ficou sem leitura, com 22 quadros com mão em cada replay. O controle C também mostrou Ç por um instante na compilação anterior. A rejeição de O foi reproduzida em outra pessoa com uma configuração compacta semelhante à do Ifes. [Compilação anterior](replay-0c0da0f.json) · [Compilação com o complemento](replay-99f0e90.json)

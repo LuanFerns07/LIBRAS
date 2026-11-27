@@ -183,6 +183,8 @@ Na compilação `99f0e90`, 50 das 53 janelas rotuladas mostraram a letra esperad
 
 O apareceu nos mesmos dois de 19 recortes de atividades ou sinais fora do alfabeto nas duas versões. As duas versões também exibiram O no trecho em que a aula do Ifes demonstra uma execução que marca como incorreta. Na extração dos quadros originais do Ifes, a rede principal preferiu F ou I nos dois recortes positivos de O. A forma compacta passou pelo complemento em dois quadros da primeira janela e em nenhum da segunda. A leitura pela webcam física e a cobertura de outras configurações de O seguem pendentes. [Comparação dos controles](../ml/evidence/alphabet-o/replay-negatives.json)
 
+Em uma gravação posterior reservada da Uníntese, O com os dedos mais fechados ficou sem leitura nas duas compilações, com a mão rastreada. As duas compilações mostraram A, C e E nas janelas correspondentes e leram A na janela rotulada S. [Comparação e referências do gesto](../ml/evidence/alphabet-o-compact/README.md)
+
 Para repetir a comparação de negativos, prepare os recortes CLAD e didáticos no caminho `data/isolated-negative-audit` e sirva cada compilação em uma porta própria. O roteiro confere os hashes dos recortes antes de ativar a câmera virtual no Chromium. [Preparação dos recortes](negativos.md#reprodução-dos-novos-recortes) · [Manifesto das janelas](../ml/evidence/alphabet-o/negative-windows.json)
 
 ```bash
