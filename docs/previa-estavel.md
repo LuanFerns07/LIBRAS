@@ -31,6 +31,8 @@ python3 "$destino/iniciar.py" --verificar
 
 O empacotador instala as dependências e busca as versões fixadas do MediaPipe quando necessário. Para reutilizar as cópias locais dos dois extratores, acrescente `LIBRASIA_HOLISTIC_FILE="$origem/runtime/holistic_landmarker.task"` e `LIBRASIA_HAND_FILE="$origem/runtime/hand_landmarker.task"` ao comando de compilação. Os pesos do classificador ficam na cópia local, e o Git guarda as somas. [Somas dos modelos](../ml/evidence/demonstracao-modelos.sha256) · [Treinamento e exportação](avaliacao.md)
 
+Em 27/11/2026, a compilação `aea5303` partiu de um checkout limpo. Os arquivos servidos da versão anterior foram reproduzidos byte a byte, com a atualização do identificador em `site/commit.txt`. O pacote verificou 29 arquivos, e uma cópia com o ONNX alterado recusou a inicialização. Os testes registraram a abertura e a liberação da webcam Acer e a conclusão da síntese local em pt-BR. O roteiro integrado usou um Y4M refeito dos MP4 de origem, com SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. Os logs ficam em `data/evidence/demonstracao`, com os nomes `build-aea5303-limpo.log`, `fisico-aea5303-limpo.log` e `roteiro-aea5303-limpo.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
+
 ## Pontos das mãos ao vivo
 
 Abra **http://127.0.0.1:4175/#area-livre** no Chromium, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Acompanhe os pontos antes, durante e depois de iniciar uma tentativa. Durante a captura, desmarque e marque a opção para verificar a sobreposição.

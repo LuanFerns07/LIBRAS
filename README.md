@@ -2,7 +2,7 @@
 
 O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.
 
-O protótipo web reúne prática de Libras, alfabeto manual e tradução nos dois sentidos. O [roadmap](ROADMAP_LIBRASIA.md) registra a implementação e o aceite de cada fluxo.
+O protótipo web reúne prática de Libras, alfabeto manual, demonstração de frases do catálogo, soletração de nomes e transcrição de sinais isolados. O roadmap registra a implementação e o aceite de cada fluxo. [Roadmap](ROADMAP_LIBRASIA.md)
 
 ![Painel de status dos marcos do LibrasIA. A versão em texto está no roadmap.](assets/status.svg)
 
@@ -50,7 +50,7 @@ npm run setup:model -- data/models/isolated-v1
 
 Os pontos da câmera são processados na própria página. Os sinais e as dicas da lição estão em revisão linguística. Na área livre, o modo experimental de sequência delimita os sinais quando a pessoa abaixa as mãos entre eles.
 
-O modelo inicial treinado na RTX 4060 reconhece candidatos a Cinco, Espelho e Amarelo. No teste reservado, teve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. A versão permanece experimental. [Avaliação e limites](docs/avaliacao.md)
+Na demonstração, o modelo combinado reconhece Cinco, Espelho, Amarelo e Aluno. Na partição reservada do MINDS-Libras, acertou 32 de 33 clipes dos sinais suportados e aceitou um de 18 negativos. Em 19 recortes externos, aceitou seis negativos. Entre eles estão uma transição entre numerais e um movimento cotidiano. A avaliação na webcam com participantes independentes e a revisão das dicas continuam pendentes. [Avaliação do modelo combinado](docs/avaliacao.md#modelo-combinado-na-partição-reservada) · [Recortes externos](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
 
 O estudo de sinalização contínua usa dados de frases e anotações temporais em experimentos locais de pesquisa. [Método e resultados](docs/sinalizacao-continua.md)
 
