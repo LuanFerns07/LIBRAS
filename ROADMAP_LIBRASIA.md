@@ -266,7 +266,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | **M8 · Aprendizagem e engajamento** | Pronto | Comparações no avatar, revisão por tentativas e retomada do sinal já estudado. A ordem da revisão e a persistência passaram nos testes. O piloto com pessoas fica nas pendências. |
 | **M9 · Cobertura e variantes** | Pronto | Aluno no catálogo avaliado, comparação da forma histórica de Fortaleza no avatar e apresentação com saudação. A revisão com pessoas e o reteste de variantes ficam nas pendências. |
 | **M10 · Sinalização contínua** | A testar | Modo experimental local com fronteiras, glosas, tradução e confirmação. Os controles com gravações passaram. Faltam dados naturais anotados com cobertura para medir o reconhecimento e revisar o sentido. |
-| **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |
+| **M11 · Web móvel na Vercel** | A testar | Toque, telas estreitas e rotação testados no Chromium local. A publicação HTTPS e os testes em Android e iPhone reais dependem de acesso e autorização. |
 
 ### M8 e M9 · Checklist de conteúdo e aprendizagem
 
@@ -301,9 +301,8 @@ A medição em sequências naturais anotadas, a validação na webcam e as condi
 
 ### M11 · Checklist de publicação e compatibilidade
 
-- [ ] **Git e ambiente.** Configurar o build da Vercel, a prévia e a versão de produção. Verificar o carregamento do modelo, dos arquivos WebAssembly e do avatar no ambiente publicado. [Deploy a partir de Git na Vercel](https://vercel.com/docs/git)
 - [x] Adaptar o layout para toque e telas estreitas. Verificar o encaixe em 390 px, a recuperação após voltar à aba e os avisos de câmera e voz na prévia local do Chromium.
 - [x] Medir no Chromium do PC o tempo da conclusão à decisão, da extração por quadro e do primeiro carregamento, com o avatar em reprodução nas tentativas gravadas. Conferir as mensagens e a recuperação de câmera e voz no PC. [Latência da prática guiada](docs/roteiro-validacao.md#latência-da-prática-guiada-no-pc) · [Câmera e voz no pacote](docs/previa-estavel.md#demonstração-atual-no-pc)
-- [ ] Medir a latência da câmera à decisão com o avatar aberto em Android e iPhone de referência e conferir as mensagens e a recuperação de câmera e voz. Completar a medição no PC com pessoas sinalizando na webcam.
-- [ ] **Revisão independente.** Testar a prévia no PC e em pelo menos um Android com Chrome e um iPhone com Safari. Confirmar permissão de câmera, reconhecimento, animação 3D, soletração, transcrição editável e voz gratuita em português brasileiro. Registrar aparelhos, navegadores e limitações.
-- [ ] **Aceite.** Repetir os fluxos essenciais na URL de produção e acrescentar o link ao README. Manter a versão web como acesso comum entre desktop e celular.
+- [x] Percorrer as cinco telas por toque em 320 px no Chromium. Ativar a câmera, girar a tela com a trilha em andamento e liberar a captura ao sair. Conferir os tipos de conteúdo e os cabeçalhos dos ativos na prévia local. [Reteste local de M11](docs/publicacao.md#verificação-local-de-m11)
+
+As etapas de publicação e aceite em aparelhos reais estão no [arquivo de pendências futuras](docs/pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação).

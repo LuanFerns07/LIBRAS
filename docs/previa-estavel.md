@@ -71,7 +71,7 @@ python3 data/releases/librasia-1.1.0/iniciar.py --porta 4203
 Na porta 4205, a prévia inclui a comparação de sinais na prática, a retomada de exercícios e a apresentação de nome com saudação no tradutor. [Abrir Praticar](http://127.0.0.1:4205/#praticar) · [Abrir Tradutor](http://127.0.0.1:4205/#tradutor)
 
 ~~~bash
-python3 data/releases/librasia-m9/iniciar.py --porta 4205
+python3 data/releases/librasia-m11/iniciar.py --porta 4205
 ~~~
 
 ## Prévia v0.1.0-preview.1

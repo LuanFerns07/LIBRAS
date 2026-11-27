@@ -341,9 +341,41 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     }
 
     await page('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 })
-    const touchPoint = await evaluate('(() => { const rect = document.querySelector("[data-page=alfabeto]").getBoundingClientRect(); return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }; })()')
-    await page('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touchPoint] })
-    await page('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+    const tap = async selector => {
+      const point = await evaluate(`(() => {
+        const control = document.querySelector(${JSON.stringify(selector)})
+        control.scrollIntoView({ block: 'center' })
+        const rect = control.getBoundingClientRect()
+        return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 }
+      })()`)
+      await page('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [point] })
+      await page('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+    }
+    const fit = width => evaluate(`document.documentElement.clientWidth === ${width} && document.documentElement.scrollWidth <= ${width}`)
+    await tap('[data-page="alfabeto"]')
     await waitUntil('document.querySelector("main h1")?.textContent === "Alfabeto manual"')
+    assert.equal(await fit(390), true)
+
+    await page('Emulation.setDeviceMetricsOverride', { width: 320, height: 680, deviceScaleFactor: 1, mobile: true })
+    for (const route of ['praticar', 'alfabeto', 'tradutor', 'saiba-mais', 'area-livre']) {
+      await tap(`[data-page="${route}"]`)
+      await waitUntil('document.querySelector("[aria-current=page]")?.dataset.page === ' + JSON.stringify(route))
+      assert.equal(await fit(320), true, route)
+    }
+    await tap('[data-camera-toggle]')
+    await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
+    await evaluate('window.touchTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
+    await page('Emulation.setDeviceMetricsOverride', {
+      width: 840, height: 390, deviceScaleFactor: 1, mobile: true,
+      screenOrientation: { type: 'landscapePrimary', angle: 90 },
+    })
+    assert.equal(await fit(840), true)
+    assert.equal(await evaluate(`(() => {
+      const [track] = document.querySelector('video').srcObject.getVideoTracks()
+      return track === window.touchTrack && track.readyState === 'live'
+    })()`), true)
+    await tap('[data-page="saiba-mais"]')
+    await waitUntil('window.touchTrack.readyState === "ended"')
+    context.diagnostic('Toque em 390 e 320 px, rotação com a câmera ativa e liberação da trilha passaram.')
   }, { fakeCamera: !physical, videoFile: demoVideo })
 })
