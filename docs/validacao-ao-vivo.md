@@ -39,15 +39,18 @@ Para uma avaliação independente, mantenha a referência humana separada da dec
 
 ### Medir no Chromium
 
-Depois que a tentativa mostrar sua resposta, leia os dados da medição no console da aba do LibrasIA, antes de iniciar a próxima tentativa.
+Depois que a tentativa mostrar sua resposta, use o comando abaixo no console da aba do LibrasIA para copiar a medição. Cole o conteúdo em **JSON da medição no Chromium** na ficha. Faça isso antes de iniciar a próxima tentativa.
 
 ~~~js
-JSON.parse(document.querySelector('[data-capture-status]').dataset.timing ?? 'null')
+const measurement = document.querySelector('[data-capture-status]').dataset.timing
+if (measurement) copy(measurement)
 ~~~
 
-Quando `trigger` for `manual`, copie `decisionMs` para a ficha e selecione o método instrumentado. É o intervalo entre acionar **Concluir tentativa** e atualizar a decisão. Use as tentativas manuais com o avatar em reprodução para o critério de latência da lição. `initialLoadMs` mede o carregamento inicial dos modelos na primeira tentativa e fica vazio nas tentativas seguintes. `extractionMs` contém as durações por quadro processado. Guarde esses tempos junto ao código da tentativa para a análise.
+O JSON guarda três medidas. `decisionMs` mede o intervalo entre concluir e exibir a decisão. `initialLoadMs` mede o carregamento inicial do reconhecedor na primeira tentativa da captura. `extractionMs` contém uma duração por quadro processado. Para o critério de latência da lição, use as tentativas manuais com o avatar em reprodução. O resumo de latência usa as conclusões manuais. Carregamento e extração também são registrados em tentativas encerradas automaticamente.
 
-Copie `classifierCalls` para **Chamadas ao classificador**. Zero indica que a tentativa terminou antes da classificação, como num quadro sem mãos. Um ou mais indica quantas vezes o classificador de sinais foi chamado, inclusive quando o resultado ficou inconclusivo. Nos modos de sequência, o valor soma as chamadas de todos os trechos analisados. Se o valor estiver ausente ou for `null`, deixe o campo em branco. A medição da última tentativa fica em memória até o próximo estado da captura.
+O valor `classifierCalls` acompanha a medição. Zero indica que a tentativa terminou antes da classificação, como num quadro sem mãos. Um ou mais indica quantas vezes o classificador de sinais foi chamado, inclusive quando o resultado ficou inconclusivo. Nos modos de sequência, o valor soma as chamadas de todos os trechos analisados. A medição da última tentativa fica em memória até o próximo estado da captura.
+
+Com o campo do JSON vazio, a ficha permite anotar manualmente as chamadas ao classificador, a latência e o método usado para obtê-la. Deixe em branco os campos de valores ausentes.
 
 ## Exportar
 
@@ -67,6 +70,8 @@ Use o manifesto exato da sessão e passe os JSONs exportados no mesmo comando. U
 
 O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. Em `classifierReachByCondition`, cada cenário da Área livre com referência definida tem contagens de tentativas que chegaram ao classificador (`reached`), pararam antes dele (`notReached`) e ficaram sem medição (`unobserved`). As fichas anteriores entram nesta última contagem. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
 
+Em `timingByEnvironment`, cada fluxo mostra contagem, mediana e p95 para o tempo de decisão, o carregamento inicial (`initialLoad`) e a extração (`extraction`). Cada tentativa contribui com no máximo uma medida de decisão e uma de carregamento. As contagens de extração correspondem aos quadros processados. Fichas com apenas latência continuam contribuindo para o resumo do tempo de decisão.
+
 ## Verificação das chamadas no Chromium
 
 No pacote `38a8ef8`, os controles usaram gravações locais como câmera do Chromium e o classificador combinado de SHA-256 `a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63`. O campo da ficha preservou zero na exportação. O analisador separou tentativas com e sem classificação e aceitou fichas anteriores, nas quais a medição fica desconhecida.
@@ -81,6 +86,10 @@ No pacote `38a8ef8`, os controles usaram gravações locais como câmera do Chro
 | Amarelo com os quadros invertidos em Praticar | 1 | Dica sobre a trajetória do indicador |
 
 Os relatórios individuais ficam em `data/evidence/demonstracao/classificador-38a8ef8-*.json`. O JSON da ficha foi conferido com dados de teste. A coleta dos cenários com pessoas independentes na webcam continua na checklist. [Origem dos controles gravados](regressao-area-livre.md#reproduzir-localmente) · [Par com pausa no modo contínuo](sinalizacao-continua.md#pares-de-sinais-do-catálogo-no-chromium) · [Controle de trajetória](roteiro-validacao.md#dica-de-trajetória-de-amarelo)
+
+## Verificação da importação dos tempos
+
+No pacote `04353d3`, o Chromium capturou um vídeo preto e registrou uma decisão manual, uma medição de carga inicial, 40 tempos de extração e zero chamadas ao classificador. A ficha local aceitou o JSON obtido da tentativa e exportou os valores. A execução do analisador com uma ficha de teste confirmou as contagens e a mediana e p95 por medida. Os registros locais são `tempos-04353d3-sem-maos.json`, `ficha-tempos-04353d3.log` e `fixture-resumo-tempos-04353d3.json`, em `data/evidence/demonstracao/`. [Teste no Chromium](../tests/e2e/validation.test.mjs) · [Teste do analisador](../ml/tests/test_live_review.py)
 
 ## Teste da lógica
 

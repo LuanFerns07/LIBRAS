@@ -10,7 +10,7 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote `38a8ef8` distingue tentativas que chegam ao classificador das que terminam sem pontos suficientes. Abra a ficha de validação em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão compilada do avatar e as somas dos arquivos do classificador. A ficha exporta o JSON localmente. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Reteste da medição](validacao-ao-vivo.md#verificação-das-chamadas-no-chromium)
+O pacote `04353d3` permite copiar os tempos de decisão, carregamento e extração para a ficha de validação. Abra a ficha em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão compilada do avatar e as somas dos arquivos do classificador. A ficha exporta o JSON localmente. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Reteste da importação](validacao-ao-vivo.md#verificação-da-importação-dos-tempos)
 
 No pacote `180711c`, o reteste no Chromium percorreu as seis etapas do roteiro com vídeos gravados e verificou o encaixe e a retomada dos pontos das duas mãos. Em ensaios separados, a webcam Acer foi aberta e liberada e a síntese local em pt-BR chegou ao fim. O aceite com participantes na webcam e a compreensão do áudio continuam pendentes. Os logs ficam em `data/evidence/demonstracao`, nos arquivos `roteiro-180711c-reteste.log`, `pontos-180711c.log`, `fisico-180711c.log` e `ficha-validacao-180711c.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Teste dos pontos](teste-pontos-ao-vivo.md)
 
