@@ -78,7 +78,24 @@ mkdir -p data/alphabet/institutional
 .venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-n-m-u.json \
   --geometry --device cuda --out data/models/alphabet-n-geometry
 .venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-n-coordinate \
-  --check data/models/alphabet-n-geometry --reference data/alphabet/static-video-n-m-u.json
+  --check data/models/alphabet-n-geometry --reference data/alphabet/static-video-n-m-u.json \
+  --out data/models/alphabet-n-candidate
+.venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/institutional-static-a-e-s-o.json --out data/alphabet/institutional/static-a-e-s-o.json
+.venv/bin/python -m ml.alphabet.merge_reference \
+  data/alphabet/static-video-final.json data/alphabet/institutional/static-n-m-u.json \
+  data/alphabet/institutional/static-a-e-s-o.json \
+  --train-source cecierj-13757 --out data/alphabet/static-video-a-e-s-o.json
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-a-e-s-o.json \
+  --device cuda --out data/models/alphabet-ae-coordinate
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-a-e-s-o.json \
+  --geometry --device cuda --out data/models/alphabet-ae-geometry
+.venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-ae-coordinate \
+  --check data/models/alphabet-ae-geometry --reference data/alphabet/static-video-a-e-s-o.json \
+  --out data/models/alphabet-ae-candidate
+.venv/bin/python -m ml.alphabet.supplement \
+  data/models/alphabet-n-candidate data/models/alphabet-ae-candidate \
+  --letters E --threshold 0.95 --out data/models/alphabet-live
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
 node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
@@ -122,4 +139,6 @@ node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
 
 O leitor temporal de X passou a exigir separação sustentada entre a ponta do indicador e as pontas vizinhas durante a parte ativa do movimento. No Chromium, as cinco janelas rotuladas de X exibiram X e nenhuma das cinco janelas rotuladas de A exibiu X. Quatro exibiram A. O A da terceira aula da UFSM ficou sem leitura. [Replay em cinco aulas](../ml/evidence/alphabet-a-e-s-o/replay-a-x.json)
 
-Com o classificador estático da prévia do retreino de N, as oito janelas novas de A, E, O e S tiveram seis acertos e duas rejeições, E do Cecierj e O da Unesp. Um candidato acrescentou ao treino os quatro recortes do Cecierj e preservou os da Unesp fora do ajuste estático. No replay das duas aulas institucionais, o candidato mostrou a letra esperada nas 14 janelas, incluindo M, N e U. Na terceira aula da UFSM, recuperou E (12/12 quadros no modelo estático) e perdeu R (0/15). O classificador estático da prévia permanece na versão que reconheceu R. [Janelas de A, E, O e S](../ml/alphabet/institutional-static-a-e-s-o.json) · [Replays do candidato](../ml/evidence/alphabet-a-e-s-o/replay-candidate.json)
+Com o classificador estático da prévia do retreino de N, as oito janelas novas de A, E, O e S tiveram seis acertos e duas rejeições, E do Cecierj e O da Unesp. Um candidato acrescentou ao treino os quatro recortes do Cecierj e preservou os da Unesp fora do ajuste estático. No replay das duas aulas institucionais, o candidato mostrou a letra esperada nas 14 janelas, incluindo M, N e U. Na terceira aula da UFSM, recuperou E (12/12 quadros no modelo estático) e perdeu R (0/15). [Janelas de A, E, O e S](../ml/alphabet/institutional-static-a-e-s-o.json) · [Replays do candidato](../ml/evidence/alphabet-a-e-s-o/replay-candidate.json)
+
+A prévia consulta as redes do candidato apenas para recuperar E em quadros em que as redes originais se abstêm. Para recomendar E, a menor probabilidade das duas redes candidatas precisa chegar a 0,95. A confirmação da letra continua exigindo três leituras seguidas. As duas redes originais continuam decidindo seus aceites com o limiar 0,80. O complemento roda no dispositivo no mesmo modo ao vivo de Praticar e da Área livre.

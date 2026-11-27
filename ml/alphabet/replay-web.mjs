@@ -120,9 +120,9 @@ async function buildIdentity() {
   }
   const commit = (await release.text()).trim()
   if (!/^[a-f0-9]{40}$/u.test(commit)) throw new Error('O identificador da compilação é inválido.')
-  const { modelSha256, agreementSha256 } = await staticModel.json()
+  const { modelSha256, agreementSha256, supplement } = await staticModel.json()
   const motionSha256 = createHash('sha256').update(Buffer.from(await temporalModel.arrayBuffer())).digest('hex')
-  return { commit, modelSha256, agreementSha256, motionSha256 }
+  return { commit, modelSha256, agreementSha256, supplementSha256: supplement?.modelSha256, motionSha256 }
 }
 
 const build = await buildIdentity()

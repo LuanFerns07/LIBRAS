@@ -54,9 +54,11 @@ alfabeto="${LIBRASIA_ALFABETO_MODELO:-data/models/alphabet-live}"
 if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; then
   mkdir -p "$previa/public/models"
   cp "$alfabeto/"{alphabet.json,alphabet.onnx} "$previa/public/models/"
-  if [[ -f "$alfabeto/alphabet-check.onnx" ]]; then
-    cp "$alfabeto/alphabet-check.onnx" "$previa/public/models/"
-  fi
+  for arquivo in alphabet-check.onnx alphabet-supplement.onnx; do
+    if [[ -f "$alfabeto/$arquivo" ]]; then
+      cp "$alfabeto/$arquivo" "$previa/public/models/"
+    fi
+  done
   movimento_padrao=data/models/alphabet-motion
   if [[ -f data/models/alphabet-trajectory/alphabet-motion.json ]]; then
     movimento_padrao=data/models/alphabet-trajectory

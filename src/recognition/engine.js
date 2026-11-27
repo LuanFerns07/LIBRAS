@@ -36,13 +36,20 @@ export async function openAlphabetEngine() {
   const response = await fetch(import.meta.env.BASE_URL + 'models/alphabet.json')
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
-  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256 } = await response.json()
+  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256, supplement } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
       !/^[a-f0-9]{64}$/u.test(modelSha256) ||
       (agreementSha256 !== undefined && !/^[a-f0-9]{64}$/u.test(agreementSha256))) {
     throw new TypeError('Manifesto do alfabeto incompatível.')
+  }
+  if (supplement !== undefined && (!supplement || !Array.isArray(supplement.labels) || !supplement.labels.length ||
+      new Set(supplement.labels).size !== supplement.labels.length ||
+      supplement.labels.some(label => !labels.includes(label)) || !Number.isFinite(supplement.threshold) ||
+      !(supplement.threshold > .5 && supplement.threshold <= 1) ||
+      !/^[a-f0-9]{64}$/u.test(supplement.modelSha256))) {
+    throw new TypeError('Manifesto do complemento de alfabeto incompatível.')
   }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
@@ -68,14 +75,19 @@ export async function openAlphabetEngine() {
   const recognizeTrajectory = trajectory ? createTrajectoryMatcher(trajectory) : null
   const legacyLetters = Object.keys(motion?.limits ?? {})
   const motionLetters = trajectory ? [...trajectoryLabels, 'J', 'Z', ...legacyLetters] : legacyLetters
-  const bytes = await verifiedBytes('models/alphabet.onnx', modelSha256)
-  const checkBytes = agreementSha256 ? await verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null
+  const [bytes, checkBytes, supplementBytes] = await Promise.all([
+    verifiedBytes('models/alphabet.onnx', modelSha256),
+    agreementSha256 ? verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null,
+    supplement ? verifiedBytes('models/alphabet-supplement.onnx', supplement.modelSha256) : null,
+  ])
   const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
   let verifier
+  let refiner
   try {
     if (checkBytes) verifier = await InferenceSession.create(checkBytes, { executionProviders: ['wasm'] })
+    if (supplementBytes) refiner = await InferenceSession.create(supplementBytes, { executionProviders: ['wasm'] })
   } catch (error) {
-    await session.release()
+    await Promise.allSettled([session.release(), verifier?.release()])
     throw error
   }
   let pending = Promise.resolve()
@@ -98,15 +110,22 @@ export async function openAlphabetEngine() {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
         const letter = await predictedLetter(session, input)
-        return letter && verifier && await predictedLetter(verifier, input) !== letter ? null : letter
+        if (letter && (!verifier || await predictedLetter(verifier, input) === letter)) return letter
+        if (!refiner) return null
+        const { scores } = await refiner.run({ hand: input })
+        if (!scores || scores.data.length !== supplement.labels.length ||
+            !scores.data.every(value => value >= 0 && value <= 1)) {
+          throw new TypeError('Saída do complemento de alfabeto incompatível.')
+        }
+        const best = scores.data.indexOf(Math.max(...scores.data))
+        return scores.data[best] >= supplement.threshold ? supplement.labels[best] : null
       })
       pending = run.catch(() => {})
       return run
     },
     async close() {
       await pending
-      await verifier?.release()
-      await session.release()
+      await Promise.all([session.release(), verifier?.release(), refiner?.release()])
     },
   }
 }
