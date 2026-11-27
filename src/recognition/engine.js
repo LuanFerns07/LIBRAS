@@ -100,14 +100,14 @@ export async function openAlphabetEngine() {
   }
   let pending = Promise.resolve()
 
-  async function predictedLetter(model, input) {
+  async function letterVote(model, input) {
     const { logits } = await model.run({ hand: input })
     if (logits.data.length !== labels.length || !logits.data.every(Number.isFinite)) {
       throw new TypeError('Saída do modelo de alfabeto incompatível.')
     }
     const best = logits.data.indexOf(Math.max(...logits.data))
     const probability = 1 / logits.data.reduce((sum, value) => sum + Math.exp(value - logits.data[best]), 0)
-    return probability >= threshold ? labels[best] : null
+    return { label: labels[best], accepted: probability >= threshold }
   }
 
   async function refinedLetter(letter, input) {
@@ -123,19 +123,30 @@ export async function openAlphabetEngine() {
     alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
     findMotion: motionLetters.length ? (frames, indexHistory) =>
       recognizeTrajectory?.(frames, indexHistory) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
-    predictLetter(values) {
+    predictLetter(values, alternateValues) {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
-        const letter = await predictedLetter(session, input)
-        if (letter && (!verifier || await predictedLetter(verifier, input) === letter)) return refinedLetter(letter, input)
-        if (!refiner) return null
-        const { scores } = await refiner.run({ hand: input })
-        if (!scores || scores.data.length !== supplement.labels.length ||
-            !scores.data.every(value => value >= 0 && value <= 1)) {
-          throw new TypeError('Saída do complemento de alfabeto incompatível.')
+        const first = await letterVote(session, input)
+        const second = verifier && first.accepted ? await letterVote(verifier, input) : null
+        if (first.accepted && (!verifier || second.accepted && second.label === first.label)) {
+          return refinedLetter(first.label, input)
         }
-        const best = scores.data.indexOf(Math.max(...scores.data))
-        return scores.data[best] >= supplement.threshold ? refinedLetter(supplement.labels[best], input) : null
+        if (refiner) {
+          const { scores } = await refiner.run({ hand: input })
+          if (!scores || scores.data.length !== supplement.labels.length ||
+              !scores.data.every(value => value >= 0 && value <= 1)) {
+            throw new TypeError('Saída do complemento de alfabeto incompatível.')
+          }
+          const best = scores.data.indexOf(Math.max(...scores.data))
+          if (scores.data[best] >= supplement.threshold) return refinedLetter(supplement.labels[best], input)
+        }
+        if (!alternateValues || !second || first.label !== 'N' || !['M', 'N'].includes(second.label)) return null
+        const alternate = new Tensor('float32', alternateValues, [1, features])
+        for (const model of [session, verifier]) {
+          const vote = await letterVote(model, alternate)
+          if (!vote.accepted || vote.label !== 'N') return null
+        }
+        return 'N'
       })
       pending = run.catch(() => {})
       return run

@@ -31,6 +31,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let candidate = null
   let votes = 0
   let shown = null
+  let missedN = false
   let movingUntil = -Infinity
   let movingCandidate = null
   let movingVotes = 0
@@ -49,6 +50,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     generation += 1
     candidate = null
     votes = 0
+    missedN = false
     lastSample = -Infinity
     lastMotionSample = -Infinity
     movingCandidate = null
@@ -118,8 +120,15 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       const current = generation
       pending = true
       try {
-        const label = await predict(values)
+        const alternateValues = letterFeatures(frame.alternateHand, frame.aspect)
+        const label = await predict(values, alternateValues)
         if (current !== generation) return
+        // Uma leitura inconclusiva isolada da mesma mão não interrompe um N já confirmado.
+        if (label === null && shown === 'N' && alternateValues && !missedN) {
+          missedN = true
+          return
+        }
+        missedN = false
         if (label !== candidate) {
           candidate = label
           votes = 0

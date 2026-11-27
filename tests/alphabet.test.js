@@ -29,6 +29,26 @@ test('a letra aparece no fluxo de quadros após três leituras iguais e some sem
   assert.equal(readings.at(-1), null)
 })
 
+test('um N confirmado tolera uma única leitura inconclusiva com extração alternativa', async () => {
+  const readings = []
+  let letter = 'N'
+  const reader = createLiveLetterReader(async () => letter, value => readings.push(value))
+  const sample = time => ({ ...frame(time), alternateHand: hand(.1) })
+  for (const time of [0, 90, 180]) await reader.read(sample(time))
+  assert.deepEqual(readings, ['N'])
+
+  letter = null
+  await reader.read(sample(270))
+  assert.deepEqual(readings, ['N'])
+  await reader.read(sample(360))
+  assert.deepEqual(readings, ['N', null])
+
+  letter = 'N'
+  for (const time of [450, 540, 630]) await reader.read(sample(time))
+  await reader.read({ ...frame(660), rightHand: [] })
+  assert.deepEqual(readings, ['N', null, 'N', null])
+})
+
 test('a trajetória usa quadros entre leituras e prevalece sobre uma previsão estática atrasada', async () => {
   const readings = []
   const windows = []

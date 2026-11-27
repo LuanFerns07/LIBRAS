@@ -1,4 +1,4 @@
-export function trackHands(video, { onFrame, onError }) {
+export function trackHands(video, { onFrame, onError, readLetters }) {
   // O carregador WASM do MediaPipe usa importScripts em um worker clássico.
   const url = new URL(`${import.meta.env.BASE_URL}hand-tracker.worker.js`, location.href)
   const worker = new Worker(url)
@@ -68,7 +68,7 @@ export function trackHands(video, { onFrame, onError }) {
         void sendLatest()
         return
       }
-      worker.postMessage({ frame, timestamp: request.timestamp }, [frame])
+      worker.postMessage({ frame, timestamp: request.timestamp, readLetters: readLetters?.() }, [frame])
     } catch {
       frame?.close()
       if (closed) return
@@ -93,7 +93,8 @@ export function trackHands(video, { onFrame, onError }) {
       inFlight = undefined
       if (visible && request?.generation === generation &&
           request.width === video.videoWidth && request.height === video.videoHeight) {
-        onFrame({ ...data.hands, timestamp: request.mediaTime * 1000, aspect: request.width / request.height })
+        onFrame({ ...data.hands, alternateHand: data.alternateHand,
+          timestamp: request.mediaTime * 1000, aspect: request.width / request.height })
       }
       void sendLatest()
     }
