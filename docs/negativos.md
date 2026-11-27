@@ -79,6 +79,8 @@ O Chromium reproduziu três dessas janelas usando uma câmera simulada e o combi
 | Cecierj, Azul | 17 | Preservou o texto |
 | Fiocruz, Sete para Oito | 22 | Acrescentou `cinco` |
 
+Uma sonda analisou 27 janelas de três transições em uma aula da UFSM. Em 23 delas, o rastreamento permitiu classificar a tentativa e nenhuma produziu Cinco. As três regras de posição ou movimento descartariam de um a seis dos seis exemplos de Cinco corretos na validação do MINDS. O caso da Fiocruz ficou reservado para comparar um ajuste futuro, com transições e exemplos positivos capturados em condições equivalentes. [Sonda e plano de aquisição](transicao-sete-oito.md)
+
 ### Reprodução dos novos recortes
 
 Os comandos usam os modelos locais `isolated-geometry`, `isolated-partials` e `isolated-combined`, com os respectivos limiares 0,640, 0,600 e 0,525. O FFmpeg recorta os trechos e remove o áudio. Para reutilizar arquivos já baixados, coloque os três MP4 de origem descritos pelo protocolo em `data/isolated-negative-audit/didactic/source`. O Chromium extrai os pontos com Holistic e os modelos rodam em CPU. Os MP4s, vetores e janelas de câmera simulada ficam em `data/`. [Contratos e hashes dos modelos](../ml/fresh_eval/protocol-negatives.json)
