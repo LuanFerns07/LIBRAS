@@ -26,6 +26,31 @@ O avatar em WebGL e a webcam física ficaram lado a lado na janela de 1.280 × 9
 
 Para o aceite com pessoa sinalizante, registre a execução esperada e a correção intencional na webcam e peça a uma pessoa fluente em Libras que confira a dica. Na Área livre, registre a retirada e o retorno de uma mão, a oclusão e o alinhamento dos pontos ao redimensionar. Na coleta de M1, registre também repouso, movimento cotidiano e sinais fora do catálogo com pessoas independentes, incluindo chamadas ao classificador. [Ficha local](http://127.0.0.1:4177/validacao/) · [Como registrar](validacao-ao-vivo.md)
 
+### Da dica à conclusão da lição de Amarelo
+
+Com a prévia `cb3adf2`, um teste no Chromium respondeu à atividade sem câmera e fez quatro tentativas na mesma sessão. A dica para o recorte invertido e a tentativa sem mãos mantiveram a etapa guiada pendente. A gravação esperada concluiu a etapa guiada e, sem o avatar visível, concluiu a tentativa de memória usando a mesma trilha. O progresso passou a mostrar um sinal concluído. A revogação de permissão durante uma nova tentativa encerrou a trilha e preservou o progresso. O teste abriu outra trilha após conceder permissão e confirmou que, ao recarregar, a lição permanecia concluída com a câmera desligada. [Teste no Chromium](../tests/e2e/amarelo-lesson.test.mjs)
+
+O teste usou a câmera de ensaio do Chromium com um vídeo composto por recortes do MINDS-Libras e um quadro preto. A dica e os dois reconhecimentos fizeram uma chamada ao classificador cada. A ausência de mãos fez zero. Apenas arquivos do servidor local foram solicitados e o armazenamento persistente continha somente o progresso da lição. O log fica em `data/evidence/demonstracao/m2-licao/cb3adf2-licao.log`. A revisão da dica com uma pessoa sinalizando na webcam continua pendente.
+
+Para reproduzir, prepare o recorte original e o recorte invertido seguindo as seções indicadas. Os marcadores azul, magenta, verde e vermelho identificam as quatro tentativas. [Recorte original](sinais-com-movimento-browser.md#reproduzir) · [Recorte invertido](#dica-de-trajetória-de-amarelo)
+
+~~~bash
+out=data/evidence/demonstracao/m2-licao
+mkdir -p "$out"
+ffmpeg -nostdin -filter_complex_threads 1 \
+  -i data/evidence/demonstracao/amarelo-01-invertido.y4m \
+  -i data/evidence/moving-sign-fixtures/amarelo-s01.y4m \
+  -f lavfi -i 'color=c=black:s=640x360:r=30:d=2.4' \
+  -filter_complex "[0:v]drawbox=color=blue:t=fill:enable='lt(t,0.5)',setsar=1[dica];
+    [1:v]split[original][memoria];[original]setsar=1[guiada];
+    [memoria]drawbox=color=red:t=fill:enable='lt(t,0.5)',setsar=1[final];
+    [2:v]drawbox=color=magenta:t=fill:enable='lt(t,0.5)',setsar=1[vazio];
+    [dica][vazio][guiada][final]concat=n=4:v=1:a=0[out]" \
+  -map '[out]' -pix_fmt yuv420p "$out/amarelo-licao.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 \
+  LIBRASIA_TEST_AMARELO_LESSON_VIDEO="$out/amarelo-licao.y4m" node --test tests/e2e/amarelo-lesson.test.mjs
+~~~
+
 ### Enquadramento e oclusão na prática
 
 Em **Praticar com ajuda**, o pacote `dfb045b` aceitou Amarelo em uma gravação recortada acima dos ombros. Na inspeção do mesmo recorte, o Holistic detectou mão e atribuiu visibilidade aos dois ombros em seis quadros. As coordenadas verticais dos pontos fora da imagem ficaram entre 1,08 e 1,29, acima do limite numérico de 1.
