@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Controles A, Q e R no mesmo enquadramento de Tel baixinha e duas vistas de A na aula explicativa da Unicentro. As fontes inteiras são reservadas à avaliação. As anotações foram fixadas por inspeção visual e pela identificação da letra na própria fonte, antes do replay.",
+  "sources": [
+    {
+      "id": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "title": "Alfabeto em libras",
+      "credits": {
+        "publicação e demonstração": "Tel baixinha, nome usado pela autora no canal"
+      },
+      "page": "https://www.youtube.com/watch?v=chzje8VmC1I",
+      "published": "2020-07-12",
+      "file": "data/alphabet/independent/tel-baixinha-download/tel-baixinha-alfabeto.mp4",
+      "sha256": "b4d025dfe16b21d7632b13349ee169aded50dd17f14fc72c0b9c8e42f12530ae",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 30 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=chzje8VmC1I&hl=pt-BR",
+      "licenseEvidence": "O campo Licença na publicação de Tel baixinha indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Cartões de Abelha, Queijo e Rato à direita da autora, em frente ao mesmo fundo e com a câmera fixa.",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 70320,
+          "endMs": 71420,
+          "anchorMs": 70880
+        },
+        {
+          "label": "Q",
+          "startMs": 110780,
+          "endMs": 111880,
+          "anchorMs": 111340
+        },
+        {
+          "label": "R",
+          "startMs": 112900,
+          "endMs": 114000,
+          "anchorMs": 113420
+        }
+      ]
+    },
+    {
+      "id": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "title": "[PED] Libras - Alfabeto Explicativo",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro"
+      },
+      "page": "https://www.youtube.com/watch?v=hxnpSXVWkGU",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-download/unicentro-alfabeto.mp4",
+      "sha256": "cdbdadecc5f5d072f3c6daa0353fe44ed9c9d2018ac055263dcc0fa56453b52f",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=hxnpSXVWkGU&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "captionSha256": "9259b15257512545737c64818bf00a0e60a3122f27606e17e0292efe5376bfc2",
+      "labelEvidence": "A professora apresenta a letra A e explica a posição lateral do polegar, com auxílio da legenda automática em português. A demonstração seguinte, em que o polegar passa para cima dos dedos para formar S, fica fora dos recortes.",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 88380,
+          "endMs": 89480,
+          "anchorMs": 88900,
+          "view": "frontal"
+        },
+        {
+          "label": "A",
+          "startMs": 92280,
+          "endMs": 93380,
+          "anchorMs": 92800,
+          "view": "oblíqua"
+        }
+      ]
+    }
+  ]
+}
