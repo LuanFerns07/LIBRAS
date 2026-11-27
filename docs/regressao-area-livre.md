@@ -35,6 +35,14 @@ Para retestar a edição com a voz local na prévia do Linux, execute:
 LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_VOICE=1 node --test tests/e2e/browser.test.mjs
 ~~~
 
+## Transcrição ao navegar
+
+No pacote `180711c`, visitar o Alfabeto e voltar para a Área livre deixava o campo de transcrição vazio. No pacote `bdbccc4`, a navegação interna conserva o texto na memória da página. Ao sair da Área livre, a câmera é liberada. Ao voltar, a câmera fica desligada e o texto volta disponível para editar e ouvir. **Limpar texto** e recarregar a página descartam a transcrição.
+
+No Chromium, o teste com a webcam Acer confirmou que a trilha terminou ao sair. O texto editado reapareceu ao voltar, inclusive com quebra de linha. O armazenamento local e o de sessão permaneceram iguais. O teste conferiu também o botão de limpar e o campo vazio após recarregar. O log fica em `data/evidence/demonstracao/transcricao-navegacao-bdbccc4.log`. [Teste de navegador](../tests/e2e/browser.test.mjs)
+
+No roteiro com gravações, duas tentativas reconheceram Cinco e Espelho. “cinco espelho” reapareceu depois de visitar o Alfabeto. A voz local em pt-BR concluiu a leitura da versão editada. Na prévia experimental, o controle Espelho + Amarelo ainda ficou inconclusivo e preservou o texto até a confirmação da sugestão revisada. Os logs da mesma compilação são `roteiro-bdbccc4.log` e `revisao-glosas-bdbccc4.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Controle da sinalização contínua](sinalizacao-continua.md#concordância-com-cinco)
+
 ## Reproduzir localmente
 
 Instale os ativos e inicie a prévia na porta 4193, em um checkout reservado à verificação.

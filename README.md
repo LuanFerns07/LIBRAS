@@ -60,7 +60,7 @@ No PC de referência com Linux, Chromium e webcam Acer, o Speech Dispatcher list
 chromium --enable-speech-dispatcher --user-data-dir="$PWD/.cache/chromium-librasia" http://127.0.0.1:4173/
 ```
 
-A transcrição fica disponível para edição quando a voz falha. Se o texto mudar durante a leitura, a voz para. Use **Ouvir** para ler a versão atualizada.
+A transcrição fica disponível para edição quando a voz falha. Se o texto mudar durante a leitura, a voz para. Use **Ouvir** para ler a versão atualizada. A transcrição acompanha a navegação entre as telas até a aba ser recarregada ou fechada.
 
 ## Verificar e compilar
 
