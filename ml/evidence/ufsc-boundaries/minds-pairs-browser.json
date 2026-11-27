@@ -1,0 +1,4936 @@
+{
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "cases": [
+    {
+      "id": "s11-cinco-aluno-0",
+      "signer": 11,
+      "gapMs": 0,
+      "clips": [
+        "s11-cinco",
+        "s11-aluno"
+      ],
+      "clipSha256": "6c23a2e83c66f9ac233608e134b6b970a8fed2d43304858c0b33ddab6cee60ff",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 59,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 3000,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3000,
+              "endMs": 3400,
+              "gloss": null
+            },
+            {
+              "startMs": 3400,
+              "endMs": 3900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 3900,
+              "endMs": 4400,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4400,
+              "endMs": 4900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4900,
+              "endMs": 5400,
+              "gloss": "aluno"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3400,
+              "endMs": 5200,
+              "maxIoU": 0.278,
+              "maxLabeledIoU": 0.278,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 500,
+              "endMs": 1000,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 1900,
+              "gloss": null
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 2900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2900,
+              "endMs": 3400,
+              "gloss": null
+            },
+            {
+              "startMs": 3400,
+              "endMs": 3900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 3900,
+              "endMs": 4400,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4400,
+              "endMs": 4900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4900,
+              "endMs": 5400,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5400,
+              "endMs": 5900,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.294,
+              "maxLabeledIoU": 0.294,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3400,
+              "endMs": 5200,
+              "maxIoU": 0.278,
+              "maxLabeledIoU": 0.278,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3300,
+              "endMs": 3900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4600,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3400,
+              "endMs": 5200,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3300,
+              "endMs": 3900,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4600,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3400,
+              "endMs": 5200,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 400,
+          "endMs": 2100,
+          "score": {
+            "frames": 17,
+            "framesWithHands": 17,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 17,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.7678390644029418,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.002739789591129623
+              },
+              {
+                "label": "cinco",
+                "value": 0.7678390644029418
+              },
+              {
+                "label": "espelho",
+                "value": 0.2284311648730573
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0005120556069514448
+              },
+              {
+                "label": "aluno",
+                "value": 0.0004779255259198418
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "aluno",
+          "startMs": 3400,
+          "endMs": 5200,
+          "score": {
+            "frames": 18,
+            "framesWithHands": 18,
+            "shouldersBySide": {
+              "left": 18,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.7827583343491168,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.09581071297684585
+              },
+              {
+                "label": "cinco",
+                "value": 0.0033015360376397345
+              },
+              {
+                "label": "espelho",
+                "value": 0.006496433953572964
+              },
+              {
+                "label": "amarelo",
+                "value": 0.11163298268282469
+              },
+              {
+                "label": "aluno",
+                "value": 0.7827583343491168
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11-cinco-aluno-800",
+      "signer": 11,
+      "gapMs": 800,
+      "clips": [
+        "s11-cinco",
+        "s11-aluno"
+      ],
+      "clipSha256": "093d9ff6bd3c3a5ffd5a817621c1175d6b49a7e1a64af9c3ea40902b74c8bd0e",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 67,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3900,
+              "endMs": 4300,
+              "gloss": null
+            },
+            {
+              "startMs": 4300,
+              "endMs": 4700,
+              "gloss": null
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5700,
+              "endMs": 6200,
+              "gloss": "aluno"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4200,
+              "endMs": 6000,
+              "maxIoU": 0.278,
+              "maxLabeledIoU": 0.278,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 500,
+              "endMs": 1000,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 1900,
+              "gloss": null
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 2900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4300,
+              "gloss": null
+            },
+            {
+              "startMs": 4300,
+              "endMs": 4700,
+              "gloss": null
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5700,
+              "endMs": 6200,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.294,
+              "maxLabeledIoU": 0.294,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4200,
+              "endMs": 6000,
+              "maxIoU": 0.278,
+              "maxLabeledIoU": 0.278,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4100,
+              "endMs": 4700,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5400,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5500,
+              "endMs": 6100,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4200,
+              "endMs": 6000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4100,
+              "endMs": 4700,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5400,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 5500,
+              "endMs": 6100,
+              "gloss": "aluno"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4200,
+              "endMs": 6000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 400,
+          "endMs": 2100,
+          "score": {
+            "frames": 17,
+            "framesWithHands": 17,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 17,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.7675236235636831,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.002737735134409778
+              },
+              {
+                "label": "cinco",
+                "value": 0.7675236235636831
+              },
+              {
+                "label": "espelho",
+                "value": 0.22875469151118755
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0005087303564627691
+              },
+              {
+                "label": "aluno",
+                "value": 0.00047521943425682227
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "aluno",
+          "startMs": 4200,
+          "endMs": 6000,
+          "score": {
+            "frames": 18,
+            "framesWithHands": 18,
+            "shouldersBySide": {
+              "left": 18,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.7745611834759304,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.10026451065283853
+              },
+              {
+                "label": "cinco",
+                "value": 0.003633925951872542
+              },
+              {
+                "label": "espelho",
+                "value": 0.0073402876774209935
+              },
+              {
+                "label": "amarelo",
+                "value": 0.11420009224193743
+              },
+              {
+                "label": "aluno",
+                "value": 0.7745611834759304
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11-cinco-espelho-0",
+      "signer": 11,
+      "gapMs": 0,
+      "clips": [
+        "s11-cinco",
+        "s11-espelho"
+      ],
+      "clipSha256": "3f766a8d1ca64c939a11d78a2ad6f24ea5817209979c4f4b5ea0a8fc7a01f292",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 59,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2100,
+              "endMs": 2700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2700,
+              "endMs": 3100,
+              "gloss": null
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4000,
+              "gloss": null
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 5900,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.294,
+              "maxLabeledIoU": 0.294,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3500,
+              "endMs": 5400,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco cinco cinco espelho espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 500,
+              "endMs": 1000,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2100,
+              "endMs": 2600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2600,
+              "endMs": 3100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4100,
+              "endMs": 4600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4600,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5600,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3500,
+              "endMs": 5400,
+              "maxIoU": 0.263,
+              "maxLabeledIoU": 0.263,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4400,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3500,
+              "endMs": 5400,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4400,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3500,
+              "endMs": 5400,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 400,
+          "endMs": 2100,
+          "score": {
+            "frames": 17,
+            "framesWithHands": 17,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 17,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.7686843700456765,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0027256681578813847
+              },
+              {
+                "label": "cinco",
+                "value": 0.7686843700456765
+              },
+              {
+                "label": "espelho",
+                "value": 0.2276093302481918
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0005058281869555996
+              },
+              {
+                "label": "aluno",
+                "value": 0.00047480336129485215
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "espelho",
+          "startMs": 3500,
+          "endMs": 5400,
+          "score": {
+            "frames": 19,
+            "framesWithHands": 19,
+            "shouldersBySide": {
+              "left": 19,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9666769963605183,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0006966725182864053
+              },
+              {
+                "label": "cinco",
+                "value": 0.03255591758898616
+              },
+              {
+                "label": "espelho",
+                "value": 0.9666769963605183
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00006749709472889951
+              },
+              {
+                "label": "aluno",
+                "value": 0.000002916437480311242
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11-cinco-espelho-800",
+      "signer": 11,
+      "gapMs": 800,
+      "clips": [
+        "s11-cinco",
+        "s11-espelho"
+      ],
+      "clipSha256": "3395d5c728b40678d0a4be09ffd59a0fb21d8040012a88a53474feaa81128a74",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 67,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco cinco espelho espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5500,
+              "endMs": 6000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4300,
+              "endMs": 6200,
+              "maxIoU": 0.263,
+              "maxLabeledIoU": 0.263,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 500,
+              "endMs": 1000,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 1900,
+              "gloss": null
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 2900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 4900,
+              "gloss": null
+            },
+            {
+              "startMs": 4900,
+              "endMs": 5300,
+              "gloss": null
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5800,
+              "endMs": 6300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6300,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.294,
+              "maxLabeledIoU": 0.294,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4300,
+              "endMs": 6200,
+              "maxIoU": 0.263,
+              "maxLabeledIoU": 0.263,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4600,
+              "endMs": 5200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4300,
+              "endMs": 6200,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1500,
+              "endMs": 2100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4600,
+              "endMs": 5200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 400,
+              "endMs": 2100,
+              "maxIoU": 0.353,
+              "maxLabeledIoU": 0.353,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4300,
+              "endMs": 6200,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 400,
+          "endMs": 2100,
+          "score": {
+            "frames": 17,
+            "framesWithHands": 17,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 17,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.7675236235636831,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.002737735134409778
+              },
+              {
+                "label": "cinco",
+                "value": 0.7675236235636831
+              },
+              {
+                "label": "espelho",
+                "value": 0.22875469151118755
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0005087303564627691
+              },
+              {
+                "label": "aluno",
+                "value": 0.00047521943425682227
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "espelho",
+          "startMs": 4300,
+          "endMs": 6200,
+          "score": {
+            "frames": 19,
+            "framesWithHands": 19,
+            "shouldersBySide": {
+              "left": 19,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9657996557063453,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.000738909830441711
+              },
+              {
+                "label": "cinco",
+                "value": 0.033388957260257174
+              },
+              {
+                "label": "espelho",
+                "value": 0.9657996557063453
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00006937930771764244
+              },
+              {
+                "label": "aluno",
+                "value": 0.000003097895238119455
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11-espelho-amarelo-0",
+      "signer": 11,
+      "gapMs": 0,
+      "clips": [
+        "s11-espelho",
+        "s11-amarelo"
+      ],
+      "clipSha256": "963f0eb580bdd262f07f85eb0a9a45e01c6282d55b2e49eb93fea3d110d34dec",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 66,
+      "framesWithHands": 66,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 800,
+              "endMs": 1100,
+              "gloss": null
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2700,
+              "endMs": 3100,
+              "gloss": null
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4100,
+              "endMs": 4700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5700,
+              "endMs": 6200,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 3600,
+              "endMs": 5800,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1200,
+              "gloss": null
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2700,
+              "endMs": 3100,
+              "gloss": null
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4100,
+              "endMs": 4600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4600,
+              "endMs": 5100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6100,
+              "gloss": null
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.263,
+              "maxLabeledIoU": 0.263,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 3600,
+              "endMs": 5800,
+              "maxIoU": 0.227,
+              "maxLabeledIoU": 0.227,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 3000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3500,
+              "endMs": 4100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5900,
+              "endMs": 6500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 3600,
+              "endMs": 5800,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3000,
+              "endMs": 3500,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5900,
+              "endMs": 6500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 3600,
+              "endMs": 5800,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "espelho",
+          "startMs": 600,
+          "endMs": 2500,
+          "score": {
+            "frames": 19,
+            "framesWithHands": 19,
+            "shouldersBySide": {
+              "left": 19,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9664030408538489,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0007467109305391909
+              },
+              {
+                "label": "cinco",
+                "value": 0.032779247164375316
+              },
+              {
+                "label": "espelho",
+                "value": 0.9664030408538489
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00006793481216301893
+              },
+              {
+                "label": "aluno",
+                "value": 0.0000030662390737325943
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 3600,
+          "endMs": 5800,
+          "score": {
+            "frames": 22,
+            "framesWithHands": 22,
+            "shouldersBySide": {
+              "left": 22,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.6853912150332596,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.015705702969243885
+              },
+              {
+                "label": "cinco",
+                "value": 0.010223405164164655
+              },
+              {
+                "label": "espelho",
+                "value": 0.28681018263346436
+              },
+              {
+                "label": "amarelo",
+                "value": 0.6853912150332596
+              },
+              {
+                "label": "aluno",
+                "value": 0.0018694941998673627
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11-espelho-amarelo-800",
+      "signer": 11,
+      "gapMs": 800,
+      "clips": [
+        "s11-espelho",
+        "s11-amarelo"
+      ],
+      "clipSha256": "487afe562a7b7f92bccc5c7a5b7e38a80e4a7a5c48cc10ed0b3f66cb0d4df22a",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 74,
+      "framesWithHands": 66,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 800,
+              "endMs": 1100,
+              "gloss": null
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4000,
+              "endMs": 4400,
+              "gloss": null
+            },
+            {
+              "startMs": 4400,
+              "endMs": 4900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6100,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6600,
+              "gloss": null
+            },
+            {
+              "startMs": 6600,
+              "endMs": 7200,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6600,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1800,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4300,
+              "gloss": null
+            },
+            {
+              "startMs": 4300,
+              "endMs": 4800,
+              "gloss": null
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5800,
+              "endMs": 6300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6300,
+              "endMs": 6800,
+              "gloss": null
+            },
+            {
+              "startMs": 6800,
+              "endMs": 7300,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.263,
+              "maxLabeledIoU": 0.263,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6600,
+              "maxIoU": 0.227,
+              "maxLabeledIoU": 0.227,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4800,
+              "gloss": null
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6700,
+              "endMs": 7300,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6600,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4300,
+              "gloss": null
+            },
+            {
+              "startMs": 4400,
+              "endMs": 5000,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5100,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6700,
+              "endMs": 7300,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 600,
+              "endMs": 2500,
+              "maxIoU": 0.316,
+              "maxLabeledIoU": 0.316,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6600,
+              "maxIoU": 0.273,
+              "maxLabeledIoU": 0.273,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "espelho",
+          "startMs": 600,
+          "endMs": 2500,
+          "score": {
+            "frames": 19,
+            "framesWithHands": 19,
+            "shouldersBySide": {
+              "left": 19,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9661169087384854,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0007417773117351307
+              },
+              {
+                "label": "cinco",
+                "value": 0.03307093160347752
+              },
+              {
+                "label": "espelho",
+                "value": 0.9661169087384854
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00006739597871280724
+              },
+              {
+                "label": "aluno",
+                "value": 0.000002986367589171894
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 4400,
+          "endMs": 6600,
+          "score": {
+            "frames": 22,
+            "framesWithHands": 22,
+            "shouldersBySide": {
+              "left": 22,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.664149367815301,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.015334772266705042
+              },
+              {
+                "label": "cinco",
+                "value": 0.011427995087505879
+              },
+              {
+                "label": "espelho",
+                "value": 0.30724044155077657
+              },
+              {
+                "label": "amarelo",
+                "value": 0.664149367815301
+              },
+              {
+                "label": "aluno",
+                "value": 0.0018474232797116017
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-cinco-aluno-0",
+      "signer": 12,
+      "gapMs": 0,
+      "clips": [
+        "s12-cinco",
+        "s12-aluno"
+      ],
+      "clipSha256": "f2a54d6049c6f46dfe56b680a5c7a5f27719f94a0bb8d7b2c4021cb682a05d87",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 67,
+      "framesWithHands": 67,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1800,
+              "endMs": 2300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3300,
+              "endMs": 6000,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1400,
+              "endMs": 1900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3300,
+              "endMs": 6000,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3300,
+              "endMs": 6000,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 3300,
+              "endMs": 6000,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 500,
+          "endMs": 2000,
+          "score": {
+            "frames": 15,
+            "framesWithHands": 15,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 15,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.8281816988414883,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.007211888540863227
+              },
+              {
+                "label": "cinco",
+                "value": 0.8281816988414883
+              },
+              {
+                "label": "espelho",
+                "value": 0.12403818936466325
+              },
+              {
+                "label": "amarelo",
+                "value": 0.03529328653469165
+              },
+              {
+                "label": "aluno",
+                "value": 0.005274936718293509
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "aluno",
+          "startMs": 3300,
+          "endMs": 6000,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.8978418793089912,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.08250700035239325
+              },
+              {
+                "label": "cinco",
+                "value": 0.0008393734888159826
+              },
+              {
+                "label": "espelho",
+                "value": 0.001067957638591344
+              },
+              {
+                "label": "amarelo",
+                "value": 0.017743789211208286
+              },
+              {
+                "label": "aluno",
+                "value": 0.8978418793089912
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-cinco-aluno-800",
+      "signer": 12,
+      "gapMs": 800,
+      "clips": [
+        "s12-cinco",
+        "s12-aluno"
+      ],
+      "clipSha256": "ba63d67b83cb47b57ad3f2d4b67fd4649ca80434d89a060391cf2f2559bffda8",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 75,
+      "framesWithHands": 67,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1800,
+              "endMs": 2300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4100,
+              "endMs": 6800,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1200,
+              "gloss": null
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": null
+            },
+            {
+              "startMs": 6900,
+              "endMs": 7500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4100,
+              "endMs": 6800,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 6900,
+              "endMs": 7500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4100,
+              "endMs": 6800,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco alunos",
+          "textFromReferenceGlosses": "cinco aluno",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 6900,
+              "endMs": 7500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "aluno",
+              "startMs": 4100,
+              "endMs": 6800,
+              "maxIoU": 0,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 500,
+          "endMs": 2000,
+          "score": {
+            "frames": 15,
+            "framesWithHands": 15,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 15,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.8257859221522191,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0074055063171703794
+              },
+              {
+                "label": "cinco",
+                "value": 0.8257859221522191
+              },
+              {
+                "label": "espelho",
+                "value": 0.12489349486271496
+              },
+              {
+                "label": "amarelo",
+                "value": 0.03655448359886985
+              },
+              {
+                "label": "aluno",
+                "value": 0.005360593069025631
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "aluno",
+          "startMs": 4100,
+          "endMs": 6800,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9081281130844807,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0741853834392777
+              },
+              {
+                "label": "cinco",
+                "value": 0.0006914603536934158
+              },
+              {
+                "label": "espelho",
+                "value": 0.0009071491501540109
+              },
+              {
+                "label": "amarelo",
+                "value": 0.016087893972394098
+              },
+              {
+                "label": "aluno",
+                "value": 0.9081281130844807
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-cinco-espelho-0",
+      "signer": 12,
+      "gapMs": 0,
+      "clips": [
+        "s12-cinco",
+        "s12-espelho"
+      ],
+      "clipSha256": "3712da77e5ffe3f7bfcba7ac8504902159663f50fab9e58b3e2c85e2291f583a",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 66,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1400,
+              "endMs": 1900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 3000,
+              "gloss": null
+            },
+            {
+              "startMs": 3000,
+              "endMs": 3400,
+              "gloss": null
+            },
+            {
+              "startMs": 3400,
+              "endMs": 3900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3900,
+              "endMs": 4400,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4400,
+              "endMs": 5000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5500,
+              "endMs": 6000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3200,
+              "endMs": 5900,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 900,
+              "endMs": 1400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1400,
+              "endMs": 1900,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 2900,
+              "gloss": null
+            },
+            {
+              "startMs": 2900,
+              "endMs": 3400,
+              "gloss": null
+            },
+            {
+              "startMs": 3400,
+              "endMs": 3900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3900,
+              "endMs": 4300,
+              "gloss": null
+            },
+            {
+              "startMs": 4300,
+              "endMs": 4800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5200,
+              "gloss": null
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5600,
+              "gloss": null
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6100,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3200,
+              "endMs": 5900,
+              "maxIoU": 0.185,
+              "maxLabeledIoU": 0.185,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3000,
+              "endMs": 3600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4400,
+              "endMs": 5000,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5400,
+              "endMs": 6000,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3200,
+              "endMs": 5900,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 500,
+              "gloss": null
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1800,
+              "endMs": 2300,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2400,
+              "endMs": 3000,
+              "gloss": null
+            },
+            {
+              "startMs": 3100,
+              "endMs": 3700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4400,
+              "endMs": 4900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6100,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 3200,
+              "endMs": 5900,
+              "maxIoU": 0.185,
+              "maxLabeledIoU": 0.185,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 500,
+          "endMs": 2000,
+          "score": {
+            "frames": 15,
+            "framesWithHands": 15,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 15,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.8258875126793991,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.007407774084797639
+              },
+              {
+                "label": "cinco",
+                "value": 0.8258875126793991
+              },
+              {
+                "label": "espelho",
+                "value": 0.12442038065754735
+              },
+              {
+                "label": "amarelo",
+                "value": 0.03690083095519131
+              },
+              {
+                "label": "aluno",
+                "value": 0.005383501623064617
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "espelho",
+          "startMs": 3200,
+          "endMs": 5900,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9950445204378906,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0005631915662375589
+              },
+              {
+                "label": "cinco",
+                "value": 0.004219500138649594
+              },
+              {
+                "label": "espelho",
+                "value": 0.9950445204378906
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0001715486160525906
+              },
+              {
+                "label": "aluno",
+                "value": 0.000001239241169450193
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-cinco-espelho-800",
+      "signer": 12,
+      "gapMs": 800,
+      "clips": [
+        "s12-cinco",
+        "s12-espelho"
+      ],
+      "clipSha256": "74ef186283b73fda4e36540f9b02e3989729496024592725c3472d229d576fb7",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 74,
+      "framesWithHands": 59,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1200,
+              "gloss": null
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": null
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4200,
+              "gloss": null
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5800,
+              "endMs": 6300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6300,
+              "endMs": 6800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4000,
+              "endMs": 6700,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 0,
+              "endMs": 400,
+              "gloss": null
+            },
+            {
+              "startMs": 400,
+              "endMs": 800,
+              "gloss": null
+            },
+            {
+              "startMs": 800,
+              "endMs": 1200,
+              "gloss": null
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": null
+            },
+            {
+              "startMs": 3700,
+              "endMs": 4200,
+              "gloss": null
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5800,
+              "endMs": 6300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6300,
+              "endMs": 6800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4000,
+              "endMs": 6700,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4400,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6800,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4000,
+              "endMs": 6700,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "accepted",
+          "reason": null,
+          "suggestedText": "cinco cinco cinco cinco espelho espelho espelho espelho",
+          "referenceText": "cinco espelhos",
+          "textFromReferenceGlosses": "cinco espelho",
+          "proposals": [
+            {
+              "startMs": 100,
+              "endMs": 600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1300,
+              "endMs": 1800,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 1900,
+              "endMs": 2400,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 3800,
+              "endMs": 4400,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4500,
+              "endMs": 5100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6800,
+              "gloss": "espelho"
+            }
+          ],
+          "references": [
+            {
+              "gloss": "cinco",
+              "startMs": 500,
+              "endMs": 2000,
+              "maxIoU": 0.333,
+              "maxLabeledIoU": 0.333,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "espelho",
+              "startMs": 4000,
+              "endMs": 6700,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "cinco",
+          "startMs": 500,
+          "endMs": 2000,
+          "score": {
+            "frames": 15,
+            "framesWithHands": 15,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 15,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "cinco",
+            "confidence": 0.8257859221522191,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0074055063171703794
+              },
+              {
+                "label": "cinco",
+                "value": 0.8257859221522191
+              },
+              {
+                "label": "espelho",
+                "value": 0.12489349486271496
+              },
+              {
+                "label": "amarelo",
+                "value": 0.03655448359886985
+              },
+              {
+                "label": "aluno",
+                "value": 0.005360593069025631
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "espelho",
+          "startMs": 4000,
+          "endMs": 6700,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9947841938313815,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0005800283196803752
+              },
+              {
+                "label": "cinco",
+                "value": 0.0044599499906547
+              },
+              {
+                "label": "espelho",
+                "value": 0.9947841938313815
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00017455914707430867
+              },
+              {
+                "label": "aluno",
+                "value": 0.0000012687112089482737
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-espelho-amarelo-0",
+      "signer": 12,
+      "gapMs": 0,
+      "clips": [
+        "s12-espelho",
+        "s12-amarelo"
+      ],
+      "clipSha256": "d473c82ebc690b01ef619b99ec71f38f7989263ce0e9b9cb6cc867bfd22c8d1b",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 74,
+      "framesWithHands": 67,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 200,
+              "endMs": 600,
+              "gloss": null
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": null
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4200,
+              "gloss": null
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5300,
+              "endMs": 5800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5800,
+              "endMs": 6300,
+              "gloss": null
+            },
+            {
+              "startMs": 6300,
+              "endMs": 6800,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6700,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 200,
+              "endMs": 700,
+              "gloss": null
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": null
+            },
+            {
+              "startMs": 3600,
+              "endMs": 4200,
+              "gloss": null
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4700,
+              "endMs": 5200,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5200,
+              "endMs": 5700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5700,
+              "endMs": 6200,
+              "gloss": null
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6700,
+              "maxIoU": 0.217,
+              "maxLabeledIoU": 0.217,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2600,
+              "endMs": 3200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5400,
+              "endMs": 6000,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6700,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": null
+            },
+            {
+              "startMs": 4200,
+              "endMs": 4700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 4800,
+              "endMs": 5300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5400,
+              "endMs": 6000,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6100,
+              "endMs": 6700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.185,
+              "maxLabeledIoU": 0.185,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 4400,
+              "endMs": 6700,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "espelho",
+          "startMs": 500,
+          "endMs": 3200,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9947556106168306,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0005871507681022678
+              },
+              {
+                "label": "cinco",
+                "value": 0.004474499072933193
+              },
+              {
+                "label": "espelho",
+                "value": 0.9947556106168306
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00018141173841000773
+              },
+              {
+                "label": "aluno",
+                "value": 0.0000013278037238568861
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 4400,
+          "endMs": 6700,
+          "score": {
+            "frames": 23,
+            "framesWithHands": 23,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 23,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.7911933621808847,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.02396903883268574
+              },
+              {
+                "label": "cinco",
+                "value": 0.012830283158443765
+              },
+              {
+                "label": "espelho",
+                "value": 0.16806700136061892
+              },
+              {
+                "label": "amarelo",
+                "value": 0.7911933621808847
+              },
+              {
+                "label": "aluno",
+                "value": 0.00394031446736697
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12-espelho-amarelo-800",
+      "signer": 12,
+      "gapMs": 800,
+      "clips": [
+        "s12-espelho",
+        "s12-amarelo"
+      ],
+      "clipSha256": "a9d7e5a5b6519401f1095138824ab80e47da0c072ca824800cc20215ef289822",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 82,
+      "framesWithHands": 68,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 200,
+              "endMs": 600,
+              "gloss": null
+            },
+            {
+              "startMs": 600,
+              "endMs": 1100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1100,
+              "endMs": 1700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6200,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6200,
+              "endMs": 6700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6700,
+              "endMs": 7200,
+              "gloss": null
+            },
+            {
+              "startMs": 7200,
+              "endMs": 7700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 5200,
+              "endMs": 7500,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 200,
+              "endMs": 700,
+              "gloss": null
+            },
+            {
+              "startMs": 700,
+              "endMs": 1200,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1200,
+              "endMs": 1700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2300,
+              "endMs": 2800,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5500,
+              "endMs": 6000,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6000,
+              "endMs": 6400,
+              "gloss": null
+            },
+            {
+              "startMs": 6400,
+              "endMs": 6800,
+              "gloss": null
+            },
+            {
+              "startMs": 6800,
+              "endMs": 7200,
+              "gloss": null
+            },
+            {
+              "startMs": 7200,
+              "endMs": 7700,
+              "gloss": null
+            },
+            {
+              "startMs": 7700,
+              "endMs": 8200,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 5200,
+              "endMs": 7500,
+              "maxIoU": 0.217,
+              "maxLabeledIoU": 0.217,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1600,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1700,
+              "endMs": 2300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2700,
+              "endMs": 3300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6200,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6400,
+              "endMs": 7000,
+              "gloss": null
+            },
+            {
+              "startMs": 7100,
+              "endMs": 7700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.222,
+              "maxLabeledIoU": 0.222,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 5200,
+              "endMs": 7500,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "referenceText": "espelho amarelo",
+          "textFromReferenceGlosses": "o espelho amarelo",
+          "proposals": [
+            {
+              "startMs": 300,
+              "endMs": 900,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1000,
+              "endMs": 1500,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 1600,
+              "endMs": 2100,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2200,
+              "endMs": 2700,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 2800,
+              "endMs": 3300,
+              "gloss": "espelho"
+            },
+            {
+              "startMs": 5000,
+              "endMs": 5500,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 5600,
+              "endMs": 6200,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 6400,
+              "endMs": 7000,
+              "gloss": null
+            },
+            {
+              "startMs": 7100,
+              "endMs": 7700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "espelho",
+              "startMs": 500,
+              "endMs": 3200,
+              "maxIoU": 0.185,
+              "maxLabeledIoU": 0.185,
+              "aligned": false,
+              "recognized": false
+            },
+            {
+              "gloss": "amarelo",
+              "startMs": 5200,
+              "endMs": 7500,
+              "maxIoU": 0.261,
+              "maxLabeledIoU": 0.261,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "espelho",
+          "startMs": 500,
+          "endMs": 3200,
+          "score": {
+            "frames": 27,
+            "framesWithHands": 27,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 27,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.9947515940991069,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.0005871508471468728
+              },
+              {
+                "label": "cinco",
+                "value": 0.004478512656259653
+              },
+              {
+                "label": "espelho",
+                "value": 0.9947515940991069
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00018141228185634695
+              },
+              {
+                "label": "aluno",
+                "value": 0.0000013301156301374975
+              }
+            ]
+          }
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 5200,
+          "endMs": 7500,
+          "score": {
+            "frames": 23,
+            "framesWithHands": 23,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 23,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.7793479357447817,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.022867595159735507
+              },
+              {
+                "label": "cinco",
+                "value": 0.013314526630206741
+              },
+              {
+                "label": "espelho",
+                "value": 0.1805522857512753
+              },
+              {
+                "label": "amarelo",
+                "value": 0.7793479357447817
+              },
+              {
+                "label": "aluno",
+                "value": 0.003917656714000733
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "pairsProtocolSha256": "09eebad7bd65dd9094506dacac5bc9067220b6a37eb5a452c3639510f8b41d5a"
+}

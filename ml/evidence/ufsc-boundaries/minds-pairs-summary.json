@@ -1,0 +1,670 @@
+{
+  "schemaVersion": 1,
+  "replaySha256": "a5fe743749ca2aaf94052c164a1893feda3db8b38903238c8c3132754305ddea",
+  "conditions": [
+    {
+      "id": "published_original",
+      "cases": 12,
+      "suggestions": 1,
+      "exactGlossSequences": 0,
+      "exactSuggestedTexts": 0,
+      "exactTextsFromReferenceGlosses": 0,
+      "glossEdits": {
+        "insertions": 64,
+        "deletions": 0,
+        "substitutions": 2,
+        "reference_units": 24,
+        "error_rate": 2.75
+      },
+      "suggestedTextEdits": {
+        "insertions": 8,
+        "deletions": 22,
+        "substitutions": 1,
+        "reference_units": 24,
+        "error_rate": 1.2916666666666667
+      },
+      "textEditsFromReferenceGlosses": {
+        "insertions": 4,
+        "deletions": 0,
+        "substitutions": 8,
+        "reference_units": 24,
+        "error_rate": 0.5
+      },
+      "boundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": false,
+        "reference_intervals": 24,
+        "predicted_intervals": 125,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "labeledBoundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": true,
+        "reference_intervals": 24,
+        "predicted_intervals": 88,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "byGapMs": {
+        "0": {
+          "cases": 6,
+          "suggestions": 0,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 34,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.9166666666666665
+          },
+          "suggestedTextEdits": {
+            "insertions": 0,
+            "deletions": 12,
+            "substitutions": 0,
+            "reference_units": 12,
+            "error_rate": 1.0
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 65,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 46,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        },
+        "800": {
+          "cases": 6,
+          "suggestions": 1,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 30,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.5833333333333335
+          },
+          "suggestedTextEdits": {
+            "insertions": 8,
+            "deletions": 10,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 1.5833333333333333
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 60,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 42,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        }
+      }
+    },
+    {
+      "id": "holistic_frozen",
+      "cases": 12,
+      "suggestions": 1,
+      "exactGlossSequences": 0,
+      "exactSuggestedTexts": 0,
+      "exactTextsFromReferenceGlosses": 0,
+      "glossEdits": {
+        "insertions": 59,
+        "deletions": 0,
+        "substitutions": 2,
+        "reference_units": 24,
+        "error_rate": 2.5416666666666665
+      },
+      "suggestedTextEdits": {
+        "insertions": 9,
+        "deletions": 22,
+        "substitutions": 1,
+        "reference_units": 24,
+        "error_rate": 1.3333333333333333
+      },
+      "textEditsFromReferenceGlosses": {
+        "insertions": 4,
+        "deletions": 0,
+        "substitutions": 8,
+        "reference_units": 24,
+        "error_rate": 0.5
+      },
+      "boundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": false,
+        "reference_intervals": 24,
+        "predicted_intervals": 137,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "labeledBoundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": true,
+        "reference_intervals": 24,
+        "predicted_intervals": 83,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "byGapMs": {
+        "0": {
+          "cases": 6,
+          "suggestions": 1,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 33,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.8333333333333335
+          },
+          "suggestedTextEdits": {
+            "insertions": 9,
+            "deletions": 10,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 1.6666666666666667
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 68,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 45,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        },
+        "800": {
+          "cases": 6,
+          "suggestions": 0,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 26,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.25
+          },
+          "suggestedTextEdits": {
+            "insertions": 0,
+            "deletions": 12,
+            "substitutions": 0,
+            "reference_units": 12,
+            "error_rate": 1.0
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 69,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 38,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        }
+      }
+    },
+    {
+      "id": "holistic_weak_cut",
+      "cases": 12,
+      "suggestions": 4,
+      "exactGlossSequences": 0,
+      "exactSuggestedTexts": 0,
+      "exactTextsFromReferenceGlosses": 0,
+      "glossEdits": {
+        "insertions": 56,
+        "deletions": 0,
+        "substitutions": 2,
+        "reference_units": 24,
+        "error_rate": 2.4166666666666665
+      },
+      "suggestedTextEdits": {
+        "insertions": 24,
+        "deletions": 16,
+        "substitutions": 4,
+        "reference_units": 24,
+        "error_rate": 1.8333333333333333
+      },
+      "textEditsFromReferenceGlosses": {
+        "insertions": 4,
+        "deletions": 0,
+        "substitutions": 8,
+        "reference_units": 24,
+        "error_rate": 0.5
+      },
+      "boundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": false,
+        "reference_intervals": 24,
+        "predicted_intervals": 90,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "labeledBoundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": true,
+        "reference_intervals": 24,
+        "predicted_intervals": 80,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "byGapMs": {
+        "0": {
+          "cases": 6,
+          "suggestions": 2,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 29,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.5
+          },
+          "suggestedTextEdits": {
+            "insertions": 12,
+            "deletions": 8,
+            "substitutions": 2,
+            "reference_units": 12,
+            "error_rate": 1.8333333333333333
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 45,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 41,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        },
+        "800": {
+          "cases": 6,
+          "suggestions": 2,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 27,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.3333333333333335
+          },
+          "suggestedTextEdits": {
+            "insertions": 12,
+            "deletions": 8,
+            "substitutions": 2,
+            "reference_units": 12,
+            "error_rate": 1.8333333333333333
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 45,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 39,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        }
+      }
+    },
+    {
+      "id": "holistic_weak_cut_with_floor",
+      "cases": 12,
+      "suggestions": 3,
+      "exactGlossSequences": 0,
+      "exactSuggestedTexts": 0,
+      "exactTextsFromReferenceGlosses": 0,
+      "glossEdits": {
+        "insertions": 58,
+        "deletions": 0,
+        "substitutions": 2,
+        "reference_units": 24,
+        "error_rate": 2.5
+      },
+      "suggestedTextEdits": {
+        "insertions": 18,
+        "deletions": 18,
+        "substitutions": 3,
+        "reference_units": 24,
+        "error_rate": 1.625
+      },
+      "textEditsFromReferenceGlosses": {
+        "insertions": 4,
+        "deletions": 0,
+        "substitutions": 8,
+        "reference_units": 24,
+        "error_rate": 0.5
+      },
+      "boundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": false,
+        "reference_intervals": 24,
+        "predicted_intervals": 96,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "labeledBoundaries": {
+        "iou_threshold": 0.5,
+        "requires_matching_label": true,
+        "reference_intervals": 24,
+        "predicted_intervals": 82,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matched_mean_iou": null,
+        "median_start_error_ms": null,
+        "median_end_error_ms": null
+      },
+      "byGapMs": {
+        "0": {
+          "cases": 6,
+          "suggestions": 1,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 29,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.5
+          },
+          "suggestedTextEdits": {
+            "insertions": 6,
+            "deletions": 10,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 1.4166666666666667
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 49,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 41,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        },
+        "800": {
+          "cases": 6,
+          "suggestions": 2,
+          "exactGlossSequences": 0,
+          "exactSuggestedTexts": 0,
+          "exactTextsFromReferenceGlosses": 0,
+          "glossEdits": {
+            "insertions": 29,
+            "deletions": 0,
+            "substitutions": 1,
+            "reference_units": 12,
+            "error_rate": 2.5
+          },
+          "suggestedTextEdits": {
+            "insertions": 12,
+            "deletions": 8,
+            "substitutions": 2,
+            "reference_units": 12,
+            "error_rate": 1.8333333333333333
+          },
+          "textEditsFromReferenceGlosses": {
+            "insertions": 2,
+            "deletions": 0,
+            "substitutions": 4,
+            "reference_units": 12,
+            "error_rate": 0.5
+          },
+          "boundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": false,
+            "reference_intervals": 12,
+            "predicted_intervals": 47,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          },
+          "labeledBoundaries": {
+            "iou_threshold": 0.5,
+            "requires_matching_label": true,
+            "reference_intervals": 12,
+            "predicted_intervals": 41,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matched_mean_iou": null,
+            "median_start_error_ms": null,
+            "median_end_error_ms": null
+          }
+        }
+      }
+    }
+  ],
+  "manualWindows": {
+    "total": 24,
+    "recognized": 24
+  }
+}

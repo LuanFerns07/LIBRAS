@@ -208,6 +208,32 @@ node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
   data/continuous-natural-eval/eqt-outside-catalog.json --eqt
 ~~~
 
+### Pares de sinais do catálogo no Chromium
+
+O commit `e70fa59` fixou três sequências de glosas com duas classes cada, usando oito clipes isolados do MINDS-Libras de duas pessoas da partição reservada. Cada par mantém a mesma pessoa nos dois clipes e tem duas versões, uma com junção direta e outra com 800 ms de quadro preto na junção. O roteiro usa as frases de referência “cinco alunos”, “cinco espelhos” e “espelho amarelo”. Essas frases descrevem as montagens. A mídia preserva o movimento original de cada clipe e a emenda é artificial. [Protocolo e hashes](../ml/evidence/ufsc-boundaries/minds-pairs-protocol.json) · [Versão MINDS-Libras e licença CC BY 4.0](https://zenodo.org/records/2667329)
+
+No Chromium, os quatro detectores usaram os mesmos quadros, um Holistic a 10 Hz, o classificador combinado e o tradutor monotônico que preserva Cinco. O classificador confirmou as 24 glosas quando recebeu os intervalos manuais. Com fronteiras automáticas, nenhum detector alcançou um pareamento de IoU ≥ 0,50 com as janelas anotadas. As propostas subdividiram os gestos e o classificador repetiu a mesma glosa em vários intervalos. [Propostas, glosas e escores por janela](../ml/evidence/ufsc-boundaries/minds-pairs-browser.json)
+
+| Detector | Inserções de glosas | Trocas de glosas | Sequências exatas | Sugestões de texto | Textos exatos |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Original | 64 | 2 | 0/12 | 1/12 | 0/12 |
+| Holistic sem controle de fragmentação | 59 | 2 | 0/12 | 1/12 | 0/12 |
+| Holistic com penalidade de corte, usada na prévia | 56 | 2 | 0/12 | 4/12 | 0/12 |
+| Holistic com penalidade e piso de cinco posições | 58 | 2 | 0/12 | 3/12 | 0/12 |
+
+A distância de edição compara 24 glosas de referência com as glosas reconhecidas na ordem. Os trechos inconclusivos ficam identificados na captura. Para medir o texto de ponta a ponta, uma tentativa sem sugestão conta como omissão da referência. Com as glosas corretas dadas ao tradutor, as três saídas foram “cinco aluno”, “cinco espelho” e “o espelho amarelo”. As diferenças literais somaram oito trocas de número gramatical e quatro inserções de artigo nas 12 sequências. O artigo pode ser válido em português e conta como inserção diante da referência literal. [Métricas, incluindo a comparação por duração da pausa](../ml/evidence/ufsc-boundaries/minds-pairs-summary.json)
+
+Na Área livre da prévia `b55d991`, a câmera de arquivo repetiu Cinco + Aluno sem intervalo inserido e Espelho + Amarelo com a pausa de 800 ms. As duas tentativas exibiram glosas repetidas e trechos inconclusivos. Ambas preservaram “Texto conferido.”. O desempenho em gravações contínuas anotadas e a aceitação com webcam física e sinalizantes ainda estão em aberto. [Resultados da Área livre](../ml/evidence/ufsc-boundaries/minds-pairs-camera.json) · [Prévia experimental](http://127.0.0.1:4201/#area-livre)
+
+Com os clipes oficiais em `data/minds-expanded/raw` e os ativos do ensaio do Cederj no Linux, execute na raiz:
+
+~~~bash
+out=data/continuous-natural-eval/minds-pairs
+mkdir -p "$out"
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" "$out/replay.json" --pairs
+.venv/bin/python -m ml.continuous_experiment.boundaries.score_pairs "$out/replay.json" > "$out/summary.json"
+~~~
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

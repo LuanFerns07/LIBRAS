@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "source": "chromium-file-camera",
+  "cases": [
+    {
+      "id": "s11-cinco-aluno-0",
+      "build": {
+        "commit": "b55d99157307ff4967512d3507cfa01571f6c6b0",
+        "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+        "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+        "threshold": 0.525
+      },
+      "renderedClipSha256": "6c23a2e83c66f9ac233608e134b6b970a8fed2d43304858c0b33ddab6cee60ff",
+      "cameraFileSha256": "cd1b084923f3310945ae500c8ae268cfad41e979e5d0507e116b67462c8ced44",
+      "camera": {
+        "width": 640,
+        "height": 360,
+        "frameRate": 30
+      },
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "window": {
+        "offsetMs": 0,
+        "durationMs": 6400,
+        "endMs": 6400
+      },
+      "extractedFrames": 64,
+      "glosses": "cinco · cinco · cinco · cinco · aluno · aluno · aluno · [trecho inconclusivo]",
+      "transcript": "Texto conferido."
+    },
+    {
+      "id": "s12-espelho-amarelo-800",
+      "build": {
+        "commit": "b55d99157307ff4967512d3507cfa01571f6c6b0",
+        "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+        "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+        "threshold": 0.525
+      },
+      "renderedClipSha256": "a9d7e5a5b6519401f1095138824ab80e47da0c072ca824800cc20215ef289822",
+      "cameraFileSha256": "45c34c19571c6ef13adc054b9493c669932ed1220e3aad2f50315f29b182a165",
+      "camera": {
+        "width": 640,
+        "height": 360,
+        "frameRate": 30
+      },
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "window": {
+        "offsetMs": 0,
+        "durationMs": 8700,
+        "endMs": 8700
+      },
+      "extractedFrames": 87,
+      "glosses": "espelho · espelho · [trecho inconclusivo] · espelho · amarelo · amarelo · [trecho inconclusivo] · [trecho inconclusivo]",
+      "transcript": "Texto conferido."
+    }
+  ]
+}
