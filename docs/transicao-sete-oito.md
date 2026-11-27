@@ -150,3 +150,33 @@ Para a primeira confirmação independente, ajustamos os mesmos dois vetos uma v
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.freeze_numeric_veto_pair
 ```
+
+### Primeira avaliação externa da conjunção
+
+A aula **Números cardinais — Libras**, do professor Israel Queiroz de Lima, foi produzida pelo Niead da Universidade Federal do Acre para o curso de Matemática EaD. A publicação oficial declara Creative Commons Atribuição. O professor e a gravação são novos para este ensaio. O enquadramento mantém cabeça, tronco e mãos visíveis tanto nas demonstrações isoladas como no exemplo de sequência numérica. [Aula e licença declarada](https://www.youtube.com/watch?v=1i_v2a4xAhY) · [Referência no material do IFAC](https://educapes.capes.gov.br/bitstream/capes/600517/1/chegou%20um%20aluno%20surdo%20e%20agora.pdf) · [Termos da licença de atribuição](https://support.google.com/youtube/answer/2797468?hl=pt-BR)
+
+O commit `a4451fb` fixou os 19 intervalos a partir da numeração projetada e da mudança da mão. São duas janelas de Cinco sobre a mesma demonstração, uma de Cinco ao final do exemplo de telefone, sete janelas de quatro transições com pausa didática e nove janelas de três transições sem pausa do exemplo de telefone. O transporte da mídia inclui horários de criação que variam a cada download. O FFmpeg remultiplexa a faixa de vídeo sem alterar seus pacotes. Conferimos o mesmo SHA-256 dos 19 recortes com o arquivo original e com o remultiplexado. [Seleção, autoria e hashes](../ml/fresh_eval/protocol-numerais-confirmacao-externa.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-confirmacao-externa/manifest.json)
+
+| Janelas | Rastreamento utilizável | Aceites como Cinco no combinado | Aceites como Cinco após o veto |
+| --- | ---: | ---: | ---: |
+| Cinco isolado e Cinco ao final do telefone | 3/3 | 3 | 3 |
+| Transições didáticas com pausa, incluindo Sete → Oito | 7/7 | 0 | 0 |
+| Transições contínuas do exemplo de telefone | 9/9 | 0 | 0 |
+
+A conjunção preservou os três Cinco aceitos, com confiança original de 0,648 a 0,929. O combinado já rejeitava todas as transições, então o ensaio verifica retenção de Cinco e deixa em aberto a capacidade de vetar falsos aceites em outra pessoa. Pesos e limiares são os mesmos do commit `9c4b5e1`. A Fiocruz e o MINDS teste ficaram fora. [Relatório externo em CPU](../ml/fresh_eval/evidence-numerais-confirmacao-externa/report.json)
+
+```bash
+out=data/transition-gate-m5/numeric-conjunction-confirmation
+protocol=ml/fresh_eval/protocol-numerais-confirmacao-externa.json
+mkdir -p "$out/source"
+yt-dlp --no-playlist -f 605 -o "$out/source/ufac-cardinais.mp4" \
+  'https://www.youtube.com/watch?v=1i_v2a4xAhY'
+ffmpeg -v error -nostdin -threads 1 -i "$out/source/ufac-cardinais.mp4" -map 0:v:0 \
+  -an -map_metadata -1 -c:v copy -fflags +bitexact -movflags +faststart \
+  "$out/source/ufac-cardinais-stable.mp4"
+.venv/bin/python -m ml.fresh_eval.prepare --protocol "$protocol" --out "$out"
+node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --workers 1
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_numeric_veto_confirmation
+```
+
+O relatório local fica em `$out/report.json`. Os vídeos e pontos ficam em `data/`.

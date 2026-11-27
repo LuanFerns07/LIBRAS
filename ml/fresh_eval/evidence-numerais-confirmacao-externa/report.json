@@ -1,0 +1,369 @@
+{
+  "scope": "first-confirmation-without-retuning",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "8bc9da20b255494409e0ad55ad07bb49cd620cc18e9f93617fa5ce58f64448b6",
+  "manifestSha256": "f503c3726337c1d90b1c57f35be50586036e4af2217c2d3cbfeb2f5ff61f8593",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "featuresManifestSha256": "56c6b5e6c904b4c50dfde6855bf9b06f6e28409209b942b7c0df701c18fd1fbe",
+  "schemaVersion": 1,
+  "frozenRuleSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "model": {
+    "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+    "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+    "threshold": 0.525
+  },
+  "outcome": "insufficient-baseline-pair",
+  "sessions": [
+    {
+      "signer": 905,
+      "session": "ufac-niead-cardinais-2019",
+      "correctCinco": [
+        "ufac-cinco-cardinal-longo",
+        "ufac-cinco-cardinal-central",
+        "ufac-cinco-telefone"
+      ],
+      "correctCincoLost": [],
+      "falseCincoByMovement": {},
+      "falseCincoMovementsVetoed": [],
+      "informative": false
+    }
+  ],
+  "decisions": [
+    {
+      "id": "ufac-cinco-cardinal-longo",
+      "signer": 905,
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9048270524653877,
+      "captureState": "ready",
+      "decision": "correct",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "25bb6b245473b72372616d08095518cd51b2d82c36abc16594d168acebae9269",
+      "scores": {
+        "shape": 0.9965444462942327,
+        "shape-and-motion": 0.8991068945174887
+      },
+      "afterVeto": "cinco"
+    },
+    {
+      "id": "ufac-cinco-cardinal-central",
+      "signer": 905,
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9294413660648825,
+      "captureState": "ready",
+      "decision": "correct",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "87949466327394b3d9aae65274e98f8563e7fe050fc46534964e484dcc13d440",
+      "scores": {
+        "shape": 0.7662263791857239,
+        "shape-and-motion": 0.7086583829837743
+      },
+      "afterVeto": "cinco"
+    },
+    {
+      "id": "ufac-cinco-telefone",
+      "signer": 905,
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.6481712382657736,
+      "captureState": "ready",
+      "decision": "correct",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "22ebb435f69b4041f446f07480430748282b48c7d3585dc4d336d105c9b285f3",
+      "scores": {
+        "shape": 0.7048378409782469,
+        "shape-and-motion": 0.6341070127073467
+      },
+      "afterVeto": "cinco"
+    },
+    {
+      "id": "ufac-didatico-seis-sete-3500",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.5643547110650395,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-seis-sete",
+      "sourceLabel": "Seis → pausa → Sete",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "f52456de0ea2302b8330954c14f807c2b2d044580d3fadaf9e213f80f92856eb",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-seis-sete-3200",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4388913749166114,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-seis-sete",
+      "sourceLabel": "Seis → pausa → Sete",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "a0b95552724e4f762953546c3065ce7ef4602b35b800c661ce78d8197c0ab3aa",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-sete-oito-3900",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.5532801728432079,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-sete-oito",
+      "sourceLabel": "Sete → pausa → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "27f35d72ea8f226e18813f1cbed2e980f83b546ff24dfea0a07fcecd15ff1c55",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-sete-oito-3400",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.6424315181209946,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-sete-oito",
+      "sourceLabel": "Sete → pausa → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "0ebe765dd8d6a4db59d0894a3a8e7e1b9dbc377a9d48bb75c9286bba05264dc0",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-sete-oito-3150",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.6348054648246058,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-sete-oito",
+      "sourceLabel": "Sete → pausa → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "1b5c0efec8eff2ecbc2dea83fc9fda38a9f1a826d5c58b9ff6d34bab372b1a61",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-oito-nove-4250",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4839999148969874,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-oito-nove",
+      "sourceLabel": "Oito → pausa → Nove",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "bbd592209f49b50e484b3b62866a98caf7e2e8f127191afc86287f4b15e5e25d",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-didatico-nove-dez-3750",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.48231629395358466,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "didatico-nove-dez",
+      "sourceLabel": "Nove → pausa → Dez",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "af4657dddbfdd74e7aea58c2dcc16dba4683a6646299f94d23e9e52a5cf6c7c6",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-um-oito-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4592777173556255,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-um-oito",
+      "sourceLabel": "Um → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "a7e6132c8d3730172a221832719c1c2f5687b8848848d824b71b86fd1a6e016d",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-um-oito-1000",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.5358985654895967,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-um-oito",
+      "sourceLabel": "Um → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "4e9809db0bfa3edf2308c91282a8c97d219cb77648a55e6b69e5db5da8c43a0e",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-um-oito-1500",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4890463696464849,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-um-oito",
+      "sourceLabel": "Um → Oito",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "7b25b2f4716544d6018f6ad0d62230eb8077f321d7ae183298067d419579aa2b",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-oito-sete-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4300065237573321,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-oito-sete",
+      "sourceLabel": "Oito → Sete",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "337b699132f8e156f45c211836cfecdeaf67ba2496deb93c431f58a9686902da",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-oito-sete-1000",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.40007565065789924,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-oito-sete",
+      "sourceLabel": "Oito → Sete",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "1ad4d549f3e12e8813db90e583d667826821778d826ade24209518589afc4ed9",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-oito-sete-1500",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.41018377950053075,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-oito-sete",
+      "sourceLabel": "Oito → Sete",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "bbc41a8a2fc97ab4059629c0a4a0fd81106fbdd51422dddecc1a5d2b5f78a42f",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-sete-tres-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.7204939639478103,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-sete-tres",
+      "sourceLabel": "Sete → Três",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "b345978b0c8236d5a85e11acbdd173ebf9707f45c2d8ac8fa8271733afbec046",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-sete-tres-1000",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4757145159595497,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-sete-tres",
+      "sourceLabel": "Sete → Três",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "0c898946fdf8f16c7b72787077d37dbd933392847dc0a1deabd759ed3020eb42",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-telefone-sete-tres-1500",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.43018936435530397,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "telefone-sete-tres",
+      "sourceLabel": "Sete → Três",
+      "session": "ufac-niead-cardinais-2019",
+      "sha256": "beaeb2c6c7d049b3499168d7478dc7e398415abf52d2150ae3e69b2be0e61153",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    }
+  ]
+}

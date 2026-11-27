@@ -16,8 +16,10 @@
       "referenceIndex": "https://educapes.capes.gov.br/bitstream/capes/600517/1/chegou%20um%20aluno%20surdo%20e%20agora.pdf",
       "url": "https://www.youtube.com/watch?v=1i_v2a4xAhY",
       "downloadFormat": "605",
-      "filename": "ufac-cardinais.mp4",
-      "sha256": "55f3d9a62dfadc7b3c26f41afb3d94dee998452887b7ec7cb4bcd02c296f4b76"
+      "filename": "ufac-cardinais-stable.mp4",
+      "sha256": "566276d79d266bdcd993f3b22f4806cb3606e62a0272b878b7ba866dffca2ee0",
+      "firstDownloadSha256": "55f3d9a62dfadc7b3c26f41afb3d94dee998452887b7ec7cb4bcd02c296f4b76",
+      "videoPacketSha256": "ab03b3fe97c9cceabaaafda2a2e92c42bd48ef52e91b1db4fa6504e66db92edc"
     }
   },
   "selection": {
