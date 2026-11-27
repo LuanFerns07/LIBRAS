@@ -147,6 +147,7 @@ def test_fold(train, validation, held, feature, negatives, ridge):
         "threshold": estimate[-1] if estimate is not None else None,
         "mindsValCorrectCinco": len(control),
         "mindsValCorrectCincoLost": [row["id"] for row in control if row["afterVeto"] is None],
+        "mindsValLostScore": {row["id"]: row["score"] for row in control if row["afterVeto"] is None},
         "didacticCorrectCinco": [row["id"] for row in didactic if row["reference"] == row["baseline"] == "cinco"],
         "didacticCorrectCincoLost": [row["id"] for row in didactic if row["reference"] == row["baseline"] == "cinco"
                                     and row["afterVeto"] is None],
@@ -193,11 +194,27 @@ def evaluate(data):
             "mindsTrainCinco": len(train), "mindsValCinco": len(validation), "profiles": results}
 
 
+def summarize(report, detail_path):
+    profiles = {}
+    for name, profile in report["profiles"].items():
+        folds = {}
+        for group, fold in profile["folds"].items():
+            stats = {key: value for key, value in fold.items() if key != "caseDecisions"}
+            stats["didacticCaptureStates"] = dict(Counter(row["capture"] for row in fold["caseDecisions"]))
+            folds[group] = stats
+        profiles[name] = {"passesCriterion": profile["passesCriterion"], "folds": folds}
+    root = {key: value for key, value in report.items() if key != "profiles"}
+    return {**root, "fullReportSha256": digest(detail_path), "profiles": profiles}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data"))
     args = parser.parse_args()
-    write_json(args.data / "transition-gate-m5/numeric-transition-fit.json", evaluate(args.data))
+    report = evaluate(args.data)
+    detail = args.data / "transition-gate-m5/numeric-transition-fit.json"
+    write_json(detail, report)
+    write_json(detail.with_name("numeric-transition-fit-summary.json"), summarize(report, detail))
 
 
 if __name__ == "__main__":

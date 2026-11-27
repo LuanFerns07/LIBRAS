@@ -1,0 +1,687 @@
+{
+  "schemaVersion": 1,
+  "scope": "leave-one-didactic-person-and-session-out-development",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "dcaa05cc3dd20d196c7c4794cdddf363e040fbcee4d1a953a19a649f37650bc8",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "mindsTrainCinco": 18,
+  "mindsValCinco": 6,
+  "fullReportSha256": "fce9559daecb0342d79905d27804534f6857f7a9216ce13dec6e275ad55a0b95",
+  "profiles": {
+    "shape/all-usable-transitions": {
+      "passesCriterion": false,
+      "folds": {
+        "cecierj-aula-03": {
+          "trained": true,
+          "fitPositiveCount": 20,
+          "fitPositiveGroups": [
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 33,
+          "fitNegativeGroups": [
+            "ufsm-grupo",
+            "ufsm-libras-d",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 9,
+          "threshold": 0.2639234452848308,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [
+            "cecierj-cardinais-cinco",
+            "cecierj-quantitativos-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 9,
+          "falseCincoWindowsVetoed": 9,
+          "falseCincoMotions": 3,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Sete → Oito",
+            "quantitativos | Oito → Nove",
+            "quantitativos | Sete → Oito"
+          ],
+          "didacticCaptureStates": {
+            "ready": 38
+          }
+        },
+        "ufsm-grupo": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 64,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-libras-d",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.15078898240373495,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [
+            "ufsm-grupo-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 1,
+          "falseCincoWindowsVetoed": 1,
+          "falseCincoMotions": 1,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Oito → Nove"
+          ],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-d": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo"
+          ],
+          "fitNegativeCount": 64,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.4326143291819345,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.28451093574007863
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-on": {
+          "trained": true,
+          "fitPositiveCount": 22,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 46,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.18852741936399187,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "insufficient": 4,
+            "ready": 23
+          }
+        }
+      }
+    },
+    "shape/baseline-accepted-as-cinco": {
+      "passesCriterion": false,
+      "folds": {
+        "cecierj-aula-03": {
+          "trained": true,
+          "fitPositiveCount": 20,
+          "fitPositiveGroups": [
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 1,
+          "fitNegativeGroups": [
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 1,
+          "threshold": 0.8700356276611924,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.8515397096431502,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.7613215386214113,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.48241706512068366
+          },
+          "didacticCorrectCinco": [
+            "cecierj-cardinais-cinco",
+            "cecierj-quantitativos-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 9,
+          "falseCincoWindowsVetoed": 9,
+          "falseCincoMotions": 3,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Sete → Oito",
+            "quantitativos | Oito → Nove",
+            "quantitativos | Sete → Oito"
+          ],
+          "didacticCaptureStates": {
+            "ready": 38
+          }
+        },
+        "ufsm-grupo": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 9,
+          "fitNegativeGroups": [
+            "cecierj-aula-03"
+          ],
+          "fitNegativeMovements": 3,
+          "threshold": 0.7362031346893011,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": -0.07379927184871748,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.7094446005492506,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.3739360809499947
+          },
+          "didacticCorrectCinco": [
+            "ufsm-grupo-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 1,
+          "falseCincoWindowsVetoed": 1,
+          "falseCincoMotions": 1,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Oito → Nove"
+          ],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-d": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo"
+          ],
+          "fitNegativeCount": 10,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 4,
+          "threshold": 0.7601739290242846,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.10227526212209315,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.7005780930717176,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.38889217958984684
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-on": {
+          "trained": true,
+          "fitPositiveCount": 22,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 10,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 4,
+          "threshold": 0.7500340589715382,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.09374241727863275,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.7092196215276362,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.4065387545267806
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "insufficient": 4,
+            "ready": 23
+          }
+        }
+      }
+    },
+    "shape-and-motion/all-usable-transitions": {
+      "passesCriterion": false,
+      "folds": {
+        "cecierj-aula-03": {
+          "trained": true,
+          "fitPositiveCount": 20,
+          "fitPositiveGroups": [
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 33,
+          "fitNegativeGroups": [
+            "ufsm-grupo",
+            "ufsm-libras-d",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 9,
+          "threshold": 0.4996630834264806,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [
+            "cecierj-cardinais-cinco",
+            "cecierj-quantitativos-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 9,
+          "falseCincoWindowsVetoed": 9,
+          "falseCincoMotions": 3,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Sete → Oito",
+            "quantitativos | Oito → Nove",
+            "quantitativos | Sete → Oito"
+          ],
+          "didacticCaptureStates": {
+            "ready": 38
+          }
+        },
+        "ufsm-grupo": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 64,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-libras-d",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.35418232059227994,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [
+            "ufsm-grupo-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 1,
+          "falseCincoWindowsVetoed": 1,
+          "falseCincoMotions": 1,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Oito → Nove"
+          ],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-d": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo"
+          ],
+          "fitNegativeCount": 64,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo",
+            "ufsm-libras-on"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.504249503620005,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [],
+          "mindsValLostScore": {},
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-on": {
+          "trained": true,
+          "fitPositiveCount": 22,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 46,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeMovements": 18,
+          "threshold": 0.6233761840041985,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "c9315cf9be751bd3ce0d1e0ef76adcdb7fea99becb4170d1a4853c7eab038e77"
+          ],
+          "mindsValLostScore": {
+            "c9315cf9be751bd3ce0d1e0ef76adcdb7fea99becb4170d1a4853c7eab038e77": 0.5959286931608239
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "insufficient": 4,
+            "ready": 23
+          }
+        }
+      }
+    },
+    "shape-and-motion/baseline-accepted-as-cinco": {
+      "passesCriterion": false,
+      "folds": {
+        "cecierj-aula-03": {
+          "trained": true,
+          "fitPositiveCount": 20,
+          "fitPositiveGroups": [
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 1,
+          "fitNegativeGroups": [
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 1,
+          "threshold": 0.9059084664919486,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84"
+          ],
+          "mindsValLostScore": {
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.37181375906721137
+          },
+          "didacticCorrectCinco": [
+            "cecierj-cardinais-cinco",
+            "cecierj-quantitativos-cinco"
+          ],
+          "didacticCorrectCincoLost": [
+            "cecierj-cardinais-cinco"
+          ],
+          "falseCincoWindows": 9,
+          "falseCincoWindowsVetoed": 9,
+          "falseCincoMotions": 3,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Sete → Oito",
+            "quantitativos | Oito → Nove",
+            "quantitativos | Sete → Oito"
+          ],
+          "didacticCaptureStates": {
+            "ready": 38
+          }
+        },
+        "ufsm-grupo": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 9,
+          "fitNegativeGroups": [
+            "cecierj-aula-03"
+          ],
+          "fitNegativeMovements": 3,
+          "threshold": 0.7684616497109531,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.3254677563266353,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.7176070110457899,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.6475858110510513
+          },
+          "didacticCorrectCinco": [
+            "ufsm-grupo-cinco"
+          ],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 1,
+          "falseCincoWindowsVetoed": 1,
+          "falseCincoMotions": 1,
+          "falseCincoMotionsFullyVetoed": [
+            "cardinais | Oito → Nove"
+          ],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-d": {
+          "trained": true,
+          "fitPositiveCount": 21,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo"
+          ],
+          "fitNegativeCount": 10,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 4,
+          "threshold": 0.8508081610902807,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.5280949967963382,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.5941684269967978,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.7195936495703762
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "ready": 6
+          }
+        },
+        "ufsm-libras-on": {
+          "trained": true,
+          "fitPositiveCount": 22,
+          "fitPositiveGroups": [
+            "cecierj-aula-03",
+            "minds-1",
+            "minds-2",
+            "minds-4",
+            "minds-5",
+            "minds-6",
+            "minds-7",
+            "ufsm-grupo",
+            "ufsm-libras-d"
+          ],
+          "fitNegativeCount": 10,
+          "fitNegativeGroups": [
+            "cecierj-aula-03",
+            "ufsm-grupo"
+          ],
+          "fitNegativeMovements": 4,
+          "threshold": 0.8409769108189006,
+          "mindsValCorrectCinco": 6,
+          "mindsValCorrectCincoLost": [
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+          ],
+          "mindsValLostScore": {
+            "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b": 0.5060412684052922,
+            "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84": 0.5915423954634716,
+            "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872": 0.7195226990067425
+          },
+          "didacticCorrectCinco": [],
+          "didacticCorrectCincoLost": [],
+          "falseCincoWindows": 0,
+          "falseCincoWindowsVetoed": 0,
+          "falseCincoMotions": 0,
+          "falseCincoMotionsFullyVetoed": [],
+          "didacticCaptureStates": {
+            "insufficient": 4,
+            "ready": 23
+          }
+        }
+      }
+    }
+  }
+}

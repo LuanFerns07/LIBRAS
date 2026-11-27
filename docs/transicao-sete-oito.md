@@ -110,3 +110,26 @@ PYTHONPATH=ml .venv/bin/python -m ml.evaluate_frozen_numeric_confirmation
 ```
 
 O relatório local fica em `$out/frozen-veto-report.json`.
+
+## Ajuste com outras sessões de transições
+
+Um ajuste linear em CPU usou quatro gravações de quatro pessoas da UFSM e da Cecierj. O protocolo `9adfa57` fixou os índices e a estratégia antes de ajustar os coeficientes. Cada rodada deixou de fora todas as janelas de uma mesma pessoa e gravação, inclusive o Cinco isolado e todas as janelas sobrepostas da mesma transição. O MINDS treino forneceu 18 Cinco para o ajuste. Os seis Cinco do MINDS validação serviram de controle em todas as rodadas. A Fiocruz e o MINDS teste ficaram fora. [Plano congelado e hashes](../ml/fresh_eval/protocol-numerais-ajuste.json)
+
+Das 77 janelas didáticas, 73 tiveram rastreamento utilizável. Havia quatro exemplos isolados de Cinco e 73 janelas de 21 transições didáticas. O combinado acertou três dos quatro Cinco. Os 10 falsos aceites vieram de quatro transições de duas pessoas. Quando a Cecierj ficou de fora, restou só uma transição difícil para o ajuste. Quando o Grupo UFSM ficou de fora, restaram três, todas da mesma pessoa da Cecierj. As demais transições ajudaram a testar sensibilidade ao conjunto de negativos.
+
+O ajuste comparou a forma da mão e a forma acrescida de deslocamento. A forma usa a mediana e a faixa entre os percentis 10 e 90 das 15 distâncias par a par entre seis pontos, o pulso e as cinco pontas dos dedos. As distâncias são divididas pelo tamanho da palma. A segunda opção acrescenta a mudança das distâncias no começo e fim da janela, o deslocamento vertical do pulso e a energia direcional do pulso e das pontas dos dedos. Cada opção foi treinada com todas as transições utilizáveis ou apenas as já aceitas como Cinco. A regressão linear penalizada usa pesos equilibrados por classe, pessoa e movimento. O limiar de cada rodada é a menor pontuação de um Cinco do ajuste. O veto só atua quando o combinado aceita Cinco e há geometria suficiente. [Implementação](../ml/evaluate_numeric_transition_fit.py)
+
+| Descritores e negativos usados no ajuste | Falsos Cinco vetados nas sessões excluídas | Cinco didáticos corretos preservados | Cinco MINDS de validação preservados por rodada |
+| --- | ---: | ---: | --- |
+| Forma, todas as transições | 10/10 janelas, 4/4 movimentos | 3/3 | 6/6, 6/6, 5/6, 6/6 |
+| Forma e movimento, todas as transições | 10/10 janelas, 4/4 movimentos | 3/3 | 6/6, 6/6, 6/6, 5/6 |
+| Forma, apenas falsos Cinco | 10/10 janelas, 4/4 movimentos | 3/3 | 3/6, 3/6, 3/6, 3/6 |
+| Forma e movimento, apenas falsos Cinco | 10/10 janelas, 4/4 movimentos | 2/3 | 5/6, 3/6, 3/6, 3/6 |
+
+A ordem das rodadas na tabela é Cecierj, Grupo UFSM, Caderno Libras D e Libras ON. Nos dois grupos com falsos aceites, os ajustes com todas as transições preservaram os Cinco pareados e os seis Cinco do MINDS validação. Em rodadas com outros grupos excluídos, cada ajuste ainda perdeu um Cinco do MINDS. A perda no teste de forma foi de 0,148 abaixo do limiar. A de forma e movimento foi de 0,027. O critério exigia preservar todos os acertos nas quatro rodadas e vetar todas as janelas de ao menos uma transição com falso Cinco por pessoa. Nenhum ajuste o atingiu. [Resultados por rodada e hash do relatório completo](../ml/fresh_eval/evidence-numerais-ajuste/summary.json)
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_numeric_transition_fit
+```
+
+Os relatórios ficam em `data/transition-gate-m5/numeric-transition-fit.json` e `data/transition-gate-m5/numeric-transition-fit-summary.json`.
