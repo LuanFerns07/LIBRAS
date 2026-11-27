@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "title": "Libras – Aula 12",
+    "institution": "UFF, Consórcio Cederj e Fundação Cecierj",
+    "script": "Mariana da Cunha Teixeira de Souza",
+    "performers": [
+      "Vanessa Rodrigues Ildefonso",
+      "Cíntia Ingrid Macedo Ribeiro"
+    ],
+    "sourcePage": "https://canal.cecierj.edu.br/recurso/13766",
+    "licensePage": "https://www.youtube.com/watch?v=4NVpij6RvGg",
+    "license": "CC BY 3.0",
+    "mediaUrl": "https://canal.cecierj.edu.br/012016/8f96e3c6238f88dd167ee2b5a8818e80.mp4",
+    "mediaPath": "data/external-moving-signs/source/aula-12.mp4",
+    "mediaSha256": "288c24e947b08c7c3e3fc6156cef6e64ea3e828107d8d9e43559d56aeeebfe9a"
+  },
+  "clip": {
+    "startMs": 210500,
+    "endMs": 220500,
+    "sampleMs": 100,
+    "canvasMaxWidth": 640,
+    "format": "Trecho único, com as duas pessoas no enquadramento original. O replay remove o áudio e conserva a velocidade."
+  },
+  "annotation": {
+    "coverage": "partial",
+    "basis": "Inspeção visual a 10 fps, cotejo com a demonstração isolada legendada de 118,000 a 119,750 s e com a legenda do diálogo. Duas ocorrências visualmente compatíveis com Amarelo. Fronteiras aproximadas e revisão por pessoa fluente pendente.",
+    "references": [
+      {
+        "gloss": "amarelo",
+        "startMs": 213000,
+        "endMs": 214000,
+        "signer": "right",
+        "cue": "A mão de quem está à direita sobe com o indicador estendido à altura da testa e desce junto ao nariz."
+      },
+      {
+        "gloss": "amarelo",
+        "startMs": 217500,
+        "endMs": 218100,
+        "signer": "left",
+        "cue": "A mão de quem está à esquerda deixa o peito e sobe com o indicador à altura da testa, depois desce à frente do nariz."
+      }
+    ],
+    "limits": "Diálogo didático roteirizado. A mesma aula forneceu uma demonstração isolada a um ensaio anterior, fora deste recorte. O recorte tem uma classe coberta e duas pessoas no quadro simultaneamente. As glosas restantes e a referência de tradução não foram anotadas."
+  },
+  "assets": {
+    "isolated": {
+      "directory": "data/models/isolated-combined",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63"
+    },
+    "translation": {
+      "directory": "data/vlibrasbd-holdout",
+      "manifestSha256": "c220f615b433c5d305f4dae738a8716177201fc7cd399d9427c09dfd2ad2b395",
+      "modelSha256": "99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11"
+    },
+    "holisticSha256": "e2dab61191e2dcd0a15f943d8e3ed1dce13c82dfa597b9dd39f562975a50c3f8"
+  },
+  "experiment": {
+    "iou": 0.5,
+    "measures": [
+      "quadros com ao menos uma mão",
+      "intervalos propostos e rótulos por condição",
+      "maior IoU por anotação parcial, com qualquer rótulo e com o rótulo de referência",
+      "estado final e texto sugerido"
+    ],
+    "conditions": [
+      {
+        "id": "published_original",
+        "directory": "data/ufsc-boundaries/web",
+        "manifestSha256": "6a614c63bac4ab854865c931ce6fe6bea34d60b67c5bb81d5e5427b51bc05910",
+        "modelSha256": "c6fc6ba3f013c2d551eb9e0614a1dff326bb028b2d81c84cb4442eed9154b610"
+      },
+      {
+        "id": "holistic_frozen",
+        "directory": "data/ufsc-boundaries/holistic/web",
+        "manifestSha256": "f59e1084c69de01d327e6cb912bb7b2a972ab5b31f1a736c90ad5e4f50a5deb3",
+        "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb"
+      },
+      {
+        "id": "holistic_weak_cut",
+        "directory": "data/ufsc-boundaries/holistic/web-only-cut",
+        "manifestSha256": "897d98624a6892aa7eaf693a675d25597720c8dfd8c4c1eef9c36e9c306c84f8",
+        "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb"
+      },
+      {
+        "id": "holistic_weak_cut_with_floor",
+        "directory": "data/ufsc-boundaries/holistic/web-weak-cut",
+        "manifestSha256": "e156b1decb16adfa6a6981e0e378ffbec3b6c137fe984e0354b0e92801ca761b",
+        "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb"
+      }
+    ]
+  }
+}
