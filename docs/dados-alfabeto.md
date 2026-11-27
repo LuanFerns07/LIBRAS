@@ -222,6 +222,26 @@ OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extrac
 .venv/bin/python -m ml.alphabet.diagnose_static "$models" "$out/frames.json"
 ```
 
+#### Orientação da imagem e estabilidade de N
+
+Na gravação da Unicentro, a imagem ampliada mostra dois dedos voltados para baixo e o anelar dobrado durante o trecho em que o painel apaga. Um complemento logístico com descritores da flexão, projeção e distância entre os dedos foi treinado nas gravações de treino da UFSM e do Cecierj. Com limiar de 0,95, a versão com projeção reconheceu os 14 quadros de N e zero dos 29 quadros de M/Q na validação da UFSM. Na Unicentro, nenhum dos nove quadros elegíveis para o complemento chegou a esse limiar. O resultado continuou assim ao treinar com coordenadas 3D do mesmo extrator. [Gravação da Unicentro](https://www.youtube.com/watch?v=hxnpSXVWkgu&t=168s) · [Partições da UFSM](../ml/alphabet/ufsm-static-windows.json)
+
+A extração com a imagem espelhada e o eixo x restaurado passou de 8 para 18 votos de N nos mesmos 18 quadros selecionáveis da Unicentro. Os dois modelos usados pela prévia são os mesmos. Os recortes de M continuaram exibindo apenas M nas decisões estáticas e os Q continuaram sem a leitura esperada. [Extração original](../ml/evidence/alphabet-m-n-u-q/diagnostico-estatico.json) · [Extração orientada](../ml/evidence/alphabet-m-n-u-q/diagnostico-espelhado.json)
+
+O candidato `a1b5766` escolhe a orientação da entrada quando detecta com confiança uma mão em dois quadros sucessivos. Os pontos voltam ao referencial da câmera antes de alimentar a leitura e a sobreposição. Na versão em uso, o N da Unicentro apagou de 487 a 538 ms antes de perder o rastreamento nas três repetições com o vídeo original. No candidato, as seis reproduções da Unicentro, três por orientação da imagem, mantiveram N até perder a mão. Os três controles de N de Tel baixinha também passaram. A amostra invertida é uma derivação da mesma demonstração. [Janelas e origem](../ml/evidence/alphabet-m-n-u-q/n-lados.json) · [Base](../ml/evidence/alphabet-m-n-u-q/n-lados-5eccc2c.json) · [Candidato](../ml/evidence/alphabet-m-n-u-q/n-lados-a1b5766.json)
+
+```sh
+manifest=ml/alphabet/independent-m-n-u-q-windows.json
+out=data/alphabet/n-estabilidade
+models=data/releases/librasia-alfabeto-z-polegar/site/models
+mkdir -p "$out"
+OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest "$manifest" --mirror --out "$out/pontos-espelhados.json"
+.venv/bin/python -m ml.alphabet.diagnose_static "$models" "$out/pontos-espelhados.json"
+ffmpeg -nostdin -ss 168.910 -i data/alphabet/independent/unicentro-download/unicentro-alfabeto.mp4 \
+  -t 1.18 -vf hflip -an -c:v libx264 -crf 15 "$out/unicentro-n-lado-oposto.mp4"
+```
+
 ### Recuperação de O com geometria da mão
 
 Nos quadros de O da Unesp e da UFAC, o verificador reconheceu a configuração em 18 de 18 e em 33 de 35 quadros, respectivamente. O classificador principal preferiu I e E na maior parte das duas janelas. O complemento treina uma regressão logística em 12 medidas dos pontos, entre elas distâncias do polegar às pontas, separação entre dedos adjacentes e curvatura relativa dos dedos. O leitor considera O quando as redes principais e o complemento de E ficam sem leitura, o verificador de O chega a 0,80 e a pontuação de forma chega a 0,95. A exibição ao vivo ainda exige três leituras consecutivas. [Exportador e treino](../ml/alphabet/refine_o.py) · [Configuração, hashes e paridade do ONNX](../ml/evidence/alphabet-o/training.json) · [Referência do IF Baiano para a forma em O](https://www.ifbaiano.edu.br/unidades/bonfim/files/2022/07/Alfabeto-manual-em-Libras-1.pdf)

@@ -69,8 +69,11 @@ def diagnose(base, frames_path):
         results.append({**row, "primaryTop": dict(Counter(first)), "verifierTop": dict(Counter(second)),
                         "staticVotes": dict(Counter(votes)), "longestExpectedRun": longest})
 
-    return {"framesSha256": checksum(frames_path), "manifestSha256": frames["manifestSha256"],
-            "landmarkerSha256": frames["landmarkerSha256"], "model": metadata, "results": results}
+    report = {"framesSha256": checksum(frames_path), "manifestSha256": frames["manifestSha256"],
+              "landmarkerSha256": frames["landmarkerSha256"], "model": metadata, "results": results}
+    if frames.get("mirroredInput"):
+        report["mirroredInput"] = True
+    return report
 
 
 if __name__ == "__main__":
