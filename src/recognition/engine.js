@@ -121,8 +121,8 @@ export async function openAlphabetEngine() {
 
   return {
     alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
-    findMotion: motionLetters.length ? frames =>
-      recognizeTrajectory?.(frames) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
+    findMotion: motionLetters.length ? (frames, indexHistory) =>
+      recognizeTrajectory?.(frames, indexHistory) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
     predictLetter(values) {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {

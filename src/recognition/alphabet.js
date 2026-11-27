@@ -35,6 +35,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let movingVotes = 0
   let lastFrame = -Infinity
   let history = []
+  let motionStart = -Infinity
 
   function show(value) {
     if (shown === value) return
@@ -42,18 +43,23 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     onReading(value)
   }
 
-  function clear() {
+  function resetReadings() {
     generation += 1
     candidate = null
     votes = 0
     lastSample = -Infinity
     lastMotionSample = -Infinity
-    lastFrame = -Infinity
     movingCandidate = null
     movingVotes = 0
     movingUntil = -Infinity
-    history = []
     show(null)
+  }
+
+  function clear() {
+    resetReadings()
+    lastFrame = -Infinity
+    history = []
+    motionStart = -Infinity
   }
 
   return {
@@ -61,7 +67,8 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     async read(frame) {
       const hand = oneHand(frame)
       if (!hand) {
-        clear()
+        resetReadings()
+        motionStart = frame.timestamp
         return
       }
       if (frame.timestamp - lastFrame > 350) clear()
@@ -73,7 +80,9 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       }
       if (findMotion && frame.timestamp - lastMotionSample >= 60) {
         lastMotionSample = frame.timestamp
-        const motion = findMotion(history)
+        const frames = motionStart <= history[0].timestamp ? history :
+          history.filter(sample => sample.timestamp >= motionStart)
+        const motion = findMotion(frames, history)
         movingVotes = motion ? (motion === movingCandidate ? movingVotes + 1 : 1) : 0
         movingCandidate = motion
         const confirmed = motion && (motion === 'J' || motion === 'Z' || movingVotes >= (motion === 'Ç' ? 3 : 2))
@@ -84,7 +93,9 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
           candidate = null
           votes = 0
           movingUntil = frame.timestamp + 600
-          history = [frame]
+          // Um X inicial pode ser parte de um Z. Os demais gestos iniciam outro traçado.
+          if (motion !== 'X') history = [frame]
+          motionStart = frame.timestamp
           show(motion)
           return
         }

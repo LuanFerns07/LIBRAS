@@ -66,3 +66,24 @@ test('o leitor exige três janelas de Ç antes de trocar a leitura de C', async 
   for (const time of [600, 700, 800]) await reader.read(frame(time))
   assert.deepEqual(readings, ['C', 'Ç'])
 })
+
+test('o leitor pode completar Z após um X inicial e uma perda breve da mão', async () => {
+  const readings = []
+  const windows = []
+  const reader = createLiveLetterReader(async () => null, value => readings.push(value), (frames, indexPath) => {
+    windows.push([frames.map(item => item.timestamp), indexPath.map(item => item.timestamp)])
+    const now = frames.at(-1).timestamp
+    if (now === 100 || now === 200) return 'X'
+    return now === 400 && indexPath[0].timestamp === 0 ? 'Z' : null
+  })
+
+  for (const time of [0, 100, 200]) await reader.read(frame(time))
+  await reader.read({ ...frame(300), rightHand: [] })
+  await reader.read(frame(400))
+  assert.deepEqual(readings, ['X', null, 'Z'])
+  assert.deepEqual(windows.at(-1), [[400], [0, 100, 200, 400]])
+
+  reader.clear()
+  await reader.read(frame(500))
+  assert.deepEqual(windows.at(-1), [[500], [500]])
+})

@@ -259,13 +259,15 @@ function isCompatibleTrajectory(label, description) {
 export function createTrajectoryMatcher(model) {
   const templates = prepareTrajectories(model.templates)
   const pathDurations = [500, 750, 1050, 1350, 1700]
-  return frames => {
-    const samples = frames.map(trajectorySample).filter(Boolean)
-    if (!samples.length || samples.at(-1).time !== frames.at(-1).timestamp) return null
-    const time = samples.at(-1).time
-    const paths = pathDurations.map(duration => samples.filter(sample => sample.time >= time - duration))
-    if (paths.some(tracesZ)) return 'Z'
-    if (paths.some(tracesJ)) return 'J'
+  const followsPath = (samples, trace, time) => pathDurations.some(duration =>
+    trace(samples.filter(sample => sample.time >= time - duration)))
+  return (frames, indexHistory = frames) => {
+    const path = indexHistory.map(trajectorySample).filter(Boolean)
+    const time = frames.at(-1)?.timestamp
+    if (!path.length || path.at(-1).time !== time) return null
+    if (followsPath(path, tracesZ, time)) return 'Z'
+    const samples = frames === indexHistory ? path : path.filter(sample => sample.time >= frames[0].timestamp)
+    if (followsPath(samples, tracesJ, time)) return 'J'
     let match = null
     for (const description of trajectoryWindows(samples)) {
       const scores = trajectoryScores(description.vector, templates)
