@@ -37,3 +37,13 @@ O programa escreve `data/alphabet/static.npz` com `points` no formato float32 `[
 - O depósito **Brazilian Sign Language Alphabet**, de Passos, Fernandes e Comunello (UNIVALI), reanota 4.411 imagens de 15 letras capturadas para o *ASL Alphabet*. O recorte do LibrasIA exige capturas de Libras e excluiu essa fonte. [Depósito Mendeley v5](https://data.mendeley.com/datasets/k4gs3bmx5k/5) · [Descrição dos autores](https://github.com/biankatpas/Brazilian-Sign-Language-Alphabet-Dataset)
 - O **Alfabeto em Libras**, de ElaineSilva, declara CC BY 4.0 e mostra 22 rótulos, contando D1 e D2. O endpoint de exportação oficial retornou HTTP 401 sem credenciais, e a ficha pública não informa pessoas ou sessões de captura. [Ficha no Roboflow Universe](https://universe.roboflow.com/elainesilva/alfabeto-em-libras-qrvnw)
 - A **LIBRAS-HC-RGBDS**, da UFPR, contém vídeos RGB-D de 61 configurações de mão, com cinco atores e duas tomadas por pessoa. O laboratório permite uso em pesquisa não comercial com atribuição. A fonte rotula configurações, e o ensaio de letras ainda precisaria verificar quais gravações preservam também a orientação e o movimento da datilologia. [Ficha e condições de uso da UFPR](https://web.inf.ufpr.br/vri/databases/brazilian-sign-language-libras-hand-configurations-database/)
+
+## Recortes de letras com movimento
+
+As três aulas do NTE da UFSM têm licença CC BY-NC-SA 4.0 e rotulam em tela as demonstrações de H, J, K, X, Y, Z e Ç. O manifesto fixa os intervalos visuais, a âncora em que a letra está legível, os créditos e os SHA-256 dos MP4 em 480p. Cada aula fica em uma partição. [Manifesto dos intervalos](../ml/alphabet/ufsm-temporal-windows.json) · [Licença CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+- A aula do Libras ON entra em treino. O enquadramento aproxima a mão durante os sete gestos. [Aula 1527000916](https://ntetube.nte.ufsm.br/v/1527000916)
+- A aula do Grupo de Produção de Material Didático entra em validação. O quadro inclui o tronco e a cartela de letras. [Aula 1536677587](https://ntetube.nte.ufsm.br/v/1536677587)
+- A aula de Giovana Fracari Hautrive fica reservada para teste. O manifesto inclui a pose estática de A de 3,66 a 4,37 s e de B de 5,06 a 6,14 s. A transição ocorre entre as duas janelas no vídeo original. [Aula 1535641159](https://ntetube.nte.ufsm.br/v/1535641159)
+
+Há uma demonstração por letra em cada aula. Reutilizar ou transformar os quadros dessa demonstração mantém a mesma origem. A avaliação mede cobertura entre essas três gravações.
