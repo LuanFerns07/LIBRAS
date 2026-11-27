@@ -1,0 +1,85 @@
+{
+  "build": {
+    "commit": "a1b57664f29a8e4165625d9987a83d9c25fc6989",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/independent-m-n-u-q-windows.json"
+  ],
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "M",
+      "startMs": 100900,
+      "endMs": 102180,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 287
+        }
+      ],
+      "workerFrames": 100,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1300
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "readings": [],
+      "workerFrames": 95,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1109
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 165370,
+      "endMs": 166230,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 227
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 900
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 167470,
+      "endMs": 168380,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 506
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 948
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "Q",
+      "startMs": 177390,
+      "endMs": 178530,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 553
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1167
+    }
+  ]
+}

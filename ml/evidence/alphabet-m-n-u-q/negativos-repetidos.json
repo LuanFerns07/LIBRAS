@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "clad-repouso-01-mao-rosto",
+      "file": "data/isolated-negative-audit/clad/raw/clad-repouso-01-mao-rosto.mp4",
+      "sha256": "f6ca643447473470f07caaa6f0cdb43713ca8656e1fd24aefb0b50488eb26463",
+      "protocol": "ml/external_eval/clad-variants.json",
+      "stratum": "repouso",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    },
+    {
+      "id": "cecierj-rosa-marrom",
+      "file": "data/isolated-negative-audit/didactic/raw/cecierj-rosa-marrom.mp4",
+      "sha256": "bfbae0633fd950ac18dddf6fda1e259aaed76f754707df48e9e20b0b249c319d",
+      "protocol": "ml/fresh_eval/protocol-negatives.json",
+      "stratum": "transicao",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1000
+        }
+      ]
+    }
+  ]
+}
