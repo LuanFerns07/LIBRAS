@@ -101,17 +101,6 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
     assert.equal(await evaluate('document.querySelector("[data-camera-toggle]").disabled'), true)
     assert.equal(await evaluate('document.querySelectorAll(".media-layout > section")[0].getBoundingClientRect().top === document.querySelectorAll(".media-layout > section")[1].getBoundingClientRect().top'), true)
-    await click('[data-quiz] input[value="0"]')
-    await click('.practice-activity [type="submit"]')
-    assert.match(await text('[data-quiz-status]'), /Resposta correta/)
-    await click('[data-review]')
-    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
-    assert.equal(await evaluate('document.activeElement.dataset.stage'), '1')
-    await evaluate('window.oldDocument = true')
-    await page('Page.reload')
-    await waitUntil('!window.oldDocument && document.readyState === "complete" && !!document.querySelector("[data-review]")')
-    await click('[data-review]')
-    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
 
     await open('alfabeto', 'Alfabeto manual')
     assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
@@ -157,6 +146,23 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     const fill = value => evaluate('document.querySelector("#translate-input").value = ' + JSON.stringify(value) +
       '; document.querySelector("#translate-input").dispatchEvent(new Event("input"))')
     const submit = () => click('form [type="submit"]')
+    const checkPlayback = async expected => {
+      const record = (() => {
+        const step = document.querySelector('[data-player-step]')
+        const steps = []
+        const observer = new MutationObserver(() => steps.push(step.textContent.trim()))
+        observer.observe(step, { childList: true })
+        window.recordedSteps = () => {
+          observer.disconnect()
+          return steps
+        }
+      }).toString()
+      if (await text('[data-play]') === 'Pausar') await click('[data-play]')
+      await evaluate('(' + record + ')()')
+      await click('[data-restart]')
+      await waitUntil('document.querySelector("[data-play]").textContent === "Reproduzir"', 15000)
+      assert.deepEqual(await evaluate('window.recordedSteps()'), expected)
+    }
     await fill('')
     await submit()
     assert.equal(await evaluate('document.querySelector("[data-translation-status]").dataset.state'), 'empty')
@@ -164,6 +170,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await submit()
     assert.equal(await evaluate('document.querySelector("[data-translation-status]").dataset.state'), 'ready')
     assert.equal(await text('[data-player-step]'), 'Nome')
+    await checkPlayback(['Nome', 'Meu', 'Pausa', 'A', 'N', 'N', 'A'])
     await fill('Bom dia')
     await submit()
     assert.match(await text('[data-translation-status]'), /BOM DIA/)
@@ -178,6 +185,20 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await fill('Ânna Clara')
     await submit()
     assert.equal(await text('[data-player-step]'), 'A')
+    await checkPlayback(['A', 'N', 'N', 'A', 'Pausa', 'C', 'L', 'A', 'R', 'A'])
+
+    await open('praticar', 'Pratique Libras')
+    await click('[data-quiz] input[value="0"]')
+    await click('.practice-activity [type="submit"]')
+    assert.match(await text('[data-quiz-status]'), /Resposta correta/)
+    await click('[data-review]')
+    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
+    assert.equal(await evaluate('document.activeElement.dataset.stage'), '1')
+    await evaluate('window.oldDocument = true')
+    await page('Page.reload')
+    await waitUntil('!window.oldDocument && document.readyState === "complete" && !!document.querySelector("[data-review]")')
+    await click('[data-review]')
+    assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
 
     if (!voiceEnabled) await evaluate('Object.defineProperty(window, "speechSynthesis", { value: undefined, configurable: true }); true')
     await open('area-livre', 'Libras para texto e voz')

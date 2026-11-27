@@ -49,6 +49,23 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_PHYSICAL=1 LIBRASIA_TEST_V
 
 Se o executável tiver outro nome, informe o caminho em LIBRASIA_CHROMIUM. O teste usa um perfil temporário, servidor HTTP restrito ao loopback e a câmera simulada do navegador. A URL ativa as verificações contra a prévia da aplicação. Ajuste a porta conforme a saída do Vite. As opções PHYSICAL e VOICE ativam respectivamente a captura da webcam sem persistência e a reprodução audível de uma frase de teste. A validação das decisões do classificador e das dicas depende da execução com pessoas sinalizantes.
 
+## Verificação técnica de 27 de novembro de 2026
+
+O teste usou a prévia `b95a5da` no Debian 13.8, em Chromium 156.0.8078.79 com perfil temporário e janela de 1280 × 900. Catálogo e animações `librasia-v0.1-draft`. Modelo combinado de sinais com SHA-256 `a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63`. Modelo principal do alfabeto com SHA-256 `39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544`.
+
+| Etapa | Resultado técnico | Evidência |
+| --- | --- | --- |
+| 1. Alfabeto | As 27 letras puderam ser selecionadas. A grade respondeu ao teclado e o avatar de Z respondeu a reproduzir, pausar, mudar velocidade e repetir. | `browser-roteiro.log` |
+| 2. Frase | A reprodução de “Meu nome é Anna” exibiu Nome → Meu → Pausa → A → N → N → A. | `browser-roteiro.log` |
+| 3. Nome isolado | A reprodução de “Ânna Clara” exibiu A → N → N → A → Pausa → C → L → A → R → A. | `browser-roteiro.log` |
+| 4. Lição | O exercício sem câmera aceitou a resposta e recuperou a sugestão de revisão após recarregar. O clipe Cinco S09-1 foi reconhecido com o avatar aberto. A regra da dica de palma passou no teste unitário. Falta observar a dica durante uma tentativa com correção intencional. | `browser-roteiro.log`, `licao-cinco.log` e `tests/lesson.test.js` |
+| 5. Área livre | Cinco e Espelho foram reconhecidos em tentativas isoladas. A transcrição gerada pôde ser editada e a voz local eSpeak NG em pt-BR sinalizou conclusão. Um ensaio adicional acrescentou “cinco espelhos” no modo com pausa. Banco S12-2 ficou inconclusivo em duas capturas e preservou o texto. A repetição de Cinco passou offline, com a mesma trilha ativa e sem novas requisições. | `dois-sinais-e-voz.log`, `area-livre-sequencia.log`, `area-livre-banco.log`, `area-livre-cinco.log` |
+| 6. Saiba mais | O clique no Dicionário do INES abriu o destino em outra aba. O Chromium mostrou o título “Dicionário Libras” e a lista do app exibiu a autoria. | `link-ines.log` e [Dicionário Libras](https://dicionario.ines.gov.br/) |
+
+Os logs locais ficam em `data/evidence/demonstracao/`. O navegador abriu e liberou a webcam física Acer a 640 × 480 e retomou a captura após conceder a permissão. O classificador recebeu os clipes gravados do MINDS-Libras pelo dispositivo de teste do Chromium. A compreensão do áudio, o reconhecimento com sinalizantes ao vivo e a revisão linguística permanecem no aceite manual. [Origem dos clipes](https://zenodo.org/records/2667329) · [Testes de navegador](../tests/e2e/browser.test.mjs) · [Testes do reconhecimento](../tests/e2e/recognition.test.mjs)
+
+Com gravação, os pontos acompanharam as duas mãos antes, durante e depois da tentativa. O teste verificou espelhamento, redimensionamento, perda e retorno da mão e o controle de exibição. O N e a passagem de M para N também passaram na Área livre e em Praticar com os clipes da Unesp. Logs locais `pontos.log` e `alfabeto-n.log`. [Sobreposição](teste-pontos-ao-vivo.md) · [Referência para o reteste de N](dados-alfabeto.md#confirmação-específica-de-n-na-prévia)
+
 ## Registro da prévia de 26/11/2026
 
 Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.
@@ -150,5 +167,19 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4173 LIBRASIA_TEST_RECOGNITION=1 \
 ~~~
 
 Para repetir um caso no mesmo navegador, defina LIBRASIA_TEST_TRIALS de 1 a 30. Em clipes rotulados, use o marcador verde para delimitar cada repetição. O relatório lista a decisão e latência de cada tentativa, quantidade medida, mediana e p95 pelo posto mais próximo. Na lição, o avatar volta a reproduzir antes da medição. Na área livre, o teste compara a transcrição cumulativa após cada tentativa.
+
+### Dois sinais em tentativas isoladas com voz local
+
+Prepare Cinco S09-1 e Espelho S11-1 com meio segundo de marcador verde em cada arquivo, como no exemplo acima. Substitua o segundo marcador por azul na junção. O teste abre duas tentativas independentes e espera “cinco” na primeira e “cinco espelho” depois da segunda. No fim, verifica a leitura da edição com voz local em pt-BR.
+
+~~~bash
+fixtures=data/evidence/camera-fixtures
+ffmpeg -i "$fixtures/10CincoSinalizador09-1-sync.y4m" -i "$fixtures/12EspelhoSinalizador11-1-sync.y4m" \
+  -filter_complex "[1:v]drawbox=color=blue:t=fill:enable='lt(t,0.5)'[blue];[0:v][blue]concat=n=2:v=1:a=0[out]" \
+  -map '[out]' -an -pix_fmt yuv420p "$fixtures/cinco-e-espelho.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_VOICE=1 LIBRASIA_TEST_TRIALS=2 LIBRASIA_EXPECT_TEXT=cinco LIBRASIA_TEST_SECOND_TEXT=espelho \
+  LIBRASIA_TEST_VIDEO="$fixtures/cinco-e-espelho.y4m" node --test tests/e2e/recognition.test.mjs
+~~~
 
 O ensaio com clipes unidos mede um cenário controlado com pausa. A validação com sinalização contínua natural requer dados anotados para medir erros de segmentação e revisão humana do sentido traduzido.

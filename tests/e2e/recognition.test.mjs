@@ -7,6 +7,7 @@ const appUrl = process.env.LIBRASIA_TEST_URL
 const enabled = process.env.LIBRASIA_TEST_RECOGNITION === '1'
 const videoFile = process.env.LIBRASIA_TEST_VIDEO
 const expected = process.env.LIBRASIA_EXPECT_TEXT?.trim()
+const secondText = process.env.LIBRASIA_TEST_SECOND_TEXT?.trim()
 const multiple = process.env.LIBRASIA_TEST_SEQUENCE === '1'
 const continuous = process.env.LIBRASIA_TEST_CONTINUOUS === '1'
 const expectedGlosses = process.env.LIBRASIA_EXPECT_GLOSSES
@@ -60,7 +61,7 @@ const finish = ((automatic, endAtMediaMs) => new Promise(resolve => {
   else pending = video.requestVideoFrameCallback(checkEnd)
 })).toString()
 
-const beginAtGreenMarker = ((offsetMs, waitForMarkerEdge) => new Promise(resolve => {
+const beginAtMarker = ((offsetMs, waitForMarkerEdge, blueMarker) => new Promise(resolve => {
   const video = document.querySelector('video')
   const canvas = document.createElement('canvas')
   canvas.width = 2
@@ -73,7 +74,7 @@ const beginAtGreenMarker = ((offsetMs, waitForMarkerEdge) => new Promise(resolve
     if (markerMs === undefined) {
       ctx.drawImage(video, 0, 0, 2, 2)
       const [red, green, blue] = ctx.getImageData(0, 0, 1, 1).data
-      const isMarker = green > 170 && red < 35 && blue < 35
+      const isMarker = red < 35 && (blueMarker ? blue > 170 && green < 35 : green > 170 && blue < 35)
       if (isMarker && seenOutsideMarker) markerMs = startMs
       if (!isMarker) seenOutsideMarker = true
     }
@@ -115,6 +116,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (expected) assert.ok(videoFile, 'Informe o arquivo Y4M rotulado para verificar um sinal positivo.')
   if (sync) assert.ok(videoFile, 'A sincronização usa um Y4M com marcador inicial verde.')
   if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
+  if (secondText) assert.ok(expected && sync && trials === 2 && !target && !multiple && !continuous,
+    'Use duas tentativas isoladas e marcadores verde e azul para verificar sinais diferentes.')
   if (continuous) assert.ok(!multiple && !target && !autoFinish && !offline, 'Use a área livre no cenário contínuo.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
@@ -233,7 +236,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       }
       let marked
       if (sync) {
-        marked = await evaluate('(' + beginAtGreenMarker + ')(' + markerOffsetMs + ',' + (fixedCaptureMs !== null) + ')', true)
+        const marker = [markerOffsetMs, fixedCaptureMs !== null, Boolean(secondText && trial === 1)]
+        marked = await evaluate('(' + beginAtMarker + ')(...' + JSON.stringify(marker) + ')', true)
         await record()
       } else if (trial > 0) {
         await startAttempt()
@@ -315,7 +319,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
       if (expectedGlosses !== undefined) check('glosas', () => assert.equal(decision.glosses, expectedGlosses))
       if (!target) {
-        const addition = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''
+        const words = secondText ? [expected, secondText].slice(0, index + 1) : Array(index + 1).fill(expected)
+        const addition = expected ? words.join(' ').toLocaleLowerCase('pt-BR') : ''
         const spacer = prefix && addition && !/\s$/u.test(prefix) ? ' ' : ''
         check('texto', () => assert.equal(decision.transcript, prefix + spacer + addition))
       }

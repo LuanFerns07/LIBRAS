@@ -26,6 +26,8 @@ Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando neces
 
 No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto** ou **Tradutor** para abrir o avatar, e **Área livre** para editar e ouvir o texto. Autorize a câmera ao usar **Ativar câmera**. O endereço de loopback permite o uso local da webcam.
 
+A demonstração no PC de referência usa o modelo combinado de sinais e os pesos do alfabeto integrados. O servidor local abre a Área livre na porta 4177. Em **Conteúdo**, mantenha **Sinais** para transcrever tentativas ou selecione **Alfabeto** para a leitura de letras ao vivo. [Abrir a prévia no PC de referência](http://127.0.0.1:4177/#area-livre) · [Resultados e limites da demonstração](docs/roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
+
 O modo de sinalização contínua tem ativação opcional com modelos locais e permanece em avaliação. [Executar o fluxo experimental](docs/sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
 
 ### Desenvolvimento
@@ -74,7 +76,7 @@ Com Chromium instalado e a prévia em execução, rode `LIBRASIA_TEST_URL=http:/
 
 Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). Para a sessão com participantes, use o [formulário local de validação](docs/validacao-ao-vivo.md). A execução da aplicação está restrita ao ambiente local nesta rodada.
 
-O desenvolvimento é integrado localmente na branch `main`. As frentes de implementação simultânea usam worktrees de branches dedicadas. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
+O desenvolvimento segue na `main`, com commits verificados e push no remoto do projeto. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
 
 ## Atualizar o painel
 
