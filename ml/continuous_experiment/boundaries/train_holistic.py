@@ -19,7 +19,7 @@ from .model import BoundaryModel, features, targets
 from .train import Example, choose_decoder, example_report, fit, measure, probabilities
 
 
-DEV_SPLITS = {"train": 4, "dev": 2}
+PARTITION_COUNTS = {"train": 4, "dev": 2, "test": 3}
 SHA256 = re.compile(r"[0-9a-f]{64}")
 
 
@@ -54,7 +54,9 @@ def load_holistic_points(path, case, times):
 
 
 def load_holistic_examples(directory, *, splits=("train", "dev")):
-    selected = {split: DEV_SPLITS[split] for split in splits}
+    selected = {split: PARTITION_COUNTS[split] for split in splits}
+    if "test" in selected and len(selected) != 1:
+        raise ValueError("A partição reservada deve ser carregada separadamente.")
     sources = load_sources()
     known = {case["id"]: case for case in sources["cases"] if case["split"] in selected}
     media = json.loads((directory / "media.json").read_text(encoding="utf-8"))
@@ -81,7 +83,10 @@ def load_holistic_examples(directory, *, splits=("train", "dev")):
         annotation = directory / case["annotation"]
         if digest(annotation) != case["annotation_sha256"]:
             raise ValueError(f"Anotação do item {case_id} divergiu do manifesto.")
-        path = directory / "holistic" / f"{case_id}.json"
+        capture_dir = directory / "holistic"
+        if case["split"] == "test":
+            capture_dir /= "test"
+        path = capture_dir / f"{case_id}.json"
         points, recipe = load_holistic_points(path, case, times)
         recipes.add(recipe)
         reference = read_eaf(annotation, case["tier"], case["video"], case["seconds"] * 1000)
