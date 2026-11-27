@@ -139,6 +139,14 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_DEMO_VIDEO="$fixtures/demo
   node --test tests/e2e/browser.test.mjs
 ~~~
 
+### Reteste do atalho de conteúdo
+
+Na compilação `aea5303`, pressionar Enter em **Ir para o conteúdo** movia o foco para o conteúdo da Área livre e mudava a URL para `#conteudo`. A recarga abria Praticar. Na compilação `aa32d96`, o atalho mantém `#area-livre`, preserva o histórico e deixa **Conteúdo** como próximo controle no Tab. A recarga manteve a Área livre e um único **Voltar** retornou para Praticar.
+
+No mesmo pacote, o Chromium abriu e liberou a webcam Acer e concluiu a síntese local com eSpeak NG em pt-BR. O controle com a gravação de duas mãos conferiu espelhamento, redimensionamento e o retorno dos pontos após ocultar uma mão. Os logs locais ficam em `data/evidence/demonstracao`, nos arquivos `fisico-aa32d96.log`, `atalho-recarregar-aa32d96.log` e `pontos-aa32d96.log`. A revisão visual com sinalização na webcam e a audição por participantes seguem pendentes. [Teste de navegador](../tests/e2e/browser.test.mjs) · [Controle com gravação](teste-pontos-ao-vivo.md)
+
+O roteiro integrado passou novamente com o Y4M de SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. O Chromium reproduziu a frase e o nome, reconheceu Amarelo, exibiu a dica de trajetória no recorte invertido, acrescentou “cinco espelho” em duas tentativas e concluiu a leitura de “Cinco e espelho.”. O link do INES abriu em outra aba, e as duas trilhas de câmera foram liberadas ao trocar de tela. Log local `roteiro-aa32d96.log`.
+
 ## Registro da prévia de 26/11/2026
 
 Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.

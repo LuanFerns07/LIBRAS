@@ -10,7 +10,7 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote serve apenas o endereço local e registra o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`. Em cópias mais antigas, gere um novo pacote para obter o arquivo de verificação. [Roteiro e resultados](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
+O pacote `aa32d96` corrige o atalho **Ir para o conteúdo** e passou o roteiro integrado no Chromium. O servidor local informa o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`. [Roteiro e resultados](roteiro-validacao.md#reteste-do-atalho-de-conteúdo)
 
 ### Recompilar com os modelos verificados
 
