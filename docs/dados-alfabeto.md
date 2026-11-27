@@ -320,3 +320,19 @@ A regra experimental exige que a projeção lateral mediana da ponta do polegar 
 O pacote candidato `605cacc` foi testado de ponta a ponta com câmera virtual no Chromium. Exibiu os mesmos quatro Z das cinco janelas rotuladas e as letras esperadas nos controles C, Ç, H, J, K, X e Y. Nas três repetições de Azul da UFSM apareceram A e L, e nos 19 controles fora do alfabeto também houve zero Z. [Janelas e repetições](../ml/evidence/alphabet-z-azul/replay-windows.json) · [Replay do candidato](../ml/evidence/alphabet-z-azul/e2e-605cacc.json) · [Dezenove controles](../ml/evidence/alphabet-z-azul/negativos-605cacc.json)
 
 No reteste com dez janelas por versão, o Z da aula `1536677587` da UFSM ficou sem leitura nas três repetições de cada versão. O Z do Cecierj apareceu em uma das duas repetições em cada versão, com leituras transitórias. Ç apareceu nas duas janelas depois de C, e U foi seguido por H nas três janelas. A prévia local adotou a regra em `5eccc2c`. O pacote integrado passou os testes de Z da Unesp na Área livre e em Praticar, da transição M → N nos dois modos e da sobreposição das duas mãos. Esses testes usaram vídeo gravado. [Janelas do reteste](../ml/evidence/alphabet-z-azul/confirmacao-janelas.json) · [Base](../ml/evidence/alphabet-z-azul/confirmacao-5b2d4c4.json) · [Candidato](../ml/evidence/alphabet-z-azul/confirmacao-605cacc.json)
+
+### Retomada do Z curto da UFSM
+
+A câmera virtual alimentou seis reproduções do trecho de 42,500 a 43,950 s da aula `1536677587`. Em cada uma, duas detecções de mão próximas fizeram o leitor deixar de selecionar uma mão no meio de um traço. A leitura ficou vazia. Com os mesmos pontos e tempos de mídia, o leitor temporal anterior deixou de confirmar todas as seis reproduções. O candidato confirmou Z nas seis, entre 700 e 734 ms após o início do trecho. Nesta comparação, o classificador estático ficou fora do replay. [Manifesto da aula](../ml/alphabet/ufsm-temporal-windows.json) · [Comparação com os pontos congelados](../ml/evidence/alphabet-z-azul/ufsm-z-curto-pareado.json)
+
+O candidato reinicia o painel ao perder a seleção da mão. Conserva o trecho anterior apenas para Z quando três juntas da palma coincidem aproximadamente nas duas detecções, a seleção volta ao mesmo lado em até 220 ms e o indicador continua o segundo ou o terceiro traço na mesma direção horizontal. A verificação da abertura do polegar continua em vigor. A versão com a retomada também precisa passar a comparação com gravações independentes, Azul e as outras letras de movimento. [Recortes de Y e Z fora do ajuste](../ml/alphabet/independent-y-z-windows.json) · [Candidato com replays](https://github.com/LuanFerns07/LIBRAS/tree/9d5d6fe)
+
+Para reproduzir uma captura com os pontos e rodar o leitor temporal sobre ela, use na raiz do código do candidato.
+
+```sh
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --manifest ml/evidence/alphabet-z-azul/confirmacao-janelas.json \
+  --source 1536677587 --workers 1 --trace --timeline > data/ufsm-z-curto.json
+node ml/alphabet/replay-motion-trace.mjs data/ufsm-z-curto.json \
+  data/releases/librasia-q-teste/site/models/alphabet-motion.json
+```
