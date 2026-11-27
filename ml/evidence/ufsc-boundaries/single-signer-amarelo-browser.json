@@ -1,0 +1,1033 @@
+{
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "cases": [
+    {
+      "id": "biocinais_reciclagem",
+      "clipSha256": "1428032a5cb97bb0b367108c0b05477ff33715121f76bf90ac18d4d8dd685169",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 65,
+      "framesWithHands": 65,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 140000,
+              "endMs": 140300,
+              "gloss": null
+            },
+            {
+              "startMs": 140300,
+              "endMs": 140700,
+              "gloss": null
+            },
+            {
+              "startMs": 140700,
+              "endMs": 141300,
+              "gloss": null
+            },
+            {
+              "startMs": 141300,
+              "endMs": 141700,
+              "gloss": null
+            },
+            {
+              "startMs": 141700,
+              "endMs": 142000,
+              "gloss": null
+            },
+            {
+              "startMs": 142000,
+              "endMs": 142200,
+              "gloss": null
+            },
+            {
+              "startMs": 142200,
+              "endMs": 142800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 142800,
+              "endMs": 143400,
+              "gloss": null
+            },
+            {
+              "startMs": 143400,
+              "endMs": 143900,
+              "gloss": null
+            },
+            {
+              "startMs": 143900,
+              "endMs": 144400,
+              "gloss": null
+            },
+            {
+              "startMs": 144400,
+              "endMs": 144900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 145000,
+              "endMs": 145600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 145600,
+              "endMs": 146000,
+              "gloss": null
+            },
+            {
+              "startMs": 146000,
+              "endMs": 146500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 142000,
+              "endMs": 142900,
+              "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte.",
+              "maxIoU": 0.667,
+              "maxLabeledIoU": 0.667,
+              "aligned": true,
+              "recognized": true
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 140000,
+              "endMs": 140500,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 140500,
+              "endMs": 140800,
+              "gloss": null
+            },
+            {
+              "startMs": 140800,
+              "endMs": 141300,
+              "gloss": null
+            },
+            {
+              "startMs": 141300,
+              "endMs": 141700,
+              "gloss": null
+            },
+            {
+              "startMs": 141700,
+              "endMs": 142100,
+              "gloss": null
+            },
+            {
+              "startMs": 142100,
+              "endMs": 142600,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 142600,
+              "endMs": 143000,
+              "gloss": null
+            },
+            {
+              "startMs": 143000,
+              "endMs": 143500,
+              "gloss": null
+            },
+            {
+              "startMs": 143500,
+              "endMs": 144000,
+              "gloss": null
+            },
+            {
+              "startMs": 144100,
+              "endMs": 144600,
+              "gloss": null
+            },
+            {
+              "startMs": 144600,
+              "endMs": 145100,
+              "gloss": null
+            },
+            {
+              "startMs": 145100,
+              "endMs": 145600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 145600,
+              "endMs": 146000,
+              "gloss": null
+            },
+            {
+              "startMs": 146000,
+              "endMs": 146500,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 142000,
+              "endMs": 142900,
+              "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte.",
+              "maxIoU": 0.556,
+              "maxLabeledIoU": 0.556,
+              "aligned": true,
+              "recognized": true
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 140200,
+              "endMs": 140700,
+              "gloss": null
+            },
+            {
+              "startMs": 140800,
+              "endMs": 141300,
+              "gloss": null
+            },
+            {
+              "startMs": 141400,
+              "endMs": 142000,
+              "gloss": null
+            },
+            {
+              "startMs": 142000,
+              "endMs": 142200,
+              "gloss": null
+            },
+            {
+              "startMs": 142200,
+              "endMs": 142800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 142900,
+              "endMs": 143500,
+              "gloss": null
+            },
+            {
+              "startMs": 144200,
+              "endMs": 144800,
+              "gloss": null
+            },
+            {
+              "startMs": 145000,
+              "endMs": 145600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 145700,
+              "endMs": 146300,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 142000,
+              "endMs": 142900,
+              "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte.",
+              "maxIoU": 0.667,
+              "maxLabeledIoU": 0.667,
+              "aligned": true,
+              "recognized": true
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 140200,
+              "endMs": 140700,
+              "gloss": null
+            },
+            {
+              "startMs": 140800,
+              "endMs": 141400,
+              "gloss": null
+            },
+            {
+              "startMs": 141500,
+              "endMs": 142100,
+              "gloss": null
+            },
+            {
+              "startMs": 142200,
+              "endMs": 142800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 142900,
+              "endMs": 143500,
+              "gloss": null
+            },
+            {
+              "startMs": 143600,
+              "endMs": 144100,
+              "gloss": null
+            },
+            {
+              "startMs": 144200,
+              "endMs": 144800,
+              "gloss": null
+            },
+            {
+              "startMs": 145000,
+              "endMs": 145600,
+              "gloss": "cinco"
+            },
+            {
+              "startMs": 145700,
+              "endMs": 146300,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 142000,
+              "endMs": 142900,
+              "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte.",
+              "maxIoU": 0.667,
+              "maxLabeledIoU": 0.667,
+              "aligned": true,
+              "recognized": true
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "amarelo",
+          "startMs": 142000,
+          "endMs": 142900,
+          "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte.",
+          "score": {
+            "frames": 9,
+            "framesWithHands": 9,
+            "shouldersBySide": {
+              "left": 9,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.5494312709400506,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.3968311499614735
+              },
+              {
+                "label": "cinco",
+                "value": 0.008081654791879554
+              },
+              {
+                "label": "espelho",
+                "value": 0.01635524131493259
+              },
+              {
+                "label": "amarelo",
+                "value": 0.5494312709400506
+              },
+              {
+                "label": "aluno",
+                "value": 0.029300682991663694
+              }
+            ]
+          }
+        },
+        {
+          "id": "metal_e_transicao",
+          "label": "Contexto legendado Amarelo: metal, após a articulação de Amarelo",
+          "startMs": 142900,
+          "endMs": 145500,
+          "score": {
+            "frames": 26,
+            "framesWithHands": 26,
+            "shouldersBySide": {
+              "left": 26,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.8117246235175807,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.8117246235175807
+              },
+              {
+                "label": "cinco",
+                "value": 0.019138280836800133
+              },
+              {
+                "label": "espelho",
+                "value": 0.00879651720914539
+              },
+              {
+                "label": "amarelo",
+                "value": 0.1463958747019332
+              },
+              {
+                "label": "aluno",
+                "value": 0.013944703734540473
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "biocinais_febre",
+      "clipSha256": "6c1ce42c87af5e2f4160f998e2973d0e197ab29dcb79ca426f26a878ef245e3f",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 37,
+      "framesWithHands": 35,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 45300,
+              "endMs": 45800,
+              "gloss": null
+            },
+            {
+              "startMs": 45800,
+              "endMs": 46300,
+              "gloss": null
+            },
+            {
+              "startMs": 46300,
+              "endMs": 46800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 46800,
+              "endMs": 47400,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 47400,
+              "endMs": 48000,
+              "gloss": null
+            },
+            {
+              "startMs": 48000,
+              "endMs": 48200,
+              "gloss": null
+            },
+            {
+              "startMs": 48200,
+              "endMs": 48700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 46300,
+              "endMs": 47400,
+              "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca.",
+              "maxIoU": 0.545,
+              "maxLabeledIoU": 0.545,
+              "aligned": true,
+              "recognized": true
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 45400,
+              "endMs": 45900,
+              "gloss": null
+            },
+            {
+              "startMs": 45900,
+              "endMs": 46400,
+              "gloss": null
+            },
+            {
+              "startMs": 46400,
+              "endMs": 46900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 46900,
+              "endMs": 47400,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 47400,
+              "endMs": 47900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 47900,
+              "endMs": 48200,
+              "gloss": null
+            },
+            {
+              "startMs": 48200,
+              "endMs": 48700,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 46300,
+              "endMs": 47400,
+              "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca.",
+              "maxIoU": 0.455,
+              "maxLabeledIoU": 0.455,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 45600,
+              "endMs": 46200,
+              "gloss": null
+            },
+            {
+              "startMs": 46300,
+              "endMs": 46800,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 47400,
+              "endMs": 47900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 48000,
+              "endMs": 48600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 46300,
+              "endMs": 47400,
+              "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca.",
+              "maxIoU": 0.455,
+              "maxLabeledIoU": 0.455,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 45600,
+              "endMs": 46100,
+              "gloss": null
+            },
+            {
+              "startMs": 46200,
+              "endMs": 46700,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 46800,
+              "endMs": 47300,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 47400,
+              "endMs": 47900,
+              "gloss": "amarelo"
+            },
+            {
+              "startMs": 48000,
+              "endMs": 48600,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 46300,
+              "endMs": 47400,
+              "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca.",
+              "maxIoU": 0.455,
+              "maxLabeledIoU": 0.455,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "amarelo",
+          "startMs": 46300,
+          "endMs": 47400,
+          "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca.",
+          "score": {
+            "frames": 11,
+            "framesWithHands": 11,
+            "shouldersBySide": {
+              "left": 11,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.8025560918135659,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.12911536023462666
+              },
+              {
+                "label": "cinco",
+                "value": 0.007441251230987778
+              },
+              {
+                "label": "espelho",
+                "value": 0.05612765224523079
+              },
+              {
+                "label": "amarelo",
+                "value": 0.8025560918135659
+              },
+              {
+                "label": "aluno",
+                "value": 0.004759644475588979
+              }
+            ]
+          }
+        },
+        {
+          "id": "febre_e_transicao",
+          "label": "Articulação inicial de Febre amarela",
+          "startMs": 45300,
+          "endMs": 46300,
+          "score": {
+            "frames": 10,
+            "framesWithHands": 9,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.9642317632771554,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.9642317632771554
+              },
+              {
+                "label": "cinco",
+                "value": 0.0007128209976194592
+              },
+              {
+                "label": "espelho",
+                "value": 0.010943700179133964
+              },
+              {
+                "label": "amarelo",
+                "value": 0.022304190745490716
+              },
+              {
+                "label": "aluno",
+                "value": 0.001807524800600375
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ufsm_caderno",
+      "clipSha256": "b4f5a08be4640a77970b77c4a7d23478778b09e884c36a947122e994bb77ee9f",
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "canvas": [
+        640,
+        360
+      ],
+      "frames": 45,
+      "framesWithHands": 45,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 37000,
+              "endMs": 37500,
+              "gloss": null
+            },
+            {
+              "startMs": 37500,
+              "endMs": 38000,
+              "gloss": null
+            },
+            {
+              "startMs": 38000,
+              "endMs": 38500,
+              "gloss": null
+            },
+            {
+              "startMs": 38500,
+              "endMs": 38800,
+              "gloss": null
+            },
+            {
+              "startMs": 38800,
+              "endMs": 39400,
+              "gloss": null
+            },
+            {
+              "startMs": 39400,
+              "endMs": 39900,
+              "gloss": null
+            },
+            {
+              "startMs": 39900,
+              "endMs": 40400,
+              "gloss": null
+            },
+            {
+              "startMs": 40400,
+              "endMs": 40900,
+              "gloss": null
+            },
+            {
+              "startMs": 40900,
+              "endMs": 41400,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 38700,
+              "endMs": 40100,
+              "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha.",
+              "maxIoU": 0.429,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 37000,
+              "endMs": 37500,
+              "gloss": null
+            },
+            {
+              "startMs": 37500,
+              "endMs": 38100,
+              "gloss": null
+            },
+            {
+              "startMs": 38100,
+              "endMs": 38600,
+              "gloss": null
+            },
+            {
+              "startMs": 38600,
+              "endMs": 38900,
+              "gloss": null
+            },
+            {
+              "startMs": 38900,
+              "endMs": 39400,
+              "gloss": null
+            },
+            {
+              "startMs": 39400,
+              "endMs": 39900,
+              "gloss": null
+            },
+            {
+              "startMs": 39900,
+              "endMs": 40400,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 38700,
+              "endMs": 40100,
+              "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha.",
+              "maxIoU": 0.357,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 37000,
+              "endMs": 37600,
+              "gloss": null
+            },
+            {
+              "startMs": 38200,
+              "endMs": 38700,
+              "gloss": null
+            },
+            {
+              "startMs": 38800,
+              "endMs": 39300,
+              "gloss": null
+            },
+            {
+              "startMs": 39400,
+              "endMs": 39800,
+              "gloss": null
+            },
+            {
+              "startMs": 39900,
+              "endMs": 40400,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 38700,
+              "endMs": 40100,
+              "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha.",
+              "maxIoU": 0.357,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposals": [
+            {
+              "startMs": 37000,
+              "endMs": 37500,
+              "gloss": null
+            },
+            {
+              "startMs": 37600,
+              "endMs": 38100,
+              "gloss": null
+            },
+            {
+              "startMs": 38200,
+              "endMs": 38700,
+              "gloss": null
+            },
+            {
+              "startMs": 38700,
+              "endMs": 39200,
+              "gloss": null
+            },
+            {
+              "startMs": 39300,
+              "endMs": 39800,
+              "gloss": null
+            },
+            {
+              "startMs": 39900,
+              "endMs": 40400,
+              "gloss": null
+            },
+            {
+              "startMs": 40600,
+              "endMs": 41200,
+              "gloss": null
+            }
+          ],
+          "references": [
+            {
+              "gloss": "amarelo",
+              "startMs": 38700,
+              "endMs": 40100,
+              "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha.",
+              "maxIoU": 0.357,
+              "maxLabeledIoU": 0,
+              "aligned": false,
+              "recognized": false
+            }
+          ]
+        }
+      ],
+      "manualWindows": [
+        {
+          "gloss": "amarelo",
+          "startMs": 38700,
+          "endMs": 40100,
+          "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha.",
+          "score": {
+            "frames": 14,
+            "framesWithHands": 14,
+            "shouldersBySide": {
+              "left": 9,
+              "right": 5,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.8784596066769474,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.8784596066769474
+              },
+              {
+                "label": "cinco",
+                "value": 0.0011648242121289514
+              },
+              {
+                "label": "espelho",
+                "value": 0.00423056293553382
+              },
+              {
+                "label": "amarelo",
+                "value": 0.11332019479285267
+              },
+              {
+                "label": "aluno",
+                "value": 0.0028248113825372653
+              }
+            ]
+          }
+        },
+        {
+          "id": "fim_de_vermelho",
+          "label": "Última parte do sinal anterior e retorno à posição neutra",
+          "startMs": 37000,
+          "endMs": 38100,
+          "score": {
+            "frames": 11,
+            "framesWithHands": 11,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 11,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.9920362354701182,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.9920362354701182
+              },
+              {
+                "label": "cinco",
+                "value": 0.00017081937449554892
+              },
+              {
+                "label": "espelho",
+                "value": 0.0008236077631609953
+              },
+              {
+                "label": "amarelo",
+                "value": 0.00670659489616026
+              },
+              {
+                "label": "aluno",
+                "value": 0.0002627424960651643
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "singleSignerProtocolSha256": "ada1ff6e9f0959ebf1c80d2a5c78c5251009abf21ceec57992a02245d3d23a86"
+}

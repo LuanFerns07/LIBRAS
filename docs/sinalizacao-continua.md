@@ -113,6 +113,36 @@ node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
   data/continuous-natural-eval/diagnosis.json --diagnose
 ```
 
+### Amarelo com uma pessoa no quadro
+
+O BioCiNAIS da UFF mostra Amarelo antes de Metal no item sobre cores da reciclagem e um movimento compatível com Amarelo depois de Febre na expressão legendada *Febre amarela*. Cada recorte mantém a transição original entre os sinais e uma única pessoa no quadro. Metal e Febre ficam fora da cobertura do catálogo. Para o segundo item, a identificação do componente Amarelo é visual e fica sujeita à revisão fluente. O MP4 disponível sob o nome *Materiais poliméricos* no depósito traz a cartela *Libras em Saúde*. A abertura dos dois arquivos indica CC BY-NC-SA, condição aplicada às versões locais. [Vídeos e metadados BioCiNAIS](https://educapes.capes.gov.br/handle/capes/431171?mode=full)
+
+O Caderno Didático de Libras D da UFSM apresenta Amarelo de frente com rótulo próprio, em um exercício de vocabulário com pausas. As três janelas manuais, os intervalos de contexto e os hashes dos vídeos foram fixados antes da inferência. Os quadros foram processados a 10 fps com o mesmo Holistic, classificador combinado, limiar 0,525 e quatro detectores utilizados no Cederj. [Aula Cores da UFSM, CC BY-NC-SA 4.0](https://ntetube.nte.ufsm.br/v/1543949237) · [Protocolo](../ml/evidence/ufsc-boundaries/single-signer-amarelo-protocol.json)
+
+| Janela manual | Quadros com mão | Escore de Amarelo | Decisão |
+| --- | ---: | ---: | --- |
+| BioCiNAIS, Amarelo antes de Metal, 142,000–142,900 s | 9/9 | 0,549 | Amarelo |
+| BioCiNAIS, componente de Febre amarela, 46,300–47,400 s | 11/11 | 0,803 | Amarelo |
+| UFSM, apresentação de Amarelo, 38,700–40,100 s | 14/14 | 0,113 | Rejeição |
+
+As três janelas chegaram à inferência, com mão detectada em todos os quadros. A demonstração frontal do Cederj, também de uma pessoa, teve escore de 0,373. Os recortes BioCiNAIS mostram que o mesmo classificador pode recuperar Amarelo junto de outra articulação. A rejeição da demonstração da UFSM mostra que a presença de apenas uma pessoa e a cobertura de mão também ocorreram em uma perda. [Diagnóstico do Cederj](../ml/evidence/ufsc-boundaries/cederj-dialogue-diagnosis.json)
+
+| Detector | Antes de Metal, melhor IoU rotulado | Em Febre amarela, melhor IoU rotulado | UFSM, melhor IoU rotulado |
+| --- | ---: | ---: | ---: |
+| Original | 0,667 | 0,545 | 0 |
+| Holistic sem controle de fragmentação | 0,556 | 0,455 | 0 |
+| Holistic com penalidade de corte | 0,667 | 0,455 | 0 |
+| Holistic com penalidade e piso de cinco posições | 0,667 | 0,455 | 0 |
+
+Na reciclagem, as quatro condições alinharam e reconheceram Amarelo em IoU ≥ 0,50. As duas condições com penalidade propuseram nove intervalos cada, contra 14 do Holistic sem controle. Em Febre amarela, o classificador retornou Amarelo em todas as condições. Só o original atingiu IoU ≥ 0,50, com duas propostas de Amarelo na mesma ocorrência. Na UFSM, o maior IoU de qualquer proposta foi 0,429. As 12 combinações de recorte e detector ficaram inconclusivas, sem texto sugerido. A anotação cobre uma classe e as fontes trazem exemplos didáticos. Os recortes BioCiNAIS vêm da mesma produção e a independência entre eles por pessoa fica sem verificação. [Propostas, janelas manuais e escores](../ml/evidence/ufsc-boundaries/single-signer-amarelo-browser.json)
+
+```bash
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
+  data/continuous-natural-eval/single-signer/replay.json --single-signer
+```
+
+Use os caminhos dos MP4 indicados no protocolo. O comando preserva a velocidade dos trechos, remove o áudio e usa uma porta de loopback temporária.
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

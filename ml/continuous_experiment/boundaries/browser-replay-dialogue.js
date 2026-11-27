@@ -69,7 +69,7 @@ async function run(protocol, diagnosis) {
   let diagnostic
   try {
     const { startMs, endMs, sampleMs, canvasMaxWidth } = protocol.clip
-    await waitForVideo(video, 'loadeddata', () => { video.src = '/replay/dialogue.mp4' })
+    await waitForVideo(video, 'loadeddata', () => { video.src = '/replay/' + (protocol.clip.file ?? 'dialogue.mp4') })
     if (video.duration * 1000 < endMs - startMs) throw new Error('A mídia termina antes da última amostra.')
     const { canvas, draw } = stageVideo(video)
     if (canvas.width !== canvasMaxWidth) throw new Error('Largura da grade diferente do protocolo.')
@@ -90,6 +90,11 @@ async function run(protocol, diagnosis) {
     const gl = document.createElement('canvas').getContext('webgl2')
     const rendererInfo = gl?.getExtension('WEBGL_debug_renderer_info')
     const diagnosisResult = diagnostic && await diagnostic.assess(video, protocol, frames, conditions, engine.recognize)
+    let manualWindows
+    if (protocol.manualWindows) {
+      const { scoreDialogueWindows } = await import('./browser-dialogue-diagnosis.js')
+      manualWindows = await scoreDialogueWindows(protocol, frames, engine.recognize)
+    }
     return {
       browser: navigator.userAgent,
       renderer: rendererInfo ? gl.getParameter(rendererInfo.UNMASKED_RENDERER_WEBGL) : null,
@@ -98,6 +103,7 @@ async function run(protocol, diagnosis) {
       framesWithHands: frames.filter(frame => frame.leftHand.length || frame.rightHand.length).length,
       conditions,
       ...(diagnosisResult ? { diagnosis: diagnosisResult } : {}),
+      ...(manualWindows ? { manualWindows } : {}),
     }
   } finally {
     closeVideo(video)

@@ -10,16 +10,19 @@ import { createServer } from 'vite'
 import { withChromium } from '../../../tests/e2e/chromium.mjs'
 
 const [dataRoot, reportFile, option] = process.argv.slice(2)
-if (!dataRoot || !reportFile || (option !== undefined && option !== '--diagnose') || process.argv.length > 5) {
-  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose]')
+if (!dataRoot || !reportFile || ![undefined, '--diagnose', '--single-signer'].includes(option) || process.argv.length > 5) {
+  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose|--single-signer]')
 }
 
 const project = fileURLToPath(new URL('../../../', import.meta.url))
 const protocolPath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-protocol.json', import.meta.url)
 const diagnosisPath = new URL('../../evidence/ufsc-boundaries/cederj-diagnosis-protocol.json', import.meta.url)
 const baselinePath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-browser.json', import.meta.url)
+const singleSignerPath = new URL('../../evidence/ufsc-boundaries/single-signer-amarelo-protocol.json', import.meta.url)
+const cederjDiagnosisPath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-diagnosis.json', import.meta.url)
 const protocol = JSON.parse(await readFile(protocolPath, 'utf8'))
-const diagnosis = option && JSON.parse(await readFile(diagnosisPath, 'utf8'))
+const diagnosis = option === '--diagnose' ? JSON.parse(await readFile(diagnosisPath, 'utf8')) : undefined
+const singleSigner = option === '--single-signer' ? JSON.parse(await readFile(singleSignerPath, 'utf8')) : undefined
 const exec = promisify(execFile)
 
 async function sha256(file) {
@@ -74,8 +77,32 @@ try {
       ['boundary-model.onnx', condition.modelSha256],
     ], condition, 'replay/' + condition.id)
   }
-  const video = await verified(resolve(dataRoot, source.mediaPath), source.mediaSha256)
-  await renderVideo(video, protocol.clip, clip)
+  const stagedCases = []
+  if (singleSigner) {
+    await verified(protocolPath, singleSigner.cederjProtocolSha256)
+    await verified(cederjDiagnosisPath, singleSigner.cederjDiagnosisSha256)
+    for (const item of singleSigner.cases) {
+      const file = item.id + '.mp4'
+      const output = resolve(staging, 'replay', file)
+      const input = await verified(resolve(dataRoot, item.source.mediaPath), item.source.mediaSha256)
+      await renderVideo(input, item.clip, output)
+      stagedCases.push({
+        id: item.id,
+        clipSha256: await sha256(output),
+        protocol: {
+          clip: { ...protocol.clip, ...item.clip, file },
+          annotation: { references: item.references },
+          experiment: protocol.experiment,
+          manualWindows: [...item.references, ...item.context],
+        },
+      })
+    }
+  }
+  let video
+  if (!singleSigner) {
+    video = await verified(resolve(dataRoot, source.mediaPath), source.mediaSha256)
+    await renderVideo(video, protocol.clip, clip)
+  }
   let diagnosisProvenance
   if (diagnosis) {
     await verified(protocolPath, diagnosis.protocolSha256)
@@ -115,17 +142,27 @@ try {
     const result = await withChromium(async ({ navigate, evaluate, waitUntil }) => {
       await navigate(url)
       await waitUntil('typeof window.runInstitutionalDialogue === "function"', 30000)
-      await evaluate('window.runInstitutionalDialogue(...' + JSON.stringify([protocol, diagnosis]) + ')')
-      await waitUntil('window.dialogueResult !== null', diagnosis ? 300000 : 180000)
-      return evaluate('window.dialogueResult')
+      async function replay(replayProtocol, replayDiagnosis) {
+        await evaluate('window.runInstitutionalDialogue(...' + JSON.stringify([replayProtocol, replayDiagnosis]) + ')')
+        await waitUntil('window.dialogueResult !== null', replayDiagnosis ? 300000 : 180000)
+        const row = await evaluate('window.dialogueResult')
+        if (row.error) throw new Error(row.error)
+        return row
+      }
+      if (!singleSigner) return replay(protocol, diagnosis)
+      const cases = []
+      for (const item of stagedCases) {
+        const row = await replay(item.protocol)
+        cases.push({ id: item.id, clipSha256: item.clipSha256, ...row })
+      }
+      return { cases }
     }, { fakeCamera: false })
-    if (result.error) throw new Error(result.error)
-    const [{ stdout: chromium }, { stdout: ffmpeg }, protocolSha256, clipSha256] = await Promise.all([
+    const [{ stdout: chromium }, { stdout: ffmpeg }, protocolSha256] = await Promise.all([
       exec(process.env.LIBRASIA_CHROMIUM || 'chromium', ['--version']),
       exec('ffmpeg', ['-version']),
       sha256(protocolPath),
-      sha256(clip),
     ])
+    const clipSha256 = singleSigner ? undefined : await sha256(clip)
     if (diagnosisProvenance) {
       const baseline = JSON.parse(await readFile(baselinePath, 'utf8'))
       diagnosisProvenance.automaticMatchesBaseline = baseline.clipSha256 === clipSha256 &&
@@ -134,6 +171,7 @@ try {
     await writeFile(reportFile, JSON.stringify({
       protocolSha256, clipSha256, chromium: chromium.trim(), ffmpeg: ffmpeg.split('\n')[0], ...result,
       ...(diagnosisProvenance ? { diagnosisProvenance } : {}),
+      ...(singleSigner ? { singleSignerProtocolSha256: await sha256(singleSignerPath) } : {}),
     }, null, 2) + '\n')
   } finally {
     await server.close()

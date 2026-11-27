@@ -77,6 +77,23 @@ async function openScorer() {
   }
 }
 
+export async function scoreDialogueWindows(protocol, frames, recognize) {
+  const scorer = await openScorer()
+  try {
+    const full = { start: 0, width: 1 }
+    const windows = []
+    for (const window of protocol.manualWindows) {
+      const { startMs, endMs } = window
+      const offset = protocol.clip.startMs
+      const clip = selectFrames(frames, startMs - offset, endMs - offset)
+      windows.push({ ...window, score: await scorer.score(clip, full, recognize) })
+    }
+    return windows
+  } finally {
+    await scorer.close()
+  }
+}
+
 async function scoreControls(video, diagnosis, sampleMs, scorer, recognize) {
   const controls = []
   for (const control of diagnosis.controls) {
