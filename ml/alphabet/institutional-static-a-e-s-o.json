@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Poses isoladas de A, E, O e S confirmadas em quadros amostrados com o rótulo visível. A Unesp fica reservada à avaliação estática desta rodada. O Cecierj pode fornecer referências em rodada posterior.",
+  "sources": [
+    {
+      "id": "cecierj-13757",
+      "split": "train",
+      "title": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
+      "project": "UFF, Fundação Cecierj e Consórcio Cederj",
+      "credits": {
+        "roteiro": "Mariana da Cunha Teixeira de Souza",
+        "coordenação geral": "Luiz Manoel Figueiredo",
+        "atuação": [
+          "Vanessa Rodrigues Ildefonso",
+          "Cíntia Ingrid Macedo Ribeiro"
+        ],
+        "filmagem e edição": "Leandro Lima de Souza"
+      },
+      "page": "https://canal.cecierj.edu.br/recurso/13757",
+      "download": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
+      "licenseEvidence": "O campo Licença da publicação oficial de 20 de julho de 2015 declara a licença de atribuição Creative Commons e permite reutilização.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra amarela à direita da pessoa.",
+      "windows": [
+        { "label": "A", "startMs": 41600, "endMs": 43200, "anchorMs": 42100 },
+        { "label": "E", "startMs": 57100, "endMs": 58820, "anchorMs": 58000 },
+        { "label": "O", "startMs": 87440, "endMs": 89100, "anchorMs": 88200 },
+        { "label": "S", "startMs": 102680, "endMs": 104120, "anchorMs": 103400 }
+      ]
+    },
+    {
+      "id": "unesp-222981",
+      "split": "test",
+      "title": "Conteúdos e didática de Libras - Alfabeto, numerais, pronomes, advérbios...",
+      "project": "NEaD Unesp e Univesp TV",
+      "credits": {
+        "intérprete de Libras": "Laís dos Santos di Benedetto",
+        "direção, produção e roteiro": "Univesp TV",
+        "coordenação": [
+          "NEaD Unesp",
+          "Univesp TV"
+        ]
+      },
+      "page": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "download": "https://acervodigital.unesp.br/bitstream/unesp/222981/8/unesp-nead_libras_graduacao_aula1.flv",
+      "file": "data/alphabet/institutional/unesp-222981.flv",
+      "sha256": "110d7d9c829d8a0bfa78a92a1c892e10e058e7385a796cc5cf52def8381acfbc",
+      "license": "CC-BY-NC-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licensePublication": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "licenseEvidence": "O campo Rights do Acervo Digital da Unesp indica CC BY-NC-SA 4.0 para o item.",
+      "labelEvidence": "Letra branca no canto inferior esquerdo.",
+      "windows": [
+        { "label": "A", "startMs": 56880, "endMs": 58550, "anchorMs": 57500 },
+        { "label": "E", "startMs": 68670, "endMs": 70250, "anchorMs": 69500 },
+        { "label": "O", "startMs": 91120, "endMs": 92280, "anchorMs": 91600 },
+        { "label": "S", "startMs": 101050, "endMs": 102550, "anchorMs": 102100 }
+      ]
+    }
+  ]
+}
