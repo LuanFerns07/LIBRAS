@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { createLiveLetterReader, letterFeatures, oneHand } from '../src/recognition/alphabet.js'
+import { createTrajectoryMatcher, trajectorySize } from '../src/recognition/alphabet-trajectory.js'
 
 const hand = y => Array.from({ length: 21 }, (_, i) => ({ x: .2 + i / 50, y: y + i / 70, z: i / 100 }))
 const frame = timestamp => ({ timestamp, aspect: 4 / 3, rightHand: hand(.1), leftHand: [] })
@@ -89,4 +90,29 @@ test('o leitor pode completar Z após um X inicial e uma perda breve da mão', a
   await reader.read({ ...frame(550), rightHand: [] })
   await reader.read(frame(600))
   assert.deepEqual(windows.at(-1), [[600], [600]])
+})
+
+test('o traçado de Z distingue o polegar aberto durante as três passagens', () => {
+  const matcher = createTrajectoryMatcher({
+    templates: ['X', 'H'].map(label => ({ label, vector: new Float32Array(trajectorySize) })),
+    limits: {},
+  })
+  function trace(thumbX) {
+    const pose = [
+      [.48, .53], [.42, .51], [.40, .49], [.40, .47], [thumbX, .45],
+      [.40, .40], [.40, .37], [.40, .34], [.40, .31],
+      [.44, .39], [.44, .37], [.44, .39], [.44, .43],
+      [.48, .39], [.48, .37], [.48, .39], [.48, .43],
+      [.52, .40], [.52, .38], [.52, .40], [.52, .43],
+    ]
+    const positions = [[0, 0], [-.06, 0], [-.13, .005], [-.05, .065], [.01, .10], [-.05, .10], [-.13, .105]]
+    return positions.map(([x, y], index) => ({
+      timestamp: index * 100,
+      aspect: 1,
+      leftHand: [],
+      rightHand: pose.map(([px, py]) => ({ x: px + x, y: py + y, z: 0 })),
+    }))
+  }
+  assert.equal(matcher(trace(.43)), 'Z')
+  assert.equal(matcher(trace(.32)), null)
 })

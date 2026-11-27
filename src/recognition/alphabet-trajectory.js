@@ -44,9 +44,23 @@ export function trajectorySample(frame) {
   }
 }
 
+function median(values) {
+  values.sort((a, b) => a - b)
+  return values[Math.floor(values.length / 2)]
+}
+
 function medianScale(samples) {
-  const sizes = samples.map(sample => sample.scale).sort((a, b) => a - b)
-  return sizes[Math.floor(sizes.length / 2)]
+  return median(samples.map(sample => sample.scale))
+}
+
+function thumbProjection({ pose }) {
+  const index = pose.subarray(15, 18)
+  const little = pose.subarray(51, 54)
+  const thumb = pose.subarray(12, 15)
+  const axis = Array.from(index, (value, i) => value - little[i])
+  const length = Math.hypot(...axis)
+  if (length < 1e-4) return 0
+  return axis.reduce((sum, value, i) => sum + value * (thumb[i] - index[i]), 0) / length
 }
 
 export function describeTrajectory(samples) {
@@ -186,19 +200,18 @@ function trajectoryWindows(samples) {
 }
 
 function turnsInIndexPath(samples, scale) {
-  const origin = samples[0].positions[2]
+  const origin = samples[0]
   let extreme = origin
   let direction = 0
   const turns = [origin]
-  for (const { positions } of samples.slice(1)) {
-    const point = positions[2]
-    const change = (point[0] - extreme[0]) / scale
+  for (const sample of samples.slice(1)) {
+    const change = (sample.positions[2][0] - extreme.positions[2][0]) / scale
     if (change * direction > 0) {
-      extreme = point
+      extreme = sample
     } else if (Math.abs(change) >= .50) {
       if (direction) turns.push(extreme)
       direction = Math.sign(change)
-      extreme = point
+      extreme = sample
     }
   }
   turns.push(extreme)
@@ -214,8 +227,12 @@ function tracesZ(samples) {
   const turns = turnsInIndexPath(samples, scale)
   for (let i = 3; i < turns.length; i += 1) {
     const [start, first, second, end] = turns.slice(i - 3, i + 1)
-    const descent = (end[1] - start[1]) / scale
-    if (descent >= .55 && (second[1] - first[1]) / scale >= .28) return true
+    const descent = (end.positions[2][1] - start.positions[2][1]) / scale
+    const diagonal = (second.positions[2][1] - first.positions[2][1]) / scale
+    if (descent < .55 || diagonal < .28) continue
+    const active = samples.filter(({ time }) => time >= start.time && time <= end.time)
+    // Azul pode ter o mesmo percurso do indicador com o polegar aberto.
+    if (median(active.map(thumbProjection)) <= .20) return true
   }
   return false
 }
