@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "decision": "no-candidate-meets-rejection-and-preservation",
+  "minimum_criterion": "reject both targeted negative attempts and keep all correctly accepted MINDS and external positive clips",
+  "confirmations": {
+    "calibration_sha256": "d1548f7bd191936365bea5aec20a234761d54c92fa2ea5e40cbb4e1852cf43ba",
+    "full_local_report_sha256": "a70097c7f3bd1bc9d63bbdee3e68107d08cf363b660e594ceda401e87ce3c8ff",
+    "groups": {
+      "MINDS reservado": {
+        "baseline": {
+          "correct": 32,
+          "false_acceptances": 1
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 21,
+            "false_acceptances": 1
+          },
+          "combined-train-validation": {
+            "correct": 24,
+            "false_acceptances": 1
+          },
+          "members-validation": {
+            "correct": 21,
+            "false_acceptances": 1
+          },
+          "members-train-validation": {
+            "correct": 24,
+            "false_acceptances": 1
+          },
+          "snapshots-validation": {
+            "correct": 22,
+            "false_acceptances": 1
+          },
+          "snapshots-train-validation": {
+            "correct": 23,
+            "false_acceptances": 1
+          }
+        }
+      },
+      "CLAD desenvolvimento": {
+        "baseline": {
+          "correct": 0,
+          "false_acceptances": 3
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 0,
+            "false_acceptances": 2
+          },
+          "combined-train-validation": {
+            "correct": 0,
+            "false_acceptances": 2
+          },
+          "members-validation": {
+            "correct": 0,
+            "false_acceptances": 2
+          },
+          "members-train-validation": {
+            "correct": 0,
+            "false_acceptances": 2
+          },
+          "snapshots-validation": {
+            "correct": 0,
+            "false_acceptances": 1
+          },
+          "snapshots-train-validation": {
+            "correct": 0,
+            "false_acceptances": 2
+          }
+        }
+      },
+      "CLAD original": {
+        "baseline": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "combined-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "members-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "members-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "snapshots-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "snapshots-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          }
+        }
+      },
+      "CLAD novas tomadas": {
+        "baseline": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "combined-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "members-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "members-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "snapshots-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          },
+          "snapshots-train-validation": {
+            "correct": 0,
+            "false_acceptances": 0
+          }
+        }
+      },
+      "Didático negativo": {
+        "baseline": {
+          "correct": 0,
+          "false_acceptances": 5
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 0,
+            "false_acceptances": 4
+          },
+          "combined-train-validation": {
+            "correct": 0,
+            "false_acceptances": 5
+          },
+          "members-validation": {
+            "correct": 0,
+            "false_acceptances": 4
+          },
+          "members-train-validation": {
+            "correct": 0,
+            "false_acceptances": 5
+          },
+          "snapshots-validation": {
+            "correct": 0,
+            "false_acceptances": 4
+          },
+          "snapshots-train-validation": {
+            "correct": 0,
+            "false_acceptances": 5
+          }
+        }
+      },
+      "Didático positivo": {
+        "baseline": {
+          "correct": 1,
+          "false_acceptances": 0
+        },
+        "alternatives": {
+          "combined-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          },
+          "combined-train-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          },
+          "members-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          },
+          "members-train-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          },
+          "snapshots-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          },
+          "snapshots-train-validation": {
+            "correct": 1,
+            "false_acceptances": 0
+          }
+        }
+      }
+    },
+    "target_cases": {
+      "clad-movimento-03-queixo-teclado": {
+        "id": "clad-movimento-03-queixo-teclado",
+        "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+        "signer": 3,
+        "state": "ready",
+        "expected": null,
+        "source_label": "movimento-comum",
+        "baseline": "aluno",
+        "confidence": 0.8009176711470568,
+        "measures": {
+          "combined": 0.8009176711470568,
+          "members": 0.606434888040916,
+          "snapshots": 0.7454975319874704
+        },
+        "alternatives": {
+          "combined-validation": null,
+          "combined-train-validation": null,
+          "members-validation": null,
+          "members-train-validation": null,
+          "snapshots-validation": null,
+          "snapshots-train-validation": null
+        }
+      },
+      "fiocruz-sete-oito": {
+        "id": "fiocruz-sete-oito",
+        "sha256": "c0c06a9e9dc671cea0becfbf4a6bdcbedb3db38ca9d56d6cbbac3dd5f32c77a9",
+        "signer": 303,
+        "state": "ready",
+        "expected": null,
+        "source_label": "sete → oito",
+        "baseline": "cinco",
+        "confidence": 0.7333095782081112,
+        "measures": {
+          "combined": 0.7333095782081112,
+          "members": 0.6594234191842481,
+          "snapshots": 0.9258625689105061
+        },
+        "alternatives": {
+          "combined-validation": null,
+          "combined-train-validation": "cinco",
+          "members-validation": null,
+          "members-train-validation": "cinco",
+          "snapshots-validation": "cinco",
+          "snapshots-train-validation": "cinco"
+        }
+      }
+    },
+    "eligible_profiles": []
+  },
+  "negative_prototypes": {
+    "calibration_sha256": "1bac9a2733067c09d37738a1cd9fc0eb7621bdeded537f7bd4a06d4a2379d86e",
+    "full_local_report_sha256": "8c73b5f112ef01b7f9805551553bf8083b2fba076e021f6163b9d7f04508e8a1",
+    "descriptors": "Median distances around the palm, variance and net change in hand geometry, and wrist path.",
+    "negative_development": {
+      "cinco": "three numeric transitions from the supplementary UFSM numbers lesson",
+      "aluno": "two false positives from CLAD development Subject4"
+    },
+    "thresholds": {
+      "cinco": {
+        "shape": 1.636,
+        "motion": 0.831,
+        "geometry-motion": 1.318,
+        "paths": 13.406
+      },
+      "aluno": {
+        "shape": 2.169,
+        "motion": 1.165,
+        "geometry-motion": 2.04,
+        "paths": 2.011
+      }
+    },
+    "groups": {
+      "MINDS reservado": {
+        "shape": {
+          "correct": 31,
+          "false_acceptances": 1
+        },
+        "motion": {
+          "correct": 32,
+          "false_acceptances": 1
+        },
+        "geometry-motion": {
+          "correct": 32,
+          "false_acceptances": 1
+        },
+        "paths": {
+          "correct": 32,
+          "false_acceptances": 1
+        }
+      },
+      "CLAD original": {
+        "shape": {
+          "correct": 0,
+          "false_acceptances": 0
+        },
+        "motion": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "geometry-motion": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "paths": {
+          "correct": 0,
+          "false_acceptances": 1
+        }
+      },
+      "CLAD novas tomadas": {
+        "shape": {
+          "correct": 0,
+          "false_acceptances": 0
+        },
+        "motion": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "geometry-motion": {
+          "correct": 0,
+          "false_acceptances": 1
+        },
+        "paths": {
+          "correct": 0,
+          "false_acceptances": 1
+        }
+      },
+      "Didático negativo": {
+        "shape": {
+          "correct": 0,
+          "false_acceptances": 5
+        },
+        "motion": {
+          "correct": 0,
+          "false_acceptances": 5
+        },
+        "geometry-motion": {
+          "correct": 0,
+          "false_acceptances": 5
+        },
+        "paths": {
+          "correct": 0,
+          "false_acceptances": 5
+        }
+      },
+      "Didático positivo": {
+        "shape": {
+          "correct": 1,
+          "false_acceptances": 0
+        },
+        "motion": {
+          "correct": 1,
+          "false_acceptances": 0
+        },
+        "geometry-motion": {
+          "correct": 1,
+          "false_acceptances": 0
+        },
+        "paths": {
+          "correct": 1,
+          "false_acceptances": 0
+        }
+      }
+    },
+    "target_cases": {
+      "clad-movimento-03-queixo-teclado": {
+        "clip": "clad-movimento-03-queixo-teclado",
+        "expected": null,
+        "baseline": "aluno",
+        "with_veto": {
+          "shape": null,
+          "motion": "aluno",
+          "geometry-motion": "aluno",
+          "paths": "aluno"
+        },
+        "distance": {
+          "shape": 1.5543027763119532,
+          "motion": 2.684741633217113,
+          "geometry-motion": 2.7039685026648352,
+          "paths": 2.767368844444434
+        }
+      },
+      "fiocruz-sete-oito": {
+        "clip": "fiocruz-sete-oito",
+        "expected": null,
+        "baseline": "cinco",
+        "with_veto": {
+          "shape": "cinco",
+          "motion": "cinco",
+          "geometry-motion": "cinco",
+          "paths": "cinco"
+        },
+        "distance": {
+          "shape": 1.8689946842834277,
+          "motion": 1.488448576469969,
+          "geometry-motion": 1.6894703748031787,
+          "paths": 15.260339037747505
+        }
+      }
+    },
+    "lost_correct_in_shape": [
+      "raw/02AlunoSinalizador12-3.mp4"
+    ],
+    "external_positive_scope": "UFSM numbers excluded because its presenter contributed the development prototypes"
+  }
+}
