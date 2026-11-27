@@ -63,6 +63,7 @@ function groupBySource(windows) {
     group.windows.push({ label, startMs, endMs })
     group.endMs = Math.max(group.endMs, endMs)
   }
+  for (const group of sources.values()) group.windows.sort((left, right) => left.startMs - right.startMs)
   return [...sources.values()]
 }
 

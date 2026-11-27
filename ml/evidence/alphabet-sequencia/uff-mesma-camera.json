@@ -1,0 +1,367 @@
+{
+  "build": {
+    "commit": "599f34118c22ca6fb4beb650a72df8a14935881d",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/uff-alfabeto-continuo.json"
+  ],
+  "sameCamera": true,
+  "results": [
+    {
+      "source": "uff-ffjzgofrtsg",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 6807,
+          "endMs": 9409
+        },
+        {
+          "label": "B",
+          "startMs": 10410,
+          "endMs": 12012
+        },
+        {
+          "label": "C",
+          "startMs": 12913,
+          "endMs": 15015
+        },
+        {
+          "label": "D",
+          "startMs": 15816,
+          "endMs": 18318
+        },
+        {
+          "label": "E",
+          "startMs": 19319,
+          "endMs": 21722
+        },
+        {
+          "label": "F",
+          "startMs": 22723,
+          "endMs": 25325
+        },
+        {
+          "label": "G",
+          "startMs": 26326,
+          "endMs": 28629
+        },
+        {
+          "label": "H",
+          "startMs": 29630,
+          "endMs": 32933
+        },
+        {
+          "label": "I",
+          "startMs": 34134,
+          "endMs": 36436
+        },
+        {
+          "label": "J",
+          "startMs": 38038,
+          "endMs": 41241
+        },
+        {
+          "label": "K",
+          "startMs": 42142,
+          "endMs": 44344
+        },
+        {
+          "label": "L",
+          "startMs": 45345,
+          "endMs": 48148
+        },
+        {
+          "label": "M",
+          "startMs": 49249,
+          "endMs": 51652
+        },
+        {
+          "label": "N",
+          "startMs": 52753,
+          "endMs": 54955
+        },
+        {
+          "label": "O",
+          "startMs": 56056,
+          "endMs": 59059
+        },
+        {
+          "label": "P",
+          "startMs": 60060,
+          "endMs": 63864
+        },
+        {
+          "label": "Q",
+          "startMs": 65165,
+          "endMs": 66967
+        },
+        {
+          "label": "R",
+          "startMs": 68268,
+          "endMs": 71271
+        },
+        {
+          "label": "S",
+          "startMs": 72573,
+          "endMs": 75175
+        },
+        {
+          "label": "T",
+          "startMs": 76376,
+          "endMs": 78979
+        },
+        {
+          "label": "U",
+          "startMs": 80180,
+          "endMs": 82783
+        },
+        {
+          "label": "V",
+          "startMs": 84084,
+          "endMs": 86086
+        },
+        {
+          "label": "W",
+          "startMs": 87287,
+          "endMs": 89990
+        },
+        {
+          "label": "X",
+          "startMs": 91191,
+          "endMs": 94695
+        },
+        {
+          "label": "Y",
+          "startMs": 95696,
+          "endMs": 98498
+        },
+        {
+          "label": "Z",
+          "startMs": 99499,
+          "endMs": 101101
+        }
+      ],
+      "startMs": 0,
+      "endMs": 101101,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 3889
+        },
+        {
+          "letter": "A",
+          "afterVideoMs": 7060
+        },
+        {
+          "letter": "B",
+          "afterVideoMs": 9912
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 12267
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 18636
+        },
+        {
+          "letter": "E",
+          "afterVideoMs": 19460
+        },
+        {
+          "letter": "F",
+          "afterVideoMs": 22133
+        },
+        {
+          "letter": "G",
+          "afterVideoMs": 25695
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 29379
+        },
+        {
+          "letter": "I",
+          "afterVideoMs": 34378
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 37050
+        },
+        {
+          "letter": "K",
+          "afterVideoMs": 41614
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 42308
+        },
+        {
+          "letter": "G",
+          "afterVideoMs": 44354
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 44481
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 45381
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 48525
+        },
+        {
+          "letter": "N",
+          "afterVideoMs": 52003
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 55978
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 59597
+        },
+        {
+          "letter": "P",
+          "afterVideoMs": 60380
+        },
+        {
+          "letter": "N",
+          "afterVideoMs": 63178
+        },
+        {
+          "letter": "Q",
+          "afterVideoMs": 65407
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 67318
+        },
+        {
+          "letter": "S",
+          "afterVideoMs": 71719
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 79046
+        },
+        {
+          "letter": "U",
+          "afterVideoMs": 79910
+        },
+        {
+          "letter": "V",
+          "afterVideoMs": 83344
+        },
+        {
+          "letter": "W",
+          "afterVideoMs": 86899
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 90446
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 95705
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 99029
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 99902
+        }
+      ],
+      "clearedAtMs": [
+        4260,
+        9593,
+        12046,
+        15261,
+        19216,
+        21818,
+        25024,
+        28782,
+        33197,
+        41350,
+        44145,
+        45171,
+        48026,
+        51739,
+        55198,
+        58917,
+        60202,
+        62981,
+        64005,
+        71073,
+        75084,
+        79706,
+        83030,
+        86597,
+        90306,
+        95454,
+        98892,
+        100749
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1601
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 3132
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 5967
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 6808
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 33197
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 34163
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 64005
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 65153
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 101023
+        }
+      ],
+      "workerFrames": 2395,
+      "framesWithHand": 2148,
+      "lastHandAfterVideoMs": 100967
+    }
+  ]
+}

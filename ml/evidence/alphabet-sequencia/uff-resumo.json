@@ -1,0 +1,313 @@
+{
+  "build": {
+    "commit": "599f34118c22ca6fb4beb650a72df8a14935881d",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "results": [
+    {
+      "source": "uff-ffjzgofrtsg",
+      "sameCamera": {
+        "windows": 26,
+        "expectedShown": 23,
+        "onlyExpected": 20,
+        "withoutReading": 2
+      },
+      "isolated": {
+        "windows": 26,
+        "expectedShown": 20,
+        "onlyExpected": 19,
+        "withoutReading": 6
+      },
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 6807,
+          "endMs": 9409,
+          "sameCamera": [
+            "A"
+          ],
+          "isolated": [
+            "A"
+          ]
+        },
+        {
+          "label": "B",
+          "startMs": 10410,
+          "endMs": 12012,
+          "sameCamera": [
+            "B"
+          ],
+          "isolated": [
+            "B"
+          ]
+        },
+        {
+          "label": "C",
+          "startMs": 12913,
+          "endMs": 15015,
+          "sameCamera": [
+            "C"
+          ],
+          "isolated": [
+            "C"
+          ]
+        },
+        {
+          "label": "D",
+          "startMs": 15816,
+          "endMs": 18318,
+          "sameCamera": [],
+          "isolated": []
+        },
+        {
+          "label": "E",
+          "startMs": 19319,
+          "endMs": 21722,
+          "sameCamera": [
+            "E"
+          ],
+          "isolated": [
+            "E"
+          ]
+        },
+        {
+          "label": "F",
+          "startMs": 22723,
+          "endMs": 25325,
+          "sameCamera": [
+            "F"
+          ],
+          "isolated": [
+            "F"
+          ]
+        },
+        {
+          "label": "G",
+          "startMs": 26326,
+          "endMs": 28629,
+          "sameCamera": [
+            "G"
+          ],
+          "isolated": [
+            "G"
+          ]
+        },
+        {
+          "label": "H",
+          "startMs": 29630,
+          "endMs": 32933,
+          "sameCamera": [
+            "H"
+          ],
+          "isolated": [
+            "H"
+          ]
+        },
+        {
+          "label": "I",
+          "startMs": 34134,
+          "endMs": 36436,
+          "sameCamera": [
+            "I"
+          ],
+          "isolated": [
+            "I"
+          ]
+        },
+        {
+          "label": "J",
+          "startMs": 38038,
+          "endMs": 41241,
+          "sameCamera": [
+            "J"
+          ],
+          "isolated": []
+        },
+        {
+          "label": "K",
+          "startMs": 42142,
+          "endMs": 44344,
+          "sameCamera": [
+            "K",
+            "H"
+          ],
+          "isolated": []
+        },
+        {
+          "label": "L",
+          "startMs": 45345,
+          "endMs": 48148,
+          "sameCamera": [
+            "L"
+          ],
+          "isolated": [
+            "L"
+          ]
+        },
+        {
+          "label": "M",
+          "startMs": 49249,
+          "endMs": 51652,
+          "sameCamera": [
+            "M"
+          ],
+          "isolated": [
+            "M"
+          ]
+        },
+        {
+          "label": "N",
+          "startMs": 52753,
+          "endMs": 54955,
+          "sameCamera": [
+            "N"
+          ],
+          "isolated": [
+            "N"
+          ]
+        },
+        {
+          "label": "O",
+          "startMs": 56056,
+          "endMs": 59059,
+          "sameCamera": [
+            "O"
+          ],
+          "isolated": [
+            "O"
+          ]
+        },
+        {
+          "label": "P",
+          "startMs": 60060,
+          "endMs": 63864,
+          "sameCamera": [
+            "X",
+            "P",
+            "N"
+          ],
+          "isolated": [
+            "P",
+            "N"
+          ]
+        },
+        {
+          "label": "Q",
+          "startMs": 65165,
+          "endMs": 66967,
+          "sameCamera": [
+            "Q"
+          ],
+          "isolated": [
+            "Q"
+          ]
+        },
+        {
+          "label": "R",
+          "startMs": 68268,
+          "endMs": 71271,
+          "sameCamera": [
+            "X"
+          ],
+          "isolated": []
+        },
+        {
+          "label": "S",
+          "startMs": 72573,
+          "endMs": 75175,
+          "sameCamera": [
+            "S"
+          ],
+          "isolated": [
+            "S"
+          ]
+        },
+        {
+          "label": "T",
+          "startMs": 76376,
+          "endMs": 78979,
+          "sameCamera": [],
+          "isolated": []
+        },
+        {
+          "label": "U",
+          "startMs": 80180,
+          "endMs": 82783,
+          "sameCamera": [
+            "U"
+          ],
+          "isolated": [
+            "U"
+          ]
+        },
+        {
+          "label": "V",
+          "startMs": 84084,
+          "endMs": 86086,
+          "sameCamera": [
+            "V"
+          ],
+          "isolated": [
+            "V"
+          ]
+        },
+        {
+          "label": "W",
+          "startMs": 87287,
+          "endMs": 89990,
+          "sameCamera": [
+            "W"
+          ],
+          "isolated": [
+            "W"
+          ]
+        },
+        {
+          "label": "X",
+          "startMs": 91191,
+          "endMs": 94695,
+          "sameCamera": [
+            "X"
+          ],
+          "isolated": [
+            "X"
+          ]
+        },
+        {
+          "label": "Y",
+          "startMs": 95696,
+          "endMs": 98498,
+          "sameCamera": [
+            "Y"
+          ],
+          "isolated": [
+            "Y"
+          ]
+        },
+        {
+          "label": "Z",
+          "startMs": 99499,
+          "endMs": 101101,
+          "sameCamera": [
+            "X",
+            "Z"
+          ],
+          "isolated": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "build": {
+    "commit": "599f34118c22ca6fb4beb650a72df8a14935881d",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/ufsm-static-windows.json",
+    "ml/alphabet/ufsm-temporal-windows.json"
+  ],
+  "sameCamera": true,
+  "results": [
+    {
+      "source": "1535641159",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 3660,
+          "endMs": 4370
+        },
+        {
+          "label": "B",
+          "startMs": 5060,
+          "endMs": 6140
+        },
+        {
+          "label": "C",
+          "startMs": 6610,
+          "endMs": 7580
+        },
+        {
+          "label": "Ç",
+          "startMs": 7770,
+          "endMs": 8950
+        },
+        {
+          "label": "D",
+          "startMs": 9500,
+          "endMs": 10360
+        },
+        {
+          "label": "E",
+          "startMs": 10590,
+          "endMs": 11320
+        },
+        {
+          "label": "F",
+          "startMs": 11900,
+          "endMs": 12840
+        },
+        {
+          "label": "G",
+          "startMs": 13530,
+          "endMs": 14610
+        },
+        {
+          "label": "H",
+          "startMs": 14850,
+          "endMs": 16280
+        },
+        {
+          "label": "I",
+          "startMs": 16830,
+          "endMs": 17590
+        },
+        {
+          "label": "J",
+          "startMs": 17850,
+          "endMs": 19400
+        },
+        {
+          "label": "K",
+          "startMs": 19820,
+          "endMs": 21250
+        },
+        {
+          "label": "L",
+          "startMs": 21620,
+          "endMs": 22630
+        },
+        {
+          "label": "M",
+          "startMs": 23150,
+          "endMs": 24350
+        },
+        {
+          "label": "N",
+          "startMs": 24820,
+          "endMs": 25770
+        },
+        {
+          "label": "O",
+          "startMs": 26360,
+          "endMs": 27650
+        },
+        {
+          "label": "P",
+          "startMs": 28470,
+          "endMs": 29090
+        },
+        {
+          "label": "Q",
+          "startMs": 29870,
+          "endMs": 30940
+        },
+        {
+          "label": "R",
+          "startMs": 31660,
+          "endMs": 32620
+        },
+        {
+          "label": "S",
+          "startMs": 33280,
+          "endMs": 34180
+        },
+        {
+          "label": "T",
+          "startMs": 35100,
+          "endMs": 35980
+        },
+        {
+          "label": "U",
+          "startMs": 36500,
+          "endMs": 37280
+        },
+        {
+          "label": "V",
+          "startMs": 37480,
+          "endMs": 38390
+        },
+        {
+          "label": "W",
+          "startMs": 38920,
+          "endMs": 39590
+        },
+        {
+          "label": "X",
+          "startMs": 40220,
+          "endMs": 41680
+        },
+        {
+          "label": "Y",
+          "startMs": 41900,
+          "endMs": 43500
+        },
+        {
+          "label": "Z",
+          "startMs": 43650,
+          "endMs": 45550
+        }
+      ],
+      "startMs": 0,
+      "endMs": 45550,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 661
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 1231
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 2007
+        },
+        {
+          "letter": "B",
+          "afterVideoMs": 5103
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 6425
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 6966
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 7982
+        },
+        {
+          "letter": "D",
+          "afterVideoMs": 9736
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 10609
+        },
+        {
+          "letter": "E",
+          "afterVideoMs": 10909
+        },
+        {
+          "letter": "F",
+          "afterVideoMs": 12333
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 13608
+        },
+        {
+          "letter": "G",
+          "afterVideoMs": 14440
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 15281
+        },
+        {
+          "letter": "I",
+          "afterVideoMs": 17107
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 18119
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 19460
+        },
+        {
+          "letter": "K",
+          "afterVideoMs": 20134
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 21511
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 22316
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 23307
+        },
+        {
+          "letter": "N",
+          "afterVideoMs": 24732
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 26444
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 27666
+        },
+        {
+          "letter": "P",
+          "afterVideoMs": 28493
+        },
+        {
+          "letter": "Q",
+          "afterVideoMs": 30147
+        },
+        {
+          "letter": "R",
+          "afterVideoMs": 31648
+        },
+        {
+          "letter": "S",
+          "afterVideoMs": 33313
+        },
+        {
+          "letter": "T",
+          "afterVideoMs": 35536
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 36262
+        },
+        {
+          "letter": "U",
+          "afterVideoMs": 37065
+        },
+        {
+          "letter": "V",
+          "afterVideoMs": 37722
+        },
+        {
+          "letter": "W",
+          "afterVideoMs": 38757
+        },
+        {
+          "letter": "V",
+          "afterVideoMs": 40031
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 40492
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 42407
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 43338
+        },
+        {
+          "letter": "G",
+          "afterVideoMs": 43854
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 44745
+        }
+      ],
+      "clearedAtMs": [
+        765,
+        1377,
+        2301,
+        6238,
+        7563,
+        9276,
+        10397,
+        10720,
+        11718,
+        13219,
+        14237,
+        14685,
+        16500,
+        19421,
+        21399,
+        22127,
+        22868,
+        24454,
+        26000,
+        28267,
+        29364,
+        31123,
+        32768,
+        34437,
+        36061,
+        36843,
+        37362,
+        38418,
+        39823,
+        40278,
+        43133,
+        43550,
+        44398,
+        45608
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1517
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 25
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 45608
+        }
+      ],
+      "workerFrames": 1056,
+      "framesWithHand": 994,
+      "lastHandAfterVideoMs": 45570
+    }
+  ]
+}

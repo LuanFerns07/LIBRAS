@@ -407,3 +407,35 @@ node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
   --manifest ml/alphabet/independent-motion-expanded-windows.json \
   --source ufac-b2u7c6oxgbg --source unicentro-aniqxveqgns --workers 1 --timeline
 ~~~
+
+### Alfabeto com a mesma trilha de câmera
+
+No Chromium, a prévia `599f341` leu 79 janelas rotuladas em três gravações. O primeiro ensaio manteve uma única trilha por aula, a velocidade original e as transições entre as letras. O segundo abriu cada janela separadamente, com dois segundos de quadro preto antes e depois. Nos dois casos, a métrica conta as letras exibidas dentro do mesmo intervalo rotulado. Uma janela pode conter a letra esperada junto de outras leituras.
+
+| Gravação | Janelas | Esperada na mesma câmera | Só a esperada | Esperada por recorte | Só a esperada |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NUEDIS/UFF, fonte reservada | 26 | 23 | 20 | 20 | 19 |
+| Unicentro, regressão | 26 | 22 | 12 | 21 | 11 |
+| UFSM, regressão com Ç | 27 | 26 | 16 | 27 | 24 |
+| **Total** | **79** | **71** | **48** | **68** | **54** |
+
+Na gravação da UFF, J, K e Z apareceram na mesma trilha e ficaram sem leitura nos recortes separados. D e T ficaram sem leitura nas duas condições. A janela de R exibiu X na mesma trilha e ficou vazia no recorte. Essa fonte foi reservada antes da inferência e está ausente dos manifestos usados no ajuste. [Aula do NUEDIS/UFF](https://www.youtube.com/watch?v=ffJZgofrtSg) · [Rótulos, licença e créditos](../ml/alphabet/uff-alfabeto-continuo.json) · [Leituras por janela](../ml/evidence/alphabet-sequencia/uff-resumo.json)
+
+Na Unicentro, a janela de N exibiu M nas duas condições. Na mesma trilha, M apareceu quando a mão já baixava, a 54,323 s do vídeo. Ao recortar o lado da imagem que contém a vista secundária, apareceu N durante a pose e houve leituras adicionais de M. O recorte também aumentou o tamanho relativo da mão na entrada do extrator. Na UFF e na UFSM, N foi a única leitura nas respectivas janelas da mesma trilha. [Aula da Unicentro](https://www.youtube.com/watch?v=AnIqxVEqGNs) · [Leituras por janela](../ml/evidence/alphabet-sequencia/unicentro-resumo.json) · [Reteste do N com recorte](../ml/evidence/alphabet-sequencia/unicentro-n-sem-segunda-vista.json)
+
+Na UFSM, a janela de Ç exibiu apenas Ç na mesma trilha e C seguido de Ç no recorte. A foi a única letra esperada que faltou na mesma trilha. As duas gravações de regressão incluem trechos já consultados no desenvolvimento. Cada condição teve uma reprodução por janela. As contagens descrevem essas tomadas e o aceite com pessoas diretamente na webcam segue pendente. [Aula da UFSM](https://ntetube.nte.ufsm.br/v/1535641159) · [Leituras por janela](../ml/evidence/alphabet-sequencia/ufsm-resumo.json)
+
+Para reproduzir o ensaio da UFF, coloque o MP4 indicado no manifesto na pasta local e use a prévia aberta no Linux.
+
+~~~bash
+out=data/evidence/alphabet-refs
+mkdir -p "$out"
+manifest=ml/alphabet/uff-alfabeto-continuo.json
+node ml/alphabet/replay-web.mjs --manifest "$manifest" --source uff-ffjzgofrtsg \
+  --same-camera --workers 1 > "$out/uff-mesma-camera.json"
+node ml/alphabet/replay-web.mjs --manifest "$manifest" --source uff-ffjzgofrtsg \
+  --timeline --workers 2 > "$out/uff-recortes.json"
+python3 -m ml.alphabet.compare_replays "$out/uff-mesma-camera.json" "$out/uff-recortes.json"
+~~~
+
+Para repetir a Unicentro, use o manifesto `ml/alphabet/unicentro-alfabeto-continuo.json` e a fonte `unicentro-aniqxveqgns`. Para repetir a UFSM, passe os dois manifestos `ml/alphabet/ufsm-static-windows.json` e `ml/alphabet/ufsm-temporal-windows.json` e selecione a fonte `1535641159`. [Relatórios com linhas do tempo e hashes da compilação](../ml/evidence/alphabet-sequencia)

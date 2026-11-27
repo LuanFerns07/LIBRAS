@@ -1,0 +1,343 @@
+{
+  "build": {
+    "commit": "599f34118c22ca6fb4beb650a72df8a14935881d",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "results": [
+    {
+      "source": "unicentro-aniqxveqgns",
+      "sameCamera": {
+        "windows": 26,
+        "expectedShown": 22,
+        "onlyExpected": 12,
+        "withoutReading": 1
+      },
+      "isolated": {
+        "windows": 26,
+        "expectedShown": 21,
+        "onlyExpected": 11,
+        "withoutReading": 1
+      },
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 9009,
+          "endMs": 12412,
+          "sameCamera": [
+            "A"
+          ],
+          "isolated": [
+            "A"
+          ]
+        },
+        {
+          "label": "B",
+          "startMs": 12513,
+          "endMs": 15415,
+          "sameCamera": [
+            "B"
+          ],
+          "isolated": [
+            "B"
+          ]
+        },
+        {
+          "label": "C",
+          "startMs": 15515,
+          "endMs": 18719,
+          "sameCamera": [
+            "C"
+          ],
+          "isolated": [
+            "C"
+          ]
+        },
+        {
+          "label": "D",
+          "startMs": 18819,
+          "endMs": 22322,
+          "sameCamera": [
+            "X"
+          ],
+          "isolated": [
+            "X"
+          ]
+        },
+        {
+          "label": "E",
+          "startMs": 22422,
+          "endMs": 25826,
+          "sameCamera": [
+            "E"
+          ],
+          "isolated": [
+            "E"
+          ]
+        },
+        {
+          "label": "F",
+          "startMs": 25926,
+          "endMs": 29530,
+          "sameCamera": [
+            "C",
+            "F"
+          ],
+          "isolated": [
+            "C",
+            "F"
+          ]
+        },
+        {
+          "label": "G",
+          "startMs": 29630,
+          "endMs": 32232,
+          "sameCamera": [
+            "G"
+          ],
+          "isolated": [
+            "G",
+            "X"
+          ]
+        },
+        {
+          "label": "H",
+          "startMs": 32332,
+          "endMs": 35235,
+          "sameCamera": [
+            "K",
+            "H"
+          ],
+          "isolated": [
+            "K",
+            "H"
+          ]
+        },
+        {
+          "label": "I",
+          "startMs": 35335,
+          "endMs": 38739,
+          "sameCamera": [
+            "I",
+            "J"
+          ],
+          "isolated": [
+            "I",
+            "J"
+          ]
+        },
+        {
+          "label": "J",
+          "startMs": 38839,
+          "endMs": 42042,
+          "sameCamera": [
+            "I",
+            "J"
+          ],
+          "isolated": [
+            "I",
+            "J"
+          ]
+        },
+        {
+          "label": "K",
+          "startMs": 42142,
+          "endMs": 45245,
+          "sameCamera": [
+            "K"
+          ],
+          "isolated": [
+            "K"
+          ]
+        },
+        {
+          "label": "L",
+          "startMs": 45345,
+          "endMs": 48549,
+          "sameCamera": [
+            "L",
+            "X"
+          ],
+          "isolated": [
+            "L",
+            "X"
+          ]
+        },
+        {
+          "label": "M",
+          "startMs": 48649,
+          "endMs": 51852,
+          "sameCamera": [
+            "M"
+          ],
+          "isolated": [
+            "M"
+          ]
+        },
+        {
+          "label": "N",
+          "startMs": 51952,
+          "endMs": 55055,
+          "sameCamera": [
+            "M"
+          ],
+          "isolated": [
+            "M"
+          ]
+        },
+        {
+          "label": "O",
+          "startMs": 55155,
+          "endMs": 58058,
+          "sameCamera": [
+            "O"
+          ],
+          "isolated": [
+            "O"
+          ]
+        },
+        {
+          "label": "P",
+          "startMs": 58158,
+          "endMs": 61361,
+          "sameCamera": [
+            "K",
+            "P"
+          ],
+          "isolated": [
+            "K",
+            "P"
+          ]
+        },
+        {
+          "label": "Q",
+          "startMs": 61461,
+          "endMs": 64665,
+          "sameCamera": [
+            "A",
+            "X"
+          ],
+          "isolated": [
+            "A",
+            "X",
+            "M"
+          ]
+        },
+        {
+          "label": "R",
+          "startMs": 64765,
+          "endMs": 67567,
+          "sameCamera": [
+            "R",
+            "H"
+          ],
+          "isolated": [
+            "R",
+            "H"
+          ]
+        },
+        {
+          "label": "S",
+          "startMs": 67668,
+          "endMs": 70270,
+          "sameCamera": [
+            "S"
+          ],
+          "isolated": [
+            "S"
+          ]
+        },
+        {
+          "label": "T",
+          "startMs": 70370,
+          "endMs": 73974,
+          "sameCamera": [],
+          "isolated": []
+        },
+        {
+          "label": "U",
+          "startMs": 74074,
+          "endMs": 76977,
+          "sameCamera": [
+            "U",
+            "H"
+          ],
+          "isolated": [
+            "U",
+            "H"
+          ]
+        },
+        {
+          "label": "V",
+          "startMs": 77077,
+          "endMs": 79479,
+          "sameCamera": [
+            "V",
+            "H"
+          ],
+          "isolated": [
+            "V",
+            "H"
+          ]
+        },
+        {
+          "label": "W",
+          "startMs": 79579,
+          "endMs": 81481,
+          "sameCamera": [
+            "W"
+          ],
+          "isolated": [
+            "W"
+          ]
+        },
+        {
+          "label": "X",
+          "startMs": 81582,
+          "endMs": 84384,
+          "sameCamera": [
+            "X"
+          ],
+          "isolated": [
+            "X"
+          ]
+        },
+        {
+          "label": "Y",
+          "startMs": 84484,
+          "endMs": 88288,
+          "sameCamera": [
+            "Y"
+          ],
+          "isolated": [
+            "Y"
+          ]
+        },
+        {
+          "label": "Z",
+          "startMs": 88388,
+          "endMs": 90891,
+          "sameCamera": [
+            "X",
+            "Z"
+          ],
+          "isolated": [
+            "S"
+          ]
+        }
+      ]
+    }
+  ]
+}
