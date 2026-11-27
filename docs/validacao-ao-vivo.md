@@ -4,22 +4,17 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
 
 ## Abrir no Linux
 
-1. Inicie o LibrasIA conforme o README. Abra a prévia em uma janela do Chromium.
-2. Na raiz do projeto, sirva o formulário em outra porta. O comando expõe somente a pasta qa no endereço local.
+1. Inicie o pacote local da demonstração e abra a Área livre em uma janela do Chromium. [Abrir Área livre](http://127.0.0.1:4177/#area-livre) · [Executar o pacote](previa-estavel.md#demonstração-atual-no-pc)
+2. Abra a ficha de validação em uma segunda janela. Coloque as duas lado a lado para manter a aba do aplicativo visível, pois o LibrasIA encerra a captura quando a aba é ocultada. Use a webcam e o botão **Ouvir** na janela do LibrasIA. [Abrir a ficha local](http://127.0.0.1:4177/validacao/)
+3. Na ficha, clique em **Preencher versão do pacote**. O código da compilação identifica também a revisão do avatar. O pacote preenche a versão do catálogo e os hashes dos dois arquivos do modelo. Informe o ambiente observado e o consentimento da pessoa participante.
+4. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
 
-   ~~~bash
-   python3 -m http.server 4174 --bind 127.0.0.1 --directory qa
-   ~~~
-
-3. Abra http://127.0.0.1:4174 em uma segunda janela. Coloque as duas lado a lado para manter a aba do aplicativo visível. O LibrasIA encerra a captura quando essa aba é ocultada. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
-4. Confirme o consentimento da pessoa participante. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
-
-Anote a versão de catálogo e a revisão do avatar da compilação testada. Registre o commit e as somas dos arquivos instalados antes de começar. Conferir as duas somas identifica mudanças de limiar que preservem os mesmos pesos.
+Para usar a ficha com um checkout de desenvolvimento ou pacote anterior, execute `python3 -m http.server 4174 --bind 127.0.0.1 --directory qa` na raiz e preencha os dados da compilação manualmente. As duas somas identificam mudanças de limiar que preservem os mesmos pesos. Ajuste a porta conforme a prévia.
 
 ~~~bash
-curl -fsS http://127.0.0.1:4173/commit.txt
-curl -fsS http://127.0.0.1:4173/models/isolated.onnx | sha256sum
-curl -fsS http://127.0.0.1:4173/models/isolated.json | sha256sum
+curl -fsS http://127.0.0.1:4177/commit.txt
+curl -fsS http://127.0.0.1:4177/models/isolated.onnx | sha256sum
+curl -fsS http://127.0.0.1:4177/models/isolated.json | sha256sum
 ~~~
 
 Se iniciou a aplicação diretamente de um checkout, registre o resultado de `git rev-parse HEAD` na hora de compilar. A prévia empacotada serve o commit da compilação em `/commit.txt`.
@@ -38,6 +33,7 @@ const { width, height } = document.querySelector('video').srcObject.getVideoTrac
 - **Aplicativo**. Anote o estado literal e a palavra exibida quando o aplicativo reconhecer o sinal. Um erro de captura ou uma dica sem palavra ficam registrados com predição vazia. Para medir latência, use apenas valores efetivamente obtidos. A cronometragem manual fica identificada e não substitui a medição instrumentada a partir do clique de conclusão.
 - **Voz**. Depois da transcrição, edite o texto e acione **Ouvir**. Registre o estado apresentado pelo aplicativo e, separadamente, se foi possível ouvir e compreender o texto. Confira a correspondência com a edição sem copiar a frase para a ficha. Uma mensagem de leitura concluída sozinha deixa a audição pendente.
 - **Roteiro**. Marque as etapas confirmadas na sessão. Teste permissão negada e retomada. Verifique a rede e o armazenamento do aplicativo durante a captura antes de marcar privacidade. O resultado de um ensaio com clipe gravado continua no roteiro técnico.
+- **Pontos e letra N**. Na Área livre, mova as duas mãos antes, durante e depois de uma tentativa. Retire uma mão e coloque-a de volta. Redimensione a janela e desmarque e marque **Mostrar pontos das mãos** durante a captura. Em **Praticar** e na **Área livre**, confira o N sustentado e a troca M → N → U. Marque cada resultado na ficha.
 
 Para uma avaliação independente, mantenha a referência humana separada da decisão do app durante a observação. Use várias pessoas fora do treino e inclua, no relatório, quantas pessoas e tentativas sustentam cada cenário e medida. As contagens do formulário mostram os estratos registrados. A análise segue os critérios do protocolo.
 
@@ -62,7 +58,8 @@ O JSON identifica a origem como live-manual-observation e inclui versão, ambien
 Use o manifesto exato da sessão e passe os JSONs exportados no mesmo comando. Use sempre o mesmo código para uma pessoa que participe de mais de uma sessão.
 
 ~~~bash
-.venv/bin/python ml/live_review.py --manifest public/models/isolated.json \
+.venv/bin/python ml/live_review.py \
+  --manifest data/releases/librasia-demonstracao/site/models/isolated.json \
   --out data/evidence/resumo-ao-vivo.json data/evidence/librasia-validacao-S*.json
 ~~~
 
@@ -72,4 +69,6 @@ O resumo mostra a matriz de resultados na área livre, as rejeições por tipo d
 
 ~~~bash
 node --test tests/validacao-ao-vivo.test.js
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_VALIDATION=1 \
+  node --test tests/e2e/validation.test.mjs
 ~~~

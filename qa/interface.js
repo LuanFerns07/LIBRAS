@@ -7,6 +7,7 @@ const mainTable = document.querySelector('#attempts')
 const tbody = mainTable.querySelector('tbody')
 const conditionCounts = document.querySelector('#counts-by-condition')
 const fields = attemptForm.elements
+const loadVersion = document.querySelector('#load-version')
 let session
 
 function fill(select, key, empty = true) {
@@ -79,11 +80,32 @@ for (const [id, title] of checkpoints) {
   const label = document.createElement('label')
   label.textContent = title
   const select = document.createElement('select')
+  select.name = id
   fill(select, 'checkpointResult', false)
   select.addEventListener('change', () => setCheckpoint(session, id, select.value))
   label.append(select)
   document.querySelector('#checkpoints').append(label)
 }
+
+loadVersion.hidden = !location.pathname.startsWith('/validacao/')
+loadVersion.addEventListener('click', async () => {
+  loadVersion.disabled = true
+  show('version-status', 'Carregando a versão do pacote…')
+  try {
+    const response = await fetch('versao.json')
+    if (!response.ok) throw new Error('Não foi possível carregar a versão.')
+    const version = await response.json()
+    if (session) return
+    for (const name of ['commit', 'catalog', 'avatar', 'modelSha256', 'manifestSha256']) {
+      sessionForm.elements[name].value = version[name]
+    }
+    show('version-status', 'Versão do pacote preenchida.')
+  } catch {
+    show('version-status', 'Confira a versão do pacote e preencha os campos manualmente.', true)
+  } finally {
+    if (!session) loadVersion.disabled = false
+  }
+})
 
 sessionForm.addEventListener('submit', event => {
   event.preventDefault()

@@ -97,6 +97,10 @@ export const checkpoints = [
   ['exercise', '4 · Aceitar um sinal e avaliar uma correção intencional'],
   ['free-voice', '5 · Transcrever dois sinais, editar e ouvir o texto'],
   ['reference', '6 · Abrir um link de Saiba mais e conferir o destino'],
+  ['hands-movement', 'Pontos das duas mãos antes, durante e depois de uma tentativa'],
+  ['hands-return', 'Retirada e retorno de uma mão no vídeo'],
+  ['hands-alignment', 'Alinhamento espelhado ao redimensionar e alternar os pontos'],
+  ['alphabet-n', 'N sustentado e sequência M → N → U em Praticar e na Área livre'],
   ['camera-resume', 'Permissão negada, retomada e encerramento da câmera'],
   ['data', 'Privacidade durante o uso da câmera'],
 ]

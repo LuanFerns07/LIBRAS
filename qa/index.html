@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; form-action 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'">
   <title>Validação ao vivo · LibrasIA</title>
   <link rel="stylesheet" href="registro.css">
   <script type="module" src="interface.js"></script>
@@ -30,6 +30,8 @@
         </fieldset>
         <fieldset>
           <legend>Versão e ambiente</legend>
+          <button type="button" id="load-version" hidden>Preencher versão do pacote</button>
+          <p id="version-status" role="status"></p>
           <div class="fields">
             <label>Commit <input required name="commit" maxlength="40" spellcheck="false"></label>
             <label>Versão do catálogo <input required name="catalog" maxlength="100" spellcheck="false"></label>

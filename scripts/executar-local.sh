@@ -96,6 +96,31 @@ JS
 if [[ -n "$pacote" ]]; then
   test -f "$previa/dist/models/isolated.json"
   git rev-parse HEAD > "$previa/dist/commit.txt"
+  mkdir -- "$previa/dist/validacao"
+  cp qa/{index.html,interface.js,registro.css,registro.js} "$previa/dist/validacao/"
+  node --input-type=module - "$previa/dist" <<'JS'
+import { createHash } from 'node:crypto'
+import { readFile, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { catalogVersion } from './src/catalog.js'
+
+const directory = process.argv[2]
+const [commitFile, model, manifest] = await Promise.all([
+  readFile(join(directory, 'commit.txt'), 'utf8'),
+  readFile(join(directory, 'models/isolated.onnx')),
+  readFile(join(directory, 'models/isolated.json')),
+])
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
+const commit = commitFile.trim()
+const version = {
+  commit,
+  catalog: catalogVersion,
+  avatar: commit,
+  modelSha256: sha256(model),
+  manifestSha256: sha256(manifest),
+}
+await writeFile(join(directory, 'validacao/versao.json'), JSON.stringify(version, null, 2) + '\n')
+JS
   mkdir -p -- "$(dirname -- "$pacote")"
   mkdir -- "$pacote"
   trap 'rm -rf -- "$previa" "$pacote"' EXIT
