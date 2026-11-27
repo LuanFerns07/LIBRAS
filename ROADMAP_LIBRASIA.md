@@ -264,7 +264,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | Próximo marco | Status | O que implementar e como validar |
 | --- | --- | --- |
 | **M8 · Aprendizagem e engajamento** | Pronto | Comparações no avatar, revisão por tentativas e retomada do sinal já estudado. A ordem da revisão e a persistência passaram nos testes. O piloto com pessoas fica nas pendências. |
-| **M9 · Cobertura e variantes** | A testar | Ampliar vocabulário e frases e apresentar variantes regionais contextualizadas com revisão em Libras. Repetir os testes por pessoa sinalizante, acompanhar confusões novas e rejeição de sinais desconhecidos e explicitar a cobertura na interface. |
+| **M9 · Cobertura e variantes** | Pronto | Aluno no catálogo avaliado, comparação da forma histórica de Fortaleza no avatar e apresentação com saudação. A revisão com pessoas e o reteste de variantes ficam nas pendências. |
 | **M10 · Sinalização contínua** | A fazer | Usar dados de sequências com condições de uso verificadas. Desenvolver segmentação automática, reconhecimento de sinais em sequência e geração de texto em português. Medir segmentação, inserções, omissões, trocas e qualidade do sentido traduzido com revisão humana. |
 | **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |
 
@@ -273,7 +273,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Disponibilizar a comparação de itens no avatar, o progresso da lição e a revisão local que prioriza tentativas pendentes. Verificar a ordem depois de um acerto e a persistência após recarga.
 - [x] Ampliar o catálogo experimental da área livre com Aluno e incluir a referência histórica de Fortaleza no avatar. Registrar a cobertura de frases e as métricas do modelo expandido. [Escopo das animações](docs/animacoes.md) · [Avaliação expandida](docs/avaliacao.md)
 - [x] **Aceite técnico de M8.** Comparar sinais da lição sem câmera e voltar à demonstração individual. Conferir a retomada de um sinal já estudado, a prioridade de tentativas pendentes e a persistência do progresso. [Reteste de M8](docs/roteiro-validacao.md#comparação-e-revisão-em-m8) · [Piloto](docs/pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação)
-- [ ] Retestar a expansão com pessoas fora do treino, incluindo sinais desconhecidos. Revisar a cobertura anunciada a partir dos resultados.
+- [x] **Aceite técnico de M9.** Reproduzir a apresentação com saudação e nome. Distinguir na interface a forma de Aluno usada na avaliação da forma histórica disponível no avatar. Retestar Aluno e um movimento fora do catálogo com gravações. [Cobertura e reteste de M9](docs/animacoes.md#cobertura-e-reteste-de-m9)
 
 ### M10 · Checklist de sinalização contínua
 

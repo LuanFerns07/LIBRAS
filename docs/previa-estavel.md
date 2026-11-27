@@ -66,6 +66,14 @@ A Área livre mostra o catálogo instalado antes de ativar a webcam e permite ed
 python3 data/releases/librasia-1.1.0/iniciar.py --porta 4203
 ~~~
 
+## Prévia da sequência atual
+
+Na porta 4205, a prévia inclui a comparação de sinais na prática, a retomada de exercícios e a apresentação de nome com saudação no tradutor. [Abrir Praticar](http://127.0.0.1:4205/#praticar) · [Abrir Tradutor](http://127.0.0.1:4205/#tradutor)
+
+~~~bash
+python3 data/releases/librasia-m9/iniciar.py --porta 4205
+~~~
+
 ## Prévia v0.1.0-preview.1
 
 A prévia reúne a aplicação compilada, os ativos de visão e o ONNX combinado congelado com o limiar 0,525. O catálogo da área livre inclui Cinco, Espelho, Amarelo e Aluno. O modelo usa dados MINDS-Libras RGB v1 sob CC BY 4.0. Os pesos ficam no pacote local. [Procedência e atribuição](dados.md) · [Avaliação e pares de checkpoints](avaliacao.md#combinação-de-geometria-e-flexão)

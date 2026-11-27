@@ -42,6 +42,14 @@ test('palavras e a apresentação do nome seguem sequências explícitas', () =>
   assert.deepEqual(ids(translate('Graça', 'name')), ['letter-g', 'letter-r', 'letter-a', 'letter-ç', 'letter-a'])
 })
 
+test('uma saudação pode abrir a apresentação do nome em duas partes', () => {
+  const steps = ['signal-bom', 'signal-dia', 'pause', 'signal-nome', 'signal-meu', 'pause', 'letter-i', 'letter-v', 'letter-o']
+  assert.deepEqual(ids(translate(' Bom dia! Meu nome é Ivo. ')), steps)
+  assert.deepEqual(ids(translate('Bom dia, meu nome e Ivo')), steps)
+  assert.deepEqual(ids(translate('Bom dia. Meu nome é Ivo2.')), [])
+  assert.equal(translate('Boa tarde, meu nome é Ivo').state, 'unsupported')
+})
+
 test('entradas fora do catálogo ou com caracteres não soletráveis têm mensagens', () => {
   assert.equal(translate('   ').state, 'empty')
   assert.equal(translate('Hoje é terça-feira').unsupported, 'Hoje é terça-feira')

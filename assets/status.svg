@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="622" viewBox="0 0 640 622" role="img" aria-labelledby="title description">
   <title id="title">Status do projeto LibrasIA</title>
-  <desc id="description">Resumo dos marcos: 2 a fazer, 1 a testar, 9 pronto.</desc>
+  <desc id="description">Resumo dos marcos: 2 a fazer, 0 a testar, 10 pronto.</desc>
   <!-- Gerado por scripts/update_status.py a partir de ROADMAP_LIBRASIA.md. -->
   <rect x="0.5" y="0.5" width="639" height="621" rx="18" fill="#151329" stroke="#3e385d"/>
   <g font-family="system-ui, DejaVu Sans, sans-serif">
@@ -10,10 +10,10 @@
     <text x="197" y="100" text-anchor="end" font-size="27" font-weight="700" fill="#d1d8ff">2</text>
     <rect x="228" y="62" width="184" height="57" rx="10" fill="#3d2d19"/>
     <text x="243" y="96" font-size="16" fill="#ffd893">A testar</text>
-    <text x="397" y="100" text-anchor="end" font-size="27" font-weight="700" fill="#ffd893">1</text>
+    <text x="397" y="100" text-anchor="end" font-size="27" font-weight="700" fill="#ffd893">0</text>
     <rect x="428" y="62" width="184" height="57" rx="10" fill="#193832"/>
     <text x="443" y="96" font-size="16" fill="#a0f2cc">Pronto</text>
-    <text x="597" y="100" text-anchor="end" font-size="27" font-weight="700" fill="#a0f2cc">9</text>
+    <text x="597" y="100" text-anchor="end" font-size="27" font-weight="700" fill="#a0f2cc">10</text>
     <text x="28" y="146" fill="#d6d0ed" font-size="14" font-weight="600">Marcos</text>
     <rect x="28" y="158" width="584" height="32" rx="7" fill="#211d38"/>
     <text x="40" y="179" fill="#c6b8eb" font-family="monospace" font-size="13">M0</text>
@@ -63,8 +63,8 @@
     <rect x="28" y="491" width="584" height="32" rx="7" fill="#211d38"/>
     <text x="40" y="512" fill="#c6b8eb" font-family="monospace" font-size="13">M9</text>
     <text x="80" y="513" fill="#f5f2ff" font-size="16">Cobertura e variantes</text>
-    <rect x="516" y="495" width="90" height="24" rx="12" fill="#3d2d19"/>
-    <text x="561" y="512" text-anchor="middle" fill="#ffd893" font-weight="600" font-size="13">A testar</text>
+    <rect x="516" y="495" width="90" height="24" rx="12" fill="#193832"/>
+    <text x="561" y="512" text-anchor="middle" fill="#a0f2cc" font-weight="600" font-size="13">Pronto</text>
     <rect x="28" y="528" width="584" height="32" rx="7" fill="#211d38"/>
     <text x="40" y="549" fill="#c6b8eb" font-family="monospace" font-size="13">M10</text>
     <text x="80" y="550" fill="#f5f2ff" font-size="16">Sinalização contínua</text>

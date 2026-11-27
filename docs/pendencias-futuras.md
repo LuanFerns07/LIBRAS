@@ -24,5 +24,6 @@ Esta lista reúne o que foi adiado por depender de participantes, dados adiciona
 ## M8 a M11 · Piloto, cobertura, dados contínuos e publicação
 
 - [ ] **M8 e M9.** Revisar comparações, frases e variantes regionais com pessoas fluentes e observar o efeito das dicas e da revisão adaptativa em um piloto.
+- [ ] **M9.** Retestar a expansão com novas pessoas fora do treino e com sinais desconhecidos. Usar as respostas para atualizar a cobertura de reconhecimento anunciada na interface. [Cobertura atual](animacoes.md#cobertura-e-reteste-de-m9)
 - [ ] **M10.** Confirmar as condições do Corpus de Libras para o uso formal em pesquisa. Obter exemplos anotados com cobertura do catálogo para medir glosas e tradução, com revisão humana do sentido e teste na webcam. [Procedência e ensaios](sinalizacao-continua.md)
 - [ ] **M11.** Obter autorização para publicar na Vercel. Repetir os fluxos essenciais em um Android com Chrome e um iPhone com Safari reais, incluindo permissão, recuperação de câmera, áudio e latência. [Roteiro de publicação](publicacao.md)

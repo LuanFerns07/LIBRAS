@@ -22,11 +22,11 @@ export function mountTranslator(main, createPlayer) {
         <p class="inline-status" data-translation-status role="status" hidden></p>
         <div class="coverage" id="translation-coverage">
           <h3>O que o protótipo cobre</h3>
-          <p>${[...lesson, student].map(entry => entry.label).join(', ')} e as frases “Bom dia” e “Meu nome é [nome]”. As sequências do avatar estão em revisão linguística.</p>
+          <p>${[...lesson, student].map(entry => entry.label).join(', ')} e as frases “Bom dia”, “Meu nome é [nome]” e “Bom dia, meu nome é [nome]”. As sequências do avatar estão em revisão linguística.</p>
         </div>
         <div class="coverage">
           <h3>Formas de ALUNO</h3>
-          <p>Compare a forma do MINDS-Libras e uma forma bimanual registrada em Fortaleza, descrita como em desuso na pesquisa publicada em 2016.</p>
+          <p>O reconhecimento foi avaliado com a forma do MINDS-Libras. No avatar, ela pode ser comparada com a forma bimanual histórica de Fortaleza, descrita como em desuso na pesquisa de 2016.</p>
           <div class="toolbar">
             <button type="button" class="button" data-student="minds">Forma do MINDS</button>
             <button type="button" class="button" data-student="fortaleza">Forma histórica de Fortaleza</button>

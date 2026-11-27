@@ -36,14 +36,17 @@ export function translate(input, mode = 'text') {
   if (word === 'bom dia') {
     return { state: 'ready', steps: greeting, message: 'A frase apresenta a sequência BOM DIA.' }
   }
-  const name = /^meu nome (?:é|e) (.+?)[.!?]*$/iu.exec(text)?.[1]
-  if (name) {
+  const introduction = /^(?:(bom dia)\s*[,!.?]+\s*)?meu nome (?:é|e) (.+?)[.!?]*$/iu.exec(text)
+  if (introduction) {
+    const [, greeted, name] = introduction
     const result = spellName(name)
     if (result.state !== 'ready') return result
+    const prefix = greeted ? [...greeting, spellingPause, ...namePrefix] : namePrefix
     return {
       ...result,
-      steps: [...namePrefix, spellingPause, ...result.steps],
-      message: 'A frase apresenta a sequência NOME MEU e a soletração do nome.',
+      steps: [...prefix, spellingPause, ...result.steps],
+      message: greeted ? 'A sequência apresenta BOM DIA, NOME MEU e a soletração do nome.'
+        : 'A frase apresenta a sequência NOME MEU e a soletração do nome.',
     }
   }
   return {

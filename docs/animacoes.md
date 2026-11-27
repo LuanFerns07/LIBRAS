@@ -66,6 +66,12 @@ Na comparação técnica para a retomada, a vista frontal do avatar reproduz os 
 
 Em “Bom dia”, os clipes são executados na ordem BOM e DIA. As duas formas de ALUNO podem ser comparadas no avatar. O reconhecimento da lição depende de um modelo avaliado para a respectiva classe, incluindo as variantes anunciadas.
 
+### Cobertura e reteste de M9
+
+O tradutor oferece “Bom dia, meu nome é [nome]” com os clipes de BOM DIA, uma pausa, NOME MEU e a soletração. O Chromium percorreu a sequência completa com “Bom dia! Meu nome é Ivo.”. A interface indica que a avaliação de reconhecimento usou a forma de Aluno do MINDS-Libras e permite comparar no avatar a forma histórica de Fortaleza. [Teste do tradutor](../tests/translate.test.js) · [Teste no Chromium](../tests/e2e/browser.test.mjs)
+
+O combinado reconheceu Aluno S11-1 em duas tentativas com gravação da partição reservada. No recorte externo do CLAD em que a mão passa do queixo ao teclado, a tentativa ficou inconclusiva e preservou o texto. Os registros ficam em `data/evidence/demonstracao/m9-cobertura/`. A revisão com pessoas fluentes e os novos testes fora do treino ficam nas pendências. [Controle de Aluno e proveniência](negativos.md#verificação-de-aluno-pela-posição-da-mão) · [Pendências](pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação)
+
 - [Duarte, Libras para Acadêmicos, pp. 24–25, acervo do Clube de Libras da UFC](https://clubedelibras.ufc.br/wp-content/uploads/2021/04/livro-librasparaacademicos-basico1-profandersonduarte.pdf#page=22)
 - [Luciana Marques Vale, Curso Básico de Libras, p. 12, repositório Enap](https://repositorio.enap.gov.br/items/367214fd-f325-49e6-8f9b-af29fa258be3). A Enap detém os direitos e sua licença permite uso educacional com crédito, sem uso comercial.
 - [Rodrigo Nogueira Machado, 2016, tabela 5 e explicação nas pp. 79–81, repositório UFSC](https://repositorio.ufsc.br/bitstream/123456789/173253/1/343702.pdf#page=81)
