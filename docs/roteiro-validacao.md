@@ -13,7 +13,9 @@ A inspeção local de 26/11/2026 identificou Debian GNU/Linux 13.8, Intel Core i
 
 ## Sequência principal
 
-| Ordem | Fluxo | Procedimento e resultado esperado | Resultado e evidência |
+Os resultados da sessão com participantes ficam nesta tabela. A execução automatizada, com as mesmas telas na ordem do roteiro, está registrada abaixo. [Roteiro integrado](#roteiro-integrado-em-uma-sessão-do-chromium)
+
+| Ordem | Fluxo | Procedimento e resultado esperado | Aceite manual |
 | --- | --- | --- | --- |
 | 1 | Abrir uma letra | Acesse **Alfabeto** por teclado. Use Tab para entrar na grade, setas e Home/End. Selecione uma letra com movimento e teste reprodução, pausa, velocidade e repetição. O foco é visível. | Pendente |
 | 2 | Frase catalogada | Em **Tradutor**, digite “Meu nome é Anna” e gere a demonstração. Observe a sequência NOME, MEU, pausa e A, N, N, A. | Pendente |
@@ -100,6 +102,42 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 ~~~
 
 Os logs ficam em `data/evidence/demonstracao`, nos arquivos `aceite-amarelo.log`, `dica-amarelo.log` e `amarelo-baixa-confianca.log`. [Recortes em velocidade original](sinais-com-movimento-browser.md) · [Origem dos clipes](https://zenodo.org/records/2667329)
+
+### Roteiro integrado em uma sessão do Chromium
+
+Em 27/11/2026, a compilação `8430fe0` passou as seis etapas na mesma aba e com um perfil limpo. O ambiente foi Debian 13.8, Chromium 156.0.8078.79, janela de 1.280 × 900 e voz local eSpeak NG em pt-BR. O catálogo e o avatar eram `librasia-v0.1-draft`. O SHA-256 do classificador combinado começa com `a8e991d9`. O manifesto começa com `036cfed2`, e o modelo principal do alfabeto, com `39b34d3e`.
+
+| Ordem | Resultado |
+| --- | --- |
+| 1 | A grade respondeu ao teclado, selecionou Z e exibiu as 27 letras. Reprodução, pausa, velocidade e repetição funcionaram. |
+| 2 | “Meu nome é Anna” exibiu Nome → Meu → Pausa → A → N → N → A. |
+| 3 | “Ânna Clara” exibiu A → N → N → A → Pausa → C → L → A → R → A. |
+| 4 | Após a atividade sem câmera, a prática guiada reconheceu Amarelo no recorte original e mostrou a dica de trajetória no recorte invertido. |
+| 5 | Duas tentativas isoladas transcreveram “cinco espelho”. A voz local concluiu a leitura depois de editar o texto para “Cinco e espelho.” |
+| 6 | O botão de navegação manteve o foco no conteúdo. O link abriu o Dicionário Libras do INES em outra aba e a lista do app exibiu os autores. |
+
+A passagem da prática para a Área livre encerrou a primeira trilha de câmera. A segunda foi encerrada ao abrir Saiba mais. Até o clique no link externo, o navegador solicitou apenas arquivos locais. Os sinais vieram de gravações e o Chromium informou a conclusão da voz. A compreensão do áudio e a adequação da dica com sinalizantes na webcam seguem na tabela de aceite manual. As duas execuções passaram, com logs em `data/evidence/demonstracao/roteiro-completo.log` e `data/evidence/demonstracao/roteiro-completo-reteste.log`. [Teste do navegador](../tests/e2e/browser.test.mjs) · [Dicionário Libras](https://dicionario.ines.gov.br/)
+
+Para repetir, prepare o Amarelo original conforme o teste de movimento, o recorte invertido conforme a seção anterior, e os clipes Cinco S09-1 e Espelho S11-1 conforme a seção de sincronização. Os quatro arquivos começam com meio segundo de verde e têm 640 × 360 a 30 fps. No arquivo final, cada cor identifica o início de uma tentativa. A prévia precisa estar servindo o classificador combinado. O teste acessa o dicionário do INES na última etapa. [Preparação do recorte original](sinais-com-movimento-browser.md#reproduzir) · [Sincronização com marcador](#sincronizar-a-captura-e-verificar-a-lição)
+
+~~~bash
+fixtures=data/evidence
+mkdir -p "$fixtures/camera-fixtures"
+for clip in 10CincoSinalizador09-1 12EspelhoSinalizador11-1; do
+  ffmpeg -i "data/minds/raw/$clip.mp4" -an \
+    -vf 'scale=640:-2,fps=30,tpad=start_duration=0.5:color=lime' -pix_fmt yuv420p \
+    "$fixtures/camera-fixtures/$clip-sync.y4m"
+done
+ffmpeg -filter_complex_threads 1 \
+  -i "$fixtures/moving-sign-fixtures/amarelo-s01.y4m" \
+  -i "$fixtures/demonstracao/amarelo-01-invertido.y4m" \
+  -i "$fixtures/camera-fixtures/10CincoSinalizador09-1-sync.y4m" \
+  -i "$fixtures/camera-fixtures/12EspelhoSinalizador11-1-sync.y4m" \
+  -filter_complex "[0:v]setsar=1[g];[1:v]drawbox=color=blue:t=fill:enable='lt(t,0.5)',setsar=1[b];[2:v]drawbox=color=magenta:t=fill:enable='lt(t,0.5)',setsar=1[m];[3:v]drawbox=color=red:t=fill:enable='lt(t,0.5)',setsar=1[r];[g][b][m][r]concat=n=4:v=1:a=0[out]" \
+  -map '[out]' -pix_fmt yuv420p "$fixtures/demonstracao/roteiro-completo.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_DEMO_VIDEO="$fixtures/demonstracao/roteiro-completo.y4m" \
+  node --test tests/e2e/browser.test.mjs
+~~~
 
 ## Registro da prévia de 26/11/2026
 

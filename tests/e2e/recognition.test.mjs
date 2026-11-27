@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { access } from 'node:fs/promises'
 import { test } from 'node:test'
 import { withChromium } from './chromium.mjs'
+import { beginAtMarker, finish } from './recorded-capture.mjs'
 
 const appUrl = process.env.LIBRASIA_TEST_URL
 const enabled = process.env.LIBRASIA_TEST_RECOGNITION === '1'
@@ -25,68 +26,6 @@ const fixedCaptureMs = process.env.LIBRASIA_TEST_CAPTURE_MS === undefined
   ? null : Number(process.env.LIBRASIA_TEST_CAPTURE_MS)
 const markerOffsetMs = Number(process.env.LIBRASIA_TEST_START_OFFSET_MS ?? 0)
 const windowToleranceMs = 300
-
-const finish = ((automatic, endAtMediaMs) => new Promise(resolve => {
-  const status = document.querySelector('[data-capture-status]')
-  const video = document.querySelector('video')
-  let start
-  let endMs
-  let pending
-  const observer = new MutationObserver(() => {
-    if (['busy', 'recording'].includes(status.dataset.state)) return
-    observer.disconnect()
-    if (pending !== undefined) video.cancelVideoFrameCallback(pending)
-    const timing = JSON.parse(status.dataset.timing ?? 'null')
-    resolve({
-      state: status.dataset.state, reason: status.dataset.reason, message: status.textContent, timing, endMs,
-      elapsedMs: automatic ? timing?.decisionMs : start === undefined ? null : performance.now() - start,
-    })
-  })
-  observer.observe(status, { attributes: true, attributeFilter: ['data-state'] })
-  if (status.dataset.state !== 'recording') {
-    observer.disconnect()
-    resolve({ state: status.dataset.state, elapsedMs: null, message: status.textContent })
-    return
-  }
-  if (automatic) return
-  function conclude(mediaTime) {
-    endMs = Math.round(mediaTime * 1000)
-    start = performance.now()
-    document.querySelector('[data-attempt]').click()
-  }
-  function checkEnd(_, { mediaTime }) {
-    pending = undefined
-    if (Math.round(mediaTime * 1000) >= endAtMediaMs) conclude(mediaTime)
-    else pending = video.requestVideoFrameCallback(checkEnd)
-  }
-  if (endAtMediaMs == null) conclude(video.currentTime)
-  else pending = video.requestVideoFrameCallback(checkEnd)
-})).toString()
-
-const beginAtMarker = ((offsetMs, waitForMarkerEdge, blueMarker) => new Promise(resolve => {
-  const video = document.querySelector('video')
-  const canvas = document.createElement('canvas')
-  canvas.width = 2
-  canvas.height = 2
-  const ctx = canvas.getContext('2d', { willReadFrequently: true })
-  let markerMs
-  let seenOutsideMarker = !waitForMarkerEdge
-  function checkFrame(_, { mediaTime }) {
-    const startMs = Math.round(mediaTime * 1000)
-    if (markerMs === undefined) {
-      ctx.drawImage(video, 0, 0, 2, 2)
-      const [red, green, blue] = ctx.getImageData(0, 0, 1, 1).data
-      const isMarker = red < 35 && (blueMarker ? blue > 170 && green < 35 : green > 170 && blue < 35)
-      if (isMarker && seenOutsideMarker) markerMs = startMs
-      if (!isMarker) seenOutsideMarker = true
-    }
-    if (markerMs !== undefined && startMs - markerMs >= offsetMs) {
-      document.querySelector('[data-attempt]').click()
-      resolve({ markerMs, startMs })
-    } else video.requestVideoFrameCallback(checkFrame)
-  }
-  video.requestVideoFrameCallback(checkFrame)
-})).toString()
 
 const useVoiceFixture = (mode => {
   window.testSpeechCalls = 0
@@ -260,7 +199,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       }
       let marked
       if (sync) {
-        const marker = [markerOffsetMs, fixedCaptureMs !== null, Boolean(secondText && trial === 1)]
+        const channels = secondText && trial === 1 ? [false, false, true] : [false, true, false]
+        const marker = [markerOffsetMs, fixedCaptureMs !== null, channels]
         marked = await evaluate('(' + beginAtMarker + ')(...' + JSON.stringify(marker) + ')', true)
         await record()
       } else if (trial > 0) {

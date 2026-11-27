@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import { once } from 'node:events'
+import { access } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { test } from 'node:test'
 import { withChromium } from './chromium.mjs'
+import { completeRecordedDemo } from './recorded-demo.mjs'
 
 const captureAndStop = (async () => {
   const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
@@ -75,17 +77,24 @@ test('Chromium conclui a síntese local em pt-BR quando habilitada explicitament
 })
 
 const appUrl = process.env.LIBRASIA_TEST_URL
+const demoVideo = process.env.LIBRASIA_TEST_DEMO_VIDEO
 
 test('aplicação compilada navega, reproduz o avatar, traduz e controla a câmera', {
   skip: !appUrl,
-}, async () => {
+}, async context => {
   const url = new URL('/', appUrl)
   const base = url.href
   const origin = url.origin
   const physical = process.env.LIBRASIA_TEST_PHYSICAL === '1'
   const voiceEnabled = process.env.LIBRASIA_TEST_VOICE === '1'
-  if (physical) assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname), 'Use a prévia local para a câmera física.')
-  await withChromium(async ({ page, navigate, evaluate, waitUntil, permission, key }) => {
+  if (physical || demoVideo) assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname), 'Use a prévia local para testar a câmera.')
+  if (demoVideo) {
+    assert.ok(!physical, 'Execute a demonstração gravada em uma rodada separada do teste da câmera física.')
+    await access(demoVideo)
+  }
+  await withChromium(async browser => {
+    const { page, navigate, evaluate, waitUntil, permission, key } = browser
+    const report = message => { if (demoVideo) context.diagnostic(message) }
     const click = selector => evaluate('document.querySelector(' + JSON.stringify(selector) + ').click()', true)
     const text = selector => evaluate('document.querySelector(' + JSON.stringify(selector) + ').textContent.trim()')
     const open = async (route, heading) => {
@@ -141,6 +150,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     })).toString()
     assert.deepEqual(await evaluate('(' + selectLetters + ')()', true),
       Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÇ', letter => ({ letter, playable: true })))
+    report('1. Alfabeto · 27 letras acessíveis e reprodução de Z controlada pelo navegador.')
 
     await open('tradutor', 'Português para Libras')
     const fill = value => evaluate('document.querySelector("#translate-input").value = ' + JSON.stringify(value) +
@@ -171,6 +181,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.equal(await evaluate('document.querySelector("[data-translation-status]").dataset.state'), 'ready')
     assert.equal(await text('[data-player-step]'), 'Nome')
     await checkPlayback(['Nome', 'Meu', 'Pausa', 'A', 'N', 'N', 'A'])
+    report('2. Frase · Nome → Meu → Pausa → A → N → N → A.')
     await fill('Bom dia')
     await submit()
     assert.match(await text('[data-translation-status]'), /BOM DIA/)
@@ -186,6 +197,12 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await submit()
     assert.equal(await text('[data-player-step]'), 'A')
     await checkPlayback(['A', 'N', 'N', 'A', 'Pausa', 'C', 'L', 'A', 'R', 'A'])
+    report('3. Nome · A → N → N → A → Pausa → C → L → A → R → A.')
+
+    if (demoVideo) {
+      await completeRecordedDemo(browser, { open, click, origin, report })
+      return
+    }
 
     await open('praticar', 'Pratique Libras')
     await click('[data-quiz] input[value="0"]')
@@ -259,5 +276,5 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await page('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touchPoint] })
     await page('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
     await waitUntil('document.querySelector("main h1")?.textContent === "Alfabeto manual"')
-  }, { fakeCamera: !physical })
+  }, { fakeCamera: !physical, videoFile: demoVideo })
 })

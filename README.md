@@ -74,6 +74,8 @@ O build gera `dist/`. Use `npm run preview` para verificar essa versão em local
 
 Com Chromium instalado e a prévia em execução, rode `LIBRASIA_TEST_URL=http://127.0.0.1:4173 npm run test:e2e`. O roteiro de validação descreve as opções para câmera física, voz local e vídeos de teste.
 
+O ensaio integrado percorre alfabeto, frase, nome, prática, transcrição com voz e Saiba mais na mesma sessão. [Preparação dos vídeos e comando do ensaio](docs/roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
+
 Os procedimentos e os resultados da revisão técnica estão no [roteiro de validação](docs/roteiro-validacao.md). Para a sessão com participantes, use o [formulário local de validação](docs/validacao-ao-vivo.md). A execução da aplicação está restrita ao ambiente local nesta rodada.
 
 O desenvolvimento segue na `main`, com commits verificados e push no remoto do projeto. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.

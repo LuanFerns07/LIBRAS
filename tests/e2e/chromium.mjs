@@ -54,10 +54,10 @@ export async function withChromium(check, { fakeCamera = true, videoFile } = {})
     }
   })
 
-  function command(method, params = {}, sessionId) {
+  function command(method, params = {}, sessionId, timeoutMs = 12000) {
     const id = ++nextId
     return new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Tempo esgotado em ' + method + '.')), 12000)
+      const timeout = setTimeout(() => reject(new Error('Tempo esgotado em ' + method + '.')), timeoutMs)
       pending.set(id, {
         resolve: value => {
           clearTimeout(timeout)
@@ -75,11 +75,11 @@ export async function withChromium(check, { fakeCamera = true, videoFile } = {})
   try {
     const { targetId } = await command('Target.createTarget', { url: 'about:blank' })
     const { sessionId } = await command('Target.attachToTarget', { targetId, flatten: true })
-    const page = (method, params) => command(method, params, sessionId)
-    const evaluate = async (expression, userGesture = false) => {
+    const page = (method, params, timeoutMs) => command(method, params, sessionId, timeoutMs)
+    const evaluate = async (expression, userGesture = false, timeoutMs) => {
       const { result, exceptionDetails } = await page('Runtime.evaluate', {
         expression, userGesture, awaitPromise: true, returnByValue: true,
-      })
+      }, timeoutMs)
       if (exceptionDetails) throw new Error(exceptionDetails.exception?.description ?? exceptionDetails.text)
       return result.value
     }

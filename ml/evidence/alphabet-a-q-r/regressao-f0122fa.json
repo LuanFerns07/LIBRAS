@@ -1,0 +1,389 @@
+{
+  "build": {
+    "commit": "f0122fa7956f507c4ef2dee2214cc4640679f881",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true,
+      "recoverDisagreement": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "worldUSha256": "bcc69d1ba21d22945668193eeebae8d058896c043f8b2e491ba7ea77abcb63ef",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "positive": {
+    "total": 89,
+    "expectedSeen": 89,
+    "withAdditionalLetter": [
+      {
+        "source": "cecierj-13757",
+        "label": "U",
+        "startMs": 109940,
+        "endMs": 111520,
+        "readings": [
+          {
+            "letter": "U",
+            "afterVideoMs": 248
+          },
+          {
+            "letter": "H",
+            "afterVideoMs": 1245
+          }
+        ]
+      },
+      {
+        "source": "cecierj-13757",
+        "label": "Ç",
+        "startMs": 50240,
+        "endMs": 51720,
+        "readings": [
+          {
+            "letter": "C",
+            "afterVideoMs": 223
+          },
+          {
+            "letter": "C",
+            "afterVideoMs": 679
+          },
+          {
+            "letter": "Ç",
+            "afterVideoMs": 1058
+          }
+        ]
+      },
+      {
+        "source": "cecierj-13757",
+        "label": "J",
+        "startMs": 71550,
+        "endMs": 73130,
+        "readings": [
+          {
+            "letter": "I",
+            "afterVideoMs": 273
+          },
+          {
+            "letter": "J",
+            "afterVideoMs": 572
+          }
+        ]
+      },
+      {
+        "source": "cecierj-13757",
+        "label": "Z",
+        "startMs": 122520,
+        "endMs": 124220,
+        "readings": [
+          {
+            "letter": "G",
+            "afterVideoMs": 232
+          },
+          {
+            "letter": "X",
+            "afterVideoMs": 802
+          },
+          {
+            "letter": "Z",
+            "afterVideoMs": 1148
+          }
+        ]
+      },
+      {
+        "source": "unesp-222981",
+        "label": "J",
+        "startMs": 79040,
+        "endMs": 80570,
+        "readings": [
+          {
+            "letter": "I",
+            "afterVideoMs": 295
+          },
+          {
+            "letter": "J",
+            "afterVideoMs": 530
+          }
+        ]
+      },
+      {
+        "source": "1535641159",
+        "label": "Ç",
+        "startMs": 7770,
+        "endMs": 8950,
+        "readings": [
+          {
+            "letter": "C",
+            "afterVideoMs": 265
+          },
+          {
+            "letter": "Ç",
+            "afterVideoMs": 516
+          }
+        ]
+      },
+      {
+        "source": "1535641159",
+        "label": "Z",
+        "startMs": 43650,
+        "endMs": 45550,
+        "readings": [
+          {
+            "letter": "G",
+            "afterVideoMs": 318
+          },
+          {
+            "letter": "Z",
+            "afterVideoMs": 1075
+          }
+        ]
+      },
+      {
+        "source": "unintese-ncfjw-0-mro",
+        "label": "C",
+        "startMs": 45400,
+        "endMs": 46300,
+        "readings": [
+          {
+            "letter": "C",
+            "afterVideoMs": 246
+          },
+          {
+            "letter": "Ç",
+            "afterVideoMs": 848
+          }
+        ]
+      }
+    ]
+  },
+  "negative": {
+    "total": 19,
+    "withLetter": [
+      {
+        "source": "clad-repouso-02-oclusao-rosto",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 4000,
+        "readings": [
+          {
+            "letter": "D",
+            "afterVideoMs": 1651
+          }
+        ]
+      },
+      {
+        "source": "clad-repouso-03-celular",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 4000,
+        "readings": [
+          {
+            "letter": "J",
+            "afterVideoMs": 1725
+          }
+        ]
+      },
+      {
+        "source": "clad-movimento-01-headset",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 4000,
+        "readings": [
+          {
+            "letter": "O",
+            "afterVideoMs": 1966
+          },
+          {
+            "letter": "O",
+            "afterVideoMs": 3168
+          },
+          {
+            "letter": "O",
+            "afterVideoMs": 3596
+          }
+        ]
+      },
+      {
+        "source": "clad-movimento-03-queixo-teclado",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 4000,
+        "readings": [
+          {
+            "letter": "Z",
+            "afterVideoMs": 1333
+          },
+          {
+            "letter": "M",
+            "afterVideoMs": 2207
+          },
+          {
+            "letter": "M",
+            "afterVideoMs": 3951
+          }
+        ]
+      },
+      {
+        "source": "ufsm-azul",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 1450,
+        "readings": [
+          {
+            "letter": "A",
+            "afterVideoMs": 210
+          },
+          {
+            "letter": "L",
+            "afterVideoMs": 753
+          }
+        ]
+      },
+      {
+        "source": "cecierj-laranja",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 1550,
+        "readings": [
+          {
+            "letter": "O",
+            "afterVideoMs": 739
+          },
+          {
+            "letter": "O",
+            "afterVideoMs": 1140
+          }
+        ]
+      },
+      {
+        "source": "cecierj-azul",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 1650,
+        "readings": [
+          {
+            "letter": "X",
+            "afterVideoMs": 584
+          }
+        ]
+      },
+      {
+        "source": "fiocruz-sete-oito",
+        "label": "fora-do-alfabeto",
+        "startMs": 0,
+        "endMs": 2150,
+        "readings": [
+          {
+            "letter": "X",
+            "afterVideoMs": 650
+          },
+          {
+            "letter": "S",
+            "afterVideoMs": 1474
+          }
+        ]
+      }
+    ]
+  },
+  "kelly": [
+    {
+      "commit": "b95a5dabb61c5c59f934abc8440f3c073c539f3c",
+      "windows": [
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "R",
+          "startMs": 150240,
+          "endMs": 152170,
+          "readings": [
+            {
+              "letter": "R",
+              "afterVideoMs": 308
+            }
+          ]
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "R",
+          "startMs": 152310,
+          "endMs": 153450,
+          "readings": []
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "U",
+          "startMs": 214140,
+          "endMs": 216850,
+          "readings": []
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "U",
+          "startMs": 217010,
+          "endMs": 218290,
+          "readings": [
+            {
+              "letter": "H",
+              "afterVideoMs": 722
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commit": "f0122fa7956f507c4ef2dee2214cc4640679f881",
+      "windows": [
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "R",
+          "startMs": 150240,
+          "endMs": 152170,
+          "readings": [
+            {
+              "letter": "R",
+              "afterVideoMs": 227
+            }
+          ]
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "R",
+          "startMs": 152310,
+          "endMs": 153450,
+          "readings": []
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "U",
+          "startMs": 214140,
+          "endMs": 216850,
+          "readings": [
+            {
+              "letter": "U",
+              "afterVideoMs": 220
+            },
+            {
+              "letter": "U",
+              "afterVideoMs": 618
+            }
+          ]
+        },
+        {
+          "source": "kelly-canuto-iofwsoxq2ag",
+          "label": "U",
+          "startMs": 217010,
+          "endMs": 218290,
+          "readings": [
+            {
+              "letter": "H",
+              "afterVideoMs": 758
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
