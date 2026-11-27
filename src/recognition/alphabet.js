@@ -32,6 +32,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let shown = null
   let movingUntil = -Infinity
   let movingCandidate = null
+  let movingVotes = 0
   let lastFrame = -Infinity
   let history = []
 
@@ -49,6 +50,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     lastMotionSample = -Infinity
     lastFrame = -Infinity
     movingCandidate = null
+    movingVotes = 0
     movingUntil = -Infinity
     history = []
     show(null)
@@ -72,11 +74,13 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       if (findMotion && frame.timestamp - lastMotionSample >= 60) {
         lastMotionSample = frame.timestamp
         const motion = findMotion(history)
-        const confirmed = motion && (motion === movingCandidate || motion === 'J' || motion === 'Z')
+        movingVotes = motion ? (motion === movingCandidate ? movingVotes + 1 : 1) : 0
         movingCandidate = motion
+        const confirmed = motion && (motion === 'J' || motion === 'Z' || movingVotes >= (motion === 'Ç' ? 3 : 2))
         if (confirmed) {
           generation += 1
           movingCandidate = null
+          movingVotes = 0
           candidate = null
           votes = 0
           movingUntil = frame.timestamp + 600

@@ -25,7 +25,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 A referência é a [prévia local do alfabeto](http://127.0.0.1:4177/#area-livre), compilada no commit `0a36425`. Em 27 de novembro de 2026, a pessoa usuária confirmou que os pontos acompanharam bem o movimento das mãos e que a atualização do reconhecimento funcionou bem no seu teste. O N ficou como ressalva. Os resultados dos testes com gravações estão nos registros de verificação. [Resultados do alfabeto](docs/dados-alfabeto.md#cobertura-e-verificação) · [Resultados dos pontos](docs/teste-pontos-ao-vivo.md)
 
-1. **Revisar N, M e U (M4).** Conferir a pose no avatar, tornar visível a diferença entre os dedos estendidos de N e M e comparar a orientação de N e U. Retestar a leitura em Praticar e na Área livre e usar a evidência para decidir sobre ajustes no modelo. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
+1. **Validar N, M e U (M4).** Retestar no PC a pose de M e N e o leitor retreinado. Registrar a comparação com U na Área livre e em Praticar. [Triagem da pose](docs/animacoes.md#triagem-da-letra-n) · [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
 2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Repetir o roteiro com A–Z e Ç e preservar a leitura ao vivo e a sobreposição. Registrar a letra esperada, a letra exibida ou a ausência de leitura, a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
 3. **Fechar o roteiro da demonstração local (M3, M5 e M7).** Verificar sinais isolados, dicas, rejeição de entradas desconhecidas, transcrição e voz. Registrar quais resultados foram reproduzidos com vídeo ou webcam física. Manter a sinalização contínua em avaliação.
 
@@ -49,7 +49,8 @@ A prévia permanece no Linux local. A publicação na Vercel e a finalização d
 - [x] Fixar a separação por pessoa sinalizante entre treino, validação e teste quando houver identificadores. Registrar a limitação das fontes sem esse metadado e verificar duplicatas.
 - [x] Medir a rejeição dos modelos congelados em gravações externas de repouso e movimentos cotidianos. [Teste com 12 trechos do CLAD](docs/negativos.md#resultado-de-26-de-novembro-de-2026)
 - [x] Verificar os modelos congelados em amostras de sinais de videoaulas licenciadas. Registrar variantes, falhas de rastreamento e tamanho da amostra. [Verificação externa de Cinco e Amarelo](docs/sinais-independentes.md)
-- [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo para avaliar rejeição durante o uso da webcam.
+- [x] Medir a rejeição em 19 novos recortes externos de repouso, atividade cotidiana, transições e glosas fora do catálogo. Reproduzir três decisões na Área livre usando as gravações como câmera. [Resultados por estrato](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
+- [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
 
@@ -93,7 +94,9 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Adicionar H, J, K, X e Z ao reconhecimento ao vivo e revisar a leitura de Ç. Testar essas seis letras no Chromium com vídeos rotulados. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
 - [x] Triar a dificuldade relatada com N. Reproduzir N, M e U com os recortes da UFSM e comparar as poses do avatar com a referência. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
 - [x] Melhorar a legibilidade de M e N no avatar. Conferir dois dedos para baixo em N, três em M e dois para cima em U. Testar a vista frontal no Chromium e a soletração de “Anna”. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n)
-- [ ] Retestar N, M e U em gravações adicionais fora do ajuste e na webcam. Registrar a letra exibida ou a ausência de leitura e se a pose do avatar ajuda a distinguir as três letras.
+- [x] Reproduzir a rejeição de N em duas aulas adicionais, retreinar os classificadores estáticos com os recortes de M/N/U do Cecierj e retestar N na Unesp, reservada para o ensaio do classificador estático. [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
+- [ ] Retestar N, M e U na webcam. Registrar a letra exibida ou a ausência de leitura e se a pose do avatar ajuda a distinguir as três letras.
+- [ ] Investigar a troca de A por X e a ausência de E observadas no replay das 27 letras. Ampliar as gravações rotuladas e retestar as trocas durante a entrada ou saída de um gesto.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -112,6 +115,7 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Verificar a transcrição do combinado com movimentos de Espelho e Amarelo em velocidade original. As oito reproduções de clipes de treino acertaram a glosa e preservaram o texto anterior. [Controles de movimento no Chromium](docs/sinais-com-movimento-browser.md)
 - [x] Adquirir 14 tomadas adicionais de treino e medir o efeito sem mudar as pessoas da validação e da medição. [Comparação por sinal](docs/avaliacao.md#gravações-adicionais-de-espelho-e-amarelo)
 - [ ] Qualificar o candidato para substituir o modelo inicial com participantes fora do treino. Testar entradas desconhecidas, dois sinais suportados, sustentação, repetição e audição do texto editado em webcam real.
+- [ ] Reduzir as falsas aceitações de transições e de atividades cotidianas. No Chromium, os recortes Sete→Oito e queixo→teclado acrescentaram Cinco e Aluno. Retestar os sinais suportados junto com a rejeição após qualquer ajuste. [Recortes e reprodução](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 
 ### M6 · Saiba mais, autoria e caráter sem fins lucrativos

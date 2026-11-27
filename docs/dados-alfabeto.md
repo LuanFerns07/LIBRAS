@@ -67,13 +67,18 @@ npm run setup:vision
 .venv/bin/python -m ml.alphabet.extract_motion --out data/alphabet/motion-final.json
 mkdir -p data/alphabet/institutional
 .venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/institutional-static-n-m-u.json --out data/alphabet/institutional/static-n-m-u.json
+.venv/bin/python -m ml.alphabet.merge_reference \
+  data/alphabet/static-video-final.json data/alphabet/institutional/static-n-m-u.json \
+  --train-source cecierj-13757 --out data/alphabet/static-video-n-m-u.json
+.venv/bin/python -m ml.alphabet.extract_motion \
   --manifest ml/alphabet/institutional-temporal-windows.json --out data/alphabet/institutional/motion-frames.json
-.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
-  --device cuda --out data/models/alphabet-ufsm-final
-.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
-  --geometry --device cuda --out data/models/alphabet-geometry-final
-.venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-ufsm-final \
-  --check data/models/alphabet-geometry-final --reference data/alphabet/static-video-final.json
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-n-m-u.json \
+  --device cuda --out data/models/alphabet-n-coordinate
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-n-m-u.json \
+  --geometry --device cuda --out data/models/alphabet-n-geometry
+.venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-n-coordinate \
+  --check data/models/alphabet-n-geometry --reference data/alphabet/static-video-n-m-u.json
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
 node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
@@ -87,10 +92,26 @@ Os vídeos de origem, os pontos extraídos e os modelos ficam no ambiente local.
 
 A prévia tenta reconhecer A–Z e Ç na Área livre e em Praticar. H, K, X e Ç comparam a flexão dos dedos, a orientação da palma e o percurso da mão com recortes de referência. Em J, o leitor acompanha o percurso do dedo mínimo. Em Z, acompanha os três traços do indicador. Y usa o detector anterior. Os limiares são experimentais.
 
-Os modelos estáticos foram treinados com o LibraSign e quadros da aula do Libras ON. A validação usou outra aula da UFSM. Na terceira aula, a concordância dos modelos aceitou 250 de 290 quadros e acertou 243. Os quadros são correlacionados dentro de cada demonstração. O A da terceira aula ficou sem acertos nessa avaliação. [Matriz e resultado por letra](../ml/evidence/alphabet-live/agreement.json)
+Os primeiros modelos estáticos foram treinados com o LibraSign e quadros da aula do Libras ON. A validação usou outra aula da UFSM. Na terceira aula, a concordância dos modelos aceitou 250 de 290 quadros e acertou 243. Os quadros são correlacionados dentro de cada demonstração. O A da terceira aula ficou sem acertos nessa avaliação. [Matriz e resultado por letra](../ml/evidence/alphabet-live/agreement.json)
 
 No replay dos pontos da terceira aula, o leitor temporal exibiu H, J, K, X, Y, Z e Ç nas respectivas janelas e não exibiu nenhuma letra de movimento nas 20 janelas estáticas dessa aula. Essa gravação fica fora das referências, mas foi consultada ao ajustar os critérios. Os resultados medem apenas esses recortes. [Resultado do replay](../ml/evidence/alphabet-live/trajectory-evaluation.json)
 
 Os testes automatizados no Chromium usaram gravações rotuladas como entrada da câmera. A Área livre exibiu B, H, J, K, X, Y, Z e Ç ao lado do vídeo durante a captura. O vídeo de C mostrou C sem acionar Ç. Os testes também verificaram X e Z separadamente, sem acionar um pelo outro. Em Praticar, B e K apareceram mesmo com A selecionado como alvo. O teste confirmou que a transcrição recebe a letra pelo botão **Adicionar letra** e que sair da Área livre encerra a câmera. A sobreposição acompanhou duas mãos no vídeo antes, durante e depois de uma tentativa. A pessoa usuária confirmou a fluidez dos pontos e que a atualização funcionou bem no seu teste, com ressalva para a letra N. A validação sistemática com pessoas sinalizantes na webcam segue pendente. [Teste do alfabeto](../tests/e2e/alphabet-live.test.mjs) · [Teste da sobreposição](../tests/e2e/hand-overlay-live.test.mjs)
 
 Na triagem do N em 27 de novembro de 2026, a prévia `0a36425` exibiu a letra esperada em nove replays no Chromium na Área livre. Foram um M, um N e um U de cada uma das três aulas da UFSM, nas janelas do manifesto estático. Esses recortes já integravam as partições de treino, validação e teste. O recorte de N da terceira aula também foi exibido em Praticar com A selecionado como alvo. A revisão da pose do avatar segue em separado. [Janelas estáticas](../ml/alphabet/ufsm-static-windows.json) · [Triagem da pose](animacoes.md#triagem-da-letra-n)
+
+### Retreino de N, M e U
+
+Nas aulas do Cecierj e da Unesp, o modelo estático anterior deixou o painel sem leitura em ambas as demonstrações de N apesar de rastrear a mão. Entre os 52 quadros de N das duas aulas, a rede principal preferiu Q em 45. A rede geométrica preferiu N em 52. O leitor exige concordância com probabilidade de pelo menos 0,80 em cada rede. [Triagem nas duas aulas](../ml/evidence/alphabet-n-m-u/report.json)
+
+O retreino acrescentou ao conjunto estático apenas os recortes de M, N e U do Cecierj e conservou a validação na segunda aula da UFSM. Na terceira aula da UFSM, os acertos estáticos passaram de 243 para 250 dos mesmos 290 quadros. Na Unesp, que ficou fora do treino e da seleção do modelo estático, os acertos de N passaram de 0 para 25 de 25 quadros. A prévia exibiu M, N e U em todos os seis replays institucionais. No recorte de U do Cecierj houve também uma leitura de H. Cada fonte fornece apenas um recorte de cada letra. Os modelos de trajetória já usavam outros recortes das aulas institucionais.
+
+O leitor agora pede três confirmações seguidas antes de exibir Ç. O trecho estático de C passou por três replays automatizados no Chromium sem acionar Ç. O trecho rotulado de Ç e as sete janelas temporais da terceira aula da UFSM continuaram produzindo a letra esperada.
+
+O script abaixo percorre as 27 janelas isoladas de uma mesma aula pela Área livre e registra todas as letras exibidas, inclusive trocas momentâneas. A entrada da câmera é o vídeo gravado. O relatório só guarda metadados e leituras.
+
+```bash
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --source 1535641159 --manifest ml/alphabet/ufsm-static-windows.json \
+  --manifest ml/alphabet/ufsm-temporal-windows.json
+```

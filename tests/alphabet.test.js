@@ -49,3 +49,20 @@ test('a trajetória usa quadros entre leituras e prevalece sobre uma previsão e
   await reader.read({ ...frame(150), rightHand: [] })
   assert.deepEqual(readings, ['K', null])
 })
+
+test('o leitor exige três janelas de Ç antes de trocar a leitura de C', async () => {
+  const readings = []
+  let motion = null
+  const reader = createLiveLetterReader(async () => 'C', value => readings.push(value), () => motion)
+  for (const time of [0, 100, 200]) await reader.read(frame(time))
+
+  motion = 'Ç'
+  for (const time of [300, 400]) await reader.read(frame(time))
+  motion = null
+  await reader.read(frame(500))
+  assert.deepEqual(readings, ['C'])
+
+  motion = 'Ç'
+  for (const time of [600, 700, 800]) await reader.read(frame(time))
+  assert.deepEqual(readings, ['C', 'Ç'])
+})
