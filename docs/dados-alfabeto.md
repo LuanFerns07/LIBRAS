@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `5eccc2c`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia em 4177 usa a compilação `058a990`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-alfabeto-z-polegar/iniciar.py --porta 4177
+python3 data/releases/librasia-n-confirmacao/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -245,6 +245,16 @@ OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extrac
 ffmpeg -nostdin -ss 168.910 -i data/alphabet/independent/unicentro-download/unicentro-alfabeto.mp4 \
   -t 1.18 -vf hflip -an -c:v libx264 -crf 15 "$out/unicentro-n-lado-oposto.mp4"
 ```
+
+#### Confirmação específica de N na prévia
+
+Na compilação `058a990`, a segunda extração só entra no modo de letras, diante de uma mão com indicador e médio apontando para baixo. A leitura pode usar os pontos dessa segunda passagem quando a rede principal indica N, a outra prefere N ou M e a rota usual fica inconclusiva. Os dois modelos precisam confirmar N nos pontos alternativos. Depois de exibir N, o leitor tolera uma única leitura inconclusiva com esses pontos presentes. Ao perder a mão, limpa o painel na próxima atualização. As trajetórias e o desenho continuam usando os pontos da primeira passagem.
+
+O Chromium manteve N até perder a mão nas nove repetições. Passaram também N da Unicentro em Área livre e Praticar, a transição M → N da Unesp e o ensaio de sobreposição de duas mãos. A mediana entre pinturas antes da tentativa, com a gravação usada no ensaio, foi de 42 ms. Os três recortes de M permaneceram como M, e os dois Q mantiveram as leituras da base. [Repetições de N](../ml/evidence/alphabet-m-n-u-q/n-lados-058a990.json) · [Controles de M e Q](../ml/evidence/alphabet-m-n-u-q/mq-058a990.json) · [Teste da sobreposição](../tests/e2e/hand-overlay-live.test.mjs)
+
+Em uma execução dos 89 recortes rotulados, houve 87 acertos. O A da UFSM continuou sem leitura e o U da UFAC ficou sem leitura nessa execução. Em três repetições dedicadas, as duas versões exibiram U nas três. Os 19 recortes fora do alfabeto tiveram os mesmos conjuntos de letras exibidas da versão com ajuste de Z. O trecho de repouso que produzia P no candidato global ficou sem leitura nas três repetições. Rosa → Marrom ainda pode exibir J, inclusive em replays em que a segunda extração ficou inativa. [89 recortes rotulados](../ml/evidence/alphabet-m-n-u-q/positivos-058a990.json) · [Reteste de U](../ml/evidence/alphabet-m-n-u-q/ufac-u-repetido-058a990.json) · [19 recortes fora do alfabeto](../ml/evidence/alphabet-m-n-u-q/negativos-058a990.json) · [Repouso e Rosa → Marrom](../ml/evidence/alphabet-m-n-u-q/negativos-repetidos-058a990.json) · [Uso da extração alternativa em Rosa → Marrom](../ml/evidence/alphabet-m-n-u-q/rosa-trace-058a990.json)
+
+O Chromium abriu e liberou a câmera **ACER HD User Facing** a 640 × 480 no PC. Os resultados de reconhecimento desta rodada vieram de câmera virtual com gravações. O reteste do gesto N com uma pessoa sinalizando na webcam física continua pendente. [Teste da webcam](../tests/e2e/browser.test.mjs)
 
 ### Recuperação de O com geometria da mão
 
