@@ -48,6 +48,20 @@ const rank = (a, b) => b.score - a.score || compareTokens(a.tokens, b.tokens)
 const outputTokens = key => key ? key.split(' ') : []
 const isRecord = value => value && typeof value === 'object' && !Array.isArray(value)
 const countFives = words => words.filter(word => word === 'cinco' || word === '5').length
+const catalogPhrases = [
+  { glosses: ['cinco', 'aluno'], text: ['cinco', 'alunos'] },
+  { glosses: ['cinco', 'espelho'], text: ['cinco', 'espelhos'] },
+  { glosses: ['cinco', 'espelho', 'amarelo'], text: ['cinco', 'espelhos', 'amarelos'] },
+]
+
+export function createContinuousTranslator(artifact) {
+  const translate = createGlossTranslator(artifact, { preserveFive: true })
+  return signs => {
+    const phrase = Array.isArray(signs) && catalogPhrases.find(({ glosses }) =>
+      glosses.length === signs.length && glosses.every((gloss, index) => gloss === signs[index]))
+    return phrase ? [...phrase.text] : translate(signs)
+  }
+}
 
 export function createGlossTranslator(artifact, { preserveFive = false } = {}) {
   const { schema, parameters, beam, maxPhrase, start, end, tables, caseFolding } = artifact ?? {}

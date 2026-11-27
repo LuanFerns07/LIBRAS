@@ -1,7 +1,7 @@
 import { InferenceSession, Tensor } from 'onnxruntime-web/wasm'
 import { recognitionCatalog } from '../catalog.js'
 import { boundaryFeatureCount, boundaryFeatures, decodeBoundaries } from './boundaries.js'
-import { createGlossTranslator, glossTranslatorSchema } from './gloss-text.js'
+import { createContinuousTranslator, glossTranslatorSchema } from './gloss-text.js'
 
 const directory = 'models/continuous/'
 const labelById = new Map(recognitionCatalog.map(({ id, text }) => [id, text]))
@@ -86,7 +86,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
     verifiedBytes(directory + 'boundary-model.onnx', model.modelSha256),
     verifiedBytes(directory + 'monotone-web.json', gloss.sha256),
   ])
-  const translate = createGlossTranslator(JSON.parse(new TextDecoder().decode(glossBytes)), { preserveFive: true })
+  const translate = createContinuousTranslator(JSON.parse(new TextDecoder().decode(glossBytes)))
   const vocabulary = new Set(catalog)
   const review = value => suggestFromReview(value, vocabulary, translate)
   const session = await InferenceSession.create(onnx, { executionProviders: ['wasm'] })

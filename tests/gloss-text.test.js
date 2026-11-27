@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { createGlossTranslator, glossTranslatorSchema } from '../src/recognition/gloss-text.js'
+import { createContinuousTranslator, createGlossTranslator, glossTranslatorSchema } from '../src/recognition/gloss-text.js'
 
 const artifact = {
   schema: glossTranslatorSchema,
@@ -47,4 +47,18 @@ test('a restrição do numeral conserva a quantidade de ocorrências de Cinco', 
   assert.deepEqual(translate(['cinco', 'aluno']), ['5', 'alunos'])
   assert.deepEqual(translate(['aluno']), ['aluno'])
   assert.deepEqual(translate(['cinco', 'cinco', 'espelho']), ['cinco', 'cinco', 'espelho'])
+})
+
+test('o modo contínuo aplica concordância às expressões completas do catálogo', () => {
+  const translate = createContinuousTranslator(artifact)
+  assert.deepEqual(translate(['cinco', 'aluno']), ['cinco', 'alunos'])
+  assert.deepEqual(translate(['cinco', 'espelho']), ['cinco', 'espelhos'])
+  assert.deepEqual(translate(['cinco', 'espelho', 'amarelo']), ['cinco', 'espelhos', 'amarelos'])
+
+  const translateOther = createGlossTranslator(artifact, { preserveFive: true })
+  for (const glosses of [
+    ['espelho', 'amarelo'], ['cinco', 'cinco', 'espelho'], ['cinco', 'aluno', 'espelho'], ['cinco espelho'],
+  ]) {
+    assert.deepEqual(translate(glosses), translateOther(glosses))
+  }
 })

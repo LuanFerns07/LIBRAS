@@ -360,26 +360,29 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       await generate()
       assert.equal(await evaluate(output + '.dataset.state'), 'inconclusive')
       assert.equal(await evaluate(apply + '.disabled'), true)
-      await edit('cinco espelho')
-      await generate()
-      assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — cinco espelho')
-      assert.equal(await getTranscript(), prefix)
-      await edit('amarelo espelho')
-      await generate()
-      assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — amarelo espelho')
-      assert.equal(await getTranscript(), prefix)
+      for (const [glosses, suggestion] of [
+        ['cinco aluno', 'cinco alunos'],
+        ['cinco espelho', 'cinco espelhos'],
+        ['cinco espelho amarelo', 'cinco espelhos amarelos'],
+        ['amarelo espelho', 'amarelo espelho'],
+      ]) {
+        await edit(glosses)
+        await generate()
+        assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — ' + suggestion)
+        assert.equal(await getTranscript(), prefix)
+      }
       await edit('amarelo ?')
       assert.equal(await evaluate(apply + '.disabled'), true, 'Uma edição deve invalidar a sugestão anterior.')
-      await edit('amarelo espelho')
+      await edit('cinco espelho amarelo')
       await generate()
       await evaluate(apply + '.click()', true)
       await evaluate(apply + '.click()', true)
       const separator = prefix && !/\s$/u.test(prefix) ? ' ' : ''
-      assert.equal(await getTranscript(), prefix + separator + 'amarelo espelho')
+      assert.equal(await getTranscript(), prefix + separator + 'cinco espelhos amarelos')
       assert.equal(await evaluate('document.querySelector("[data-gloss-review]").hidden'), true)
       assert.equal(await evaluate('document.activeElement.id'), 'transcription')
       assert.deepEqual(otherRequests, [], 'A revisão também deve ser local.')
-      context.diagnostic('A revisão preservou Cinco, rejeitou trechos em aberto e acrescentou somente a sugestão confirmada.')
+      context.diagnostic('A revisão testou a concordância em três expressões, rejeitou trechos em aberto e acrescentou uma vez a sugestão confirmada.')
     }
 
     if (expectedHint) {
