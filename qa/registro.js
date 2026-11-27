@@ -193,6 +193,8 @@ export function addAttempt(session, input, now = new Date()) {
   if ((decision === 'hint') !== (shownParameter !== 'none')) {
     throw new TypeError('Confira se o assunto corresponde ao estado de dica exibido.')
   }
+  const classifierCalls = input.classifierCalls == null || input.classifierCalls === '' ? null
+    : numberInRange(input.classifierCalls, 0, Number.MAX_SAFE_INTEGER, 'o número de chamadas ao classificador')
   const latency = input.latencyMs == null || input.latencyMs === '' ? null : {
     milliseconds: numberInRange(input.latencyMs, 0, 120000, 'a latência', false),
     method: choose(input.latencyMethod, 'latencyMethod', 'o método de medição de latência'),
@@ -232,7 +234,7 @@ export function addAttempt(session, input, now = new Date()) {
       parameter: referenceParameter,
       feedbackVerdict,
     },
-    application: { decision, prediction, shownParameter, latency },
+    application: { decision, prediction, shownParameter, latency, classifierCalls },
     voice: { applicationStatus: voiceStatus, humanAudibility: audibility, editedTextMatch },
   }
   session.attempts.push(attempt)

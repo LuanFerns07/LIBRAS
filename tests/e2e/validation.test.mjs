@@ -59,6 +59,7 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
       for (const [name, value] of Object.entries({
         flow: 'free', condition: 'no-hand', lighting: 'regular', framing: 'adequate',
         referenceLabel: 'none', decision: 'inconclusive',
+        classifierCalls: 0,
       })) form.elements[name].value = value
       form.requestSubmit()
 
@@ -86,6 +87,7 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     assert.equal(exported.checkpoints['hands-return'], 'inconclusive')
     assert.equal(exported.checkpoints['alphabet-n'], 'pending')
     assert.equal(exported.attempts[0].application.decision, 'inconclusive')
+    assert.equal(exported.attempts[0].application.classifierCalls, 0)
     assert.equal(exported.summary.byCondition['no-hand'], 1)
     assert.ok(requests.some(({ url: requested }) => requested === new URL('versao.json', url).href))
     assert.ok(requests.every(request => new URL(request.url).origin === url.origin && request.method === 'GET'))

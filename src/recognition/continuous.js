@@ -92,7 +92,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
   const session = await InferenceSession.create(onnx, { executionProviders: ['wasm'] })
   let working = Promise.resolve()
 
-  async function analyze(frames) {
+  async function analyze(frames, onClassification) {
     const samples = regularizeBoundaryFrames(frames, model.sampleMs)
     const length = samples.times.length
     if (length < 2) return continuousResult([], frames, recognize, translate)
@@ -100,12 +100,12 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
     const input = new Tensor('float32', boundaryFeatures(samples.frames), [length, boundaryFeatureCount])
     const { probabilities } = await session.run({ features: input })
     const intervals = decodeBoundaries(samples.times, probabilities.data, model.durationPriorMs, model.decoder)
-    return continuousResult(intervals, frames, recognize, translate)
+    return continuousResult(intervals, frames, segment => recognize(segment, onClassification), translate)
   }
 
   return {
-    recognize(frames) {
-      const run = working.then(async () => ({ ...await analyze(frames), review }))
+    recognize(frames, onClassification) {
+      const run = working.then(async () => ({ ...await analyze(frames, onClassification), review }))
       working = run.catch(() => {})
       return run
     },

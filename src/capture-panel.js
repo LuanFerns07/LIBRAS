@@ -235,8 +235,11 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     renderButtons()
     show('busy', 'Analisando a tentativa.')
     let analysis
+    let classifierCalls = null
+    let calls = 0
     try {
-      analysis = await analyze(frames)
+      analysis = await analyze(frames, () => { calls += 1 })
+      classifierCalls = calls
     } catch {
       analysis = { state: 'unavailable', message: 'Tente novamente após reativar a câmera.' }
     } finally {
@@ -254,6 +257,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
       decisionMs: performance.now() - timing.finishedAt,
       initialLoadMs,
       extractionMs: timing.extractionMs,
+      classifierCalls,
     })
   }
 

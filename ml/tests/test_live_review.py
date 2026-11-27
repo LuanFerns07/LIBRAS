@@ -68,3 +68,16 @@ class LiveReviewTests(TestCase):
         self.assertEqual(group["independentParticipants"], 0)
         self.assertIsNone(group["freeRecognition"]["falseAcceptance"]["rate"])
         self.assertEqual(group["timingByEnvironment"], [])
+
+    def test_counts_classifier_reach_separately_from_decision_and_legacy_data(self):
+        trials = [observed(number, "other", condition="out-of-catalog") for number in range(1, 4)]
+        trials[0]["application"]["classifierCalls"] = 1
+        trials[1]["application"]["classifierCalls"] = 0
+        result = analyze([session(trials)], MODEL, MANIFEST_HASH)["groups"][0]["freeRecognition"]
+        self.assertEqual(result["classifierReachByCondition"], {
+            "out-of-catalog": {"reached": 1, "notReached": 1, "unobserved": 1},
+        })
+        self.assertEqual(result["falseAcceptanceByCondition"]["out-of-catalog"]["total"], 3)
+        trials[0]["application"]["classifierCalls"] = True
+        with self.assertRaisesRegex(ValueError, "chamadas ao classificador"):
+            analyze([session(trials)], MODEL, MANIFEST_HASH)

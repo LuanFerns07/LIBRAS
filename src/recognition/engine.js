@@ -233,7 +233,7 @@ export async function openEngine() {
   let inference = Promise.resolve()
   let continuous
 
-  function recognize(frames) {
+  function recognize(frames, onClassification) {
     const processed = preprocessFrames(frames, manifest.preprocess)
     if (processed.state === 'no-hand') {
       return { state: 'inconclusive', reason: 'no-hand', message: 'Mostre a mão e os ombros no quadro para tentar de novo.' }
@@ -245,6 +245,7 @@ export async function openEngine() {
     const trajectory = observeVerticalTrajectory(frames)
     const input = new Tensor('float32', processed.values, [1, manifest.frames, manifest.features])
     const run = inference.then(async () => {
+      onClassification?.()
       const { logits } = await session.run({ landmarks: input })
       return { ...decide(logits.data, manifest), palm, trajectory }
     })
@@ -267,8 +268,8 @@ export async function openEngine() {
       })
       return opening
     } : undefined,
-    recognizeSequence(frames) {
-      return Promise.all(segmentFrames(frames).map(recognize)).then(segments => {
+    recognizeSequence(frames, onClassification) {
+      return Promise.all(segmentFrames(frames).map(segment => recognize(segment, onClassification))).then(segments => {
         if (segments.length === 0) return { state: 'inconclusive', message: 'Nenhum trecho com mãos enquadradas foi rastreado.' }
         return { state: 'sequence', segments }
       })

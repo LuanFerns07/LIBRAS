@@ -89,7 +89,7 @@ test('o JSON agrupa estratos observados e preserva etapas pendentes sem conteúd
   addAttempt(session, { ...observed, text: 'Ignorado', video: [1, 2], image: 'Ignorada' }, time)
   addAttempt(session, {
     ...observed, flow: 'free', target: null, condition: 'no-hand', referenceLabel: 'none',
-    decision: 'inconclusive', prediction: null,
+    decision: 'inconclusive', prediction: null, classifierCalls: '0',
   }, time)
   setCheckpoint(session, 'letter', 'passed')
   assert.throws(() => setCheckpoint(session, 'outra', 'passed'), /Etapa/u)
@@ -104,6 +104,8 @@ test('o JSON agrupa estratos observados e preserva etapas pendentes sem conteúd
   const exported = JSON.parse(json)
   assert.deepEqual(exported.summary, summary)
   assert.deepEqual(exported.attempts.map(attempt => attempt.number), [1, 2])
+  assert.deepEqual(exported.attempts.map(attempt => attempt.application.classifierCalls), [null, 0])
+  assert.throws(() => addAttempt(session, { ...observed, classifierCalls: '1.5' }), /chamadas ao classificador/u)
   assert.equal(exported.checkpoints.letter, 'passed')
   assert.equal(exported.checkpoints.exercise, 'pending')
   assert.equal(exported.exportedAt, time.toISOString())

@@ -51,11 +51,14 @@ def checked_session(session, model, manifest_hash):
         application = attempt["application"]
         prediction = application["prediction"]
         decision = application["decision"]
+        calls = application.get("classifierCalls")
         scored = decision == "accepted"
         if (attempt["number"] != number or attempt["flow"] not in FLOWS
                 or attempt["reference"]["label"] not in REFERENCE_LABELS or decision not in DECISIONS
                 or (scored and prediction not in model["labels"][1:]) or (not scored and prediction is not None)):
             raise ValueError("Há uma tentativa inválida ou uma predição fora do modelo.")
+        if calls is not None and (type(calls) is not int or calls < 0):
+            raise ValueError("Há um número inválido de chamadas ao classificador.")
 
 
 def eligible(session):
@@ -99,6 +102,7 @@ def group_report(sessions, labels):
     by_flow = {flow: [item for item in attempts if item["flow"] == flow] for flow in FLOWS}
     matrix = np.zeros((len(labels), len(labels)), dtype=int)
     negative_conditions = defaultdict(lambda: {"count": 0, "total": 0})
+    classifier_by_condition = defaultdict(lambda: {"reached": 0, "notReached": 0, "unobserved": 0})
     excluded = Counter()
     for attempt in by_flow["free"]:
         condition = attempt["condition"]
@@ -112,6 +116,9 @@ def group_report(sessions, labels):
         expected = labels.index(reference) if reference in labels else 0
         predicted = labels.index(attempt["application"]["prediction"])
         matrix[expected, predicted] += 1
+        calls = attempt["application"].get("classifierCalls")
+        reached = "unobserved" if calls is None else "reached" if calls > 0 else "notReached"
+        classifier_by_condition[condition][reached] += 1
         if expected == 0:
             negative_conditions[condition]["total"] += 1
             negative_conditions[condition]["count"] += int(predicted != 0)
@@ -140,6 +147,7 @@ def group_report(sessions, labels):
         "independentParticipants": len({item["participant"]["id"] for item in selected if item["attempts"]}),
         "attemptsByCondition": dict(Counter(item["condition"] for item in attempts)),
         "freeRecognition": {**classification, "excludedAttempts": dict(excluded),
+                            "classifierReachByCondition": dict(classifier_by_condition),
                             "falseAcceptanceByCondition": dict(negative_conditions)},
         "guidedFeedback": dict(Counter(item["reference"]["feedbackVerdict"] for item in by_flow["guided"])),
         "timingByEnvironment": [

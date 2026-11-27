@@ -21,6 +21,7 @@ const expectedHint = process.env.LIBRASIA_TEST_EXPECT_HINT?.trim()
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
 const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
 const expectedReason = process.env.LIBRASIA_EXPECT_REASON
+const expectedClassifierCalls = process.env.LIBRASIA_EXPECT_CLASSIFIER_CALLS
 const prefix = process.env.LIBRASIA_TEST_TRANSCRIPT_PREFIX ?? ''
 const voiceMode = process.env.LIBRASIA_TEST_VOICE_MODE
 const offline = process.env.LIBRASIA_TEST_OFFLINE === '1'
@@ -74,6 +75,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (offline) assert.ok(expected && sync && !multiple && !target && trials >= 2,
     'Use um sinal confirmado na área livre, com clipe sincronizado e pelo menos duas tentativas.')
   if (expectedReason) assert.ok(!expected, 'O motivo esperado deve corresponder a uma tentativa inconclusiva.')
+  if (expectedClassifierCalls !== undefined) assert.match(expectedClassifierCalls, /^\d+$/u)
   assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
     'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
   if (fixedCaptureMs !== null) {
@@ -319,6 +321,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       check('estado', () => assert.equal(decision.state, expectedState, decision.message))
       if (expectedHint) check('dica', () => assert.ok(decision.message.includes(expectedHint), decision.message))
       if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
+      if (expectedClassifierCalls !== undefined) check('classificador', () =>
+        assert.equal(decision.timing?.classifierCalls, Number(expectedClassifierCalls)))
       if (expectedGlosses !== undefined) check('glosas', () => assert.equal(decision.glosses, expectedGlosses))
       if (!target) {
         const words = secondText ? [expected, secondText].slice(0, index + 1) : Array(index + 1).fill(expected)
