@@ -96,3 +96,23 @@ O comando usa apenas os recortes Holistic 361 e 362 e os checkpoints locais `bou
 ### Protocolo da partição reservada
 
 Foram fixadas quatro condições antes de medir os recortes 459, 460 e 462. O decodificador publicado e o retreinado no Holistic entram com seus parâmetros originais. As duas alternativas usam os pesos Holistic, penalidade de corte de 0,25 e os parâmetros escolhidos na validação para a variante sem piso e para a variante com piso de cinco posições. A comparação principal usa F1 em IoU ≥ 0,50, pareamento de referências abaixo de 500 ms e fragmentação. O protocolo inclui os hashes dos pesos, do modelo de visão, do relatório de validação e do manifesto de origem. [Protocolo congelado](../ml/continuous_experiment/boundaries/fragmentation-reserved.json)
+
+### Resultado na partição reservada
+
+A execução única após congelar os parâmetros mediu as 131 anotações dos recortes 459, 460 e 462. Entre elas, 64 duram menos de 500 ms. Os vídeos são os mesmos reservados no ensaio com Hand Landmarker e foram extraídos agora com Holistic. A opção `--split test` alterou o hash do programa de extração. O modelo de visão, a amostragem e o esquema de pontos permaneceram iguais aos da validação. O relatório registra os dois hashes da receita e a origem dos recortes. [Resultado por recorte e hashes](../ml/evidence/ufsc-boundaries/fragmentation-reserved.json)
+
+| Condição congelada | Propostas <500 ms | Referências curtas pareadas | Referências fragmentadas | F1 (IoU 0,25 / 0,50 / 0,75) |
+| --- | ---: | ---: | ---: | --- |
+| Original da prévia local | 45/195 | 32/64 | 31 | 0,656 / 0,436 / 0,086 |
+| Holistic com decodificador original | 33/193 | 28/64 | 37 | 0,642 / 0,383 / 0,093 |
+| Holistic com penalidade de corte | 29/150 | 28/64 | 21 | 0,676 / 0,456 / 0,128 |
+| Holistic com penalidade de corte e piso | 0/144 | 28/64 | 19 | 0,684 / 0,465 / 0,116 |
+
+A alternativa com piso aumentou a precisão em IoU ≥ 0,50 de 71/195 para 64/144 e reduziu a revocação de 71/131 para 64/131 frente à prévia local. Quatro referências curtas a menos foram pareadas. Com os mesmos pesos Holistic, ela manteve o total de 28 curtas pareadas e preservou 17 dos 28 pareamentos do decodificador original desses pesos. Em 134 das 144 propostas havia mão em cinco ou mais posições. Esse total mede disponibilidade dos pontos de mão. A exigência de ombros e o reconhecimento de glosas ainda precisam ser medidos para a alternativa no fluxo integrado. [Métricas e comparação por gravação](../ml/evidence/ufsc-boundaries/fragmentation-reserved.json)
+
+```bash
+node ml/continuous_experiment/boundaries/extract-web.mjs --split test
+.venv/bin/python -m ml.continuous_experiment.boundaries.evaluate_fragmentation_reserved
+```
+
+O primeiro comando usa os vídeos locais e grava os pontos em `data/ufsc-boundaries/holistic/test`. O segundo aplica somente as quatro regras fixadas e grava `fragmentation-comparison.json` nesse diretório.
