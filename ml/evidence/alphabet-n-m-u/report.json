@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "manifest": "ml/alphabet/institutional-static-n-m-u.json",
+  "manifestSha256": "a0d590f01f46a8396a56ccfe89d7518dc03fd98c8b01b214eab69202ad0c39ea",
+  "independence": "As duas aulas ficam fora do treino e da calibração do classificador estático consultado. Outros recortes das mesmas aulas foram usados como referência para letras com movimento. Os seis clipes do ensaio são distintos desses recortes.",
+  "preview": {
+    "url": "http://127.0.0.1:4177/#area-livre",
+    "chromium": "156.0.8078.79",
+    "initialAssetsSha256": {
+      "/": "8d81c6fecf0e507e077b98ba069b9f9678c43b660ab6a645fc1fa72577dbca52",
+      "/assets/index-DuX0kqea.js": "8dda492762f9f909c8f0600b61cc5f8ccd3a6dd7d6f5fa261c73a7d34740e5e3",
+      "/assets/index-B7nidlSj.css": "dc9d5ffe89aac6092a96d438a78b81f369589fefdde3865cc54bfb637a52caed",
+      "/models/alphabet.json": "549ea25f91134255c76e918c51ae965c1ef21febb980f474a1dfe1b70db525d3",
+      "/models/alphabet.onnx": "351f116eb40a5f218eb43beea1a7651d03359cf2980b274dc34f2659ac853b18",
+      "/models/alphabet-check.onnx": "02677a36a344c695b087762412d24d258e7e89b6d27f51ed6329e328b28c4852",
+      "/models/alphabet-motion.json": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+    },
+    "diagnosticAssetsSha256": {
+      "/": "2fbef2bdb31bb50f58fff2a5de798d7a4cf024310b121166f6bd23e1faf79247",
+      "/assets/index-DS2s9UnR.js": "cbf848cc0b839e7173662abb46cacacd303c616814279c7bd0124a0182781cc0",
+      "/assets/index-B7nidlSj.css": "dc9d5ffe89aac6092a96d438a78b81f369589fefdde3865cc54bfb637a52caed"
+    },
+    "sameModelAssetsInBoth": true,
+    "note": "A prévia recebeu outro pacote JavaScript entre os testes iniciais e a sonda diagnóstica. Os hashes dos arquivos de modelos das letras coincidiram."
+  },
+  "protocol": {
+    "fixture": "trim=start={startSeconds}:end={endSeconds},setpts=PTS-STARTPTS,fps=25,scale=640:360:flags=lanczos,tpad=start_duration=0.80:stop_duration=1.00:color=black",
+    "encoding": "FFmpeg 7.1.5, yuv420p, Y4M sem áudio. Os dois tempos vêm do manifesto.",
+    "browserTest": "LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_LETTER_VIDEO={fixture} LIBRASIA_TEST_EXPECT_LETTER={label} LIBRASIA_TEST_FORBIDDEN_LETTER={forbiddenLetter} node --test tests/e2e/alphabet-live.test.mjs",
+    "browserDiagnosis": "Em outro replay de cada N, registrar a leitura e os pixels não transparentes da sobreposição a cada pelo menos 120 ms até 14,5 s. Contar apenas amostras em que o pixel da imagem de entrada em x=84% e y=20% distingue o vídeo do preenchimento preto.",
+    "extraction": ".venv/bin/python -m ml.alphabet.extract_motion --manifest ml/alphabet/institutional-static-n-m-u.json --out data/evidence/alphabet-n-m-u/points.json",
+    "offline": "ONNX Runtime 1.23.2 em CPU. Aplicar a seleção de mão e a normalização de centered em ml/alphabet/train.py, executar os dois ONNX publicados pela prévia e comparar seus máximos após softmax. O aceito exige a mesma classe e probabilidade de pelo menos 0,80 em ambos."
+  },
+  "localArtifacts": {
+    "points": {
+      "path": "data/evidence/alphabet-n-m-u/points.json",
+      "sha256": "098c5546390c312e9bece95597f6eeb8654ea45201473831151f8b50eed6fd2d",
+      "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+    },
+    "displayProbe": {
+      "path": "data/evidence/alphabet-n-m-u/display-probe.json",
+      "sha256": "9ee62c31e9a21a6b43186cdcb6e573545a8574bfe2888b43be08b20fa5f96cb4"
+    }
+  },
+  "results": [
+    {
+      "source": "cecierj-13757",
+      "label": "M",
+      "frames": 26,
+      "primary": {
+        "topLabels": {
+          "M": 26
+        },
+        "overThreshold": 26,
+        "targetProbabilityMedian": 0.9996
+      },
+      "check": {
+        "topLabels": {
+          "M": 25,
+          "N": 1
+        },
+        "overThreshold": 25,
+        "targetProbabilityMedian": 1.0
+      },
+      "agreedLabels": {
+        "M": 24
+      },
+      "browser": {
+        "letterShownAndAdded": true,
+        "forbiddenLetter": "N",
+        "testStatus": "pass",
+        "log": "data/evidence/alphabet-n-m-u/cecierj-13757-m.e2e.log",
+        "logSha256": "7f3a90e00386be57bcd8fd64137fcc67fa689e050b8d83622979be745f8c7974"
+      }
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "N",
+      "frames": 27,
+      "primary": {
+        "topLabels": {
+          "Q": 26,
+          "N": 1
+        },
+        "overThreshold": 0,
+        "targetProbabilityMedian": 0.3573
+      },
+      "check": {
+        "topLabels": {
+          "N": 27
+        },
+        "overThreshold": 20,
+        "targetProbabilityMedian": 0.8242
+      },
+      "agreedLabels": {},
+      "browser": {
+        "letterShownAndAdded": false,
+        "forbiddenLetter": "M",
+        "testStatus": "expected-letter-timeout",
+        "log": "data/evidence/alphabet-n-m-u/cecierj-13757-n.e2e.log",
+        "logSha256": "9d1423b72e04270e6e1e067004ebf5c4335978e850dc8b2da0fdaa3582400dc4",
+        "diagnostic": {
+          "visibleSamples": 54,
+          "handOverlay": 52,
+          "counts": {
+            "—": 54
+          }
+        }
+      }
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "frames": 25,
+      "primary": {
+        "topLabels": {
+          "U": 25
+        },
+        "overThreshold": 25,
+        "targetProbabilityMedian": 0.9465
+      },
+      "check": {
+        "topLabels": {
+          "U": 25
+        },
+        "overThreshold": 25,
+        "targetProbabilityMedian": 0.9947
+      },
+      "agreedLabels": {
+        "U": 25
+      },
+      "browser": {
+        "letterShownAndAdded": true,
+        "forbiddenLetter": "V",
+        "testStatus": "pass",
+        "log": "data/evidence/alphabet-n-m-u/cecierj-13757-u.e2e.log",
+        "logSha256": "e7ca3727fed00cfa7fd43dbc74a1b3255859aca93d6360cdb69c0f5ff7319fb8"
+      }
+    },
+    {
+      "source": "unesp-222981",
+      "label": "M",
+      "frames": 21,
+      "primary": {
+        "topLabels": {
+          "M": 21
+        },
+        "overThreshold": 21,
+        "targetProbabilityMedian": 0.9998
+      },
+      "check": {
+        "topLabels": {
+          "M": 21
+        },
+        "overThreshold": 21,
+        "targetProbabilityMedian": 1.0
+      },
+      "agreedLabels": {
+        "M": 21
+      },
+      "browser": {
+        "letterShownAndAdded": true,
+        "forbiddenLetter": "N",
+        "testStatus": "pass",
+        "log": "data/evidence/alphabet-n-m-u/unesp-222981-m.e2e.log",
+        "logSha256": "1c8fba55247696bd6f831137e705f5874a16698a7fa5e7ec16044fec5b6b9d8b"
+      }
+    },
+    {
+      "source": "unesp-222981",
+      "label": "N",
+      "frames": 25,
+      "primary": {
+        "topLabels": {
+          "N": 6,
+          "Q": 19
+        },
+        "overThreshold": 0,
+        "targetProbabilityMedian": 0.4354
+      },
+      "check": {
+        "topLabels": {
+          "N": 25
+        },
+        "overThreshold": 17,
+        "targetProbabilityMedian": 0.8732
+      },
+      "agreedLabels": {},
+      "browser": {
+        "letterShownAndAdded": false,
+        "forbiddenLetter": "M",
+        "testStatus": "expected-letter-timeout",
+        "log": "data/evidence/alphabet-n-m-u/unesp-222981-n.e2e.log",
+        "logSha256": "c4edd882d95c78325495654fa79a8846bb002276bd6e7be9aa023b43bdb0dad3",
+        "diagnostic": {
+          "visibleSamples": 51,
+          "handOverlay": 48,
+          "counts": {
+            "—": 51
+          }
+        }
+      }
+    },
+    {
+      "source": "unesp-222981",
+      "label": "U",
+      "frames": 16,
+      "primary": {
+        "topLabels": {
+          "U": 16
+        },
+        "overThreshold": 16,
+        "targetProbabilityMedian": 0.967
+      },
+      "check": {
+        "topLabels": {
+          "U": 16
+        },
+        "overThreshold": 16,
+        "targetProbabilityMedian": 0.9996
+      },
+      "agreedLabels": {
+        "U": 16
+      },
+      "browser": {
+        "letterShownAndAdded": true,
+        "forbiddenLetter": "V",
+        "testStatus": "pass",
+        "log": "data/evidence/alphabet-n-m-u/unesp-222981-u.e2e.log",
+        "logSha256": "637f165c7c588dd1612a6a2d105d0cce391d25794aa5842f3fe3e8b7f9bc991e"
+      }
+    }
+  ],
+  "summary": {
+    "browserPassesByLetter": {
+      "M": [
+        2,
+        2
+      ],
+      "N": [
+        0,
+        2
+      ],
+      "U": [
+        2,
+        2
+      ]
+    },
+    "offlineCorrectByAgreement": {
+      "M": [
+        45,
+        47
+      ],
+      "N": [
+        0,
+        52
+      ],
+      "U": [
+        41,
+        41
+      ]
+    },
+    "framesWithHand": [
+      140,
+      140
+    ],
+    "primaryTopQForN": [
+      45,
+      52
+    ],
+    "geometricTopNForN": [
+      52,
+      52
+    ],
+    "geometricNAboveThreshold": [
+      37,
+      52
+    ],
+    "displayVisibleSamplesForN": 105,
+    "displayHandOverlaySamplesForN": 100,
+    "displayUnexpectedLettersForN": 0
+  },
+  "limit": "Cada fonte contribui com um exemplo por letra. As amostras de quadros são correlacionadas dentro de cada clipe. Estes recortes passam a servir de diagnóstico se entrarem em calibração posterior.",
+  "newSourceTriage": [
+    {
+      "title": "Libras, UFRB",
+      "page": "https://educapes.capes.gov.br/handle/capes/430666?mode=full",
+      "status": "Depósito institucional com cinco MP4 e licença CC BY-NC-SA 3.0 BR. Conteúdo de N, M e U ainda precisa ser localizado."
+    },
+    {
+      "title": "Fiocruz Imagens, alfabeto manual",
+      "page": "https://homologacao-omeka.icict.fiocruz.br/s/fiocruzimagens/busca?q=sinais",
+      "status": "Há fotografias com as três letras. Os termos do banco e a indicação nos itens precisam ser esclarecidos para extrair um recorte reutilizável."
+    }
+  ]
+}
