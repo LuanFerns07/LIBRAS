@@ -88,15 +88,25 @@ def train(source, reference, classes):
     }
 
 
-def export(base, source, reference, output):
+def export(base, source, reference, output, geometry_verifier=None):
     if base.resolve() == output.resolve():
         raise ValueError("Escolha um destino diferente da base.")
     metadata = json.loads((base / "alphabet.json").read_text())
     verifier = load_model(base, "alphabet-check.onnx", metadata["agreementSha256"])
     primary = load_model(base, "alphabet.onnx", metadata["modelSha256"])
     supplement = metadata["supplement"]
-    if metadata["features"] != FEATURES or metadata["preprocess"] != "hand-wrist-palm-v1" or "O" in supplement["labels"]:
-        raise ValueError("O complemento precisa usar a mão normalizada e não conter O.")
+    if metadata["features"] != FEATURES or metadata["preprocess"] != "hand-wrist-palm-v1":
+        raise ValueError("O complemento precisa usar a mão normalizada.")
+    gate_model = verifier
+    if geometry_verifier is not None:
+        alternate = json.loads((geometry_verifier / "alphabet.json").read_text())
+        if any(alternate[key] != metadata[key] for key in ("version", "labels", "features", "preprocess", "threshold")):
+            raise ValueError("O verificador geométrico usa um contrato diferente da base.")
+        gate_model = load_model(geometry_verifier, "alphabet.onnx", alternate["modelSha256"])
+    prior_letters = supplement["labels"]
+    already_has_o = "O" in prior_letters
+    letters = list(prior_letters) if already_has_o else [*prior_letters, "O"]
+    o_column = letters.index("O")
     existing = load_model(base, "alphabet-supplement.onnx", supplement["modelSha256"])
     o = metadata["labels"].index("O")
     model, validation = train(source, reference, metadata["labels"])
@@ -109,7 +119,7 @@ def export(base, source, reference, output):
                           input_names=["hand"], output_names=["shape"], opset_version=17,
                           dynamic_axes={"hand": {0: "frames"}, "shape": {0: "frames"}})
         graphs = {}
-        for name, path in [("base", existing), ("verifier", verifier), ("o", folder / "o.onnx")]:
+        for name, path in [("base", existing), ("verifier", gate_model), ("o", folder / "o.onnx")]:
             part = onnx.load(path)
             if [(item.domain, item.version) for item in part.opset_import] != [("", 17)]:
                 raise ValueError("Use modelos ONNX exportados com opset 17.")
@@ -129,9 +139,14 @@ def export(base, source, reference, output):
             helper.make_node("Less", ["previous_max", "threshold_supplement"], ["previous_abstains"]),
             helper.make_node("And", ["verifies_o", "previous_abstains"], ["can_refine_o"]),
             helper.make_node("Where", ["can_refine_o", shape, "zero_o"], ["verified_o"]),
-            helper.make_node("Concat", [previous, "verified_o"], ["scores"], axis=1),
         ])
-        letters = [*supplement["labels"], "O"]
+        if already_has_o:
+            mask = np.asarray([letter == "O" for letter in letters], dtype=np.float32)
+            weights.append(numpy_helper.from_array(mask, "o_column"))
+            nodes.append(helper.make_node("Mul", ["verified_o", "o_column"], ["refined"]))
+            nodes.append(helper.make_node("Max", [previous, "refined"], ["scores"]))
+        else:
+            nodes.append(helper.make_node("Concat", [previous, "verified_o"], ["scores"], axis=1))
         graph = helper.make_graph(nodes, "alphabet_supplement_with_o",
                                   [helper.make_tensor_value_info("hand", TensorProto.FLOAT, ["frames", FEATURES])],
                                   [helper.make_tensor_value_info("scores", TensorProto.FLOAT, ["frames", len(letters)])],
@@ -150,23 +165,32 @@ def export(base, source, reference, output):
         scores = infer(target)
         with torch.inference_mode():
             binary = model(torch.from_numpy(fixture)).numpy().ravel()
-        verified = torch.from_numpy(infer(verifier)).softmax(dim=1)[:, o].numpy() >= metadata["threshold"]
+        verified = torch.from_numpy(infer(gate_model)).softmax(dim=1)[:, o].numpy() >= metadata["threshold"]
         prior = infer(existing)
         verified &= prior.max(axis=1) < supplement["threshold"]
-        np.testing.assert_allclose(scores[:, :-1], prior, atol=1e-6, rtol=2e-5)
-        np.testing.assert_allclose(scores[:, -1], np.where(verified, binary, 0), atol=1e-6, rtol=2e-5)
+        refined = np.where(verified, binary, 0)
+        if already_has_o:
+            expected_scores = prior.copy()
+            expected_scores[:, o_column] = np.maximum(prior[:, o_column], refined)
+        else:
+            expected_scores = np.column_stack((prior, refined))
+        np.testing.assert_allclose(scores, expected_scores, atol=1e-6, rtol=2e-5)
 
         supplement = {**supplement, "labels": letters, "modelSha256": checksum(target)}
         report = {"sourceSha256": checksum(source), "referenceSha256": checksum(reference),
-                  "verifierSha256": checksum(verifier), "previousSupplementSha256": checksum(existing),
+                  "verifierSha256": checksum(gate_model), "previousSupplementSha256": checksum(existing),
                   "versions": {"torch": torch.__version__, "onnx": onnx.__version__, "onnxruntime": ort.__version__},
                   "supplement": supplement, "validation": {}}
         cursor = 0
         for group, (_, expected) in validation.items():
-            predicted = scores[cursor:cursor + len(expected), -1] >= supplement["threshold"]
-            report["validation"][group] = {"examples": len(expected), "positives": int(expected.sum()),
-                                           "acceptedO": int((predicted & expected).sum()),
-                                           "falseO": int((predicted & ~expected).sum())}
+            rows = slice(cursor, cursor + len(expected))
+            predicted = scores[rows, o_column] >= supplement["threshold"]
+            result = {"examples": len(expected), "positives": int(expected.sum()),
+                      "acceptedO": int((predicted & expected).sum()), "falseO": int((predicted & ~expected).sum())}
+            if already_has_o:
+                novel = predicted & (prior[rows, o_column] < supplement["threshold"])
+                result.update(addedO=int((novel & expected).sum()), addedFalseO=int((novel & ~expected).sum()))
+            report["validation"][group] = result
             cursor += len(expected)
         for path in (primary, verifier):
             copyfile(path, folder / path.name)
@@ -183,8 +207,10 @@ def main():
     parser.add_argument("--source", type=Path, default=Path("data/alphabet/static.npz"))
     parser.add_argument("--reference", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--geometry-verifier", type=Path,
+                        help="Rede multiclasses adicional usada para confirmar apenas O.")
     args = parser.parse_args()
-    export(args.base, args.source, args.reference, args.out)
+    export(args.base, args.source, args.reference, args.out, args.geometry_verifier)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,234 @@
+{
+  "manifest": {
+    "version": 1,
+    "preprocess": "hand-wrist-palm-v1",
+    "features": 63,
+    "labels": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "I",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W"
+    ],
+    "threshold": 0.8,
+    "modelSha256": "ab1b654240082fce0872a4d7571fdd184de0ffea7ebe0acf9b33fc37a8efd9f4",
+    "source": "https://www.kaggle.com/datasets/heitorccf/librasign/versions/1"
+  },
+  "datasetSha256": "a2995cb3af683a0bc65b14969e5b7675378aaaf8257e247392c3f08a9a04dbd6",
+  "seed": 413,
+  "epochs": 30,
+  "selectedEpoch": 28,
+  "device": "cuda",
+  "torch": "2.6.0+cu124",
+  "geometry": true,
+  "results": {
+    "val": {
+      "rows": 2500,
+      "accepted": 2500,
+      "correct": 2500,
+      "macroF1": 1.0,
+      "onnxMaxError": 0.0000457763671875
+    },
+    "test": {
+      "rows": 2500,
+      "accepted": 2500,
+      "correct": 2500,
+      "macroF1": 1.0,
+      "onnxMaxError": 0.0000457763671875
+    },
+    "ufsm-val": {
+      "rows": 273,
+      "accepted": 264,
+      "correct": 248,
+      "macroF1": 0.910179526355997,
+      "perLetter": {
+        "A": {
+          "total": 12,
+          "correct": 12
+        },
+        "B": {
+          "total": 16,
+          "correct": 16
+        },
+        "C": {
+          "total": 12,
+          "correct": 12
+        },
+        "D": {
+          "total": 15,
+          "correct": 15
+        },
+        "E": {
+          "total": 17,
+          "correct": 17
+        },
+        "F": {
+          "total": 16,
+          "correct": 6
+        },
+        "G": {
+          "total": 16,
+          "correct": 16
+        },
+        "I": {
+          "total": 12,
+          "correct": 12
+        },
+        "L": {
+          "total": 15,
+          "correct": 15
+        },
+        "M": {
+          "total": 14,
+          "correct": 14
+        },
+        "N": {
+          "total": 14,
+          "correct": 14
+        },
+        "O": {
+          "total": 16,
+          "correct": 16
+        },
+        "P": {
+          "total": 11,
+          "correct": 11
+        },
+        "Q": {
+          "total": 15,
+          "correct": 13
+        },
+        "R": {
+          "total": 11,
+          "correct": 10
+        },
+        "S": {
+          "total": 19,
+          "correct": 19
+        },
+        "T": {
+          "total": 12,
+          "correct": 0
+        },
+        "U": {
+          "total": 15,
+          "correct": 15
+        },
+        "V": {
+          "total": 9,
+          "correct": 9
+        },
+        "W": {
+          "total": 6,
+          "correct": 6
+        }
+      }
+    },
+    "ufsm-test": {
+      "rows": 445,
+      "accepted": 438,
+      "correct": 420,
+      "macroF1": 0.9484737539351183,
+      "perLetter": {
+        "A": {
+          "total": 37,
+          "correct": 26
+        },
+        "B": {
+          "total": 17,
+          "correct": 13
+        },
+        "C": {
+          "total": 15,
+          "correct": 15
+        },
+        "D": {
+          "total": 14,
+          "correct": 13
+        },
+        "E": {
+          "total": 37,
+          "correct": 37
+        },
+        "F": {
+          "total": 15,
+          "correct": 15
+        },
+        "G": {
+          "total": 17,
+          "correct": 16
+        },
+        "I": {
+          "total": 12,
+          "correct": 12
+        },
+        "L": {
+          "total": 16,
+          "correct": 15
+        },
+        "M": {
+          "total": 40,
+          "correct": 39
+        },
+        "N": {
+          "total": 40,
+          "correct": 39
+        },
+        "O": {
+          "total": 38,
+          "correct": 37
+        },
+        "P": {
+          "total": 10,
+          "correct": 8
+        },
+        "Q": {
+          "total": 17,
+          "correct": 16
+        },
+        "R": {
+          "total": 15,
+          "correct": 14
+        },
+        "S": {
+          "total": 38,
+          "correct": 38
+        },
+        "T": {
+          "total": 14,
+          "correct": 14
+        },
+        "U": {
+          "total": 28,
+          "correct": 28
+        },
+        "V": {
+          "total": 14,
+          "correct": 14
+        },
+        "W": {
+          "total": 11,
+          "correct": 11
+        }
+      }
+    }
+  },
+  "referenceSha256": "d1b4e870933349b7a2e90f5c02fabf1e82f31f6a013c2435c3e4a4a164f05ede",
+  "referenceTrainFrames": 626,
+  "referenceTrainRepeats": 32
+}
