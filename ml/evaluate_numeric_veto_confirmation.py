@@ -77,8 +77,8 @@ def summarize(rows):
     return status, results
 
 
-def evaluate(data):
-    protocol = load_json(SELECTION)
+def evaluate(data, selection=SELECTION, session_dir=None):
+    protocol = load_json(selection)
     frozen = load_json(FROZEN)
     if (protocol["scope"] != frozen["independentCheck"]["role"] or protocol["confirmationSha256"] != digest(FROZEN)
             or any(clip["label"] not in ("cinco", None) for clip in protocol["clips"])
@@ -87,9 +87,9 @@ def evaluate(data):
                                                    "threshold": frozen["baselineThreshold"]}):
         raise ValueError("A seleção externa precisa corresponder aos pesos e limiar congelados.")
     estimates = estimates_from(frozen)
-    directory = data / DIRECTORY
+    directory = session_dir if session_dir is not None else data / DIRECTORY
     features = directory / "features/index.json"
-    baseline = evaluate_baseline(directory / "manifest.json", features, data / "models", SELECTION)
+    baseline = evaluate_baseline(directory / "manifest.json", features, data / "models", selection)
     metadata = load_json(features)["clips"]
     cases = [decide(clip, meta, features, estimates)
              for clip, meta in zip(baseline["models"]["combined"]["decisions"], metadata, strict=True)]
@@ -102,8 +102,11 @@ def evaluate(data):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=Path("data"))
+    parser.add_argument("--protocol", type=Path, default=SELECTION)
+    parser.add_argument("--session-dir", type=Path, help="Pasta da sessão preparada com o protocolo informado.")
     args = parser.parse_args()
-    write_json(args.data / DIRECTORY / "report.json", evaluate(args.data))
+    directory = args.session_dir if args.session_dir is not None else args.data / DIRECTORY
+    write_json(directory / "report.json", evaluate(args.data, args.protocol, directory))
 
 
 if __name__ == "__main__":
