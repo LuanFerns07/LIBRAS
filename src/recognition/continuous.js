@@ -114,7 +114,11 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
 
   return {
     recognize(frames, onClassification) {
-      const run = working.then(async () => ({ ...await analyze(frames, onClassification), review }))
+      const run = working.then(async () => ({
+        ...await analyze(frames, onClassification),
+        captureStartMs: frames[0]?.timestamp ?? 0,
+        review,
+      }))
       working = run.catch(() => {})
       return run
     },

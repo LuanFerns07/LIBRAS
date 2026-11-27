@@ -265,7 +265,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | --- | --- | --- |
 | **M8 · Aprendizagem e engajamento** | Pronto | Comparações no avatar, revisão por tentativas e retomada do sinal já estudado. A ordem da revisão e a persistência passaram nos testes. O piloto com pessoas fica nas pendências. |
 | **M9 · Cobertura e variantes** | Pronto | Aluno no catálogo avaliado, comparação da forma histórica de Fortaleza no avatar e apresentação com saudação. A revisão com pessoas e o reteste de variantes ficam nas pendências. |
-| **M10 · Sinalização contínua** | A fazer | Usar dados de sequências com condições de uso verificadas. Desenvolver segmentação automática, reconhecimento de sinais em sequência e geração de texto em português. Medir segmentação, inserções, omissões, trocas e qualidade do sentido traduzido com revisão humana. |
+| **M10 · Sinalização contínua** | A testar | Modo experimental local com fronteiras, glosas, tradução e confirmação. Os controles com gravações passaram. Faltam dados naturais anotados com cobertura para medir o reconhecimento e revisar o sentido. |
 | **M11 · Web móvel na Vercel** | A fazer | Adaptar a interface para toque e telas estreitas e publicar a mesma aplicação web via GitHub e Vercel. Aceitar após validar a URL HTTPS no PC, no Chrome para Android e no Safari para iOS em aparelhos reais. |
 
 ### M8 e M9 · Checklist de conteúdo e aprendizagem
@@ -295,8 +295,9 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Medir glosas e texto em 12 sequências controladas de dois sinais do MINDS-Libras. As 24 janelas anotadas foram reconhecidas quando fornecidas isoladamente ao classificador. A segmentação automática fragmentou os sinais e nenhuma sequência foi reconhecida por inteiro. [Sequências montadas e resultados](docs/sinalizacao-continua.md#pares-de-sinais-do-catálogo-no-chromium)
 - [x] Aplicar a concordância em “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. Conferir a revisão após uma captura de vídeo gravado e medir a tradução das glosas de referência nos 12 pares do MINDS. [Concordância e ensaio no Chromium](docs/sinalizacao-continua.md#concordância-com-cinco)
 - [x] Usar as pausas quando formam dois ou mais trechos com ao menos uma glosa reconhecida no modo contínuo. Medir glosas e texto nos 12 pares montados do MINDS e conferir a confirmação na Área livre, a revisão parcial e a preservação da transcrição no controle do EQT. [Avaliação e captura no Chromium](docs/sinalizacao-continua.md#pausas-no-modo-contínuo)
-- [ ] Medir a sequência de glosas e a tradução em gravações anotadas com cobertura do catálogo. Incluir validação com webcam física.
-- [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
+- [x] Exibir os tempos dos trechos na revisão. Conferir as marcações em sequências completas e parciais e removê-las após confirmar o texto. [Reteste do modo experimental](docs/sinalizacao-continua.md#tempos-dos-trechos-na-revisão)
+
+A medição em sequências naturais anotadas, a validação na webcam e as condições de uso formal da fonte estão no [arquivo de pendências futuras](docs/pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação).
 
 ### M11 · Checklist de publicação e compatibilidade
 

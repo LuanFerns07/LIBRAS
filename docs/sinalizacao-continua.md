@@ -20,7 +20,7 @@ LIBRASIA_CONTINUO=1 LIBRASIA_PORTA=4201 \
 
 Abra [Área livre](http://127.0.0.1:4201/#area-livre) e selecione **Sinalização contínua experimental**. Ative a câmera e abra uma tentativa. Confira os sinais detectados. Para ajustar a sequência, edite os nomes no campo de revisão, substitua ou remova os trechos marcados com `?` e use **Gerar sugestão**. Use **Acrescentar à transcrição** para confirmar. No modelo combinado, o catálogo tem Cinco, Espelho, Amarelo e Aluno.
 
-Para reabrir o pacote local já compilado neste PC, execute `python3 data/releases/librasia-continuo-revisao/iniciar.py --porta 4201` na raiz do projeto.
+Para reabrir o pacote local já compilado neste PC, execute `python3 data/releases/librasia-m10/iniciar.py --porta 4201` na raiz do projeto.
 
 Os pesos de fronteiras são mantidos no ambiente local de pesquisa. O detector congelado tem SHA-256 `c6fc6ba3f013c2d551eb9e0614a1dff326bb028b2d81c84cb4442eed9154b610`. O artefato monotônico deriva de 14.000 pares de treino do VLibrasBD v2, sob CC BY-SA 4.0, e tem SHA-256 `99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11`. Cada carregamento confere os hashes. [Condições da fonte UFSC](fronteiras.md#proveniência-e-condições-de-uso) · [VLibrasBD v2 e atribuição](glosas-texto.md)
 
@@ -288,6 +288,12 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 ~~~
 
 Os relatórios ficam em `data/continuous-natural-eval/pauses/`. Os ensaios na interface têm sufixo `-continuo-3155a95`. O resultado da câmera física está em `webcam-fisica-3155a95.log`. [Preparação de Cinco e Aluno](regressao-area-livre.md#concordância-em-sequências-com-pausas) · [Teste no Chromium](../tests/e2e/recognition.test.mjs)
+
+### Tempos dos trechos na revisão
+
+Abra **Tempos dos trechos** na revisão para ver o início e o fim de cada segmento em segundos desde o primeiro quadro da tentativa. Os rótulos incluem os trechos inconclusivos. A lista representa a captura original e é limpa ao confirmar a sugestão ou iniciar outra revisão. [Interface de revisão](../src/views/gloss-review.js)
+
+O Chromium conferiu Cinco → Aluno, Amarelo → Espelho, Cinco → Vontade e uma frase do EQT no pacote local com o detector de SHA-256 `445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb`. Os dois primeiros controles geraram sugestões que só entraram na transcrição após a confirmação. Cinco → Vontade e o EQT ficaram inconclusivos e preservaram o texto anterior. A revisão manual do controle EQT invalidou a sugestão quando restou um `?` e limpou a lista temporal após confirmar a edição. Os logs estão em `data/evidence/demonstracao/m10-tempos/`. [Teste no Chromium](../tests/e2e/recognition.test.mjs) · [Pendências do modo contínuo](pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação)
 
 ## Base de frases
 

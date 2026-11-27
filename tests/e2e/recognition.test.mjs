@@ -281,6 +281,21 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       })()`) : null
       if (continuous) {
         assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
+        const timing = 'document.querySelector("[data-gloss-timing]")'
+        assert.equal(await evaluate(`${timing}.hidden`), !glosses)
+        if (glosses) {
+          assert.equal(await evaluate(`${timing}.open`), false)
+          await evaluate(`${timing}.querySelector('summary').click()`, true)
+          assert.equal(await evaluate(`${timing}.open`), true)
+          const entries = await evaluate(`Array.from(${timing}.querySelectorAll('li'), item => item.textContent)`)
+          assert.deepEqual(entries.map(entry => entry.split(' · ')[0]), glosses.split(' · '))
+          for (const entry of entries) {
+            const bounds = / · (\d+,\d) a (\d+,\d) s$/u.exec(entry)
+            assert.ok(bounds, entry)
+            assert.ok(Number(bounds[2].replace(',', '.')) > Number(bounds[1].replace(',', '.')), entry)
+          }
+          context.diagnostic('Tempos desde o início da captura · ' + entries.join(' | '))
+        }
         const apply = 'document.querySelector("[data-apply-gloss-suggestion]")'
         assert.equal(await evaluate(apply + '.disabled'), decision.state !== 'accepted')
         if (expected && decision.state === 'accepted') await evaluate(apply + '.click()', true)
@@ -420,6 +435,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       const separator = prefix && !/\s$/u.test(prefix) ? ' ' : ''
       assert.equal(await getTranscript(), prefix + separator + 'cinco espelhos amarelos')
       assert.equal(await evaluate('document.querySelector("[data-gloss-review]").hidden'), true)
+      assert.equal(await evaluate('!!document.querySelector("[data-gloss-timing] li")'), false)
       assert.equal(await evaluate('document.activeElement.id'), 'transcription')
       assert.deepEqual(otherRequests, [], 'A revisão também deve ser local.')
       context.diagnostic('A revisão testou a concordância em três expressões, rejeitou trechos em aberto e acrescentou uma vez a sugestão confirmada.')
