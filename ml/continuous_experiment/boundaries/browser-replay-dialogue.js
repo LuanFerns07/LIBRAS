@@ -44,6 +44,10 @@ async function compare(condition, frames, recognize, protocol) {
   const runtime = await openContinuous(localAsset, verifiedBytes, recognize)
   try {
     const result = await runtime.recognize(frames)
+    const referenceText = protocol.annotation.text
+    const textFromReferenceGlosses = referenceText
+      ? result.review(protocol.annotation.references.map(reference => reference.gloss).join(' ')).text ?? null
+      : undefined
     const offset = protocol.clip.startMs
     const proposals = result.intervals.map(({ startMs, endMs }, index) => ({
       startMs: startMs + offset,
@@ -55,6 +59,7 @@ async function compare(condition, frames, recognize, protocol) {
       state: result.state,
       reason: result.reason ?? null,
       suggestedText: result.text ?? null,
+      ...(referenceText ? { referenceText, textFromReferenceGlosses } : {}),
       proposals,
       references: protocol.annotation.references.map(reference =>
         scoreReference(reference, proposals, protocol.experiment.iou)),

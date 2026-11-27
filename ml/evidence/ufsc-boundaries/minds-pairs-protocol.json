@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "scope": "controlled-composition-of-isolated-signs",
+  "selection": "Primeira tomada de cada sinal para duas pessoas da partição reservada com as quatro classes. Os limites foram anotados por inspeção dos vídeos e os rótulos vêm do catálogo MINDS. Mantêm-se a entrada e a saída naturais de cada clipe.",
+  "composition": "Dois clipes da mesma pessoa justapostos em cada exemplo. A condição com pausa inclui 800 ms de preto entre o fim de um clipe e o começo do outro. As frases de referência são descrições em português das glosas montadas.",
+  "dataset": {
+    "name": "MINDS-Libras RGB v1",
+    "url": "https://zenodo.org/records/2667329",
+    "license": "CC BY 4.0",
+    "manifest": "ml/manifests/minds-expanded-v1.json",
+    "manifestSha256": "3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be"
+  },
+  "replayProtocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "clips": [
+    {
+      "id": "s11-cinco",
+      "signer": 11,
+      "gloss": "cinco",
+      "startMs": 300,
+      "endMs": 3200,
+      "glossStartMs": 700,
+      "glossEndMs": 2400,
+      "mediaPath": "data/minds-expanded/raw/10CincoSinalizador11-1.mp4",
+      "mediaSha256": "ccee74e0ee607b73d8746c00cdf7d8d23ef0159a5ea41b84ed23e62558a1cfe0"
+    },
+    {
+      "id": "s12-cinco",
+      "signer": 12,
+      "gloss": "cinco",
+      "startMs": 1700,
+      "endMs": 4400,
+      "glossStartMs": 2200,
+      "glossEndMs": 3700,
+      "mediaPath": "data/minds-expanded/raw/10CincoSinalizador12-1.mp4",
+      "mediaSha256": "2f47038df45a50c255ce92aba19235acd6d437465f3daa9d354c6db48c89a1aa"
+    },
+    {
+      "id": "s11-espelho",
+      "signer": 11,
+      "gloss": "espelho",
+      "startMs": 400,
+      "endMs": 3400,
+      "glossStartMs": 1000,
+      "glossEndMs": 2900,
+      "mediaPath": "data/minds-expanded/raw/12EspelhoSinalizador11-1.mp4",
+      "mediaSha256": "f1182e9b50cf59d39b4216eb8da72398c7e1ceb6d65191662552d466c6fc74e3"
+    },
+    {
+      "id": "s12-espelho",
+      "signer": 12,
+      "gloss": "espelho",
+      "startMs": 300,
+      "endMs": 4200,
+      "glossStartMs": 800,
+      "glossEndMs": 3500,
+      "mediaPath": "data/minds-expanded/raw/12EspelhoSinalizador12-1.mp4",
+      "mediaSha256": "8902e2df9fd5cf9d6967d86287ede68611ace6b9f8651d411dee33a9217df36c"
+    },
+    {
+      "id": "s11-aluno",
+      "signer": 11,
+      "gloss": "aluno",
+      "startMs": 600,
+      "endMs": 3600,
+      "glossStartMs": 1100,
+      "glossEndMs": 2900,
+      "mediaPath": "data/minds-expanded/raw/02AlunoSinalizador11-1.mp4",
+      "mediaSha256": "d7d3c1ff10a436737f36d87ed4f8436ff65b11a60e35b4bf7e0a3d7007de5f94"
+    },
+    {
+      "id": "s12-aluno",
+      "signer": 12,
+      "gloss": "aluno",
+      "startMs": 900,
+      "endMs": 4900,
+      "glossStartMs": 1500,
+      "glossEndMs": 4200,
+      "mediaPath": "data/minds-expanded/raw/02AlunoSinalizador12-1.mp4",
+      "mediaSha256": "4b210ca2fd1b66d6f91d4e19f5ea327d8a0157964b7f7a161dc7250f6f1fd43f"
+    },
+    {
+      "id": "s11-amarelo",
+      "signer": 11,
+      "gloss": "amarelo",
+      "startMs": 800,
+      "endMs": 4400,
+      "glossStartMs": 1400,
+      "glossEndMs": 3600,
+      "mediaPath": "data/minds-expanded/raw/03AmareloSinalizador11-1.mp4",
+      "mediaSha256": "8b6bc3b50f8622b0cf4c7ff012b34e43e55e3e9bab7df4b745d725ca7efc9647"
+    },
+    {
+      "id": "s12-amarelo",
+      "signer": 12,
+      "gloss": "amarelo",
+      "startMs": 1300,
+      "endMs": 4800,
+      "glossStartMs": 1800,
+      "glossEndMs": 4100,
+      "mediaPath": "data/minds-expanded/raw/03AmareloSinalizador12-1.mp4",
+      "mediaSha256": "42d066a09a46ba811cdda70a2fa8abc7b824ba43cecc54840d5af1dfad8c9519"
+    }
+  ],
+  "cases": [
+    {
+      "id": "s11-cinco-aluno-0",
+      "clips": [
+        "s11-cinco",
+        "s11-aluno"
+      ],
+      "gapMs": 0,
+      "referenceText": "cinco alunos"
+    },
+    {
+      "id": "s11-cinco-aluno-800",
+      "clips": [
+        "s11-cinco",
+        "s11-aluno"
+      ],
+      "gapMs": 800,
+      "referenceText": "cinco alunos"
+    },
+    {
+      "id": "s11-cinco-espelho-0",
+      "clips": [
+        "s11-cinco",
+        "s11-espelho"
+      ],
+      "gapMs": 0,
+      "referenceText": "cinco espelhos"
+    },
+    {
+      "id": "s11-cinco-espelho-800",
+      "clips": [
+        "s11-cinco",
+        "s11-espelho"
+      ],
+      "gapMs": 800,
+      "referenceText": "cinco espelhos"
+    },
+    {
+      "id": "s11-espelho-amarelo-0",
+      "clips": [
+        "s11-espelho",
+        "s11-amarelo"
+      ],
+      "gapMs": 0,
+      "referenceText": "espelho amarelo"
+    },
+    {
+      "id": "s11-espelho-amarelo-800",
+      "clips": [
+        "s11-espelho",
+        "s11-amarelo"
+      ],
+      "gapMs": 800,
+      "referenceText": "espelho amarelo"
+    },
+    {
+      "id": "s12-cinco-aluno-0",
+      "clips": [
+        "s12-cinco",
+        "s12-aluno"
+      ],
+      "gapMs": 0,
+      "referenceText": "cinco alunos"
+    },
+    {
+      "id": "s12-cinco-aluno-800",
+      "clips": [
+        "s12-cinco",
+        "s12-aluno"
+      ],
+      "gapMs": 800,
+      "referenceText": "cinco alunos"
+    },
+    {
+      "id": "s12-cinco-espelho-0",
+      "clips": [
+        "s12-cinco",
+        "s12-espelho"
+      ],
+      "gapMs": 0,
+      "referenceText": "cinco espelhos"
+    },
+    {
+      "id": "s12-cinco-espelho-800",
+      "clips": [
+        "s12-cinco",
+        "s12-espelho"
+      ],
+      "gapMs": 800,
+      "referenceText": "cinco espelhos"
+    },
+    {
+      "id": "s12-espelho-amarelo-0",
+      "clips": [
+        "s12-espelho",
+        "s12-amarelo"
+      ],
+      "gapMs": 0,
+      "referenceText": "espelho amarelo"
+    },
+    {
+      "id": "s12-espelho-amarelo-800",
+      "clips": [
+        "s12-espelho",
+        "s12-amarelo"
+      ],
+      "gapMs": 800,
+      "referenceText": "espelho amarelo"
+    }
+  ]
+}

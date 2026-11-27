@@ -10,8 +10,8 @@ import { createServer } from 'vite'
 import { withChromium } from '../../../tests/e2e/chromium.mjs'
 
 const [dataRoot, reportFile, option] = process.argv.slice(2)
-if (!dataRoot || !reportFile || ![undefined, '--diagnose', '--single-signer', '--eqt'].includes(option) || process.argv.length > 5) {
-  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose|--single-signer|--eqt]')
+if (!dataRoot || !reportFile || ![undefined, '--diagnose', '--single-signer', '--eqt', '--pairs'].includes(option) || process.argv.length > 5) {
+  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose|--single-signer|--eqt|--pairs]')
 }
 
 const project = fileURLToPath(new URL('../../../', import.meta.url))
@@ -20,11 +20,14 @@ const diagnosisPath = new URL('../../evidence/ufsc-boundaries/cederj-diagnosis-p
 const baselinePath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-browser.json', import.meta.url)
 const singleSignerPath = new URL('../../evidence/ufsc-boundaries/single-signer-amarelo-protocol.json', import.meta.url)
 const eqtPath = new URL('../../evidence/ufsc-boundaries/eqt-outside-catalog-protocol.json', import.meta.url)
+const pairsPath = new URL('../../evidence/ufsc-boundaries/minds-pairs-protocol.json', import.meta.url)
 const cederjDiagnosisPath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-diagnosis.json', import.meta.url)
 const protocol = JSON.parse(await readFile(protocolPath, 'utf8'))
 const diagnosis = option === '--diagnose' ? JSON.parse(await readFile(diagnosisPath, 'utf8')) : undefined
 const singleSigner = option === '--single-signer' ? JSON.parse(await readFile(singleSignerPath, 'utf8')) : undefined
 const eqt = option === '--eqt' ? JSON.parse(await readFile(eqtPath, 'utf8')) : undefined
+const pairs = option === '--pairs' ? JSON.parse(await readFile(pairsPath, 'utf8')) : undefined
+const batch = singleSigner || eqt || pairs
 const exec = promisify(execFile)
 
 async function sha256(file) {
@@ -47,6 +50,18 @@ async function renderVideo(video, { startMs, endMs }, destination) {
     '-map', '0:v:0', '-an', '-c:v', 'libx264', '-crf', '18', '-threads', '1',
     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', destination,
   ])
+}
+
+async function renderPair(first, second, gapMs, destination) {
+  const seconds = value => (value / 1000).toFixed(3)
+  const args = [first, second].flatMap(({ file, startMs, endMs }) =>
+    ['-threads', '1', '-ss', seconds(startMs), '-t', seconds(endMs - startMs), '-i', file])
+  const filters = ['[0:v]scale=640:360,setsar=1[a]', '[1:v]scale=640:360,setsar=1[b]']
+  if (gapMs) filters.push(`color=c=black:s=640x360:r=30:d=${seconds(gapMs)}[gap]`)
+  filters.push(gapMs ? '[a][gap][b]concat=n=3:v=1:a=0[out]' : '[a][b]concat=n=2:v=1:a=0[out]')
+  await exec('ffmpeg', ['-hide_banner', '-loglevel', 'error', ...args, '-filter_complex_threads', '1',
+    '-filter_complex', filters.join(';'), '-map', '[out]', '-an', '-c:v', 'libx264', '-crf', '18',
+    '-threads', '1', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', destination])
 }
 
 const staging = await mkdtemp(resolve(tmpdir(), 'librasia-dialogue-'))
@@ -119,8 +134,49 @@ try {
       })
     }
   }
+  if (pairs) {
+    await verified(protocolPath, pairs.replayProtocolSha256)
+    await verified(resolve(dataRoot, pairs.dataset.manifest), pairs.dataset.manifestSha256)
+    const clips = new Map()
+    for (const spec of pairs.clips) {
+      if (clips.has(spec.id) || spec.startMs < 0 || spec.startMs > spec.glossStartMs ||
+          spec.glossStartMs >= spec.glossEndMs || spec.glossEndMs > spec.endMs) {
+        throw new Error('Recorte de origem inválido: ' + spec.id)
+      }
+      const file = await verified(resolve(dataRoot, spec.mediaPath), spec.mediaSha256)
+      clips.set(spec.id, { ...spec, file })
+    }
+    for (const item of pairs.cases) {
+      const first = clips.get(item.clips[0])
+      const second = clips.get(item.clips[1])
+      if (!/^[a-z0-9-]+$/u.test(item.id) || !first || !second || first.signer !== second.signer ||
+          item.clips.length !== 2 || !Number.isInteger(item.gapMs) || item.gapMs < 0 || !item.referenceText) {
+        throw new Error('Sequência de controle inválida: ' + item.id)
+      }
+      const offset = first.endMs - first.startMs + item.gapMs
+      const endMs = offset + second.endMs - second.startMs
+      const file = item.id + '.mp4'
+      const output = resolve(staging, 'replay', file)
+      const references = [first, second].map((sample, index) => ({
+        gloss: sample.gloss,
+        startMs: sample.glossStartMs - sample.startMs + (index ? offset : 0),
+        endMs: sample.glossEndMs - sample.startMs + (index ? offset : 0),
+      }))
+      await renderPair(first, second, item.gapMs, output)
+      stagedCases.push({
+        id: item.id, signer: first.signer, gapMs: item.gapMs, clips: item.clips,
+        clipSha256: await sha256(output),
+        protocol: {
+          clip: { ...protocol.clip, startMs: 0, endMs, file },
+          annotation: { references, text: item.referenceText },
+          experiment: protocol.experiment,
+          manualWindows: references,
+        },
+      })
+    }
+  }
   let video
-  if (!singleSigner && !eqt) {
+  if (!batch) {
     video = await verified(resolve(dataRoot, source.mediaPath), source.mediaSha256)
     await renderVideo(video, protocol.clip, clip)
   }
@@ -170,7 +226,7 @@ try {
         if (row.error) throw new Error(row.error)
         return row
       }
-      if (!singleSigner && !eqt) return replay(protocol, diagnosis)
+      if (!batch) return replay(protocol, diagnosis)
       const cases = []
       for (const { protocol: replayProtocol, ...item } of stagedCases) {
         const row = await replay(replayProtocol)
@@ -183,7 +239,7 @@ try {
       exec('ffmpeg', ['-version']),
       sha256(protocolPath),
     ])
-    const clipSha256 = singleSigner || eqt ? undefined : await sha256(clip)
+    const clipSha256 = batch ? undefined : await sha256(clip)
     if (diagnosisProvenance) {
       const baseline = JSON.parse(await readFile(baselinePath, 'utf8'))
       diagnosisProvenance.automaticMatchesBaseline = baseline.clipSha256 === clipSha256 &&
@@ -194,6 +250,7 @@ try {
       ...(diagnosisProvenance ? { diagnosisProvenance } : {}),
       ...(singleSigner ? { singleSignerProtocolSha256: await sha256(singleSignerPath) } : {}),
       ...(eqt ? { eqtProtocolSha256: await sha256(eqtPath) } : {}),
+      ...(pairs ? { pairsProtocolSha256: await sha256(pairsPath) } : {}),
     }, null, 2) + '\n')
   } finally {
     await server.close()
