@@ -44,7 +44,7 @@ export function trackHands(video, { onFrame, onError }) {
     const { videoWidth: width, videoHeight: height } = video
     if (video.readyState >= 2 && width && height && mediaTime !== lastMediaTime) {
       lastMediaTime = mediaTime
-      latest = { generation, width, height, timestamp: now }
+      latest = { generation, width, height, timestamp: now, mediaTime }
       void sendLatest()
     }
     schedule()
@@ -93,7 +93,7 @@ export function trackHands(video, { onFrame, onError }) {
       inFlight = undefined
       if (visible && request?.generation === generation &&
           request.width === video.videoWidth && request.height === video.videoHeight) {
-        onFrame(data.hands)
+        onFrame({ ...data.hands, timestamp: request.mediaTime * 1000, aspect: request.width / request.height })
       }
       void sendLatest()
     }

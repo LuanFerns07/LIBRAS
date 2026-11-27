@@ -9,7 +9,8 @@ import { mountTranslator } from './views/translator.js'
 
 const root = document.querySelector('#app')
 const main = mountShell(root)
-const openEngine = () => import('./recognition/engine.js').then(runtime => runtime.openEngine())
+const openEngine = mode => import('./recognition/engine.js')
+  .then(runtime => mode === 'letter' ? runtime.openAlphabetEngine() : runtime.openEngine())
 
 navigate(root, main, {
   praticar: container => mountPractice(container, { createPlayer, openEngine }),

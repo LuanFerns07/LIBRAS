@@ -50,6 +50,19 @@ else
   printf '%s\n' 'O avatar e as atividades sem câmera estão disponíveis. Para reconhecer sinais, instale os pesos descritos em docs/avaliacao.md.'
 fi
 
+alfabeto="${LIBRASIA_ALFABETO_MODELO:-data/models/alphabet-live}"
+if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; then
+  mkdir -p "$previa/public/models"
+  cp "$alfabeto/"{alphabet.json,alphabet.onnx} "$previa/public/models/"
+  if [[ -f "$alfabeto/alphabet-check.onnx" ]]; then
+    cp "$alfabeto/alphabet-check.onnx" "$previa/public/models/"
+  fi
+  movimento="${LIBRASIA_ALFABETO_MOVIMENTO:-data/models/alphabet-motion}"
+  if [[ -n "${LIBRASIA_ALFABETO_MOVIMENTO:-}" || -f "$movimento/alphabet-motion.json" ]]; then
+    cp "$movimento/alphabet-motion.json" "$previa/public/models/"
+  fi
+fi
+
 export VITE_LIBRASIA_CONTINUO=0
 if [[ "${LIBRASIA_CONTINUO:-}" == 1 ]]; then
   if [[ ! -f "$previa/public/models/isolated.onnx" ]]; then

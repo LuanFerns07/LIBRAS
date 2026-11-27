@@ -2,18 +2,25 @@ import { icon } from './shell.js'
 import { createCamera } from './recognition/camera.js'
 import { handOverlay } from './recognition/hand-overlay.js'
 import { trackHands } from './recognition/hand-tracking.js'
+import { createLiveLetterReader } from './recognition/alphabet.js'
 import { captureSequence } from './recognition/sequence.js'
 
 export function captureMarkup() {
   return `
     <section class="panel media-card" aria-label="Sua câmera">
       <div class="panel-header"><h2>Sua câmera</h2><span class="media-status" data-camera-state>Desligada</span></div>
-      <div class="camera-stage">
-        <video aria-label="Prévia da webcam" autoplay muted playsinline hidden></video>
-        <canvas data-hand-overlay aria-hidden="true" hidden></canvas>
-        <div class="camera-placeholder">
-          <span>${icon('camera')}</span>
-          <p>Ative a câmera para sinalizar.</p>
+      <div class="camera-display">
+        <div class="camera-stage">
+          <video aria-label="Prévia da webcam" autoplay muted playsinline hidden></video>
+          <canvas data-hand-overlay aria-hidden="true" hidden></canvas>
+          <div class="camera-placeholder">
+            <span>${icon('camera')}</span>
+            <p>Ative a câmera para sinalizar.</p>
+          </div>
+        </div>
+        <div class="live-letter" data-live-letter hidden>
+          <span>Letra detectada</span>
+          <output data-live-character aria-live="polite">—</output>
         </div>
       </div>
       <div class="toolbar panel-toolbar">
@@ -39,7 +46,7 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
-export function mountCapture(main, { openEngine, interpret, onResult, onReady, captureMode, enabled = true }) {
+export function mountCapture(main, { openEngine, interpret, onResult, onReady, onLetter, captureMode, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -49,13 +56,16 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   const canvas = main.querySelector('[data-hand-overlay]')
   const points = main.querySelector('[data-hand-points]')
   const handStatus = main.querySelector('[data-hand-status]')
+  const letterPanel = main.querySelector('[data-live-letter]')
+  const letterOutput = main.querySelector('[data-live-character]')
   const overlay = handOverlay(canvas, video)
+  const letterMode = () => captureMode?.() === 'letter'
   let cameraState = 'idle'
   let phase = 'idle'
-  let enginePromise
-  let engineLoadMs = null
+  const engines = new Map()
   let preview
   let capture
+  let reading
   let ticket = 0
   let disposed = false
 
@@ -76,6 +86,8 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     stateLabel.textContent = cameraStates[cameraState]
     toggle.textContent = ready || cameraState === 'starting' ? 'Desativar câmera' : 'Ativar câmera'
     toggle.disabled = !enabled
+    letterPanel.hidden = !letterMode()
+    button.hidden = !letterPanel.hidden
     button.disabled = !enabled || !ready || phase === 'loading' || phase === 'inferring'
     button.textContent = phase === 'recording' ? 'Concluir tentativa' : 'Iniciar tentativa'
   }
@@ -88,24 +100,56 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   }
 
   function closeEngine() {
-    enginePromise?.then(engine => engine.close(), () => {}).catch(() => {})
-    enginePromise = undefined
-    engineLoadMs = null
+    for (const { pending } of engines.values()) {
+      pending.then(engine => engine.close(), () => {}).catch(() => {})
+    }
+    engines.clear()
   }
 
-  function getEngine() {
-    if (enginePromise) return enginePromise
+  function getEngine(mode) {
+    const key = mode === 'letter' ? 'letter' : 'isolated'
+    if (engines.has(key)) return engines.get(key)
     const startedAt = performance.now()
-    const pending = Promise.resolve().then(openEngine)
-    enginePromise = pending
+    const pending = Promise.resolve().then(() => openEngine(key))
+    const entry = { pending, loadMs: null }
+    engines.set(key, entry)
     pending.then(engine => {
-      if (pending !== enginePromise) return
-      engineLoadMs = performance.now() - startedAt
-      onReady?.(engine)
+      if (engines.get(key) !== entry) return
+      entry.loadMs = performance.now() - startedAt
+      onReady?.(engine, key)
     }, () => {
-      if (pending === enginePromise) enginePromise = undefined
+      if (engines.get(key) === entry) engines.delete(key)
     })
-    return pending
+    return entry
+  }
+
+  function showLetter(label) {
+    letterOutput.textContent = label ?? '—'
+    onLetter?.(label)
+  }
+
+  function stopLetters() {
+    reading?.reader?.clear()
+    reading = undefined
+    if (letterOutput.textContent !== '—') showLetter(null)
+  }
+
+  async function prepareLetters() {
+    if (!camera.active || !letterMode() || reading) return
+    const request = {}
+    reading = request
+    try {
+      const engine = await getEngine('letter').pending
+      if (reading !== request) return
+      if (engine.alphabetCatalog.length) {
+        request.reader = createLiveLetterReader(engine.predictLetter, showLetter, engine.findMotion)
+        show('ready', 'Mostre uma letra com uma mão.')
+      } else {
+        show('unavailable', 'O modelo local de alfabeto está indisponível.')
+      }
+    } catch {
+      if (reading === request) show('unavailable', 'Verifique se o modelo local de alfabeto está instalado.')
+    }
   }
 
   function closePreview() {
@@ -116,18 +160,25 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   }
 
   function showPreviewError() {
+    if (letterMode()) stopLetters()
     closePreview()
     handStatus.textContent = 'Pontos das mãos indisponíveis. Desmarque a opção e marque novamente para tentar de novo.'
     handStatus.hidden = false
   }
 
   function syncPreview() {
-    const visible = enabled && camera.active && points.checked
+    const needed = enabled && camera.active && (points.checked || letterMode())
     handStatus.hidden = true
     try {
-      if (visible && !preview) preview = trackHands(video, { onFrame: overlay.paint, onError: showPreviewError })
-      preview?.setVisible(visible)
-      if (!visible) overlay.clear()
+      if (needed && !preview) preview = trackHands(video, {
+        onFrame(frame) {
+          overlay.paint(frame)
+          void reading?.reader?.read(frame)
+        },
+        onError: showPreviewError,
+      })
+      preview?.setVisible(needed)
+      if (!points.checked || !needed) overlay.clear()
     } catch {
       showPreviewError()
     }
@@ -137,16 +188,21 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     cameraState = state
     if (state === 'error') {
       cancel()
+      stopLetters()
       closePreview()
       closeEngine()
     }
     show(state === 'error' ? 'capture-error' : state, message)
     renderButtons()
-    if (state === 'ready') syncPreview()
+    if (state === 'ready') {
+      syncPreview()
+      void prepareLetters()
+    }
   })
 
   function stop(message) {
     cancel()
+    stopLetters()
     closePreview()
     camera.stop()
     closeEngine()
@@ -162,9 +218,14 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   points.addEventListener('change', () => {
     renderButtons()
     syncPreview()
+    void prepareLetters()
   })
-  video.addEventListener('waiting', overlay.clear)
-  video.addEventListener('resize', overlay.clear)
+  function clearTracking() {
+    overlay.clear()
+    reading?.reader?.clear()
+  }
+  video.addEventListener('waiting', clearTracking)
+  video.addEventListener('resize', clearTracking)
 
   async function complete(analyze, frames, current, timing, initialLoadMs) {
     if (current !== ticket || disposed) return
@@ -200,7 +261,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
       capture.finish()
       return
     }
-    if (!camera.active || phase !== 'idle') return
+    if (!camera.active || phase !== 'idle' || letterMode()) return
     const current = ++ticket
     const mode = captureMode?.() ?? 'isolated'
     phase = 'loading'
@@ -208,8 +269,9 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     show('busy', 'Preparando o reconhecimento no dispositivo.')
     let engine
     let analyze
+    const entry = getEngine(mode)
     try {
-      engine = await getEngine()
+      engine = await entry.pending
       if (current !== ticket || disposed) return
       if (mode === 'continuous') analyze = (await engine.prepareContinuous()).recognize
       else analyze = mode === 'sequence' ? engine.recognizeSequence : engine.recognize
@@ -221,8 +283,8 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
       return
     }
     if (current !== ticket || disposed) return
-    const initialLoadMs = engineLoadMs
-    engineLoadMs = null
+    const initialLoadMs = entry.loadMs
+    entry.loadMs = null
     phase = 'recording'
     renderButtons()
     const prompt = {
@@ -233,7 +295,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     show('recording', prompt[mode])
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
-      ...(mode !== 'isolated' ? { limitMs: 12_000, limitFrames: 125 } : {}),
+      ...(['sequence', 'continuous'].includes(mode) ? { limitMs: 12_000, limitFrames: 125 } : {}),
       onFinish(frames, timing) { void complete(analyze, frames, current, timing, initialLoadMs) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
@@ -257,18 +319,22 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     reset() {
       if (phase !== 'idle') {
         cancel()
-        renderButtons()
       }
+      stopLetters()
+      renderButtons()
       if (cameraState === 'ready') show('ready', 'Mostre a mão e a parte superior do corpo.')
+      syncPreview()
+      void prepareLetters()
     },
     dispose() {
       disposed = true
       cancel()
+      stopLetters()
       closePreview()
       camera.dispose()
       closeEngine()
-      video.removeEventListener('waiting', overlay.clear)
-      video.removeEventListener('resize', overlay.clear)
+      video.removeEventListener('waiting', clearTracking)
+      video.removeEventListener('resize', clearTracking)
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('pagehide', onPageHide)
     },

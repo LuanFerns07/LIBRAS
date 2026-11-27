@@ -168,6 +168,21 @@ p { line-height: 1.55; }
   transform: scaleX(-1);
 }
 .camera-stage > canvas { position: absolute; inset: 0; pointer-events: none; }
+.camera-display:has(.live-letter:not([hidden])) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(4.5rem, 21%);
+  align-items: stretch;
+}
+.live-letter {
+  background: var(--lavender);
+  display: grid;
+  align-content: center;
+  gap: .25rem;
+  padding: .5rem;
+  text-align: center;
+}
+.live-letter span { font-size: .75rem; line-height: 1.25; }
+.live-letter output { color: var(--accent-dark); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 750; }
 .camera-placeholder { height: 100%; display: grid; place-content: center; justify-items: center; padding: 1rem; text-align: center; }
 .camera-placeholder span {
   display: grid;

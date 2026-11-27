@@ -12,7 +12,7 @@ const stages = [
 
 const letterInstructions = [
   'Reproduza a demonstração da letra no avatar.',
-  'Compare sua mão com a do avatar. Se usar a câmera, faça uma letra por tentativa.',
+  'Compare sua mão com a do avatar. A letra detectada aparece ao lado da câmera.',
   'Faça a letra de memória. Você pode voltar à demonstração quando precisar.',
 ]
 
@@ -185,9 +185,16 @@ export function mountPractice(main, { createPlayer, openEngine }) {
       supportedLetters = manualAlphabet.map(letter => letter.label).filter(label => labels.includes(label))
       renderCoverage()
     },
+    onLetter(label) {
+      if (!label || mode !== 'letter' || !step) return
+      const detected = manualAlphabet.find(letter => letter.label === label)
+      const result = letterPracticeFeedback({ state: 'accepted', id: detected?.id }, current(), supportedLetters)
+      if (result.state !== 'accepted') return
+      markAttempt(progress.letter[current().id], step, result)
+      store()
+    },
     interpret(result) {
-      return mode === 'letter' ? letterPracticeFeedback(result, current(), supportedLetters)
-        : practiceFeedback(result, current(), step)
+      return practiceFeedback(result, current(), step)
     },
     onResult(result) {
       markAttempt(progress[mode][current().id], step, result)
