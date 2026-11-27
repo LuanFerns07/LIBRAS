@@ -14,6 +14,7 @@ const { values: options } = parseArgs({ options: {
   letters: { type: 'string' },
   crop: { type: 'string' },
   workers: { type: 'string', default: '2' },
+  'same-camera': { type: 'boolean' },
   timeline: { type: 'boolean' },
   trace: { type: 'boolean' },
 } })
@@ -51,6 +52,18 @@ for (const path of options.manifest) {
 }
 if (windows.length === 0 || [...selected].some(id => !windows.some(window => window.source === id))) {
   throw new Error('As opções devem selecionar janelas de todas as fontes solicitadas.')
+}
+
+function groupBySource(windows) {
+  const sources = new Map()
+  for (const { source, file, label, startMs, endMs } of windows) {
+    if (!sources.has(source)) sources.set(source, { source, file, startMs: 0, endMs: 0, windows: [] })
+    const group = sources.get(source)
+    if (group.file !== file) throw new Error('A mesma fonte identifica vídeos diferentes: ' + source)
+    group.windows.push({ label, startMs, endMs })
+    group.endMs = Math.max(group.endMs, endMs)
+  }
+  return [...sources.values()]
 }
 
 function startProbe(recordTimeline, recordTrace) {
@@ -110,6 +123,7 @@ function startProbe(recordTimeline, recordTrace) {
 async function replay(window, index, directory) {
   const { startMs, endMs, file, ...label } = window
   const duration = (endMs - startMs) / 1000
+  const timeline = options.timeline || options['same-camera']
   const videoFile = join(directory, index + '.y4m')
   const filters = [`trim=duration=${duration}`]
   if (options.crop) filters.push(`crop=${options.crop}`)
@@ -121,9 +135,10 @@ async function replay(window, index, directory) {
     return await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
       await navigate(outUrl.href)
       await permission(outUrl.origin, 'granted')
-      await evaluate(`(${startProbe})(${!!options.timeline}, ${!!options.trace})`, true)
+      await evaluate(`(${startProbe})(${!!timeline}, ${!!options.trace})`, true)
       await waitUntil('document.querySelector("[data-recognition-coverage]").textContent.startsWith("Leitura experimental")', 12000)
-      await waitUntil(`document.querySelector('video').currentTime >= ${leadSeconds + duration + .55}`, 15000)
+      const finishAt = leadSeconds + duration + .55
+      await waitUntil(`document.querySelector('video').currentTime >= ${finishAt}`, Math.max(15000, finishAt * 1000 + 5000))
       const { changes, handVisibility, firstWorkerFrame, lastHand, workerFrames, framesWithHand, frames } =
         await evaluate('window.replayObservations')
       if (firstWorkerFrame === null || firstWorkerFrame >= leadSeconds) {
@@ -136,7 +151,7 @@ async function replay(window, index, directory) {
         ...label, startMs, endMs,
         readings: changes.filter(({ letter }) => letter !== '—')
           .map(({ letter, time }) => ({ letter, afterVideoMs: Math.round((time - leadSeconds) * 1000) })),
-        ...(options.timeline ? {
+        ...(timeline ? {
           clearedAtMs: changes.filter(({ letter }) => letter === '—')
             .map(({ time }) => Math.round((time - leadSeconds) * 1000)),
           handVisibility: handVisibility.map(({ visible, time }) => ({
@@ -173,16 +188,17 @@ async function buildIdentity() {
 }
 
 const build = await buildIdentity()
+const captures = options['same-camera'] ? groupBySource(windows) : windows
 const workspace = await mkdtemp(join(tmpdir(), 'librasia-replay-'))
-const report = new Array(windows.length)
+const report = new Array(captures.length)
 let cursor = 0
 try {
-  const runners = Array.from({ length: Math.min(windows.length, workerCount) }, async () => {
-    while (cursor < windows.length) {
+  const runners = Array.from({ length: Math.min(captures.length, workerCount) }, async () => {
+    while (cursor < captures.length) {
       const index = cursor++
-      const window = windows[index]
+      const window = captures[index]
       report[index] = await replay(window, index, workspace)
-      process.stderr.write(`${window.source}/${window.label} concluído.\n`)
+      process.stderr.write(`${window.source}${window.label ? '/' + window.label : ''} concluído.\n`)
     }
   })
   const results = await Promise.allSettled(runners)
@@ -192,6 +208,7 @@ try {
     throw new Error('A compilação ou os modelos mudaram durante o replay.')
   }
   console.log(JSON.stringify({ build, manifests: options.manifest, ...(options.crop ? { crop: options.crop } : {}),
+    ...(options['same-camera'] ? { sameCamera: true } : {}),
     results: report }, null, 2))
 } finally {
   await rm(workspace, { recursive: true, force: true })

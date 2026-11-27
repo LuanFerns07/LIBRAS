@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Uma janela por letra impressa na demonstração da Unicentro. O roteiro mede a leitura na sequência do vídeo, com uma única captura, e usa as mesmas janelas para o controle por recorte. Y dessa aula integrou o ajuste do complemento de Y e algumas outras letras já foram consultadas em avaliações anteriores.",
+  "sources": [
+    {
+      "id": "unicentro-aniqxveqgns",
+      "split": "regression",
+      "title": "[PED] Libras - Alfabeto Manual",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro",
+        "direção, edição e finalização": "Daniel Luiz de Souza",
+        "intérprete de Libras nos créditos": "Ana Paula Silva"
+      },
+      "page": "https://www.youtube.com/watch?v=AnIqxVEqGNs",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-sequencia-download/unicentro-sequencia-alfabeto.mp4",
+      "sha256": "b6a5bc1dd2ec128857234cec36712b54f7fa11d669cbf24d7384544cde173cd1",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=AnIqxVEqGNs&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "As 26 letras latinas aparecem em preto no canto direito, em ordem. A área das cartelas foi inspecionada a cada três quadros e os rótulos foram conferidos visualmente. A janela considera a cartela estável, incluindo eventuais momentos de repouso e transição.",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 9009,
+          "endMs": 12412
+        },
+        {
+          "label": "B",
+          "startMs": 12513,
+          "endMs": 15415
+        },
+        {
+          "label": "C",
+          "startMs": 15515,
+          "endMs": 18719
+        },
+        {
+          "label": "D",
+          "startMs": 18819,
+          "endMs": 22322
+        },
+        {
+          "label": "E",
+          "startMs": 22422,
+          "endMs": 25826
+        },
+        {
+          "label": "F",
+          "startMs": 25926,
+          "endMs": 29530
+        },
+        {
+          "label": "G",
+          "startMs": 29630,
+          "endMs": 32232
+        },
+        {
+          "label": "H",
+          "startMs": 32332,
+          "endMs": 35235
+        },
+        {
+          "label": "I",
+          "startMs": 35335,
+          "endMs": 38739
+        },
+        {
+          "label": "J",
+          "startMs": 38839,
+          "endMs": 42042
+        },
+        {
+          "label": "K",
+          "startMs": 42142,
+          "endMs": 45245
+        },
+        {
+          "label": "L",
+          "startMs": 45345,
+          "endMs": 48549
+        },
+        {
+          "label": "M",
+          "startMs": 48649,
+          "endMs": 51852
+        },
+        {
+          "label": "N",
+          "startMs": 51952,
+          "endMs": 55055
+        },
+        {
+          "label": "O",
+          "startMs": 55155,
+          "endMs": 58058
+        },
+        {
+          "label": "P",
+          "startMs": 58158,
+          "endMs": 61361
+        },
+        {
+          "label": "Q",
+          "startMs": 61461,
+          "endMs": 64665
+        },
+        {
+          "label": "R",
+          "startMs": 64765,
+          "endMs": 67567
+        },
+        {
+          "label": "S",
+          "startMs": 67668,
+          "endMs": 70270
+        },
+        {
+          "label": "T",
+          "startMs": 70370,
+          "endMs": 73974
+        },
+        {
+          "label": "U",
+          "startMs": 74074,
+          "endMs": 76977
+        },
+        {
+          "label": "V",
+          "startMs": 77077,
+          "endMs": 79479
+        },
+        {
+          "label": "W",
+          "startMs": 79579,
+          "endMs": 81481
+        },
+        {
+          "label": "X",
+          "startMs": 81582,
+          "endMs": 84384
+        },
+        {
+          "label": "Y",
+          "startMs": 84484,
+          "endMs": 88288
+        },
+        {
+          "label": "Z",
+          "startMs": 88388,
+          "endMs": 90891
+        }
+      ]
+    }
+  ]
+}
