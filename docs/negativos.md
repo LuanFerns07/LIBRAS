@@ -111,6 +111,27 @@ PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate \
 
 Para repetir as três capturas simuladas, use a transformação de vídeo registrada na evidência para preparar os Y4M. Execute o teste `recognition.test.mjs` do roteiro de capturas parciais com `LIBRASIA_TEST_START_OFFSET_MS=500`, a duração de cada clipe e o texto esperado na reprodução. Os rótulos esperados `aluno` e `cinco` verificam a reprodução do erro observado. [Roteiro Chromium](janelas-area-livre.md#reproduzir) · [Parâmetros das três capturas](../ml/fresh_eval/evidence-negatives/browser.json)
 
+### Os 19 recortes na Área livre do Chromium
+
+O pacote local `cb3adf2` processou os 19 recortes como vídeo de câmera no Chromium, com o classificador combinado em WebAssembly e limiar 0,525. Cada recorte entrou em uma tentativa manual com a duração definida no manifesto. O teste verificou a transcrição, as chamadas ao classificador e a janela observada. [Resultados por recorte e hashes](../ml/fresh_eval/evidence-negatives/browser-cb3adf2.json)
+
+| Estrato | Total | Chegaram ao classificador | Falsas aceitações |
+| --- | ---: | ---: | ---: |
+| Repouso | 4 | 2 | 0 |
+| Movimento cotidiano | 3 | 3 | 0 |
+| Transição entre sinais | 3 | 3 | 1 |
+| Sinal fora do catálogo | 9 | 9 | 4 |
+| **Total** | **19** | **17** | **5** |
+
+A Área livre preservou o texto em todas as tentativas inconclusivas. A passagem do queixo ao teclado parou na confirmação da posição da mão para Aluno. Os cinco falsos aceites acrescentaram Amarelo para Vermelho e Laranja, Cinco para Azul e para a transição de Sete para Oito, e Espelho para Seis. A taxa de 5/19 (26,3%) neste recorte fica acima da meta de 10%. A coleta de M1 com pessoas independentes na webcam segue pendente. [Protocolo de aceite](protocolo-aceite.md#metas-de-aceite)
+
+Com os recortes preparados conforme os dois manifestos, execute o ensaio abaixo. O programa verifica o SHA-256 de cada MP4 e salva o Y4M, os logs e o resumo em `data/evidence`. O resumo registra a duração do marcador e os hashes dos arquivos. [Programa de reprodução](../ml/fresh_eval/replay_negatives.py)
+
+~~~bash
+python3 -m ml.fresh_eval.replay_negatives --url http://127.0.0.1:4177 \
+  --sources data/isolated-negative-audit --out data/evidence/demonstracao/m1-negativos-cb3adf2
+~~~
+
 ## Negativos complementares no controle com máscara do nariz
 
 O mesmo grupo de nove clipes de desenvolvimento do CLAD entrou no treino de `ConvSequenceNoseMasked`. O controle usa a mesma arquitetura e a mesma extração, com as relações com o nariz zeradas. Mantivemos as três rodadas por pessoa do MINDS, a semente 7391 e 80 épocas por rodada. Os recortes externos de avaliação ficaram fora do ajuste.

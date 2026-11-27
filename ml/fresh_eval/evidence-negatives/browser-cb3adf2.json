@@ -1,0 +1,388 @@
+{
+  "scope": "external-negative-recorded-camera",
+  "build": {
+    "commit": "cb3adf24947e6442f4497718d9df90d39c767168",
+    "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+    "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+    "threshold": 0.525
+  },
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "sourceManifests": {
+    "clad": "ml/external_eval/evidence/variants/manifest.json",
+    "didactic": "ml/fresh_eval/evidence-negatives/manifest.json"
+  },
+  "fixtureTransform": "scale=640:-2,fps=30,tpad=start_duration=0.5:color=lime:stop_mode=clone:stop_duration=0.5",
+  "markerOffsetMs": 500,
+  "transcriptPrefix": "Texto de controle.",
+  "states": {
+    "inconclusive": 14,
+    "accepted": 5
+  },
+  "byStratum": {
+    "fora-do-catalogo": {
+      "total": 9,
+      "classifierReached": 9,
+      "falseAcceptances": 4
+    },
+    "movimento-comum": {
+      "total": 3,
+      "classifierReached": 3,
+      "falseAcceptances": 0
+    },
+    "repouso": {
+      "total": 4,
+      "classifierReached": 2,
+      "falseAcceptances": 0
+    },
+    "transicao": {
+      "total": 3,
+      "classifierReached": 3,
+      "falseAcceptances": 1
+    }
+  },
+  "results": [
+    {
+      "id": "clad-repouso-01-mao-rosto",
+      "group": "clad",
+      "stratum": "repouso",
+      "sourceLabel": "repouso",
+      "clipSha256": "f6ca643447473470f07caaa6f0cdb43713ca8656e1fd24aefb0b50488eb26463",
+      "fixtureSha256": "df99e76ae0511cc8213f6fe62551acbfcefcf28db31b841d1e4e2aa9ddd7ab31",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        500,
+        4500
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "clad-repouso-02-oclusao-rosto",
+      "group": "clad",
+      "stratum": "repouso",
+      "sourceLabel": "repouso",
+      "clipSha256": "8e17227ddf885f0e23f9734355ba918c350ca56b3c75207ae0555cb4b24675f6",
+      "fixtureSha256": "65b3f9339eea60de40a424567b5e9b2c877084d62c0f5b9d201fb038c0274504",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        500,
+        4500
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "clad-repouso-03-celular",
+      "group": "clad",
+      "stratum": "repouso",
+      "sourceLabel": "repouso",
+      "clipSha256": "ed4d32bd3896b86610f4fce86e8b3921cd5129f78f3cbd532140ef9f94e8aef7",
+      "fixtureSha256": "000a03946bd6e2db90378bce218474e97e654b4170af8a6dacbc3563254c7950",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        533,
+        4566
+      ],
+      "state": "inconclusive",
+      "reason": "insufficient",
+      "classifierCalls": 0,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "clad-movimento-01-headset",
+      "group": "clad",
+      "stratum": "movimento-comum",
+      "sourceLabel": "movimento-comum",
+      "clipSha256": "50f0865d86ea3079088dbb17359abb9db557676e189dfa15fd11ad551855df8d",
+      "fixtureSha256": "2e74ac016cf903bd3ad6776cb8ac20384783d072f5b245f633d41323a30a9dd8",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        500,
+        4534
+      ],
+      "state": "inconclusive",
+      "reason": "low-confidence",
+      "classifierCalls": 1,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "clad-movimento-02-usb",
+      "group": "clad",
+      "stratum": "movimento-comum",
+      "sourceLabel": "movimento-comum",
+      "clipSha256": "918c3c6cf1141f39177095d4dadcff6188cccc127f4aef0b16c01252009a171b",
+      "fixtureSha256": "8e83a7e58cc0c164616606ec77a8d4fca3d7f490eee2350889a549f29697e2e1",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        501,
+        4501
+      ],
+      "state": "inconclusive",
+      "reason": "low-confidence",
+      "classifierCalls": 1,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "group": "clad",
+      "stratum": "movimento-comum",
+      "sourceLabel": "movimento-comum",
+      "clipSha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "fixtureSha256": "0e2ff7c922959c7b9907053978d2d82639bcd0b88c85733ab023c1650f634b22",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        500,
+        4533
+      ],
+      "state": "inconclusive",
+      "reason": "uncertain-aluno",
+      "classifierCalls": 1,
+      "extractedFrames": 40,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "ufsm-cores-baixa",
+      "group": "didactic",
+      "stratum": "repouso",
+      "sourceLabel": "mãos abaixo do quadro",
+      "clipSha256": "d0347a8beb41c26a28d409cfaafe28c5e56082108bb3777e8eb36dfa052a3973",
+      "fixtureSha256": "67dbccfc58d19bf7855b391ba9ca95727da90c4bbc2fa807e25351b1bd765fae",
+      "captureMs": 1600,
+      "observedWindowMs": [
+        501,
+        2134
+      ],
+      "state": "inconclusive",
+      "reason": "insufficient",
+      "classifierCalls": 0,
+      "extractedFrames": 17,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "ufsm-vermelho",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "vermelho",
+      "clipSha256": "50bf579a5739a5f168f1ad6c61150fad9f2bc91be2c6b699e7f05545257f40c1",
+      "fixtureSha256": "7bfa14e4d471264bc3716b1a3206c640796ac10fbf1e048cedecdc1bee7f146c",
+      "captureMs": 1400,
+      "observedWindowMs": [
+        501,
+        1934
+      ],
+      "state": "accepted",
+      "reason": null,
+      "classifierCalls": 1,
+      "extractedFrames": 15,
+      "transcript": "Texto de controle. amarelo"
+    },
+    {
+      "id": "ufsm-laranja",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "laranja",
+      "clipSha256": "cb2fbe7f4ca0b36897ac7a2ced7e1cc86e771a053cc519e3bdb413fc368864bf",
+      "fixtureSha256": "8b0bf73bc2ade858b2140602dc0a27405b1c1a17790d5c8873137db1a76c2a82",
+      "captureMs": 1600,
+      "observedWindowMs": [
+        500,
+        2100
+      ],
+      "state": "accepted",
+      "reason": null,
+      "classifierCalls": 1,
+      "extractedFrames": 16,
+      "transcript": "Texto de controle. amarelo"
+    },
+    {
+      "id": "ufsm-azul",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "azul",
+      "clipSha256": "4b444b4d890ccfa0770d6ba85389ac489687abbd35be6e198d0115c038cac5fe",
+      "fixtureSha256": "fc5015ec1f2435a0df65a9be0e793d1756a8308280b93b977a520e59ff50f426",
+      "captureMs": 1450,
+      "observedWindowMs": [
+        500,
+        2000
+      ],
+      "state": "accepted",
+      "reason": null,
+      "classifierCalls": 1,
+      "extractedFrames": 15,
+      "transcript": "Texto de controle. cinco"
+    },
+    {
+      "id": "cecierj-laranja",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "laranja",
+      "clipSha256": "9f123535a76d4adc1eef4002bce742a9245f5f76a486e5da6f73d93480dece3d",
+      "fixtureSha256": "ca17b94a3b5e1edb73d754bcaa30d01a76ae427524dd1272b7498446666df418",
+      "captureMs": 1550,
+      "observedWindowMs": [
+        500,
+        2067
+      ],
+      "state": "inconclusive",
+      "reason": "low-confidence",
+      "classifierCalls": 1,
+      "extractedFrames": 16,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "cecierj-azul",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "azul",
+      "clipSha256": "312aea3f694af50dc0b287d228b3aa8d0da008ebf9267b456e0286ac0188527b",
+      "fixtureSha256": "13b0a65bf5910e2767b585ee890a78933f98114d4301801c24d53aa103b6ef85",
+      "captureMs": 1650,
+      "observedWindowMs": [
+        500,
+        2200
+      ],
+      "state": "inconclusive",
+      "reason": "low-confidence",
+      "classifierCalls": 1,
+      "extractedFrames": 17,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "cecierj-vermelho",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "vermelho",
+      "clipSha256": "b0de7a01fe7d0ef196e0df3ad94ce162e42b2bc99883786af170b6f7a2797f43",
+      "fixtureSha256": "bbd3203b96edf87af9602b47432ccb017ae0c3e620d007394c7b3ff3b8b4d567",
+      "captureMs": 1650,
+      "observedWindowMs": [
+        500,
+        2166
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 17,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "fiocruz-dois",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "dois",
+      "clipSha256": "7b9408eb8bcb2646269959da3eeec94fc42dde4ea247b8f505ce1284ba75cab7",
+      "fixtureSha256": "6d4b5b4a1eed06be0cc891dab3a5d2b09de5b6df3e095227f753b0fa8f6d702a",
+      "captureMs": 1900,
+      "observedWindowMs": [
+        500,
+        2400
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 19,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "fiocruz-tres",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "três",
+      "clipSha256": "1badfff5052bab2fdb529bf53709ce19b2570f2b73abff5e0c9fb2558e80b50f",
+      "fixtureSha256": "548358490b9e928dfa16f28bf828598c5fb54bb134b214b70497e89c2a3f2413",
+      "captureMs": 2500,
+      "observedWindowMs": [
+        500,
+        3000
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 25,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "fiocruz-seis",
+      "group": "didactic",
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "seis",
+      "clipSha256": "180254d60e1d7826af2d7c0a80a641af4141db50d85bc48cd8c98ffedb7f1197",
+      "fixtureSha256": "a06857bbe3328ce5f8103fe17b86856d63cd23feb9770a2fde4ee862134c7333",
+      "captureMs": 3200,
+      "observedWindowMs": [
+        500,
+        3733
+      ],
+      "state": "accepted",
+      "reason": null,
+      "classifierCalls": 1,
+      "extractedFrames": 32,
+      "transcript": "Texto de controle. espelho"
+    },
+    {
+      "id": "cecierj-rosa-marrom",
+      "group": "didactic",
+      "stratum": "transicao",
+      "sourceLabel": "rosa → marrom",
+      "clipSha256": "bfbae0633fd950ac18dddf6fda1e259aaed76f754707df48e9e20b0b249c319d",
+      "fixtureSha256": "1e43881911778e9535891748c692df681dae14676b7cef9d450d6f4d63426bbb",
+      "captureMs": 1000,
+      "observedWindowMs": [
+        500,
+        1500
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 10,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "fiocruz-dois-tres",
+      "group": "didactic",
+      "stratum": "transicao",
+      "sourceLabel": "dois → três",
+      "clipSha256": "a71f724acd6e7d8c6e945b8204d172f669c5ec1e89a4c0f8356d0d25144e14f7",
+      "fixtureSha256": "bd57f7e96374572ec9d404c9646053852f05ed207bb620b9d4ce56a1d4d6bc43",
+      "captureMs": 1500,
+      "observedWindowMs": [
+        500,
+        2000
+      ],
+      "state": "inconclusive",
+      "reason": "out-of-catalog",
+      "classifierCalls": 1,
+      "extractedFrames": 15,
+      "transcript": "Texto de controle."
+    },
+    {
+      "id": "fiocruz-sete-oito",
+      "group": "didactic",
+      "stratum": "transicao",
+      "sourceLabel": "sete → oito",
+      "clipSha256": "c0c06a9e9dc671cea0becfbf4a6bdcbedb3db38ca9d56d6cbbac3dd5f32c77a9",
+      "fixtureSha256": "3ac5268a7911f1c190f536e3a7b800b44627713614a9bf0891a542c00bb2cdad",
+      "captureMs": 2150,
+      "observedWindowMs": [
+        500,
+        2700
+      ],
+      "state": "accepted",
+      "reason": null,
+      "classifierCalls": 1,
+      "extractedFrames": 22,
+      "transcript": "Texto de controle. cinco"
+    }
+  ]
+}

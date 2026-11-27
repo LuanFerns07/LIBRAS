@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { access, writeFile } from 'node:fs/promises'
 import { test } from 'node:test'
+import { recognitionCatalog } from '../../src/catalog.js'
 import { withChromium } from './chromium.mjs'
 import { beginAtMarker, finish } from './recorded-capture.mjs'
 
@@ -30,6 +31,7 @@ const fixedCaptureMs = process.env.LIBRASIA_TEST_CAPTURE_MS === undefined
 const markerOffsetMs = Number(process.env.LIBRASIA_TEST_START_OFFSET_MS ?? 0)
 const windowToleranceMs = 300
 const reportFile = process.env.LIBRASIA_TEST_REPORT
+const auditNegative = process.env.LIBRASIA_TEST_AUDIT_NEGATIVE === '1'
 
 const useVoiceFixture = (mode => {
   window.testSpeechCalls = 0
@@ -76,6 +78,11 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     'Use um sinal confirmado na área livre, com clipe sincronizado e pelo menos duas tentativas.')
   if (expectedReason) assert.ok(!expected, 'O motivo esperado deve corresponder a uma tentativa inconclusiva.')
   if (expectedClassifierCalls !== undefined) assert.match(expectedClassifierCalls, /^\d+$/u)
+  if (auditNegative) {
+    assert.ok(reportFile && videoFile && fixedCaptureMs !== null && trials === 1 &&
+      !target && !multiple && !continuous && !expected && !expectedReason && expectedClassifierCalls === undefined,
+    'A auditoria registra uma tentativa isolada por vídeo, sem fixar a decisão esperada.')
+  }
   assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
     'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
   if (fixedCaptureMs !== null) {
@@ -321,13 +328,23 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
           'A duração real divergiu da janela planejada.')
       })
       const expectedState = expectedHint ? 'hint' : expected ? 'accepted' : 'inconclusive'
-      check('estado', () => assert.equal(decision.state, expectedState, decision.message))
+      if (auditNegative) check('estado', () => {
+        assert.ok(['accepted', 'inconclusive'].includes(decision.state), decision.message)
+        assert.ok([0, 1].includes(decision.timing.classifierCalls), 'A auditoria mede o reconhecimento isolado.')
+        if (decision.state === 'accepted') assert.equal(decision.timing.classifierCalls, 1)
+      })
+      else check('estado', () => assert.equal(decision.state, expectedState, decision.message))
       if (expectedHint) check('dica', () => assert.ok(decision.message.includes(expectedHint), decision.message))
       if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
       if (expectedClassifierCalls !== undefined) check('classificador', () =>
         assert.equal(decision.timing?.classifierCalls, Number(expectedClassifierCalls)))
       if (expectedGlosses !== undefined) check('glosas', () => assert.equal(decision.glosses, expectedGlosses))
-      if (!target) {
+      if (auditNegative) check('texto', () => {
+        const spacer = prefix && !/\s$/u.test(prefix) ? ' ' : ''
+        const allowed = decision.state === 'accepted' ? recognitionCatalog.map(({ text }) => prefix + spacer + text) : [prefix]
+        assert.ok(allowed.includes(decision.transcript), 'A decisão e a transcrição da auditoria devem corresponder.')
+      })
+      else if (!target) {
         const words = secondText ? [expected, secondText].slice(0, index + 1) : Array(index + 1).fill(expected)
         const addition = expected ? words.join(' ').toLocaleLowerCase('pt-BR') : ''
         const spacer = prefix && addition && !/\s$/u.test(prefix) ? ' ' : ''
