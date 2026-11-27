@@ -68,6 +68,24 @@ Os logs locais ficam em `data/evidence/demonstracao/`. O navegador abriu e liber
 
 Com gravação, os pontos acompanharam as duas mãos antes, durante e depois da tentativa. O teste verificou espelhamento, redimensionamento, perda e retorno da mão e o controle de exibição. O N e a passagem de M para N também passaram na Área livre e em Praticar com os clipes da Unesp. Logs locais `pontos.log` e `alfabeto-n.log`. [Sobreposição](teste-pontos-ao-vivo.md) · [Referência para o reteste de N](dados-alfabeto.md#confirmação-específica-de-n-na-prévia)
 
+### Retomada após revogar a permissão da câmera
+
+Na prévia `599f341`, o teste revogou a permissão pelo DevTools do Chromium durante uma tentativa na Área livre. A trilha da webcam ACER HD User Facing (640 × 480) terminou, o app exibiu **Problema de captura** e preservou o texto digitado. Com a permissão bloqueada, o botão de câmera exibiu o aviso correspondente. Após conceder a permissão novamente, o app abriu outra trilha, iniciou uma nova tentativa e liberou a câmera ao navegar para **Saiba mais**.
+
+O mesmo teste, com o clipe Cinco S09-1 a 640 × 360, confirmou que o modelo reconheceu o sinal depois da retomada e acrescentou “cinco” uma vez ao texto preservado. A sessão com sinalizantes e a avaliação das dicas permanecem no roteiro manual. [Teste automatizado](../tests/e2e/camera-recovery.test.mjs) · [Preparação do clipe](#sincronizar-a-captura-e-verificar-a-lição)
+
+Com a prévia local aberta, execute os dois cenários em sequência.
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_CAMERA_RECOVERY=1 \
+  LIBRASIA_TEST_PHYSICAL=1 node --test tests/e2e/camera-recovery.test.mjs
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_CAMERA_RECOVERY=1 \
+  LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/cinco-sincronizado.y4m \
+  node --test tests/e2e/camera-recovery.test.mjs
+~~~
+
+Os resultados ficam nos logs locais `camera-retomada-fisica-599f341.log` e `camera-retomada-cinco-599f341.log`, em `data/evidence/demonstracao/`.
+
 ### Lição completa de Cinco no Chromium
 
 O teste voltou à atividade após uma resposta incorreta, aceitou a resposta esperada e abriu **Praticar com ajuda** pela revisão. A prévia reconheceu o clipe Cinco S09-1 nessa etapa e em **Tentar com menos ajuda**, com o painel do avatar oculto e a câmera ativa na passagem entre etapas. O contador mostrou um sinal concluído. Depois de recarregar, o progresso reapareceu e a câmera voltou desligada. O teste unitário também confirmou que a revisão abre a prática de memória quando a etapa guiada já foi concluída. A correção intencional por uma pessoa sinalizante e a revisão linguística da dica continuam pendentes.
