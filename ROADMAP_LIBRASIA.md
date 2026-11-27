@@ -178,7 +178,8 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Verificar quais fontes de vídeo oferecem glosas, texto em português, identificação de sinalizantes e condições de acesso. [Triagem e fontes candidatas](docs/dados-glosas.md)
 - [x] Treinar o componente glosas para português com pares textuais e medir WER e frases exatas em uma partição reservada. [Resultado em 1.800 pares do VLibrasBD](docs/glosas-texto.md)
 - [x] Comparar o gerador congelado com um tradutor monotônico em outras 1.800 frases, sem chaves normalizadas do primeiro ensaio. O WER passou de 61,57% para 50,66%. [Comparação e erros por método](docs/comparacao-glosas.md)
-- [ ] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo com webcam. Medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada.
+- [x] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo experimental local com webcam. [Execução e ensaio no Chromium](docs/sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
+- [ ] Reduzir a fragmentação do detector com o Holistic, medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada e incluir validação com webcam física.
 - [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
 
 ### M11 · Checklist de publicação e compatibilidade

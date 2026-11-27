@@ -37,7 +37,7 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
-export function mountCapture(main, { openEngine, interpret, onResult, onReady, sequenceMode, enabled = true }) {
+export function mountCapture(main, { openEngine, interpret, onResult, onReady, captureMode, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -160,7 +160,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     }
   })
 
-  async function complete(engine, frames, current, multiple, timing, initialLoadMs) {
+  async function complete(analyze, frames, current, timing, initialLoadMs) {
     if (current !== ticket || disposed) return
     phase = 'inferring'
     capture = undefined
@@ -168,7 +168,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     show('busy', 'Analisando a tentativa.')
     let analysis
     try {
-      analysis = await (multiple ? engine.recognizeSequence(frames) : engine.recognize(frames))
+      analysis = await analyze(frames)
     } catch {
       analysis = { state: 'unavailable', message: 'Tente novamente após reativar a câmera.' }
     } finally {
@@ -197,19 +197,24 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     }
     if (!camera.active || phase !== 'idle') return
     const current = ++ticket
-    const multiple = sequenceMode?.() === true
+    const mode = captureMode?.() ?? 'isolated'
     stopPreview()
     phase = 'loading'
     renderButtons()
     show('busy', 'Preparando o reconhecimento no dispositivo.')
     let engine
+    let analyze
     try {
       engine = await getEngine()
+      if (current !== ticket || disposed) return
+      if (mode === 'continuous') analyze = (await engine.prepareContinuous()).recognize
+      else analyze = mode === 'sequence' ? engine.recognizeSequence : engine.recognize
     } catch {
       if (current !== ticket || disposed) return
       phase = 'idle'
       renderButtons()
       show('unavailable', 'Verifique se os modelos locais estão instalados.')
+      void startPreview()
       return
     }
     if (current !== ticket || disposed) return
@@ -217,13 +222,17 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, s
     engineLoadMs = null
     phase = 'recording'
     renderButtons()
-    show('recording', multiple ? 'Faça os sinais e abaixe as mãos entre eles. Conclua a sequência ao terminar.'
-      : 'Faça um único sinal agora e conclua a tentativa.')
+    const prompt = {
+      isolated: 'Faça um único sinal agora e conclua a tentativa.',
+      sequence: 'Faça os sinais e abaixe as mãos entre eles. Conclua a sequência ao terminar.',
+      continuous: 'Sinalize a sequência e conclua a tentativa quando terminar.',
+    }
+    show('recording', prompt[mode])
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
-      ...(multiple ? { limitMs: 12_000, limitFrames: 125 } : {}),
+      ...(mode !== 'isolated' ? { limitMs: 12_000, limitFrames: 125 } : {}),
       onLandmarks: overlay.paint,
-      onFinish(frames, timing) { void complete(engine, frames, current, multiple, timing, initialLoadMs) },
+      onFinish(frames, timing) { void complete(analyze, frames, current, timing, initialLoadMs) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
   }

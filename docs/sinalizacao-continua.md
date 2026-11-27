@@ -4,6 +4,46 @@ O estudo de glosas para português avalia o componente textual em um corpus para
 
 Os experimentos usam gravações contínuas reais. A tradução inicial é avaliada em frases roteirizadas do setor de energia. A segmentação é avaliada em trilhas temporais de uma entrevista pública do Corpus Libras. O aplicativo oferece sinais isolados e um modo experimental de sequências separadas por pausas. Os modelos deste estudo permanecem em pesquisa local enquanto a equivalência das coordenadas e o desempenho na webcam estão em avaliação.
 
+## Fluxo contínuo experimental na câmera
+
+O modo local usa os quadros do Holistic em uma grade de 100 ms. O detector ONNX propõe fronteiras, o classificador já usado na área livre reconhece cada trecho e o tradutor monotônico propõe texto a partir da sequência de glosas. A interface exibe as glosas detectadas. Um trecho inconclusivo preserva a transcrição anterior. [Treino do detector de fronteiras](fronteiras.md) · [Treino da tradução de glosas](comparacao-glosas.md)
+
+Com os pesos de fronteiras, o corpus textual e a validação local preparados conforme os ensaios acima, execute na raiz do projeto.
+
+```bash
+.venv/bin/python -m ml.continuous_experiment.boundaries.export
+.venv/bin/python -m ml.continuous_experiment.gloss_text.export_web \
+  data/vlibrasbd-v2 data/vlibrasbd-holdout
+LIBRASIA_CONTINUO=1 LIBRASIA_PORTA=4201 \
+  LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
+```
+
+Abra **http://127.0.0.1:4201/** e selecione **Área livre → Sinalização contínua experimental**. Ative a câmera e abra uma tentativa. Confira os sinais detectados e revise o texto antes de ouvi-lo. A sessão usa os quatro sinais do modelo combinado, Cinco, Espelho, Amarelo e Aluno.
+
+Os pesos de fronteiras são mantidos no ambiente local de pesquisa. O detector congelado tem SHA-256 `c6fc6ba3f013c2d551eb9e0614a1dff326bb028b2d81c84cb4442eed9154b610`. O artefato monotônico deriva de 14.000 pares de treino do VLibrasBD v2, sob CC BY-SA 4.0, e tem SHA-256 `99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11`. Cada carregamento confere os hashes. [Condições da fonte UFSC](fronteiras.md#proveniência-e-condições-de-uso) · [VLibrasBD v2 e atribuição](glosas-texto.md)
+
+### Ensaio da integração no Chromium
+
+O pré-processamento e a decodificação de fronteiras coincidiram com o Python em controles de paridade. O ONNX em WASM reproduziu os intervalos do Python com diferença máxima de 2,38 × 10⁻⁷ nas probabilidades. O tradutor carregado no navegador repetiu as saídas de referência. Na comparação Python e JavaScript, os 1.200 pares de validação e 12 casos adicionais tiveram saídas idênticas.
+
+| Controle pela câmera simulada | Trechos propostos | Glosas reconhecidas | Resultado na transcrição |
+| --- | ---: | --- | --- |
+| Amarelo do Cederj | 4 | Nenhuma | Texto anterior preservado |
+| Amarelo e Espelho S04, dois clipes do treino unidos | 8 | Amarelo, Amarelo, Espelho | Texto anterior preservado |
+| Repouso CLAD 01a | 7 | Nenhuma | Texto anterior preservado |
+
+As decisões levaram de 27 a 30 ms depois do clique de conclusão. O excesso de propostas em repouso e a repetição de Amarelo mostram que o detector, treinado com Hand Landmarker, ainda precisa de ajuste com pontos do Holistic e de avaliação em gravações contíguas anotadas. A medição de erro de glosas e tradução em sequências naturais segue pendente. Os registros locais ficam em `data/evidence/continuo-integrado`.
+
+O teste de câmera usa `LIBRASIA_TEST_CONTINUOUS=1` no [roteiro automatizado](../tests/e2e/recognition.test.mjs), junto do Y4M sincronizado e da duração da tentativa. O controle abaixo verifica que a tentativa preserva o texto anterior quando os trechos ficam inconclusivos.
+
+```bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4201/ LIBRASIA_TEST_RECOGNITION=1 \
+  LIBRASIA_TEST_CONTINUOUS=1 LIBRASIA_TEST_CAPTURE_MS=4200 \
+  LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO=data/evidence/controle-nariz-browser/clad-repouso-01a.y4m \
+  node --test tests/e2e/recognition.test.mjs
+```
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

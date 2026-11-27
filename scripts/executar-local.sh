@@ -50,6 +50,21 @@ else
   printf '%s\n' 'O avatar e as atividades sem câmera estão disponíveis. Para reconhecer sinais, instale os pesos descritos em docs/avaliacao.md.'
 fi
 
+export VITE_LIBRASIA_CONTINUO=0
+if [[ "${LIBRASIA_CONTINUO:-}" == 1 ]]; then
+  if [[ ! -f "$previa/public/models/isolated.onnx" ]]; then
+    printf '%s\n' 'A sinalização contínua precisa do classificador local de glosas. Informe LIBRASIA_MODELO.' >&2
+    exit 1
+  fi
+  fronteiras="${LIBRASIA_FRONTEIRAS:-data/ufsc-boundaries/web}"
+  glosas="${LIBRASIA_GLOSAS:-data/vlibrasbd-holdout}"
+  destino="$previa/public/models/continuous"
+  mkdir -p "$destino"
+  cp "$fronteiras/"{boundary-model.onnx,boundary-model.json} "$destino/"
+  cp "$glosas/"{monotone-web.json,monotone-web.manifest.json} "$destino/"
+  export VITE_LIBRASIA_CONTINUO=1
+fi
+
 node --input-type=module - "$previa" <<'JS'
 import { join } from 'node:path'
 import { build } from 'vite'

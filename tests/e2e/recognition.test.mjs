@@ -8,7 +8,9 @@ const enabled = process.env.LIBRASIA_TEST_RECOGNITION === '1'
 const videoFile = process.env.LIBRASIA_TEST_VIDEO
 const expected = process.env.LIBRASIA_EXPECT_TEXT?.trim()
 const multiple = process.env.LIBRASIA_TEST_SEQUENCE === '1'
-const sync = multiple || process.env.LIBRASIA_TEST_SYNC === '1'
+const continuous = process.env.LIBRASIA_TEST_CONTINUOUS === '1'
+const expectedGlosses = process.env.LIBRASIA_EXPECT_GLOSSES
+const sync = multiple || continuous || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
 const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
@@ -113,6 +115,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (expected) assert.ok(videoFile, 'Informe o arquivo Y4M rotulado para verificar um sinal positivo.')
   if (sync) assert.ok(videoFile, 'A sincronização usa um Y4M com marcador inicial verde.')
   if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
+  if (continuous) assert.ok(!multiple && !target && !autoFinish && !offline, 'Use a área livre no cenário contínuo.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
   if (offline) assert.ok(expected && sync && !multiple && !target && trials >= 2,
@@ -121,8 +124,9 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
     'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
   if (fixedCaptureMs !== null) {
-    assert.ok(Number.isInteger(fixedCaptureMs) && fixedCaptureMs >= 500 && fixedCaptureMs <= 4200,
-      'Informe uma duração de captura de 500 a 4200 ms.')
+    const limitMs = continuous ? 11000 : 4200
+    assert.ok(Number.isInteger(fixedCaptureMs) && fixedCaptureMs >= 500 && fixedCaptureMs <= limitMs,
+      `Informe uma duração de captura de 500 a ${limitMs} ms.`)
     assert.ok(sync && !autoFinish && !multiple && !target, 'Use clipe sincronizado e tentativa manual na área livre.')
   } else {
     assert.equal(markerOffsetMs, 0, 'Defina a duração da captura para deslocar o início.')
@@ -167,6 +171,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       await evaluate('document.querySelector(' + JSON.stringify('[data-stage="1"]') + ').click()', true)
       assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
     }
+    if (continuous) await evaluate('document.querySelector("[data-continuous-mode]").click()', true)
     await permission(base.origin, 'granted')
     await evaluate('document.querySelector("[data-camera-toggle]").click()', true)
     await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
@@ -245,6 +250,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       const endAtMediaMs = fixedCaptureMs === null ? null : marked.startMs + fixedCaptureMs
       const decision = await evaluate('(' + finish + ')(' + autoFinish + ',' + endAtMediaMs + ')', true)
       const transcript = target ? null : await getTranscript()
+      const glosses = continuous ? await evaluate(`(() => {
+        const trail = document.querySelector("[data-continuous-glosses]")
+        return trail.hidden ? '' : trail.textContent.split(' — ')[1]
+      })()`) : null
       const window = fixedCaptureMs === null || !Number.isFinite(decision.endMs) ? null : {
         offsetMs: marked.startMs - marked.markerMs,
         durationMs: decision.endMs - marked.startMs,
@@ -257,10 +266,11 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.equal(await getTranscript(), transcript)
         assert.equal(await evaluate('document.querySelector("[data-attempt]").textContent'), 'Iniciar tentativa')
       }
-      decisions.push({ ...decision, transcript, window })
+      decisions.push({ ...decision, transcript, window, glosses })
       context.diagnostic('Tentativa ' + (trial + 1) + '/' + trials + ' · ' + decision.message +
         (window ? ' · janela real ' + window.offsetMs.toFixed(0) + '–' + window.endMs.toFixed(0) +
           ' ms · ' + (decision.timing?.extractionMs.length ?? 0) + ' quadros · texto ' + JSON.stringify(transcript) : '') +
+        (continuous ? ' · sinais detectados ' + JSON.stringify(glosses) : '') +
         ' · ' + (autoFinish ? 'fim do tempo até resposta: ' : 'conclusão até resposta: ') +
         (decision.elapsedMs?.toFixed(1) ?? 'indisponível') + ' ms')
     }
@@ -303,6 +313,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       })
       check('estado', () => assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message))
       if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
+      if (expectedGlosses !== undefined) check('glosas', () => assert.equal(decision.glosses, expectedGlosses))
       if (!target) {
         const addition = expected ? Array(index + 1).fill(expected.toLocaleLowerCase('pt-BR')).join(' ') : ''
         const spacer = prefix && addition && !/\s$/u.test(prefix) ? ' ' : ''
@@ -312,6 +323,11 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
 
     for (const path of ['/models/isolated.json', '/models/isolated.onnx', '/runtime/holistic_landmarker.task']) {
       assert.ok(seenAssets.has(path), 'Ativo carregado: ' + path)
+    }
+    if (continuous) {
+      for (const file of ['boundary-model.json', 'boundary-model.onnx', 'monotone-web.json', 'monotone-web.manifest.json']) {
+        assert.ok(seenAssets.has('/models/continuous/' + file), 'Ativo carregado: ' + file)
+      }
     }
     assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')

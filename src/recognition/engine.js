@@ -13,19 +13,24 @@ async function localAsset(path) {
   return response
 }
 
-export async function openEngine() {
-  const manifest = readModelManifest(await (await localAsset('models/isolated.json')).json())
-  const bytes = await (await localAsset('models/isolated.onnx')).arrayBuffer()
+async function verifiedBytes(path, expected) {
+  const bytes = await (await localAsset(path)).arrayBuffer()
   const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
     byte => byte.toString(16).padStart(2, '0')).join('')
-  if (digest !== manifest.modelSha256) throw new Error('O SHA-256 do classificador diverge do manifesto.')
+  if (digest !== expected) throw new Error('O SHA-256 do modelo diverge do manifesto.')
+  return new Uint8Array(bytes)
+}
+
+export async function openEngine() {
+  const manifest = readModelManifest(await (await localAsset('models/isolated.json')).json())
+  const bytes = await verifiedBytes('models/isolated.onnx', manifest.modelSha256)
 
   env.wasm.numThreads = 1
   env.wasm.wasmPaths = {
     wasm: new URL(ortWasm, location.href).href,
     mjs: new URL(ortModule, location.href).href,
   }
-  const session = await InferenceSession.create(new Uint8Array(bytes), { executionProviders: ['wasm'] })
+  const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
   let extractor
   try {
     extractor = await openHolistic()
@@ -34,6 +39,7 @@ export async function openEngine() {
     throw error
   }
   let inference = Promise.resolve()
+  let continuous
 
   function recognize(frames) {
     const processed = preprocessFrames(frames, manifest.preprocess)
@@ -59,6 +65,15 @@ export async function openEngine() {
     captureOptions: { intervalMs: 100, limitMs: 4500 },
     detect: extractor.detect,
     recognize,
+    prepareContinuous: import.meta.env.VITE_LIBRASIA_CONTINUO === '1' ? () => {
+      if (continuous) return continuous
+      const opening = import('./continuous.js').then(({ openContinuous }) => openContinuous(localAsset, verifiedBytes, recognize))
+      continuous = opening
+      opening.catch(() => {
+        if (continuous === opening) continuous = undefined
+      })
+      return opening
+    } : undefined,
     recognizeSequence(frames) {
       return Promise.all(segmentFrames(frames).map(recognize)).then(segments => {
         if (segments.length === 0) return { state: 'inconclusive', message: 'Nenhum trecho com mãos enquadradas foi rastreado.' }
@@ -67,8 +82,12 @@ export async function openEngine() {
     },
     async close() {
       extractor.close()
-      await inference
-      await session.release()
+      try {
+        await continuous?.then(runtime => runtime.close(), () => {})
+      } finally {
+        await inference
+        await session.release()
+      }
     },
   }
 }
