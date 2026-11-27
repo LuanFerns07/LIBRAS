@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": "ufsc-boundary-conv1d-v1",
+  "preprocess": "ufsc-hand-boundary-v1",
+  "modelSha256": "445e00fa2c8dad91ca4fb40905b80a98f6abac5a5669ad2eca3ac8d91a3f97eb",
+  "checkpointSha256": "b11b359cd6eec4edaca317537296cb10709c49ad13eedf5960e88ffadd5e7ba1",
+  "opset": 17,
+  "input": {
+    "name": "features",
+    "dtype": "float32",
+    "shape": [
+      "T",
+      260
+    ]
+  },
+  "output": {
+    "name": "probabilities",
+    "dtype": "float32",
+    "shape": [
+      "T",
+      3
+    ],
+    "channels": [
+      "activity",
+      "start",
+      "end"
+    ]
+  },
+  "sampleMs": 100,
+  "durationPriorMs": 558.0,
+  "decoder": {
+    "version": 1,
+    "maxDurationMs": 2100,
+    "activityFloor": 0.68,
+    "boundaryWeight": 0.1,
+    "proposalPenalty": 0.15,
+    "durationWeight": 0.25
+  },
+  "provenance": {
+    "trainingCorpus": "Corpus de Libras (UFSC), Inventário Nacional da Libras, G1",
+    "useConditions": "https://corpuslibras.ufsc.br/espacointerativo/perguntas/view/6",
+    "distribution": "local-only"
+  },
+  "parity": {
+    "lengths": [
+      2,
+      17,
+      61,
+      600
+    ],
+    "onnxRuntime": "1.23.2",
+    "atol": 1e-05,
+    "rtol": 1e-05,
+    "maxAbsError": 2.682209014892578e-07
+  }
+}

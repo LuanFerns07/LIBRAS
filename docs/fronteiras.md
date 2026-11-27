@@ -34,3 +34,31 @@ python -m unittest discover -s ml/continuous_experiment/boundaries/tests -v
 ```
 
 Se o servidor de vídeo estiver omitindo intermediários HTTPS, a opção `--ca-bundle` aceita uma cadeia local de emissão verificada. Para esta execução, a cadeia acrescentou YR2 e Root YR assinado por X1, obtidos na Let's Encrypt, à lista de certificados do sistema. A verificação HTTPS ficou ativa. [Cadeias de confiança Let's Encrypt](https://letsencrypt.org/certificates/)
+
+## Comparação com pontos do Holistic Web
+
+O Chromium extraiu os quatro vídeos de treino e os dois de validação em 600 quadros por vídeo, com passo de 100 ms e largura de até 640 px. O Holistic detectou ao menos uma mão em 1.682/3.600 quadros. Todos os vídeos, a receita de extração e o modelo de visão ficam identificados por SHA-256. Os três vídeos do teste reservado ficaram fora desta rodada.
+
+| Detector avaliado nos mesmos pontos do Holistic | Propostas | Duração abaixo de 500 ms | Pares com IoU ≥ 0,50 | F1 |
+| --- | ---: | ---: | ---: | ---: |
+| Pesos e decodificador originais | 74 | 13 | 43/72 | 0,589 |
+| Pesos originais com decodificador recalibrado | 76 | 13 | 45/72 | 0,608 |
+| Pesos treinados no Holistic com decodificador recalibrado | 79 | 18 | 45/72 | 0,596 |
+
+A seleção dos decodificadores e a escolha da época do candidato usaram essas mesmas duas gravações de validação. Os dois ajustes escolheram a mesma configuração de decodificador. O candidato acrescentou três propostas em relação à recalibração dos pesos originais e aumentou a quantidade abaixo de 500 ms de 13 para 18. Estes números medem segmentação na validação. A prévia experimental ainda usa o detector congelado do ensaio anterior. [Relatório por gravação](../ml/evidence/ufsc-boundaries/holistic-development.json) · [Manifesto ONNX do candidato](../ml/evidence/ufsc-boundaries/holistic-model.json)
+
+Entre as 249 anotações da trilha direita nos seis recortes, nenhuma tem correspondência literal com Cinco, Espelho, Amarelo ou Aluno. O recorte mede fronteiras temporais e serve ao treino do detector. A avaliação integrada de glosas e texto precisa de gravações anotadas em que o classificador cubra as glosas produzidas. [Triagem das fontes](dados-glosas.md) · [Fluxo integrado no Chromium](sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
+
+Com o ambiente local preparado e os vídeos já adquiridos, rode na raiz do projeto.
+
+```bash
+npm run setup:vision
+node ml/continuous_experiment/boundaries/extract-web.mjs
+.venv/bin/python -m ml.continuous_experiment.boundaries.train_holistic
+.venv/bin/python -m ml.continuous_experiment.boundaries.export \
+  data/ufsc-boundaries/holistic/boundary-model.pt data/ufsc-boundaries/holistic/web
+```
+
+O treino usa 80 épocas em CPU, duas threads e semente 2845. O checkpoint selecionado veio da época 21. A exportação do candidato teve erro máximo de 2,68 × 10⁻⁷ para as probabilidades na paridade PyTorch e ONNX. O diretório `holistic/web` permite comparar o candidato localmente com `LIBRASIA_FRONTEIRAS`.
+
+No Chromium, o candidato marcou quatro trechos no Amarelo do Cederj, nove nos dois clipes unidos de Amarelo e Espelho e quatro no repouso CLAD. O detector original havia marcado quatro, oito e sete, respectivamente. Nos clipes unidos, o candidato reconheceu Amarelo e Espelho uma vez cada, com sete trechos inconclusivos. As três tentativas preservaram o texto anterior. Os registros `holistic-*.log` ficam em `data/evidence/continuo-integrado`. [Controles de câmera](sinalizacao-continua.md#ensaio-da-integração-no-chromium)
