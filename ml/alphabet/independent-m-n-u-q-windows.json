@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Controles M, N, U e Q reservados por pessoa e sessão. As janelas foram fixadas por inspeção visual antes da inferência. Os dois M da Unicentro pertencem à mesma demonstração editada.",
+  "sources": [
+    {
+      "id": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "title": "Alfabeto em libras",
+      "credits": {
+        "publicação e demonstração": "Tel baixinha, nome usado pela autora no canal"
+      },
+      "page": "https://www.youtube.com/watch?v=chzje8VmC1I",
+      "published": "2020-07-12",
+      "file": "data/alphabet/independent/tel-baixinha-download/tel-baixinha-alfabeto.mp4",
+      "sha256": "b4d025dfe16b21d7632b13349ee169aded50dd17f14fc72c0b9c8e42f12530ae",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 30 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=chzje8VmC1I&hl=pt-BR",
+      "licenseEvidence": "O campo Licença na publicação de Tel baixinha indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Cartões de Macaco, Noz, Queijo e Urso ao lado da sinalizante com câmera fixa. A janela de Q reaproveita o controle anterior.",
+      "windows": [
+        {
+          "label": "M",
+          "startMs": 100900,
+          "endMs": 102180,
+          "anchorMs": 101550,
+          "view": "frontal"
+        },
+        {
+          "label": "N",
+          "startMs": 103100,
+          "endMs": 104420,
+          "anchorMs": 103650,
+          "view": "frontal"
+        },
+        {
+          "label": "Q",
+          "startMs": 110780,
+          "endMs": 111880,
+          "anchorMs": 111340,
+          "view": "frontal"
+        },
+        {
+          "label": "U",
+          "startMs": 120180,
+          "endMs": 121660,
+          "anchorMs": 121050,
+          "view": "frontal"
+        }
+      ]
+    },
+    {
+      "id": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "title": "[PED] Libras - Alfabeto Explicativo",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro"
+      },
+      "page": "https://www.youtube.com/watch?v=hxnpSXVWkGU",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-download/unicentro-alfabeto.mp4",
+      "sha256": "cdbdadecc5f5d072f3c6daa0353fe44ed9c9d2018ac055263dcc0fa56453b52f",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=hxnpSXVWkGU&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Demonstração em ordem alfabética e configuração da mão. O M aparece em dois planos da mesma gravação. No U, a rotação deixa a mão de perfil e os dedos se sobrepõem parcialmente.",
+      "windows": [
+        {
+          "label": "M",
+          "startMs": 165370,
+          "endMs": 166230,
+          "anchorMs": 165850,
+          "view": "plano aberto"
+        },
+        {
+          "label": "M",
+          "startMs": 167470,
+          "endMs": 168380,
+          "anchorMs": 168010,
+          "view": "plano aproximado"
+        },
+        {
+          "label": "N",
+          "startMs": 168910,
+          "endMs": 170090,
+          "anchorMs": 169530,
+          "view": "plano aproximado"
+        },
+        {
+          "label": "Q",
+          "startMs": 177390,
+          "endMs": 178530,
+          "anchorMs": 177910,
+          "view": "plano aproximado"
+        },
+        {
+          "label": "U",
+          "startMs": 214450,
+          "endMs": 215350,
+          "anchorMs": 214900,
+          "view": "perfil da mão em plano aproximado"
+        }
+      ]
+    }
+  ]
+}
