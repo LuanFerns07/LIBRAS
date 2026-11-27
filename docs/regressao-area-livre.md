@@ -23,6 +23,18 @@ O candidato com flexão dos dedos, de SHA-256 `8e38930e3fb1ef7cbc308cd736f70a49a
 
 Uma reprodução posterior, com tempo de mídia observado e cinco janelas predefinidas, registrou dez falsas aceitações com o modelo inicial. Os controles de Cinco e Espelho passaram nas duas tentativas de cada sinal. [Protocolo e resultados por janela](janelas-area-livre.md)
 
+## Edição durante a leitura
+
+Na prévia `aa32d96`, editar o campo durante a fala mantinha a síntese da versão anterior. Com `50ad447`, a edição interrompeu a síntese e mostrou o aviso de interrupção. Um novo clique em **Ouvir** enviou à voz local eSpeak NG em pt-BR o texto “Transcrição atualizada.”, e o Chromium informou a conclusão. O teste unitário verificou que o evento atrasado da fala cancelada não altera o estado da nova leitura.
+
+No mesmo pacote, o vídeo de Cinco S09-1 foi reconhecido e um erro simulado da voz preservou o texto para nova edição. O quadro preto resultou em **Tentativa inconclusiva** e preservou “Texto conferido.”. Os logs locais ficam em `data/evidence/demonstracao`, com os nomes `fisico-50ad447.log`, `cinco-erro-voz-50ad447.log` e `sem-maos-50ad447.log`. [Teste de voz no Chromium](../tests/e2e/browser.test.mjs) · [Teste de reconhecimento](../tests/e2e/recognition.test.mjs)
+
+Para retestar a edição com a voz local na prévia do Linux, execute:
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_VOICE=1 node --test tests/e2e/browser.test.mjs
+~~~
+
 ## Reproduzir localmente
 
 Instale os ativos e inicie a prévia na porta 4193, em um checkout reservado à verificação.

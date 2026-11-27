@@ -10,7 +10,9 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote `aa32d96` corrige o atalho **Ir para o conteúdo** e passou o roteiro integrado no Chromium. O servidor local informa o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`. [Roteiro e resultados](roteiro-validacao.md#reteste-do-atalho-de-conteúdo)
+O pacote `50ad447` passou o roteiro integrado no Chromium, com a nova interrupção da fala ao editar a transcrição. A execução com gravações percorreu as seis etapas, encerrou a voz depois de ler o texto editado e abriu o dicionário do INES. O log fica em `data/evidence/demonstracao/roteiro-50ad447.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Reteste de edição e voz](regressao-area-livre.md#edição-durante-a-leitura)
+
+O servidor local informa o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`.
 
 ### Recompilar com os modelos verificados
 
