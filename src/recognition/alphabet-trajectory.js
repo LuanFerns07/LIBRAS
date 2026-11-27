@@ -107,12 +107,15 @@ export function describeTrajectory(samples) {
   const outerFingers = activeSamples.reduce((sum, sample) => sum + sample.flexion[3] + sample.flexion[4], 0) /
     (2 * activeSamples.length)
   const indexFlexion = activeSamples.map(sample => sample.flexion[1]).sort((a, b) => a - b)
+  const indexSeparations = activeSamples.map(sample => Math.max(sample.gaps[0], sample.gaps[4]))
+    .sort((a, b) => a - b)
   const indexY = activeSamples.map(sample => sample.positions[2][1])
   const indexX = activeSamples.map(sample => sample.positions[2][0])
   return {
     vector, path, amount, indexTurn,
     indexBend: indexFlexion[Math.floor(indexFlexion.length / 4)],
     indexGap: Math.max(...activeSamples.map(sample => sample.gaps[4])),
+    indexSeparation: indexSeparations[Math.floor(indexSeparations.length / 2)],
     middleFinger: activeSamples.reduce((sum, sample) => sum + sample.flexion[2], 0) / activeSamples.length,
     meanIndexFlexion: activeSamples.reduce((sum, sample) => sum + sample.flexion[1], 0) / activeSamples.length,
     indexX: (Math.max(...indexX) - Math.min(...indexX)) / scale,
@@ -245,7 +248,7 @@ function isCompatibleTrajectory(label, description) {
   if (label === 'Ç') return description.indexTurn >= .18 && description.path >= .82
   if (label === 'H') return description.outerMotion <= 1.13
   if (label === 'K') return description.outerMotion >= .93 && description.path >= .52 && description.wristRise >= .18
-  if (label === 'X') return description.indexTurn <= 2.3 &&
+  if (label === 'X') return description.indexSeparation >= .55 && description.indexTurn <= 2.3 &&
     (description.indexX <= 1.25 || description.indexBend < .78) &&
     (description.meanIndexFlexion < .97 || description.indexY >= Math.max(.30, 1.5 * description.indexX)) &&
     ((description.indexBend <= .93 && description.indexGap >= .56) ||

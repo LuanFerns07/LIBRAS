@@ -96,7 +96,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Melhorar a legibilidade de M e N no avatar. Conferir dois dedos para baixo em N, três em M e dois para cima em U. Testar a vista frontal no Chromium e a soletração de “Anna”. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n)
 - [x] Reproduzir a rejeição de N em duas aulas adicionais, retreinar os classificadores estáticos com os recortes de M/N/U do Cecierj e retestar N na Unesp, reservada para o ensaio do classificador estático. [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
 - [ ] Retestar N, M e U na webcam. Registrar a letra exibida ou a ausência de leitura e se a pose do avatar ajuda a distinguir as três letras.
-- [ ] Investigar a troca de A por X e a ausência de E observadas no replay das 27 letras. Ampliar as gravações rotuladas e retestar as trocas durante a entrada ou saída de um gesto.
+- [x] Distinguir A de X nos recortes testados. Repetir no Chromium cinco exemplos de cada letra com a nova exigência de separação do indicador em X. [Verificação](docs/dados-alfabeto.md#distinção-entre-a-e-x-e-ensaio-de-e)
+- [ ] Recuperar o A que ficou sem leitura. Ampliar a avaliação de E e manter a leitura de R ao escolher um novo modelo estático. Retestar as trocas durante a entrada ou saída de um gesto.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -208,7 +209,8 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 - [x] Comparar o gerador congelado com um tradutor monotônico em outras 1.800 frases, sem chaves normalizadas do primeiro ensaio. O WER passou de 61,57% para 50,66%. [Comparação e erros por método](docs/comparacao-glosas.md)
 - [x] Integrar a detecção de fronteiras, o reconhecimento de glosas e a geração de texto em um fluxo experimental local com webcam. [Execução e ensaio no Chromium](docs/sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
 - [x] Comparar o detector original, a recalibração e o retreino com pontos do Holistic na validação. [Comparação de fronteiras](docs/fronteiras.md#comparação-com-pontos-do-holistic-web)
-- [ ] Reduzir a fragmentação do detector com o Holistic, medir o erro na sequência de glosas e na tradução em novos dados com cobertura adequada e incluir validação com webcam física.
+- [x] Medir o controle de fragmentação do Holistic em três gravações reservadas. Com penalidade e piso de cinco posições, as referências fragmentadas caíram de 31 para 19 e os pareamentos de 71 para 64. [Teste reservado](docs/fronteiras.md#resultado-na-partição-reservada)
+- [ ] Testar o controle de fragmentação junto com o reconhecedor de glosas no Chromium. Medir a sequência de glosas e a tradução em gravações anotadas com cobertura do catálogo e incluir validação com webcam física.
 - [ ] Conferir com a equipe as condições do Corpus de Libras para uso formal em pesquisa e fazer a revisão humana do sentido da tradução.
 
 ### M11 · Checklist de publicação e compatibilidade
