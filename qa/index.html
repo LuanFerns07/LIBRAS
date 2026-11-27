@@ -82,11 +82,19 @@
               <label>Estado da tentativa <select required name="decision" data-options="decision"></select></label>
               <label>Palavra reconhecida <select name="prediction" data-options="label"></select></label>
               <label>Assunto da dica <select required name="shownParameter" data-options="shownParameter" data-default="none"></select></label>
-              <label>Chamadas ao classificador <input name="classifierCalls" type="number" min="0" step="1" aria-describedby="classifier-help"></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Medição da tentativa</legend>
+            <label>JSON da medição no Chromium
+              <textarea name="captureTiming" rows="3" aria-describedby="timing-help"></textarea>
+            </label>
+            <p id="timing-help">Cole a medição da tentativa. Com o campo vazio, você pode informar os valores abaixo.</p>
+            <div class="fields">
+              <label>Chamadas ao classificador <input name="classifierCalls" type="number" min="0" step="1"></label>
               <label>Latência medida (ms) <input name="latencyMs" type="number" min="0" max="120000" step="any"></label>
               <label>Método de latência <select name="latencyMethod" data-options="latencyMethod"></select></label>
             </div>
-            <p id="classifier-help">Use o valor medido no Chromium. Deixe em branco se a tentativa ficou sem medição.</p>
           </fieldset>
           <fieldset>
             <legend>Voz após edição</legend>

@@ -53,6 +53,25 @@ test('a referência humana e a classificação divergente permanecem registradas
   assert.equal(session.attempts.length, 1)
 })
 
+test('a ficha importa a medição da tentativa e conserva a origem da conclusão', () => {
+  const session = createSession(setup, time)
+  const capture = { trigger: 'manual', decisionMs: 13.8, initialLoadMs: 300, extractionMs: [16.5, 17], classifierCalls: 1 }
+  const { application } = addAttempt(session, {
+    ...observed, captureTiming: JSON.stringify({ ...capture, image: 'Ignorada' }),
+  }, time)
+  assert.deepEqual(application.captureTiming, capture)
+  assert.deepEqual(application.latency, { milliseconds: 13.8, method: 'instrumented' })
+  assert.equal(application.classifierCalls, 1)
+  const auto = addAttempt(session, {
+    ...observed, captureTiming: JSON.stringify({ ...capture, trigger: 'time-limit', initialLoadMs: null }),
+  }, time)
+  assert.equal(auto.application.latency, null)
+  assert.equal(auto.application.captureTiming.initialLoadMs, null)
+  for (const captureTiming of ['incompleto', 'null', JSON.stringify({ ...capture, extractionMs: [-1] })]) {
+    assert.throws(() => addAttempt(session, { ...observed, captureTiming }), /JSON da medição/u)
+  }
+})
+
 test('uma dica conserva o parâmetro humano, o assunto exibido e o desacordo', () => {
   const session = createSession(setup, time)
   const attempt = addAttempt(session, {

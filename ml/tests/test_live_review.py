@@ -81,3 +81,20 @@ class LiveReviewTests(TestCase):
         trials[0]["application"]["classifierCalls"] = True
         with self.assertRaisesRegex(ValueError, "chamadas ao classificador"):
             analyze([session(trials)], MODEL, MANIFEST_HASH)
+
+    def test_summarizes_load_and_frame_extraction_separately_from_decision(self):
+        trials = [observed(number, "cinco", "cinco", flow="guided") for number in range(1, 4)]
+        manual = {"trigger": "manual", "decisionMs": 15, "initialLoadMs": 350, "extractionMs": [8, 11]}
+        trials[0]["application"]["captureTiming"] = manual
+        trials[1]["application"]["captureTiming"] = {
+            "trigger": "time-limit", "decisionMs": 50, "initialLoadMs": None, "extractionMs": [12],
+        }
+        result = analyze([session(trials)], MODEL, MANIFEST_HASH)["groups"][0]["timingByEnvironment"][0]["byFlow"]
+        self.assertEqual(result["guided"], {
+            "count": 2, "medianMs": 22.5, "p95Ms": 30,
+            "initialLoad": {"count": 1, "medianMs": 350, "p95Ms": 350},
+            "extraction": {"count": 3, "medianMs": 11, "p95Ms": 12},
+        })
+        manual["extractionMs"] = [None]
+        with self.assertRaisesRegex(ValueError, "duração inválida"):
+            analyze([session(trials)], MODEL, MANIFEST_HASH)

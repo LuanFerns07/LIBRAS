@@ -55,6 +55,11 @@ function updateInputs() {
 
   const hint = fields.decision.value === 'hint'
   if (!hint) fields.shownParameter.value = 'none'
+
+  const imported = fields.captureTiming.value.trim() !== ''
+  for (const name of ['classifierCalls', 'latencyMs', 'latencyMethod']) {
+    fields[name].disabled = imported
+  }
 }
 
 function addRow(attempt) {
@@ -124,6 +129,7 @@ sessionForm.addEventListener('submit', event => {
 
 fields.flow.addEventListener('change', updateInputs)
 fields.decision.addEventListener('change', updateInputs)
+fields.captureTiming.addEventListener('input', updateInputs)
 
 attemptForm.addEventListener('submit', event => {
   event.preventDefault()

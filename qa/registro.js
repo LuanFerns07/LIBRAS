@@ -138,6 +138,45 @@ function numberInRange(value, minimum, maximum, label, integer = true) {
   return number
 }
 
+function readCaptureTiming(text) {
+  if (text == null) return null
+  const message = 'Cole o JSON da medição da tentativa no Chromium.'
+  if (typeof text !== 'string') throw new TypeError(message)
+  if (text.trim() === '') return null
+  let parsed
+  try {
+    parsed = JSON.parse(text)
+  } catch {
+    throw new TypeError(message)
+  }
+  const { trigger, decisionMs, initialLoadMs = null, extractionMs, classifierCalls = null } = parsed ?? {}
+  const validMs = value => typeof value === 'number' && value >= 0 && value <= Number.MAX_SAFE_INTEGER
+  if (!['manual', 'time-limit', 'frame-limit'].includes(trigger) || !validMs(decisionMs) ||
+      (initialLoadMs !== null && !validMs(initialLoadMs)) ||
+      !Array.isArray(extractionMs) || !extractionMs.every(validMs) ||
+      (classifierCalls !== null && (!Number.isSafeInteger(classifierCalls) || classifierCalls < 0))) {
+    throw new TypeError(message)
+  }
+  return { trigger, decisionMs, initialLoadMs, extractionMs, classifierCalls }
+}
+
+function readApplicationTiming(input) {
+  const captureTiming = readCaptureTiming(input.captureTiming)
+  if (captureTiming) {
+    const latency = captureTiming.trigger === 'manual'
+      ? { milliseconds: captureTiming.decisionMs, method: 'instrumented' } : null
+    return { captureTiming, latency, classifierCalls: captureTiming.classifierCalls }
+  }
+  const classifierCalls = input.classifierCalls == null || input.classifierCalls === '' ? null
+    : numberInRange(input.classifierCalls, 0, Number.MAX_SAFE_INTEGER, 'o número de chamadas ao classificador')
+  const latency = input.latencyMs == null || input.latencyMs === '' ? null : {
+    milliseconds: numberInRange(input.latencyMs, 0, 120000, 'a latência', false),
+    method: choose(input.latencyMethod, 'latencyMethod', 'o método de medição de latência'),
+  }
+  if (!latency && input.latencyMethod) throw new TypeError('Informe o valor medido da latência.')
+  return { captureTiming, latency, classifierCalls }
+}
+
 export function createSession(input, now = new Date()) {
   if (input.consent !== true) throw new TypeError('Confirme o consentimento para registrar a sessão.')
   return {
@@ -193,13 +232,7 @@ export function addAttempt(session, input, now = new Date()) {
   if ((decision === 'hint') !== (shownParameter !== 'none')) {
     throw new TypeError('Confira se o assunto corresponde ao estado de dica exibido.')
   }
-  const classifierCalls = input.classifierCalls == null || input.classifierCalls === '' ? null
-    : numberInRange(input.classifierCalls, 0, Number.MAX_SAFE_INTEGER, 'o número de chamadas ao classificador')
-  const latency = input.latencyMs == null || input.latencyMs === '' ? null : {
-    milliseconds: numberInRange(input.latencyMs, 0, 120000, 'a latência', false),
-    method: choose(input.latencyMethod, 'latencyMethod', 'o método de medição de latência'),
-  }
-  if (!latency && input.latencyMethod) throw new TypeError('Informe o valor medido da latência.')
+  const measurement = readApplicationTiming(input)
   const referenceParameter = choose(input.referenceParameter, 'referenceParameter', 'o parâmetro apontado pelo revisor')
   const feedbackVerdict = choose(input.feedbackVerdict, 'feedbackVerdict', 'a avaliação humana da dica')
   if (['appropriate', 'inappropriate'].includes(feedbackVerdict) && referenceParameter === 'not-observed') {
@@ -234,7 +267,7 @@ export function addAttempt(session, input, now = new Date()) {
       parameter: referenceParameter,
       feedbackVerdict,
     },
-    application: { decision, prediction, shownParameter, latency, classifierCalls },
+    application: { decision, prediction, shownParameter, ...measurement },
     voice: { applicationStatus: voiceStatus, humanAudibility: audibility, editedTextMatch },
   }
   session.attempts.push(attempt)

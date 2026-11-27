@@ -35,6 +35,19 @@ def timing(values):
     }
 
 
+def check_capture_timing(capture):
+    if capture is None:
+        return
+    if (not isinstance(capture, dict) or capture.get("trigger") not in ("manual", "time-limit", "frame-limit")
+            or not isinstance(capture.get("extractionMs"), list)):
+        raise ValueError("Há uma medição de captura inválida na ficha.")
+    values = [capture.get("decisionMs"), *capture["extractionMs"]]
+    if capture.get("initialLoadMs") is not None:
+        values.append(capture["initialLoadMs"])
+    if any(type(value) not in (int, float) or not 0 <= value <= 2**53 - 1 for value in values):
+        raise ValueError("Há uma duração inválida na medição de captura.")
+
+
 def checked_session(session, model, manifest_hash):
     if session["schema"] != "librasia-live-review/v1" or session["source"] != "live-manual-observation":
         raise ValueError("Use uma ficha de observação ao vivo do LibrasIA.")
@@ -59,6 +72,7 @@ def checked_session(session, model, manifest_hash):
             raise ValueError("Há uma tentativa inválida ou uma predição fora do modelo.")
         if calls is not None and (type(calls) is not int or calls < 0):
             raise ValueError("Há um número inválido de chamadas ao classificador.")
+        check_capture_timing(application.get("captureTiming"))
 
 
 def eligible(session):
@@ -161,8 +175,19 @@ def group_report(sessions, labels):
 
 def attempt_timing(attempts):
     values = []
+    initial_loads = []
+    extractions = []
     for attempt in attempts:
-        latency = attempt["application"]["latency"]
+        application = attempt["application"]
+        capture = application.get("captureTiming")
+        if capture is not None:
+            if capture["trigger"] == "manual":
+                values.append(capture["decisionMs"])
+            if capture.get("initialLoadMs") is not None:
+                initial_loads.append(capture["initialLoadMs"])
+            extractions.extend(capture["extractionMs"])
+            continue
+        latency = application["latency"]
         if latency is None:
             continue
         value = latency["milliseconds"]
@@ -170,7 +195,11 @@ def attempt_timing(attempts):
             raise ValueError("Há uma duração inválida na ficha.")
         if latency["method"] == "instrumented":
             values.append(value)
-    return timing(values)
+    return {
+        **timing(values),
+        "initialLoad": timing(initial_loads),
+        "extraction": timing(extractions),
+    }
 
 
 def main():
