@@ -31,9 +31,10 @@ def u_shape(points):
 def export(base, output, metadata, model, features, recover_disagreement):
     if base.resolve() == output.resolve() or "worldU" in metadata:
         raise ValueError("Escolha uma base sem a confirmação de U e um destino separado.")
-    if metadata.get("imageR", {}).get("vetoThreshold") != R_VETO:
-        raise ValueError("A base deve usar o limiar do veto de R avaliado neste ensaio.")
-    configuration = {**metadata, "imageR": {**metadata["imageR"], "recoverDisagreement": recover_disagreement}}
+    image_r = metadata.get("imageR", {})
+    if image_r.get("vetoThreshold") != R_VETO or image_r.get("threshold") != R_CONFIRMATION:
+        raise ValueError("A base deve usar os limiares de R avaliados neste ensaio.")
+    configuration = {**metadata, "imageR": {**image_r, "recoverDisagreement": recover_disagreement}}
     output.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(dir=output) as directory:
         folder = Path(directory)
