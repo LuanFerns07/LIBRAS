@@ -99,7 +99,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
       const paused = signingSpaceIntervals(frames, model.sampleMs)
       if (paused.length >= 2) {
         const result = await continuousResult(paused, frames, classify, translate)
-        if (result.state === 'accepted') return result
+        if (result.glosses.some(Boolean)) return result
       }
     }
     const samples = regularizeBoundaryFrames(frames, model.sampleMs)

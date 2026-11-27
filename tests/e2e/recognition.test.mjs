@@ -256,9 +256,11 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         const trail = document.querySelector("[data-continuous-glosses]")
         return trail.hidden ? '' : trail.textContent.split(' — ')[1]
       })()`) : null
-      if (continuous && expected && decision.state === 'accepted') {
+      if (continuous) {
         assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
-        await evaluate('document.querySelector("[data-apply-gloss-suggestion]").click()', true)
+        const apply = 'document.querySelector("[data-apply-gloss-suggestion]")'
+        assert.equal(await evaluate(apply + '.disabled'), decision.state !== 'accepted')
+        if (expected && decision.state === 'accepted') await evaluate(apply + '.click()', true)
       }
       const transcript = target ? null : await getTranscript()
       const window = fixedCaptureMs === null || !Number.isFinite(decision.endMs) ? null : {
