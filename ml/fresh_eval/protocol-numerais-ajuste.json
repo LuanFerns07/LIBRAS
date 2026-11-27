@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "scope": "leave-one-didactic-person-and-session-out-development",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "threshold": 0.525,
+  "minds": {
+    "index": "minds-expanded/features/index.json",
+    "sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+    "adjustmentPartition": "train",
+    "controlPartition": "val"
+  },
+  "sources": [
+    {
+      "index": "transition-gate-m5/geometry-development/features/index.json",
+      "sha256": "ba4b5bd354cd5e80bbd39ae3aefd71549ef9f901b9815a565d42bb7dd1cc4d4a",
+      "protocol": "transition-geometry-development.json",
+      "groups": {"901": "ufsm-libras-on"}
+    },
+    {
+      "index": "transition-gate-m5/numerais-independentes/features/index.json",
+      "sha256": "cf6f3cf4c662a9d473a976e71ba1d7128202b957a73e21450ea7b72c1ff934ca",
+      "protocol": "protocol-numerais-desenvolvimento.json",
+      "groups": {"902": "ufsm-libras-d", "903": "ufsm-grupo"}
+    },
+    {
+      "index": "transition-gate-m5/numerais-segundo-par/features/index.json",
+      "sha256": "51e4dd070b70e63fb0e97020648383b54fe211da79336056e3d6588db47869d0",
+      "protocol": "protocol-numerais-segundo-par.json",
+      "groups": {"904": "cecierj-aula-03"}
+    }
+  ],
+  "fit": {
+    "method": "linear-weighted-ridge",
+    "ridge": 0.1,
+    "thresholdSelection": "minimum-score-over-all-fit-positives",
+    "negatives": ["all-usable-transitions", "baseline-accepted-as-cinco"],
+    "features": ["shape", "shape-and-motion"],
+    "weighting": "equal-total-per-class-then-person-then-motion-then-overlapping-window",
+    "trigger": "cinco"
+  },
+  "criterion": {
+    "preserveAllCorrectCincoInMindsValAndDidacticHeldSessions": true,
+    "requireVetoInBothSessionsWithBaselineFalseCinco": true,
+    "requireAllOverlappingWindowsOfAtLeastOneFalseMovementPerSession": true
+  }
+}
