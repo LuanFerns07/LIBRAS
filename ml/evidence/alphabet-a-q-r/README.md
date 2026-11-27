@@ -210,3 +210,29 @@ for nome in pontos-chromium ufac-ampliado-captura unicentro-obliquo-captura; do
     data/releases/librasia-demonstracao/site "$out/$nome.json" > "$out/$nome-diagnostico.json"
 done
 ~~~
+
+### Pares de P e Q em outros ângulos
+
+O commit `2225fbd` fixou os recortes pelas letras impressas nas aulas. Os três pares novos de UFAC, UFF e Uníntese ampliaram o ajuste de três para seis pessoas. O Ifes ficou na reserva por pessoa, com dois recortes de P e dois de Q. O commit `222994b` fixou uma segunda vista de Q da aula explicativa da Unicentro. As duas vistas da Unicentro ficaram fora do ajuste. [Manifesto e créditos das aulas](../../alphabet/pq-angular-2026.json) · [Segunda vista da Unicentro](../../alphabet/pq-unicentro-segunda-vista.json)
+
+Comparamos as duas regressões logísticas anteriores, de geometria local e de geometria com direção dos dedos, nos pontos de imagem e nos pontos 3D. Cada ajuste amostrou 16 entradas por recorte, com o limiar de 0,95 já usado na sonda anterior. A avaliação usou as mesmas 63 janelas utilizáveis nas quatro comparações e excluiu todas as gravações usadas em qualquer ajuste. A regra avaliada só pode trocar P por Q quando as duas redes estáticas já aceitam P. [Escores e hashes](pq-diversidade-offline.json)
+
+| Entrada e treino | Quadros recuperados na primeira vista de Q da Unicentro | P corretos que virariam Q |
+| --- | ---: | ---: |
+| 3D, três pessoas | 0/14 nos dois modelos | 0/53 |
+| 3D, seis pessoas | 0/14 nos dois modelos | 0/53 |
+| Imagem, três pessoas | 0/14 nos dois modelos | 11/53 na geometria local e 0/53 na geometria com direção |
+| Imagem, seis pessoas | 0/14 nos dois modelos | 0/53 |
+
+No Chromium, a prévia `50ad447` exibiu P na primeira vista de Q da aula explicativa e mostrou Q 309 ms após o início da segunda vista. No Ifes, as duas janelas de Q mostraram Q. Entre as duas janelas de P do Ifes, uma mostrou N e a outra mostrou P. A rodada manteve na demonstração os modelos já instalados. A primeira vista de Q continua como caso de regressão. [Leituras do Chromium por janela](pq-diversidade-chromium.json)
+
+Para repetir os dois recortes da Unicentro no pacote local, use os MP4 conferidos pelos manifestos.
+
+~~~bash
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --manifest ml/alphabet/independent-p-q-windows.json \
+  --manifest ml/alphabet/pq-unicentro-segunda-vista.json \
+  --source unicentro-hxnpsxvwkgu --letters Q --workers 1 --timeline
+~~~
+
+Para refazer a extração com `ml.alphabet.extract_motion --world`, use os manifestos da primeira sonda de Q, os dois manifestos novos e a referência 3D já documentada. Separe os recortes P e Q de `1527000916`, `cecierj-13757` e `unesp-222981` para o treino original. Junte os seis recortes de treino do novo manifesto para formar o treino ampliado. Para o arquivo de avaliação, reúna os recortes de validação e teste e retire as seis gravações usadas nos ajustes. Aplique o mesmo arquivo de avaliação aos dois treinos com `ml.alphabet.probe_pq --coordinates world` e `ml.alphabet.probe_pq --coordinates image`. [Preparação da referência 3D](../alphabet-a-e-independent/README.md#ensaio-de-flexão-em-coordenadas-3d) · [Sonda P/Q](../../alphabet/probe_pq.py)

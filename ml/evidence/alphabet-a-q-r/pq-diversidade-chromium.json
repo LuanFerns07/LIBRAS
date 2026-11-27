@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "runs": [
+    {
+      "build": {
+        "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+        "imageRPolicy": {
+          "threshold": 0.95,
+          "vetoThreshold": 0.2,
+          "allowU": true
+        },
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/independent-p-q-windows.json",
+        "ml/alphabet/pq-angular-2026.json"
+      ],
+      "results": [
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "P",
+          "startMs": 108040,
+          "endMs": 109680,
+          "readings": [],
+          "clearedAtMs": [],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1431
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 62
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1747
+            }
+          ],
+          "workerFrames": 94,
+          "framesWithHand": 37,
+          "lastHandAfterVideoMs": 1701
+        },
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "Q",
+          "startMs": 110780,
+          "endMs": 111880,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 228
+            }
+          ],
+          "clearedAtMs": [
+            1149
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1613
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 29
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1149
+            }
+          ],
+          "workerFrames": 94,
+          "framesWithHand": 28,
+          "lastHandAfterVideoMs": 1110
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "label": "P",
+          "startMs": 173650,
+          "endMs": 176740,
+          "readings": [
+            {
+              "letter": "K",
+              "afterVideoMs": 2930
+            }
+          ],
+          "clearedAtMs": [
+            3161
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1636
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 23
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 3161
+            }
+          ],
+          "workerFrames": 141,
+          "framesWithHand": 75,
+          "lastHandAfterVideoMs": 3123
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "label": "Q",
+          "startMs": 177390,
+          "endMs": 178530,
+          "readings": [
+            {
+              "letter": "P",
+              "afterVideoMs": 554
+            }
+          ],
+          "clearedAtMs": [
+            1085
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1612
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 23
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1208
+            }
+          ],
+          "workerFrames": 94,
+          "framesWithHand": 29,
+          "lastHandAfterVideoMs": 1171
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "P",
+          "startMs": 148470,
+          "endMs": 149330,
+          "readings": [
+            {
+              "letter": "P",
+              "afterVideoMs": 423
+            }
+          ],
+          "clearedAtMs": [
+            889
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1613
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 46
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 889
+            }
+          ],
+          "workerFrames": 89,
+          "framesWithHand": 22,
+          "lastHandAfterVideoMs": 853
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "Q",
+          "startMs": 149680,
+          "endMs": 150920,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 549
+            }
+          ],
+          "clearedAtMs": [
+            1286
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1617
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 44
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1286
+            }
+          ],
+          "workerFrames": 98,
+          "framesWithHand": 32,
+          "lastHandAfterVideoMs": 1248
+        },
+        {
+          "source": "unicentro-aniqxveqgns",
+          "label": "P",
+          "startMs": 58790,
+          "endMs": 59730,
+          "readings": [
+            {
+              "letter": "P",
+              "afterVideoMs": 473
+            }
+          ],
+          "clearedAtMs": [
+            1029
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1637
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 27
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1029
+            }
+          ],
+          "workerFrames": 85,
+          "framesWithHand": 19,
+          "lastHandAfterVideoMs": 991
+        },
+        {
+          "source": "unicentro-aniqxveqgns",
+          "label": "Q",
+          "startMs": 62480,
+          "endMs": 63220,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 256
+            }
+          ],
+          "clearedAtMs": [
+            823
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1610
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 21
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 823
+            }
+          ],
+          "workerFrames": 81,
+          "framesWithHand": 15,
+          "lastHandAfterVideoMs": 784
+        },
+        {
+          "source": "ifes-mfl8r4t36fe",
+          "label": "P",
+          "startMs": 302900,
+          "endMs": 304580,
+          "readings": [
+            {
+              "letter": "N",
+              "afterVideoMs": 1135
+            }
+          ],
+          "clearedAtMs": [
+            1215
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1604
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 42
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1709
+            }
+          ],
+          "workerFrames": 108,
+          "framesWithHand": 42,
+          "lastHandAfterVideoMs": 1673
+        },
+        {
+          "source": "ifes-mfl8r4t36fe",
+          "label": "P",
+          "startMs": 313600,
+          "endMs": 314480,
+          "readings": [
+            {
+              "letter": "P",
+              "afterVideoMs": 663
+            }
+          ],
+          "clearedAtMs": [
+            948
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1644
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 41
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 948
+            }
+          ],
+          "workerFrames": 89,
+          "framesWithHand": 23,
+          "lastHandAfterVideoMs": 911
+        },
+        {
+          "source": "ifes-mfl8r4t36fe",
+          "label": "Q",
+          "startMs": 323420,
+          "endMs": 324320,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 231
+            }
+          ],
+          "clearedAtMs": [
+            960
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1633
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 44
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 960
+            }
+          ],
+          "workerFrames": 90,
+          "framesWithHand": 23,
+          "lastHandAfterVideoMs": 920
+        },
+        {
+          "source": "ifes-mfl8r4t36fe",
+          "label": "Q",
+          "startMs": 334750,
+          "endMs": 335400,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 235
+            }
+          ],
+          "clearedAtMs": [
+            744
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1595
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 41
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 744
+            }
+          ],
+          "workerFrames": 81,
+          "framesWithHand": 18,
+          "lastHandAfterVideoMs": 705
+        }
+      ]
+    },
+    {
+      "build": {
+        "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+        "imageRPolicy": {
+          "threshold": 0.95,
+          "vetoThreshold": 0.2,
+          "allowU": true
+        },
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/pq-unicentro-segunda-vista.json"
+      ],
+      "results": [
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "label": "Q",
+          "startMs": 179080,
+          "endMs": 180230,
+          "readings": [
+            {
+              "letter": "Q",
+              "afterVideoMs": 309
+            }
+          ],
+          "clearedAtMs": [
+            1248
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1604
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 86
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1248
+            }
+          ],
+          "workerFrames": 93,
+          "framesWithHand": 28,
+          "lastHandAfterVideoMs": 1210
+        }
+      ]
+    }
+  ]
+}

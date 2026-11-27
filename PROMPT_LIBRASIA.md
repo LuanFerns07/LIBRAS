@@ -24,6 +24,8 @@ Use os recortes rotulados da UFAC e da Unicentro para retestar o momento em que 
 
 Nos recortes de R da UFAC e U em perfil da Unicentro, a mão foi rastreada e o painel ficou vazio. Use o U oblíquo da Unicentro e o U da UFAC como controles ao ampliar a cobertura por ângulo. O verificador de forma de R deu pontuação alta ao U em perfil, e a ampliação do R da UFAC preservou a divergência entre as redes. [Diagnóstico por quadro](ml/evidence/alphabet-a-q-r/README.md#diagnóstico-do-u-em-perfil-e-do-r-da-ufac)
 
+Use as duas vistas de Q da aula explicativa da Unicentro para avaliar a confusão com P. A prévia exibiu P na primeira vista e Q na segunda. O treino ampliado com UFAC, UFF e Uníntese ainda deixou a primeira vista sem recuperação no teste offline. Preserve P e Q da reserva do Ifes junto das referências anteriores ao testar um novo candidato. [Treino e ensaio de ângulo](ml/evidence/alphabet-a-q-r/README.md#pares-de-p-e-q-em-outros-ângulos)
+
 Mantenha a prévia e a inferência no Linux local nesta rodada. A publicação na Vercel e a finalização do memorial dependem de nova orientação da equipe.
 
 A lição inicial usa **três a cinco sinais isolados**. Escolha os sinais pela utilidade pedagógica, pela cobertura dos conjuntos de dados e pela possibilidade de demonstrá-los fielmente no avatar. Mantenha as três etapas de observar a demonstração, praticar com auxílio e tentar com menos ajuda. Ofereça pausa, repetição e velocidade reduzida no avatar, além de uma atividade curta de compreensão sem câmera.
