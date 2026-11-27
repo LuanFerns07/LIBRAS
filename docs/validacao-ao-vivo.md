@@ -39,13 +39,15 @@ Para uma avaliação independente, mantenha a referência humana separada da dec
 
 ### Medir no Chromium
 
-Depois que a tentativa mostrar sua resposta, leia os tempos no console da aba do LibrasIA, antes de iniciar a próxima tentativa.
+Depois que a tentativa mostrar sua resposta, leia os dados da medição no console da aba do LibrasIA, antes de iniciar a próxima tentativa.
 
 ~~~js
 JSON.parse(document.querySelector('[data-capture-status]').dataset.timing ?? 'null')
 ~~~
 
-Quando `trigger` for `manual`, copie `decisionMs` para a ficha e selecione o método instrumentado. É o intervalo entre acionar **Concluir tentativa** e atualizar a decisão. Use as tentativas manuais com o avatar em reprodução para o critério de latência da lição. `initialLoadMs` mede o primeiro carregamento dos modelos após ativar a câmera e fica vazio nas tentativas seguintes. `extractionMs` contém as durações por quadro processado. Guarde esses tempos junto ao código da tentativa para a análise. A página mantém somente os tempos da última decisão em memória.
+Quando `trigger` for `manual`, copie `decisionMs` para a ficha e selecione o método instrumentado. É o intervalo entre acionar **Concluir tentativa** e atualizar a decisão. Use as tentativas manuais com o avatar em reprodução para o critério de latência da lição. `initialLoadMs` mede o carregamento inicial dos modelos na primeira tentativa e fica vazio nas tentativas seguintes. `extractionMs` contém as durações por quadro processado. Guarde esses tempos junto ao código da tentativa para a análise.
+
+Copie `classifierCalls` para **Chamadas ao classificador**. Zero indica que a tentativa terminou antes da classificação, como num quadro sem mãos. Um ou mais indica quantas vezes o classificador de sinais foi chamado, inclusive quando o resultado ficou inconclusivo. Nos modos de sequência, o valor soma as chamadas de todos os trechos analisados. Se o valor estiver ausente ou for `null`, deixe o campo em branco. A medição da última tentativa fica em memória até o próximo estado da captura.
 
 ## Exportar
 
@@ -63,7 +65,22 @@ Use o manifesto exato da sessão e passe os JSONs exportados no mesmo comando. U
   --out data/evidence/resumo-ao-vivo.json data/evidence/librasia-validacao-S*.json
 ~~~
 
-O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
+O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. Em `classifierReachByCondition`, cada cenário da Área livre com referência definida tem contagens de tentativas que chegaram ao classificador (`reached`), pararam antes dele (`notReached`) e ficaram sem medição (`unobserved`). As fichas anteriores entram nesta última contagem. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
+
+## Verificação das chamadas no Chromium
+
+No pacote `38a8ef8`, os controles usaram gravações locais como câmera do Chromium e o classificador combinado de SHA-256 `a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63`. O campo da ficha preservou zero na exportação. O analisador separou tentativas com e sem classificação e aceitou fichas anteriores, nas quais a medição fica desconhecida.
+
+| Controle | Chamadas | Decisão |
+| --- | ---: | --- |
+| Quadro preto | 0 | Inconclusiva por ausência de mãos |
+| Vontade S09-4 | 1 | Inconclusiva por baixa confiança |
+| Cinco S09-1 | 1 | Cinco acrescentado |
+| Cinco e Espelho com pausa | 2 | “cinco espelhos” acrescentado |
+| Espelho e Amarelo no modo contínuo | 8 | Sequência parcial, com a transcrição preservada |
+| Amarelo com os quadros invertidos em Praticar | 1 | Dica sobre a trajetória do indicador |
+
+Os relatórios individuais ficam em `data/evidence/demonstracao/classificador-38a8ef8-*.json`. O JSON da ficha foi conferido com dados de teste. A coleta dos cenários com pessoas independentes na webcam continua na checklist. [Origem dos controles gravados](regressao-area-livre.md#reproduzir-localmente) · [Par com pausa no modo contínuo](sinalizacao-continua.md#pares-de-sinais-do-catálogo-no-chromium) · [Controle de trajetória](roteiro-validacao.md#dica-de-trajetória-de-amarelo)
 
 ## Teste da lógica
 
@@ -71,4 +88,5 @@ O resumo mostra a matriz de resultados na área livre, as rejeições por tipo d
 node --test tests/validacao-ao-vivo.test.js
 LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_VALIDATION=1 \
   node --test tests/e2e/validation.test.mjs
+PYTHONPATH=ml .venv/bin/python -m unittest discover -s ml/tests -p 'test_live_review.py'
 ~~~
