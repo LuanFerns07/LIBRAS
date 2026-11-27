@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "frozen-for-a-second-independent-development-pair",
+  "model_sha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "model_manifest_sha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "minds_calibration_index_sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "calibration": {
+    "split": "train",
+    "reference": "cinco",
+    "baseline_decision": "cinco",
+    "correct_clips": 18,
+    "threshold_method": "minimum_median_confirmation"
+  },
+  "rule": {
+    "trigger_decision": "cinco",
+    "frames": 24,
+    "window_start_frames": [0, 6, 12],
+    "window_length_frames": 12,
+    "resample": "repeat_each_frame_twice_with_original_tracking_mask",
+    "measure": "median_of_three_cinco_softmax_probabilities",
+    "reject_below": 0.6674022400036198
+  },
+  "independent_check": {
+    "dataset_role": "development",
+    "group_by": ["person", "recording_session"],
+    "requires_baseline_correct_positive_and_false_cinco_from_same_person_and_recording": true,
+    "preferred_negative": "Sete → Oito",
+    "keep_other_numeric_transitions_as_controls": true,
+    "require_preserving_all_baseline_correct_cinco_and_rejecting_at_least_one_baseline_false_cinco": true,
+    "reserved_sources_excluded": ["Fiocruz", "MINDS test"]
+  }
+}

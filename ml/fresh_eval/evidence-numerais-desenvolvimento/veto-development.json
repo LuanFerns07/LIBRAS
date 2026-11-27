@@ -1,0 +1,585 @@
+{
+  "schema_version": 1,
+  "scope": "development-only",
+  "device": "CPUExecutionProvider",
+  "minds_reserved_and_fiocruz_features_loaded": false,
+  "model_fingerprints": {
+    "combined": {
+      "onnx": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifest": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b"
+    },
+    "geometry": {
+      "onnx": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifest": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac"
+    },
+    "flexion": {
+      "onnx": "8e38930e3fb1ef7cbc308cd736f70a49a6882941bb9cbbd424c06d598b1b980c",
+      "manifest": "19d7cbf6f94b2608c9bbbd4902e5856437e3f85528ba52ff0a859a95801cb206"
+    }
+  },
+  "minds_index_sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "paired_index_sha256": "cf6f3cf4c662a9d473a976e71ba1d7128202b957a73e21450ea7b72c1ff934ca",
+  "paired_protocol_sha256": "4fac40bb19f38188eb51eb1ea9bbf09726239f0b93f60960713d9b789ac4d7d1",
+  "historical_confirmation_sha256": "d1548f7bd191936365bea5aec20a234761d54c92fa2ea5e40cbb4e1852cf43ba",
+  "historical_geometry_sha256": "b46ff115460d766f2726f6b8d3d776eccf18d065251878cb0dde7cc6aecab2cd",
+  "baseline": {
+    "minds_train_correct_cinco": 18,
+    "minds_val_correct_cinco": 6,
+    "minds_val_wrong_cinco": 0,
+    "paired_cinco": 1,
+    "numeric_false_cinco": [
+      "ufsm-grupo-oito-nove"
+    ],
+    "seven_to_eight_windows": 6,
+    "seven_to_eight_people": 2,
+    "paired_capture_states": {
+      "ready": 12
+    }
+  },
+  "rules": {
+    "combined-validation": {
+      "measure": "combined",
+      "bound": "min",
+      "threshold": 0.798,
+      "fit_to": "val",
+      "minds_train_correct_cinco_lost": 1,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "combined-train-validation": {
+      "measure": "combined",
+      "bound": "min",
+      "threshold": 0.692,
+      "fit_to": "train+val",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": true
+    },
+    "members-validation": {
+      "measure": "members",
+      "bound": "min",
+      "threshold": 0.662,
+      "fit_to": "val",
+      "minds_train_correct_cinco_lost": 1,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "members-train-validation": {
+      "measure": "members",
+      "bound": "min",
+      "threshold": 0.544,
+      "fit_to": "train+val",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "snapshots-validation": {
+      "measure": "snapshots",
+      "bound": "min",
+      "threshold": 0.782,
+      "fit_to": "val",
+      "minds_train_correct_cinco_lost": 1,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "snapshots-train-validation": {
+      "measure": "snapshots",
+      "bound": "min",
+      "threshold": 0.661,
+      "fit_to": "train+val",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": true
+    },
+    "partial_confirmation": {
+      "measure": "partial_confirmation",
+      "bound": "min",
+      "threshold": 0.6674022400036198,
+      "fit_to": "train",
+      "training_values": 18,
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": true
+    },
+    "shape_change": {
+      "measure": "shape_change",
+      "bound": "max",
+      "threshold": 0.5637318778395658,
+      "fit_to": "train",
+      "training_values": 18,
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 0,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "wrist_position": {
+      "ranges": {
+        "wrist_center_y": {
+          "min": -0.23126781731843948,
+          "max": 0.44110508263111115,
+          "measured": 18
+        },
+        "wrist_center_abs_x": {
+          "min": 0.41928374767303467,
+          "max": 0.7297329306602478,
+          "measured": 18
+        },
+        "wrist_vertical_span": {
+          "min": 0.155997908115387,
+          "max": 1.7538790553808212,
+          "measured": 18
+        },
+        "wrist_delta_y": {
+          "min": -0.1124609112739563,
+          "max": 0.980944549664855,
+          "measured": 16
+        }
+      },
+      "fit_to": "train",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 6,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [
+        "ufsm-grupo-cinco"
+      ],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "wrist_motion": {
+      "ranges": {
+        "wrist_anisotropy": {
+          "min": 0.3420949195423737,
+          "max": 0.9936241516521797,
+          "measured": 18
+        },
+        "wrist_horizontal_share": {
+          "min": 0.009687374088858548,
+          "max": 0.38109971282949257,
+          "measured": 18
+        }
+      },
+      "fit_to": "train",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 1,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    },
+    "fingertip_motion": {
+      "ranges": {
+        "fingertip_anisotropy": {
+          "min": 0.3281188692578788,
+          "max": 0.9958370966761625,
+          "measured": 18
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.003583244390774111,
+          "max": 0.8139155961055662,
+          "measured": 18
+        }
+      },
+      "fit_to": "train",
+      "minds_train_correct_cinco_lost": 0,
+      "minds_val_correct_cinco_lost": 1,
+      "minds_val_wrong_cinco_removed": 0,
+      "paired_correct_cinco_lost": [],
+      "paired_false_cinco_removed": [
+        "ufsm-grupo-oito-nove"
+      ],
+      "seven_to_eight_accepted": 0,
+      "meets_development_criterion": false
+    }
+  },
+  "paired_decisions": [
+    {
+      "id": "ufsm-libras-d-cinco",
+      "sha256": "fc97724c4fa01cbf2b867337c686d541a674b6d49f5e3a2278a442f207b8d2cc",
+      "signer": 902,
+      "partition": "test",
+      "stratum": null,
+      "reference": "cinco",
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.47850307562480054,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-libras-d-seis-sete",
+      "sha256": "23f215e4168931869587b599b86c5bdf26c4eec5c7da7e2a259cd931e19b3430",
+      "signer": 902,
+      "partition": "test",
+      "stratum": "transicao-controle",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.9821894808441182,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-600",
+      "sha256": "464128da619b0ea96c732d2022c0d7ff91c7de8df5b1a67a41d9567b034297e2",
+      "signer": 902,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.6720157710961809,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-1000",
+      "sha256": "6bd23855079a8fdc6663f5a0f8eb34c80dfa0a1991dd468108d0032014614a5a",
+      "signer": 902,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.7250425927066455,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-1500",
+      "sha256": "13b43c8897da05f4a8efb7c91055f15375605953486d99ce92f1b284ce24b860",
+      "signer": 902,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.8331047487666752,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-libras-d-oito-nove",
+      "sha256": "5b236556c5111cad2896f76f360c1297d2d5cb40b17d00f90e77c00c4a9303c4",
+      "signer": 902,
+      "partition": "test",
+      "stratum": "transicao-controle",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.8958001161202739,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-grupo-cinco",
+      "sha256": "bbc43f8c843688240685d16ca6e3c63fb07532e8114f47ce2d87e7f67a56fec9",
+      "signer": 903,
+      "partition": "test",
+      "stratum": null,
+      "reference": "cinco",
+      "capture": "ready",
+      "baseline": "cinco",
+      "confidence": 0.9701564421799358,
+      "measures": {
+        "combined": 0.9701564421799358,
+        "members": 0.9409076200788035,
+        "snapshots": 0.9752016628959691,
+        "partial_confirmation": 0.9734155720554732,
+        "shape_change": 0.06352545660931441
+      },
+      "geometry": {
+        "wrist_center_y": 0.2684252858161926,
+        "wrist_center_abs_x": 0.5357370972633362,
+        "wrist_vertical_span": 0.1505279690027237,
+        "wrist_delta_y": 0.13609804213047028,
+        "wrist_anisotropy": 0.9583120491096577,
+        "wrist_horizontal_share": 0.032238420912425916,
+        "fingertip_anisotropy": 0.8160079978125641,
+        "fingertip_horizontal_share": 0.09626423514231996
+      },
+      "alternatives": {
+        "combined-validation": "cinco",
+        "combined-train-validation": "cinco",
+        "members-validation": "cinco",
+        "members-train-validation": "cinco",
+        "snapshots-validation": "cinco",
+        "snapshots-train-validation": "cinco",
+        "partial_confirmation": "cinco",
+        "shape_change": "cinco",
+        "wrist_position": null,
+        "wrist_motion": "cinco",
+        "fingertip_motion": "cinco"
+      }
+    },
+    {
+      "id": "ufsm-grupo-seis-sete",
+      "sha256": "64e72946c99bf1b6e949dfb170ca11733c26a281cf5f88d65c2a407ba4f0c364",
+      "signer": 903,
+      "partition": "test",
+      "stratum": "transicao-controle",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.8838535705788167,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-600",
+      "sha256": "7e521fbd4e375bca719dfd369279ef960154401ebc527d24f87b2d7fe3fbc73a",
+      "signer": 903,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.7783523416380869,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-1000",
+      "sha256": "7fdf10a350f922a4aaaac35b7438e442bdd80d03883fabc791af83ca38869f20",
+      "signer": 903,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.6790346044529806,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-1500",
+      "sha256": "b957415f0f96c53074e855ad6a95608050f6f7f3bd757f171696b419330d54d6",
+      "signer": 903,
+      "partition": "test",
+      "stratum": "transicao-sete-oito",
+      "reference": null,
+      "capture": "ready",
+      "baseline": null,
+      "confidence": 0.65338471521834,
+      "measures": {},
+      "geometry": {},
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": null,
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": null,
+        "wrist_position": null,
+        "wrist_motion": null,
+        "fingertip_motion": null
+      }
+    },
+    {
+      "id": "ufsm-grupo-oito-nove",
+      "sha256": "79c292932765868a3179d0353dac894af278714a4af3d2fc80a5591eb69cad61",
+      "signer": 903,
+      "partition": "test",
+      "stratum": "transicao-controle",
+      "reference": null,
+      "capture": "ready",
+      "baseline": "cinco",
+      "confidence": 0.6817391353612173,
+      "measures": {
+        "combined": 0.6817391353612173,
+        "members": 0.5533409724137764,
+        "snapshots": 0.1940938113748578,
+        "partial_confirmation": 0.397828819716074,
+        "shape_change": 0.14231667217758534
+      },
+      "geometry": {
+        "wrist_center_y": 0.08720018714666367,
+        "wrist_center_abs_x": 0.6896246671676636,
+        "wrist_vertical_span": 0.15194798223674297,
+        "wrist_delta_y": -0.005496367812156677,
+        "wrist_anisotropy": 0.8317107886881443,
+        "wrist_horizontal_share": 0.36961843671144895,
+        "fingertip_anisotropy": 0.25894207973269623,
+        "fingertip_horizontal_share": 0.5915026074048491
+      },
+      "alternatives": {
+        "combined-validation": null,
+        "combined-train-validation": null,
+        "members-validation": null,
+        "members-train-validation": "cinco",
+        "snapshots-validation": null,
+        "snapshots-train-validation": null,
+        "partial_confirmation": null,
+        "shape_change": "cinco",
+        "wrist_position": null,
+        "wrist_motion": "cinco",
+        "fingertip_motion": null
+      }
+    }
+  ]
+}

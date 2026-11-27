@@ -60,3 +60,28 @@ node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --work
 PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate --protocol "$protocol" \
   --manifest "$out/manifest.json" --features "$out/features/index.json" --out "$out/report.json"
 ```
+
+## Comparação de vetos no par Oito → Nove e Cinco
+
+A comparação reaplicou os vetos históricos de confiança, concordância entre modelos e quadros estáticos, além das faixas geométricas da primeira sonda. Foram acrescentadas duas regras calibradas nos 18 Cinco corretos do MINDS treino, a confirmação em subtrechos e a mudança de forma da mão. O critério do ensaio foi rejeitar o falso Cinco de Oito → Nove, manter o Cinco isolado da mesma gravação e os seis Cinco corretos do MINDS validação, conservar os 18 Cinco da calibração e manter as seis janelas de Sete → Oito rejeitadas. Os recortes Fiocruz e os pontos reservados do MINDS ficaram fora. [Regras, contagens e decisões](../ml/fresh_eval/evidence-numerais-desenvolvimento/veto-development.json)
+
+| Regra para uma janela que o modelo aceitou como Cinco | Cinco perdidos no MINDS treino / validação | Cinco pareado preservado | Falso Cinco de Oito → Nove vetado |
+| --- | ---: | --- | --- |
+| Confiança do combinado ≥ 0,692, mínimo histórico em treino e validação | 0/18 · 0/6 | Sim | Sim |
+| Concordância entre modelos ≥ 0,544, mínimo histórico em treino e validação | 0/18 · 0/6 | Sim | Não |
+| Mediana da confiança em três quadros estáticos ≥ 0,661, mínimo histórico em treino e validação | 0/18 · 0/6 | Sim | Sim |
+| Mediana da probabilidade de Cinco em três subtrechos ≥ 0,667402, mínimo em treino | 0/18 · 0/6 | Sim | Sim |
+| Mudança de forma da mão ≤ 0,563732, máximo em treino | 0/18 · 0/6 | Sim | Não |
+| Faixa de posições do pulso do treino | 0/18 · 6/6 | Não | Sim |
+| Faixa de movimento do pulso do treino | 0/18 · 1/6 | Sim | Não |
+| Faixa de movimento das pontas dos dedos do treino | 0/18 · 1/6 | Sim | Sim |
+
+Para a confirmação em subtrechos, o combinado recebe três janelas de 12 quadros a partir dos índices 0, 6 e 12 da sequência normalizada de 24 quadros. Cada quadro é duplicado e mantém a sua máscara de rastreamento. A mediana da probabilidade de Cinco foi 0,973 no positivo pareado e 0,398 no falso. A medida da forma da mão usa distâncias tridimensionais entre o pulso e as pontas dos cinco dedos, divididas pela distância entre o pulso e a base do dedo médio. O percentil 90 do desvio absoluto médio em relação ao próprio clipe foi 0,064 no Cinco isolado e 0,142 em Oito → Nove, ambos abaixo do limite de treino. [Implementação da comparação](../ml/evaluate_paired_numerals.py)
+
+O limiar dos subtrechos deriva só do MINDS treino e a regra usa apenas o modelo combinado. A única observação de um falso Cinco com controle positivo pareado ainda vem de uma pessoa. O protocolo fixa a regra para um segundo par de desenvolvimento de outra pessoa e sessão. Os rótulos e recortes precisam estar definidos antes de rodar o modelo congelado. O segundo par é informativo se o modelo acertar o Cinco isolado e aceitar a transição como Cinco no mesmo enquadramento. A regra precisa manter todos os Cinco corretos e vetar pelo menos um falso Cinco desse novo grupo. [Regra e critério congelados](../ml/fresh_eval/evidence-numerais-desenvolvimento/partial-confirmation-protocol.json)
+
+Com os pontos das duas aulas extraídos, este comando grava `$out/veto-development.json` em CPU.
+
+```bash
+PYTHONPATH=ml .venv/bin/python -m ml.evaluate_paired_numerals
+```
