@@ -1,5 +1,6 @@
-import { openContinuous } from '/src/recognition/continuous.js'
+import { continuousResult, openContinuous } from '/src/recognition/continuous.js'
 import { openEngine } from '/src/recognition/engine.js'
+import { signingSpaceIntervals } from '/src/recognition/segmentation.js'
 import { closeVideo, stageVideo, waitForVideo } from '../browser-probe.js'
 
 const video = document.querySelector('video')
@@ -23,7 +24,7 @@ function scoreReference(reference, proposals, minIoU) {
   }
 }
 
-async function compare(condition, frames, recognize, protocol) {
+async function compare(condition, frames, recognize, protocol, pauseControl) {
   const decoderModel = 'boundary-model.'
   async function localAsset(path) {
     const name = path.split('/').at(-1)
@@ -43,33 +44,44 @@ async function compare(condition, frames, recognize, protocol) {
 
   const runtime = await openContinuous(localAsset, verifiedBytes, recognize)
   try {
-    const result = await runtime.recognize(frames)
-    const referenceText = protocol.annotation.text
-    const textFromReferenceGlosses = referenceText
-      ? result.review(protocol.annotation.references.map(reference => reference.gloss).join(' ')).text ?? null
-      : undefined
-    const offset = protocol.clip.startMs
-    const proposals = result.intervals.map(({ startMs, endMs }, index) => ({
-      startMs: startMs + offset,
-      endMs: endMs + offset,
-      gloss: result.glosses[index],
-    }))
-    return {
-      id: condition.id,
-      state: result.state,
-      reason: result.reason ?? null,
-      suggestedText: result.text ?? null,
-      ...(referenceText ? { referenceText, textFromReferenceGlosses } : {}),
-      proposals,
-      references: protocol.annotation.references.map(reference =>
-        scoreReference(reference, proposals, protocol.experiment.iou)),
+    const original = await runtime.recognize(frames)
+    const results = [scoreResult(condition.id, original, protocol, original.review)]
+    if (pauseControl) {
+      const intervals = signingSpaceIntervals(frames, protocol.clip.sampleMs)
+      const translate = glosses => original.review(glosses.join(' ')).text?.split(' ') ?? []
+      const paused = await continuousResult(intervals, frames, recognize, translate)
+      results.push(scoreResult('signing_space_pauses', paused, protocol, original.review))
     }
+    return results
   } finally {
     await runtime.close()
   }
 }
 
-async function run(protocol, diagnosis) {
+function scoreResult(id, result, protocol, review) {
+  const referenceText = protocol.annotation.text
+  const textFromReferenceGlosses = referenceText
+    ? review(protocol.annotation.references.map(reference => reference.gloss).join(' ')).text ?? null
+    : undefined
+  const offset = protocol.clip.startMs
+  const proposals = result.intervals.map(({ startMs, endMs }, index) => ({
+    startMs: startMs + offset,
+    endMs: endMs + offset,
+    gloss: result.glosses[index],
+  }))
+  return {
+    id,
+    state: result.state,
+    reason: result.reason ?? null,
+    suggestedText: result.text ?? null,
+    ...(referenceText ? { referenceText, textFromReferenceGlosses } : {}),
+    proposals,
+    references: protocol.annotation.references.map(reference =>
+      scoreReference(reference, proposals, protocol.experiment.iou)),
+  }
+}
+
+async function run(protocol, diagnosis, comparePauses) {
   const engine = await openEngine()
   let diagnostic
   try {
@@ -85,8 +97,8 @@ async function run(protocol, diagnosis) {
       frames.push({ ...engine.detect(canvas, timestamp), aspect: canvas.width / canvas.height })
     }
     const conditions = []
-    for (const condition of protocol.experiment.conditions) {
-      conditions.push(await compare(condition, frames, engine.recognize, protocol))
+    for (const [index, condition] of protocol.experiment.conditions.entries()) {
+      conditions.push(...await compare(condition, frames, engine.recognize, protocol, comparePauses && index === 0))
     }
     if (diagnosis) {
       const { openDialogueDiagnosis } = await import('./browser-dialogue-diagnosis.js')
@@ -116,9 +128,9 @@ async function run(protocol, diagnosis) {
   }
 }
 
-window.runInstitutionalDialogue = (protocol, diagnosis) => {
+window.runInstitutionalDialogue = (protocol, diagnosis, comparePauses) => {
   window.dialogueResult = null
-  run(protocol, diagnosis).then(
+  run(protocol, diagnosis, comparePauses).then(
     result => { window.dialogueResult = result },
     error => { window.dialogueResult = { error: error.stack ?? String(error) } },
   )

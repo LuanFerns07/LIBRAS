@@ -257,6 +257,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         return trail.hidden ? '' : trail.textContent.split(' — ')[1]
       })()`) : null
       if (continuous && expected && decision.state === 'accepted') {
+        assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
         await evaluate('document.querySelector("[data-apply-gloss-suggestion]").click()', true)
       }
       const transcript = target ? null : await getTranscript()

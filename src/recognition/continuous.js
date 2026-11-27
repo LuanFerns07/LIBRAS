@@ -2,6 +2,7 @@ import { InferenceSession, Tensor } from 'onnxruntime-web/wasm'
 import { recognitionCatalog } from '../catalog.js'
 import { boundaryFeatureCount, boundaryFeatures, decodeBoundaries } from './boundaries.js'
 import { createContinuousTranslator, glossTranslatorSchema } from './gloss-text.js'
+import { signingSpaceIntervals } from './segmentation.js'
 
 const directory = 'models/continuous/'
 const labelById = new Map(recognitionCatalog.map(({ id, text }) => [id, text]))
@@ -70,7 +71,7 @@ export function suggestFromReview(value, vocabulary, translate) {
     : { state: 'inconclusive', message: 'A sequência revisada ficou sem sugestão de texto.' }
 }
 
-export async function openContinuous(localAsset, verifiedBytes, recognize, catalog = labelById.values()) {
+export async function openContinuous(localAsset, verifiedBytes, recognize, catalog = labelById.values(), { preferPauses = false } = {}) {
   async function readJson(file) {
     return (await localAsset(directory + file)).json()
   }
@@ -93,6 +94,14 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
   let working = Promise.resolve()
 
   async function analyze(frames, onClassification) {
+    const classify = segment => recognize(segment, onClassification)
+    if (preferPauses) {
+      const paused = signingSpaceIntervals(frames, model.sampleMs)
+      if (paused.length >= 2) {
+        const result = await continuousResult(paused, frames, classify, translate)
+        if (result.state === 'accepted') return result
+      }
+    }
     const samples = regularizeBoundaryFrames(frames, model.sampleMs)
     const length = samples.times.length
     if (length < 2) return continuousResult([], frames, recognize, translate)
@@ -100,7 +109,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
     const input = new Tensor('float32', boundaryFeatures(samples.frames), [length, boundaryFeatureCount])
     const { probabilities } = await session.run({ features: input })
     const intervals = decodeBoundaries(samples.times, probabilities.data, model.durationPriorMs, model.decoder)
-    return continuousResult(intervals, frames, segment => recognize(segment, onClassification), translate)
+    return continuousResult(intervals, frames, classify, translate)
   }
 
   return {

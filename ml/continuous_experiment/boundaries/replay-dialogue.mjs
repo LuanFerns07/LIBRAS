@@ -9,9 +9,11 @@ import { promisify } from 'node:util'
 import { createServer } from 'vite'
 import { withChromium } from '../../../tests/e2e/chromium.mjs'
 
-const [dataRoot, reportFile, option] = process.argv.slice(2)
-if (!dataRoot || !reportFile || ![undefined, '--diagnose', '--single-signer', '--eqt', '--pairs'].includes(option) || process.argv.length > 5) {
-  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose|--single-signer|--eqt|--pairs]')
+const [dataRoot, reportFile, option, control] = process.argv.slice(2)
+const comparePauses = control === '--compare-pauses' && ['--pairs', '--eqt'].includes(option)
+if (!dataRoot || !reportFile || ![undefined, '--diagnose', '--single-signer', '--eqt', '--pairs'].includes(option) ||
+    (control && !comparePauses) || process.argv.length > 6) {
+  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose|--single-signer|--eqt|--pairs] [--compare-pauses]')
 }
 
 const project = fileURLToPath(new URL('../../../', import.meta.url))
@@ -220,7 +222,7 @@ try {
       await navigate(url)
       await waitUntil('typeof window.runInstitutionalDialogue === "function"', 30000)
       async function replay(replayProtocol, replayDiagnosis) {
-        await evaluate('window.runInstitutionalDialogue(...' + JSON.stringify([replayProtocol, replayDiagnosis]) + ')')
+        await evaluate('window.runInstitutionalDialogue(...' + JSON.stringify([replayProtocol, replayDiagnosis, comparePauses]) + ')')
         await waitUntil('window.dialogueResult !== null', replayDiagnosis ? 300000 : 180000)
         const row = await evaluate('window.dialogueResult')
         if (row.error) throw new Error(row.error)

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { decide, readModelManifest } from '../src/recognition/decision.js'
 import { featureCount, preprocessFrames, preprocessId, sequenceLength } from '../src/recognition/preprocess.js'
-import { segmentFrames } from '../src/recognition/segmentation.js'
+import { segmentFrames, signingSpaceIntervals } from '../src/recognition/segmentation.js'
 
 function makeFrame(timestamp, { hand = true, pose = true } = {}) {
   const landmarks = []
@@ -72,4 +72,6 @@ test('a segmentação separa sinais com pausa, preserva sustentações e descart
   assert.equal(segments.length, 2)
   assert.deepEqual(segments.map(window => [window[0].timestamp, window.at(-1).timestamp]), [[0, 500], [1000, 1600]])
   assert.equal(segmentFrames(Array.from({ length: 21 }, (_, index) => makeFrame(index * 100))).length, 1)
+  const irregular = [...frames.slice(0, 6), makeFrame(575, { hand: false }), ...frames.slice(6)]
+  assert.deepEqual(signingSpaceIntervals(irregular, 100), [{ startMs: 0, endMs: 575 }, { startMs: 1000, endMs: 1700 }])
 })

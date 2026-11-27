@@ -32,3 +32,14 @@ export function segmentFrames(frames) {
   finish()
   return segments
 }
+
+export function signingSpaceIntervals(frames, sampleMs) {
+  return segmentFrames(frames).map(segment => {
+    const last = segment.at(-1)
+    const next = frames[frames.indexOf(last) + 1]
+    return {
+      startMs: segment[0].timestamp,
+      endMs: Math.min(last.timestamp + sampleMs, next?.timestamp ?? Infinity),
+    }
+  })
+}
