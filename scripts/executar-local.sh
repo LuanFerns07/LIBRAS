@@ -55,7 +55,7 @@ if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; the
   mkdir -p "$previa/public/models"
   cp "$alfabeto/"{alphabet.json,alphabet.onnx} "$previa/public/models/"
   for arquivo in alphabet-check.onnx alphabet-supplement.onnx alphabet-contrast.onnx alphabet-a-world.onnx \
-    alphabet-q-shape.onnx alphabet-r-shape.onnx alphabet-y-shape.onnx; do
+    alphabet-q-shape.onnx alphabet-r-shape.onnx alphabet-y-shape.onnx alphabet-u-world.onnx; do
     if [[ -f "$alfabeto/$arquivo" ]]; then
       cp "$alfabeto/$arquivo" "$previa/public/models/"
     fi

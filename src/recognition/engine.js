@@ -37,7 +37,7 @@ export async function openAlphabetEngine() {
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
   const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256,
-    supplement, contrast, worldA, worldQ, imageR, imageY } = await response.json()
+    supplement, contrast, worldA, worldQ, imageR, imageY, worldU } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
@@ -63,6 +63,7 @@ export async function openAlphabetEngine() {
     [worldQ, ['Q', 'N'], 'hand-world-wrist-palm-v1', 'alphabet-q-shape.onnx'],
     [imageR, ['U', 'R'], 'hand-wrist-palm-v1', 'alphabet-r-shape.onnx'],
     [imageY, [], 'hand-wrist-palm-v1', 'alphabet-y-shape.onnx'],
+    [worldU, ['U', 'R'], 'hand-world-wrist-palm-v1', 'alphabet-u-world.onnx'],
   ]
   for (const [shape, letters, reference] of shapes) {
     if (shape !== undefined && (!shape || !agreementSha256 || letters.some(label => !labels.includes(label)) ||
@@ -74,8 +75,12 @@ export async function openAlphabetEngine() {
   if (imageR && ((imageR.vetoThreshold !== undefined &&
       (!Number.isFinite(imageR.vetoThreshold) || !(imageR.vetoThreshold > 0 && imageR.vetoThreshold < imageR.threshold))) ||
       (imageR.allowU !== undefined && typeof imageR.allowU !== 'boolean') ||
+      (imageR.recoverDisagreement !== undefined && typeof imageR.recoverDisagreement !== 'boolean') ||
       (imageR.allowU === false && imageR.vetoThreshold === undefined))) {
     throw new TypeError('Manifesto da confirmação de R incompatível.')
+  }
+  if (worldU && imageR?.vetoThreshold === undefined) {
+    throw new TypeError('A confirmação de U exige o veto de R.')
   }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
@@ -125,7 +130,7 @@ export async function openAlphabetEngine() {
       ...shapeModels.map(model => model?.release())])
     throw error
   }
-  const [aModel, qModel, rModel, yModel] = shapeModels
+  const [aModel, qModel, rModel, yModel, uModel] = shapeModels
   let pending = Promise.resolve()
 
   async function letterVote(model, input) {
@@ -144,6 +149,11 @@ export async function openAlphabetEngine() {
       throw new TypeError('Saída da confirmação de forma incompatível.')
     }
     return scores.data[0] >= threshold
+  }
+
+  async function confirmsWorldShape(model, hand, threshold) {
+    const world = letterFeatures(hand, 1)
+    return !!world && await confirmsShape(model, { world: new Tensor('float32', world, [1, features]) }, threshold)
   }
 
   async function refinedLetter(letter, input) {
@@ -174,7 +184,9 @@ export async function openAlphabetEngine() {
         const second = verifier && (first.accepted || checkA || checkQ) ? await letterVote(verifier, input) : null
         if (first.accepted && (!verifier || second.accepted && second.label === first.label)) {
           if (rModel && first.label === 'R' && imageR.vetoThreshold !== undefined &&
-              !await confirmsShape(rModel, { hand: input }, imageR.vetoThreshold)) return null
+              !await confirmsShape(rModel, { hand: input }, imageR.vetoThreshold)) {
+            return uModel && hasWorld && await confirmsWorldShape(uModel, worldHand, worldU.threshold) ? 'U' : null
+          }
           if (rModel && first.label === 'U' && imageR.allowU !== false &&
               await confirmsShape(rModel, { hand: input }, imageR.threshold)) return 'R'
           return refinedLetter(first.label, input)
@@ -190,14 +202,13 @@ export async function openAlphabetEngine() {
         }
         const maybeA = checkA && worldCandidates.includes(second.label)
         const maybeQ = checkQ && second.accepted && second.label === 'Q'
-        if (maybeA || maybeQ) {
-          const world = letterFeatures(worldHand, 1)
-          if (world) {
-            const inputWorld = { world: new Tensor('float32', world, [1, features]) }
-            const confirmed = await confirmsShape(maybeA ? aModel : qModel, inputWorld,
-              maybeA ? worldA.threshold : worldQ.threshold)
-            if (confirmed) return maybeA ? 'A' : 'Q'
-          }
+        if ((maybeA || maybeQ) && await confirmsWorldShape(maybeA ? aModel : qModel, worldHand,
+          maybeA ? worldA.threshold : worldQ.threshold)) {
+          return maybeA ? 'A' : 'Q'
+        }
+        if (rModel && imageR.recoverDisagreement && first.accepted && first.label === 'R' && second?.label === 'U' &&
+            await confirmsShape(rModel, { hand: input }, imageR.threshold)) {
+          return 'R'
         }
         if (alternateValues && first.accepted && second && first.label === 'N' &&
             ['M', 'N'].includes(second.label)) {

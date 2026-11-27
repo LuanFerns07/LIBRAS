@@ -127,6 +127,7 @@ def alphabet_model_files(metadata):
             ("alphabet-q-shape.onnx", metadata.get("worldQ", {}).get("modelSha256")),
             ("alphabet-r-shape.onnx", metadata.get("imageR", {}).get("modelSha256")),
             ("alphabet-y-shape.onnx", metadata.get("imageY", {}).get("modelSha256")),
+            ("alphabet-u-world.onnx", metadata.get("worldU", {}).get("modelSha256")),
         ) if digest is not None
     ]
 
