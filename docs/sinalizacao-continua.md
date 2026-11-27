@@ -234,6 +234,24 @@ node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" "$out/replay
 .venv/bin/python -m ml.continuous_experiment.boundaries.score_pairs "$out/replay.json" > "$out/summary.json"
 ~~~
 
+### Concordância com Cinco
+
+A prévia `ec13dd6` aplica o plural a três sequências completas do catálogo. As glosas “cinco aluno”, “cinco espelho” e “cinco espelho amarelo” geram “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. A tradução automática de uma sequência conclusiva e a revisão usam a mesma regra. Em 84 sequências de um a três sinais, só essas três saídas mudaram e a contagem de Cinco foi preservada em todas.
+
+Ao fornecer ao tradutor as glosas de referência dos 12 pares do MINDS, as correspondências exatas passaram de 0/12 a 8/12. O erro literal por palavra passou de 50,00% a 16,67%. As quatro diferenças restantes foram a presença de “o” em “o espelho amarelo”. [Comparação textual e evidência do Chromium](../ml/evidence/ufsc-boundaries/minds-pairs-concordancia.json)
+
+Na câmera de arquivo do Chromium, o par Espelho + Amarelo com pausa de 800 ms ainda gerou glosas repetidas e trechos inconclusivos. A transcrição anterior ficou intacta. Na revisão, o teste conferiu os três plurais, a invalidação da sugestão após uma edição e o acréscimo único de “cinco espelhos amarelos” após confirmar. A validação de transições naturais e de sinalização na webcam física segue pendente. [Prévia experimental](http://127.0.0.1:4201/#area-livre)
+
+Para repetir o mesmo ensaio com o arquivo usado na câmera do Chromium, execute na raiz:
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 \
+  LIBRASIA_TEST_CONTINUOUS=1 LIBRASIA_TEST_GLOSS_REVIEW=1 \
+  LIBRASIA_TEST_CAPTURE_MS=8700 LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO=data/continuous-natural-eval/minds-pairs/s12-espelho-amarelo-800-sync.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

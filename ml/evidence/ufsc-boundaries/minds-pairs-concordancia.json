@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "scope": "text from reference glosses of controlled compositions and catalog combinations",
+  "protocolPath": "ml/evidence/ufsc-boundaries/minds-pairs-protocol.json",
+  "protocolSha256": "09eebad7bd65dd9094506dacac5bc9067220b6a37eb5a452c3639510f8b41d5a",
+  "translationArtifactSha256": "99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11",
+  "catalogProbe": {
+    "sequences": 84,
+    "numeralCountPreserved": 84,
+    "differences": [
+      {
+        "glosses": [
+          "cinco",
+          "espelho"
+        ],
+        "previous": "cinco espelho",
+        "current": "cinco espelhos"
+      },
+      {
+        "glosses": [
+          "cinco",
+          "aluno"
+        ],
+        "previous": "cinco aluno",
+        "current": "cinco alunos"
+      },
+      {
+        "glosses": [
+          "cinco",
+          "espelho",
+          "amarelo"
+        ],
+        "previous": "cinco espelho amarelo",
+        "current": "cinco espelhos amarelos"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "s11-cinco-aluno-0",
+      "glosses": [
+        "cinco",
+        "aluno"
+      ],
+      "referenceText": "cinco alunos",
+      "previous": "cinco aluno",
+      "current": "cinco alunos"
+    },
+    {
+      "id": "s11-cinco-aluno-800",
+      "glosses": [
+        "cinco",
+        "aluno"
+      ],
+      "referenceText": "cinco alunos",
+      "previous": "cinco aluno",
+      "current": "cinco alunos"
+    },
+    {
+      "id": "s11-cinco-espelho-0",
+      "glosses": [
+        "cinco",
+        "espelho"
+      ],
+      "referenceText": "cinco espelhos",
+      "previous": "cinco espelho",
+      "current": "cinco espelhos"
+    },
+    {
+      "id": "s11-cinco-espelho-800",
+      "glosses": [
+        "cinco",
+        "espelho"
+      ],
+      "referenceText": "cinco espelhos",
+      "previous": "cinco espelho",
+      "current": "cinco espelhos"
+    },
+    {
+      "id": "s11-espelho-amarelo-0",
+      "glosses": [
+        "espelho",
+        "amarelo"
+      ],
+      "referenceText": "espelho amarelo",
+      "previous": "o espelho amarelo",
+      "current": "o espelho amarelo"
+    },
+    {
+      "id": "s11-espelho-amarelo-800",
+      "glosses": [
+        "espelho",
+        "amarelo"
+      ],
+      "referenceText": "espelho amarelo",
+      "previous": "o espelho amarelo",
+      "current": "o espelho amarelo"
+    },
+    {
+      "id": "s12-cinco-aluno-0",
+      "glosses": [
+        "cinco",
+        "aluno"
+      ],
+      "referenceText": "cinco alunos",
+      "previous": "cinco aluno",
+      "current": "cinco alunos"
+    },
+    {
+      "id": "s12-cinco-aluno-800",
+      "glosses": [
+        "cinco",
+        "aluno"
+      ],
+      "referenceText": "cinco alunos",
+      "previous": "cinco aluno",
+      "current": "cinco alunos"
+    },
+    {
+      "id": "s12-cinco-espelho-0",
+      "glosses": [
+        "cinco",
+        "espelho"
+      ],
+      "referenceText": "cinco espelhos",
+      "previous": "cinco espelho",
+      "current": "cinco espelhos"
+    },
+    {
+      "id": "s12-cinco-espelho-800",
+      "glosses": [
+        "cinco",
+        "espelho"
+      ],
+      "referenceText": "cinco espelhos",
+      "previous": "cinco espelho",
+      "current": "cinco espelhos"
+    },
+    {
+      "id": "s12-espelho-amarelo-0",
+      "glosses": [
+        "espelho",
+        "amarelo"
+      ],
+      "referenceText": "espelho amarelo",
+      "previous": "o espelho amarelo",
+      "current": "o espelho amarelo"
+    },
+    {
+      "id": "s12-espelho-amarelo-800",
+      "glosses": [
+        "espelho",
+        "amarelo"
+      ],
+      "referenceText": "espelho amarelo",
+      "previous": "o espelho amarelo",
+      "current": "o espelho amarelo"
+    }
+  ],
+  "previousBuild": "b55d99157307ff4967512d3507cfa01571f6c6b0",
+  "currentBuild": "ec13dd64d22739e3918c0220bf9ad05caa1abaf1",
+  "referenceGlossResults": {
+    "previous": {
+      "exact": 0,
+      "cases": 12,
+      "insertions": 4,
+      "deletions": 0,
+      "substitutions": 8,
+      "reference_units": 24,
+      "error_rate": 0.5
+    },
+    "current": {
+      "exact": 8,
+      "cases": 12,
+      "insertions": 4,
+      "deletions": 0,
+      "substitutions": 0,
+      "reference_units": 24,
+      "error_rate": 0.16666666666666666
+    }
+  },
+  "browserReview": {
+    "test": "tests/e2e/recognition.test.mjs",
+    "testSha256": "09eb21c02a2c26e7a563222b4adede44b8266ac37b4155c3bd39a97b9cacde18",
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "mode": "recorded-camera",
+    "video": "s12-espelho-amarelo-800-sync.y4m",
+    "videoSha256": "45c34c19571c6ef13adc054b9493c669932ed1220e3aad2f50315f29b182a165",
+    "case": "s12-espelho-amarelo-800",
+    "captureMs": 8700,
+    "glosses": "espelho · espelho · espelho · espelho · amarelo · amarelo · [trecho inconclusivo] · [trecho inconclusivo]",
+    "decision": "inconclusive",
+    "transcriptBeforeReview": "Texto conferido.",
+    "confirmedTranscript": "Texto conferido. cinco espelhos amarelos",
+    "testPassed": true
+  }
+}
