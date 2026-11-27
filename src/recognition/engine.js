@@ -7,7 +7,7 @@ import { frameForRecognition } from './framing.js'
 import { openHolistic } from './holistic.js'
 import { preprocessFrames } from './preprocess.js'
 import { segmentFrames } from './segmentation.js'
-import { alphabetFeatureCount, letterFeatures } from './alphabet.js'
+import { alphabetFeatureCount, letterFeatures, rankLetterLogits } from './alphabet.js'
 import { matchMotion, motionVectorSize } from './alphabet-motion.js'
 import { createTrajectoryMatcher, trajectorySize } from './alphabet-trajectory.js'
 import { localAsset, readSignalManifest } from './model-assets.js'
@@ -131,7 +131,7 @@ export async function openAlphabetEngine() {
     }
     const best = logits.data.indexOf(Math.max(...logits.data))
     const probability = 1 / logits.data.reduce((sum, value) => sum + Math.exp(value - logits.data[best]), 0)
-    return { label: labels[best], accepted: probability >= threshold }
+    return { label: labels[best], accepted: probability >= threshold, logits: logits.data }
   }
 
   async function confirmsShape(model, inputs, threshold) {
@@ -160,7 +160,7 @@ export async function openAlphabetEngine() {
     alphabetCatalog: [...new Set([...labels, ...motionLetters, ...(yModel ? ['Y'] : [])])].sort(),
     findMotion: motionLetters.length ? (frames, indexHistory, zDropout) =>
       recognizeTrajectory?.(frames, indexHistory, zDropout) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
-    predictLetter(values, alternateValues, worldHand) {
+    predictLetter(values, alternateValues, worldHand, includeRanking) {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
         const first = await letterVote(session, input)
@@ -172,8 +172,10 @@ export async function openAlphabetEngine() {
           if (rModel && first.label === 'R' && imageR.vetoThreshold !== undefined &&
               !await confirmsShape(rModel, { hand: input }, imageR.vetoThreshold)) return null
           if (rModel && first.label === 'U' && imageR.allowU !== false &&
-              await confirmsShape(rModel, { hand: input }, imageR.threshold)) return 'R'
-          return refinedLetter(first.label, input)
+              await confirmsShape(rModel, { hand: input }, imageR.threshold)) return { label: 'R' }
+          const label = await refinedLetter(first.label, input)
+          const ranking = includeRanking && label === first.label ? rankLetterLogits(first.logits, labels) : undefined
+          return { label, ranking }
         }
         if (refiner) {
           const { scores } = await refiner.run({ hand: input })
@@ -182,7 +184,9 @@ export async function openAlphabetEngine() {
             throw new TypeError('Saída do complemento de alfabeto incompatível.')
           }
           const best = scores.data.indexOf(Math.max(...scores.data))
-          if (scores.data[best] >= supplement.threshold) return refinedLetter(supplement.labels[best], input)
+          if (scores.data[best] >= supplement.threshold) {
+            return { label: await refinedLetter(supplement.labels[best], input) }
+          }
         }
         const maybeA = checkA && worldCandidates.includes(second.label)
         const maybeQ = checkQ && second.accepted && second.label === 'Q'
@@ -192,15 +196,15 @@ export async function openAlphabetEngine() {
             const inputWorld = { world: new Tensor('float32', world, [1, features]) }
             const confirmed = await confirmsShape(maybeA ? aModel : qModel, inputWorld,
               maybeA ? worldA.threshold : worldQ.threshold)
-            if (confirmed) return maybeA ? 'A' : 'Q'
+            if (confirmed) return { label: maybeA ? 'A' : 'Q' }
           }
         }
         if (alternateValues && first.accepted && second && first.label === 'N' &&
             ['M', 'N'].includes(second.label)) {
           const alternate = new Tensor('float32', alternateValues, [1, features])
-          if (await confirmsAlternateN(alternate)) return 'N'
+          if (await confirmsAlternateN(alternate)) return { label: 'N' }
         }
-        return yModel && await confirmsShape(yModel, { hand: input }, imageY.threshold) ? 'Y' : null
+        return yModel && await confirmsShape(yModel, { hand: input }, imageY.threshold) ? { label: 'Y' } : null
       })
       pending = run.catch(() => {})
       return run

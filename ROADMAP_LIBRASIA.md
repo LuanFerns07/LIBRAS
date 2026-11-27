@@ -105,6 +105,7 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 
 - [x] Oferecer A–Z e Ç no seletor de Prática, com demonstração no avatar e progresso separado. [Modo alfabeto](docs/dados-alfabeto.md#praticar-e-ler-letras-ao-vivo)
 - [x] Exibir a letra detectada ao lado da webcam na Prática e na Área livre, sem iniciar tentativa. Verificar B, Ç e Y com gravação rotulada no Chromium. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
+- [x] Exibir na Área livre a letra principal e duas alternativas ordenadas quando a rede principal determina a leitura. Verificar com gravações no Chromium o ranking de B, a limpeza do painel ao perder a mão e a leitura do J por trajetória sem porcentagem. [Pontuação e verificação](docs/dados-alfabeto.md#pontuação-ao-vivo-na-área-livre)
 - [x] Adicionar H, J, K, X e Z ao reconhecimento ao vivo e revisar a leitura de Ç. Testar essas seis letras no Chromium com vídeos rotulados. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
 - [x] Triar a dificuldade relatada com N. Reproduzir N, M e U com os recortes da UFSM e comparar as poses do avatar com a referência. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
 - [x] Melhorar a legibilidade de M e N no avatar. Conferir dois dedos para baixo em N, três em M e dois para cima em U. Testar a vista frontal no Chromium e a soletração de “Anna”. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n)

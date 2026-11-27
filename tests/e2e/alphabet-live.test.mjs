@@ -8,6 +8,7 @@ const transitionVideo = process.env.LIBRASIA_TEST_M_N_VIDEO
 const sequenceVideo = process.env.LIBRASIA_TEST_M_N_U_VIDEO
 const letter = process.env.LIBRASIA_TEST_EXPECT_LETTER || 'B'
 const forbidden = process.env.LIBRASIA_TEST_FORBIDDEN_LETTER
+const expectedRanking = process.env.LIBRASIA_TEST_LETTER_RANKING
 const testPractice = letter === 'B' || process.env.LIBRASIA_TEST_ALPHABET_PRACTICE === '1'
 
 test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
@@ -43,9 +44,35 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
         written: document.querySelector('#transcription').value,
       }
     })()`), { beside: true, attemptHidden: true, pointsHidden: true, written: '' })
+    if (expectedRanking === '1') {
+      const scores = await evaluate(`(() => {
+        const ranking = document.querySelector('[data-letter-ranking]')
+        const parseScore = text => Number.parseFloat(text.replace(',', '.'))
+        return {
+          visible: !ranking.hidden,
+          primary: parseScore(ranking.querySelector('strong').textContent),
+          alternatives: Array.from(ranking.querySelectorAll('li:not([hidden])'), item => ({
+            label: item.textContent.split(' ')[0],
+            score: parseScore(item.textContent.split(' ')[1]),
+            smaller: parseFloat(getComputedStyle(item).fontSize) <
+              parseFloat(getComputedStyle(document.querySelector('[data-live-character]')).fontSize),
+          })),
+        }
+      })()`)
+      assert.ok(scores.visible)
+      assert.equal(scores.alternatives.length, 2)
+      assert.ok(scores.alternatives.every(({ label, smaller }) => /^[A-ZÇ]$/u.test(label) && smaller))
+      assert.equal(new Set([letter, ...scores.alternatives.map(({ label }) => label)]).size, 3)
+      const [second, third] = scores.alternatives.map(({ score }) => score)
+      assert.ok(100 >= scores.primary && scores.primary >= second && second >= third && third >= 0)
+      assert.ok(scores.primary + second + third <= 100.2)
+    } else if (expectedRanking === '0') {
+      assert.equal(await evaluate('document.querySelector("[data-letter-ranking]").hidden'), true)
+    }
     await evaluate('document.querySelector("[data-add-letter]").click()', true)
     assert.equal(await evaluate('document.querySelector("#transcription").value'), letter)
     await waitUntil(`${live} === '—'`, 8000)
+    assert.equal(await evaluate('document.querySelector("[data-letter-ranking]").hidden'), true)
     if (forbidden) assert.ok(!(await evaluate('window.alphabetReadings')).includes(forbidden))
     await evaluate('document.querySelector("[data-page=saiba-mais]").click()', true)
     await waitUntil('window.cameraTrack.readyState === "ended"')

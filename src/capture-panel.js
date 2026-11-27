@@ -5,7 +5,7 @@ import { trackHands } from './recognition/hand-tracking.js'
 import { createLiveLetterReader } from './recognition/alphabet.js'
 import { captureSequence } from './recognition/sequence.js'
 
-export function captureMarkup() {
+export function captureMarkup({ letterRanking = false } = {}) {
   const validation = new URLSearchParams(location.search).get('validacao') === '1'
   return `
     <section class="panel media-card" aria-label="Sua câmera">
@@ -22,6 +22,15 @@ export function captureMarkup() {
         <div class="live-letter" data-live-letter hidden>
           <span>Letra detectada</span>
           <output data-live-character aria-live="polite">—</output>
+          ${letterRanking ? `
+            <div class="letter-ranking" data-letter-ranking hidden>
+              <span>Modelo base</span>
+              <strong data-primary-letter-score></strong>
+              <ol aria-label="Outras letras possíveis" start="2">
+                <li data-letter-alternative></li>
+                <li data-letter-alternative></li>
+              </ol>
+            </div>` : ''}
         </div>
       </div>
       <div class="toolbar panel-toolbar">
@@ -56,6 +65,8 @@ const resultLabels = {
   unavailable: 'Reconhecimento indisponível',
 }
 
+const letterPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', maximumFractionDigits: 1 })
+
 export function mountCapture(main, { openEngine, interpret, onResult, onReady, onLetter, captureMode, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
@@ -68,6 +79,9 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   const handStatus = main.querySelector('[data-hand-status]')
   const letterPanel = main.querySelector('[data-live-letter]')
   const letterOutput = main.querySelector('[data-live-character]')
+  const letterRanking = main.querySelector('[data-letter-ranking]')
+  const primaryScore = letterRanking?.querySelector('[data-primary-letter-score]')
+  const alternatives = letterRanking?.querySelectorAll('[data-letter-alternative]')
   const validationCamera = main.querySelector('[data-validation-camera]')
   const measurementPanel = main.querySelector('[data-validation-measurement]')
   const copyMeasurement = measurementPanel?.querySelector('[data-copy-measurement]')
@@ -178,6 +192,20 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     onLetter?.(label)
   }
 
+  function showLetterRanking(ranking) {
+    letterRanking.hidden = !ranking
+    if (!ranking) return
+    const scoreText = letterPercent.format(ranking[0].score)
+    if (primaryScore.textContent !== scoreText) primaryScore.textContent = scoreText
+    for (const [index, item] of alternatives.entries()) {
+      const alternative = ranking[index + 1]
+      item.hidden = !alternative
+      if (!alternative) continue
+      const text = `${alternative.label} ${letterPercent.format(alternative.score)}`
+      if (item.textContent !== text) item.textContent = text
+    }
+  }
+
   function stopLetters() {
     reading?.reader?.clear()
     reading = undefined
@@ -192,7 +220,8 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
       const engine = await getEngine('letter').pending
       if (reading !== request) return
       if (engine.alphabetCatalog.length) {
-        request.reader = createLiveLetterReader(engine.predictLetter, showLetter, engine.findMotion)
+        request.reader = createLiveLetterReader(engine.predictLetter, showLetter, engine.findMotion,
+          letterRanking ? showLetterRanking : undefined)
         show('ready', 'Mostre uma letra com uma mão.')
       } else {
         show('unavailable', 'O modelo local de alfabeto está indisponível.')

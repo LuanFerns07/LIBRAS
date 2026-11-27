@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { createLiveLetterReader, letterFeatures, oneHand } from '../src/recognition/alphabet.js'
+import { createLiveLetterReader, letterFeatures, oneHand, rankLetterLogits } from '../src/recognition/alphabet.js'
 import { createTrajectoryMatcher, trajectorySize } from '../src/recognition/alphabet-trajectory.js'
 
 const hand = y => Array.from({ length: 21 }, (_, i) => ({ x: .2 + i / 50, y: y + i / 70, z: i / 100 }))
@@ -17,7 +17,7 @@ test('o leitor usa uma mão levantada e trata duas mãos no mesmo nível como am
 test('a letra aparece no fluxo de quadros após três leituras iguais e some sem a mão', async () => {
   const readings = []
   let letter = 'A'
-  const reader = createLiveLetterReader(async () => letter, value => readings.push(value))
+  const reader = createLiveLetterReader(async () => ({ label: letter }), value => readings.push(value))
   for (const time of [0, 90]) await reader.read(frame(time))
   assert.deepEqual(readings, [])
   await reader.read(frame(180))
@@ -29,10 +29,50 @@ test('a letra aparece no fluxo de quadros após três leituras iguais e some sem
   assert.equal(readings.at(-1), null)
 })
 
+test('o ranking usa o softmax de todo o catálogo antes de selecionar três letras', () => {
+  const ranked = rankLetterLogits([1000, 1002, 999, 1001], ['A', 'B', 'C', 'D'])
+  assert.deepEqual(ranked.map(({ label }) => label), ['B', 'D', 'A'])
+  const total = 1 + Math.exp(-1) + Math.exp(-2) + Math.exp(-3)
+  assert.ok(Math.abs(ranked[0].score - 1 / total) < 1e-12)
+  assert.ok(Math.abs(ranked[2].score - Math.exp(-2) / total) < 1e-12)
+  const complete = rankLetterLogits([1000, 1002, 999], ['A', 'B', 'C'])
+  assert.ok(Math.abs(complete.reduce((sum, { score }) => sum + score, 0) - 1) < 1e-12)
+})
+
+test('o ranking se atualiza com a mesma letra e some em trajetórias e ao perder a mão', async () => {
+  const initial = rankLetterLogits([5, 2, 4], ['A', 'B', 'C'])
+  const next = rankLetterLogits([5, 3, 2], ['A', 'B', 'C'])
+  const labels = []
+  const rankings = []
+  let reading = { label: 'A', ranking: initial }
+  let motion = null
+  const reader = createLiveLetterReader(async () => reading, label => labels.push(label),
+    () => motion, ranking => rankings.push(ranking))
+
+  for (const time of [0, 90]) await reader.read(frame(time))
+  assert.deepEqual(rankings, [])
+  await reader.read(frame(180))
+  reading = { label: 'A', ranking: next }
+  await reader.read(frame(270))
+  assert.deepEqual(rankings, [initial, next])
+  assert.deepEqual(labels, ['A'])
+
+  motion = 'J'
+  await reader.read(frame(360))
+  assert.deepEqual(labels, ['A', 'J'])
+  assert.equal(rankings.at(-1), null)
+  motion = null
+  for (const time of [460, 700, 990, 1080, 1170]) await reader.read(frame(time))
+  assert.equal(rankings.at(-1), next)
+  await reader.read({ ...frame(1260), rightHand: [] })
+  assert.equal(rankings.at(-1), null)
+  assert.deepEqual(labels, ['A', 'J', null, 'A', null])
+})
+
 test('um N confirmado tolera uma única leitura inconclusiva com extração alternativa', async () => {
   const readings = []
   let letter = 'N'
-  const reader = createLiveLetterReader(async () => letter, value => readings.push(value))
+  const reader = createLiveLetterReader(async () => letter ? { label: letter } : null, value => readings.push(value))
   const sample = time => ({ ...frame(time), alternateHand: hand(.1) })
   for (const time of [0, 90, 180]) await reader.read(sample(time))
   assert.deepEqual(readings, ['N'])
@@ -64,7 +104,7 @@ test('a trajetória usa quadros entre leituras e prevalece sobre uma previsão e
   assert.deepEqual(windows, [[0], [0, 30, 60], [0, 30, 60, 90, 120]])
   assert.deepEqual(readings, ['K'])
 
-  finishPrediction('V')
+  finishPrediction({ label: 'V' })
   await pending
   assert.deepEqual(readings, ['K'])
   await reader.read({ ...frame(150), rightHand: [] })
@@ -74,7 +114,7 @@ test('a trajetória usa quadros entre leituras e prevalece sobre uma previsão e
 test('o leitor exige três janelas de Ç antes de trocar a leitura de C', async () => {
   const readings = []
   let motion = null
-  const reader = createLiveLetterReader(async () => 'C', value => readings.push(value), () => motion)
+  const reader = createLiveLetterReader(async () => ({ label: 'C' }), value => readings.push(value), () => motion)
   for (const time of [0, 100, 200]) await reader.read(frame(time))
 
   motion = 'Ç'
@@ -151,7 +191,7 @@ test('Z retoma um traço interrompido por uma sobreposição breve da mesma mão
 
   async function read(tail) {
     const readings = []
-    const reader = createLiveLetterReader(async () => 'G', value => readings.push(value), matcher)
+    const reader = createLiveLetterReader(async () => ({ label: 'G' }), value => readings.push(value), matcher)
     for (const sample of [...trace.slice(0, -1), ...tail]) await reader.read(sample)
     return readings
   }

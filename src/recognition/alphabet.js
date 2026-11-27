@@ -32,7 +32,16 @@ export function letterFeatures(hand, aspect) {
   return values.map(value => value / scale)
 }
 
-export function createLiveLetterReader(predict, onReading, findMotion) {
+export function rankLetterLogits(logits, labels) {
+  const max = Math.max(...logits)
+  const weights = Array.from(logits, logit => Math.exp(logit - max))
+  const total = weights.reduce((sum, weight) => sum + weight, 0)
+  return weights.map((weight, index) => ({ label: labels[index], score: weight / total }))
+    .sort((first, second) => second.score - first.score)
+    .slice(0, 3)
+}
+
+export function createLiveLetterReader(predict, onReading, findMotion, onRanking) {
   let generation = 0
   let pending = false
   let lastSample = -Infinity
@@ -40,6 +49,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let candidate = null
   let votes = 0
   let shown = null
+  let shownRanking = null
   let missedN = false
   let movingUntil = -Infinity
   let movingCandidate = null
@@ -50,10 +60,15 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let recoveringZ = false
   let zDropout = null
 
-  function show(value) {
-    if (shown === value) return
-    shown = value
-    onReading(value)
+  function show(label, ranking = null) {
+    if (shown !== label) {
+      shown = label
+      onReading(label)
+    }
+    if (onRanking && shownRanking !== ranking) {
+      shownRanking = ranking
+      onRanking(ranking)
+    }
   }
 
   function resetReadings() {
@@ -148,11 +163,13 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       try {
         const alternateValues = letterFeatures(frame.alternateHand, frame.aspect)
         const worldHand = hand === frame.leftHand ? frame.leftWorld : frame.rightWorld
-        const label = await predict(values, alternateValues, worldHand)
+        const reading = await predict(values, alternateValues, worldHand, Boolean(onRanking))
         if (current !== generation) return
+        const label = reading?.label ?? null
         // Uma leitura inconclusiva isolada da mesma mão não interrompe um N já confirmado.
         if (label === null && shown === 'N' && alternateValues && !missedN) {
           missedN = true
+          show('N')
           return
         }
         missedN = false
@@ -161,7 +178,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
           votes = 0
           show(null)
         }
-        if (label && ++votes >= 3) show(label)
+        if (label && ++votes >= 3) show(label, reading.ranking)
       } catch {
         if (current === generation) clear()
       } finally {

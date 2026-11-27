@@ -23,7 +23,7 @@ export function mountFree(main, openEngine, draft) {
       <p class="muted" data-mode-help>Por padrão, faça um sinal por tentativa.</p>
     </div>
     <div class="media-layout">
-      ${captureMarkup()}
+      ${captureMarkup({ letterRanking: true })}
       <section class="panel content-panel">
         <h2>Transcrição</h2>
         <label for="transcription" class="field-label">Texto editável</label>

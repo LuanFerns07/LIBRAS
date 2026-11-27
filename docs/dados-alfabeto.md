@@ -62,6 +62,14 @@ A prévia validada no PC usa um pacote local cuja versão aparece em `http://127
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ```
 
+### Pontuação ao vivo na Área livre
+
+Quando a rede principal define a letra confirmada, **Área livre → Alfabeto** mostra a letra em destaque e as duas alternativas seguintes, em ordem de pontuação. O softmax normaliza as 20 classes da rede principal na prévia atual. As três pontuações exibidas podem somar menos de 100%, porque as outras classes também entram no cálculo. Os valores expressam a distribuição da rede para aquele quadro.
+
+O painel acompanha as leituras confirmadas e limpa as pontuações quando perde a mão. Quando uma trajetória ou um classificador complementar determina a letra, o painel exibe só a letra confirmada. Esses caminhos têm seus próprios critérios de reconhecimento. **Adicionar letra** usa a leitura principal.
+
+No Chromium com gravações, o B da UFSM exibiu a letra principal acima de duas alternativas ordenadas e limpou o painel quando perdeu a mão. O J da UFSM apareceu sem porcentagem. As sequências M → N da Unesp e M → N → U da UFF passaram na Área livre e em Praticar. Os logs locais estão em `data/evidence/pontuacao-alfabeto/`. [Teste no Chromium](../tests/e2e/alphabet-live.test.mjs)
+
 ### Compilar neste Linux
 
 Depois de baixar e conferir os vídeos dos manifestos e preparar o LibraSign, execute a extração e o treino na raiz. A opção `--device cpu` também é aceita.

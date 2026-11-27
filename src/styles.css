@@ -177,6 +177,7 @@ p { line-height: 1.55; }
   grid-template-columns: minmax(0, 1fr) minmax(4.5rem, 21%);
   align-items: stretch;
 }
+.camera-display:has(.live-letter:not([hidden])) .camera-stage { width: 100%; }
 .live-letter {
   background: var(--lavender);
   display: grid;
@@ -187,6 +188,10 @@ p { line-height: 1.55; }
 }
 .live-letter span { font-size: .75rem; line-height: 1.25; }
 .live-letter output { color: var(--accent-dark); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 750; }
+.letter-ranking { font-variant-numeric: tabular-nums; }
+.letter-ranking span, .letter-ranking strong { display: block; }
+.letter-ranking ol { list-style: none; margin: .45rem 0 0; padding: 0; font-size: .78rem; color: var(--muted); }
+.letter-ranking li { margin-block: .12rem; }
 .camera-placeholder { height: 100%; display: grid; place-content: center; justify-items: center; padding: 1rem; text-align: center; }
 .camera-placeholder span {
   display: grid;
