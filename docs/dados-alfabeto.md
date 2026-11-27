@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `b95a5da`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia validada no PC usa um pacote local cuja versão aparece em `http://127.0.0.1:4177/commit.txt`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-r-completo-teste/iniciar.py --porta 4177
+python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -381,3 +381,29 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
 A prévia verifica a forma de R quando as redes concordam em R ou U. Na comparação com gravações, a leitura R de Tel baixinha passou de zero a três acertos em três repetições. Os dez recortes de U já reconhecidos continuaram mostrando U, incluindo o da UFF em vista oblíqua. O falso R do movimento de queixo para teclado caiu de um em cinco replays a zero em cinco. [Configuração, comparação e reprodução](../ml/evidence/alphabet-a-q-r/README.md#adoção-da-confirmação-de-r)
 
 O U oblíquo da Uníntese ficou sem letra depois da remoção do R indevido. O U em perfil da aula explicativa da Unicentro e o R da UFF também ficaram sem leitura. As hipóteses para recuperar esses casos seguem em avaliação. [Casos restantes](../ml/evidence/alphabet-a-q-r/README.md#casos-restantes-de-u-e-r)
+
+### Reteste de letras com movimento na prévia local
+
+O Chromium 156 usou a compilação `50ad447` na Área livre. O script reproduziu a mídia em velocidade original pelo dispositivo de teste do navegador e registrou as letras exibidas e os instantes em que o painel ficou vazio. Fixamos 12 recortes no commit `acdc21c`, usando as letras impressas na tela. Os vídeos da UFAC e da Unicentro já forneceram recortes de outras letras em avaliações anteriores. Estas janelas foram avaliadas pela primeira vez nesta rodada, com os modelos do alfabeto congelados. [Protocolo e hashes](../ml/alphabet/independent-motion-expanded-windows.json) · [Aula da UFAC](https://www.youtube.com/watch?v=B2U7c6OXgBg) · [Aula da Unicentro](https://www.youtube.com/watch?v=AnIqxVEqGNs)
+
+| Letra rotulada | Leituras na UFAC | Leituras na Unicentro |
+| --- | --- | --- |
+| C | C | C |
+| Ç | C → Ç → C | |
+| H | H | K → H |
+| J | I → J → J | I → J → J |
+| K | L → H → G → K | K |
+| X | X | X |
+| Z | G → Z | |
+
+As setas registram a ordem das leituras. O JSON permite ver os intervalos em que o painel ficou vazio entre elas. Os dois controles de C mostraram apenas C. No recorte de Ç da UFAC, o C inicial durou 801 ms e o C depois de Ç ficou visível por 2.093 ms. Os outros recortes com leituras adicionais registraram aparições entre 107 e 650 ms. [Tempos e contagem de quadros das 12 janelas](../ml/evidence/alphabet-movimento-final/independentes.json)
+
+Nos 17 controles anteriores, a letra esperada apareceu em 14 reproduções. O Y apareceu nos quatro recortes rotulados. Z faltou uma vez em cada um dos recortes de Tel baixinha, Paterno e Cecierj. No reteste, Z apareceu em cinco de seis reproduções. Foram cinco recortes, com uma repetição do Cecierj. Em mais duas rodadas pareadas, o Z de Tel baixinha apareceu uma vez em cada versão, `50ad447` e `59c47db`. O Z de Paterno apareceu nas duas repetições de cada pacote. Os resultados mostram variação entre reproduções do mesmo recorte. [Controles](../ml/evidence/alphabet-movimento-final/controles.json) · [Reteste de Z](../ml/evidence/alphabet-movimento-final/reteste-z.json) · [Comparação entre pacotes](../ml/evidence/alphabet-movimento-final/comparacao-z.json)
+
+Nos testes de ponta a ponta com vídeos da UFSM, Z curto e Ç apareceram na Área livre e em Praticar antes de iniciar uma tentativa. A Área livre permitiu adicionar a letra lida e liberou a trilha ao navegar. Em Praticar, a leitura mostrou a letra sinalizada com A como alvo. Os logs locais ficam em `data/evidence/alphabet-movimento-final/ponta-a-ponta-z.log` e `data/evidence/alphabet-movimento-final/ponta-a-ponta-cedilha.log`. O teste de Y e das trocas de letras com pessoas diretamente na webcam segue pendente. [Cenários no Chromium](../tests/e2e/alphabet-live.test.mjs)
+
+~~~bash
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --manifest ml/alphabet/independent-motion-expanded-windows.json \
+  --source ufac-b2u7c6oxgbg --source unicentro-aniqxveqgns --workers 1 --timeline
+~~~

@@ -1,0 +1,474 @@
+{
+  "build": {
+    "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/independent-motion-expanded-windows.json"
+  ],
+  "results": [
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "C",
+      "startMs": 93360,
+      "endMs": 96300,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 224
+        }
+      ],
+      "clearedAtMs": [
+        3010
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1641
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 36
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 3010
+        }
+      ],
+      "workerFrames": 140,
+      "framesWithHand": 74,
+      "lastHandAfterVideoMs": 2972
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "Ç",
+      "startMs": 100400,
+      "endMs": 104440,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 246
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 1047
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 1867
+        }
+      ],
+      "clearedAtMs": [
+        1669,
+        3960
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1647
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 16
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 4103
+        }
+      ],
+      "workerFrames": 168,
+      "framesWithHand": 101,
+      "lastHandAfterVideoMs": 4063
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "H",
+      "startMs": 141200,
+      "endMs": 145450,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 1187
+        }
+      ],
+      "clearedAtMs": [
+        4301
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1601
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 26
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 4301
+        }
+      ],
+      "workerFrames": 167,
+      "framesWithHand": 101,
+      "lastHandAfterVideoMs": 4263
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "J",
+      "startMs": 156830,
+      "endMs": 161120,
+      "readings": [
+        {
+          "letter": "I",
+          "afterVideoMs": 213
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 863
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 2711
+        }
+      ],
+      "clearedAtMs": [
+        2088,
+        4198
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1555
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 36
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 4359
+        }
+      ],
+      "workerFrames": 164,
+      "framesWithHand": 100,
+      "lastHandAfterVideoMs": 4319
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "K",
+      "startMs": 164200,
+      "endMs": 168050,
+      "readings": [
+        {
+          "letter": "L",
+          "afterVideoMs": 220
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 825
+        },
+        {
+          "letter": "G",
+          "afterVideoMs": 1660
+        },
+        {
+          "letter": "K",
+          "afterVideoMs": 1767
+        }
+      ],
+      "clearedAtMs": [
+        659,
+        1421,
+        2557
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1602
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 22
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 3937
+        }
+      ],
+      "workerFrames": 152,
+      "framesWithHand": 86,
+      "lastHandAfterVideoMs": 3897
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "X",
+      "startMs": 277100,
+      "endMs": 283200,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 486
+        }
+      ],
+      "clearedAtMs": [
+        6133
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1595
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 49
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 6133
+        }
+      ],
+      "workerFrames": 202,
+      "framesWithHand": 137,
+      "lastHandAfterVideoMs": 6097
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "Z",
+      "startMs": 294360,
+      "endMs": 298360,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 420
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1508
+        }
+      ],
+      "clearedAtMs": [
+        1021,
+        3846
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1611
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 42
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 4007
+        }
+      ],
+      "workerFrames": 169,
+      "framesWithHand": 101,
+      "lastHandAfterVideoMs": 3969
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "C",
+      "startMs": 16820,
+      "endMs": 18240,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 443
+        }
+      ],
+      "clearedAtMs": [
+        1488
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1641
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 22
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1488
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1450
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "H",
+      "startMs": 33040,
+      "endMs": 34860,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 560
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 1073
+        }
+      ],
+      "clearedAtMs": [
+        1711
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1633
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 39
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1872
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1833
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "J",
+      "startMs": 39860,
+      "endMs": 42010,
+      "readings": [
+        {
+          "letter": "I",
+          "afterVideoMs": 558
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 675
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1997
+        }
+      ],
+      "clearedAtMs": [
+        963,
+        2052
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1601
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 23
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 2052
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 2192
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 2232
+        }
+      ],
+      "workerFrames": 114,
+      "framesWithHand": 46,
+      "lastHandAfterVideoMs": 2192
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "K",
+      "startMs": 43310,
+      "endMs": 44780,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 512
+        }
+      ],
+      "clearedAtMs": [
+        1577
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1621
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 34
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1577
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1534
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "X",
+      "startMs": 82450,
+      "endMs": 83970,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 599
+        }
+      ],
+      "clearedAtMs": [
+        1472
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1615
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 100
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 157
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 196
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1472
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1432
+    }
+  ]
+}

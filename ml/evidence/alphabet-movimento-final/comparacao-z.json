@@ -1,0 +1,386 @@
+{
+  "rounds": [
+    {
+      "build": {
+        "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+        "imageRPolicy": {
+          "threshold": 0.95,
+          "vetoThreshold": 0.2,
+          "allowU": true
+        },
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/independent-y-z-windows.json"
+      ],
+      "results": [
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "Z",
+          "startMs": 130440,
+          "endMs": 131680,
+          "readings": [
+            {
+              "letter": "Z",
+              "afterVideoMs": 1115
+            }
+          ],
+          "clearedAtMs": [
+            1193
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1648
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 20
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1193
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 1271
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1310
+            }
+          ],
+          "workerFrames": 96,
+          "framesWithHand": 28,
+          "lastHandAfterVideoMs": 1271
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "Z",
+          "startMs": 162720,
+          "endMs": 164150,
+          "readings": [
+            {
+              "letter": "Z",
+              "afterVideoMs": 943
+            }
+          ],
+          "clearedAtMs": [
+            1437
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1644
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 43
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1437
+            }
+          ],
+          "workerFrames": 105,
+          "framesWithHand": 36,
+          "lastHandAfterVideoMs": 1400
+        }
+      ]
+    },
+    {
+      "build": {
+        "commit": "59c47db574dd52f1bdc87653b8e7e8108fe67ac5",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/independent-y-z-windows.json"
+      ],
+      "results": [
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "Z",
+          "startMs": 130440,
+          "endMs": 131680,
+          "readings": [
+            {
+              "letter": "Z",
+              "afterVideoMs": 1114
+            }
+          ],
+          "clearedAtMs": [
+            1202
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1563
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 27
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1202
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 1242
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1322
+            }
+          ],
+          "workerFrames": 93,
+          "framesWithHand": 29,
+          "lastHandAfterVideoMs": 1282
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "Z",
+          "startMs": 162720,
+          "endMs": 164150,
+          "readings": [
+            {
+              "letter": "X",
+              "afterVideoMs": 572
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 936
+            }
+          ],
+          "clearedAtMs": [
+            1458
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1601
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 44
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1458
+            }
+          ],
+          "workerFrames": 101,
+          "framesWithHand": 35,
+          "lastHandAfterVideoMs": 1420
+        }
+      ]
+    },
+    {
+      "build": {
+        "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+        "imageRPolicy": {
+          "threshold": 0.95,
+          "vetoThreshold": 0.2,
+          "allowU": true
+        },
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/independent-y-z-windows.json"
+      ],
+      "results": [
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "Z",
+          "startMs": 130440,
+          "endMs": 131680,
+          "readings": [],
+          "clearedAtMs": [],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1594
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 27
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 917
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 956
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1192
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 1270
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1309
+            }
+          ],
+          "workerFrames": 96,
+          "framesWithHand": 28,
+          "lastHandAfterVideoMs": 1270
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "Z",
+          "startMs": 162720,
+          "endMs": 164150,
+          "readings": [
+            {
+              "letter": "Z",
+              "afterVideoMs": 908
+            }
+          ],
+          "clearedAtMs": [
+            1438
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1597
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 43
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1438
+            }
+          ],
+          "workerFrames": 101,
+          "framesWithHand": 36,
+          "lastHandAfterVideoMs": 1401
+        }
+      ]
+    },
+    {
+      "build": {
+        "commit": "59c47db574dd52f1bdc87653b8e7e8108fe67ac5",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+        "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+        "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "manifests": [
+        "ml/alphabet/independent-y-z-windows.json"
+      ],
+      "results": [
+        {
+          "source": "tel-baixinha-chzje8vmc1i",
+          "label": "Z",
+          "startMs": 130440,
+          "endMs": 131680,
+          "readings": [],
+          "clearedAtMs": [],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1601
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 21
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 915
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 955
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1190
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 1268
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1307
+            }
+          ],
+          "workerFrames": 95,
+          "framesWithHand": 27,
+          "lastHandAfterVideoMs": 1268
+        },
+        {
+          "source": "ifsc-ueslei-paterno",
+          "label": "Z",
+          "startMs": 162720,
+          "endMs": 164150,
+          "readings": [
+            {
+              "letter": "X",
+              "afterVideoMs": 552
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 931
+            }
+          ],
+          "clearedAtMs": [
+            1461
+          ],
+          "handVisibility": [
+            {
+              "visible": false,
+              "afterVideoMs": -1637
+            },
+            {
+              "visible": true,
+              "afterVideoMs": 39
+            },
+            {
+              "visible": false,
+              "afterVideoMs": 1461
+            }
+          ],
+          "workerFrames": 105,
+          "framesWithHand": 37,
+          "lastHandAfterVideoMs": 1425
+        }
+      ]
+    }
+  ]
+}

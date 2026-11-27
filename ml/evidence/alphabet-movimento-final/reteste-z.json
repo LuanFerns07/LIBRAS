@@ -1,0 +1,254 @@
+{
+  "build": {
+    "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    },
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/independent-y-z-windows.json",
+    "ml/alphabet/independent-motion-expanded-windows.json",
+    "ml/evidence/alphabet-z-azul/confirmacao-janelas.json"
+  ],
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Z",
+      "startMs": 130440,
+      "endMs": 131680,
+      "readings": [],
+      "clearedAtMs": [],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1600
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 25
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 926
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 967
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1224
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 1264
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1342
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1302
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "Z",
+      "startMs": 162720,
+      "endMs": 164150,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 436
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 900
+        }
+      ],
+      "clearedAtMs": [
+        1477
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1604
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 36
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1477
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1441
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "Z",
+      "startMs": 88140,
+      "endMs": 89830,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 1361
+        }
+      ],
+      "clearedAtMs": [
+        1731
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1607
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 20
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1731
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1691
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "Z",
+      "startMs": 294360,
+      "endMs": 298360,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 412
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1480
+        }
+      ],
+      "clearedAtMs": [
+        1019,
+        4038
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1609
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 46
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 4038
+        }
+      ],
+      "workerFrames": 166,
+      "framesWithHand": 100,
+      "lastHandAfterVideoMs": 4001
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 216
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1094
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 1617
+        }
+      ],
+      "clearedAtMs": [
+        477,
+        1775
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1595
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 22
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1775
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1735
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 217
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 1020
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1195
+        }
+      ],
+      "clearedAtMs": [
+        556,
+        1742
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1595
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 16
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 1742
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1701
+    }
+  ]
+}
