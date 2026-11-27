@@ -70,7 +70,7 @@ O ensaio verifica esses dois recortes. A adoção na prévia local depende dos c
 
 ### Regressão com o pacote de Q e R
 
-Nas mesmas 89 janelas rotuladas, a prévia `b7b8d21` e o candidato `c8193b8` exibiram a letra esperada em todos os recortes. Em alguns recortes, também apareceram outras letras. Nos 19 recortes fora do alfabeto, a prévia exibiu alguma letra em sete e o candidato em oito. No movimento do queixo para o teclado, o candidato acrescentou R aos 609 ms, além do M que já aparecia na prévia. No recorte Rosa → Marrom, o candidato exibiu J. O pacote conjunto segue experimental. [Positivos do candidato](positivos-c8193b8.json) · [Negativos do candidato](negativos-c8193b8.json) · [Negativos da prévia](../alphabet-a-e-independent/negativos-b7b8d21.json)
+Nas mesmas 89 janelas rotuladas, a prévia `b7b8d21` e o candidato `c8193b8` exibiram a letra esperada em todos os recortes. Em alguns recortes, também apareceram outras letras. Nos 19 recortes fora do alfabeto, a prévia exibiu alguma letra em sete e o candidato em oito. No movimento do queixo para o teclado, o candidato acrescentou R aos 609 ms, além do M que já aparecia na prévia. No recorte Rosa → Marrom, o candidato exibiu J. Em três novas reproduções do recorte do queixo para o teclado, R apareceu em uma na compilação candidata e em nenhuma na prévia. O pacote conjunto segue experimental. [Reteste pareado](reteste-queixo.json) · [Positivos do candidato](positivos-c8193b8.json) · [Negativos do candidato](negativos-c8193b8.json) · [Negativos da prévia](../alphabet-a-e-independent/negativos-b7b8d21.json)
 
 ### Comparação com recortes adicionais
 
@@ -84,3 +84,7 @@ Os mesmos replays foram executados nas duas compilações com um processo Chromi
 | Unicentro, aula explicativa com Q e U em perfil | P · Sem leitura | P · Sem leitura |
 
 Nenhuma das quatro janelas de U exibiu R. No U em perfil da aula explicativa, houve 23 quadros com mão, com o painel vazio nas duas versões. Esse caso deixa em aberto a confirmação em outros recortes de perfil com U aceito. O Q lido como P permanece fora da regra treinada para Q/N. [Leituras da prévia](controles-b7b8d21.json) · [Leituras do candidato](controles-c8193b8.json)
+
+### Teste do complemento de Q em separado
+
+O manifesto da compilação `81e20b9` inclui `worldQ`. O complemento experimental de R ficou desabilitado. O Chromium exibiu Q em três replays do recorte de Tel baixinha. Os três testes de ponta a ponta passaram com gravações, incluindo a leitura de Q na Área livre e em Praticar e a troca de M para N na mesma captura. No recorte do queixo para o teclado, o painel exibiu somente M. A regressão completa ainda precisa passar para esse pacote substituir a prévia. [Repetições de Q](tel-q-81e20b9.json) · [Recorte do queixo para o teclado](queixo-81e20b9.json)
