@@ -37,7 +37,7 @@ export async function openAlphabetEngine() {
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
   const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256,
-    supplement, contrast, worldA, worldQ, imageR } = await response.json()
+    supplement, contrast, worldA, worldQ, imageR, imageY } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
@@ -62,6 +62,7 @@ export async function openAlphabetEngine() {
     [worldA, worldCandidates, 'hand-world-wrist-palm-v1', 'alphabet-a-world.onnx'],
     [worldQ, ['Q', 'N'], 'hand-world-wrist-palm-v1', 'alphabet-q-shape.onnx'],
     [imageR, ['U', 'R'], 'hand-wrist-palm-v1', 'alphabet-r-shape.onnx'],
+    [imageY, [], 'hand-wrist-palm-v1', 'alphabet-y-shape.onnx'],
   ]
   for (const [shape, letters, reference] of shapes) {
     if (shape !== undefined && (!shape || !agreementSha256 || letters.some(label => !labels.includes(label)) ||
@@ -118,7 +119,7 @@ export async function openAlphabetEngine() {
       ...shapeModels.map(model => model?.release())])
     throw error
   }
-  const [aModel, qModel, rModel] = shapeModels
+  const [aModel, qModel, rModel, yModel] = shapeModels
   let pending = Promise.resolve()
 
   async function letterVote(model, input) {
@@ -145,8 +146,16 @@ export async function openAlphabetEngine() {
     return letter
   }
 
+  async function confirmsAlternateN(input) {
+    for (const model of [session, verifier]) {
+      const vote = await letterVote(model, input)
+      if (!vote.accepted || vote.label !== 'N') return false
+    }
+    return true
+  }
+
   return {
-    alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
+    alphabetCatalog: [...new Set([...labels, ...motionLetters, ...(yModel ? ['Y'] : [])])].sort(),
     findMotion: motionLetters.length ? (frames, indexHistory, zDropout) =>
       recognizeTrajectory?.(frames, indexHistory, zDropout) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
     predictLetter(values, alternateValues, worldHand) {
@@ -174,20 +183,19 @@ export async function openAlphabetEngine() {
         const maybeQ = checkQ && second.accepted && second.label === 'Q'
         if (maybeA || maybeQ) {
           const world = letterFeatures(worldHand, 1)
-          if (!world) return null
-          const inputWorld = { world: new Tensor('float32', world, [1, features]) }
-          const confirmed = await confirmsShape(maybeA ? aModel : qModel, inputWorld,
-            maybeA ? worldA.threshold : worldQ.threshold)
-          return confirmed ? (maybeA ? 'A' : 'Q') : null
+          if (world) {
+            const inputWorld = { world: new Tensor('float32', world, [1, features]) }
+            const confirmed = await confirmsShape(maybeA ? aModel : qModel, inputWorld,
+              maybeA ? worldA.threshold : worldQ.threshold)
+            if (confirmed) return maybeA ? 'A' : 'Q'
+          }
         }
-        if (!alternateValues || !first.accepted || !second || first.label !== 'N' ||
-            !['M', 'N'].includes(second.label)) return null
-        const alternate = new Tensor('float32', alternateValues, [1, features])
-        for (const model of [session, verifier]) {
-          const vote = await letterVote(model, alternate)
-          if (!vote.accepted || vote.label !== 'N') return null
+        if (alternateValues && first.accepted && second && first.label === 'N' &&
+            ['M', 'N'].includes(second.label)) {
+          const alternate = new Tensor('float32', alternateValues, [1, features])
+          if (await confirmsAlternateN(alternate)) return 'N'
         }
-        return 'N'
+        return yModel && await confirmsShape(yModel, { hand: input }, imageY.threshold) ? 'Y' : null
       })
       pending = run.catch(() => {})
       return run

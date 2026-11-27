@@ -116,21 +116,41 @@ def probe(base, references, output=None, export_letters="QR"):
     return report
 
 
+def alphabet_model_files(metadata):
+    return [
+        (filename, digest) for filename, digest in (
+            ("alphabet.onnx", metadata["modelSha256"]),
+            ("alphabet-check.onnx", metadata.get("agreementSha256")),
+            ("alphabet-supplement.onnx", metadata.get("supplement", {}).get("modelSha256")),
+            ("alphabet-contrast.onnx", metadata.get("contrast", {}).get("modelSha256")),
+            ("alphabet-a-world.onnx", metadata.get("worldA", {}).get("modelSha256")),
+            ("alphabet-q-shape.onnx", metadata.get("worldQ", {}).get("modelSha256")),
+            ("alphabet-r-shape.onnx", metadata.get("imageR", {}).get("modelSha256")),
+            ("alphabet-y-shape.onnx", metadata.get("imageY", {}).get("modelSha256")),
+        ) if digest is not None
+    ]
+
+
+def export_confirmation(model, features, path, input_name, preprocess, threshold):
+    torch.onnx.export(model, torch.from_numpy(features[:1]), path, input_names=[input_name],
+                      output_names=["scores"], opset_version=17, dynamo=False,
+                      dynamic_axes={input_name: {0: "frames"}, "scores": {0: "frames"}})
+    onnx.checker.check_model(path, full_check=True)
+    options = ort.SessionOptions()
+    options.intra_op_num_threads = 1
+    session = ort.InferenceSession(path, options, providers=["CPUExecutionProvider"])
+    actual, = session.run(["scores"], {input_name: features})
+    with torch.inference_mode():
+        expected = model(torch.from_numpy(features)).numpy()
+    np.testing.assert_allclose(actual, expected, atol=1e-6, rtol=2e-5)
+    np.testing.assert_array_equal(actual >= threshold, expected >= threshold)
+    return {"preprocess": preprocess, "threshold": threshold, "modelSha256": checksum(path)}
+
+
 def export(base, output, metadata, trained):
     if base.resolve() == output.resolve() or any(key in metadata for key in ("worldQ", "imageR")):
         raise ValueError("Use uma base sem os complementos de Q e R e um destino separado.")
     output.mkdir(parents=True, exist_ok=True)
-    files = [
-        (filename, digest) for filename, digest in (
-            ("alphabet.onnx", metadata["modelSha256"]),
-            ("alphabet-check.onnx", metadata["agreementSha256"]),
-            ("alphabet-supplement.onnx", metadata["supplement"]["modelSha256"]),
-            ("alphabet-contrast.onnx", metadata.get("contrast", {}).get("modelSha256")),
-            ("alphabet-a-world.onnx", metadata.get("worldA", {}).get("modelSha256")),
-        ) if digest is not None
-    ]
-    options = ort.SessionOptions()
-    options.intra_op_num_threads = 1
     additions = {}
     with TemporaryDirectory(dir=output) as temporary:
         folder = Path(temporary)
@@ -142,18 +162,8 @@ def export(base, output, metadata, trained):
                 continue
             model, features = trained[target]
             path = folder / f"alphabet-{target.lower()}-shape.onnx"
-            torch.onnx.export(model, torch.from_numpy(features[:1]), path, input_names=[input_name],
-                              output_names=["scores"], opset_version=17, dynamo=False,
-                              dynamic_axes={input_name: {0: "frames"}, "scores": {0: "frames"}})
-            onnx.checker.check_model(path, full_check=True)
-            session = ort.InferenceSession(path, options, providers=["CPUExecutionProvider"])
-            actual, = session.run(["scores"], {input_name: features})
-            with torch.inference_mode():
-                expected = model(torch.from_numpy(features)).numpy()
-            np.testing.assert_allclose(actual, expected, atol=1e-6, rtol=2e-5)
-            np.testing.assert_array_equal(actual >= .95, expected >= .95)
-            additions[key] = {"preprocess": preprocess, "threshold": .95, "modelSha256": checksum(path)}
-        for filename, digest in files:
+            additions[key] = export_confirmation(model, features, path, input_name, preprocess, .95)
+        for filename, digest in alphabet_model_files(metadata):
             copyfile(load_model(base, filename, digest), folder / filename)
         for asset in folder.iterdir():
             asset.replace(output / asset.name)
