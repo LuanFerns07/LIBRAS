@@ -7,11 +7,12 @@
     "cecierj-aula-03": {
       "name": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
       "publisher": "Universidade Federal Fluminense e Fundação Cecierj/Consórcio Cederj",
-      "credits": "Roteiro Mariana da Cunha Teixeira de Souza. Produção Fundação Cecierj/Consórcio Cederj e UFF.",
+      "credits": "Roteiro Mariana da Cunha Teixeira de Souza. Atuação Vanessa Rodrigues Ildefonso e Cíntia Ingrid Macedo Ribeiro. Filmagem e edição Leandro Lima de Souza. Produção Fundação Cecierj/Consórcio Cederj e UFF.",
       "page": "https://canal.cecierj.edu.br/recurso/13757",
       "licensePage": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "license": "CC-BY-3.0",
+      "licenseUrl": "https://support.google.com/youtube/answer/2797468?hl=pt-BR",
+      "license": "CC-BY",
+      "licenseNote": "O canal oficial marca a aula como Creative Commons Atribuição. A documentação atual da plataforma aponta para CC BY 4.0.",
       "url": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
       "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
       "filename": "cecierj-aula-03.mp4"
@@ -24,7 +25,7 @@
       1000,
       1500
     ],
-    "firstFrameAnchor": "Configuração e trajetória da mão próximas à mudança do numeral identificado na legenda."
+    "anchorDefinition": "Configuração e trajetória da mão próximas à mudança do numeral identificado na legenda."
   },
   "clips": [
     {"id": "cecierj-cardinais-cinco", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": "cinco", "startMs": 172250, "durationMs": 1820, "cue": "Algarismo 5 na tela, com realização isolada de Cinco dentro do intervalo."},

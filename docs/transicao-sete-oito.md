@@ -85,3 +85,28 @@ Com os pontos das duas aulas extraídos, este comando grava `$out/veto-developme
 ```bash
 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_paired_numerals
 ```
+
+## Segundo par independente na aula da Cecierj
+
+A aula **Datilologia: alfabeto manual e números**, da UFF e da Fundação Cecierj, deu um segundo par com a mesma pessoa e o mesmo enquadramento dentro da aula. Uma intérprete diferente das duas novas aulas UFSM apresenta sequências de cardinais, quantitativos e ordinais. O Canal Cecierj fornece o MP4 e a publicação equivalente da própria Fundação no YouTube declara Creative Commons Atribuição. O roteiro é de Mariana da Cunha Teixeira de Souza. Os créditos finais registram atuação de Vanessa Rodrigues Ildefonso e Cíntia Ingrid Macedo Ribeiro e filmagem e edição de Leandro Lima de Souza. [Aula e download oficial](https://canal.cecierj.edu.br/recurso/13757) · [Publicação com a licença declarada](https://www.youtube.com/watch?v=cT3l6iP7NXY) · [Licença de atribuição no YouTube](https://support.google.com/youtube/answer/2797468?hl=pt-BR)
+
+O commit `849b360` fixou, antes da inferência, as duas janelas de Cinco isolado e 36 janelas de transição. Cada uma das três sequências fornece janelas de 600, 1.000 e 1.500 ms em torno de quatro transições, de Seis → Sete a Nove → Dez. A numeração na tela e a trajetória da mão orientaram a marcação quadro a quadro. As três durações se sobrepõem para cada movimento. O FFmpeg recortou o arquivo e removeu o áudio. Vídeo e pontos ficaram em `data/`. [Protocolo de seleção e crédito](../ml/fresh_eval/protocol-numerais-segundo-par.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-segundo-par/manifest.json)
+
+| Sequência e transição | Janelas utilizáveis | Aceitas como Cinco no combinado | Vetadas com o limiar congelado |
+| --- | ---: | ---: | ---: |
+| Cardinais, Sete → Oito | 3/3 | 3 | 0 |
+| Quantitativos, Sete → Oito | 3/3 | 3 | 0 |
+| Quantitativos, Oito → Nove | 3/3 | 3 | 0 |
+| Demais transições cardinais, quantitativas e ordinais | 27/27 | 0 | 0 |
+
+O combinado aceitou o Cinco cardinal com confiança 0,972 e o Cinco de quantidade com 0,955. A confirmação em subtrechos, congelada em 0,667402, preservou os dois acertos e vetou zero dos nove falsos aceites. Os nove recortes correspondem a três movimentos de uma única intérprete. O Sete → Oito cardinal manteve confirmação de 0,920 a 0,948 nos subtrechos. Há um segundo par independente e a regra falhou no critério fixado. A Fiocruz e o teste reservado do MINDS ficaram fora desta rodada. [Relatório por janela, modelo e resultado](../ml/fresh_eval/evidence-numerais-segundo-par/report.json) · [Critério e limiar congelados](../ml/fresh_eval/evidence-numerais-desenvolvimento/partial-confirmation-protocol.json)
+
+```bash
+out=data/transition-gate-m5/numerais-segundo-par
+protocol=ml/fresh_eval/protocol-numerais-segundo-par.json
+.venv/bin/python -m ml.fresh_eval.prepare --protocol "$protocol" --out "$out"
+node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --workers 1
+PYTHONPATH=ml .venv/bin/python -m ml.evaluate_frozen_numeric_confirmation
+```
+
+O relatório local fica em `$out/frozen-veto-report.json`.
