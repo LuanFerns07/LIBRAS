@@ -249,9 +249,25 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await evaluate('document.querySelector("#transcription").value = "Texto editado do LibrasIA."')
     if (voiceEnabled) {
       await waitUntil('speechSynthesis.getVoices().some(v => v.localService && v.lang.replaceAll("_", "-").toLowerCase() === "pt-br")')
+      await evaluate(`const speak = speechSynthesis.speak.bind(speechSynthesis)
+        speechSynthesis.speak = utterance => {
+          window.lastUtterance = utterance.text
+          speak(utterance)
+        }
+        document.querySelector('#transcription').value = 'Transcrição anterior do LibrasIA. '.repeat(14)`)
+      await click('[data-speak]')
+      await waitUntil('speechSynthesis.speaking')
+      await evaluate('document.querySelector("#transcription").select()')
+      const edited = 'Transcrição atualizada.'
+      await page('Input.insertText', { text: edited })
+      assert.equal(await evaluate('document.querySelector("#transcription").value'), edited)
+      assert.equal(await evaluate('document.querySelector("[data-voice-status]").dataset.state'), 'interrupted')
+      await waitUntil('!speechSynthesis.speaking && !speechSynthesis.pending')
       await click('[data-speak]')
       await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "accepted"')
+      assert.equal(await evaluate('window.lastUtterance'), edited)
       assert.equal(await text('[data-voice-status]'), 'Leitura concluída.')
+      context.diagnostic('A edição interrompeu a leitura da versão anterior e a voz local leu a versão atualizada.')
     } else {
       await click('[data-speak]')
       assert.equal(await evaluate('document.querySelector("[data-voice-status]").dataset.state'), 'unavailable')

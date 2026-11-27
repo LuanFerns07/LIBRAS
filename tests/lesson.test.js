@@ -93,6 +93,33 @@ test('apenas a voz pt-BR local lê a edição atual e a falha mantém a mensagem
   assert.match(status.textContent, /voz local/)
 })
 
+test('uma edição interrompe a leitura e ignora callbacks do texto anterior', () => {
+  const status = { dataset: {}, hidden: true }
+  let spoken
+  class Utterance {
+    constructor(text) { this.text = text }
+  }
+  const synthesis = {
+    getVoices: () => [{ lang: 'pt-BR', localService: true }],
+    speak(utterance) { spoken = utterance },
+    cancel() { spoken.onerror() },
+  }
+  const speech = mountSpeech(status, synthesis, Utterance)
+  speech.speak('Transcrição anterior.')
+  const previous = spoken
+  speech.textChanged()
+  assert.equal(status.dataset.state, 'interrupted')
+  speech.speak('Transcrição atualizada.')
+  previous.onend()
+  assert.equal(status.dataset.state, 'busy')
+  assert.equal(spoken.text, 'Transcrição atualizada.')
+  spoken.onend()
+  assert.equal(status.dataset.state, 'accepted')
+  speech.textChanged()
+  assert.equal(status.hidden, true)
+  assert.equal(status.dataset.state, undefined)
+})
+
 test('o progresso local persiste somente os contadores e estados do catálogo', () => {
   const entries = new Map()
   const storage = { getItem: key => entries.get(key), setItem: (key, value) => entries.set(key, value) }

@@ -53,8 +53,13 @@ export function mountFree(main, openEngine) {
   const addLetter = main.querySelector('[data-add-letter]')
   const addSpace = main.querySelector('[data-add-space]')
   const voice = mountSpeech(voiceStatus)
+  function setTranscription(text) {
+    if (transcription.value === text) return
+    transcription.value = text
+    voice.textChanged()
+  }
   const glossReview = continuousEnabled ? mountGlossReview(main, text => {
-    transcription.value = appendTranscription(transcription.value, { state: 'accepted', text })
+    setTranscription(appendTranscription(transcription.value, { state: 'accepted', text }))
     transcription.focus()
   }) : undefined
   let currentLetter = null
@@ -84,7 +89,7 @@ export function mountFree(main, openEngine) {
     },
     onResult(result) {
       if (result.glosses) glossReview?.show(result)
-      else transcription.value = appendTranscription(transcription.value, result)
+      else setTranscription(appendTranscription(transcription.value, result))
     },
   })
   function changeMode() {
@@ -112,12 +117,13 @@ export function mountFree(main, openEngine) {
     if (continuous.checked) sequence.checked = false
     changeMode()
   })
+  transcription.addEventListener('input', voice.textChanged)
   main.querySelector('[data-speak]').addEventListener('click', () => voice.speak(transcription.value))
   addLetter.addEventListener('click', () => {
-    if (currentLetter) transcription.value += currentLetter
+    if (currentLetter) setTranscription(transcription.value + currentLetter)
   })
   addSpace.addEventListener('click', () => {
-    if (transcription.value && !/\s$/u.test(transcription.value)) transcription.value += ' '
+    if (transcription.value && !/\s$/u.test(transcription.value)) setTranscription(transcription.value + ' ')
   })
   main.querySelector('[data-clear]').addEventListener('click', () => {
     voice.stop()

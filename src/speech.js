@@ -17,7 +17,18 @@ export function mountSpeech(status, synthesis = globalThis.speechSynthesis, Utte
     synthesis.cancel()
   }
 
+  function textChanged() {
+    if (current) {
+      stop()
+      show('Leitura interrompida. Use Ouvir para ler o texto atualizado.', 'interrupted')
+    } else if (status.dataset.state !== 'interrupted') {
+      status.hidden = true
+      delete status.dataset.state
+    }
+  }
+
   function speak(text) {
+    stop()
     const message = text.trim()
     if (!message) {
       show('Digite ou sinalize algo antes de ouvir.', 'inconclusive')
@@ -28,7 +39,6 @@ export function mountSpeech(status, synthesis = globalThis.speechSynthesis, Utte
       show('A voz local em português brasileiro está indisponível. O texto continua disponível para edição.', 'unavailable')
       return
     }
-    stop()
     const utterance = new Utterance(message)
     current = utterance
     utterance.lang = 'pt-BR'
@@ -44,11 +54,11 @@ export function mountSpeech(status, synthesis = globalThis.speechSynthesis, Utte
       show('A leitura falhou. O texto continua disponível para edição.', 'unavailable')
     }
     try {
-      synthesis.speak(utterance)
       show('Lendo o texto editado.', 'busy')
+      synthesis.speak(utterance)
     } catch {
       utterance.onerror()
     }
   }
-  return { speak, stop }
+  return { speak, stop, textChanged }
 }
