@@ -38,3 +38,25 @@ PYTHONPATH=ml .venv/bin/python -m ml.probe_transition_geometry compare
 ```
 
 O relatório local fica em `$out/probe.json`.
+
+## Duas novas gravações com Cinco no mesmo enquadramento
+
+A UFSM publicou duas gravações de **Números Cardinais** com pessoas diferentes da aula **Números** usada na sonda e da turma da Fiocruz. Em cada gravação, a mesma pessoa mantém cabeça, ombros e mão visíveis durante Cinco, a transição de Sete para Oito e as duas transições vizinhas. Os rótulos foram conferidos pela legenda da própria aula e pela mudança da mão quadro a quadro. O commit `cebe89f` fixou os 12 intervalos e os hashes dos vídeos e do combinado antes da inferência. Cada vídeo contribui com um Cinco, três janelas sobrepostas de Sete → Oito e um recorte de cada transição vizinha. As seis janelas de Sete → Oito correspondem a dois movimentos. [Caderno Didático Libras D, roteiro e apresentação de Giovana Fracari Hautrive](https://ntetube.nte.ufsm.br/v/1543950577) · [Grupo de Produção de Material Didático em Língua de Sinais](https://ntetube.nte.ufsm.br/v/1536688636) · [Seleção de desenvolvimento, créditos e hashes](../ml/fresh_eval/protocol-numerais-desenvolvimento.json)
+
+| Gravação | Cinco isolado | Sete → Oito aceitas como Cinco | Transições de controle |
+| --- | --- | ---: | --- |
+| Caderno Didático Libras D | Inconclusivo, confiança máxima 0,479 | 0/3 | Seis → Sete e Oito → Nove rejeitadas |
+| Grupo de Produção de Material Didático | Cinco, 0,970 | 0/3 | Seis → Sete rejeitada e Oito → Nove aceita como Cinco, 0,682 |
+
+As 12 janelas tiveram rastreamento utilizável. Na segunda gravação, o falso Cinco em Oito → Nove e o Cinco correto da mesma pessoa formam um par com enquadramento comparável para desenvolvimento de uma regra. O falso aceite em Sete → Oito segue reproduzido apenas no caso existente da Fiocruz, que ficou fora desta rodada. O modelo e seu limiar de 0,525 permaneceram congelados. [Relatório ONNX em CPU](../ml/fresh_eval/evidence-numerais-desenvolvimento/report-combined.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-desenvolvimento/manifest.json)
+
+As duas aulas usam CC BY-NC-SA 4.0. A preparação limita a modificação ao recorte temporal e à remoção do áudio. Vídeos e pontos ficam em `data/` para uso local não comercial. O avaliador didático usa o campo técnico `partition: test` para ler os recortes externos. O campo `scope` do protocolo registra o uso exclusivo em desenvolvimento. [Licença CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+```bash
+out=data/transition-gate-m5/numerais-independentes
+protocol=ml/fresh_eval/protocol-numerais-desenvolvimento.json
+.venv/bin/python -m ml.fresh_eval.prepare --protocol "$protocol" --out "$out"
+node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --workers 1
+PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate --protocol "$protocol" \
+  --manifest "$out/manifest.json" --features "$out/features/index.json" --out "$out/report.json"
+```
