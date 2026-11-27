@@ -1,0 +1,42 @@
+{
+  "sources": [
+    {
+      "id": "cecierj-13757",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "windows": [
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        }
+      ]
+    }
+  ],
+  "selection": "Cinco replays adicionais para comparar o Z do Cecierj nas duas compilações."
+}

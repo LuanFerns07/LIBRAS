@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `59c47db`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia em 4177 usa a compilação `b95a5da`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-y-forma-teste/iniciar.py --porta 4177
+python3 data/releases/librasia-r-completo-teste/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -375,3 +375,9 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
   LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-y-reproduzido" \
   ./scripts/executar-local.sh --pacote data/releases/librasia-y-reconstruido
 ```
+
+### Confirmação de R na prévia local
+
+A prévia verifica a forma de R quando as redes concordam em R ou U. Na comparação com gravações, a leitura R de Tel baixinha passou de zero a três acertos em três repetições. Os dez recortes de U já reconhecidos continuaram mostrando U, incluindo o da UFF em vista oblíqua. O falso R do movimento de queixo para teclado caiu de um em cinco replays a zero em cinco. [Configuração, comparação e reprodução](../ml/evidence/alphabet-a-q-r/README.md#adoção-da-confirmação-de-r)
+
+O U oblíquo da Uníntese ficou sem letra depois da remoção do R indevido. O U em perfil da aula explicativa da Unicentro e o R da UFF também ficaram sem leitura. As hipóteses para recuperar esses casos seguem em avaliação. [Casos restantes](../ml/evidence/alphabet-a-q-r/README.md#casos-restantes-de-u-e-r)

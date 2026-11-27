@@ -143,3 +143,21 @@ Nas três reproduções de Tel baixinha, a prévia exibiu U e o pacote com recup
 No vídeo original da Uníntese, as redes aceitaram R em 15 quadros do U. Todos esses votos ficaram abaixo de 0,20 no modelo de forma. No ensaio com pontos da câmera virtual houve 23 votos assim. Duas regressões para U foram treinadas com amostras da primeira aula da UFSM, da Unesp e do Cecierj. O modelo 3D confirmou U em 22 dos 23 quadros da Uníntese. O modelo de imagem ficou abaixo do limiar em todos os 23. Nenhuma das duas regressões acrescentou U nas capturas do controle de queixo para o teclado. [Ensaio no vídeo original](ru-obliqo-veto-offline.json) · [Referências de treino](../../alphabet/institutional-r-u-training.json) · [Comparação nos pontos do Chromium](complemento-u-quadros-web.json)
 
 No R da UFF, a primeira rede aceitou R e a segunda preferiu U em 42 dos quadros selecionáveis que também passaram pelo limiar de forma de R. Uma regra experimental pode confirmar essa combinação. Ela e o modelo de U precisam de testes com novas gravações e de ponta a ponta antes de uso. [Código da sonda](https://github.com/LuanFerns07/LIBRAS/blob/f60058b/ml/alphabet/probe_u.py)
+
+### Adoção da confirmação de R
+
+O pacote com veto e recuperação passou a servir a prévia local em 4177. O Chromium mostrou a letra esperada em 88 dos 89 recortes da bateria. O painel exibiu A e G no recorte de Z do Cecierj nessa rodada. No primeiro reteste, ele apareceu em três de três capturas da base e em duas de três do candidato. No segundo reteste apareceu em três de cinco de cada versão. As duas redes concordaram em zero aceites de R ou U nos quadros selecionáveis das 16 capturas dirigidas. As duas rotas da confirmação de R ficaram inativas nesses pontos. [Bateria do alfabeto](positivos-r-completo.json) · [Primeiro reteste da base](z-cecierj-r-base.json) · [Primeiro reteste do candidato](z-cecierj-r-completo.json) · [Segundo reteste da base](z-cecierj-extra-r-base.json) · [Segundo reteste do candidato](z-cecierj-extra-r-completo.json) · [Votos por captura](avaliacao-z-contexto-final.json)
+
+Nenhum dos 19 recortes fora do alfabeto exibiu R. O Z curto da UFSM apareceu nas três repetições. A sobreposição de duas mãos passou com vídeo. Após a troca da prévia, o Chromium repetiu a leitura de R em Praticar e na Área livre e verificou a passagem de M para N com gravações. [Controles fora do alfabeto](negativos-r-completo.json) · [Três repetições do Z curto](z-curto-r-completo.json)
+
+Para exportar o complemento com ambas as rotas e reconstruir a prévia com os modelos anteriores, use a referência 3D de A e os pontos de M, N, U e Q da reprodução descrita acima.
+
+```sh
+base="$PWD/data/releases/librasia-y-forma-teste/site/models"
+.venv/bin/python -m ml.alphabet.probe_qr "$base" \
+  data/alphabet/a-oculto/referencia-3d.json data/alphabet/q-r-diagnostico/mnuq-3d.json \
+  --export-letters R --r-veto-threshold .20 --out data/models/alphabet-r-reproduzido
+LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
+  LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-r-reproduzido" \
+  ./scripts/executar-local.sh --pacote data/releases/librasia-r-reconstruido
+```
