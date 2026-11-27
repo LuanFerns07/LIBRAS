@@ -48,6 +48,9 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 - [x] Integrar o avatar lado a lado com a captura pela webcam, inferência e resposta do exercício. Usar o modelo treinado e verificar o caminho em navegador com vídeos rotulados e exemplos fora do catálogo.
 - [x] Implementar quatro estados visíveis: execução aceita, dica acionável sobre um parâmetro, tentativa inconclusiva e problema de captura. Pedir nova tentativa quando a imagem ou a estimativa não derem base para corrigir o estudante.
 - [x] Testar concessão e negação de câmera, saída do fluxo, troca de aba e reativação. Verificar que a aplicação processa os quadros localmente, sem transmitir ou persistir as imagens.
+- [x] **Webcam física no Chromium.** Abrir a câmera ACER HD User Facing, conferir a trilha ativa e liberar a câmera ao sair da aba e da Área livre. [Prévia local dos pontos](docs/previa-estavel.md#pontos-das-mãos-ao-vivo)
+- [x] **Vídeo gravado no Chromium.** Verificar 21 pontos por mão, movimento das duas mãos antes, durante e depois de uma tentativa, oclusão e retorno de uma mão, opção ligada por padrão e alternância durante a captura. Conferir o encaixe e o espelhamento em 1.280 e 390 px e a liberação da trilha ao navegar. [Vídeo e cenário](docs/teste-pontos-ao-vivo.md) · [Teste automatizado](tests/e2e/hand-overlay-live.test.mjs)
+- [ ] **Aceite visual na webcam física.** Na Área livre, ativar a câmera, mexer dedos e pulsos das duas mãos, tirar uma mão do quadro e trazê-la de volta. Conferir o alinhamento ao redimensionar a janela.
 - [ ] Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
 - [ ] **Aceite.** No PC, uma pessoa usa a câmera real para demonstrar o sinal, recebe uma dica adequada em uma tentativa com erro observável e vê um aviso distinto quando a captura falha. Registrar a versão e a evidência desse fluxo.
 

@@ -37,3 +37,24 @@ sha256sum data/clad-development/raw/clad-dev-58a.mp4 \
 | `clad-duas-maos.y4m` | `f94d2c2139afb9f7d8f4979de5b13b010f4d5b48d9136955ea5b18a1ce79623c` |
 
 TAYYUB, Jawad, HAWASLY, Majd e COHN, Anthony G. *Complex and Long Activities Dataset*. University of Leeds, 2017. O LibrasIA recortou, desacelerou e redimensionou o vídeo, aplicou a oclusão e marcou as fases. [Dataset](https://doi.org/10.5518/249) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Verificar a prévia
+
+Com a prévia de pontos ao vivo aberta na porta 4175, execute os testes na raiz. O primeiro injeta o Y4M na câmera do Chromium e confere as articulações desenhadas nos pixels do canvas. O segundo abre a webcam do computador, verifica a trilha e confirma sua liberação.
+
+```bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4175/ \
+  LIBRASIA_TEST_HAND_VIDEO=data/evidence/hand-overlay-live/clad-duas-maos.y4m \
+  node --test tests/e2e/hand-overlay-live.test.mjs
+
+LIBRASIA_TEST_URL=http://127.0.0.1:4175/ LIBRASIA_TEST_PHYSICAL=1 \
+  node --test tests/e2e/browser.test.mjs
+```
+
+## Resultado da prévia empacotada
+
+O Chromium 156.0.8078.79 testou a compilação `7e30829`. Com o vídeo gravado, o canvas desenhou 21 pontos por mão, mostrou movimentos distintos das duas mãos e apagou os pontos da mão ocluída até seu retorno. O vídeo e o canvas tiveram o mesmo encaixe e espelhamento em janelas de 1.280 e 390 px. A opção começou marcada, apagou os pontos ao ser desmarcada e retomou o desenho ao ser marcada durante a tentativa. Ao sair da Área livre, a trilha terminou e o vídeo soltou a referência à câmera.
+
+Na amostra com leitura dos pixels do canvas, os intervalos medianos entre pinturas foram 43 ms antes da tentativa, 89 ms durante a captura e 40 ms depois de concluir. A primeira pintura após o clique para iniciar ocorreu em 14 ms. O teste separado de reconhecimento acrescentou Amarelo à transcrição com a sobreposição ativa.
+
+Com a webcam física ACER HD User Facing, o Chromium abriu a trilha a 640 × 480 e confirmou sua liberação ao mudar de aba e ao sair da Área livre. O aceite visual com movimentos na webcam física fica na checklist. Os registros locais estão em `data/evidence/hand-overlay-live/final-video.log`, `final-webcam-fisica.log` e `final-reconhecimento.log`. [Checklist](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)

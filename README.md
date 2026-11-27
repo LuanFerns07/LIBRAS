@@ -12,7 +12,7 @@ O protótipo web reúne prática de Libras, alfabeto manual e tradução nos doi
 
 ## Executar neste Linux
 
-Para testar a câmera, os pontos das mãos e o modelo combinado na versão fixada, consulte a [prévia local v0.1.0-preview.1](docs/previa-estavel.md).
+Para testar a câmera e os pontos das mãos antes, durante e depois de uma tentativa, abra a [prévia local dos pontos ao vivo](docs/previa-estavel.md#pontos-das-mãos-ao-vivo).
 
 Use Node.js 22 LTS (ou Node.js 20.19+) e npm. No navegador desktop, recomenda-se Chromium com WebGL 2, câmera e voz local pt-BR.
 
