@@ -162,6 +162,7 @@ async function buildIdentity() {
   return { commit, modelSha256, agreementSha256, supplementSha256: supplement?.modelSha256,
     contrastSha256: contrast?.modelSha256, worldASha256: worldA?.modelSha256,
     worldQSha256: worldQ?.modelSha256, imageRSha256: imageR?.modelSha256,
+    imageRPolicy: imageR && { threshold: imageR.threshold, vetoThreshold: imageR.vetoThreshold, allowU: imageR.allowU !== false },
     imageYSha256: imageY?.modelSha256, motionSha256 }
 }
 

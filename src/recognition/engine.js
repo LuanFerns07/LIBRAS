@@ -71,6 +71,12 @@ export async function openAlphabetEngine() {
       throw new TypeError('Manifesto da confirmação de forma do alfabeto incompatível.')
     }
   }
+  if (imageR && ((imageR.vetoThreshold !== undefined &&
+      (!Number.isFinite(imageR.vetoThreshold) || !(imageR.vetoThreshold > 0 && imageR.vetoThreshold < imageR.threshold))) ||
+      (imageR.allowU !== undefined && typeof imageR.allowU !== 'boolean') ||
+      (imageR.allowU === false && imageR.vetoThreshold === undefined))) {
+    throw new TypeError('Manifesto da confirmação de R incompatível.')
+  }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
   const motion = motionResponse.ok ? await motionResponse.json() : null
@@ -167,7 +173,10 @@ export async function openAlphabetEngine() {
         const checkQ = qModel && hasWorld && first.label === 'N'
         const second = verifier && (first.accepted || checkA || checkQ) ? await letterVote(verifier, input) : null
         if (first.accepted && (!verifier || second.accepted && second.label === first.label)) {
-          if (rModel && first.label === 'U' && await confirmsShape(rModel, { hand: input }, imageR.threshold)) return 'R'
+          if (rModel && first.label === 'R' && imageR.vetoThreshold !== undefined &&
+              !await confirmsShape(rModel, { hand: input }, imageR.vetoThreshold)) return null
+          if (rModel && first.label === 'U' && imageR.allowU !== false &&
+              await confirmsShape(rModel, { hand: input }, imageR.threshold)) return 'R'
           return refinedLetter(first.label, input)
         }
         if (refiner) {

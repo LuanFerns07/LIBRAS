@@ -39,12 +39,12 @@ def y_shape(points):
     return torch.cat((shape, placement), dim=1)
 
 
-def train(examples):
+def train(examples, label="Y", measure=y_shape):
     # O mesmo número de quadros por recorte preserva o peso das demonstrações curtas.
     sampled = [points[np.linspace(0, len(points) - 1, 16).round().astype(int)] for _, points in examples]
     points = torch.from_numpy(np.concatenate(sampled))
-    target = np.repeat([clip["label"] == "Y" for clip, _ in examples], 16)
-    return ShapeConfirmation(y_shape, *fit_linear(y_shape(points), target)).eval()
+    target = np.repeat([clip["label"] == label for clip, _ in examples], 16)
+    return ShapeConfirmation(measure, *fit_linear(measure(points), target)).eval()
 
 
 def export(base, output, model, features):
