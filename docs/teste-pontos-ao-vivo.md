@@ -40,14 +40,14 @@ TAYYUB, Jawad, HAWASLY, Majd e COHN, Anthony G. *Complex and Long Activities Dat
 
 ## Verificar a prévia
 
-Com a prévia de pontos ao vivo aberta na porta 4175, execute os testes na raiz. O primeiro injeta o Y4M na câmera do Chromium e confere as articulações desenhadas nos pixels do canvas. O segundo abre a webcam do computador, verifica a trilha e confirma sua liberação.
+Com o pacote local da demonstração servindo a porta 4177, execute os testes na raiz. O primeiro injeta o Y4M na câmera do Chromium e confere as articulações desenhadas nos pixels do canvas. O segundo abre a webcam do computador, verifica a trilha e confirma sua liberação.
 
 ```bash
-LIBRASIA_TEST_URL=http://127.0.0.1:4175/ \
+LIBRASIA_TEST_URL=http://127.0.0.1:4177/ \
   LIBRASIA_TEST_HAND_VIDEO=data/evidence/hand-overlay-live/clad-duas-maos.y4m \
   node --test tests/e2e/hand-overlay-live.test.mjs
 
-LIBRASIA_TEST_URL=http://127.0.0.1:4175/ LIBRASIA_TEST_PHYSICAL=1 \
+LIBRASIA_TEST_URL=http://127.0.0.1:4177/ LIBRASIA_TEST_PHYSICAL=1 \
   node --test tests/e2e/browser.test.mjs
 ```
 

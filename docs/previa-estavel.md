@@ -10,7 +10,9 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote `50ad447` passou o roteiro integrado no Chromium, com a nova interrupção da fala ao editar a transcrição. A execução com gravações percorreu as seis etapas, encerrou a voz depois de ler o texto editado e abriu o dicionário do INES. O log fica em `data/evidence/demonstracao/roteiro-50ad447.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Reteste de edição e voz](regressao-area-livre.md#edição-durante-a-leitura)
+O pacote `180711c` inclui a ficha de validação na porta da demonstração. Abra a ficha em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão compilada do avatar e as somas dos arquivos do classificador. A ficha exporta o JSON localmente. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Instruções de validação](validacao-ao-vivo.md)
+
+O reteste no Chromium percorreu as seis etapas do roteiro com vídeos gravados e verificou o encaixe e a retomada dos pontos das duas mãos. Em ensaios separados, a webcam Acer foi aberta e liberada e a síntese local em pt-BR chegou ao fim. O aceite com participantes na webcam e a compreensão do áudio continuam pendentes. Os logs ficam em `data/evidence/demonstracao`, nos arquivos `roteiro-180711c-reteste.log`, `pontos-180711c.log`, `fisico-180711c.log` e `ficha-validacao-180711c.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Teste dos pontos](teste-pontos-ao-vivo.md)
 
 O servidor local informa o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`.
 
@@ -37,24 +39,11 @@ Em 27/11/2026, a compilação `aea5303` partiu de um checkout limpo. Os arquivos
 
 ## Pontos das mãos ao vivo
 
-Abra **http://127.0.0.1:4175/#area-livre** no Chromium, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Acompanhe os pontos antes, durante e depois de iniciar uma tentativa. Durante a captura, desmarque e marque a opção para verificar a sobreposição.
+Na Área livre, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Acompanhe os pontos antes, durante e depois de iniciar uma tentativa. Durante a captura, desmarque e marque a opção para verificar a sobreposição. [Abrir Área livre](http://127.0.0.1:4177/#area-livre)
 
 O Hand Landmarker acompanha até duas mãos em um worker local. A sobreposição desenha 21 pontos e suas conexões em cada mão detectada. O vídeo e a sobreposição usam o mesmo espelhamento e encaixe. Quando uma mão deixa de ser detectada, o desenho dela é apagado na próxima atualização. A decisão de sinais usa o classificador combinado da prévia. [Modelo Hand Landmarker do MediaPipe](https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/vision/README.md#hand-landmarker)
 
-Se a prévia estiver encerrada, execute na raiz do projeto.
-
-```bash
-python3 data/releases/librasia-pontos-ao-vivo/iniciar.py --porta 4175
-```
-
-Para gerar o pacote em outro diretório com o classificador local já exportado, execute na raiz.
-
-```bash
-LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
-  --pacote data/releases/librasia-pontos-ao-vivo
-```
-
-O pacote grava o commit da compilação em `site/commit.txt` e serve os modelos pelo endereço local. O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confirmação visual do alinhamento com movimentos feitos na webcam integra o teste manual. [Resultados com vídeo gravado e webcam física](teste-pontos-ao-vivo.md#resultado-da-prévia-empacotada) · [Checklist de verificação](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)
+O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confirmação visual do alinhamento com movimentos feitos na webcam integra o teste manual. [Resultados com vídeo gravado e webcam física](teste-pontos-ao-vivo.md#resultado-da-prévia-empacotada) · [Checklist de verificação](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)
 
 ## Prévia v0.1.0-preview.1
 
