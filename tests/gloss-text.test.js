@@ -30,3 +30,21 @@ test('o tradutor rejeita formatos incompatíveis de artefato e de entrada', () =
   assert.throws(() => translate('IR'), TypeError)
   assert.throws(() => translate([null]), TypeError)
 })
+
+test('a restrição do numeral conserva a quantidade de ocorrências de Cinco', () => {
+  const model = {
+    ...artifact,
+    tables: { ...artifact.tables, phrases: {
+      'cinco espelho': [10, [['o espelho', 10]]],
+      'cinco aluno': [10, [['5 alunos', 10]]],
+      cinco: [10, [['do', 10]]],
+      aluno: [10, [['cinco alunos', 10]]],
+    } },
+  }
+  assert.deepEqual(createGlossTranslator(model)(['cinco', 'espelho']), ['o', 'espelho'])
+  const translate = createGlossTranslator(model, { preserveFive: true })
+  assert.deepEqual(translate(['cinco', 'espelho']), ['cinco', 'espelho'])
+  assert.deepEqual(translate(['cinco', 'aluno']), ['5', 'alunos'])
+  assert.deepEqual(translate(['aluno']), ['aluno'])
+  assert.deepEqual(translate(['cinco', 'cinco', 'espelho']), ['cinco', 'cinco', 'espelho'])
+})

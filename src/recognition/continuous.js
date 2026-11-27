@@ -86,7 +86,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize, catal
     verifiedBytes(directory + 'boundary-model.onnx', model.modelSha256),
     verifiedBytes(directory + 'monotone-web.json', gloss.sha256),
   ])
-  const translate = createGlossTranslator(JSON.parse(new TextDecoder().decode(glossBytes)))
+  const translate = createGlossTranslator(JSON.parse(new TextDecoder().decode(glossBytes)), { preserveFive: true })
   const vocabulary = new Set(catalog)
   const review = value => suggestFromReview(value, vocabulary, translate)
   const session = await InferenceSession.create(onnx, { executionProviders: ['wasm'] })

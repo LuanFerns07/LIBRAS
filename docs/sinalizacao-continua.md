@@ -28,7 +28,7 @@ Os pesos de fronteiras são mantidos no ambiente local de pesquisa. O detector c
 
 Na prévia experimental do Chromium, o controle com Amarelo e Espelho apresentou sete trechos em cada execução. Em ambas apareceram Amarelo repetido e Espelho. O último trecho foi lido como Cinco na primeira execução e ficou inconclusivo no reteste do pacote `b514496`. O texto anterior permaneceu intacto. A revisão substituiu a sequência por “amarelo espelho”, mostrou a sugestão e acrescentou o texto uma vez após a confirmação. Uma nova edição invalidou a sugestão anterior. No recorte de repouso do CLAD, dois trechos ficaram inconclusivos e o texto também foi preservado. O reteste isolado de Cinco acrescentou a palavra ao concluir a tentativa.
 
-Na webcam física Acer HD User Facing a 640 × 480, a tentativa em repouso ficou inconclusiva, sem fronteiras detectadas. A trilha foi liberada ao sair da Área livre. O ensaio com Amarelo e Espelho usou clipes de treino unidos. A avaliação de sequências naturais com anotação de referência e a revisão do sentido em português seguem pendentes. A geração também pode omitir palavras quando recebe glosas válidas. No artefato atual, “cinco espelho” gera “o espelho”.
+Na webcam física Acer HD User Facing a 640 × 480, a tentativa em repouso ficou inconclusiva, sem fronteiras detectadas. A trilha foi liberada ao sair da Área livre. O ensaio com Amarelo e Espelho usou clipes de treino unidos. A avaliação de sequências naturais com anotação de referência e a revisão do sentido em português seguem pendentes.
 
 Para repetir o controle com vídeo, sirva a prévia com o detector Holistic com penalidade de corte e use:
 
@@ -41,6 +41,29 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 \
 ~~~
 
 Os logs ficam em `data/evidence/continuo-integrado`, nos arquivos `revisao-amarelo-espelho.log`, `revisao-final-b514496.log`, `isolado-b514496.log`, `revisao-repouso.log` e `revisao-webcam.log`. [Configuração do detector com penalidade](#controle-de-fragmentação-no-navegador)
+
+### Preservação do numeral Cinco
+
+O tradutor congelado sugeria “o espelho” para a sequência “cinco espelho”. No modo contínuo, cada trecho da decodificação passou a conservar a quantidade de ocorrências do numeral, aceitando “cinco” e “5”. A sugestão para esse caso passou a “cinco espelho” e continua editável na transcrição. A restrição mantém o numeral informado ao tradutor, inclusive quando a leitura original da câmera estiver errada.
+
+| Teste | Tradutor anterior | Com preservação de Cinco |
+| --- | --- | --- |
+| 84 combinações de um a três sinais do catálogo | 35 sequências mudaram a contagem de Cinco | 0 mudaram a contagem |
+| 1.800 pares da amostra reservada, WER | 50,66% | 50,66% |
+| 53 pares com Cinco ou 5 em pelo menos um lado, WER | 57,32% | 56,59% |
+| 44 pares desses 53 com contagem positiva igual nos dois lados | 3 omissões de Cinco frente ao português | 0 omissões |
+| 66 pares numéricos da validação, WER | 61,85% | 63,65% |
+
+Os recortes textuais vêm dos mesmos componentes reservados do VLibrasBD v2. A presença de Cinco em pelo menos um lado define o recorte numérico. No teste, nove pares desse recorte tinham contagens diferentes entre as glosas e o português. Cada WER usa uma referência e a tokenização do ensaio textual. As 84 combinações servem para verificar o numeral, sem referência de correção gramatical. O artefato de tradução foi mantido. [Comparação anterior](comparacao-glosas.md) · [Resultados por partição e método](../ml/evidence/vlibrasbd-holdout/preservacao-cinco.json)
+
+No Chromium, o clipe montado de Amarelo e Espelho produziu Amarelo, Amarelo e Espelho entre sete propostas. Quatro propostas ficaram inconclusivas. Entre as glosas reconhecidas, houve uma inserção de Amarelo em relação aos dois sinais de referência. A tentativa preservou a transcrição. Com os sinais fornecidos diretamente ao tradutor, a saída foi “amarelo espelho”. O teste também conferiu a sugestão “cinco espelho” após editar as glosas, antes de confirmar qualquer texto. O log fica em `data/evidence/continuo-integrado/cinco-revisao-teste.log`. [Teste da revisão](#revisão-dos-sinais-detectados)
+
+Reproduza a comparação textual com o CSV e o artefato do navegador já preparados.
+
+~~~bash
+.venv/bin/python -m ml.continuous_experiment.gloss_text.evaluate_five \
+  data/vlibrasbd-v2 data/vlibrasbd-holdout data/vlibrasbd-holdout/preservacao-cinco.json
+~~~
 
 ### Ensaio da integração no Chromium
 

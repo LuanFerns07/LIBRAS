@@ -324,6 +324,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       await generate()
       assert.equal(await evaluate(output + '.dataset.state'), 'inconclusive')
       assert.equal(await evaluate(apply + '.disabled'), true)
+      await edit('cinco espelho')
+      await generate()
+      assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — cinco espelho')
+      assert.equal(await getTranscript(), prefix)
       await edit('amarelo espelho')
       await generate()
       assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — amarelo espelho')
@@ -339,7 +343,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       assert.equal(await evaluate('document.querySelector("[data-gloss-review]").hidden'), true)
       assert.equal(await evaluate('document.activeElement.id'), 'transcription')
       assert.deepEqual(otherRequests, [], 'A revisão também deve ser local.')
-      context.diagnostic('A revisão rejeitou os trechos em aberto, invalidou sugestões antigas e acrescentou somente a sugestão confirmada.')
+      context.diagnostic('A revisão preservou Cinco, rejeitou trechos em aberto e acrescentou somente a sugestão confirmada.')
     }
 
     if (expectedHint) {

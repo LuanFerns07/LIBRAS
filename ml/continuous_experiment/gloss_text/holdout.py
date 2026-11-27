@@ -14,7 +14,7 @@ def digest(purpose, value):
     return hashlib.sha256(f"{PROTOCOL}/{purpose}/{value}".encode()).hexdigest()
 
 
-def reserve(pairs, previous):
+def eligible_by_split(pairs, previous):
     keys, components = sentence_components(pairs)
     component_by_row = {pair.row: root for pair, root in zip(pairs, components)}
     exposed = {number for rows in previous["rows"].values() for number in rows}
@@ -30,7 +30,11 @@ def reserve(pairs, previous):
         seen_pairs.add(endpoints)
         destination = "dev" if int(digest("component", component)[:16], 16) % 2 == 0 else "test"
         eligible[destination].append((digest("sample", pair.row), pair.row))
+    return eligible, component_by_row, used, exposed
 
+
+def reserve(pairs, previous):
+    eligible, component_by_row, used, exposed = eligible_by_split(pairs, previous)
     rows = {"train": previous["rows"]["train"]}
     allocated = set(used)
     for split, count in LIMITS.items():

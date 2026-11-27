@@ -1,0 +1,282 @@
+{
+  "protocol": "vlibrasbd-v2-heldout-components-01",
+  "split_sha256": "5bbbe1d19ecaf4207e285eb328f9fd775d4b830f9638548e3cdc454188830cbd",
+  "monotone_sha256": "99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11",
+  "groups": {
+    "dev_sampled": {
+      "monotone": {
+        "examples": 1200,
+        "exact_matches": 88,
+        "exact_match_rate": 0.07333333333333333,
+        "insertions": 204,
+        "deletions": 1743,
+        "substitutions": 1664,
+        "reference_units": 6976,
+        "error_rate": 0.517631880733945,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      },
+      "preserve_five": {
+        "examples": 1200,
+        "exact_matches": 88,
+        "exact_match_rate": 0.07333333333333333,
+        "insertions": 204,
+        "deletions": 1743,
+        "substitutions": 1664,
+        "reference_units": 6976,
+        "error_rate": 0.517631880733945,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      }
+    },
+    "dev_five": {
+      "monotone": {
+        "examples": 66,
+        "exact_matches": 1,
+        "exact_match_rate": 0.015151515151515152,
+        "insertions": 16,
+        "deletions": 114,
+        "substitutions": 178,
+        "reference_units": 498,
+        "error_rate": 0.6184738955823293,
+        "compared_to_glosses": {
+          "missing_five": 15,
+          "added_five": 5,
+          "changed_count": 20
+        },
+        "compared_to_reference": {
+          "missing_five": 16,
+          "added_five": 10,
+          "changed_count": 26
+        }
+      },
+      "preserve_five": {
+        "examples": 66,
+        "exact_matches": 1,
+        "exact_match_rate": 0.015151515151515152,
+        "insertions": 18,
+        "deletions": 110,
+        "substitutions": 189,
+        "reference_units": 498,
+        "error_rate": 0.6365461847389559,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 4,
+          "added_five": 8,
+          "changed_count": 12
+        }
+      }
+    },
+    "dev_five_count_agrees": {
+      "monotone": {
+        "examples": 54,
+        "exact_matches": 1,
+        "exact_match_rate": 0.018518518518518517,
+        "insertions": 8,
+        "deletions": 92,
+        "substitutions": 148,
+        "reference_units": 395,
+        "error_rate": 0.6278481012658228,
+        "compared_to_glosses": {
+          "missing_five": 13,
+          "added_five": 4,
+          "changed_count": 17
+        },
+        "compared_to_reference": {
+          "missing_five": 13,
+          "added_five": 4,
+          "changed_count": 17
+        }
+      },
+      "preserve_five": {
+        "examples": 54,
+        "exact_matches": 1,
+        "exact_match_rate": 0.018518518518518517,
+        "insertions": 9,
+        "deletions": 88,
+        "substitutions": 156,
+        "reference_units": 395,
+        "error_rate": 0.640506329113924,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      }
+    },
+    "test_sampled": {
+      "monotone": {
+        "examples": 1800,
+        "exact_matches": 134,
+        "exact_match_rate": 0.07444444444444444,
+        "insertions": 283,
+        "deletions": 2551,
+        "substitutions": 2432,
+        "reference_units": 10394,
+        "error_rate": 0.506638445256879,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      },
+      "preserve_five": {
+        "examples": 1800,
+        "exact_matches": 134,
+        "exact_match_rate": 0.07444444444444444,
+        "insertions": 283,
+        "deletions": 2551,
+        "substitutions": 2432,
+        "reference_units": 10394,
+        "error_rate": 0.506638445256879,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      }
+    },
+    "test_five": {
+      "monotone": {
+        "examples": 53,
+        "exact_matches": 1,
+        "exact_match_rate": 0.018867924528301886,
+        "insertions": 11,
+        "deletions": 121,
+        "substitutions": 103,
+        "reference_units": 410,
+        "error_rate": 0.573170731707317,
+        "compared_to_glosses": {
+          "missing_five": 5,
+          "added_five": 0,
+          "changed_count": 5
+        },
+        "compared_to_reference": {
+          "missing_five": 4,
+          "added_five": 6,
+          "changed_count": 10
+        }
+      },
+      "preserve_five": {
+        "examples": 53,
+        "exact_matches": 1,
+        "exact_match_rate": 0.018867924528301886,
+        "insertions": 11,
+        "deletions": 115,
+        "substitutions": 106,
+        "reference_units": 410,
+        "error_rate": 0.5658536585365853,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 1,
+          "added_five": 8,
+          "changed_count": 9
+        }
+      }
+    },
+    "test_five_count_agrees": {
+      "monotone": {
+        "examples": 44,
+        "exact_matches": 1,
+        "exact_match_rate": 0.022727272727272728,
+        "insertions": 9,
+        "deletions": 98,
+        "substitutions": 74,
+        "reference_units": 322,
+        "error_rate": 0.562111801242236,
+        "compared_to_glosses": {
+          "missing_five": 3,
+          "added_five": 0,
+          "changed_count": 3
+        },
+        "compared_to_reference": {
+          "missing_five": 3,
+          "added_five": 0,
+          "changed_count": 3
+        }
+      },
+      "preserve_five": {
+        "examples": 44,
+        "exact_matches": 1,
+        "exact_match_rate": 0.022727272727272728,
+        "insertions": 9,
+        "deletions": 94,
+        "substitutions": 75,
+        "reference_units": 322,
+        "error_rate": 0.5527950310559007,
+        "compared_to_glosses": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        },
+        "compared_to_reference": {
+          "missing_five": 0,
+          "added_five": 0,
+          "changed_count": 0
+        }
+      }
+    }
+  },
+  "catalog_controls": {
+    "sequences": 84,
+    "monotone": {
+      "missing_five": 40,
+      "added_five": 0,
+      "changed_count": 35
+    },
+    "preserve_five": {
+      "missing_five": 0,
+      "added_five": 0,
+      "changed_count": 0
+    },
+    "cinco_espelho": [
+      [
+        "o",
+        "espelho"
+      ],
+      [
+        "cinco",
+        "espelho"
+      ]
+    ]
+  }
+}

@@ -47,8 +47,9 @@ function compareTokens(left, right) {
 const rank = (a, b) => b.score - a.score || compareTokens(a.tokens, b.tokens)
 const outputTokens = key => key ? key.split(' ') : []
 const isRecord = value => value && typeof value === 'object' && !Array.isArray(value)
+const countFives = words => words.filter(word => word === 'cinco' || word === '5').length
 
-export function createGlossTranslator(artifact) {
+export function createGlossTranslator(artifact, { preserveFive = false } = {}) {
   const { schema, parameters, beam, maxPhrase, start, end, tables, caseFolding } = artifact ?? {}
   if (schema !== glossTranslatorSchema || beam !== 6 || maxPhrase !== 3 || start !== '<início>' || end !== '<fim>'
       || !isRecord(parameters) || ![parameters.language, parameters.length, parameters.copy].every(Number.isFinite)
@@ -64,15 +65,17 @@ export function createGlossTranslator(artifact) {
   const bigrams = countsFrom(tables.bigrams)
   const trigrams = countsFrom(tables.trigrams)
   const wordPriorDenominator = tables.totalWords + 0.2 * (Object.keys(tables.words).length + 1)
+  const preservesNumeral = (input, output) => !preserveFive || countFives(input) === countFives(output)
 
   function candidates(source, position, width) {
     const word = source[position]
-    const phrase = phrases(source.slice(position, position + width).join(' '))
+    const input = source.slice(position, position + width)
+    const phrase = phrases(input.join(' '))
     if (width > 1) {
       return phrase.entries.slice(0, 4).filter(([, count]) => count >= 2).map(([output, count]) => ({
         tokens: outputTokens(output),
         score: width * Math.log(count / phrase.total) - 0.20 * (width - 1),
-      }))
+      })).filter(({ tokens }) => preservesNumeral(input, tokens))
     }
 
     const left = leftContext(`${source[position - 1] ?? start} ${word}`)
@@ -84,13 +87,15 @@ export function createGlossTranslator(artifact) {
       ...right.entries.slice(0, 3).map(([output]) => output),
     ])
 
-    return Array.from(outputs, output => {
-      const prior = ((phrase.counts.get(output) ?? 0) + parameters.copy * Number(output === word))
-        / (phrase.total + parameters.copy)
-      const probability = (prior + ((left.counts.get(output) ?? 0) + 3 * prior) / (left.total + 3)
-        + ((right.counts.get(output) ?? 0) + 3 * prior) / (right.total + 3)) / 3
-      return { tokens: outputTokens(output), score: Math.log(probability) }
-    }).sort(rank).slice(0, beam)
+    return Array.from(outputs, output => ({ output, tokens: outputTokens(output) }))
+      .filter(({ tokens }) => preservesNumeral(input, tokens))
+      .map(({ output, tokens }) => {
+        const prior = ((phrase.counts.get(output) ?? 0) + parameters.copy * Number(output === word))
+          / (phrase.total + parameters.copy)
+        const probability = (prior + ((left.counts.get(output) ?? 0) + 3 * prior) / (left.total + 3)
+          + ((right.counts.get(output) ?? 0) + 3 * prior) / (right.total + 3)) / 3
+        return { tokens, score: Math.log(probability) }
+      }).sort(rank).slice(0, beam)
   }
 
   return glosses => {
