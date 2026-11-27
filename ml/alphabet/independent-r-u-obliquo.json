@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Dois pares externos de R e U. Os recortes foram fixados pelos cartões e pela pose antes do replay. As gravações ficaram fora do treino e da escolha dos limiares de R.",
+  "sources": [
+    {
+      "id": "unintese-ncfjw-0-mro",
+      "split": "test",
+      "title": "Aprenda as letras de A a Z no Alfabeto Manual - Parte 2 | Escola de Libras (eLibras)",
+      "project": "Escola de Libras (eLibras), Uníntese",
+      "credits": {
+        "publicação": "Uníntese",
+        "apresentação": "Patrícia Santos",
+        "demonstração": "A pessoa que interpreta a introdução para Libras demonstra as letras. Seu nome não consta nos créditos exibidos nem na descrição consultada."
+      },
+      "page": "https://www.youtube.com/watch?v=nCFjW-0-mro",
+      "published": "2022-02-08",
+      "file": "data/alphabet/independent/unintese-download/unintese-alfabeto.mp4",
+      "sha256": "1a9128d1d661fc912505a531f0e84240e4d0d966f2876e74d2c357905f5e89c7",
+      "downloadFormats": "YouTube 298 (H.264, 1280 × 720, 59,94 fps) + 140-2 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=nCFjW-0-mro&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação da Uníntese indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Cartões R e U em amarelo no rodapé. No U a mão se apresenta em ângulo oblíquo.",
+      "windows": [
+        {
+          "label": "R",
+          "startMs": 84050,
+          "endMs": 85200,
+          "anchorMs": 84610
+        },
+        {
+          "label": "U",
+          "startMs": 94730,
+          "endMs": 95870,
+          "anchorMs": 95330,
+          "view": "oblíqua"
+        }
+      ]
+    },
+    {
+      "id": "uff-nuedis-sdcvqodwh0o",
+      "split": "test",
+      "title": "Alfabeto manual em Libras",
+      "project": "Acessibilidade e os princípios do SUS, adaptado para o curso de Libras iniciantes do IB/UFF",
+      "credits": {
+        "publicação": "NUEDIS LIBRAS UFF",
+        "conteudistas": "Aline da Silva Alves, Margareth Prevot e Tatiane Militão de Sá",
+        "intérpretes nos créditos": "Elisangela Maroto Souza Guimarães e Gabriel Sampaio Veríssimo"
+      },
+      "page": "https://www.youtube.com/watch?v=SdCVqodwH0o",
+      "published": "2020-06-02",
+      "file": "data/alphabet/independent/uff-nuedis-download/uff-nuedis-alfabeto.mp4",
+      "sha256": "9201d1e548e85dbd85426808ea4e100de79768e37a9dbe322305f50370753bfc",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140-2 (AAC), combinados sem recodificação",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=SdCVqodwH0o&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação oficial indica Creative Commons de atribuição com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "A letra preta aparece ao lado da pessoa sinalizante durante a pose. No U, os dedos ficam próximos na projeção da câmera.",
+      "windows": [
+        {
+          "label": "R",
+          "startMs": 78160,
+          "endMs": 80450,
+          "anchorMs": 79020
+        },
+        {
+          "label": "U",
+          "startMs": 90360,
+          "endMs": 92420,
+          "anchorMs": 91230,
+          "view": "oblíqua com sobreposição parcial dos dedos"
+        }
+      ]
+    }
+  ]
+}
