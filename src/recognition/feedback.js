@@ -1,4 +1,4 @@
-import { recognitionCatalog } from '../catalog.js'
+import { catalogTranscription, recognitionCatalog } from '../catalog.js'
 
 const signals = new Map(recognitionCatalog.map(signal => [signal.id, signal]))
 
@@ -79,7 +79,8 @@ export function freeFeedback(result) {
     const words = result.segments.map(freeFeedback).filter(segment => segment.state === 'accepted').map(segment => segment.text)
     const omitted = result.segments.length - words.length
     if (words.length === 0) return { state: 'inconclusive', message: 'Os trechos gravados ficaram fora do catálogo ou com baixa confiança.' }
-    const text = omitted === 0 && words.join(' ') === 'cinco espelho' ? 'cinco espelhos' : words.join(' ')
+    const translation = omitted === 0 ? catalogTranscription(words) : undefined
+    const text = translation ?? words.join(' ')
     return {
       state: 'accepted',
       text,

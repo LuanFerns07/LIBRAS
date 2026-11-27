@@ -79,10 +79,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   assert.ok(Number.isInteger(markerOffsetMs) && markerOffsetMs >= 0 && markerOffsetMs <= 2500,
     'Informe um deslocamento de 0 a 2500 ms a partir do marcador.')
   if (fixedCaptureMs !== null) {
-    const limitMs = continuous ? 11000 : 4200
+    const limitMs = continuous || multiple ? 11000 : 4200
     assert.ok(Number.isInteger(fixedCaptureMs) && fixedCaptureMs >= 500 && fixedCaptureMs <= limitMs,
       `Informe uma duração de captura de 500 a ${limitMs} ms.`)
-    assert.ok(sync && !autoFinish && !multiple && !target, 'Use clipe sincronizado e tentativa manual na área livre.')
+    assert.ok(sync && !autoFinish && !target, 'Use clipe sincronizado e tentativa manual na área livre.')
   } else {
     assert.equal(markerOffsetMs, 0, 'Defina a duração da captura para deslocar o início.')
   }

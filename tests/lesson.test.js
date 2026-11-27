@@ -63,10 +63,15 @@ test('a área livre mantém a edição e acrescenta uma palavra por decisão ace
 
 test('a área livre preserva a ordem e informa incerteza na sequência', () => {
   const espelho = { state: 'accepted', id: 'signal-espelho' }
+  const aluno = { state: 'accepted', id: 'signal-aluno' }
+  const amarelo = { state: 'accepted', id: 'signal-amarelo' }
   assert.equal(freeFeedback({ state: 'sequence', segments: [acceptedCinco, espelho] }).text, 'cinco espelhos')
+  assert.equal(freeFeedback({ state: 'sequence', segments: [acceptedCinco, aluno] }).text, 'cinco alunos')
+  assert.equal(freeFeedback({ state: 'sequence', segments: [acceptedCinco, espelho, amarelo] }).text, 'cinco espelhos amarelos')
   const incomplete = freeFeedback({ state: 'sequence', segments: [espelho, inconclusive, acceptedCinco] })
   assert.equal(incomplete.text, 'espelho cinco')
   assert.match(incomplete.message, /Trechos inconclusivos: 1/)
+  assert.equal(freeFeedback({ state: 'sequence', segments: [acceptedCinco, inconclusive, aluno] }).text, 'cinco aluno')
   assert.equal(freeFeedback({ state: 'sequence', segments: [inconclusive] }).state, 'inconclusive')
 })
 

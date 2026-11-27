@@ -103,4 +103,16 @@ export const studentFortaleza = {
 
 export const recognitionCatalog = [...lesson, student]
 
+const transcriptions = [
+  { glosses: ['cinco', 'aluno'], text: 'cinco alunos' },
+  { glosses: ['cinco', 'espelho'], text: 'cinco espelhos' },
+  { glosses: ['cinco', 'espelho', 'amarelo'], text: 'cinco espelhos amarelos' },
+]
+
+export function catalogTranscription(glosses) {
+  if (!Array.isArray(glosses)) return undefined
+  return transcriptions.find(entry => entry.glosses.length === glosses.length &&
+    entry.glosses.every((gloss, index) => gloss === glosses[index]))?.text
+}
+
 export const spellingPause = Object.freeze({ id: 'pause', label: 'Pausa' })
