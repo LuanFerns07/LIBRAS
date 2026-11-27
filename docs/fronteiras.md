@@ -61,4 +61,6 @@ node ml/continuous_experiment/boundaries/extract-web.mjs
 
 O treino usa 80 épocas em CPU, duas threads e semente 2845. O checkpoint selecionado veio da época 21. A exportação do candidato teve erro máximo de 2,68 × 10⁻⁷ para as probabilidades na paridade PyTorch e ONNX. O diretório `holistic/web` permite comparar o candidato localmente com `LIBRASIA_FRONTEIRAS`.
 
+Para extrair somente a partição reservada em outra pasta local, execute `node ml/continuous_experiment/boundaries/extract-web.mjs --split test`. O comando usa os mesmos módulos de visão do navegador e grava os três recortes em `data/ufsc-boundaries/holistic/test`. Em 1.138 dos 1.800 quadros houve pelo menos uma mão detectada. Fixe os parâmetros do decodificador no desenvolvimento antes de usar esses pontos para medir desempenho.
+
 No Chromium, o candidato marcou quatro trechos no Amarelo do Cederj, nove nos dois clipes unidos de Amarelo e Espelho e quatro no repouso CLAD. O detector original havia marcado quatro, oito e sete, respectivamente. Nos clipes unidos, o candidato reconheceu Amarelo e Espelho uma vez cada, com sete trechos inconclusivos. As três tentativas preservaram o texto anterior. Os registros `holistic-*.log` ficam em `data/evidence/continuo-integrado`. [Controles de câmera](sinalizacao-continua.md#ensaio-da-integração-no-chromium)

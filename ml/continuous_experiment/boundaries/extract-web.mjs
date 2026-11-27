@@ -9,17 +9,20 @@ import { withChromium } from '../../../tests/e2e/chromium.mjs'
 const { values: options } = parseArgs({ options: {
   project: { type: 'string', default: '.' },
   dir: { type: 'string', default: 'data/ufsc-boundaries' },
+  split: { type: 'string', default: 'development' },
   workers: { type: 'string', default: '2' },
   help: { type: 'boolean' },
 } })
 if (options.help) {
-  console.log('node ml/continuous_experiment/boundaries/extract-web.mjs [--project .] [--dir data/ufsc-boundaries] [--workers 1|2]')
+  console.log('node ml/continuous_experiment/boundaries/extract-web.mjs [--dir data/ufsc-boundaries] [--split development|test] [--workers 1|2]')
   process.exit(0)
 }
 
 const project = resolve(options.project)
 const directory = resolve(options.dir)
-const output = resolve(directory, 'holistic')
+if (!['development', 'test'].includes(options.split)) throw new Error('Selecione development ou test.')
+const reserved = options.split === 'test'
+const output = resolve(directory, 'holistic', reserved ? 'test' : '')
 const workers = Number(options.workers)
 if (![1, 2].includes(workers)) throw new Error('Escolha um ou dois processos Chromium.')
 
@@ -48,11 +51,12 @@ const [source, media, modelSha256, sourceDigests, { version: mediapipe }] = awai
   readJson(visionPackage),
 ])
 const extractorSha256 = createHash('sha256').update(JSON.stringify({ sourceDigests, mediapipe })).digest('hex')
-const development = row => row.split === 'train' || row.split === 'dev'
-const expected = source.cases.filter(development)
-const rows = media.filter(development)
-if (expected.length !== 6 || rows.length !== expected.length || new Set(rows.map(row => row.id)).size !== rows.length) {
-  throw new Error('O manifesto deve cobrir os seis vídeos de treino e validação.')
+const included = row => reserved ? row.split === 'test' : row.split === 'train' || row.split === 'dev'
+const expected = source.cases.filter(included)
+const rows = media.filter(included)
+if (expected.length !== (reserved ? 3 : 6) || rows.length !== expected.length ||
+    new Set(rows.map(row => row.id)).size !== rows.length) {
+  throw new Error('O manifesto deve cobrir todas as gravações da partição selecionada.')
 }
 const times = Array.from({ length: source.seconds * 1000 / sampleMs }, (_, index) => index * sampleMs)
 
@@ -83,7 +87,7 @@ for (const entry of expected) {
   const video = `FLN_G1_D${entry.dyad}_${entry.interview}entrevista_VIDEO${source.camera}.mp4`
   if (!row || row.split !== entry.split || row.dyad !== entry.dyad || row.interview !== entry.interview
     || row.video !== video || row.seconds !== source.seconds || row.tier !== source.tier) {
-    throw new Error(`O manifesto diverge do recorte de desenvolvimento ${entry.id}.`)
+    throw new Error(`O manifesto diverge do recorte ${entry.id}.`)
   }
   const file = resolve(directory, video)
   const [videoSha256, { size }] = await Promise.all([sha256(file), stat(file)])
@@ -185,4 +189,4 @@ if (clips.size) {
     await server.close()
   }
 }
-console.log(`Extração de treino e validação registrada em ${output}.`)
+console.log(`Extração de ${reserved ? 'teste' : 'treino e validação'} registrada em ${output}.`)
