@@ -173,7 +173,7 @@ def evaluate(data):
         destination = train if row.partition == "train" else validation
         destination.append(make_case(session, model, row.checksum, f"minds-{row.signer}", "cinco",
                                      "cinco", row.state, row.values))
-    external = [make_case(session, model, *case) for case in read_didactic(data, plan["sources"])]
+    external = [make_case(session, model, *case) for case in read_didactic(data, plan["sources"], model)]
     groups = sorted({row["group"] for row in external})
 
     results = {}
