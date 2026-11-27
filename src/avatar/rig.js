@@ -149,7 +149,7 @@ function arm(parent, side, palette) {
 
   if (side > 0) wrist.scale.x = -1;
 
-  return (position, rotation, digits) => {
+  return (position, rotation, digits, elbowLift = 0) => {
     const requestedWrist = new Vector3(...position);
     const axis = new Vector3().subVectors(requestedWrist, shoulder);
     const distance = Math.min(upperLength + foreLength - 0.001, Math.max(0.06, axis.length()));
@@ -157,7 +157,8 @@ function arm(parent, side, palette) {
     const wristPoint = shoulder.clone().addScaledVector(axis, distance);
     const elbowOffset = (upperLength ** 2 + distance ** 2 - foreLength ** 2) / (2 * distance);
     const height = Math.sqrt(Math.max(0, upperLength ** 2 - elbowOffset ** 2));
-    const elbowBend = pole.clone().addScaledVector(axis, -axis.dot(pole)).normalize();
+    const bendDirection = pole.clone().addScaledVector(vertical, elbowLift);
+    const elbowBend = bendDirection.addScaledVector(axis, -axis.dot(bendDirection)).normalize();
     const elbowPoint = shoulder.clone().addScaledVector(axis, elbowOffset).addScaledVector(elbowBend, height);
 
     segment(sleeve, shoulder, elbowPoint, 0.139, 0, 0.61);
@@ -188,9 +189,9 @@ export function createRig() {
 
   return {
     model,
-    applyPose({ wrist, rotation, digits, left = leftRest }) {
-      rightArm(wrist, rotation, digits);
-      leftArm(left.wrist, left.rotation, left.digits);
+    applyPose({ wrist, rotation, digits, elbowLift, left = leftRest }) {
+      rightArm(wrist, rotation, digits, elbowLift);
+      leftArm(left.wrist, left.rotation, left.digits, left.elbowLift);
     },
     dispose() {
       const geometries = new Set();

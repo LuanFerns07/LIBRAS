@@ -36,24 +36,32 @@ test('as formas manuais permanecem distintas em pares próximos', () => {
     }
     assert.notDeepEqual(get(a).digits, get(b).digits, a + b);
   }
-  for (const [a, b] of ['gq', 'nu']) {
-    assert.deepEqual(get(a).digits, get(b).digits, a + b);
-    assert.notDeepEqual(get(a).rotation, get(b).rotation, a + b);
-  }
+  assert.deepEqual(get('g').digits, get('q').digits);
+  assert.notDeepEqual(get('g').rotation, get('q').rotation);
 });
 
-test('M e N deixam os dedos voltados para baixo à frente do pulso', () => {
-  const [m, n] = ['m', 'n'].map((letter) => sampleClip(clips[`letter-${letter}`], 0));
-  for (const { rotation } of [m, n]) {
-    const [pitch, yaw, roll] = rotation.map((degrees) => degrees * Math.PI / 180);
+test('M e N exibem o dorso e os dedos voltados para baixo, e U exibe a palma', () => {
+  const [m, n, u] = ['m', 'n', 'u'].map((letter) => sampleClip(clips[`letter-${letter}`], 0));
+  const radians = Math.PI / 180;
+  for (const pose of [m, n, u]) {
+    const [pitch, yaw, roll] = pose.rotation.map(degrees => degrees * radians);
     const wrist = new Euler(pitch, yaw, roll, 'YXZ');
-    const fingers = new Vector3(0, 1, 0).applyEuler(wrist);
-    const dorsum = new Vector3(0, 0, -1).applyEuler(wrist);
-    assert.ok(fingers.y < -0.8 && fingers.z > 0.2);
-    assert.ok(dorsum.z > 0.8);
+    const palm = new Vector3(0, 0, 1).applyEuler(wrist);
+    const axis = new Vector3(1, 0, 0);
+    for (const [bend] of pose.digits.slice(1, 3)) {
+      const finger = new Vector3(0, 1, 0).applyAxisAngle(axis, bend * radians).applyEuler(wrist);
+      if (pose === u) {
+        assert.ok(finger.y > 0.9 && palm.z > 0.7);
+      } else {
+        assert.ok(finger.y < -0.9 && finger.z > 0.2 && palm.z < -0.7);
+        assert.ok(bend > 10 && bend < 30);
+      }
+    }
   }
   assert.deepEqual(m.digits.slice(1, 3), n.digits.slice(1, 3));
-  assert.ok(m.digits[3][0] < 15 && n.digits[3][0] > 45);
+  assert.deepEqual(m.digits[3], m.digits[2]);
+  assert.ok(n.digits[3][0] > 45 && u.digits[3][0] > 45);
+  assert.equal(interpolatePose(n, u, 0.5).elbowLift, n.elbowLift / 2);
 });
 
 test('todos os quadros amostrados produzem articulações e coordenadas finitas', () => {
@@ -156,9 +164,9 @@ test('a soletração mantém letras repetidas e pausas na ordem', () => {
   advance(75);
   assert.deepEqual(steps, [['letter-n', 0], ['letter-n', 1], ['pause', 2], ['letter-a', 3]]);
   assert.deepEqual(states, ['paused', 'playing', 'finished']);
-  assert.ok(painted.some((pose) =>
-    pose.wrist[0] > clips['letter-n'].frames[0].wrist[0] + 0.08 && pose.wrist[1] > 1.8,
-  ));
+  const n = sampleClip(clips['letter-n'], 0);
+  assert.ok(painted.some(pose =>
+    pose.wrist[0] > n.wrist[0] + 0.08 && pose.elbowLift === n.elbowLift));
 });
 
 test('pausar, alterar velocidade, repetir e trocar de sequência afetam o relógio', () => {

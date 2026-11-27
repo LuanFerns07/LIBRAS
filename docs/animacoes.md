@@ -1,6 +1,6 @@
 # Animações do LibrasIA
 
-Versão do catálogo `0.2.1-preliminar`. As poses e trajetórias foram modeladas em código com geometria original. O navegador carrega o código local do avatar. As obras de referência servem à consulta e seus arquivos não integram o aplicativo.
+Versão do catálogo `0.2.2-preliminar`. As poses e trajetórias foram modeladas em código com geometria original. O navegador carrega o código local do avatar. As obras de referência servem à consulta e seus arquivos não integram o aplicativo.
 
 ## Alfabeto manual
 
@@ -48,6 +48,10 @@ Em 27 de novembro de 2026, a pessoa usuária relatou dificuldade com N. Na aula 
 No commit `0a36425`, o clipe de N estende indicador e médio, usa a mesma rotação para baixo de M e deixa o anelar flexionado. Na renderização frontal do Chromium, os dedos estendidos ficam parcialmente sobrepostos. A comparação visual com M fica difícil. A revisão deve conferir a rotação da mão e a visibilidade dos dedos na letra isolada e na soletração. O replay da câmera reconheceu N, M e U nos três recortes de cada letra da UFSM. A causa da dificuldade na webcam da pessoa usuária segue em aberto. [Verificação do leitor](dados-alfabeto.md#cobertura-e-verificação) · [Tarefa de revisão](../ROADMAP_LIBRASIA.md#prioridades-da-retomada)
 
 Na versão `0.2.1-preliminar`, a rotação de M e N volta o dorso da mão para o observador e deixa as pontas à frente do pulso. A renderização frontal no Chromium exibe três dedos voltados para baixo em M, dois em N e dois voltados para cima em U. A verificação do tradutor reproduziu os dois Ns de “Meu nome é Anna”. A revisão linguística com pessoas fluentes segue pendente. [Alfabeto na UFSM](https://ntetube.nte.ufsm.br/v/1536677587) · [Teste de navegador](../tests/e2e/browser.test.mjs)
+
+Na versão `0.2.2-preliminar`, o cotovelo de M e N sobe e a primeira articulação dos dedos estendidos flexiona levemente. A mudança reduz a dobra do pulso no avatar. Em N, só indicador e médio descem juntos. Em M, o anelar acompanha os outros dois. U mantém a palma voltada para quem observa e as duas pontas para cima. O material do IF Baiano e as gravações do Cecierj, da Unesp e da UFSM mostram a diferença entre as letras, com variação na inclinação do antebraço. [Quadro do IF Baiano](https://www.ifbaiano.edu.br/unidades/bonfim/files/2022/07/Alfabeto-manual-em-Libras-1.pdf) · [Cecierj](https://canal.cecierj.edu.br/recurso/13757) · [Unesp](https://acervodigital.unesp.br/handle/unesp/222981)
+
+O Chromium exibiu as comparações **M e N** e **N e U** na página Alfabeto e reproduziu “Meu nome é Anna” com os dois Ns. Os testes do avatar verificam a orientação, a flexão do anelar e a transição do cotovelo. A revisão linguística e a execução na webcam por uma pessoa sinalizante continuam pendentes. [Teste de navegador](../tests/e2e/browser.test.mjs) · [Testes do avatar](../tests/avatar.test.js)
 
 ## Expansão de vocabulário e variantes
 

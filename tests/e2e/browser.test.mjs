@@ -135,6 +135,14 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     await click('[data-comparison="0"]')
     assert.match(await text('[data-comparison-status]'), /Em A.*Em S/)
     assert.equal(await text('[data-player-step]'), 'A')
+    await click('[data-comparison="2"]')
+    assert.match(await text('[data-comparison-status]'), /Em M.*Em N/)
+    assert.equal(await text('[data-player-step]'), 'M')
+    await waitUntil('document.querySelector("[data-player-step]").textContent.trim() === "N"')
+    await click('[data-comparison="3"]')
+    assert.match(await text('[data-comparison-status]'), /Em N.*Em U/)
+    assert.equal(await text('[data-player-step]'), 'N')
+    await waitUntil('document.querySelector("[data-player-step]").textContent.trim() === "U"')
     const selectLetters = (() => Array.from(document.querySelectorAll('.letter-grid button'), button => {
       button.click()
       return {

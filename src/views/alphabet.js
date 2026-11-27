@@ -4,6 +4,8 @@ import { mountPlayerControls, playerMarkup } from '../player-controls.js'
 const comparisons = [
   ['A', 'S', 'Em A, o polegar fica ao lado dos dedos fechados. Em S, ele cruza à frente dos dedos.'],
   ['I', 'J', 'I mantém a configuração com o dedo mínimo estendido. J usa essa configuração com movimento.'],
+  ['M', 'N', 'Em M, indicador, médio e anelar apontam para baixo. Em N, o anelar fica dobrado.'],
+  ['N', 'U', 'Em N, indicador e médio apontam para baixo, com o dorso voltado para quem observa. Em U, apontam para cima, com a palma voltada para quem observa.'],
 ]
 
 export function mountAlphabet(main, createPlayer) {

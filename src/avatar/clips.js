@@ -1,4 +1,4 @@
-export const ANIMATION_VERSION = '0.2.1-preliminar';
+export const ANIMATION_VERSION = '0.2.2-preliminar';
 
 // Cada dedo usa graus: flexão da base, articulação média, distal e abertura lateral.
 const straight = [2, 3, 2, 0];
@@ -31,6 +31,7 @@ const i = fingers(thumbAcross, closed, closed, closed, straight);
 const l = fingers(thumbOut, straight, closed, closed, closed);
 const m = fingers(thumbAcross, straight, straight, straight, closed);
 const n = fingers(thumbAcross, straight, straight, closed, closed);
+const downwardFinger = [19, 3, 2, 0];
 const o = fingers([29, 20, 12, 0], [42, 59, 34, 0], [42, 59, 34, 0], [43, 60, 36, 0], curved);
 const r = fingers(thumbAcross, spread(straight, 22), [35, 0, 2, -20], closed, closed);
 const s = fingers(thumbAcross, closed, closed, closed, closed);
@@ -67,7 +68,6 @@ const five = fingers(
 const letterWrist = [-0.63, 1.61, 0.48];
 const front = [0, 0, 0];
 const down = [47, 0, 180];
-const downWithDorsumForward = [22, 180, 180];
 
 function pose(digits, wrist = letterWrist, rotation = front, bilateral = false) {
   const body = { digits, wrist, rotation };
@@ -84,6 +84,14 @@ export const neutralPose = pose(relaxed, [-0.62, 0.45, 0.15], [10, 35, 162]);
 
 function hold(bodyPose, seconds = 0.82) {
   return { seconds, frames: [{ t: 0, ...bodyPose }] };
+}
+
+function downwardLetter(ring) {
+  return hold({
+    ...pose(fingers(thumbAcross, downwardFinger, downwardFinger, ring, closed),
+      [-0.59, 1.64, 0.71], [36, 174, 170]),
+    elbowLift: 1.15,
+  });
 }
 
 function motion(seconds, frames) {
@@ -129,8 +137,8 @@ export const clips = {
     [1, pose(h, [-0.61, 1.69, 0.49], [0, 3, -5])],
   ]),
   'letter-l': hold(pose(l)),
-  'letter-m': hold(pose(m, [-0.63, 1.9, 0.61], downWithDorsumForward)),
-  'letter-n': hold(pose(n, [-0.63, 1.9, 0.61], downWithDorsumForward)),
+  'letter-m': downwardLetter(downwardFinger),
+  'letter-n': downwardLetter(closed),
   'letter-o': hold(pose(o, letterWrist, [0, 64, 0])),
   'letter-p': motion(0.97, [
     [0, pose(h, letterWrist, [-13, 3, 56])],
@@ -222,7 +230,7 @@ export const clips = {
 
 function interpolateHand(start, end, amount) {
   const lerp = (a, b) => a + (b - a) * amount;
-  return {
+  const hand = {
     wrist: start.wrist.map((value, index) => lerp(value, end.wrist[index])),
     rotation: start.rotation.map((value, index) => {
       const offset = ((end.rotation[index] - value + 540) % 360) - 180;
@@ -232,6 +240,9 @@ function interpolateHand(start, end, amount) {
       joint.map((value, axis) => lerp(value, end.digits[finger][axis])),
     ),
   };
+  const elbowLift = lerp(start.elbowLift ?? 0, end.elbowLift ?? 0);
+  if (elbowLift) hand.elbowLift = elbowLift;
+  return hand;
 }
 
 export function interpolatePose(start, end, amount) {
