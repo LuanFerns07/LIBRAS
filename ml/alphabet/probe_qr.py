@@ -47,7 +47,7 @@ def r_shape(points):
     return torch.cat((projection, separation, shape_features(points)[:, 7:9]), dim=1)
 
 
-def probe(base, references, output=None, export_letters="QR"):
+def probe(base, references, output=None, export_letters="QR", r_options=None):
     metadata = json.loads((base / "alphabet.json").read_text())
     labels = np.array(metadata["labels"])
     options = ort.SessionOptions()
@@ -112,7 +112,7 @@ def probe(base, references, output=None, export_letters="QR"):
     report = {"references": [checksum(path) for path in references],
               "alphabetManifestSha256": checksum(base / "alphabet.json"), "threshold": .95, "results": results}
     if output is not None:
-        report["confirmations"] = export(base, output, metadata, trained)
+        report["confirmations"] = export(base, output, metadata, trained, r_options)
     return report
 
 
@@ -147,9 +147,10 @@ def export_confirmation(model, features, path, input_name, preprocess, threshold
     return {"preprocess": preprocess, "threshold": threshold, "modelSha256": checksum(path)}
 
 
-def export(base, output, metadata, trained):
-    if base.resolve() == output.resolve() or any(key in metadata for key in ("worldQ", "imageR")):
-        raise ValueError("Use uma base sem os complementos de Q e R e um destino separado.")
+def export(base, output, metadata, trained, r_options=None):
+    existing = {"Q": "worldQ", "R": "imageR"}
+    if base.resolve() == output.resolve() or any(existing[letter] in metadata for letter in trained):
+        raise ValueError("Use uma base sem os complementos a exportar e um destino separado.")
     output.mkdir(parents=True, exist_ok=True)
     additions = {}
     with TemporaryDirectory(dir=output) as temporary:
@@ -163,6 +164,8 @@ def export(base, output, metadata, trained):
             model, features = trained[target]
             path = folder / f"alphabet-{target.lower()}-shape.onnx"
             additions[key] = export_confirmation(model, features, path, input_name, preprocess, .95)
+        if r_options:
+            additions["imageR"].update(r_options)
         for filename, digest in alphabet_model_files(metadata):
             copyfile(load_model(base, filename, digest), folder / filename)
         for asset in folder.iterdir():
@@ -179,5 +182,17 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=Path, help="Pasta para exportar os complementos ONNX.")
     parser.add_argument("--export-letters", choices=("Q", "R", "QR"), default="QR",
                         help="Complementos a exportar. A avaliação offline sempre mede os dois.")
+    parser.add_argument("--r-veto-threshold", type=float, help="Confiança mínima para um R aceito pelas duas redes.")
+    parser.add_argument("--r-veto-only", action="store_true", help="Preserva U quando as duas redes aceitam U.")
     args = parser.parse_args()
-    print(json.dumps(probe(args.base, args.references, args.out, args.export_letters), ensure_ascii=False, indent=2))
+    r_options = {}
+    if args.r_veto_threshold is not None:
+        if not args.out or "R" not in args.export_letters or not 0 < args.r_veto_threshold < .95:
+            parser.error("O limiar do veto exige exportação de R e deve estar entre 0 e 0,95.")
+        r_options["vetoThreshold"] = args.r_veto_threshold
+    if args.r_veto_only:
+        if args.r_veto_threshold is None:
+            parser.error("Informe o limiar do veto quando a confirmação partir somente de R.")
+        r_options["allowU"] = False
+    print(json.dumps(probe(args.base, args.references, args.out, args.export_letters, r_options),
+                     ensure_ascii=False, indent=2))
