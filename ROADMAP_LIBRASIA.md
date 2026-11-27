@@ -23,10 +23,10 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ## Prioridades da retomada
 
-A referência é a prévia local do alfabeto no commit `0c0da0f`. A versão ajusta a pose de N e M e oferece as comparações M/N e N/U no avatar. O Chromium reconheceu N em vídeos da UFAC e da Unesp e confirmou a sobreposição com duas mãos. A webcam física foi aberta e liberada. A validação dos gestos na webcam segue pendente. [Prévia local](http://127.0.0.1:4177/#area-livre) · [Reteste do N](docs/dados-alfabeto.md#reteste-com-a-pose-revisada-de-n) · [Resultados dos pontos](docs/teste-pontos-ao-vivo.md)
+A referência é a prévia local do alfabeto no commit `99f0e90`. A versão recupera O nos recortes da UFAC e da Unesp e inclui a pose revisada de N e M no avatar. O Chromium reconheceu a passagem de M para N e verificou a sobreposição das duas mãos com vídeo. A validação dos gestos na webcam física segue pendente. [Prévia local](http://127.0.0.1:4177/#area-livre) · [Reteste do N](docs/dados-alfabeto.md#reteste-com-a-pose-revisada-de-n) · [Resultado de O](docs/dados-alfabeto.md#recuperação-de-o-com-geometria-da-mão)
 
 1. **Validar N, M e U na webcam (M4).** Retestar o leitor no PC em Área livre e em Praticar. Registrar a pose observada, a letra exibida, as trocas momentâneas ou a ausência de leitura. Buscar revisão linguística quando houver uma pessoa fluente disponível. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n) · [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
-2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Investigar as rejeições de A na UFSM e de O na Unesp e na UFAC. Repetir o roteiro com A–Z e Ç, com controles de C/Ç, X/Z e E/R. Registrar a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
+2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Investigar o A da UFSM e a configuração compacta de O na aula do Ifes. Repetir o roteiro com A–Z e Ç, com controles de C/Ç, X/Z e E/R. Registrar a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
 3. **Fechar o roteiro da demonstração local (M3, M5 e M7).** Verificar sinais isolados, dicas, rejeição de entradas desconhecidas, transcrição e voz. Registrar quais resultados foram reproduzidos com vídeo ou webcam física. Manter a sinalização contínua em avaliação.
 
 A prévia permanece no Linux local. A publicação na Vercel e a finalização do memorial estão adiadas por orientação da equipe.
@@ -102,7 +102,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Distinguir A de X nos recortes testados. Repetir no Chromium cinco exemplos de cada letra com a nova exigência de separação do indicador em X. [Verificação](docs/dados-alfabeto.md#distinção-entre-a-e-x-e-ensaio-de-e)
 - [x] Recuperar E com um complemento do classificador estático. Reproduzir no Chromium as 27 janelas da terceira aula da UFSM e os 14 recortes institucionais. Confirmar E nas três aulas e preservar R e N no recorte da UFSM. [Resultado por janela](docs/dados-alfabeto.md#resultado-da-prévia-com-o-complemento-de-e)
 - [x] Repetir o teste em seis janelas de uma aula da UFAC reservada. Verificar A, E, M, N e U e registrar a ausência de leitura de O. Verificar por recorte que ampliar a mão na imagem da UFSM é insuficiente para recuperar A. [Testes independentes](ml/evidence/alphabet-a-e-independent/README.md)
-- [ ] Investigar A da UFSM e O da Unesp e da UFAC, que ficaram sem leitura. Ampliar a avaliação com exemplos fora do ajuste e verificar trocas momentâneas de C/Ç, G/Z e U/H ao entrar e sair de uma pose.
+- [x] Recuperar O nos recortes da Unesp e da UFAC com um complemento geométrico. Conferir os controles C, E e S, as 53 janelas rotuladas e os 19 recortes fora do alfabeto no Chromium. [Resultado de O](docs/dados-alfabeto.md#recuperação-de-o-com-geometria-da-mão)
+- [ ] Investigar A da UFSM e os dois recortes de O do Ifes que continuam sem leitura. Ampliar a avaliação com exemplos fora do ajuste e verificar trocas momentâneas de C/Ç, G/Z e U/H ao entrar e sair de uma pose.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -122,6 +123,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Adquirir 14 tomadas adicionais de treino e medir o efeito sem mudar as pessoas da validação e da medição. [Comparação por sinal](docs/avaliacao.md#gravações-adicionais-de-espelho-e-amarelo)
 - [ ] Qualificar o candidato para substituir o modelo inicial com participantes fora do treino. Testar entradas desconhecidas, dois sinais suportados, sustentação, repetição e audição do texto editado em webcam real.
 - [x] Medir regras de rejeição para Cinco e Aluno e testar a posição e a direção da mão em 27 janelas de desenvolvimento da UFSM. As regras avaliadas perderam acertos de Cinco na validação. [Comparação geométrica e critérios de coleta](docs/transicao-sete-oito.md)
+- [x] Reproduzir um falso Cinco em Oito→Nove em uma gravação de desenvolvimento com Cinco isolado da mesma pessoa e do mesmo enquadramento. Medir a confirmação temporal no par e nos controles do MINDS e congelar a regra para outra pessoa. [Numerais pareados e confirmação temporal](docs/transicao-sete-oito.md)
+- [ ] Obter um segundo par independente de Cinco correto e transição falsamente aceita como Cinco para medir a confirmação temporal antes de abrir a reserva.
 - [ ] Reduzir as falsas aceitações de transições e de atividades cotidianas. No Chromium, os recortes Sete→Oito e queixo→teclado acrescentaram Cinco e Aluno. Retestar os sinais suportados junto com a rejeição após qualquer ajuste. [Recortes e reprodução](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
 - [ ] **Aceite.** O revisor produz uma sequência de sinais suportados sem seleção prévia, edita o texto e ouve o resultado no PC. Uma tentativa incerta fica visível e não gera uma palavra incorreta na transcrição dos casos de teste.
 

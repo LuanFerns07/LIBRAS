@@ -95,7 +95,9 @@ mkdir -p data/alphabet/institutional
   --out data/models/alphabet-ae-candidate
 .venv/bin/python -m ml.alphabet.supplement \
   data/models/alphabet-n-candidate data/models/alphabet-ae-candidate \
-  --letters E --threshold 0.95 --out data/models/alphabet-live
+  --letters E --threshold 0.95 --out data/models/alphabet-e-supplement
+.venv/bin/python -m ml.alphabet.refine_o data/models/alphabet-e-supplement \
+  --reference data/alphabet/static-video-a-e-s-o.json --out data/models/alphabet-live
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
 node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
@@ -169,4 +171,25 @@ ffmpeg -nostdin -ss 86.850 -i data/alphabet/institutional/unesp-222981.flv \
 LIBRASIA_TEST_URL=http://127.0.0.1:4177/ \
   LIBRASIA_TEST_M_N_VIDEO=data/evidence/alphabet-n-m-u/unesp-m-n.y4m \
   node --test tests/e2e/alphabet-live.test.mjs
+```
+
+### Recuperação de O com geometria da mão
+
+Nos quadros de O da Unesp e da UFAC, o verificador reconheceu a configuração em 18 de 18 e em 33 de 35 quadros, respectivamente. O classificador principal preferiu I e E na maior parte das duas janelas. O complemento treina uma regressão logística em 12 medidas dos pontos, entre elas distâncias do polegar às pontas, separação entre dedos adjacentes e curvatura relativa dos dedos. O leitor considera O quando as redes principais e o complemento de E ficam sem leitura, o verificador de O chega a 0,80 e a pontuação de forma chega a 0,95. A exibição ao vivo ainda exige três leituras consecutivas. [Exportador e treino](../ml/alphabet/refine_o.py) · [Configuração, hashes e paridade do ONNX](../ml/evidence/alphabet-o/training.json) · [Referência do IF Baiano para a forma em O](https://www.ifbaiano.edu.br/unidades/bonfim/files/2022/07/Alfabeto-manual-em-Libras-1.pdf)
+
+Na validação, o complemento marcou O em 70 de 125 quadros rotulados do LibraSign e em 16 de 16 quadros da aula reservada para validação. Nenhum dos 2.632 quadros das outras letras recebeu O pelo complemento. Os quadros de uma mesma janela são correlacionados. O treino usa o LibraSign e os recortes de treino da primeira aula da UFSM e do Cecierj. Os recortes da Unesp, da terceira aula da UFSM, da UFAC e do Ifes ficaram fora do ajuste dos pesos do complemento. O ensaio específico do O usou os casos já conhecidos da Unesp e da UFAC como regressões. [Partições e resultados](../ml/evidence/alphabet-o/training.json)
+
+Na compilação `99f0e90`, 50 das 53 janelas rotuladas mostraram a letra esperada no Chromium. O foi recuperado na Unesp e na UFAC. Os dois recortes de O do Ifes e o A da terceira aula da UFSM continuaram sem leitura. Todas as janelas que já mostravam a letra esperada continuaram mostrando essa letra, incluindo C, E e S. O vídeo da UFAC também exibiu O na Área livre e em Praticar sem iniciar tentativa. [Replays por janela](../ml/evidence/alphabet-o/replay-99f0e90.json) · [Anotação da fonte independente do Ifes](../ml/evidence/alphabet-o-independent/README.md)
+
+O apareceu nos mesmos dois de 19 recortes de atividades ou sinais fora do alfabeto nas duas versões. As duas versões também exibiram O no trecho em que a aula do Ifes demonstra uma execução que marca como incorreta. Na extração dos quadros originais do Ifes, a rede principal preferiu F ou I nos dois recortes positivos de O. A forma compacta passou pelo complemento em dois quadros da primeira janela e em nenhum da segunda. A leitura pela webcam física e a cobertura de outras configurações de O seguem pendentes. [Comparação dos controles](../ml/evidence/alphabet-o/replay-negatives.json)
+
+Para repetir a comparação de negativos, prepare os recortes CLAD e didáticos no caminho `data/isolated-negative-audit` e sirva cada compilação em uma porta própria. O roteiro confere os hashes dos recortes antes de ativar a câmera virtual no Chromium. [Preparação dos recortes](negativos.md#reprodução-dos-novos-recortes) · [Manifesto das janelas](../ml/evidence/alphabet-o/negative-windows.json)
+
+```bash
+manifest=ml/evidence/alphabet-o/negative-windows.json
+mapfile -t ids < <(jq -r '.sources[].id' "$manifest")
+args=()
+for id in "${ids[@]}"; do args+=(--source "$id"); done
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
+  --manifest "$manifest" "${args[@]}" --workers 2
 ```
