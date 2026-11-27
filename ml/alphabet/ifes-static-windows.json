@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Janelas de O e dos controles A, C, E e S no vídeo didático do Cefor/Ifes, verificadas pelo glifo branco e pela mão ativa em pose estável. A gravação inteira fica reservada para avaliação.",
+  "sources": [
+    {
+      "id": "ifes-mfl8r4t36fe",
+      "split": "test",
+      "title": "Alfabeto em Libras",
+      "project": "Centro de Referência em Formação e em Educação a Distância (Cefor), Instituto Federal do Espírito Santo (Ifes)",
+      "credits": {
+        "sinalizante": "Edgar, identificado pelo primeiro nome na abertura",
+        "produção": "Cefor/Ifes"
+      },
+      "page": "https://www.youtube.com/watch?v=MFL8R4t36fE",
+      "published": "2020-07-15",
+      "file": "data/alphabet/independent/ifes-download/ifes-alfabeto.mp4",
+      "sha256": "e8306a310b059616a87fe150c30f93ff15ef8a7668d1e32b05cb405980be9f5e",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=MFL8R4t36fE&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Ifes Cefor indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "A letra demonstrada aparece em branco. O X vermelho indica uma execução incorreta da letra em explicação. Em O, o X vermelho é visível de 287980 a 290080 ms nos quadros amostrados e fica fora das janelas.",
+      "windows": [
+        { "label": "A", "startMs": 23400, "endMs": 25300, "anchorMs": 24640 },
+        { "label": "C", "startMs": 50240, "endMs": 51480, "anchorMs": 50660 },
+        { "label": "E", "startMs": 87200, "endMs": 89600, "anchorMs": 88300 },
+        { "label": "O", "startMs": 283780, "endMs": 285880, "anchorMs": 285040 },
+        { "label": "O", "startMs": 292600, "endMs": 293680, "anchorMs": 293020 },
+        { "label": "S", "startMs": 360220, "endMs": 362500, "anchorMs": 361620 }
+      ]
+    }
+  ]
+}

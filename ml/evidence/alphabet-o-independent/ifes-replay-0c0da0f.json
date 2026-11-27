@@ -1,0 +1,146 @@
+{
+  "manifest": "ml/alphabet/ifes-static-windows.json",
+  "manifestSha256": "94b64229e1433a2ac32108f316c8e296079d7ac20fafbac33712f525c64a8bb1",
+  "videoSha256": "e8306a310b059616a87fe150c30f93ff15ef8a7668d1e32b05cb405980be9f5e",
+  "split": "test",
+  "build": {
+    "commit": "0c0da0fc923fe87112636f65495f93c148e981d7",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "b4476c4aa73cd96e28396c7d65e1a086d3f56c39424cf9f2955c80b7888f4004",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "chromium": "156.0.8078.79",
+  "ffmpeg": "7.1.5-0+deb13u1",
+  "cpu": true,
+  "offlineExtraction": {
+    "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+    "pointsSha256": "4c5c9b691405d77cf5b0cd0022b1ace504ee887c62ab97ceae1de2cd2cfbcc6d",
+    "windows": [
+      {
+        "label": "A",
+        "startMs": 23400,
+        "framesWithOneHand": 0,
+        "framesWithTwoHands": 30,
+        "framesWithSelectableHand": 30
+      },
+      {
+        "label": "C",
+        "startMs": 50240,
+        "framesWithOneHand": 0,
+        "framesWithTwoHands": 20,
+        "framesWithSelectableHand": 20
+      },
+      {
+        "label": "E",
+        "startMs": 87200,
+        "framesWithOneHand": 0,
+        "framesWithTwoHands": 37,
+        "framesWithSelectableHand": 37
+      },
+      {
+        "label": "O",
+        "startMs": 283780,
+        "framesWithOneHand": 1,
+        "framesWithTwoHands": 32,
+        "framesWithSelectableHand": 33
+      },
+      {
+        "label": "O",
+        "startMs": 292600,
+        "framesWithOneHand": 17,
+        "framesWithTwoHands": 0,
+        "framesWithSelectableHand": 17
+      },
+      {
+        "label": "S",
+        "startMs": 360220,
+        "framesWithOneHand": 1,
+        "framesWithTwoHands": 35,
+        "framesWithSelectableHand": 36
+      }
+    ]
+  },
+  "replay": [
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "A",
+      "startMs": 23400,
+      "endMs": 25300,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 322
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1917
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "C",
+      "startMs": 50240,
+      "endMs": 51480,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 276
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1260
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "E",
+      "startMs": 87200,
+      "endMs": 89600,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 231
+        }
+      ],
+      "workerFrames": 127,
+      "framesWithHand": 63,
+      "lastHandAfterVideoMs": 2409
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "O",
+      "startMs": 283780,
+      "endMs": 285880,
+      "readings": [],
+      "workerFrames": 117,
+      "framesWithHand": 50,
+      "lastHandAfterVideoMs": 2102
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "O",
+      "startMs": 292600,
+      "endMs": 293680,
+      "readings": [],
+      "workerFrames": 92,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 1125
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "S",
+      "startMs": 360220,
+      "endMs": 362500,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 217
+        }
+      ],
+      "workerFrames": 123,
+      "framesWithHand": 55,
+      "lastHandAfterVideoMs": 2291
+    }
+  ]
+}
