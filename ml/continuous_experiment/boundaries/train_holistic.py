@@ -102,7 +102,11 @@ def load_holistic_examples(directory):
 def score_with_duration(rows, predictions):
     result, = measure(rows, predictions, (0.5,))
     durations = [segment.end_ms - segment.start_ms for segments in predictions for segment in segments]
-    return {**result, "median_predicted_duration_ms": median(durations) if durations else None}
+    return {
+        **result,
+        "median_predicted_duration_ms": median(durations) if durations else None,
+        "predicted_under_500ms": sum(duration < 500 for duration in durations),
+    }
 
 
 def score_decoder(rows, scores, duration_prior, config):
@@ -123,9 +127,12 @@ def compare(directory, epochs, seed):
     baseline_model = BoundaryModel(rows["train"][0].design.shape[1])
     baseline_model.load_state_dict(baseline["weights"])
     baseline_scores = probabilities(baseline_model.eval(), baseline["mean"], baseline["std"], dev)
+    original_duration = baseline["duration_prior_ms"]
     baseline_report = score_decoder(
-        dev, baseline_scores, baseline["duration_prior_ms"], DecodeConfig(**baseline["decode"]),
+        dev, baseline_scores, original_duration, DecodeConfig(**baseline["decode"]),
     )
+    retuned_decoder = choose_decoder(dev, baseline_scores, original_duration)
+    retuned_report = score_decoder(dev, baseline_scores, original_duration, retuned_decoder)
 
     model, mean, std, (val_loss, epoch) = fit(rows, epochs, seed)
     duration = float(np.median([segment.end_ms - segment.start_ms
@@ -139,6 +146,7 @@ def compare(directory, epochs, seed):
     with TemporaryDirectory(dir=output) as staging:
         checkpoint = Path(staging) / "boundary-model.pt"
         torch.save(candidate, checkpoint)
+        original_hash = digest(original)
         report = {
             "schema_version": 1,
             "source": "Corpus de Libras UFSC, G1, entrevistas e trilha direita da câmera 3",
@@ -148,7 +156,9 @@ def compare(directory, epochs, seed):
             "reserved_test_used": False,
             "coverage": {split: [example_report(row) for row in examples] for split, examples in rows.items()},
             "baseline": {"training_features": "MediaPipe Hand Landmarker",
-                         "retuned_on_holistic_dev": False, "checkpoint_sha256": digest(original), **baseline_report},
+                         "retuned_on_holistic_dev": False, "checkpoint_sha256": original_hash, **baseline_report},
+            "baseline_retuned": {"training_features": "MediaPipe Hand Landmarker",
+                                 "retuned_on_holistic_dev": True, "checkpoint_sha256": original_hash, **retuned_report},
             "candidate": {"training_features": "MediaPipe Holistic Web",
                           "checkpoint_selected_on_reported_dev": True, "decoder_selected_on_reported_dev": True,
                           "checkpoint_sha256": digest(checkpoint),
@@ -177,7 +187,7 @@ def main():
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     report = compare(args.directory, args.epochs, args.seed)
-    print(json.dumps({model: report[model]["aggregate"] for model in ("baseline", "candidate")},
+    print(json.dumps({model: report[model]["aggregate"] for model in ("baseline", "baseline_retuned", "candidate")},
                      ensure_ascii=False, indent=2))
 
 
