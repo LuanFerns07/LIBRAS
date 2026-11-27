@@ -10,7 +10,7 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote `04353d3` permite copiar os tempos de decisão, carregamento e extração para a ficha de validação. Abra a ficha em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão compilada do avatar e as somas dos arquivos do classificador. A ficha exporta o JSON localmente. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Reteste da importação](validacao-ao-vivo.md#verificação-da-importação-dos-tempos)
+O pacote `599f341` foi recompilado com os pesos locais verificados e inclui a ficha para registrar os tempos de decisão, carregamento e extração. Abra a ficha em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão compilada do avatar e as somas dos arquivos do classificador. A ficha exporta o JSON localmente. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Reteste da importação](validacao-ao-vivo.md#verificação-da-importação-dos-tempos)
 
 No pacote `180711c`, o reteste no Chromium percorreu as seis etapas do roteiro com vídeos gravados e verificou o encaixe e a retomada dos pontos das duas mãos. Em ensaios separados, a webcam Acer foi aberta e liberada e a síntese local em pt-BR chegou ao fim. O aceite com participantes na webcam e a compreensão do áudio continuam pendentes. Os logs ficam em `data/evidence/demonstracao`, nos arquivos `roteiro-180711c-reteste.log`, `pontos-180711c.log`, `fisico-180711c.log` e `ficha-validacao-180711c.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Teste dos pontos](teste-pontos-ao-vivo.md)
 
@@ -18,22 +18,23 @@ O servidor local informa o código compilado em `site/commit.txt`. A inicializa�
 
 ### Recompilar com os modelos verificados
 
-Em um checkout limpo da `main`, use a pasta `models` de uma cópia local da demonstração. As somas versionadas identificam o modelo combinado, o alfabeto, os complementos e os manifestos de decisão usados no roteiro. Ajuste `origem` se os arquivos estiverem fora do checkout.
+Em um checkout da `main`, use os pesos locais em `data/models`. A opção `LIBRASIA_DEMONSTRACAO=1` seleciona `isolated-combined`, `alphabet-r-completo` e `alphabet-trajectory`. O empacotador confere os 12 arquivos de modelos e manifestos com as somas versionadas antes de compilar. Use um diretório de saída novo.
 
 ~~~bash
-projeto="$PWD"
-origem="$projeto/data/releases/librasia-demonstracao/site"
-destino="$projeto/data/releases/librasia-demonstracao-recompilada"
-(
-  cd "$origem/models"
-  sha256sum --check --strict "$projeto/ml/evidence/demonstracao-modelos.sha256"
-) &&
-LIBRASIA_MODELO="$origem/models" LIBRASIA_ALFABETO_MODELO="$origem/models" \
-  LIBRASIA_ALFABETO_MOVIMENTO="$origem/models" ./scripts/executar-local.sh --pacote "$destino" &&
+destino=data/releases/librasia-demonstracao-recompilada
+LIBRASIA_DEMONSTRACAO=1 ./scripts/executar-local.sh --pacote "$destino" &&
 python3 "$destino/iniciar.py" --verificar
 ~~~
 
-O empacotador instala as dependências e busca as versões fixadas do MediaPipe quando necessário. Para reutilizar as cópias locais dos dois extratores, acrescente `LIBRASIA_HOLISTIC_FILE="$origem/runtime/holistic_landmarker.task"` e `LIBRASIA_HAND_FILE="$origem/runtime/hand_landmarker.task"` ao comando de compilação. Os pesos do classificador ficam na cópia local, e o Git guarda as somas. [Somas dos modelos](../ml/evidence/demonstracao-modelos.sha256) · [Treinamento e exportação](avaliacao.md)
+Para abrir essa cópia ao lado da demonstração, execute `python3 "$destino/iniciar.py" --porta 4178` e abra a Área livre no Chromium. [Área livre da cópia recompilada](http://127.0.0.1:4178/#area-livre)
+
+O empacotador instala as dependências e busca as versões fixadas do MediaPipe quando necessário. Para reutilizar arquivos dos extratores, informe os caminhos em `LIBRASIA_HOLISTIC_FILE` e `LIBRASIA_HAND_FILE`. Caso os pesos do LibrasIA estejam em outras pastas locais, defina `LIBRASIA_MODELO`, `LIBRASIA_ALFABETO_MODELO` e `LIBRASIA_ALFABETO_MOVIMENTO`. As somas versionadas cobrem os arquivos copiados dessas pastas. Os pesos ficam fora do Git. [Somas dos modelos](../ml/evidence/demonstracao-modelos.sha256) · [Treinamento e exportação do combinado](avaliacao.md#combinação-de-geometria-e-flexão) · [Pesos do alfabeto](dados-alfabeto.md#compilar-neste-linux)
+
+Uma cópia existente do pacote também serve como origem dos pesos. Aponte as três variáveis dos modelos para a pasta `site/models` da cópia e mantenha `LIBRASIA_DEMONSTRACAO=1` para conferir os arquivos.
+
+Em 27/11/2026, o pacote `599f341` foi gerado em checkout limpo, com instalação a partir do lockfile, pesos de `data/models` e extratores MediaPipe de cópias locais verificadas. A aplicação, a ficha e os modelos reproduziram os arquivos do pacote anterior byte a byte, com os identificadores de compilação atualizados. A verificação cobriu 34 arquivos. A tentativa com o classificador inicial divergente encerrou antes de criar o pacote.
+
+Passaram os 69 testes JavaScript, os sete testes Python do aplicativo, a abertura e a liberação da webcam Acer, a síntese local em pt-BR, a exportação da ficha e o roteiro integrado com vídeos gravados. Os logs ficam em `data/evidence/demonstracao/`, com os nomes `reproducao-599f341.log`, `fisico-599f341.log`, `ficha-599f341.log` e `roteiro-599f341.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Reexportação do classificador](avaliacao.md#combinação-de-geometria-e-flexão)
 
 Em 27/11/2026, a compilação `aea5303` partiu de um checkout limpo. Os arquivos servidos da versão anterior foram reproduzidos byte a byte, com a atualização do identificador em `site/commit.txt`. O pacote verificou 29 arquivos, e uma cópia com o ONNX alterado recusou a inicialização. Os testes registraram a abertura e a liberação da webcam Acer e a conclusão da síntese local em pt-BR. O roteiro integrado usou um Y4M refeito dos MP4 de origem, com SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. Os logs ficam em `data/evidence/demonstracao`, com os nomes `build-aea5303-limpo.log`, `fisico-aea5303-limpo.log` e `roteiro-aea5303-limpo.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
 

@@ -244,6 +244,8 @@ node ml/verify-wasm.mjs --run data/models/isolated-combined
 LIBRASIA_PORTA=4175 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
 ```
 
+Na recompilação `599f341`, a reexportação dos mesmos checkpoints em uma pasta nova reproduziu byte a byte `isolated.onnx` e `isolated.json`, com limiar 0,525. A paridade entre PyTorch e ONNX passou nas 36 entradas de validação do exportador. No Chromium, as cinco entradas de controle produziram decisões idênticas e erro absoluto máximo nos logits de 9,54 × 10⁻⁷ no WASM. [Somas da demonstração](../ml/evidence/demonstracao-modelos.sha256) · [Recompilar o pacote](previa-estavel.md#recompilar-com-os-modelos-verificados)
+
 ### Modelo combinado na partição reservada
 
 Com os pesos congelados e o limiar 0,525, o modelo combinado acertou 32 dos 33 clipes dos sinais suportados na partição MINDS reservada, de três pessoas. O F1 macro foi 0,972, a cobertura foi 97,0% e houve uma falsa aceitação em 18 negativos. O clipe de Banco foi aceito como Espelho e um dos nove clipes de Cinco ficou inconclusivo. As métricas de reconhecimento passam os limites numéricos nesse conjunto. [Resultados e matriz por sinal](../ml/evidence/isolated-combined/reserved-onnx.json) · [Metas de aceite](protocolo-aceite.md#metas-de-aceite)
