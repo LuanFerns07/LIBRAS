@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "selection": "Novas janelas de duas aulas licenciadas, rotuladas por cartela antes da inferência. As mesmas aulas forneceram recortes de outras letras em avaliações anteriores.",
+  "purpose": "Medir a letra exibida e outras leituras na demonstração local com a câmera de arquivo do Chromium.",
+  "timeUnit": "milliseconds",
+  "windowEnd": "exclusive",
+  "sources": [
+    {
+      "id": "ufac-b2u7c6oxgbg",
+      "split": "test",
+      "title": "Datilologia ou Alfabeto Manual - Libras - Ufac",
+      "project": "Universidade Federal do Acre, Núcleo de Interiorização e Educação a Distância, Matemática EaD",
+      "credits": {
+        "professor": "Israel Queiroz de Lima",
+        "produção": "Niead/UFAC"
+      },
+      "page": "https://www.youtube.com/watch?v=B2U7c6OXgBg",
+      "published": "2019-07-22",
+      "file": "data/alphabet/independent/ufac-download/ufac-alfabeto.mp4",
+      "sha256": "ce2c475fdd4b8918f38db82a95eaa975cb7038f065428a00b7420624cf5745e5",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=B2U7c6OXgBg&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Niead Ufac indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "institutionalReference": "https://repositorio.ifac.edu.br/jspui/bitstream/123456789/34/3/Chegou%20um%20aluno%20Surdo%2C%20e%20agora.%20Um%20roteiro%20de%20aprendizagem%20para%20professores%20do%20ensino%20de%20administra%C3%A7%C3%A3o%20para%20Surdos.pdf",
+      "labelEvidence": "Letra e desenho na cartela do quadro. O começo do gesto pode anteceder a entrada da cartela; os intervalos preservam o movimento e terminam antes de abaixar a mão.",
+      "windows": [
+        {
+          "label": "C",
+          "startMs": 93360,
+          "endMs": 96300,
+          "anchorMs": 94600,
+          "view": "Controle com a configuração em C sustentada diante do tronco."
+        },
+        {
+          "label": "Ç",
+          "startMs": 100400,
+          "endMs": 104440,
+          "anchorMs": 102100,
+          "view": "Configuração em C diante do peito, com movimento curto e cartela de Ç."
+        },
+        {
+          "label": "H",
+          "startMs": 141200,
+          "endMs": 145450,
+          "anchorMs": 143300,
+          "view": "Rotação da mão com dois dedos, enquadramento frontal de cintura para cima."
+        },
+        {
+          "label": "J",
+          "startMs": 156830,
+          "endMs": 161120,
+          "anchorMs": 158100,
+          "view": "Descida do mínimo e rotação da mão, seguidas de sustentação."
+        },
+        {
+          "label": "K",
+          "startMs": 164200,
+          "endMs": 168050,
+          "anchorMs": 166100,
+          "view": "Mão eleva e se estabiliza na configuração final de K."
+        },
+        {
+          "label": "X",
+          "startMs": 277100,
+          "endMs": 283200,
+          "anchorMs": 279300,
+          "view": "Movimento do indicador diante do tronco, com sustentação da forma final."
+        },
+        {
+          "label": "Z",
+          "startMs": 294360,
+          "endMs": 298360,
+          "anchorMs": 295510,
+          "view": "Traçado do indicador diante do tronco, seguido de sustentação."
+        }
+      ]
+    },
+    {
+      "id": "unicentro-aniqxveqgns",
+      "split": "test",
+      "title": "[PED] Libras - Alfabeto Manual",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro",
+        "direção, edição e finalização": "Daniel Luiz de Souza",
+        "intérprete de Libras nos créditos": "Ana Paula Silva"
+      },
+      "page": "https://www.youtube.com/watch?v=AnIqxVEqGNs",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-sequencia-download/unicentro-sequencia-alfabeto.mp4",
+      "sha256": "b6a5bc1dd2ec128857234cec36712b54f7fa11d669cbf24d7384544cde173cd1",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=AnIqxVEqGNs&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra impressa em preto e segunda vista da mesma execução no canto inferior direito. O recorte mantém a composição do vídeo.",
+      "windows": [
+        {
+          "label": "C",
+          "startMs": 16820,
+          "endMs": 18240,
+          "anchorMs": 17400,
+          "view": "Controle com a configuração em C sustentada ao lado da cabeça."
+        },
+        {
+          "label": "H",
+          "startMs": 33040,
+          "endMs": 34860,
+          "anchorMs": 34100,
+          "view": "Rotação da mão com dois dedos ao lado da cabeça."
+        },
+        {
+          "label": "J",
+          "startMs": 39860,
+          "endMs": 42010,
+          "anchorMs": 40890,
+          "view": "Traçado do mínimo em dois gestos consecutivos sob o mesmo rótulo."
+        },
+        {
+          "label": "K",
+          "startMs": 43310,
+          "endMs": 44780,
+          "anchorMs": 43800,
+          "view": "Elevação da mão e sustentação da configuração final."
+        },
+        {
+          "label": "X",
+          "startMs": 82450,
+          "endMs": 83970,
+          "anchorMs": 83200,
+          "view": "Movimento curto do indicador ao lado do rosto."
+        }
+      ]
+    }
+  ]
+}
