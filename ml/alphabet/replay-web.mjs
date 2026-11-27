@@ -12,6 +12,7 @@ const { values: options } = parseArgs({ options: {
   manifest: { type: 'string', multiple: true },
   source: { type: 'string', multiple: true },
   letters: { type: 'string' },
+  crop: { type: 'string' },
   workers: { type: 'string', default: '2' },
   timeline: { type: 'boolean' },
   trace: { type: 'boolean' },
@@ -21,6 +22,9 @@ const workerCount = Number(options.workers)
 if (!options.manifest?.length || !options.source?.length || ![1, 2, 3, 4].includes(workerCount) ||
     url.protocol !== 'http:' || !['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname)) {
   throw new Error('Informe manifestos, fontes, uma prévia HTTP local e de 1 a 4 processos Chromium.')
+}
+if (options.crop !== undefined && !/^[1-9]\d*:[1-9]\d*:\d+:\d*$/u.test(options.crop)) {
+  throw new Error('Informe o recorte como largura:altura:x:y em pixels do vídeo de origem.')
 }
 
 const ffmpeg = promisify(execFile)
@@ -107,10 +111,12 @@ async function replay(window, index, directory) {
   const { startMs, endMs, file, ...label } = window
   const duration = (endMs - startMs) / 1000
   const videoFile = join(directory, index + '.y4m')
+  const filters = [`trim=duration=${duration}`]
+  if (options.crop) filters.push(`crop=${options.crop}`)
+  filters.push('scale=640:-2', 'fps=30', `tpad=start_duration=${leadSeconds}:stop_duration=2:color=black`)
   await ffmpeg('ffmpeg', ['-hide_banner', '-loglevel', 'error',
     '-ss', String(startMs / 1000), '-i', file, '-an', '-pix_fmt', 'yuv420p',
-    '-vf', `trim=duration=${duration},scale=640:-2,fps=30,tpad=start_duration=${leadSeconds}:stop_duration=2:color=black`,
-    videoFile])
+    '-vf', filters.join(','), videoFile])
   try {
     return await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
       await navigate(outUrl.href)
@@ -185,7 +191,8 @@ try {
   if (JSON.stringify(await buildIdentity()) !== JSON.stringify(build)) {
     throw new Error('A compilação ou os modelos mudaram durante o replay.')
   }
-  console.log(JSON.stringify({ build, manifests: options.manifest, results: report }, null, 2))
+  console.log(JSON.stringify({ build, manifests: options.manifest, ...(options.crop ? { crop: options.crop } : {}),
+    results: report }, null, 2))
 } finally {
   await rm(workspace, { recursive: true, force: true })
 }

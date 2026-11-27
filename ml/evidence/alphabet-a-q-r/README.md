@@ -171,3 +171,42 @@ No Chromium, o candidato exibiu o U da Uníntese e o R da UFF três vezes em tr�
 Na UFAC, U apareceu nas duas versões e R ficou sem leitura. O U em perfil da aula explicativa da Unicentro também ficou sem leitura nas duas versões. [Base nos controles](ufac-perfil-b95a5da.json) · [Candidato nos controles](ufac-perfil-f0122fa.json) · [Recortes da UFAC](../../alphabet/ufac-r-u-holdout.json)
 
 Na reserva de Kelly Canuto, as duas versões exibiram o R oblíquo e deixaram o R em rotação sem leitura. O U frontal apareceu no candidato e ficou sem leitura na base. O U em rotação exibiu H nas duas versões. O candidato exibiu a letra esperada em 89 de 89 recortes positivos, com letras extras em oito. Nos 19 controles sem letras, oito produziram alguma letra, incluindo um Z breve no movimento do queixo para o teclado. O candidato permanece em avaliação e a demonstração usa a versão integrada anterior. [Recortes de Kelly Canuto](../../alphabet/kelly-r-u-holdout.json) · [Resultados por recorte](regressao-f0122fa.json)
+
+### Diagnóstico do U em perfil e do R da UFAC
+
+O reensaio usou os modelos congelados do pacote `50ad447`. O Chromium reproduziu os vídeos à velocidade original pela câmera de teste e registrou as leituras no painel e os pontos do Hand Landmarker. O diagnóstico reaplicou, em CPU, as duas redes estáticas e a confirmação de forma de R a cada quadro com uma mão selecionável. O painel amostra os quadros ao vivo e exige votos consecutivos, de modo que a contagem por quadro e as letras exibidas respondem a medidas diferentes. [Captura no Chromium](../../alphabet/replay-web.mjs) · [Diagnóstico por quadro](../../alphabet/diagnose_ru.py)
+
+| Recorte | Quadros selecionáveis | Painel no Chromium | Decisão das redes |
+| --- | ---: | --- | --- |
+| U em perfil, aula explicativa da Unicentro | 23 | Vazio | A rede principal favoreceu F em 21 quadros. Nenhuma das duas redes aceitou U. O verificador de forma de R passou de 0,95 em 21 quadros. |
+| U oblíquo, outra aula da Unicentro com a mesma professora | 18 | U → H | As duas redes estáticas concordaram em U acima do limiar nos 18 quadros. |
+| R da UFAC, quadro original | 47 | Vazio | O verificador escolheu R acima de 0,80 em 40 quadros. Os três votos da rede principal acima de 0,80 foram U. O maior escore de forma de R foi 0,864. |
+| R da UFAC, região da mão ampliada | 49 | Vazio | A rede principal preferiu U e a segunda preferiu R nos 49 quadros. O maior escore de forma de R foi 0,849. |
+| U da UFAC, controle no quadro original e ampliado | 44 e 42 | U em ambos | As redes aceitaram U juntas em 22 e 34 quadros, respectivamente. |
+
+A ampliação manteve a região do rosto e da mão e retirou a cartela à direita. O U em perfil e o U oblíquo da Unicentro vêm de duas aulas da mesma pessoa e têm enquadramentos diferentes. No R da UFAC, uma regra que aceitasse a divergência só com a confirmação de forma atual ainda daria zero quadros de R. O escore alto de forma no U em perfil mostra o risco de usar essa confirmação sozinha. [Relatório com cinco fontes](diagnostico-perfil-50ad447.json) · [UFAC ampliada](diagnostico-ufac-ampliado-50ad447.json) · [Unicentro oblíqua](diagnostico-unicentro-obliquo-50ad447.json)
+
+Para reproduzir, rode na raiz do repositório com a prévia local e os MP4 conferidos nos manifestos. Os relatórios versionados contêm decisões e contagens. Os arquivos gerados com pontos ficam na pasta local `data/`.
+
+~~~bash
+out=data/evidence/alphabet-perfil-r-u
+mkdir -p "$out"
+node ml/alphabet/replay-web.mjs --manifest ml/alphabet/independent-m-n-u-q-windows.json \
+  --manifest ml/alphabet/ufac-r-u-holdout.json --manifest ml/alphabet/independent-r-u-obliquo.json \
+  --manifest ml/alphabet/kelly-r-u-holdout.json --source unicentro-hxnpsxvwkgu \
+  --source ufac-b2u7c6oxgbg --source unintese-ncfjw-0-mro --source uff-nuedis-sdcvqodwh0o \
+  --source kelly-canuto-iofwsoxq2ag --letters RU --workers 1 --timeline --trace > "$out/pontos-chromium.json"
+
+node ml/alphabet/replay-web.mjs --manifest ml/alphabet/ufac-r-u-holdout.json \
+  --source ufac-b2u7c6oxgbg --letters RU --crop 960:540:96:156 --workers 1 --timeline --trace \
+  > "$out/ufac-ampliado-captura.json"
+
+node ml/alphabet/replay-web.mjs --manifest ml/alphabet/independent-q-r-u-controls.json \
+  --source unicentro-aniqxveqgns --letters RU --workers 1 --timeline --trace \
+  > "$out/unicentro-obliquo-captura.json"
+
+for nome in pontos-chromium ufac-ampliado-captura unicentro-obliquo-captura; do
+  OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m ml.alphabet.diagnose_ru \
+    data/releases/librasia-demonstracao/site "$out/$nome.json" > "$out/$nome-diagnostico.json"
+done
+~~~

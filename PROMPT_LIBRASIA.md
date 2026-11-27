@@ -22,6 +22,8 @@ Enquanto o reteste na webcam aguarda disponibilidade, amplie os replays de A, N,
 
 Use os recortes rotulados da UFAC e da Unicentro para retestar o momento em que cada letra aparece. Confira também as leituras adicionais e a duração de cada uma. No pacote `50ad447`, as 12 letras esperadas apareceram, com leituras adicionais em seis recortes. Inclua o retorno de Ç para C durante a sustentação e a variação de Z entre replays no aceite com sinalizantes. [Reteste de letras com movimento](docs/dados-alfabeto.md#reteste-de-letras-com-movimento-na-prévia-local)
 
+Nos recortes de R da UFAC e U em perfil da Unicentro, a mão foi rastreada e o painel ficou vazio. Use o U oblíquo da Unicentro e o U da UFAC como controles ao ampliar a cobertura por ângulo. O verificador de forma de R deu pontuação alta ao U em perfil, e a ampliação do R da UFAC preservou a divergência entre as redes. [Diagnóstico por quadro](ml/evidence/alphabet-a-q-r/README.md#diagnóstico-do-u-em-perfil-e-do-r-da-ufac)
+
 Mantenha a prévia e a inferência no Linux local nesta rodada. A publicação na Vercel e a finalização do memorial dependem de nova orientação da equipe.
 
 A lição inicial usa **três a cinco sinais isolados**. Escolha os sinais pela utilidade pedagógica, pela cobertura dos conjuntos de dados e pela possibilidade de demonstrá-los fielmente no avatar. Mantenha as três etapas de observar a demonstração, praticar com auxílio e tentar com menos ajuda. Ofereça pausa, repetição e velocidade reduzida no avatar, além de uma atividade curta de compreensão sem câmera.

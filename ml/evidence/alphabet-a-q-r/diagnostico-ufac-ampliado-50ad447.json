@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "traceSha256": "f25e17d7002a3850e9ec964f299ce40bc9f336a97b85fbd633a4bee07cd3cb13",
+  "manifestSha256": "8f995f105e317b04d2e412508fe20606034433461fd86401c5df985f578597b8",
+  "threshold": 0.8,
+  "build": {
+    "commit": "50ad44780737adf7fdb242ee56dcd7bbb583fdc7",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "imageRSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+    "imageRPolicy": {
+      "threshold": 0.95,
+      "vetoThreshold": 0.2,
+      "allowU": true
+    }
+  },
+  "results": [
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "R",
+      "startMs": 223250,
+      "endMs": 225250,
+      "readings": [],
+      "workerFrames": 115,
+      "eligibleFrames": 49,
+      "topPairs": [
+        {
+          "primary": "U",
+          "verifier": "R",
+          "primaryAboveThreshold": false,
+          "verifierAboveThreshold": true,
+          "frames": 38
+        },
+        {
+          "primary": "U",
+          "verifier": "R",
+          "primaryAboveThreshold": true,
+          "verifierAboveThreshold": true,
+          "frames": 10
+        },
+        {
+          "primary": "U",
+          "verifier": "R",
+          "primaryAboveThreshold": true,
+          "verifierAboveThreshold": false,
+          "frames": 1
+        }
+      ],
+      "rShapeScoreRange": [
+        0.642202,
+        0.849006
+      ],
+      "strongRShapeFrames": 0,
+      "consensusFrames": {
+        "R": 0,
+        "U": 0
+      },
+      "acceptedByCurrentRURoutes": {
+        "R": 0,
+        "U": 0
+      },
+      "reverseDisagreementRFrames": 0,
+      "reverseDisagreementWithBothAboveThreshold": 0
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 787
+        }
+      ],
+      "workerFrames": 108,
+      "eligibleFrames": 42,
+      "topPairs": [
+        {
+          "primary": "U",
+          "verifier": "U",
+          "primaryAboveThreshold": true,
+          "verifierAboveThreshold": true,
+          "frames": 34
+        },
+        {
+          "primary": "U",
+          "verifier": "U",
+          "primaryAboveThreshold": true,
+          "verifierAboveThreshold": false,
+          "frames": 4
+        },
+        {
+          "primary": "U",
+          "verifier": "U",
+          "primaryAboveThreshold": false,
+          "verifierAboveThreshold": false,
+          "frames": 4
+        }
+      ],
+      "rShapeScoreRange": [
+        0.027966,
+        0.066385
+      ],
+      "strongRShapeFrames": 0,
+      "consensusFrames": {
+        "R": 0,
+        "U": 34
+      },
+      "acceptedByCurrentRURoutes": {
+        "R": 0,
+        "U": 34
+      },
+      "reverseDisagreementRFrames": 0,
+      "reverseDisagreementWithBothAboveThreshold": 0
+    }
+  ],
+  "crop": "960:540:96:156"
+}
