@@ -58,6 +58,12 @@ def read_paired(data, labels):
     return path, index, rows
 
 
+def partial_confirmation(values, session, model, windows=WINDOWS):
+    five = model["labels"].index("cinco")
+    partials = [posterior(session, model, np.repeat(values[step:step + 12], 2, axis=0))[1][five] for step in windows]
+    return float(np.median(partials))
+
+
 def inspect(clip, meta, models, combined):
     labels = combined["labels"]
     baseline, confidence, measures = score_clip(clip, models, combined)
@@ -65,9 +71,8 @@ def inspect(clip, meta, models, combined):
     if baseline == five:
         session = models["combined"][0]
         values = clip.values
-        partials = [posterior(session, combined, np.repeat(values[step:step + 12], 2, axis=0))[1][five]
-                    for step in WINDOWS]
-        measures.update({"partial_confirmation": float(np.median(partials)), "shape_change": shape_change(values)})
+        measures.update({"partial_confirmation": partial_confirmation(values, session, combined),
+                         "shape_change": shape_change(values)})
     return {
         "id": meta.get("id", meta["file"]), "sha256": clip.checksum, "signer": clip.signer,
         "partition": clip.partition, "stratum": meta.get("stratum"), "reference": labels[clip.label],

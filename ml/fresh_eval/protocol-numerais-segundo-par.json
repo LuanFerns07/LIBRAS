@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-27",
+  "scope": "development",
+  "confirmationSha256": "3f4432fa1fefc67b9e6a38ae14121eeb2cd68956fcc0465e2f04e5c09e8efe18",
+  "sources": {
+    "cecierj-aula-03": {
+      "name": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
+      "publisher": "Universidade Federal Fluminense e Fundação Cecierj/Consórcio Cederj",
+      "credits": "Roteiro Mariana da Cunha Teixeira de Souza. Atuação Vanessa Rodrigues Ildefonso e Cíntia Ingrid Macedo Ribeiro. Filmagem e edição Leandro Lima de Souza. Produção Fundação Cecierj/Consórcio Cederj e UFF.",
+      "page": "https://canal.cecierj.edu.br/recurso/13757",
+      "licensePage": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
+      "licenseUrl": "https://support.google.com/youtube/answer/2797468?hl=pt-BR",
+      "license": "CC-BY",
+      "licenseNote": "O canal oficial marca a aula como Creative Commons Atribuição. A documentação atual da plataforma aponta para CC BY 4.0.",
+      "url": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "filename": "cecierj-aula-03.mp4"
+    }
+  },
+  "selection": {
+    "caption_directed": true,
+    "durationsMs": [
+      600,
+      1000,
+      1500
+    ],
+    "anchorDefinition": "Configuração e trajetória da mão próximas à mudança do numeral identificado na legenda."
+  },
+  "clips": [
+    {"id": "cecierj-cardinais-cinco", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": "cinco", "startMs": 172250, "durationMs": 1820, "cue": "Algarismo 5 na tela, com realização isolada de Cinco dentro do intervalo."},
+    {"id": "cecierj-quantitativos-cinco", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": "cinco", "startMs": 283900, "durationMs": 1400, "cue": "Algarismo 5 na tela, com realização isolada de Cinco dentro do intervalo."},
+    {"id": "cecierj-cardinais-seis-sete-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 177060, "startMs": 176760, "durationMs": 600},
+    {"id": "cecierj-cardinais-seis-sete-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 177060, "startMs": 176560, "durationMs": 1000},
+    {"id": "cecierj-cardinais-seis-sete-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 177060, "startMs": 176310, "durationMs": 1500},
+    {"id": "cecierj-cardinais-sete-oito-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 179570, "startMs": 179270, "durationMs": 600},
+    {"id": "cecierj-cardinais-sete-oito-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 179570, "startMs": 179070, "durationMs": 1000},
+    {"id": "cecierj-cardinais-sete-oito-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 179570, "startMs": 178820, "durationMs": 1500},
+    {"id": "cecierj-cardinais-oito-nove-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 181980, "startMs": 181680, "durationMs": 600},
+    {"id": "cecierj-cardinais-oito-nove-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 181980, "startMs": 181480, "durationMs": 1000},
+    {"id": "cecierj-cardinais-oito-nove-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 181980, "startMs": 181230, "durationMs": 1500},
+    {"id": "cecierj-cardinais-nove-dez-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 185000, "startMs": 184700, "durationMs": 600},
+    {"id": "cecierj-cardinais-nove-dez-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 185000, "startMs": 184500, "durationMs": 1000},
+    {"id": "cecierj-cardinais-nove-dez-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "cardinais", "label": null, "stratum": "cardinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 185000, "startMs": 184250, "durationMs": 1500},
+    {"id": "cecierj-quantitativos-seis-sete-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 287800, "startMs": 287500, "durationMs": 600},
+    {"id": "cecierj-quantitativos-seis-sete-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 287800, "startMs": 287300, "durationMs": 1000},
+    {"id": "cecierj-quantitativos-seis-sete-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 287800, "startMs": 287050, "durationMs": 1500},
+    {"id": "cecierj-quantitativos-sete-oito-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 290060, "startMs": 289760, "durationMs": 600},
+    {"id": "cecierj-quantitativos-sete-oito-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 290060, "startMs": 289560, "durationMs": 1000},
+    {"id": "cecierj-quantitativos-sete-oito-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 290060, "startMs": 289310, "durationMs": 1500},
+    {"id": "cecierj-quantitativos-oito-nove-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 292020, "startMs": 291720, "durationMs": 600},
+    {"id": "cecierj-quantitativos-oito-nove-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 292020, "startMs": 291520, "durationMs": 1000},
+    {"id": "cecierj-quantitativos-oito-nove-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 292020, "startMs": 291270, "durationMs": 1500},
+    {"id": "cecierj-quantitativos-nove-dez-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 294800, "startMs": 294500, "durationMs": 600},
+    {"id": "cecierj-quantitativos-nove-dez-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 294800, "startMs": 294300, "durationMs": 1000},
+    {"id": "cecierj-quantitativos-nove-dez-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "quantitativos", "label": null, "stratum": "quantitativos-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 294800, "startMs": 294050, "durationMs": 1500},
+    {"id": "cecierj-ordinais-seis-sete-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 229920, "startMs": 229620, "durationMs": 600},
+    {"id": "cecierj-ordinais-seis-sete-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 229920, "startMs": 229420, "durationMs": 1000},
+    {"id": "cecierj-ordinais-seis-sete-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-seis-sete", "sourceLabel": "Seis → Sete", "anchorMs": 229920, "startMs": 229170, "durationMs": 1500},
+    {"id": "cecierj-ordinais-sete-oito-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 232340, "startMs": 232040, "durationMs": 600},
+    {"id": "cecierj-ordinais-sete-oito-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 232340, "startMs": 231840, "durationMs": 1000},
+    {"id": "cecierj-ordinais-sete-oito-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-sete-oito", "sourceLabel": "Sete → Oito", "anchorMs": 232340, "startMs": 231590, "durationMs": 1500},
+    {"id": "cecierj-ordinais-oito-nove-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 234900, "startMs": 234600, "durationMs": 600},
+    {"id": "cecierj-ordinais-oito-nove-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 234900, "startMs": 234400, "durationMs": 1000},
+    {"id": "cecierj-ordinais-oito-nove-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-oito-nove", "sourceLabel": "Oito → Nove", "anchorMs": 234900, "startMs": 234150, "durationMs": 1500},
+    {"id": "cecierj-ordinais-nove-dez-600", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 237500, "startMs": 237200, "durationMs": 600},
+    {"id": "cecierj-ordinais-nove-dez-1000", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 237500, "startMs": 237000, "durationMs": 1000},
+    {"id": "cecierj-ordinais-nove-dez-1500", "source": "cecierj-aula-03", "signer": 904, "session": "cecierj-aula-03-gravacao", "sequence": "ordinais", "label": null, "stratum": "ordinais-nove-dez", "sourceLabel": "Nove → Dez", "anchorMs": 237500, "startMs": 236750, "durationMs": 1500}
+  ],
+  "models": {
+    "combined": {
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "threshold": 0.525
+    }
+  }
+}
