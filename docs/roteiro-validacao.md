@@ -11,6 +11,21 @@ A inspeção local de 26/11/2026 identificou Debian GNU/Linux 13.8, Intel Core i
 3. Use um perfil de navegador limpo para começar sem permissões e sem progresso. Confira os logs do navegador e a aba de rede durante os testes de captura.
 4. Se a síntese estiver indisponível no Chromium em Linux, confira o serviço com spd-say -o espeak-ng -L. Experimente um perfil separado iniciado com chromium --enable-speech-dispatcher e registre se a voz é exposta à aplicação. Confirme a língua e a reprodução com a audição do revisor.
 
+## Prática guiada mínima (M1 e M2)
+
+No Chromium, abra **Praticar**, escolha **Amarelo** e entre em **Praticar com ajuda**. Reproduza o avatar, ative a câmera e permita o acesso. Use **Iniciar tentativa** e **Concluir tentativa** para fazer um sinal por vez. [Abrir Praticar](http://127.0.0.1:4177/#praticar)
+
+| Cenário | Resultado técnico no pacote `dfb045b` | Origem |
+| --- | --- | --- |
+| Execução esperada | **Sinal reconhecido** para Amarelo. Uma chamada ao classificador. | Gravação MINDS S01-1 |
+| Trajetória contrária | **Ajuste sugerido** com a dica para deslocar o indicador da testa em direção ao nariz. Uma chamada ao classificador. | Mesma gravação com os quadros em ordem inversa |
+| Ausência de mãos | **Tentativa inconclusiva** com orientação para mostrar a mão e os ombros. Zero chamadas ao classificador. | Vídeo de quadro preto |
+| Permissão negada e captura interrompida | **Problema de captura** na negação e na revogação durante a tentativa. A nova permissão abriu outra trilha e a câmera foi liberada ao sair da prática. | Webcam ACER HD User Facing a 640 × 480 |
+
+O avatar em WebGL e a webcam física ficaram lado a lado na janela de 1.280 × 900. A sessão de interrupção solicitou apenas arquivos estáticos do servidor local. Os logs estão em `data/evidence/demonstracao/m1-m2-dfb045b/`. [Reprodução da dica](#dica-de-trajetória-de-amarelo)
+
+Para o aceite com pessoa sinalizante, registre a execução esperada e a correção intencional na webcam e peça a uma pessoa fluente em Libras que confira a dica. Na Área livre, registre a retirada e o retorno de uma mão, a oclusão e o alinhamento dos pontos ao redimensionar. Na coleta de M1, registre também repouso, movimento cotidiano e sinais fora do catálogo com pessoas independentes, incluindo chamadas ao classificador. [Ficha local](http://127.0.0.1:4177/validacao/) · [Como registrar](validacao-ao-vivo.md)
+
 ## Sequência principal
 
 Os resultados da sessão com participantes ficam nesta tabela. A execução automatizada, com as mesmas telas na ordem do roteiro, está registrada abaixo. [Roteiro integrado](#roteiro-integrado-em-uma-sessão-do-chromium)

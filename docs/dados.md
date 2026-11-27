@@ -28,6 +28,16 @@ A classe de rejeição é formada por outras glosas disponíveis no MINDS-Libras
 
 O [manifesto expandido](../ml/manifests/minds-expanded-v1.json) mantém os 174 clipes anteriores e acrescenta 33 execuções de ALUNO (glosa 02). São 18 de treino, 6 de validação e 9 de teste, com os mesmos grupos de pessoas. O SHA-256 do manifesto de 207 clipes é `3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be`.
 
+## Contrato e revisão técnica de M1
+
+O catálogo inicial vincula Cinco, Espelho e Amarelo aos IDs `signal-cinco`, `signal-espelho` e `signal-amarelo`. Cada item tem nome, texto, referência, versão, situação da revisão e o parâmetro da dica. O player recebe uma sequência de itens com esses IDs e resolve os clipes pelo mesmo identificador. Um ID desconhecido é rejeitado pelo player. [Catálogo compartilhado](../src/catalog.js) · [Player](../src/avatar/playback.js) · [Referências de animação](animacoes.md#sinais-da-lição)
+
+Na prévia local `dfb045b`, o manifesto do combinado declara o esquema `holistic-shoulders-v1`. O tensor `landmarks` tem formato `float32[1, 24, 192]`. Cada quadro contém ombros, cotovelos e pulsos do corpo, seguidos pelos 21 pontos da mão esquerda e pelos 21 da direita. Cada ponto tem XYZ e uma máscara de presença. X e Y usam o centro dos ombros como origem, a largura entre os ombros como escala e a proporção da imagem no eixo X. A profundidade das mãos usa a referência dos pulsos. Durante a captura, a amostragem é de 100 ms e a tentativa é reamostrada para 24 quadros. [Pré-processamento](../src/recognition/preprocess.js)
+
+O modelo retorna `logits` na ordem de rótulos do manifesto, com a classe fora do catálogo na primeira posição. A aplicação calcula a confiança e usa o limiar do pacote. A prática guiada compara a classe aceita com o alvo e avalia separadamente a palma ou a trajetória para apresentar a dica. A falha de captura tem estado próprio. [Decisão do classificador](../src/recognition/decision.js) · [Feedback da prática](../src/recognition/feedback.js)
+
+A revisão técnica conferiu os três IDs, os clipes do avatar e os rótulos no manifesto efetivamente servido. A extração local passou na verificação de partições, hashes e duplicatas nos 174 clipes do recorte inicial e nos 207 do expandido. O teste de paridade em WebAssembly conferiu cinco amostras do combinado sem divergências de decisão. O registro DataCite do DOI `10.5281/zenodo.2667329` confirmou a indicação de CC BY 4.0. Os logs ficam em `data/evidence/demonstracao/m1-m2-dfb045b/` e `data/evidence/demonstracao/m1-m2-wasm-dfb045b.log`. As amostras de negativos com pessoas independentes na webcam seguem pendentes. [Consulta DataCite](https://api.datacite.org/dois/10.5281/zenodo.2667329) · [Referências e bases](referencias.md) · [Protocolo de aceite](protocolo-aceite.md)
+
 ## Atribuição dos artefatos de reconhecimento
 
 ALMEIDA, Sílvia G. M. et al. *MINDS-Libras Dataset*. Versão 1. Zenodo, 2019. DOI 10.5281/zenodo.2667329. Extração local de pontos, normalização, recorte de classes e treinamento do LibrasIA a partir da fonte sob CC BY 4.0. [Dataset](https://doi.org/10.5281/zenodo.2667329) · [Licença CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

@@ -23,13 +23,12 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ## Prioridades da retomada
 
-A prévia integrada reúne alfabeto e leitura de letras ao vivo, tradutor, prática e transcrição com voz. No PC de referência, ficam disponíveis as telas de [Praticar](http://127.0.0.1:4177/#praticar) e [Área livre](http://127.0.0.1:4177/#area-livre). [Roteiro e resultados no Chromium](docs/roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
+A rodada atual se concentra em M1 e M2 para entregar uma prática guiada funcional no PC com webcam. [Abrir Praticar](http://127.0.0.1:4177/#praticar)
 
-1. **Fechar a demonstração local (M2 a M7).** Rodar alfabeto, frase, nome, lição, transcrição e voz, e conferir um destino de Saiba mais. Corrigir falhas de implementação que impeçam o roteiro. Registrar por etapa o que funcionou com vídeo gravado e o que foi verificado com webcam e voz locais.
-2. **Concluir os aceites com participantes quando houver disponibilidade.** Rever as dicas de prática, o sinal N ao lado de M e U, as poses e sequências do avatar, a perda e a retomada de uma mão, e a compreensão do texto falado. [Referências da pose N](docs/animacoes.md#triagem-da-letra-n) · [Ficha de validação](docs/validacao-ao-vivo.md)
-3. **Retomar a otimização após a demonstração.** Usar os controles reservados de A, Q, R, U, Y e Z, e os falsos aceites de transições, como conjunto de regressão. [Controles do alfabeto](ml/evidence/alphabet-a-q-r/README.md) · [Avaliação externa de Cinco](docs/transicao-sete-oito.md)
+1. **M1.** Conferir as referências, o catálogo, a separação dos dados e o contrato entre o modelo e o avatar. Completar os negativos na webcam com pessoas independentes assim que houver disponibilidade. [Revisão técnica](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências e bases](docs/referencias.md)
+2. **M2.** Confirmar que uma execução esperada, uma correção intencional e uma falha de captura têm respostas distintas em **Praticar com ajuda**. Registrar a retirada e o retorno de uma mão e conferir o alinhamento da sobreposição ao redimensionar a janela. [Roteiro curto](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Ficha de validação](docs/validacao-ao-vivo.md)
 
-A prévia permanece no Linux local. A publicação na Vercel e a finalização do memorial estão adiadas por orientação da equipe.
+As demais etapas, a publicação na Vercel e a finalização do memorial ficam para outra rodada.
 
 ## Implementação e aceite por marco
 
@@ -53,6 +52,7 @@ A prévia permanece no Linux local. A publicação na Vercel e a finalização d
 - [x] Medir chamadas ao classificador por tentativa. Verificar no Chromium a diferença entre ausência de mãos e rejeição após classificação, guardar o valor na ficha e resumir a cobertura por cenário. [Verificação com gravações](docs/validacao-ao-vivo.md#verificação-das-chamadas-no-chromium)
 - [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
+- [x] Conferir os três sinais iniciais no catálogo, no player 3D e no manifesto da prévia. Verificar partições, atribuição da base e paridade WebAssembly. Reunir as fontes e bases em um índice para citação. [Revisão técnica de M1](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências](docs/referencias.md)
 - [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
 
 ### M2 · Primeiro sinal com webcam e avatar reais
@@ -62,6 +62,7 @@ A prévia permanece no Linux local. A publicação na Vercel e a finalização d
 - [x] Testar concessão e negação de câmera, saída do fluxo, troca de aba e reativação. Verificar que a aplicação processa os quadros localmente, sem transmitir ou persistir as imagens.
 - [x] **Webcam física no Chromium.** Abrir a câmera ACER HD User Facing, conferir a trilha ativa e liberar a câmera ao sair da aba e da Área livre. [Prévia local dos pontos](docs/previa-estavel.md#pontos-das-mãos-ao-vivo)
 - [x] Revogar a permissão durante uma tentativa no Chromium. Conferir o aviso de captura, a retomada da webcam física e o reconhecimento de Cinco com vídeo gravado depois de conceder a permissão novamente. [Reteste da captura](docs/roteiro-validacao.md#retomada-após-revogar-a-permissão-da-câmera)
+- [x] Conferir os quatro estados com Amarelo em **Praticar com ajuda**. Usar gravações para reconhecimento, dica de trajetória e ausência de mãos. Usar a webcam física para a falha nativa de permissão durante a tentativa e a retomada. [Roteiro curto e resultados](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2)
 - [x] **Vídeo gravado no Chromium.** Verificar 21 pontos por mão, movimento das duas mãos antes, durante e depois de uma tentativa, oclusão e retorno de uma mão, opção ligada por padrão e alternância durante a captura. Conferir o encaixe e o espelhamento em 1.280 e 390 px e a liberação da trilha ao navegar. [Vídeo e cenário](docs/teste-pontos-ao-vivo.md) · [Teste automatizado](tests/e2e/hand-overlay-live.test.mjs)
 - [x] **Relato de uso na webcam.** A pessoa usuária confirmou que a sobreposição acompanhou bem os movimentos em tempo real.
 - [ ] **Aceite visual na webcam física.** Na Área livre, registrar a retirada e o retorno de uma mão e conferir o alinhamento ao redimensionar a janela.

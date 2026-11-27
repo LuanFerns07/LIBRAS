@@ -8,6 +8,8 @@ O protótipo web reúne prática de Libras, alfabeto manual, demonstração de f
 
 [Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prioridades da retomada](ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Prompt de implementação](PROMPT_LIBRASIA.md)
 
+[Referências, bases e consultas](docs/referencias.md)
+
 [Checklist da inscrição no prêmio](ROADMAP_LIBRASIA.md#checklist-da-inscrição) · [Preparação do memorial e dos anexos](docs/inscricao.md)
 
 ## Executar neste Linux

@@ -1,6 +1,6 @@
 # Animações do LibrasIA
 
-Versão do catálogo `0.2.2-preliminar`. As poses e trajetórias foram modeladas em código com geometria original. O navegador carrega o código local do avatar. As obras de referência servem à consulta e seus arquivos não integram o aplicativo.
+Versão do catálogo da aplicação `librasia-v0.1-draft`. As poses e trajetórias foram modeladas em código com geometria original. O navegador carrega o código local do avatar, cuja revisão é identificada pelo commit do pacote. As obras de referência servem à consulta e seus arquivos não integram o aplicativo.
 
 ## Alfabeto manual
 
@@ -16,11 +16,11 @@ As referências orientam os movimentos de Ç, H, J, K, W, X, Y e Z. O clipe de P
 
 A fonte dos parâmetros é a descrição das amostras do MINDS-Libras. O trio inicial inclui uma execução estática e duas dinâmicas de uma mão, com parâmetros manuais observáveis. [Tese de Tamires Martins Rezende, Apêndice B, Tabela 17](https://repositorio.ufmg.br/server/api/core/bitstreams/4307a8e9-f22e-4374-a900-0f42d88974a8/content)
 
-| Clipe | Referência de execução no avatar | Parâmetro candidato a feedback |
+| Clipe | Referência de execução no avatar | Parâmetro usado pela prática guiada |
 | --- | --- | --- |
-| `signal-cinco` | Indicador e médio fletidos em V, palma para frente e mão à frente do tronco. Forma registrada no MINDS-Libras. | Configuração dos dedos em captura nítida. |
+| `signal-cinco` | Indicador e médio fletidos em V, palma para frente e mão à frente do tronco. Forma registrada no MINDS-Libras. | Orientação da palma da mão direita em captura nítida. |
 | `signal-amarelo` | Mão em D, indicador parte da testa em direção ao nariz, com palma para a esquerda da pessoa destra. | Trajetória vertical do indicador se rosto e mão estiverem rastreados. |
-| `signal-espelho` | Mão aberta à frente do rosto, palma voltada à pessoa sinalizante, com oscilações de rotação para os lados. | Rotação do pulso se a mão permanecer rastreada. |
+| `signal-espelho` | Mão aberta à frente do rosto, palma voltada à pessoa sinalizante, com oscilações de rotação para os lados. | Orientação da palma voltada à pessoa na forma destra. |
 
 ## Apresentação
 
