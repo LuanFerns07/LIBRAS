@@ -274,6 +274,12 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_DEMO_VIDEO="$fixtures/demo
   node --test tests/e2e/browser.test.mjs
 ~~~
 
+### Aceite técnico de M7
+
+Um checkout limpo de `c008531` reproduziu a prévia byte a byte. No Chromium, o roteiro integrado passou pelas 27 letras, pela apresentação de nome, pela soletração isolada, pelo reconhecimento e pela dica de Amarelo, pela transcrição de Cinco e Espelho e pela leitura da edição em pt-BR. O Dicionário Libras abriu em outra aba. As tentativas de reconhecimento usaram gravações. [Preparar e executar o roteiro](#roteiro-integrado-em-uma-sessão-do-chromium)
+
+Em ensaios separados, a exportação da ficha preservou a versão do pacote e a medição. O Chromium retomou a webcam física após revogar a permissão e repetiu a transcrição offline com o modelo já carregado em uma trilha de vídeo gravado. A verificação de integridade recusou uma cópia com o arquivo de revisão alterado. Os logs locais estão em `data/evidence/demonstracao/m7-demo/`. A tag `v1.1.0` identifica o pacote de demonstração técnica. [Compilação local](previa-estavel.md#prévia-de-trabalho) · [Pendências de revisão](pendencias-futuras.md#m7--demonstração-independente-e-inscrição)
+
 ### Conferência dos sete links de Saiba mais
 
 Em 27/11/2026, o Chromium 156.0.8078.79 abriu os sete destinos abaixo a partir do pacote local `d473dc4`, em um perfil sem login. Cada destino abriu em outra aba e respondeu com HTTP 200. A linha de autoria ou instituição do aplicativo foi conferida no conteúdo das páginas.

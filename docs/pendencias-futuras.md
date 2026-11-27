@@ -18,7 +18,7 @@ Esta lista reúne o que foi adiado por depender de participantes, dados adiciona
 
 ## M7 · Demonstração independente e inscrição
 
-- [ ] Repetir a demonstração com revisor independente, webcam e áudio reais. Conferir a compreensão das mensagens e da voz.
+- [ ] Repetir a demonstração com revisor independente, webcam e áudio reais. Conferir a compreensão das mensagens e da voz, retestar os problemas de correção em Libras e registrar as limitações com a versão dos ativos usados.
 - [ ] Finalizar o memorial quando a equipe retomar essa etapa. Validar a autoria, as contribuições humanas, os dados e documentos pessoais, as assinaturas e o envio com os integrantes responsáveis. [Checklist da inscrição](../ROADMAP_LIBRASIA.md#checklist-da-inscrição) · [Edital e anexos](inscricao.md)
 
 ## M8 a M11 · Piloto, cobertura, dados contínuos e publicação

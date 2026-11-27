@@ -60,10 +60,10 @@ O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confi
 
 Na porta 4203, Cinco, Espelho e Amarelo completaram a lição no Chromium usando vídeos gravados. A mesma prévia inclui as 27 letras do avatar e aceita hífens tipográficos ao soletrar nomes compostos. [Abrir Praticar](http://127.0.0.1:4203/#praticar) · [Evidências da lição](roteiro-validacao.md#lição-completa-dos-três-sinais-em-m3) · [Evidências do alfabeto](dados-alfabeto.md#aceite-técnico-de-m4)
 
-A Área livre mostra o catálogo instalado antes de ativar a webcam e permite editar a transcrição antes de usar **Ouvir**. [Abrir Área livre](http://127.0.0.1:4203/#area-livre) · [Evidências de transcrição e voz](regressao-area-livre.md#aceite-técnico-de-m5)
+A Área livre mostra o catálogo instalado antes de ativar a webcam e permite editar a transcrição antes de usar **Ouvir**. A tag `v1.1.0` fixa a demonstração técnica no Chromium. [Abrir Área livre](http://127.0.0.1:4203/#area-livre) · [Roteiro integrado e evidências](roteiro-validacao.md#aceite-técnico-de-m7)
 
 ~~~bash
-python3 data/releases/librasia-m5/iniciar.py --porta 4203
+python3 data/releases/librasia-1.1.0/iniciar.py --porta 4203
 ~~~
 
 ## Prévia v0.1.0-preview.1

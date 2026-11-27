@@ -6,6 +6,8 @@ O protótipo web reúne prática de Libras, alfabeto manual, demonstração de f
 
 A versão 1.0 local conclui M1 e M2 com prática guiada de Amarelo, avatar 3D e webcam no Chromium. A coleta e a revisão com participantes ficam para depois da 1.0. [Abrir Praticar](http://127.0.0.1:4177/#praticar) · [Executar a versão 1.0](docs/previa-estavel.md#demonstração-atual-no-pc)
 
+A demonstração local 1.1 reúne a lição de três sinais, o alfabeto, o tradutor, a Área livre com voz e a ficha de validação. [Abrir a prévia](http://127.0.0.1:4203/) · [Evidências da demonstração](docs/roteiro-validacao.md#aceite-técnico-de-m7)
+
 ![Painel de status dos marcos do LibrasIA. A versão em texto está no roadmap.](assets/status.svg)
 
 [Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prioridades da retomada](ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Prompt de implementação](PROMPT_LIBRASIA.md)
