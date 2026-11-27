@@ -133,3 +133,20 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.ev
 ```
 
 Os relatórios ficam em `data/transition-gate-m5/numeric-transition-fit.json` e `data/transition-gate-m5/numeric-transition-fit-summary.json`.
+
+### Conjunção pós-hoc
+
+A conjunção surgiu depois da comparação anterior, pois forma e forma com movimento perderam um Cinco em rodadas diferentes. Reaplicamos as decisões dos dois vetos treinados com todas as transições, com os pesos e limiares originais de cada rodada. Uma janela só é vetada quando o combinado aceita Cinco e os dois escores ficam abaixo dos respectivos limiares. [Decisões por rodada, com o SHA-256 do relatório original](../ml/fresh_eval/evidence-numerais-ajuste/conjunction.json)
+
+| Pessoa e gravação excluídas do ajuste | Falsos Cinco vetados | Cinco didáticos preservados | Cinco corretos do MINDS validação preservados |
+| --- | ---: | ---: | ---: |
+| Cecierj | 9/9, três movimentos | 2/2 | 6/6 |
+| Grupo UFSM | 1/1, um movimento | 1/1 | 6/6 |
+| Caderno Libras D | 0, sem falsos Cinco | 0, sem Cinco correto no combinado | 6/6 |
+| Libras ON | 0, sem falsos Cinco | 0, sem positivo isolado avaliado | 6/6 |
+
+Para a primeira confirmação independente, ajustamos os mesmos dois vetos uma vez em todo o desenvolvimento, com 22 janelas de Cinco e 69 janelas utilizáveis de transições. Os seis Cinco do MINDS validação ficaram fora do ajuste e os seis permaneceram aceitos. A execução também manteve os três Cinco didáticos já corretos. Os limiares fixados foram 0,166268 para forma e 0,388047 para forma com movimento. O próximo ensaio deve fixar os recortes de uma pessoa e sessão novas antes da inferência, preservar todos os Cinco que o combinado acertar e vetar todas as janelas de pelo menos um movimento que o combinado confundir com Cinco. A Fiocruz e o MINDS teste ficaram fora. [Pesos, limiares e critério congelados](../ml/fresh_eval/evidence-numerais-ajuste/conjunction-frozen.json)
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.freeze_numeric_veto_pair
+```

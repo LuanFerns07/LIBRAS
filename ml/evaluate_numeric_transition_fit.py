@@ -159,7 +159,7 @@ def test_fold(train, validation, held, feature, negatives, ridge):
     }
 
 
-def evaluate(data):
+def read_development(data):
     plan = load_json(PLAN)
     path, index = checked_index(data, plan["minds"])
     session, model, manifest_sha = verified_model(data / "models/isolated-combined", index)
@@ -175,6 +175,11 @@ def evaluate(data):
         destination.append(make_case(session, model, row.checksum, f"minds-{row.signer}", "cinco",
                                      "cinco", row.state, row.values))
     external = [make_case(session, model, *case) for case in read_didactic(data, plan["sources"], model)]
+    return plan, train, validation, external
+
+
+def evaluate(data):
+    plan, train, validation, external = read_development(data)
     groups = sorted({row["group"] for row in external})
 
     results = {}
@@ -190,7 +195,8 @@ def evaluate(data):
                              for fold in folds.values()))
         results[f"{feature}/{negatives}"] = {"passesCriterion": qualifies, "folds": folds}
     return {"schemaVersion": 1, "scope": plan["scope"], "device": "CPUExecutionProvider",
-            "protocolSha256": digest(PLAN), "modelSha256": model["modelSha256"], "modelManifestSha256": manifest_sha,
+            "protocolSha256": digest(PLAN), "modelSha256": plan["modelSha256"],
+            "modelManifestSha256": plan["modelManifestSha256"],
             "mindsTrainCinco": len(train), "mindsValCinco": len(validation), "profiles": results}
 
 

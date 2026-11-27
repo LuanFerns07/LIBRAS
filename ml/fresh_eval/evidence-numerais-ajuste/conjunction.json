@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "scope": "post-hoc-development",
+  "originalReportSha256": "fce9559daecb0342d79905d27804534f6857f7a9216ce13dec6e275ad55a0b95",
+  "folds": {
+    "cecierj-aula-03": {
+      "originalThresholds": {
+        "shape": 0.2639234452848308,
+        "shape-and-motion": 0.4996630834264806
+      },
+      "mindsValCorrectCinco": 6,
+      "mindsValCorrectCincoLost": [],
+      "didacticCorrectCinco": [
+        "cecierj-cardinais-cinco",
+        "cecierj-quantitativos-cinco"
+      ],
+      "didacticCorrectCincoLost": [],
+      "falseCincoByMovement": {
+        "cardinais | Sete → Oito": {
+          "cecierj-cardinais-sete-oito-600": true,
+          "cecierj-cardinais-sete-oito-1000": true,
+          "cecierj-cardinais-sete-oito-1500": true
+        },
+        "quantitativos | Sete → Oito": {
+          "cecierj-quantitativos-sete-oito-600": true,
+          "cecierj-quantitativos-sete-oito-1000": true,
+          "cecierj-quantitativos-sete-oito-1500": true
+        },
+        "quantitativos | Oito → Nove": {
+          "cecierj-quantitativos-oito-nove-600": true,
+          "cecierj-quantitativos-oito-nove-1000": true,
+          "cecierj-quantitativos-oito-nove-1500": true
+        }
+      }
+    },
+    "ufsm-grupo": {
+      "originalThresholds": {
+        "shape": 0.15078898240373495,
+        "shape-and-motion": 0.35418232059227994
+      },
+      "mindsValCorrectCinco": 6,
+      "mindsValCorrectCincoLost": [],
+      "didacticCorrectCinco": [
+        "ufsm-grupo-cinco"
+      ],
+      "didacticCorrectCincoLost": [],
+      "falseCincoByMovement": {
+        "cardinais | Oito → Nove": {
+          "ufsm-grupo-oito-nove": true
+        }
+      }
+    },
+    "ufsm-libras-d": {
+      "originalThresholds": {
+        "shape": 0.4326143291819345,
+        "shape-and-motion": 0.504249503620005
+      },
+      "mindsValCorrectCinco": 6,
+      "mindsValCorrectCincoLost": [],
+      "didacticCorrectCinco": [],
+      "didacticCorrectCincoLost": [],
+      "falseCincoByMovement": {}
+    },
+    "ufsm-libras-on": {
+      "originalThresholds": {
+        "shape": 0.18852741936399187,
+        "shape-and-motion": 0.6233761840041985
+      },
+      "mindsValCorrectCinco": 6,
+      "mindsValCorrectCincoLost": [],
+      "didacticCorrectCinco": [],
+      "didacticCorrectCincoLost": [],
+      "falseCincoByMovement": {}
+    }
+  },
+  "passesCriterion": true
+}
