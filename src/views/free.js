@@ -4,7 +4,7 @@ import { appendTranscription, freeFeedback } from '../recognition/feedback.js'
 import { mountSpeech } from '../speech.js'
 import { glossReviewMarkup, mountGlossReview } from './gloss-review.js'
 
-export function mountFree(main, openEngine) {
+export function mountFree(main, openEngine, draft) {
   const continuousEnabled = import.meta.env.VITE_LIBRASIA_CONTINUO === '1'
   main.innerHTML = `
     <div class="page-heading">
@@ -43,6 +43,7 @@ export function mountFree(main, openEngine) {
     </div>`
 
   const transcription = main.querySelector('#transcription')
+  transcription.value = draft.text
   const voiceStatus = main.querySelector('[data-voice-status]')
   const sequence = main.querySelector('[data-sequence-mode]')
   const continuous = main.querySelector('[data-continuous-mode]')
@@ -136,6 +137,7 @@ export function mountFree(main, openEngine) {
     transcription.focus()
   })
   return () => {
+    draft.text = transcription.value
     voice.stop()
     capture.dispose()
   }

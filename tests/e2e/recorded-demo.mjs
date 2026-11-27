@@ -65,6 +65,12 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
   assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco')
   await capture('red', 'accepted')
   assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco espelho')
+  await evaluate('window.freeTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
+  await open('alfabeto', 'Alfabeto manual')
+  assert.equal(await evaluate('window.freeTrack.readyState'), 'ended')
+  await open('area-livre', 'Libras para texto e voz')
+  assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
+  assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco espelho')
   await waitUntil('speechSynthesis.getVoices().some(v => v.localService && v.lang.replaceAll("_", "-").toLowerCase() === "pt-br")')
   await evaluate(`const speak = speechSynthesis.speak.bind(speechSynthesis);
     speechSynthesis.speak = utterance => {
@@ -77,11 +83,9 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
   await click('[data-speak]')
   await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "accepted"')
   assert.equal(await evaluate('window.demoUtterance'), edited)
-  await evaluate('window.freeTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
-  report('5. Área livre · cinco espelho · voz local leu a edição em pt-BR.')
+  report('5. Área livre · cinco espelho após voltar do Alfabeto · voz local leu a edição em pt-BR.')
 
   await open('saiba-mais', 'Saiba mais')
-  assert.equal(await evaluate('window.freeTrack.readyState'), 'ended')
   assert.deepEqual(unexpectedRequests, [], 'A câmera e a voz devem funcionar com requisições apenas de arquivos locais.')
   const dictionary = 'https://dicionario.ines.gov.br/'
   const link = 'a[href="' + dictionary + '"]'

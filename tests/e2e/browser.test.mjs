@@ -273,17 +273,39 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       assert.equal(await evaluate('document.querySelector("[data-voice-status]").dataset.state'), 'unavailable')
       assert.equal(await evaluate('document.querySelector("#transcription").value'), 'Texto editado do LibrasIA.')
     }
+    const transcription = 'document.querySelector("#transcription")'
+    const draft = await evaluate(transcription + '.value')
+    const storage = 'JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)])'
+    const storageBefore = await evaluate(storage)
+    await open('alfabeto', 'Alfabeto manual')
+    assert.equal(await evaluate('window.previousCameraTrack.readyState'), 'ended')
+    await open('area-livre', 'Libras para texto e voz')
+    assert.equal(await evaluate(transcription + '.value'), draft)
+    assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
+    assert.equal(await evaluate(storage), storageBefore)
     await click('[data-clear]')
     assert.equal(await evaluate('document.activeElement.id'), 'transcription')
-    assert.equal(await evaluate('document.querySelector("#transcription").value'), '')
+    assert.equal(await evaluate(transcription + '.value'), '')
 
     await open('saiba-mais', 'Saiba mais')
-    assert.equal(await evaluate('window.previousCameraTrack.readyState'), 'ended')
     assert.deepEqual(await evaluate('Array.from(document.querySelectorAll("main li a"), a => new URL(a.href).hostname)'), [
       'indl.iphan.gov.br', 'editora.ufsc.br', 'm.grupoa.com.br', 'dicionario.ines.gov.br',
       'manuario.ines.gov.br', 'corpuslibras.ufsc.br', 'faced.ufc.br',
     ])
     assert.match(await text('footer'), /sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales/u)
+
+    await open('area-livre', 'Libras para texto e voz')
+    assert.equal(await evaluate(transcription + '.value'), '')
+    await evaluate(transcription + '.focus()')
+    const temporaryText = 'Mensagem temporária.\nSegunda linha.'
+    await page('Input.insertText', { text: temporaryText })
+    await open('saiba-mais', 'Saiba mais')
+    await open('area-livre', 'Libras para texto e voz')
+    assert.equal(await evaluate(transcription + '.value'), temporaryText)
+    await evaluate('window.previousDocument = true')
+    await page('Page.reload')
+    await waitUntil('!window.previousDocument && !!' + transcription)
+    assert.equal(await evaluate(transcription + '.value'), '')
 
     await page('Emulation.setDeviceMetricsOverride', { width: 390, height: 840, deviceScaleFactor: 1, mobile: true })
     await open('praticar', 'Pratique Libras')
