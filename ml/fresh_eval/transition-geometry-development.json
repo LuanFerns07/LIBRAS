@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "source": "ufsm-numeros",
+  "signer": 901,
+  "allowedWindowMs": [13000, 18600],
+  "anchors": [
+    {"id": "seis-sete", "sourceLabel": "seis → sete", "motionAtMs": 14350},
+    {"id": "sete-oito", "sourceLabel": "sete → oito", "motionAtMs": 15650},
+    {"id": "oito-nove", "sourceLabel": "oito → nove", "motionAtMs": 16800}
+  ],
+  "startBeforeAnchorMs": [850, 650, 450],
+  "durationsMs": [900, 1350, 2100]
+}
