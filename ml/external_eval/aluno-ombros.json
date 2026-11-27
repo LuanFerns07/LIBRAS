@@ -1,0 +1,28 @@
+{
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "region": { "minAbsX": 0.23, "minY": -0.30, "maxY": 0.50, "minFrames": 8 },
+  "criterion": "Rejeitar o falso Aluno de queixo para teclado e manter todos os Alunos corretos do MINDS. A regra só pode vetar Aluno.",
+  "minds": {
+    "path": "minds-expanded/features/index.json",
+    "sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90"
+  },
+  "development": {
+    "path": "clad-development/features/index.json",
+    "sha256": "13e0d766118c9e4976a87e84a266fb30e44ea6e894c996b4c7bb8e2f02a3b685"
+  },
+  "reserved": [
+    {
+      "path": "external-negative/features/index.json",
+      "sha256": "45439738d3ce0abea10ce444c2a31e194f95b0f2b8b00103fc6221f1e75f852e"
+    },
+    {
+      "path": "isolated-negative-audit/clad/features/index.json",
+      "sha256": "53a885f2dd08dcdf07f0151d0418e0a448f2ddb93000ed2905a6b717dadf32a6"
+    },
+    {
+      "path": "isolated-negative-audit/didactic/features/index.json",
+      "sha256": "5c5f4a87a72e70a542ca17f73bcb896316ba4d06d53e22d1d61b1874083ed239"
+    }
+  ]
+}
