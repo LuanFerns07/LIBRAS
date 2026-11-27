@@ -23,7 +23,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ## Prioridades da retomada
 
-A referência é a [prévia local do alfabeto](http://127.0.0.1:4177/#area-livre), compilada no commit `0a36425`. Em 27 de novembro de 2026, a pessoa usuária confirmou que os pontos acompanharam bem o movimento das mãos e que a atualização do reconhecimento funcionou bem no seu teste. O N ficou como ressalva. Os resultados dos testes com gravações estão nos registros de verificação. [Resultados do alfabeto](docs/dados-alfabeto.md#cobertura-e-verificação) · [Resultados dos pontos](docs/teste-pontos-ao-vivo.md)
+A referência é a [prévia local do alfabeto](http://127.0.0.1:4177/#area-livre), compilada no commit `759a671`. Em 27 de novembro de 2026, a pessoa usuária confirmou a fluidez dos pontos e do reconhecimento, com ressalva para N. A rodada seguinte ajustou a pose de M e N, retreinou os modelos estáticos e revisou a distinção entre A e X. [Resultados do alfabeto](docs/dados-alfabeto.md#cobertura-e-verificação) · [Resultados dos pontos](docs/teste-pontos-ao-vivo.md)
 
 1. **Validar N, M e U (M4).** Retestar no PC a pose de M e N e o leitor retreinado. Registrar a comparação com U na Área livre e em Praticar. [Triagem da pose](docs/animacoes.md#triagem-da-letra-n) · [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
 2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Repetir o roteiro com A–Z e Ç e preservar a leitura ao vivo e a sobreposição. Registrar a letra esperada, a letra exibida ou a ausência de leitura, a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.

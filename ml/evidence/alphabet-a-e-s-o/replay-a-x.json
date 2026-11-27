@@ -1,0 +1,161 @@
+{
+  "build": {
+    "commit": "759a671d434ac99cabbf6567bb9649d98f46cac8",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/ufsm-static-windows.json",
+    "ml/alphabet/ufsm-temporal-windows.json",
+    "ml/alphabet/institutional-temporal-windows.json",
+    "ml/alphabet/institutional-static-a-e-s-o.json"
+  ],
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "A",
+      "startMs": 4620,
+      "endMs": 5240,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 77,
+      "framesWithHand": 13,
+      "lastHandAfterVideoMs": 613
+    },
+    {
+      "source": "1536677587",
+      "label": "A",
+      "startMs": 4750,
+      "endMs": 5500,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 262
+        }
+      ],
+      "workerFrames": 78,
+      "framesWithHand": 17,
+      "lastHandAfterVideoMs": 784
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [],
+      "workerFrames": 80,
+      "framesWithHand": 15,
+      "lastHandAfterVideoMs": 715
+    },
+    {
+      "source": "1527000916",
+      "label": "X",
+      "startMs": 41350,
+      "endMs": 42650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 468
+        }
+      ],
+      "workerFrames": 94,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1366
+    },
+    {
+      "source": "1536677587",
+      "label": "X",
+      "startMs": 40380,
+      "endMs": 41260,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 597
+        }
+      ],
+      "workerFrames": 87,
+      "framesWithHand": 21,
+      "lastHandAfterVideoMs": 937
+    },
+    {
+      "source": "1535641159",
+      "label": "X",
+      "startMs": 40220,
+      "endMs": 41680,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 438
+        }
+      ],
+      "workerFrames": 102,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1475
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "X",
+      "startMs": 117320,
+      "endMs": 119330,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 544
+        }
+      ],
+      "workerFrames": 112,
+      "framesWithHand": 46,
+      "lastHandAfterVideoMs": 2044
+    },
+    {
+      "source": "unesp-222981",
+      "label": "X",
+      "startMs": 108030,
+      "endMs": 109570,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 462
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1570
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "A",
+      "startMs": 41600,
+      "endMs": 43200,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 275
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1607
+    },
+    {
+      "source": "unesp-222981",
+      "label": "A",
+      "startMs": 56880,
+      "endMs": 58550,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 225
+        }
+      ],
+      "workerFrames": 110,
+      "framesWithHand": 42,
+      "lastHandAfterVideoMs": 1695
+    }
+  ]
+}

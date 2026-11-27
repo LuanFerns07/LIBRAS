@@ -120,6 +120,6 @@ node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
 
 ### Distinção entre A e X e ensaio de E
 
-O leitor temporal de X passou a exigir separação sustentada entre a ponta do indicador e as pontas vizinhas durante a parte ativa do movimento. No Chromium, as cinco janelas rotuladas de X exibiram X e nenhuma das cinco janelas rotuladas de A exibiu X. Quatro exibiram A. O A da terceira aula da UFSM ficou sem leitura.
+O leitor temporal de X passou a exigir separação sustentada entre a ponta do indicador e as pontas vizinhas durante a parte ativa do movimento. No Chromium, as cinco janelas rotuladas de X exibiram X e nenhuma das cinco janelas rotuladas de A exibiu X. Quatro exibiram A. O A da terceira aula da UFSM ficou sem leitura. [Replay em cinco aulas](../ml/evidence/alphabet-a-e-s-o/replay-a-x.json)
 
 Com o classificador estático da prévia do retreino de N, as oito janelas novas de A, E, O e S tiveram seis acertos e duas rejeições, E do Cecierj e O da Unesp. Um candidato acrescentou ao treino os quatro recortes do Cecierj e preservou os da Unesp fora do ajuste estático. No replay das duas aulas institucionais, o candidato mostrou a letra esperada nas 14 janelas, incluindo M, N e U. Na terceira aula da UFSM, recuperou E (12/12 quadros no modelo estático) e perdeu R (0/15). O classificador estático da prévia permanece na versão que reconheceu R. [Janelas de A, E, O e S](../ml/alphabet/institutional-static-a-e-s-o.json) · [Replays do candidato](../ml/evidence/alphabet-a-e-s-o/replay-candidate.json)
