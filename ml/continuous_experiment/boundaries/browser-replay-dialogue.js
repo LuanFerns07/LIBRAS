@@ -64,8 +64,9 @@ async function compare(condition, frames, recognize, protocol) {
   }
 }
 
-async function run(protocol) {
+async function run(protocol, diagnosis) {
   const engine = await openEngine()
+  let diagnostic
   try {
     const { startMs, endMs, sampleMs, canvasMaxWidth } = protocol.clip
     await waitForVideo(video, 'loadeddata', () => { video.src = '/replay/dialogue.mp4' })
@@ -82,8 +83,13 @@ async function run(protocol) {
     for (const condition of protocol.experiment.conditions) {
       conditions.push(await compare(condition, frames, engine.recognize, protocol))
     }
+    if (diagnosis) {
+      const { openDialogueDiagnosis } = await import('./browser-dialogue-diagnosis.js')
+      diagnostic = await openDialogueDiagnosis(diagnosis, canvas, draw)
+    }
     const gl = document.createElement('canvas').getContext('webgl2')
     const rendererInfo = gl?.getExtension('WEBGL_debug_renderer_info')
+    const diagnosisResult = diagnostic && await diagnostic.assess(video, protocol, frames, conditions, engine.recognize)
     return {
       browser: navigator.userAgent,
       renderer: rendererInfo ? gl.getParameter(rendererInfo.UNMASKED_RENDERER_WEBGL) : null,
@@ -91,16 +97,17 @@ async function run(protocol) {
       frames: frames.length,
       framesWithHands: frames.filter(frame => frame.leftHand.length || frame.rightHand.length).length,
       conditions,
+      ...(diagnosisResult ? { diagnosis: diagnosisResult } : {}),
     }
   } finally {
     closeVideo(video)
-    await engine.close()
+    await Promise.all([engine.close(), diagnostic?.close()])
   }
 }
 
-window.runInstitutionalDialogue = protocol => {
+window.runInstitutionalDialogue = (protocol, diagnosis) => {
   window.dialogueResult = null
-  run(protocol).then(
+  run(protocol, diagnosis).then(
     result => { window.dialogueResult = result },
     error => { window.dialogueResult = { error: error.stack ?? String(error) } },
   )

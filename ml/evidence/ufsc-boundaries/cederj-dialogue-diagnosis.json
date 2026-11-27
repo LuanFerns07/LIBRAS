@@ -1,0 +1,1271 @@
+{
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "clipSha256": "ca51c2c5a8ca129a37e001191c011693535182e489893a37bca66e86b2f1f74c",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "canvas": [
+    640,
+    360
+  ],
+  "frames": 100,
+  "framesWithHands": 100,
+  "diagnosis": {
+    "windows": [
+      {
+        "id": "right_amarelo",
+        "startMs": 213000,
+        "endMs": 214000,
+        "expected": "amarelo",
+        "signer": "right",
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "low-confidence",
+            "label": null,
+            "confidence": 0.4718110833529635,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.4418651949687454
+              },
+              {
+                "label": "cinco",
+                "value": 0.004342931615452057
+              },
+              {
+                "label": "espelho",
+                "value": 0.07296169039388448
+              },
+              {
+                "label": "amarelo",
+                "value": 0.4718110833529635
+              },
+              {
+                "label": "aluno",
+                "value": 0.00901909966895471
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9749043964264457,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.012546649880239479
+              },
+              {
+                "label": "cinco",
+                "value": 0.004094831627073672
+              },
+              {
+                "label": "espelho",
+                "value": 0.0019809783180033016
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0064731437482378335
+              },
+              {
+                "label": "aluno",
+                "value": 0.9749043964264457
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.5253708947533535,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.5253708947533535
+              },
+              {
+                "label": "cinco",
+                "value": 0.004542386179373587
+              },
+              {
+                "label": "espelho",
+                "value": 0.10200816541483881
+              },
+              {
+                "label": "amarelo",
+                "value": 0.3614093914157439
+              },
+              {
+                "label": "aluno",
+                "value": 0.006669162236690239
+              }
+            ]
+          }
+        ],
+        "coordinateControl": {
+          "framing": "right",
+          "maxTensorDifference": 0,
+          "frames": 10,
+          "framesWithHands": 10,
+          "shouldersBySide": {
+            "left": 0,
+            "right": 10,
+            "unknown": 0
+          },
+          "preprocess": "ready",
+          "state": "inconclusive",
+          "reason": "low-confidence",
+          "label": null,
+          "confidence": 0.4718110833529635,
+          "probabilities": [
+            {
+              "label": null,
+              "value": 0.4418651949687454
+            },
+            {
+              "label": "cinco",
+              "value": 0.004342931615452057
+            },
+            {
+              "label": "espelho",
+              "value": 0.07296169039388448
+            },
+            {
+              "label": "amarelo",
+              "value": 0.4718110833529635
+            },
+            {
+              "label": "aluno",
+              "value": 0.00901909966895471
+            }
+          ]
+        }
+      },
+      {
+        "id": "left_amarelo",
+        "startMs": 217500,
+        "endMs": 218100,
+        "expected": "amarelo",
+        "signer": "left",
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 6,
+            "framesWithHands": 6,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 6,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9770429159477422,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.01031076389608199
+              },
+              {
+                "label": "cinco",
+                "value": 0.0023299048590843985
+              },
+              {
+                "label": "espelho",
+                "value": 0.0007032332410282603
+              },
+              {
+                "label": "amarelo",
+                "value": 0.009613182056063072
+              },
+              {
+                "label": "aluno",
+                "value": 0.9770429159477422
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 6,
+            "framesWithHands": 6,
+            "shouldersBySide": {
+              "left": 6,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "amarelo",
+            "confidence": 0.5652826864182877,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.42522193693479016
+              },
+              {
+                "label": "cinco",
+                "value": 0.0006965187301295894
+              },
+              {
+                "label": "espelho",
+                "value": 0.00274970613470379
+              },
+              {
+                "label": "amarelo",
+                "value": 0.5652826864182877
+              },
+              {
+                "label": "aluno",
+                "value": 0.00604915178208876
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 6,
+            "framesWithHands": 6,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 6,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.6513812843110987,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.07549317318895502
+              },
+              {
+                "label": "cinco",
+                "value": 0.04979517667253945
+              },
+              {
+                "label": "espelho",
+                "value": 0.021313885160445124
+              },
+              {
+                "label": "amarelo",
+                "value": 0.20201648066696165
+              },
+              {
+                "label": "aluno",
+                "value": 0.6513812843110987
+              }
+            ]
+          }
+        ],
+        "coordinateControl": {
+          "framing": "left",
+          "maxTensorDifference": 0,
+          "frames": 6,
+          "framesWithHands": 6,
+          "shouldersBySide": {
+            "left": 0,
+            "right": 6,
+            "unknown": 0
+          },
+          "preprocess": "ready",
+          "state": "accepted",
+          "reason": null,
+          "label": "aluno",
+          "confidence": 0.9770429159477422,
+          "probabilities": [
+            {
+              "label": null,
+              "value": 0.01031076389608199
+            },
+            {
+              "label": "cinco",
+              "value": 0.0023299048590843985
+            },
+            {
+              "label": "espelho",
+              "value": 0.0007032332410282603
+            },
+            {
+              "label": "amarelo",
+              "value": 0.009613182056063072
+            },
+            {
+              "label": "aluno",
+              "value": 0.9770429159477422
+            }
+          ]
+        }
+      },
+      {
+        "id": "right_before",
+        "startMs": 212000,
+        "endMs": 213000,
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "espelho",
+            "confidence": 0.6464578375271886,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.11388309431976176
+              },
+              {
+                "label": "cinco",
+                "value": 0.0015105828001830317
+              },
+              {
+                "label": "espelho",
+                "value": 0.6464578375271886
+              },
+              {
+                "label": "amarelo",
+                "value": 0.23775977826219472
+              },
+              {
+                "label": "aluno",
+                "value": 0.0003887070906719263
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9678156966735945,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.01743215086688076
+              },
+              {
+                "label": "cinco",
+                "value": 0.004091706337340467
+              },
+              {
+                "label": "espelho",
+                "value": 0.0020802210409975783
+              },
+              {
+                "label": "amarelo",
+                "value": 0.008580225081186613
+              },
+              {
+                "label": "aluno",
+                "value": 0.9678156966735945
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "low-confidence",
+            "label": null,
+            "confidence": 0.4131208015349801,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.23388959276864144
+              },
+              {
+                "label": "cinco",
+                "value": 0.0016290965548921336
+              },
+              {
+                "label": "espelho",
+                "value": 0.3503903521214742
+              },
+              {
+                "label": "amarelo",
+                "value": 0.4131208015349801
+              },
+              {
+                "label": "aluno",
+                "value": 0.0009701570200121149
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "right_after",
+        "startMs": 214000,
+        "endMs": 215000,
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "low-confidence",
+            "label": null,
+            "confidence": 0.4449550244475828,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.4449550244475828
+              },
+              {
+                "label": "cinco",
+                "value": 0.021194725289653802
+              },
+              {
+                "label": "espelho",
+                "value": 0.1397958915918479
+              },
+              {
+                "label": "amarelo",
+                "value": 0.2954746178899224
+              },
+              {
+                "label": "aluno",
+                "value": 0.09857974078099328
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9753440642455137,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.011662408716096482
+              },
+              {
+                "label": "cinco",
+                "value": 0.0047853049770803895
+              },
+              {
+                "label": "espelho",
+                "value": 0.0020029822742840724
+              },
+              {
+                "label": "amarelo",
+                "value": 0.006205239787025316
+              },
+              {
+                "label": "aluno",
+                "value": 0.9753440642455137
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "low-confidence",
+            "label": null,
+            "confidence": 0.37693805962917853,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.37693805962917853
+              },
+              {
+                "label": "cinco",
+                "value": 0.06892531967190008
+              },
+              {
+                "label": "espelho",
+                "value": 0.33545731729628
+              },
+              {
+                "label": "amarelo",
+                "value": 0.19716146214973143
+              },
+              {
+                "label": "aluno",
+                "value": 0.021517841252910005
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "left_before",
+        "startMs": 216500,
+        "endMs": 217500,
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.9049481622201198,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.026221395431328877
+              },
+              {
+                "label": "cinco",
+                "value": 0.02695460220129663
+              },
+              {
+                "label": "espelho",
+                "value": 0.012058816418411002
+              },
+              {
+                "label": "amarelo",
+                "value": 0.029817023728843668
+              },
+              {
+                "label": "aluno",
+                "value": 0.9049481622201198
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "out-of-catalog",
+            "label": null,
+            "confidence": 0.9963142287580312,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.9963142287580312
+              },
+              {
+                "label": "cinco",
+                "value": 0.000013729511484522893
+              },
+              {
+                "label": "espelho",
+                "value": 0.0002690987098441528
+              },
+              {
+                "label": "amarelo",
+                "value": 0.0033607808839242544
+              },
+              {
+                "label": "aluno",
+                "value": 0.00004216213671581285
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "inconclusive",
+            "reason": "low-confidence",
+            "label": null,
+            "confidence": 0.44119179205104136,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.06320962588866419
+              },
+              {
+                "label": "cinco",
+                "value": 0.3227935461660031
+              },
+              {
+                "label": "espelho",
+                "value": 0.14600895688998766
+              },
+              {
+                "label": "amarelo",
+                "value": 0.026796079004303634
+              },
+              {
+                "label": "aluno",
+                "value": 0.44119179205104136
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "left_after",
+        "startMs": 218100,
+        "endMs": 219100,
+        "framings": [
+          {
+            "framing": "full",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.7565526750496511,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.05998615158932853
+              },
+              {
+                "label": "cinco",
+                "value": 0.060443945832314896
+              },
+              {
+                "label": "espelho",
+                "value": 0.04121139741786889
+              },
+              {
+                "label": "amarelo",
+                "value": 0.08180583011083659
+              },
+              {
+                "label": "aluno",
+                "value": 0.7565526750496511
+              }
+            ]
+          },
+          {
+            "framing": "left",
+            "frames": 10,
+            "framesWithHands": 9,
+            "shouldersBySide": {
+              "left": 10,
+              "right": 0,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.6809128060088072,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.2186317556861035
+              },
+              {
+                "label": "cinco",
+                "value": 0.0021710589370654777
+              },
+              {
+                "label": "espelho",
+                "value": 0.003710020601115891
+              },
+              {
+                "label": "amarelo",
+                "value": 0.09457435876690802
+              },
+              {
+                "label": "aluno",
+                "value": 0.6809128060088072
+              }
+            ]
+          },
+          {
+            "framing": "right",
+            "frames": 10,
+            "framesWithHands": 10,
+            "shouldersBySide": {
+              "left": 0,
+              "right": 10,
+              "unknown": 0
+            },
+            "preprocess": "ready",
+            "state": "accepted",
+            "reason": null,
+            "label": "aluno",
+            "confidence": 0.6969944653981475,
+            "probabilities": [
+              {
+                "label": null,
+                "value": 0.06236405650622332
+              },
+              {
+                "label": "cinco",
+                "value": 0.09243373806279342
+              },
+              {
+                "label": "espelho",
+                "value": 0.024889570307017016
+              },
+              {
+                "label": "amarelo",
+                "value": 0.12331816972581888
+              },
+              {
+                "label": "aluno",
+                "value": 0.6969944653981475
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "overlaps": [
+      {
+        "id": "right_amarelo",
+        "proposals": [
+          {
+            "startMs": 212900,
+            "endMs": 213500,
+            "gloss": null,
+            "conditions": [
+              "published_original"
+            ],
+            "score": {
+              "frames": 6,
+              "framesWithHands": 6,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 6,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "inconclusive",
+              "reason": "low-confidence",
+              "label": null,
+              "confidence": 0.5015276240378738,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.24402991978346547
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.00568401864690402
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.24687744748748897
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.5015276240378738
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.0018809900442677673
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 213500,
+            "endMs": 214000,
+            "gloss": null,
+            "conditions": [
+              "published_original",
+              "holistic_frozen"
+            ],
+            "score": {
+              "frames": 5,
+              "framesWithHands": 5,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 5,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "inconclusive",
+              "reason": "out-of-catalog",
+              "label": null,
+              "confidence": 0.6926525587240668,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.6926525587240668
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.004579674164828212
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.03836088840190511
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.22847056900600346
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.03593630970319638
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 213000,
+            "endMs": 213500,
+            "gloss": null,
+            "conditions": [
+              "holistic_frozen"
+            ],
+            "score": {
+              "frames": 5,
+              "framesWithHands": 5,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 5,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "inconclusive",
+              "reason": "low-confidence",
+              "label": null,
+              "confidence": 0.4685747574758941,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.3505483705807613
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.0062855619443122025
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.1699032761587195
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.4685747574758941
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.0046880338403129515
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 213100,
+            "endMs": 213700,
+            "gloss": null,
+            "conditions": [
+              "holistic_weak_cut",
+              "holistic_weak_cut_with_floor"
+            ],
+            "score": {
+              "frames": 6,
+              "framesWithHands": 6,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 6,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "inconclusive",
+              "reason": "out-of-catalog",
+              "label": null,
+              "confidence": 0.5318663061881523,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.5318663061881523
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.003704685530335601
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.07752048616576747
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.3747561929078689
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.012152329207875888
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 213900,
+            "endMs": 214500,
+            "gloss": null,
+            "conditions": [
+              "holistic_weak_cut",
+              "holistic_weak_cut_with_floor"
+            ],
+            "score": {
+              "frames": 6,
+              "framesWithHands": 6,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 6,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "inconclusive",
+              "reason": "out-of-catalog",
+              "label": null,
+              "confidence": 0.5278468122497799,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.5278468122497799
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.014877180351176075
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.15449336225075735
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.2560278103564056
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.04675483479188119
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "left_amarelo",
+        "proposals": [
+          {
+            "startMs": 217100,
+            "endMs": 217600,
+            "gloss": "aluno",
+            "conditions": [
+              "published_original"
+            ],
+            "score": {
+              "frames": 5,
+              "framesWithHands": 5,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 5,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "accepted",
+              "reason": null,
+              "label": "aluno",
+              "confidence": 0.9015806213380113,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.048026588541664354
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.003011454220569485
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.0022612933831461313
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.045120042516608734
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.9015806213380113
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 218000,
+            "endMs": 218600,
+            "gloss": "aluno",
+            "conditions": [
+              "published_original"
+            ],
+            "score": {
+              "frames": 6,
+              "framesWithHands": 6,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 6,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "accepted",
+              "reason": null,
+              "label": "aluno",
+              "confidence": 0.6299294159876226,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.0847519226753433
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.10043639693605126
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.07422940099245173
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.11065286340853096
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.6299294159876226
+                }
+              ]
+            }
+          },
+          {
+            "startMs": 218000,
+            "endMs": 218500,
+            "gloss": "aluno",
+            "conditions": [
+              "holistic_frozen",
+              "holistic_weak_cut",
+              "holistic_weak_cut_with_floor"
+            ],
+            "score": {
+              "frames": 5,
+              "framesWithHands": 5,
+              "shouldersBySide": {
+                "left": 0,
+                "right": 5,
+                "unknown": 0
+              },
+              "preprocess": "ready",
+              "state": "accepted",
+              "reason": null,
+              "label": "aluno",
+              "confidence": 0.6356016362657577,
+              "probabilities": [
+                {
+                  "label": null,
+                  "value": 0.09299254490024923
+                },
+                {
+                  "label": "cinco",
+                  "value": 0.08485631722979581
+                },
+                {
+                  "label": "espelho",
+                  "value": 0.06736712525408996
+                },
+                {
+                  "label": "amarelo",
+                  "value": 0.11918237635010732
+                },
+                {
+                  "label": "aluno",
+                  "value": 0.6356016362657577
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "controls": [
+      {
+        "id": "cederj_demonstration",
+        "expected": "amarelo",
+        "score": {
+          "frames": 18,
+          "framesWithHands": 18,
+          "shouldersBySide": {
+            "left": 17,
+            "right": 1,
+            "unknown": 0
+          },
+          "preprocess": "ready",
+          "state": "inconclusive",
+          "reason": "out-of-catalog",
+          "label": null,
+          "confidence": 0.5902476377231362,
+          "probabilities": [
+            {
+              "label": null,
+              "value": 0.5902476377231362
+            },
+            {
+              "label": "cinco",
+              "value": 0.00649342082156362
+            },
+            {
+              "label": "espelho",
+              "value": 0.01777679366145709
+            },
+            {
+              "label": "amarelo",
+              "value": 0.37282167191329185
+            },
+            {
+              "label": "aluno",
+              "value": 0.012660475880551294
+            }
+          ]
+        }
+      },
+      {
+        "id": "minds_training",
+        "expected": "amarelo",
+        "score": {
+          "frames": 37,
+          "framesWithHands": 31,
+          "shouldersBySide": {
+            "left": 0,
+            "right": 37,
+            "unknown": 0
+          },
+          "preprocess": "ready",
+          "state": "accepted",
+          "reason": null,
+          "label": "amarelo",
+          "confidence": 0.8765446121374184,
+          "probabilities": [
+            {
+              "label": null,
+              "value": 0.08584858772579117
+            },
+            {
+              "label": "cinco",
+              "value": 0.009831420324487168
+            },
+            {
+              "label": "espelho",
+              "value": 0.011101201958405738
+            },
+            {
+              "label": "amarelo",
+              "value": 0.8765446121374184
+            },
+            {
+              "label": "aluno",
+              "value": 0.01667417785389732
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "diagnosisProvenance": {
+    "protocolSha256": "8b7fbeb3bec16a86b27af7a931cadecf3769ec5165d088593e288fb94a16bb56",
+    "controls": [
+      {
+        "id": "cederj_demonstration",
+        "clipSha256": "97ad788c183cbb26888b2557150554ff502d4ec16a018676d1c6f4e113c94731"
+      },
+      {
+        "id": "minds_training",
+        "clipSha256": "37a2044f27df633fc37e5b12adf236b590428b6459f3f36f280e088a5e0d74b3"
+      }
+    ],
+    "automaticMatchesBaseline": true
+  }
+}

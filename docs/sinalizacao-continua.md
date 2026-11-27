@@ -93,6 +93,26 @@ node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
 
 Execute na raiz do repositório com FFmpeg, Chromium, dependências do projeto e os ativos locais previstos no protocolo. O Vite abre uma porta de loopback temporária. Para reproduzir o Chromium com renderização por software, indique em `LIBRASIA_CHROMIUM` um executável que invoque o navegador com `--use-gl=angle --use-angle=swiftshader --disable-accelerated-video-decode`.
 
+#### Diagnóstico do classificador de Amarelo
+
+O diagnóstico entrega ao classificador combinado `a8e991d9` os intervalos de referência já anotados, quatro janelas adjacentes e as propostas automáticas que sobrepõem as referências. O limiar de 0,525 e a extração Holistic ficaram fixos. Para cada quadro do diálogo, também extraímos pontos nas duas metades da imagem, conservando a escala em pixels e usando um rastreador separado por metade. O lado rastreado usa o centro dos ombros no quadro inteiro. Um controle geométrico reexpressa os pontos da imagem inteira nas coordenadas da metade correspondente e compara os tensores que alimentam a inferência. [Protocolo do diagnóstico](../ml/evidence/ufsc-boundaries/cederj-diagnosis-protocol.json)
+
+| Intervalo anotado | Quadro inteiro | Metade da pessoa que sinaliza |
+| --- | --- | --- |
+| Amarelo à direita | 10/10 quadros com a pessoa da direita. Inconclusivo, com escore de Amarelo de 0,472. | 10/10 quadros com a pessoa da direita. Classe de rejeição com 0,5254 e Amarelo com 0,361. |
+| Amarelo à esquerda | 6/6 quadros com a pessoa da direita. Aluno com 0,977 e Amarelo com 0,010. | 6/6 quadros com a pessoa da esquerda. Amarelo com 0,565. |
+
+Os dois controles geométricos tiveram diferença máxima zero nos tensores. À esquerda, a combinação do enquadramento e da escolha da pessoa pelo Holistic mudou a decisão. À direita, o mesmo classificador rejeitou a janela manual mesmo com a pessoa que sinaliza rastreada e isolada no quadro. A demonstração frontal da mesma aula também ficou inconclusiva, com Amarelo em 0,373. A tomada de treino MINDS S01-1, usada como controle de funcionamento, deu Amarelo em 0,877. Os recortes variam em pessoa, realização e posição, de modo que o ensaio deixa em aberto a contribuição individual desses fatores. [Demonstração institucional](https://canal.cecierj.edu.br/recurso/13766) · [Tomada MINDS](sinais-com-movimento-browser.md)
+
+O replay do quadro inteiro repetiu exatamente as propostas congeladas. À direita, as cinco janelas sobrepostas distintas tinham 500 a 600 ms, passaram pelo pré-processamento e ficaram inconclusivas. O maior escore de Amarelo foi 0,502. À esquerda, o melhor IoU com a referência foi 0,10 e as três propostas sobrepostas distintas receberam Aluno. Nos quatro intervalos adjacentes, o quadro inteiro acompanhou a pessoa da direita e retornou Espelho, uma tentativa inconclusiva e duas de Aluno, na ordem do vídeo. Essas janelas servem como controles de contexto e carecem de anotação lexical para medir acertos. [Decisões, escores e rastreamento por janela](../ml/evidence/ufsc-boundaries/cederj-dialogue-diagnosis.json)
+
+Na execução registrada, concluímos a extração e a segmentação do quadro inteiro antes de reabrir o mesmo vídeo para os recortes laterais. Uma tentativa intercalada produziu intervalos automáticos diferentes. O comando abaixo conserva a ordem usada no resultado registrado.
+
+```bash
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
+  data/continuous-natural-eval/diagnosis.json --diagnose
+```
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

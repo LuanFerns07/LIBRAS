@@ -9,14 +9,17 @@ import { promisify } from 'node:util'
 import { createServer } from 'vite'
 import { withChromium } from '../../../tests/e2e/chromium.mjs'
 
-const [dataRoot, reportFile] = process.argv.slice(2)
-if (!dataRoot || !reportFile || process.argv.length !== 4) {
-  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json')
+const [dataRoot, reportFile, option] = process.argv.slice(2)
+if (!dataRoot || !reportFile || (option !== undefined && option !== '--diagnose') || process.argv.length > 5) {
+  throw new Error('Uso: node ml/continuous_experiment/boundaries/replay-dialogue.mjs RAIZ_DOS_DADOS RESULTADO.json [--diagnose]')
 }
 
 const project = fileURLToPath(new URL('../../../', import.meta.url))
 const protocolPath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-protocol.json', import.meta.url)
+const diagnosisPath = new URL('../../evidence/ufsc-boundaries/cederj-diagnosis-protocol.json', import.meta.url)
+const baselinePath = new URL('../../evidence/ufsc-boundaries/cederj-dialogue-browser.json', import.meta.url)
 const protocol = JSON.parse(await readFile(protocolPath, 'utf8'))
+const diagnosis = option && JSON.parse(await readFile(diagnosisPath, 'utf8'))
 const exec = promisify(execFile)
 
 async function sha256(file) {
@@ -29,6 +32,16 @@ async function verified(file, expected) {
   const actual = await sha256(file)
   if (actual !== expected) throw new Error('SHA-256 divergente: ' + file)
   return file
+}
+
+async function renderVideo(video, { startMs, endMs }, destination) {
+  await exec('ffmpeg', [
+    '-hide_banner', '-loglevel', 'error', '-threads', '1',
+    '-ss', (startMs / 1000).toFixed(3), '-i', video,
+    '-t', ((endMs - startMs) / 1000).toFixed(3),
+    '-map', '0:v:0', '-an', '-c:v', 'libx264', '-crf', '18', '-threads', '1',
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', destination,
+  ])
 }
 
 const staging = await mkdtemp(resolve(tmpdir(), 'librasia-dialogue-'))
@@ -62,13 +75,20 @@ try {
     ], condition, 'replay/' + condition.id)
   }
   const video = await verified(resolve(dataRoot, source.mediaPath), source.mediaSha256)
-  await exec('ffmpeg', [
-    '-hide_banner', '-loglevel', 'error', '-threads', '1',
-    '-ss', (protocol.clip.startMs / 1000).toFixed(3), '-i', video,
-    '-t', ((protocol.clip.endMs - protocol.clip.startMs) / 1000).toFixed(3),
-    '-map', '0:v:0', '-an', '-c:v', 'libx264', '-crf', '18', '-threads', '1',
-    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', clip,
-  ])
+  await renderVideo(video, protocol.clip, clip)
+  let diagnosisProvenance
+  if (diagnosis) {
+    await verified(protocolPath, diagnosis.protocolSha256)
+    await verified(baselinePath, diagnosis.baselineReportSha256)
+    const controls = []
+    for (const control of diagnosis.controls) {
+      const input = control.mediaPath ? await verified(resolve(dataRoot, control.mediaPath), control.mediaSha256) : video
+      const output = resolve(staging, 'replay', control.id + '.mp4')
+      await renderVideo(input, control, output)
+      controls.push({ id: control.id, clipSha256: await sha256(output) })
+    }
+    diagnosisProvenance = { protocolSha256: await sha256(diagnosisPath), controls }
+  }
 
   const server = await createServer({
     root: project,
@@ -95,8 +115,8 @@ try {
     const result = await withChromium(async ({ navigate, evaluate, waitUntil }) => {
       await navigate(url)
       await waitUntil('typeof window.runInstitutionalDialogue === "function"', 30000)
-      await evaluate('window.runInstitutionalDialogue(' + JSON.stringify(protocol) + ')')
-      await waitUntil('window.dialogueResult !== null', 180000)
+      await evaluate('window.runInstitutionalDialogue(...' + JSON.stringify([protocol, diagnosis]) + ')')
+      await waitUntil('window.dialogueResult !== null', diagnosis ? 300000 : 180000)
       return evaluate('window.dialogueResult')
     }, { fakeCamera: false })
     if (result.error) throw new Error(result.error)
@@ -106,8 +126,14 @@ try {
       sha256(protocolPath),
       sha256(clip),
     ])
+    if (diagnosisProvenance) {
+      const baseline = JSON.parse(await readFile(baselinePath, 'utf8'))
+      diagnosisProvenance.automaticMatchesBaseline = baseline.clipSha256 === clipSha256 &&
+        JSON.stringify(baseline.conditions) === JSON.stringify(result.conditions)
+    }
     await writeFile(reportFile, JSON.stringify({
       protocolSha256, clipSha256, chromium: chromium.trim(), ffmpeg: ffmpeg.split('\n')[0], ...result,
+      ...(diagnosisProvenance ? { diagnosisProvenance } : {}),
     }, null, 2) + '\n')
   } finally {
     await server.close()
