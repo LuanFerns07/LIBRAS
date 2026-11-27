@@ -1,0 +1,588 @@
+{
+  "protocolSha256": "7acee6fc1b96f44a6bda445bc1b0f28495cc81087f6e5b563d5d5275106fcc43",
+  "derivedManifestSha256": "504392a092e5a79a0fc8f1561240f47482231acfd8a03724c65a9da8459efcf8",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "pointsSha256": "66e10ea2b7d0a221f2b45ca54c4074ae3d9701dc4b9a02f4c317b9787127a47c",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "onnxruntime": "1.23.2",
+  "build": {
+    "commit": "bfe194567ec9876c934b1e8b6089b3714b0cc9d0",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "bbe7a7d6d5211db99aa3bb59daffbf6faaae3e8a67eae9b490fb45bfd30bd1b2",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "results": [
+    {
+      "window": {
+        "id": "o-primeira",
+        "label": "O",
+        "startMs": 65125,
+        "endMs": 66125,
+        "anchorMs": 65500
+      },
+      "variant": "inteiro",
+      "clipSha256": "253873612b44d8dfea1911b205f46eb5413ffdc750167899a55dfdf2a6f89912",
+      "replay": {
+        "source": "o-primeira-inteiro",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 250
+          }
+        ],
+        "workerFrames": 91,
+        "framesWithHand": 24,
+        "lastHandAfterVideoMs": 972
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.1601,
+        "acceptedByAgreement": {},
+        "acceptedBySupplement": {
+          "E": 16
+        },
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-primeira",
+        "label": "O",
+        "startMs": 65125,
+        "endMs": 66125,
+        "anchorMs": 65500
+      },
+      "variant": "sem-repouso",
+      "clipSha256": "07616e32d2676e4922f6bc16fa635a057da6a23bb5ea5ba298c827f61086da56",
+      "replay": {
+        "source": "o-primeira-sem-repouso",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 238
+          }
+        ],
+        "workerFrames": 87,
+        "framesWithHand": 21,
+        "lastHandAfterVideoMs": 967
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.16,
+        "acceptedByAgreement": {},
+        "acceptedBySupplement": {
+          "E": 16
+        },
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-primeira",
+        "label": "O",
+        "startMs": 65125,
+        "endMs": 66125,
+        "anchorMs": 65500
+      },
+      "variant": "ampliado",
+      "clipSha256": "2e9aa8cb0b933a0ec249c2dd9c857c08350bd25dd6d0c627a8b122f52cd530c5",
+      "replay": {
+        "source": "o-primeira-ampliado",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 271
+          }
+        ],
+        "workerFrames": 86,
+        "framesWithHand": 20,
+        "lastHandAfterVideoMs": 982
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2152,
+        "acceptedByAgreement": {},
+        "acceptedBySupplement": {
+          "E": 16
+        },
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-primeira",
+        "label": "O",
+        "startMs": 65125,
+        "endMs": 66125,
+        "anchorMs": 65500
+      },
+      "variant": "ampliado-sem-repouso",
+      "clipSha256": "8bb51e79a1eb53c8eece3f786e471b030bb28da2c6f2c1e3ae1172d2e764c6a1",
+      "replay": {
+        "source": "o-primeira-ampliado-sem-repouso",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 223
+          }
+        ],
+        "workerFrames": 89,
+        "framesWithHand": 25,
+        "lastHandAfterVideoMs": 987
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.215,
+        "acceptedByAgreement": {},
+        "acceptedBySupplement": {
+          "E": 16
+        },
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-primeira",
+        "label": "O",
+        "startMs": 65125,
+        "endMs": 66125,
+        "anchorMs": 65500
+      },
+      "variant": "mao-ativa-2x",
+      "clipSha256": "a9f09017d99b2f6721aae6c2f3f31efc1a9807e116f107b44e7dabf188388339",
+      "replay": {
+        "source": "o-primeira-mao-ativa-2x",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 223
+          }
+        ],
+        "workerFrames": 93,
+        "framesWithHand": 25,
+        "lastHandAfterVideoMs": 978
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.324,
+        "acceptedByAgreement": {},
+        "acceptedBySupplement": {
+          "E": 16
+        },
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "e-segunda",
+        "label": "E",
+        "startMs": 131950,
+        "endMs": 132950,
+        "anchorMs": 132550
+      },
+      "variant": "inteiro",
+      "clipSha256": "1f7ab3c7801ee3a309bbce7f3820b208f984437c4a5f01178f3297914b98272b",
+      "replay": {
+        "source": "e-segunda-inteiro",
+        "label": "E",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 224
+          }
+        ],
+        "workerFrames": 93,
+        "framesWithHand": 26,
+        "lastHandAfterVideoMs": 985
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2115,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "e-segunda",
+        "label": "E",
+        "startMs": 131950,
+        "endMs": 132950,
+        "anchorMs": 132550
+      },
+      "variant": "sem-repouso",
+      "clipSha256": "a35f373dc0cb0e3184f808ab2f7f1ac79051123320d38d63f1fee06a6ebf6ef8",
+      "replay": {
+        "source": "e-segunda-sem-repouso",
+        "label": "E",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 272
+          }
+        ],
+        "workerFrames": 92,
+        "framesWithHand": 25,
+        "lastHandAfterVideoMs": 1003
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2115,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "e-segunda",
+        "label": "E",
+        "startMs": 131950,
+        "endMs": 132950,
+        "anchorMs": 132550
+      },
+      "variant": "ampliado",
+      "clipSha256": "ef8afad922ca3ba6e5cedf8493c194a907edb3150b8e389857afbd147b853dad",
+      "replay": {
+        "source": "e-segunda-ampliado",
+        "label": "E",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 232
+          }
+        ],
+        "workerFrames": 93,
+        "framesWithHand": 25,
+        "lastHandAfterVideoMs": 974
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2823,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "e-segunda",
+        "label": "E",
+        "startMs": 131950,
+        "endMs": 132950,
+        "anchorMs": 132550
+      },
+      "variant": "ampliado-sem-repouso",
+      "clipSha256": "ff8a55daa09b8727f4b3f411a25f06253e5196f718b45da0ed93b200c67f6617",
+      "replay": {
+        "source": "e-segunda-ampliado-sem-repouso",
+        "label": "E",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 235
+          }
+        ],
+        "workerFrames": 92,
+        "framesWithHand": 24,
+        "lastHandAfterVideoMs": 972
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2823,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "e-segunda",
+        "label": "E",
+        "startMs": 131950,
+        "endMs": 132950,
+        "anchorMs": 132550
+      },
+      "variant": "mao-ativa-2x",
+      "clipSha256": "fc5a2e98127ba72e3a322a973316fde7d67633043b6824c6519a6c3180013bca",
+      "replay": {
+        "source": "e-segunda-mao-ativa-2x",
+        "label": "E",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 222
+          }
+        ],
+        "workerFrames": 93,
+        "framesWithHand": 25,
+        "lastHandAfterVideoMs": 982
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.4237,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-segunda",
+        "label": "O",
+        "startMs": 147000,
+        "endMs": 148000,
+        "anchorMs": 147640
+      },
+      "variant": "inteiro",
+      "clipSha256": "3e2aa170b71fcd5725eb0ccb0953822b8d736931a643bbe211eb4c2ccdba5e06",
+      "replay": {
+        "source": "o-segunda-inteiro",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 224
+          }
+        ],
+        "workerFrames": 95,
+        "framesWithHand": 26,
+        "lastHandAfterVideoMs": 976
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.1875,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-segunda",
+        "label": "O",
+        "startMs": 147000,
+        "endMs": 148000,
+        "anchorMs": 147640
+      },
+      "variant": "sem-repouso",
+      "clipSha256": "26806cec36640bbb2c025da454700afaa59910de7df468bd16149f5aad69b8e3",
+      "replay": {
+        "source": "o-segunda-sem-repouso",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 216
+          }
+        ],
+        "workerFrames": 94,
+        "framesWithHand": 26,
+        "lastHandAfterVideoMs": 1004
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.1874,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-segunda",
+        "label": "O",
+        "startMs": 147000,
+        "endMs": 148000,
+        "anchorMs": 147640
+      },
+      "variant": "ampliado",
+      "clipSha256": "a87190ef0d9fc3d1fcb4a9adfeaee7aab9d727c34f6fdc317da5112818634f20",
+      "replay": {
+        "source": "o-segunda-ampliado",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 239
+          }
+        ],
+        "workerFrames": 95,
+        "framesWithHand": 26,
+        "lastHandAfterVideoMs": 999
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 0,
+        "twoHands": 16,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2504,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-segunda",
+        "label": "O",
+        "startMs": 147000,
+        "endMs": 148000,
+        "anchorMs": 147640
+      },
+      "variant": "ampliado-sem-repouso",
+      "clipSha256": "d09301b38b4b30944bd5fb87b886acda3c329ac50c3261d7d84331508c3f64a3",
+      "replay": {
+        "source": "o-segunda-ampliado-sem-repouso",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 238
+          }
+        ],
+        "workerFrames": 79,
+        "framesWithHand": 16,
+        "lastHandAfterVideoMs": 1013
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.2504,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    },
+    {
+      "window": {
+        "id": "o-segunda",
+        "label": "O",
+        "startMs": 147000,
+        "endMs": 148000,
+        "anchorMs": 147640
+      },
+      "variant": "mao-ativa-2x",
+      "clipSha256": "cdd023cef70dab2f1ebabc2e6b23da3c5f42d0ec27d90b0a0703a25699ce76d2",
+      "replay": {
+        "source": "o-segunda-mao-ativa-2x",
+        "label": "O",
+        "startMs": 0,
+        "endMs": 1000,
+        "readings": [
+          {
+            "letter": "E",
+            "afterVideoMs": 263
+          }
+        ],
+        "workerFrames": 79,
+        "framesWithHand": 18,
+        "lastHandAfterVideoMs": 1012
+      },
+      "classificationByFrame": {
+        "sampledFrames": 16,
+        "oneHand": 16,
+        "twoHands": 0,
+        "selectableHand": 16,
+        "medianHandHeightFraction": 0.3762,
+        "acceptedByAgreement": {
+          "E": 16
+        },
+        "acceptedBySupplement": {},
+        "rejectedByBoth": 0
+      }
+    }
+  ]
+}
