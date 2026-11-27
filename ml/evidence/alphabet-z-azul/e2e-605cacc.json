@@ -1,0 +1,371 @@
+{
+  "build": {
+    "commit": "605cacc74e42acf1190013f276924160737f129f",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-z-azul/replay-windows.json"
+  ],
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "X",
+      "startMs": 41350,
+      "endMs": 42650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 429
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 35,
+      "lastHandAfterVideoMs": 1369
+    },
+    {
+      "source": "1527000916",
+      "label": "Z",
+      "startMs": 43820,
+      "endMs": 44790,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 638
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 968
+    },
+    {
+      "source": "1536677587",
+      "label": "X",
+      "startMs": 40380,
+      "endMs": 41260,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 581
+        }
+      ],
+      "workerFrames": 87,
+      "framesWithHand": 21,
+      "lastHandAfterVideoMs": 906
+    },
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "endMs": 43950,
+      "readings": [],
+      "workerFrames": 101,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1445
+    },
+    {
+      "source": "1535641159",
+      "label": "Ç",
+      "startMs": 7770,
+      "endMs": 8950,
+      "readings": [
+        {
+          "letter": "Ç",
+          "afterVideoMs": 508
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 31,
+      "lastHandAfterVideoMs": 1183
+    },
+    {
+      "source": "1535641159",
+      "label": "H",
+      "startMs": 14850,
+      "endMs": 16280,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 430
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1444
+    },
+    {
+      "source": "1535641159",
+      "label": "J",
+      "startMs": 17850,
+      "endMs": 19400,
+      "readings": [
+        {
+          "letter": "J",
+          "afterVideoMs": 492
+        }
+      ],
+      "workerFrames": 108,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1543
+    },
+    {
+      "source": "1535641159",
+      "label": "K",
+      "startMs": 19820,
+      "endMs": 21250,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 466
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1458
+    },
+    {
+      "source": "1535641159",
+      "label": "X",
+      "startMs": 40220,
+      "endMs": 41680,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 431
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1502
+    },
+    {
+      "source": "1535641159",
+      "label": "Y",
+      "startMs": 41900,
+      "endMs": 43500,
+      "readings": [
+        {
+          "letter": "Y",
+          "afterVideoMs": 568
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 41,
+      "lastHandAfterVideoMs": 1594
+    },
+    {
+      "source": "1535641159",
+      "label": "Z",
+      "startMs": 43650,
+      "endMs": 45550,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 349
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1105
+        }
+      ],
+      "workerFrames": 116,
+      "framesWithHand": 49,
+      "lastHandAfterVideoMs": 1902
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "X",
+      "startMs": 117320,
+      "endMs": 119330,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 508
+        }
+      ],
+      "workerFrames": 119,
+      "framesWithHand": 50,
+      "lastHandAfterVideoMs": 2038
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 217
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1132
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 1671
+        }
+      ],
+      "workerFrames": 109,
+      "framesWithHand": 41,
+      "lastHandAfterVideoMs": 1711
+    },
+    {
+      "source": "unesp-222981",
+      "label": "X",
+      "startMs": 108030,
+      "endMs": 109570,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 470
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1551
+    },
+    {
+      "source": "unesp-222981",
+      "label": "Z",
+      "startMs": 113560,
+      "endMs": 115100,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 835
+        }
+      ],
+      "workerFrames": 94,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1585
+    },
+    {
+      "source": "1535641159",
+      "label": "C",
+      "startMs": 6610,
+      "endMs": 7580,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 275
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1019
+    },
+    {
+      "source": "clad-movimento-02-usb",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 159,
+      "framesWithHand": 84,
+      "lastHandAfterVideoMs": 3999
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 606
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 1532
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2199
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3971
+        }
+      ],
+      "workerFrames": 161,
+      "framesWithHand": 87,
+      "lastHandAfterVideoMs": 3971
+    },
+    {
+      "source": "cecierj-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 641
+        }
+      ],
+      "workerFrames": 112,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1629
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 259
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 815
+        }
+      ],
+      "workerFrames": 100,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1268
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 215
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 698
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1274
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 225
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 801
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1271
+    }
+  ]
+}

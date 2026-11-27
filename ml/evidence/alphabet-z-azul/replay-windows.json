@@ -1,0 +1,200 @@
+{
+  "sources": [
+    {
+      "id": "1527000916",
+      "file": "data/alphabet/ufsm/1527000916.mp4",
+      "sha256": "30954083d7bcfd107d93837d2d977d65a85e1af10ceed099721e580569687c50",
+      "windows": [
+        {
+          "label": "X",
+          "startMs": 41350,
+          "endMs": 42650,
+          "anchorMs": 42150
+        },
+        {
+          "label": "Z",
+          "startMs": 43820,
+          "endMs": 44790,
+          "anchorMs": 44350
+        }
+      ]
+    },
+    {
+      "id": "1536677587",
+      "file": "data/alphabet/ufsm/1536677587.mp4",
+      "sha256": "6985c1e971d1cb7667d4e009be0d6c6483eef114676f405cb7c036f526cdcf6d",
+      "windows": [
+        {
+          "label": "X",
+          "startMs": 40380,
+          "endMs": 41260,
+          "anchorMs": 41000
+        },
+        {
+          "label": "Z",
+          "startMs": 42500,
+          "endMs": 43950,
+          "anchorMs": 43050
+        }
+      ]
+    },
+    {
+      "id": "1535641159",
+      "file": "data/alphabet/ufsm/1535641159.mp4",
+      "sha256": "1d1be8a4fe346d004147ab258d88499c4620f95dd21312ec809748efa20f4af7",
+      "windows": [
+        {
+          "label": "Ç",
+          "startMs": 7770,
+          "endMs": 8950,
+          "anchorMs": 7900
+        },
+        {
+          "label": "H",
+          "startMs": 14850,
+          "endMs": 16280,
+          "anchorMs": 15200
+        },
+        {
+          "label": "J",
+          "startMs": 17850,
+          "endMs": 19400,
+          "anchorMs": 18300
+        },
+        {
+          "label": "K",
+          "startMs": 19820,
+          "endMs": 21250,
+          "anchorMs": 20300
+        },
+        {
+          "label": "X",
+          "startMs": 40220,
+          "endMs": 41680,
+          "anchorMs": 40850
+        },
+        {
+          "label": "Y",
+          "startMs": 41900,
+          "endMs": 43500,
+          "anchorMs": 42800
+        },
+        {
+          "label": "Z",
+          "startMs": 43650,
+          "endMs": 45550,
+          "anchorMs": 44450
+        }
+      ]
+    },
+    {
+      "id": "cecierj-13757",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "windows": [
+        {
+          "label": "X",
+          "startMs": 117320,
+          "endMs": 119330,
+          "anchorMs": 118400
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500
+        }
+      ]
+    },
+    {
+      "id": "unesp-222981",
+      "file": "data/alphabet/institutional/unesp-222981.flv",
+      "sha256": "110d7d9c829d8a0bfa78a92a1c892e10e058e7385a796cc5cf52def8381acfbc",
+      "windows": [
+        {
+          "label": "X",
+          "startMs": 108030,
+          "endMs": 109570,
+          "anchorMs": 108600
+        },
+        {
+          "label": "Z",
+          "startMs": 113560,
+          "endMs": 115100,
+          "anchorMs": 114400
+        }
+      ]
+    },
+    {
+      "id": "1535641159",
+      "file": "data/alphabet/ufsm/1535641159.mp4",
+      "sha256": "1d1be8a4fe346d004147ab258d88499c4620f95dd21312ec809748efa20f4af7",
+      "windows": [
+        {
+          "label": "C",
+          "startMs": 6610,
+          "endMs": 7580,
+          "anchorMs": 7090
+        }
+      ]
+    },
+    {
+      "id": "clad-movimento-02-usb",
+      "file": "data/isolated-negative-audit/clad/raw/clad-movimento-02-usb.mp4",
+      "sha256": "918c3c6cf1141f39177095d4dadcff6188cccc127f4aef0b16c01252009a171b",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    },
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "file": "data/isolated-negative-audit/clad/raw/clad-movimento-03-queixo-teclado.mp4",
+      "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    },
+    {
+      "id": "cecierj-azul",
+      "file": "data/isolated-negative-audit/didactic/raw/cecierj-azul.mp4",
+      "sha256": "312aea3f694af50dc0b287d228b3aa8d0da008ebf9267b456e0286ac0188527b",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1650
+        }
+      ]
+    },
+    {
+      "id": "ufsm-azul",
+      "file": "data/isolated-negative-audit/didactic/raw/ufsm-azul.mp4",
+      "sha256": "4b444b4d890ccfa0770d6ba85389ac489687abbd35be6e198d0115c038cac5fe",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1450
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1450
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1450
+        }
+      ]
+    }
+  ]
+}

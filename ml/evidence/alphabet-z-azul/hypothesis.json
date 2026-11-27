@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "rule": "Vetar somente um traçado candidato de Z se a mediana da projeção lateral da ponta do polegar exceder 0,20 da escala da palma. Usar o intervalo entre o primeiro e o último extremo do indicador que satisfazem a regra atual. A projeção começa na base do indicador e segue o eixo da base do mínimo à base do indicador; os pontos são tridimensionais e normalizados por palma.",
+  "threshold": 0.2,
+  "selection": "Escolha anterior ao replay de Azul. Nas extrações CPU já disponíveis dos manifestos, quatro replays produziram Z. As medianas máximas observadas em janelas aceitas foram -0,281, -0,216, 0,027 e -0,446. O limite deixa ao menos 0,173 de margem para esse controle positivo mais aberto.",
+  "criteria": [
+    "Preservar cada Z produzido pelo leitor original sobre as mesmas sequências de pontos. Os Z e X que ficam sem leitura no original devem ser registrados.",
+    "Reduzir os Z na janela exata de Azul da UFSM já registrada como falso. Três capturas em Chromium e comparação com o mesmo fluxo de pontos.",
+    "Conservar os resultados esperados já presentes nos controles C/Ç, H/J/K/X/Y no replay pareado. Registrar leituras transitórias em ambos os caminhos.",
+    "Manter o histórico que permite completar Z depois de X. As demais condições temporais permanecem fixas."
+  ],
+  "calibrationFiles": [
+    "data/alphabet/motion-final.json",
+    "data/alphabet/institutional-final.json"
+  ]
+}

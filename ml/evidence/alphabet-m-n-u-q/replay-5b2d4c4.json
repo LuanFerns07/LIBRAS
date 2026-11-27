@@ -1,0 +1,144 @@
+{
+  "build": {
+    "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/independent-m-n-u-q-windows.json"
+  ],
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "M",
+      "startMs": 100900,
+      "endMs": 102180,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 268
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1303
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "N",
+      "startMs": 103100,
+      "endMs": 104420,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 226
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1342
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "readings": [],
+      "workerFrames": 96,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1114
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "U",
+      "startMs": 120180,
+      "endMs": 121660,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 226
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 946
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1521
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 165370,
+      "endMs": 166230,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 219
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 872
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 167470,
+      "endMs": 168380,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 489
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 972
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "N",
+      "startMs": 168910,
+      "endMs": 170090,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 348
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1226
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "Q",
+      "startMs": 177390,
+      "endMs": 178530,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 214
+        }
+      ],
+      "workerFrames": 96,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1201
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "U",
+      "startMs": 214450,
+      "endMs": 215350,
+      "readings": [],
+      "workerFrames": 89,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 938
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "publishedBuild": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+  "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407",
+  "purpose": "Distinguir a leitura Z no sinal Azul da UFSM, já observado falso de interesse. Preservar o Z de diferentes fontes e a distinção de letras estáticas e em movimento.",
+  "references": [
+    {
+      "manifest": "ml/alphabet/ufsm-temporal-windows.json",
+      "sha256": "490c5b6663636e413fcf90fd39bab7ff15c9dc242216f7ec384820057a808da5",
+      "scope": "X/Z das três gravações e Ç/H/J/K/Y da gravação 1535641159."
+    },
+    {
+      "manifest": "ml/alphabet/institutional-temporal-windows.json",
+      "sha256": "36701b4c0a4a0c470ed1dcd38cc952665d88cdfbc4b8c328e4a72eb450a23286",
+      "scope": "X/Z da Cecierj e da Unesp."
+    },
+    {
+      "manifest": "ml/alphabet/ufsm-static-windows.json",
+      "scope": "C da gravação 1535641159."
+    }
+  ],
+  "controls": {
+    "manifest": "ml/evidence/alphabet-o/negative-windows.json",
+    "sha256": "0a6c294c0823b267de53a6b618f9c1a433a5597557cd5430252138a91d8c9966",
+    "knownFailure": "ufsm-azul",
+    "other": [
+      "cecierj-azul",
+      "clad-movimento-02-usb",
+      "clad-movimento-03-queixo-teclado"
+    ],
+    "repetitionsOfKnownFailure": 3
+  },
+  "measurements": [
+    "Registrar pontos em imagem e timestamps do trabalhador que alimenta o leitor, eventos de letra na interface, intervalos sem mão e identidade de compilação.",
+    "Comparar extensão do indicador, abertura lateral do polegar relativa ao eixo transversal da palma e limites dos três traços usados pelo leitor de Z. Medir os replays de X junto dos Z rotulados.",
+    "Separar o Z do reconhecimento estático L emitido antes dele pela decisão temporal. O histórico após X deve permanecer disponível ao leitor.",
+    "Se as referências sustentarem uma alternativa, escolher seu critério apenas com os Z e controles sem Azul da UFSM. Congelar o critério antes de reproduzir Azul e registrar o efeito sobre todos os Z detectados na configuração original e os controles C/Ç/H/J/K/X/Y."
+  ],
+  "limits": "Azul é uma falha conhecida da compilação e serve para testar a hipótese específica. Janelas didáticas e repetições da mesma pessoa não estimam generalização. Replays em câmera simulada; execução em CPU."
+}

@@ -1,0 +1,233 @@
+{
+  "framesSha256": "54cccddc5043d009fa95346bf7f4c09d5fbbaa6e14ee7be21ef3439744686571",
+  "manifestSha256": "b807676e88f57e60022db6ef4c78cd7f9c9175920a4aecad3b5904b02d3f1151",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "model": {
+    "version": 1,
+    "preprocess": "hand-wrist-palm-v1",
+    "features": 63,
+    "labels": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "I",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W"
+    ],
+    "threshold": 0.8,
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "source": "https://www.kaggle.com/datasets/heitorccf/librasign/versions/1",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplement": {
+      "labels": [
+        "E",
+        "O",
+        "S"
+      ],
+      "threshold": 0.95,
+      "modelSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885"
+    },
+    "contrast": {
+      "from": "E",
+      "to": "O",
+      "threshold": 0.95,
+      "modelSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad"
+    }
+  },
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "M",
+      "startMs": 100900,
+      "endMs": 102180,
+      "sampled": 20,
+      "selected": 20,
+      "primaryTop": {
+        "M": 20
+      },
+      "verifierTop": {
+        "M": 20
+      },
+      "staticVotes": {
+        "M": 20
+      },
+      "longestExpectedRun": 20
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "N",
+      "startMs": 103100,
+      "endMs": 104420,
+      "sampled": 21,
+      "selected": 21,
+      "primaryTop": {
+        "N": 21
+      },
+      "verifierTop": {
+        "N": 21
+      },
+      "staticVotes": {
+        "N": 21
+      },
+      "longestExpectedRun": 21
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "sampled": 17,
+      "selected": 17,
+      "primaryTop": {
+        "N": 17
+      },
+      "verifierTop": {
+        "Q": 17
+      },
+      "staticVotes": {
+        "—": 17
+      },
+      "longestExpectedRun": 0
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "U",
+      "startMs": 120180,
+      "endMs": 121660,
+      "sampled": 23,
+      "selected": 22,
+      "primaryTop": {
+        "S": 1,
+        "U": 21
+      },
+      "verifierTop": {
+        "U": 22
+      },
+      "staticVotes": {
+        "—": 1,
+        "U": 21
+      },
+      "longestExpectedRun": 21
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 165370,
+      "endMs": 166230,
+      "sampled": 14,
+      "selected": 14,
+      "primaryTop": {
+        "M": 14
+      },
+      "verifierTop": {
+        "M": 14
+      },
+      "staticVotes": {
+        "M": 14
+      },
+      "longestExpectedRun": 14
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "M",
+      "startMs": 167470,
+      "endMs": 168380,
+      "sampled": 14,
+      "selected": 12,
+      "primaryTop": {
+        "M": 12
+      },
+      "verifierTop": {
+        "M": 12
+      },
+      "staticVotes": {
+        "M": 12
+      },
+      "longestExpectedRun": 11
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "N",
+      "startMs": 168910,
+      "endMs": 170090,
+      "sampled": 19,
+      "selected": 18,
+      "primaryTop": {
+        "N": 17,
+        "M": 1
+      },
+      "verifierTop": {
+        "N": 10,
+        "M": 8
+      },
+      "staticVotes": {
+        "N": 8,
+        "—": 10
+      },
+      "longestExpectedRun": 4
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "Q",
+      "startMs": 177390,
+      "endMs": 178530,
+      "sampled": 18,
+      "selected": 17,
+      "primaryTop": {
+        "A": 1,
+        "P": 13,
+        "M": 2,
+        "L": 1
+      },
+      "verifierTop": {
+        "N": 1,
+        "P": 12,
+        "M": 2,
+        "Q": 1,
+        "A": 1
+      },
+      "staticVotes": {
+        "—": 4,
+        "P": 12,
+        "M": 1
+      },
+      "longestExpectedRun": 0
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "U",
+      "startMs": 214450,
+      "endMs": 215350,
+      "sampled": 14,
+      "selected": 14,
+      "primaryTop": {
+        "T": 1,
+        "F": 13
+      },
+      "verifierTop": {
+        "I": 7,
+        "T": 4,
+        "R": 2,
+        "O": 1
+      },
+      "staticVotes": {
+        "—": 14
+      },
+      "longestExpectedRun": 0
+    }
+  ]
+}

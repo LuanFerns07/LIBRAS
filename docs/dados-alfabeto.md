@@ -194,6 +194,28 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177/ \
   node --test tests/e2e/alphabet-live.test.mjs
 ```
 
+### M, N, U e Q em duas gravações reservadas
+
+As janelas de Tel baixinha e da Unicentro foram fixadas no commit `560593b` antes da inferência. As fontes inteiras ficaram fora do ajuste do classificador. A Área livre mostrou M nos três recortes e N nos dois. No N de Tel baixinha, os dois modelos estáticos concordaram nos 21 quadros amostrados. No N da Unicentro, a rede principal preferiu N em 17 dos 18 quadros selecionáveis e o verificador preferiu M em oito. A concordância com os limiares confirmou oito quadros de N. [Manifesto](../ml/alphabet/independent-m-n-u-q-windows.json) · [Replay em Chromium](../ml/evidence/alphabet-m-n-u-q/replay-5b2d4c4.json) · [Votos por recorte](../ml/evidence/alphabet-m-n-u-q/diagnostico-estatico.json)
+
+Em três repetições com a linha do tempo dos pontos, o N de Tel baixinha permaneceu no painel até a mão sair da captura. Nos três replays da Unicentro, a leitura sumiu entre 724 e 813 ms desde o início do recorte e a mão continuou rastreada até 1.240 a 1.257 ms. A discordância N/M nos quadros amostrados orienta a próxima investigação do classificador. [Linha do tempo da letra e do rastreamento](../ml/evidence/alphabet-m-n-u-q/linha-do-tempo-n.json)
+
+Em Tel baixinha, Q ficou sem leitura e U apareceu seguido de H. Na Unicentro, Q apareceu como P e U em perfil ficou sem leitura. Havia quadros rastreados em todos os recortes. Os dois M da Unicentro vêm de planos diferentes da mesma demonstração. [Tel baixinha](https://www.youtube.com/watch?v=chzje8VmC1I&t=100s) · [Alfabeto Explicativo da Unicentro](https://www.youtube.com/watch?v=hxnpSXVWkgu&t=165s)
+
+```sh
+manifest=ml/alphabet/independent-m-n-u-q-windows.json
+out=data/evidence/alphabet-m-n-u-q
+models=data/releases/librasia-alfabeto-s-o-z-validado/site/models
+mkdir -p "$out"
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ --manifest "$manifest" \
+  --source tel-baixinha-chzje8vmc1i --source unicentro-hxnpsxvwkgu --workers 1
+node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ --manifest "$manifest" \
+  --source tel-baixinha-chzje8vmc1i --source unicentro-hxnpsxvwkgu --letters N --timeline --workers 1
+OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest "$manifest" --out "$out/frames.json"
+.venv/bin/python -m ml.alphabet.diagnose_static "$models" "$out/frames.json"
+```
+
 ### Recuperação de O com geometria da mão
 
 Nos quadros de O da Unesp e da UFAC, o verificador reconheceu a configuração em 18 de 18 e em 33 de 35 quadros, respectivamente. O classificador principal preferiu I e E na maior parte das duas janelas. O complemento treina uma regressão logística em 12 medidas dos pontos, entre elas distâncias do polegar às pontas, separação entre dedos adjacentes e curvatura relativa dos dedos. O leitor considera O quando as redes principais e o complemento de E ficam sem leitura, o verificador de O chega a 0,80 e a pontuação de forma chega a 0,95. A exibição ao vivo ainda exige três leituras consecutivas. [Exportador e treino](../ml/alphabet/refine_o.py) · [Configuração, hashes e paridade do ONNX](../ml/evidence/alphabet-o/training.json) · [Referência do IF Baiano para a forma em O](https://www.ifbaiano.edu.br/unidades/bonfim/files/2022/07/Alfabeto-manual-em-Libras-1.pdf)
@@ -236,3 +258,9 @@ O leitor pode completar o traçado de Z após exibir X. Uma perda breve do rastr
 Nas 72 janelas do alfabeto, o Chromium exibiu a letra esperada em 71. S apareceu sozinho no recorte da Uníntese e A ficou sem leitura na terceira aula da UFSM. As 17 janelas adicionais de E e O, que incluem os enquadramentos do mesmo vídeo de Paterno, exibiram a letra esperada. Nos 19 controles fora do alfabeto, O e S apareceram nos mesmos recortes que na compilação `bfe1945`. O teste da câmera física com uma pessoa sinalizando segue pendente. [Janelas do alfabeto e variações de enquadramento](../ml/evidence/alphabet-o-s-independent/replay-5b2d4c4.json) · [Controles fora do alfabeto](../ml/evidence/alphabet-o-s-independent/replay-negatives-5b2d4c4.json)
 
 Na prévia em 4177, os testes com vídeo passaram para S da Uníntese e O de Paterno em Praticar e na Área livre. Também passaram a troca de M para N na mesma captura e a sobreposição das duas mãos. [Testes do leitor](../tests/e2e/alphabet-live.test.mjs) · [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs)
+
+#### Ensaio do candidato de Z em Azul
+
+A regra experimental exige que a projeção lateral mediana da ponta do polegar fique até 0,20 da escala da palma durante os três traços de Z. O limite foi fixado nos controles de Z antes de abrir Azul. O replay pareado dos mesmos pontos reduziu a leitura de Z em Azul da UFSM de uma em três capturas para zero em três. [Protocolo](../ml/evidence/alphabet-z-azul/protocol.json) · [Critério congelado](../ml/evidence/alphabet-z-azul/hypothesis.json)
+
+O pacote `605cacc` compilado na branch local `diagnostico-z-azul` foi testado de ponta a ponta com câmera virtual no Chromium. Exibiu os mesmos quatro Z das cinco janelas rotuladas e as letras esperadas nos controles C, Ç, H, J, K, X e Y. O Z da aula `1536677587` ficou sem leitura nas duas compilações desta rodada. Nas três repetições de Azul da UFSM apareceram A e L, e nos 19 controles fora do alfabeto também houve zero Z. Outras leituras transitórias persistiram. O pacote permanece em avaliação antes de substituir a prévia local. [Janelas e repetições](../ml/evidence/alphabet-z-azul/replay-windows.json) · [Replay do candidato](../ml/evidence/alphabet-z-azul/e2e-605cacc.json) · [Dezenove controles](../ml/evidence/alphabet-z-azul/negativos-605cacc.json)

@@ -13,6 +13,7 @@ const { values: options } = parseArgs({ options: {
   source: { type: 'string', multiple: true },
   letters: { type: 'string' },
   workers: { type: 'string', default: '2' },
+  timeline: { type: 'boolean' },
 } })
 const url = new URL(options.url)
 const workerCount = Number(options.workers)
@@ -47,13 +48,14 @@ if (windows.length === 0 || [...selected].some(id => !windows.some(window => win
   throw new Error('As opções devem selecionar janelas de todas as fontes solicitadas.')
 }
 
-function startProbe() {
+function startProbe(recordTimeline) {
   const mode = document.querySelector('[data-free-mode]')
   mode.value = 'letter'
   mode.dispatchEvent(new Event('change'))
   const output = document.querySelector('[data-live-character]')
   const video = document.querySelector('video')
-  const observations = { changes: [], firstWorkerFrame: null, lastHand: null, workerFrames: 0, framesWithHand: 0 }
+  const observations = { changes: [], handVisibility: [], firstWorkerFrame: null, lastHand: null,
+    workerFrames: 0, framesWithHand: 0 }
   window.replayObservations = observations
 
   new MutationObserver(() => {
@@ -67,7 +69,11 @@ function startProbe() {
         if (data.type !== 'frame') return
         observations.workerFrames += 1
         observations.firstWorkerFrame ??= video.currentTime
-        if (data.hands.leftHand?.length === 21 || data.hands.rightHand?.length === 21) {
+        const visible = data.hands.leftHand?.length === 21 || data.hands.rightHand?.length === 21
+        if (recordTimeline && observations.handVisibility.at(-1)?.visible !== visible) {
+          observations.handVisibility.push({ visible, time: video.currentTime })
+        }
+        if (visible) {
           observations.lastHand = video.currentTime
           observations.framesWithHand += 1
         }
@@ -90,10 +96,11 @@ async function replay(window, index, directory) {
     return await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
       await navigate(outUrl.href)
       await permission(outUrl.origin, 'granted')
-      await evaluate(`(${startProbe})()`, true)
+      await evaluate(`(${startProbe})(${!!options.timeline})`, true)
       await waitUntil('document.querySelector("[data-recognition-coverage]").textContent.startsWith("Leitura experimental")', 12000)
       await waitUntil(`document.querySelector('video').currentTime >= ${leadSeconds + duration + .55}`, 15000)
-      const { changes, firstWorkerFrame, lastHand, workerFrames, framesWithHand } = await evaluate('window.replayObservations')
+      const { changes, handVisibility, firstWorkerFrame, lastHand, workerFrames, framesWithHand } =
+        await evaluate('window.replayObservations')
       if (firstWorkerFrame === null || firstWorkerFrame >= leadSeconds) {
         throw new Error(`O rastreamento não iniciou antes da demonstração ${label.source}/${label.label}.`)
       }
@@ -101,6 +108,13 @@ async function replay(window, index, directory) {
         ...label, startMs, endMs,
         readings: changes.filter(({ letter }) => letter !== '—')
           .map(({ letter, time }) => ({ letter, afterVideoMs: Math.round((time - leadSeconds) * 1000) })),
+        ...(options.timeline ? {
+          clearedAtMs: changes.filter(({ letter }) => letter === '—')
+            .map(({ time }) => Math.round((time - leadSeconds) * 1000)),
+          handVisibility: handVisibility.map(({ visible, time }) => ({
+            visible, afterVideoMs: Math.round((time - leadSeconds) * 1000),
+          })),
+        } : {}),
         workerFrames, framesWithHand,
         lastHandAfterVideoMs: lastHand === null ? null : Math.round((lastHand - leadSeconds) * 1000),
       }
