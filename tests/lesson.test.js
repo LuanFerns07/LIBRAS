@@ -30,8 +30,10 @@ test('a prática distingue reconhecimento, dica, incerteza e falhas', () => {
   assert.equal(practiceFeedback(acceptedCinco, cinco, 1).state, 'accepted')
   assert.equal(practiceFeedback(acceptedCinco, espelho, 1).state, 'inconclusive')
   assert.equal(practiceFeedback({ ...acceptedCinco, palm: 'away' }, cinco, 1).state, 'hint')
-  assert.equal(practiceFeedback({ ...acceptedCinco, palm: 'away' }, cinco, 2).state, 'accepted')
+  assert.equal(practiceFeedback({ ...acceptedCinco, palm: 'away' }, cinco, 2).reason, 'palm-orientation')
   assert.equal(practiceFeedback({ ...acceptedCinco, id: espelho.id }, espelho, 1).state, 'hint')
+  assert.equal(practiceFeedback({ ...acceptedCinco, id: espelho.id }, espelho, 2).reason, 'palm-orientation')
+  assert.equal(practiceFeedback({ ...acceptedCinco, id: espelho.id, palm: 'uncertain' }, espelho, 2).state, 'accepted')
   assert.equal(practiceFeedback({ state: 'accepted', id: amarelo.id, trajectory: 'upward' }, amarelo, 1).state, 'hint')
   assert.deepEqual(practiceFeedback(inconclusive, cinco, 1), inconclusive)
   const captureError = { state: 'capture-error', message: 'Câmera desligada.' }

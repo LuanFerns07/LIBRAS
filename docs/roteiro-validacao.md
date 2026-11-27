@@ -202,6 +202,22 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 
 O modelo carregado foi o mesmo verificado na demonstração. O log da lição fica em `data/evidence/demonstracao/licao-completa.log`. [Clipe do MINDS-Libras](https://zenodo.org/records/2667329) · [Teste da lição](../tests/e2e/recognition.test.mjs)
 
+### Lição completa dos três sinais em M3
+
+O botão **Praticar com ajuda** aparece depois da resposta correta na atividade e abre a etapa guiada do sinal selecionado. No Chromium, o teste usou Cinco S09-1 e Espelho S11-1 do MINDS-Libras. Em ambas as lições, uma resposta incorreta manteve a atividade aberta. A resposta correta liberou o botão, o modelo reconheceu o sinal com e sem o avatar, e o progresso voltou depois de recarregar. O teste de Amarelo repetiu a dica de trajetória, a tentativa sem mãos e os dois reconhecimentos. [Teste dos sinais](../tests/e2e/recognition.test.mjs) · [Teste de Amarelo](../tests/e2e/amarelo-lesson.test.mjs)
+
+Na etapa de memória, quando a orientação observada é contrária à da palma esperada em Cinco ou Espelho, o aplicativo pede nova tentativa e mantém a etapa pendente. O teste unitário do feedback cobre esse controle. Os testes da lição acima usaram vídeos gravados e os pesos combinados. Os registros estão em `data/evidence/demonstracao/m3-licao/`. [Teste do feedback](../tests/lesson.test.js) · [Revisão das dicas com participantes](pendencias-futuras.md#m1-a-m3--webcam-e-revisão-das-dicas)
+
+Para repetir Cinco, use o arquivo sincronizado preparado para a lição individual. Para Espelho, use o mesmo comando, informe `signal-espelho`, `espelho` e `12EspelhoSinalizador11-1-sync.y4m`. [Preparo dos arquivos](#roteiro-integrado-em-uma-sessão-do-chromium)
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4203 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_LESSON_FLOW=1 LIBRASIA_TEST_TRIALS=2 LIBRASIA_EXPECT_CLASSIFIER_CALLS=1 \
+  LIBRASIA_TEST_TARGET=signal-cinco LIBRASIA_EXPECT_TEXT=cinco \
+  LIBRASIA_TEST_VIDEO=data/evidence/camera-fixtures/10CincoSinalizador09-1-sync.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
 ### Dica de trajetória de Amarelo
 
 Na prática guiada, o Chromium reconheceu Amarelo S01-1 em velocidade original. Ao receber o recorte com os quadros em ordem inversa, o mesmo modelo exibiu “Desloque o indicador da testa em direção ao nariz” nas três tentativas. O progresso registrou as dicas e manteve a prática guiada pendente. Em outro recorte invertido, S04-1, o aplicativo mostrou baixa confiança. São ensaios técnicos com gravações de treino e trajetória alterada. A adequação da dica a um erro intencional feito na webcam permanece no roteiro com sinalizantes.

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { access, writeFile } from 'node:fs/promises'
 import { test } from 'node:test'
-import { recognitionCatalog } from '../../src/catalog.js'
+import { lesson, recognitionCatalog } from '../../src/catalog.js'
 import { withChromium } from './chromium.mjs'
 import { beginAtMarker, finish } from './recorded-capture.mjs'
 
@@ -18,6 +18,7 @@ const reviewGlosses = process.env.LIBRASIA_TEST_GLOSS_REVIEW === '1'
 const sync = multiple || continuous || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
 const lessonFlow = process.env.LIBRASIA_TEST_LESSON_FLOW === '1'
+const quizAnswers = new Map([['signal-cinco', 0], ['signal-espelho', 1], ['signal-amarelo', 2]])
 const expectedHint = process.env.LIBRASIA_TEST_EXPECT_HINT?.trim()
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
 const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
@@ -69,8 +70,9 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (reviewGlosses) assert.ok(continuous && !expected && trials === 1,
     'Use uma tentativa contínua inconclusiva para verificar a revisão.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
-  if (lessonFlow) assert.ok(target === 'signal-cinco' && expected === 'cinco' && sync && trials === 2,
-    'Use duas tentativas com o clipe sincronizado de Cinco para verificar a lição inteira.')
+  const lessonSignal = lesson.find(signal => signal.id === target)
+  if (lessonFlow) assert.ok(quizAnswers.has(target) && expected === lessonSignal.text && sync && trials === 2,
+    'Use duas tentativas com o clipe sincronizado do alvo para verificar a lição inteira.')
   if (expectedHint) assert.ok(target && sync && !expected && !expectedReason,
     'Use um clipe sincronizado e o alvo da prática guiada para verificar uma dica.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
@@ -145,12 +147,16 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.equal(await evaluate('document.querySelector("[data-camera-toggle]").disabled'), true)
         const answer = value => evaluate(`document.querySelector('[data-quiz] input[value="${value}"]').click();
           document.querySelector('[data-quiz]').form.requestSubmit()`)
-        await answer(1)
+        const correct = quizAnswers.get(target)
+        await answer((correct + 1) % 3)
         assert.equal(await evaluate('document.querySelector("[data-quiz-status]").dataset.state'), 'inconclusive')
-        await answer(0)
+        assert.equal(await evaluate('document.querySelector("[data-practice-next]").hidden'), true)
+        await answer(correct)
         assert.equal(await evaluate('document.querySelector("[data-quiz-status]").dataset.state'), 'accepted')
-        await evaluate('document.querySelector("[data-review]").click()', true)
+        assert.equal(await evaluate('document.querySelector("[data-practice-next]").hidden'), false)
+        await evaluate('document.querySelector("[data-practice-next]").click()', true)
         assert.equal(await evaluate('document.activeElement.dataset.stage'), '1')
+        assert.equal(await evaluate('document.querySelector("[data-signal]").value'), target)
       } else {
         await evaluate('document.querySelector(\'[data-stage="1"]\').click()', true)
       }
@@ -416,8 +422,10 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     }
 
     if (lessonFlow) {
-      const progress = 'document.querySelector("[data-progress]")?.textContent === "1 de 3 sinais concluídos"'
+      const progress = `document.querySelector("progress")?.value === 1 && document.querySelector("progress").max === ${lesson.length}`
       await waitUntil(progress)
+      const result = await evaluate('JSON.parse(localStorage.getItem("librasia:progress:v1"))[' + JSON.stringify(target) + ']')
+      assert.ok(result.observed && result.understood && result.guided && result.independent, 'O progresso deve registrar as quatro evidências do alvo.')
       await evaluate('window.testLessonCompleted = true')
       await page('Page.reload')
       await waitUntil('!window.testLessonCompleted && ' + progress)

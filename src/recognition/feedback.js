@@ -81,6 +81,9 @@ export function practiceFeedback(result, target, step) {
   if (target.id === 'signal-amarelo' && result.trajectory !== 'downward') {
     return { state: 'inconclusive', reason: 'trajectory', message: 'Repita o movimento mostrado pelo avatar com a mão e o rosto visíveis.' }
   }
+  if (adjustment) {
+    return { state: 'inconclusive', reason: 'palm-orientation', message: 'Revise a orientação da palma no avatar e tente novamente.' }
+  }
   return { state: 'accepted', message: `${target.label} foi reconhecido.`, id: target.id }
 }
 

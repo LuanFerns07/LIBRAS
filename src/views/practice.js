@@ -90,6 +90,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
         <button class="button" type="submit">Conferir resposta</button>
       </form>
       <p class="inline-status" data-quiz-status role="status" hidden></p>
+      <button class="button primary" type="button" data-practice-next hidden>Praticar com ajuda</button>
     </section>
     <section class="panel content-panel practice-activity" data-letter-observation aria-labelledby="letter-observation-heading" hidden>
       <h2 id="letter-observation-heading">Registro da observação</h2>
@@ -109,6 +110,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   const observeLetter = main.querySelector('[data-observe-letter]')
   const fieldset = main.querySelector('[data-quiz]')
   const quizStatus = main.querySelector('[data-quiz-status]')
+  const practiceNext = main.querySelector('[data-practice-next]')
   const progressLabel = main.querySelector('[data-progress]')
   const progressBar = main.querySelector('progress')
   const reviewButton = main.querySelector('[data-review]')
@@ -228,6 +230,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     activity.hidden = letters || step !== 0
     letterActivity.hidden = !letters || step !== 0
     quizStatus.hidden = true
+    practiceNext.hidden = true
     player.setSequence(step === 2 ? [] : [entry])
     avatar.hidden = step === 2
     camera.reset()
@@ -245,6 +248,10 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     step = index
     render()
   }))
+  practiceNext.addEventListener('click', () => {
+    tabs[1].click()
+    tabs[1].focus()
+  })
   modePicker.addEventListener('change', () => {
     mode = modePicker.value
     step = 0
@@ -276,7 +283,8 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     const correct = Number(answer) === quizzes[selected.signal][2]
     quizStatus.hidden = false
     quizStatus.dataset.state = correct ? 'accepted' : 'inconclusive'
-    quizStatus.textContent = correct ? 'Resposta correta. Avance para praticar com ajuda.' : 'Observe o avatar novamente e tente outra resposta.'
+    quizStatus.textContent = correct ? 'Resposta correta.' : 'Observe o avatar novamente e tente outra resposta.'
+    practiceNext.hidden = !correct
     if (correct) {
       progress.signal[current().id].observed = true
       progress.signal[current().id].understood = true

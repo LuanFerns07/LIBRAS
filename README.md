@@ -12,6 +12,8 @@ A versão 1.0 local conclui M1 e M2 com prática guiada de Amarelo, avatar 3D e 
 
 [Referências, bases e consultas](docs/referencias.md)
 
+[Pendências para próximas versões](docs/pendencias-futuras.md)
+
 [Checklist da inscrição no prêmio](ROADMAP_LIBRASIA.md#checklist-da-inscrição) · [Preparação do memorial e dos anexos](docs/inscricao.md)
 
 ## Executar neste Linux

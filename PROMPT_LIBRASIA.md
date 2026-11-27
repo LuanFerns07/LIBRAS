@@ -14,7 +14,7 @@ A versão 1.0 local conclui M1 e M2. A entrega é uma prática guiada de Amarelo
 
 Use a prévia local da porta 4177 com o modelo combinado. O ensaio técnico com Amarelo usa gravação original, recorte com trajetória invertida, quadro sem mãos e recortes para testar oclusão e enquadramento. A webcam física verifica o erro de permissão e a retomada com o avatar aberto. A coleta de negativos, a revisão da execução e da dica com participantes e os controles visuais na webcam ficam na checklist pós-1.0. [Prévia e compilação](docs/previa-estavel.md) · [Validações pós-1.0](ROADMAP_LIBRASIA.md#validações-pós-10)
 
-A expansão, os ajustes finos do modelo e do alfabeto, a publicação na Vercel e a finalização do memorial ficam para outra rodada. O roadmap preserva os critérios e registros das demais etapas. [Prioridades atuais](ROADMAP_LIBRASIA.md#prioridades-da-retomada)
+Após a 1.0, siga os marcos em ordem a partir de M3. Registre no arquivo de pendências as etapas que dependem de terceiros, dados, equipamentos ou autorização. A finalização do memorial e a publicação na Vercel continuam registradas para uma rodada posterior. [Roadmap](ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Pendências](docs/pendencias-futuras.md)
 
 A lição inicial usa **três a cinco sinais isolados**. Escolha os sinais pela utilidade pedagógica, pela cobertura dos conjuntos de dados e pela possibilidade de demonstrá-los fielmente no avatar. Mantenha as três etapas de observar a demonstração, praticar com auxílio e tentar com menos ajuda. Ofereça pausa, repetição e velocidade reduzida no avatar, além de uma atividade curta de compreensão sem câmera.
 

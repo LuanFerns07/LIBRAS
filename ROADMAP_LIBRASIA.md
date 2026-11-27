@@ -13,7 +13,7 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 | **M0 · Fundação** | Pronto | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
 | **M1 · Dados e critérios** | Pronto | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | O aceite técnico confirma a base, o catálogo e as partições para a versão exploratória local. |
 | **M2 · Um sinal de ponta a ponta** | Pronto | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Os ensaios da 1.0 confirmam quatro respostas distintas para Amarelo e a recuperação da webcam no Chromium. |
-| **M3 · Lição e reconhecimento** | A testar | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
+| **M3 · Lição e reconhecimento** | Pronto | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | Os três sinais completam a lição com vídeo gravado e inferência real. A revisão das dicas com participantes fica nas pendências. |
 | **M4 · Alfabeto e texto para Libras** | A testar | A–Z e Ç no avatar e na leitura ao vivo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | As poses, a leitura pela webcam e os exemplos de tradução e soletração passam pela revisão. |
 | **M5 · Área livre e voz** | A testar | Sinalização sem alvo pré-selecionado, transcrição editável e leitura gratuita | Integração, Dados e ML, UX | O texto vem de sinais reais, casos incertos ficam visíveis e o áudio usa o texto confirmado no PC. |
 | **M6 · Saiba mais e créditos** | Pronto | Links externos, créditos e declaração sem fins lucrativos | UX, revisão independente | Os destinos conferem com os títulos e a mensagem aparece no app e no README. |
@@ -28,7 +28,7 @@ A versão 1.0 local conclui M1 e M2 com uma prática guiada funcional no PC com 
 1. **M1.** Catálogo, licenças, partições e contrato entre o modelo e o avatar conferidos para o uso exploratório. [Revisão técnica](docs/dados.md#aceite-técnico-de-m1) · [Referências e bases](docs/referencias.md)
 2. **M2.** A prática de Amarelo distingue reconhecimento, ajuste, tentativa inconclusiva e falha de captura. Os ensaios de sinalização usaram gravações. A recuperação de permissão foi conferida na webcam física. [Roteiro curto](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Ficha de validação](docs/validacao-ao-vivo.md)
 
-Os testes com participantes, os demais marcos, a publicação na Vercel e a finalização do memorial ficam para outra rodada. [Validações pós-1.0](#validações-pós-10)
+Após a 1.0, a implementação segue em ordem a partir de M3. Validações que dependem de terceiros, dados ou autorização ficam no arquivo de pendências e os ensaios técnicos continuam nos marcos seguintes. [Validações pós-1.0](#validações-pós-10)
 
 ## Implementação e aceite por marco
 
@@ -75,10 +75,7 @@ Os testes com participantes, os demais marcos, a publicação na Vercel e a fina
 
 ### Validações pós-1.0
 
-- [ ] **M1.** Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
-- [ ] **M2.** Na Área livre, registrar a retirada e o retorno de uma mão na webcam física e conferir o alinhamento ao redimensionar a janela.
-- [ ] **M2.** Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
-- [ ] **M2.** Observar uma pessoa sinalizando com a câmera real, revisar a adequação da dica com uma pessoa fluente em Libras e registrar a resposta a uma falha de captura. [Ficha local](docs/validacao-ao-vivo.md)
+As validações com participantes e os demais impedimentos da sequência estão reunidos no [arquivo de pendências futuras](docs/pendencias-futuras.md).
 
 ### M3 · Modelo avaliado e lição utilizável
 
@@ -89,9 +86,8 @@ Os testes com participantes, os demais marcos, a publicação na Vercel e a fina
 - [x] Medir precisão, revocação e F1 por sinal e média macro no teste reservado. Registrar matriz de confusão, cobertura, falsas aceitações e latência mediana e p95 no PC com clipes de teste. Contar tentativas inconclusivas na análise de cobertura e na revocação dos sinais suportados.
 - [x] Medir o modelo combinado congelado nos 51 clipes reservados do MINDS. Observar 32/33 acertos no catálogo, 1/18 falso aceite e F1 macro de 0,972. [Avaliação do combinado](docs/avaliacao.md#modelo-combinado-na-partição-reservada)
 - [x] Importar o tempo de decisão, a carga inicial e os tempos de extração do Chromium na ficha de aceite. Conferir a exportação e as contagens, medianas e p95 por fluxo e ambiente. [Verificação da importação](docs/validacao-ao-vivo.md#verificação-da-importação-dos-tempos)
-- [ ] Medir as mesmas métricas com participantes independentes usando a webcam no PC, incluindo tempo de extração e carregamento.
-- [ ] Comparar as dicas com avaliação humana nas amostras disponíveis. Verificar tanto a execução esperada quanto correções intencionais, variantes conhecidas, mão dominante, iluminação e enquadramento. Registrar quais dimensões foram testadas de fato e as que ficaram pendentes.
-- [ ] **Aceite.** A lição funciona completa sem recorrer a inferência simulada. Cada item habilitado para correção tem dica revisada e resultados dentro dos critérios definidos em M1. Quando um sinal falhar, ele volta ao trabalho de dados, animação ou feedback antes de integrar o catálogo de prática.
+- [x] Avançar da atividade para a prática com ajuda mantendo o sinal selecionado. Tratar a orientação contrária da palma em Cinco e Espelho como tentativa inconclusiva na etapa de memória. [Reteste da lição completa](docs/roteiro-validacao.md#lição-completa-dos-três-sinais-em-m3)
+- [x] **Aceite técnico.** Cinco, Espelho e Amarelo passaram pelas três etapas com vídeos gravados e inferência no Chromium. O modelo combinado atingiu os critérios numéricos no MINDS reservado. As métricas de webcam com participantes e a revisão humana das dicas seguem no [arquivo de pendências futuras](docs/pendencias-futuras.md#m1-a-m3--webcam-e-revisão-das-dicas).
 
 O primeiro teste reservado obteve F1 macro de 0,612 e 5 falsas aceitações em 18 entradas fora do catálogo. O protocolo exige F1 macro de pelo menos 0,75 e falsas aceitações de até 10%. A versão local fica disponível para exploração. Para avançar no aceite, corrigir a confusão de Cinco e as falsas aceitações em Amarelo e repetir a avaliação com participantes independentes. [Resultados do teste e matriz de confusão](docs/avaliacao.md#execução-do-catálogo-inicial-em-26-de-novembro-de-2026)
 

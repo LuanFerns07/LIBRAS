@@ -56,6 +56,14 @@ O Hand Landmarker acompanha até duas mãos em um worker local. A sobreposição
 
 O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confirmação visual do alinhamento com movimentos feitos na webcam integra o teste manual. [Resultados com vídeo gravado e webcam física](teste-pontos-ao-vivo.md#resultado-da-prévia-empacotada) · [Checklist de verificação](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)
 
+## Prévia de M3
+
+Na porta 4203, a lição permite passar da resposta correta para a prática com ajuda do mesmo sinal. Cinco, Espelho e Amarelo completaram as etapas no Chromium usando vídeos gravados. [Abrir Praticar em M3](http://127.0.0.1:4203/#praticar) · [Evidências da lição](roteiro-validacao.md#lição-completa-dos-três-sinais-em-m3)
+
+~~~bash
+python3 data/releases/librasia-m3/iniciar.py --porta 4203
+~~~
+
 ## Prévia v0.1.0-preview.1
 
 A prévia reúne a aplicação compilada, os ativos de visão e o ONNX combinado congelado com o limiar 0,525. O catálogo da área livre inclui Cinco, Espelho, Amarelo e Aluno. O modelo usa dados MINDS-Libras RGB v1 sob CC BY 4.0. Os pesos ficam no pacote local. [Procedência e atribuição](dados.md) · [Avaliação e pares de checkpoints](avaliacao.md#combinação-de-geometria-e-flexão)
