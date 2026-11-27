@@ -26,6 +26,29 @@ PYTHONPATH=. python ml/evidence/alphabet-a-e-independent/diagnose_crop.py \
 
 O arquivo [ufsm-a-crop.json](ufsm-a-crop.json) registra as versões, os hashes e os resultados agregados de `summary.json`. `diagnosis.json` e os vídeos derivados são saídas locais.
 
+## Ensaio de flexão em coordenadas 3D
+
+Uma regressão logística usa a razão entre a distância da base à ponta e o comprimento das articulações de cada um dos quatro dedos, do indicador ao mínimo. O Hand Landmarker fornece as coordenadas 3D da mesma mão selecionada nas coordenadas da imagem. O treino usou 35 quadros de A e 340 das outras letras da primeira aula da UFSM e do Cecierj. A regra avaliada permite um novo voto de A a partir de 0,50 somente se as redes estáticas preferirem letras de A/Q/R e se as rotas da prévia ficarem sem leitura.
+
+Dos 11 quadros do A da terceira aula da UFSM, nove receberam voto do complemento. A maior sequência foi de cinco quadros amostrados seguidos. Nenhum dos outros 65 recortes ganhou votos, incluindo 57 recortes de outras letras e os Q e R reservados de Tel baixinha. O ensaio percorreu os pontos extraídos em CPU. A integração no navegador e os testes com movimentos fora do alfabeto ainda estão pendentes. [Contagens e hashes](ufsm-a-flexao-3d.json) · [Novos controles A/Q/R](../alphabet-a-q-r/README.md)
+
+```bash
+out=data/alphabet/a-oculto
+mkdir -p "$out"
+export OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1'
+refs=()
+for input in ufsm-static-windows institutional-static-a-e-s-o ifes-static-windows \
+  ufac-static-windows unintese-static-windows independent-a-q-r-windows; do
+  path="$out/$input-3d.json"
+  .venv/bin/python -m ml.alphabet.extract_motion --world --manifest "ml/alphabet/$input.json" --out "$path"
+  refs+=("$path")
+done
+.venv/bin/python -m ml.alphabet.merge_reference "${refs[@]}" --train-source cecierj-13757 \
+  --out "$out/referencia-3d.json"
+.venv/bin/python -m ml.alphabet.probe_a_world data/releases/librasia-alfabeto-z-polegar/site/models \
+  "$out/referencia-3d.json"
+```
+
 ## Fonte independente da UFAC
 
 A aula **Datilologia ou Alfabeto Manual**, do professor Israel Queiroz de Lima, foi produzida pelo Niead/UFAC para Matemática EaD. O campo Licença do vídeo institucional registra Creative Commons de atribuição com reutilização permitida. A publicação do YouTube sobre a modalidade de licença aponta para CC BY 3.0. A gravação inteira está na partição de teste. [Aula da UFAC](https://www.youtube.com/watch?v=B2U7c6OXgBg&hl=pt-BR), [Referência institucional do IFAC, p. 19](https://repositorio.ifac.edu.br/jspui/bitstream/123456789/34/3/Chegou%20um%20aluno%20Surdo%2C%20e%20agora.%20Um%20roteiro%20de%20aprendizagem%20para%20professores%20do%20ensino%20de%20administra%C3%A7%C3%A3o%20para%20Surdos.pdf), [Termos da licença](https://creativecommons.org/licenses/by/3.0/), [Versão da licença adotada pelo YouTube](https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/).

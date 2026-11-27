@@ -15,7 +15,7 @@ def sha256(path):
         return file_digest(stream, "sha256").hexdigest()
 
 
-def extract(path, windows, model, *, mirror=False):
+def extract(path, windows, model, *, mirror=False, include_world=False):
     task = mediapipe.tasks.vision
     opts = task.HandLandmarkerOptions(
         base_options=mediapipe.tasks.BaseOptions(model_asset_path=str(model)),
@@ -48,9 +48,15 @@ def extract(path, windows, model, *, mirror=False):
                     hands = [[dict(x=1 - p.x if mirror else p.x, y=p.y, z=p.z) for p in hand]
                              for hand in signal.hand_landmarks]
                     # A geometria será testada espelhada também, em ambas as mãos.
-                    frames.append(dict(timestamp=time, aspect=columns / rows,
-                                       leftHand=hands[1] if len(hands) == 2 else [],
-                                       rightHand=hands[0] if hands else []))
+                    frame = dict(timestamp=time, aspect=columns / rows,
+                                 leftHand=hands[1] if len(hands) == 2 else [],
+                                 rightHand=hands[0] if hands else [])
+                    if include_world:
+                        world = [[dict(x=-p.x if mirror else p.x, y=p.y, z=p.z) for p in hand]
+                                 for hand in signal.hand_world_landmarks]
+                        frame["leftWorld"] = world[1] if len(world) == 2 else []
+                        frame["rightWorld"] = world[0] if world else []
+                    frames.append(frame)
                     last = time
                 records.append({**window, "frames": frames})
     finally:
@@ -64,6 +70,7 @@ def main():
     parser.add_argument("--root", type=Path, default=Path("."), help="Raiz dos caminhos de vídeo do manifesto.")
     parser.add_argument("--model", type=Path, default=Path("public/runtime/hand_landmarker.task"))
     parser.add_argument("--mirror", action="store_true", help="Espelha a entrada do extrator e restaura o eixo x na saída.")
+    parser.add_argument("--world", action="store_true", help="Registra as coordenadas 3D junto aos pontos de imagem.")
     parser.add_argument("--out", type=Path, default=Path("data/alphabet/motion-frames.json"))
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text())
@@ -73,7 +80,8 @@ def main():
         path = args.root / source["file"]
         if sha256(path) != source["sha256"]:
             raise ValueError(f"Vídeo divergente da anotação em {path.name}.")
-        records = extract(path, [*source["windows"], *source.get("staticChecks", [])], args.model, mirror=args.mirror)
+        records = extract(path, [*source["windows"], *source.get("staticChecks", [])], args.model,
+                          mirror=args.mirror, include_world=args.world)
         samples.extend({**row, "source": source["id"], "split": source["split"]} for row in records)
         print(source["id"], [(row["label"], sum(bool(frame["rightHand"]) for frame in row["frames"]),
                               len(row["frames"])) for row in records], flush=True)
