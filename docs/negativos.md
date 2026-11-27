@@ -53,3 +53,58 @@ node ml/extract.mjs --manifest data/clad-development/manifest.json \
 ```
 
 O extrator produziu vetores utilizáveis nos 9 trechos. Acumulando as três matrizes de medição, os negativos adicionais reduziram as falsas aceitações de 8 para 5 em 42 clipes e elevaram o F1 macro de 0,668 para 0,673. A cobertura passou de 61 para 60 em 78. Os acertos de Cinco caíram de 13 para 9 em 18, com sete trocas por Espelho. O ensaio ficou abaixo do critério de Cinco e o modelo local continua com os mesmos pesos. [Manifesto dos recortes](../ml/evidence/isolated-clad/manifest.json) · [Matrizes por rodada](../ml/evidence/isolated-clad/cross-validation.json)
+
+## Novas posturas, transições e glosas externas
+
+O modelo combinado já havia sido medido em 12 trechos do CLAD, com uma falsa aceitação, e em dez reproduções parciais de uma única gravação de Banco, todas rejeitadas. A partição reservada do MINDS contém pessoas distintas, com glosas negativas também presentes entre os dados de treino. A nova seleção inclui nove demonstrações de seis glosas ausentes do catálogo e do treino dos modelos, três transições entre glosas externas e sete trechos de repouso ou atividade cotidiana. [CLAD original com o combinado](../ml/evidence/isolated-combined/clad-evaluation.json) · [Banco no Chromium](janelas-area-livre.md#reteste-com-a-combinação-de-geometria-e-flexão) · [Manifesto do treino MINDS](../ml/manifests/minds-expanded-v1.json)
+
+O CLAD contribui com seis tomadas diferentes das usadas no primeiro teste, das mesmas três pessoas reservadas à avaliação. Os novos recortes incluem mãos junto à boca ou atrás de objetos, ajuste de headset, manuseio de pen drive e retorno ao teclado com oclusão. As pessoas reservadas ao desenvolvimento permaneceram fora do recorte. Os outros 13 clipes vêm de três apresentadores em materiais licenciados da UFSM, da Fiocruz e da Fundação Cecierj. O rótulo de cada sinal externo vem da legenda ou do algarismo mostrado na gravação. O recorte também inclui uma pausa em pé com as mãos abaixo do enquadramento. Os intervalos foram fixados por inspeção visual antes da inferência. [Protocolo CLAD](../ml/external_eval/clad-variants.json) · [Protocolo didático, créditos e licenças](../ml/fresh_eval/protocol-negatives.json)
+
+Os três modelos congelados produziram as mesmas seis falsas aceitações em 19 tentativas. Os 17 trechos com rastreamento utilizável chegaram à inferência. Duas tentativas de repouso terminaram com rastreamento insuficiente, uma no CLAD e uma na UFSM. [Manifesto CLAD](../ml/external_eval/evidence/variants/manifest.json) · [Geometria no CLAD](../ml/external_eval/evidence/variants/report-geometry.json) · [Parciais no CLAD](../ml/external_eval/evidence/variants/report-partials.json) · [Combinado no CLAD](../ml/external_eval/evidence/variants/report-combined.json) · [Manifesto didático](../ml/fresh_eval/evidence-negatives/manifest.json) · [Comparação didática](../ml/fresh_eval/evidence-negatives/report.json)
+
+| Estrato | Total | Rastreamento utilizável | Falsos aceites em cada modelo |
+| --- | ---: | ---: | ---: |
+| Repouso | 4 | 2 | 0 |
+| Movimento cotidiano | 3 | 3 | 1 |
+| Transição entre sinais | 3 | 3 | 1 |
+| Sinal fora do catálogo | 9 | 9 | 4 |
+
+Com o combinado, a volta do queixo ao teclado foi aceita como Aluno. Na UFSM, Vermelho e Laranja foram aceitos como Amarelo e Azul como Cinco. Na Fiocruz, Seis foi aceito como Espelho e a transição de Sete para Oito como Cinco. As três demonstrações da Cecierj, com os mesmos rótulos de cores dos clipes da UFSM, foram rejeitadas. A diferença observada entre apresentações limita a generalização. Os recortes não equivalem a uma amostra de novas pessoas sinalizando espontaneamente em webcam. [Decisões por clipe no CLAD](../ml/external_eval/evidence/variants/report-combined.json) · [Decisões por clipe nas aulas](../ml/fresh_eval/evidence-negatives/report.json)
+
+O Chromium reproduziu três dessas janelas usando uma câmera simulada e o combinado em WebAssembly. As falsas aceitações de Aluno e Cinco voltaram a acrescentar palavras à área livre. O Azul da Cecierj ficou inconclusivo e preservou o texto. Cada linha corresponde a uma tentativa. [Janelas reais, transcrição e hashes](../ml/fresh_eval/evidence-negatives/browser.json)
+
+| Recorte | Quadros processados | Resultado na área livre |
+| --- | ---: | --- |
+| CLAD, mão do queixo ao teclado | 40 | Acrescentou `aluno` |
+| Cecierj, Azul | 17 | Preservou o texto |
+| Fiocruz, Sete para Oito | 22 | Acrescentou `cinco` |
+
+### Reprodução dos novos recortes
+
+Os comandos usam os modelos locais `isolated-geometry`, `isolated-partials` e `isolated-combined`, com os respectivos limiares 0,640, 0,600 e 0,525. O FFmpeg recorta os trechos e remove o áudio. Para reutilizar arquivos já baixados, coloque os três MP4 de origem descritos pelo protocolo em `data/isolated-negative-audit/didactic/source`. O Chromium extrai os pontos com Holistic e os modelos rodam em CPU. Os MP4s, vetores e janelas de câmera simulada ficam em `data/`. [Contratos e hashes dos modelos](../ml/fresh_eval/protocol-negatives.json)
+
+```bash
+out=data/isolated-negative-audit
+python3 -m ml.external_eval.prepare --protocol ml/external_eval/clad-variants.json \
+  --archives data/external-negative/source --out "$out/clad"
+python3 -m ml.fresh_eval.prepare --protocol ml/fresh_eval/protocol-negatives.json \
+  --out "$out/didactic"
+
+for group in clad didactic; do
+  node ml/extract.mjs --manifest "$out/$group/manifest.json" \
+    --out "$out/$group/features" --workers 2
+done
+
+for model in geometry partials combined; do
+  PYTHONPATH=ml .venv/bin/python -m ml.external_eval.evaluate \
+    --protocol ml/external_eval/clad-variants.json \
+    --manifest "$out/clad/manifest.json" --features "$out/clad/features/index.json" \
+    --run "data/models/isolated-$model" --out "$out/clad/report-$model.json"
+done
+PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate \
+  --protocol ml/fresh_eval/protocol-negatives.json \
+  --manifest "$out/didactic/manifest.json" --features "$out/didactic/features/index.json" \
+  --out "$out/didactic/report.json"
+```
+
+Para repetir as três capturas simuladas, use a transformação de vídeo registrada na evidência para preparar os Y4M. Execute o teste `recognition.test.mjs` do roteiro de capturas parciais com `LIBRASIA_TEST_START_OFFSET_MS=500`, a duração de cada clipe e o texto esperado na reprodução. Os rótulos esperados `aluno` e `cinco` verificam a reprodução do erro observado. [Roteiro Chromium](janelas-area-livre.md#reproduzir) · [Parâmetros das três capturas](../ml/fresh_eval/evidence-negatives/browser.json)

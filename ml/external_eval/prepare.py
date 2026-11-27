@@ -148,7 +148,11 @@ def main():
     if args.development:
         protocol["clips"] = json.loads(DEVELOPMENT.read_text(encoding="utf-8"))
         source_path = DEVELOPMENT
-    directory = args.out or Path("data/clad-development" if args.development else "data/external-negative")
+    default_output = Path("data/clad-development")
+    if not args.development:
+        default_name = "external-negative" if source_path.resolve() == SOURCE.resolve() else source_path.stem
+        default_output = Path("data") / default_name
+    directory = args.out or default_output
     archives = args.archives
     if archives is None and args.development:
         archives = Path("data/external-negative/source")

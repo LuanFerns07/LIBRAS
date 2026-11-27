@@ -1,0 +1,754 @@
+{
+  "scope": "exploratory-external-didactic-clips",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "fd697f34b5e7181993c1f7807f85c0f9bc42969d1d414fda7b501f4e1b956f20",
+  "manifestSha256": "44984df493ac92a76a6aa46382d129942a5efa9710edc8bdb7d9115cdbea3790",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "featuresManifestSha256": "5c5f4a87a72e70a542ca17f73bcb896316ba4d06d53e22d1d61b1874083ed239",
+  "models": {
+    "geometry": {
+      "threshold": 0.64,
+      "onnxSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifestSha256": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac",
+      "perLabel": {},
+      "decisions": [
+        {
+          "id": "ufsm-cores-baixa",
+          "signer": 301,
+          "expected": null,
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive",
+          "stratum": "repouso",
+          "sourceLabel": "mãos abaixo do quadro"
+        },
+        {
+          "id": "ufsm-vermelho",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.8561614361715403,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "ufsm-laranja",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.9081885832320785,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "ufsm-azul",
+          "signer": 301,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.9477288954111889,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-laranja",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.7702748461001055,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "cecierj-azul",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.5196678238701983,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-vermelho",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8795719828711986,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "fiocruz-dois",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9296924717728505,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "dois"
+        },
+        {
+          "id": "fiocruz-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9902659641051867,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "três"
+        },
+        {
+          "id": "fiocruz-seis",
+          "signer": 303,
+          "expected": null,
+          "predicted": "espelho",
+          "confidence": 0.8851556787695856,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "seis"
+        },
+        {
+          "id": "cecierj-rosa-marrom",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8540348109718787,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "rosa → marrom"
+        },
+        {
+          "id": "fiocruz-dois-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9882701336746557,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "dois → três"
+        },
+        {
+          "id": "fiocruz-sete-oito",
+          "signer": 303,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.8071957603259758,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "transicao",
+          "sourceLabel": "sete → oito"
+        }
+      ],
+      "negativeOverall": {
+        "captureStates": {
+          "insufficient": 1,
+          "ready": 12
+        },
+        "falseAcceptance": {
+          "count": 5,
+          "total": 13,
+          "rate": 0.38461538461538464
+        },
+        "falseAcceptanceGivenUsableTracking": {
+          "count": 5,
+          "total": 12,
+          "rate": 0.4166666666666667
+        },
+        "subjectsWithAnyFalseAcceptance": {
+          "count": 2,
+          "total": 3,
+          "rate": 0.6666666666666666
+        },
+        "falsePredictions": {
+          "amarelo": 2,
+          "cinco": 2,
+          "espelho": 1
+        }
+      },
+      "negativeByStratum": {
+        "fora-do-catalogo": {
+          "captureStates": {
+            "ready": 9
+          },
+          "falseAcceptance": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 2,
+            "total": 3,
+            "rate": 0.6666666666666666
+          },
+          "falsePredictions": {
+            "amarelo": 2,
+            "cinco": 1,
+            "espelho": 1
+          }
+        },
+        "repouso": {
+          "captureStates": {
+            "insufficient": 1
+          },
+          "falseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 0,
+            "total": 0,
+            "rate": null
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falsePredictions": {}
+        },
+        "transicao": {
+          "captureStates": {
+            "ready": 3
+          },
+          "falseAcceptance": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "falsePredictions": {
+            "cinco": 1
+          }
+        }
+      }
+    },
+    "partials": {
+      "threshold": 0.6,
+      "onnxSha256": "0aae75ca27ef370ccc8c6f846035b9d3c03a9b9b2a7a86ccf966145e01af0f5a",
+      "manifestSha256": "68dce0ae3d95075fc0f54f82a1fec356a6b7d3efdf00a6a06b8ddc2df5647e3a",
+      "perLabel": {},
+      "decisions": [
+        {
+          "id": "ufsm-cores-baixa",
+          "signer": 301,
+          "expected": null,
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive",
+          "stratum": "repouso",
+          "sourceLabel": "mãos abaixo do quadro"
+        },
+        {
+          "id": "ufsm-vermelho",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.6459988603616067,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "ufsm-laranja",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.6518761626484325,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "ufsm-azul",
+          "signer": 301,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.9039079390446468,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-laranja",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.916312362509875,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "cecierj-azul",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.862829858680344,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-vermelho",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9813502354472304,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "fiocruz-dois",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.910234612125563,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "dois"
+        },
+        {
+          "id": "fiocruz-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9786549990824132,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "três"
+        },
+        {
+          "id": "fiocruz-seis",
+          "signer": 303,
+          "expected": null,
+          "predicted": "espelho",
+          "confidence": 0.9716731991166712,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "seis"
+        },
+        {
+          "id": "cecierj-rosa-marrom",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9575437023478612,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "rosa → marrom"
+        },
+        {
+          "id": "fiocruz-dois-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9767173143019565,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "dois → três"
+        },
+        {
+          "id": "fiocruz-sete-oito",
+          "signer": 303,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.647054597443816,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "transicao",
+          "sourceLabel": "sete → oito"
+        }
+      ],
+      "negativeOverall": {
+        "captureStates": {
+          "insufficient": 1,
+          "ready": 12
+        },
+        "falseAcceptance": {
+          "count": 5,
+          "total": 13,
+          "rate": 0.38461538461538464
+        },
+        "falseAcceptanceGivenUsableTracking": {
+          "count": 5,
+          "total": 12,
+          "rate": 0.4166666666666667
+        },
+        "subjectsWithAnyFalseAcceptance": {
+          "count": 2,
+          "total": 3,
+          "rate": 0.6666666666666666
+        },
+        "falsePredictions": {
+          "amarelo": 2,
+          "cinco": 2,
+          "espelho": 1
+        }
+      },
+      "negativeByStratum": {
+        "fora-do-catalogo": {
+          "captureStates": {
+            "ready": 9
+          },
+          "falseAcceptance": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 2,
+            "total": 3,
+            "rate": 0.6666666666666666
+          },
+          "falsePredictions": {
+            "amarelo": 2,
+            "cinco": 1,
+            "espelho": 1
+          }
+        },
+        "repouso": {
+          "captureStates": {
+            "insufficient": 1
+          },
+          "falseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 0,
+            "total": 0,
+            "rate": null
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falsePredictions": {}
+        },
+        "transicao": {
+          "captureStates": {
+            "ready": 3
+          },
+          "falseAcceptance": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "falsePredictions": {
+            "cinco": 1
+          }
+        }
+      }
+    },
+    "combined": {
+      "threshold": 0.525,
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "perLabel": {},
+      "decisions": [
+        {
+          "id": "ufsm-cores-baixa",
+          "signer": 301,
+          "expected": null,
+          "predicted": null,
+          "confidence": null,
+          "captureState": "insufficient",
+          "decision": "capture-inconclusive",
+          "stratum": "repouso",
+          "sourceLabel": "mãos abaixo do quadro"
+        },
+        {
+          "id": "ufsm-vermelho",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.6217111792721363,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "ufsm-laranja",
+          "signer": 301,
+          "expected": null,
+          "predicted": "amarelo",
+          "confidence": 0.7541153669218629,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "ufsm-azul",
+          "signer": 301,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.8085550468824698,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-laranja",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.49768591467917894,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "laranja"
+        },
+        {
+          "id": "cecierj-azul",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.31621722041986344,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "azul"
+        },
+        {
+          "id": "cecierj-vermelho",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.5743871036936866,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "vermelho"
+        },
+        {
+          "id": "fiocruz-dois",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8519358938635646,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "dois"
+        },
+        {
+          "id": "fiocruz-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9702183507676314,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "três"
+        },
+        {
+          "id": "fiocruz-seis",
+          "signer": 303,
+          "expected": null,
+          "predicted": "espelho",
+          "confidence": 0.9113759684467297,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "fora-do-catalogo",
+          "sourceLabel": "seis"
+        },
+        {
+          "id": "cecierj-rosa-marrom",
+          "signer": 302,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8004654263642419,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "rosa → marrom"
+        },
+        {
+          "id": "fiocruz-dois-tres",
+          "signer": 303,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9664467599203471,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao",
+          "sourceLabel": "dois → três"
+        },
+        {
+          "id": "fiocruz-sete-oito",
+          "signer": 303,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.7333095782081112,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "transicao",
+          "sourceLabel": "sete → oito"
+        }
+      ],
+      "negativeOverall": {
+        "captureStates": {
+          "insufficient": 1,
+          "ready": 12
+        },
+        "falseAcceptance": {
+          "count": 5,
+          "total": 13,
+          "rate": 0.38461538461538464
+        },
+        "falseAcceptanceGivenUsableTracking": {
+          "count": 5,
+          "total": 12,
+          "rate": 0.4166666666666667
+        },
+        "subjectsWithAnyFalseAcceptance": {
+          "count": 2,
+          "total": 3,
+          "rate": 0.6666666666666666
+        },
+        "falsePredictions": {
+          "amarelo": 2,
+          "cinco": 2,
+          "espelho": 1
+        }
+      },
+      "negativeByStratum": {
+        "fora-do-catalogo": {
+          "captureStates": {
+            "ready": 9
+          },
+          "falseAcceptance": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 4,
+            "total": 9,
+            "rate": 0.4444444444444444
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 2,
+            "total": 3,
+            "rate": 0.6666666666666666
+          },
+          "falsePredictions": {
+            "amarelo": 2,
+            "cinco": 1,
+            "espelho": 1
+          }
+        },
+        "repouso": {
+          "captureStates": {
+            "insufficient": 1
+          },
+          "falseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 0,
+            "total": 0,
+            "rate": null
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "falsePredictions": {}
+        },
+        "transicao": {
+          "captureStates": {
+            "ready": 3
+          },
+          "falseAcceptance": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 1,
+            "total": 3,
+            "rate": 0.3333333333333333
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "falsePredictions": {
+            "cinco": 1
+          }
+        }
+      }
+    }
+  }
+}

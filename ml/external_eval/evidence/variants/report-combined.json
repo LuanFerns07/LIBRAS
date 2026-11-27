@@ -1,0 +1,147 @@
+{
+  "dataset": "10.5518/249",
+  "manifestSha256": "70fd33ac64feebbad4711c80cc80a08d103402f08d8f249d2b38c6b27ed55329",
+  "protocolSha256": "ee379b01243fed694a46cdaae8b552ec49c31cdb935b11b89a047f1f96ff31b3",
+  "featuresManifestSha256": "53a885f2dd08dcdf07f0151d0418e0a448f2ddb93000ed2905a6b717dadf32a6",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "threshold": 0.525,
+  "runtime": {
+    "device": "CPUExecutionProvider",
+    "onnxruntime": "1.23.2"
+  },
+  "overall": {
+    "captureStates": {
+      "ready": 5,
+      "insufficient": 1
+    },
+    "falseAcceptance": {
+      "count": 1,
+      "total": 6,
+      "rate": 0.16666666666666666
+    },
+    "falseAcceptanceGivenUsableTracking": {
+      "count": 1,
+      "total": 5,
+      "rate": 0.2
+    },
+    "subjectsWithAnyFalseAcceptance": {
+      "count": 1,
+      "total": 3,
+      "rate": 0.3333333333333333
+    },
+    "falsePredictions": {
+      "aluno": 1
+    }
+  },
+  "byStratum": {
+    "repouso": {
+      "captureStates": {
+        "ready": 2,
+        "insufficient": 1
+      },
+      "falseAcceptance": {
+        "count": 0,
+        "total": 3,
+        "rate": 0.0
+      },
+      "falseAcceptanceGivenUsableTracking": {
+        "count": 0,
+        "total": 2,
+        "rate": 0.0
+      },
+      "subjectsWithAnyFalseAcceptance": {
+        "count": 0,
+        "total": 3,
+        "rate": 0.0
+      },
+      "falsePredictions": {}
+    },
+    "movimento-comum": {
+      "captureStates": {
+        "ready": 3
+      },
+      "falseAcceptance": {
+        "count": 1,
+        "total": 3,
+        "rate": 0.3333333333333333
+      },
+      "falseAcceptanceGivenUsableTracking": {
+        "count": 1,
+        "total": 3,
+        "rate": 0.3333333333333333
+      },
+      "subjectsWithAnyFalseAcceptance": {
+        "count": 1,
+        "total": 3,
+        "rate": 0.3333333333333333
+      },
+      "falsePredictions": {
+        "aluno": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "clad-repouso-01-mao-rosto",
+      "subject": 1,
+      "video": 4,
+      "stratum": "repouso",
+      "sha256": "f6ca643447473470f07caaa6f0cdb43713ca8656e1fd24aefb0b50488eb26463",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.8907036165212064
+    },
+    {
+      "id": "clad-repouso-02-oclusao-rosto",
+      "subject": 2,
+      "video": 8,
+      "stratum": "repouso",
+      "sha256": "8e17227ddf885f0e23f9734355ba918c350ca56b3c75207ae0555cb4b24675f6",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.5764028683777943
+    },
+    {
+      "id": "clad-repouso-03-celular",
+      "subject": 3,
+      "video": 12,
+      "stratum": "repouso",
+      "sha256": "ed4d32bd3896b86610f4fce86e8b3921cd5129f78f3cbd532140ef9f94e8aef7",
+      "captureState": "insufficient",
+      "predicted": null,
+      "confidence": null
+    },
+    {
+      "id": "clad-movimento-01-headset",
+      "subject": 1,
+      "video": 45,
+      "stratum": "movimento-comum",
+      "sha256": "50f0865d86ea3079088dbb17359abb9db557676e189dfa15fd11ad551855df8d",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.5309205638585004
+    },
+    {
+      "id": "clad-movimento-02-usb",
+      "subject": 2,
+      "video": 49,
+      "stratum": "movimento-comum",
+      "sha256": "918c3c6cf1141f39177095d4dadcff6188cccc127f4aef0b16c01252009a171b",
+      "captureState": "ready",
+      "predicted": null,
+      "confidence": 0.354548112521827
+    },
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "subject": 3,
+      "video": 54,
+      "stratum": "movimento-comum",
+      "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "captureState": "ready",
+      "predicted": "aluno",
+      "confidence": 0.8009176711470568
+    }
+  ]
+}

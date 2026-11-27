@@ -1,0 +1,59 @@
+{
+  "scope": "three-directed-replays-on-simulated-camera",
+  "appBaseCommit": "8857f0e",
+  "chromium": "156.0.8078.79",
+  "engine": "ONNX Runtime WebAssembly",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "threshold": 0.525,
+  "fixtureTransform": "scale=640:-2,fps=30,tpad=start_duration=0.5:color=lime:stop_duration=0.6:stop_mode=clone",
+  "markerOffsetMs": 500,
+  "transcriptPrefix": "Texto conferido.",
+  "results": [
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "stratum": "movimento-comum",
+      "clipSha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "fixtureSha256": "ac73fb0cba82a138e9c8b6107c31d138b78b64a2c6a2469598847e41c7d638ab",
+      "captureMs": 4000,
+      "observedWindowMs": [
+        533,
+        4533
+      ],
+      "extractedFrames": 40,
+      "state": "accepted",
+      "falseAcceptance": true,
+      "transcript": "Texto conferido. aluno"
+    },
+    {
+      "id": "cecierj-azul",
+      "stratum": "fora-do-catalogo",
+      "clipSha256": "312aea3f694af50dc0b287d228b3aa8d0da008ebf9267b456e0286ac0188527b",
+      "fixtureSha256": "80948880dc54872efeeafe81cb5633f0de1673594bf384b9ad23a000d923c3e9",
+      "captureMs": 1650,
+      "observedWindowMs": [
+        500,
+        2166
+      ],
+      "extractedFrames": 17,
+      "state": "inconclusive",
+      "falseAcceptance": false,
+      "transcript": "Texto conferido."
+    },
+    {
+      "id": "fiocruz-sete-oito",
+      "stratum": "transicao",
+      "clipSha256": "c0c06a9e9dc671cea0becfbf4a6bdcbedb3db38ca9d56d6cbbac3dd5f32c77a9",
+      "fixtureSha256": "820b02703a6022d4aede6ec593f5ebedcd7b5e34d2f11bd66ca418329708ae23",
+      "captureMs": 2150,
+      "observedWindowMs": [
+        500,
+        2700
+      ],
+      "extractedFrames": 22,
+      "state": "accepted",
+      "falseAcceptance": true,
+      "transcript": "Texto conferido. cinco"
+    }
+  ]
+}
