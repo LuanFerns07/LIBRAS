@@ -1,0 +1,594 @@
+{
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "eqtProtocolSha256": "bc68f9fd60bbda068ac91369a83f3755fed22a5df7fa3ecc770ea3c367544170",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "cases": [
+    {
+      "id": "00",
+      "item": 228,
+      "clipSha256": "cd696175e020a9f8aaecd743f8acb1ad3941e0868eebd40776d8520933852ba1",
+      "referenceUnits": 3,
+      "frames": 34,
+      "framesWithHands": 34,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 8,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01",
+      "item": 137,
+      "clipSha256": "a58216a831e1c2a7f69baf6648817b3bcaf37d93b3dceb37250db2e942de4e3d",
+      "referenceUnits": 6,
+      "frames": 36,
+      "framesWithHands": 23,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "amarelo"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "amarelo"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "amarelo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "item": 198,
+      "clipSha256": "b094797a22f7f415e69ef7615239af08555e53eb180f81545c330a3f187a178a",
+      "referenceUnits": 5,
+      "frames": 42,
+      "framesWithHands": 29,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "item": 194,
+      "clipSha256": "a40aa0a8b5ae5a6f792e3e4a887d9e38d55a1f0fcc3805734ac85fafdb707e6b",
+      "referenceUnits": 3,
+      "frames": 30,
+      "framesWithHands": 30,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": []
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": []
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "item": 84,
+      "clipSha256": "dbf0b808cb03b33c6a942b90d029e8f8f077b7c4ce7d5f43002cfd7c8b80a1c7",
+      "referenceUnits": 4,
+      "frames": 42,
+      "framesWithHands": 42,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 9,
+          "recognized": []
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": []
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "item": 67,
+      "clipSha256": "59982ea92093462d4b1e0333b75eecafbc9d2f074332828847ded491a75cdfaa",
+      "referenceUnits": 6,
+      "frames": 39,
+      "framesWithHands": 39,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 8,
+          "recognized": []
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": []
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "item": 197,
+      "clipSha256": "b15a779ea422ba91e00de1ac56c6a6e529a8a985022a1c6c64f8291164df56ec",
+      "referenceUnits": 3,
+      "frames": 28,
+      "framesWithHands": 28,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "espelho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "item": 223,
+      "clipSha256": "34e94504a2f3517453a6fa0924e967032cb6d9959989366ccfcdd8b2614d7d22",
+      "referenceUnits": 6,
+      "frames": 49,
+      "framesWithHands": 49,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 12,
+          "recognized": []
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 10,
+          "recognized": [
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 9,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": [
+            "espelho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "item": 199,
+      "clipSha256": "860eea8f62031ee5c22a28e8a1080f3d5e904fad9f3499df2f658f6193cdc5f1",
+      "referenceUnits": 5,
+      "frames": 32,
+      "framesWithHands": 32,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 5,
+          "recognized": [
+            "espelho",
+            "espelho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "item": 130,
+      "clipSha256": "2ca64a734e030c64ff0b140131ede4d1538d0e96fb97f0f9637f999ddd107f57",
+      "referenceUnits": 7,
+      "frames": 51,
+      "framesWithHands": 32,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": [
+            "cinco"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": [
+            "cinco"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "cinco"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": [
+            "cinco"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "item": 192,
+      "clipSha256": "971ee77c8c112efe9e889ba294d814e8b6943ae9e1ef3fb74b2a5d59bbe20487",
+      "referenceUnits": 4,
+      "frames": 36,
+      "framesWithHands": 36,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 7,
+          "recognized": []
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 6,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": []
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 4,
+          "recognized": []
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "item": 20,
+      "clipSha256": "dd4ce2946b08fa2feae28b78b54d2093aff382a9eefa9d61c9a4b05fd74dda22",
+      "referenceUnits": 10,
+      "frames": 64,
+      "framesWithHands": 51,
+      "conditions": [
+        {
+          "id": "published_original",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 11,
+          "recognized": [
+            "amarelo",
+            "cinco",
+            "cinco",
+            "cinco",
+            "amarelo"
+          ]
+        },
+        {
+          "id": "holistic_frozen",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 11,
+          "recognized": [
+            "espelho",
+            "amarelo",
+            "cinco",
+            "cinco"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 8,
+          "recognized": [
+            "espelho",
+            "cinco",
+            "cinco",
+            "amarelo"
+          ]
+        },
+        {
+          "id": "holistic_weak_cut_with_floor",
+          "state": "inconclusive",
+          "reason": "partial-sequence",
+          "suggestedText": null,
+          "proposed": 8,
+          "recognized": [
+            "espelho",
+            "cinco",
+            "cinco",
+            "cinco",
+            "amarelo"
+          ]
+        }
+      ]
+    }
+  ]
+}

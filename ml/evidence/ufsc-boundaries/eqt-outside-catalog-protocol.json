@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "source": "https://zenodo.org/records/21398895",
+  "license": "CC BY-NC 4.0",
+  "samplesSha256": "541410946862e20ded3866cf7cadbacd0be98cab7cac7a663455fc6f6dc21299",
+  "selection": "Doze amostras de teste escolhidas no ensaio EQT já versionado, sem ajuste dos pesos do modo contínuo.",
+  "referenceAliases": [
+    "5",
+    "aluna",
+    "alunas",
+    "aluno",
+    "alunos",
+    "amarela",
+    "amarelas",
+    "amarelo",
+    "amarelos",
+    "cinco",
+    "espelho",
+    "espelhos"
+  ],
+  "coverage": {
+    "train": {
+      "records": 3202,
+      "reference_word_hits": 0,
+      "gloss_annotated": 0
+    },
+    "dev": {
+      "records": 1068,
+      "reference_word_hits": 0,
+      "gloss_annotated": 0
+    },
+    "test": {
+      "records": 1065,
+      "reference_word_hits": 0,
+      "gloss_annotated": 0
+    }
+  },
+  "cases": [
+    {
+      "id": "00",
+      "item": 228,
+      "mediaPath": "data/eqt-v4/web-test/00.mp4",
+      "mediaSha256": "cd696175e020a9f8aaecd743f8acb1ad3941e0868eebd40776d8520933852ba1",
+      "framesOriginal": 102,
+      "referenceUnits": 3,
+      "clip": {
+        "startMs": 0,
+        "endMs": 3400,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "01",
+      "item": 137,
+      "mediaPath": "data/eqt-v4/web-test/01.mp4",
+      "mediaSha256": "a58216a831e1c2a7f69baf6648817b3bcaf37d93b3dceb37250db2e942de4e3d",
+      "framesOriginal": 106,
+      "referenceUnits": 6,
+      "clip": {
+        "startMs": 0,
+        "endMs": 3533,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "02",
+      "item": 198,
+      "mediaPath": "data/eqt-v4/web-test/02.mp4",
+      "mediaSha256": "b094797a22f7f415e69ef7615239af08555e53eb180f81545c330a3f187a178a",
+      "framesOriginal": 124,
+      "referenceUnits": 5,
+      "clip": {
+        "startMs": 0,
+        "endMs": 4133,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "03",
+      "item": 194,
+      "mediaPath": "data/eqt-v4/web-test/03.mp4",
+      "mediaSha256": "a40aa0a8b5ae5a6f792e3e4a887d9e38d55a1f0fcc3805734ac85fafdb707e6b",
+      "framesOriginal": 88,
+      "referenceUnits": 3,
+      "clip": {
+        "startMs": 0,
+        "endMs": 2933,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "04",
+      "item": 84,
+      "mediaPath": "data/eqt-v4/web-test/04.mp4",
+      "mediaSha256": "dbf0b808cb03b33c6a942b90d029e8f8f077b7c4ce7d5f43002cfd7c8b80a1c7",
+      "framesOriginal": 126,
+      "referenceUnits": 4,
+      "clip": {
+        "startMs": 0,
+        "endMs": 4200,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "05",
+      "item": 67,
+      "mediaPath": "data/eqt-v4/web-test/05.mp4",
+      "mediaSha256": "59982ea92093462d4b1e0333b75eecafbc9d2f074332828847ded491a75cdfaa",
+      "framesOriginal": 115,
+      "referenceUnits": 6,
+      "clip": {
+        "startMs": 0,
+        "endMs": 3833,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "06",
+      "item": 197,
+      "mediaPath": "data/eqt-v4/web-test/06.mp4",
+      "mediaSha256": "b15a779ea422ba91e00de1ac56c6a6e529a8a985022a1c6c64f8291164df56ec",
+      "framesOriginal": 83,
+      "referenceUnits": 3,
+      "clip": {
+        "startMs": 0,
+        "endMs": 2766,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "07",
+      "item": 223,
+      "mediaPath": "data/eqt-v4/web-test/07.mp4",
+      "mediaSha256": "34e94504a2f3517453a6fa0924e967032cb6d9959989366ccfcdd8b2614d7d22",
+      "framesOriginal": 146,
+      "referenceUnits": 6,
+      "clip": {
+        "startMs": 0,
+        "endMs": 4866,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "08",
+      "item": 199,
+      "mediaPath": "data/eqt-v4/web-test/08.mp4",
+      "mediaSha256": "860eea8f62031ee5c22a28e8a1080f3d5e904fad9f3499df2f658f6193cdc5f1",
+      "framesOriginal": 96,
+      "referenceUnits": 5,
+      "clip": {
+        "startMs": 0,
+        "endMs": 3200,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "09",
+      "item": 130,
+      "mediaPath": "data/eqt-v4/web-test/09.mp4",
+      "mediaSha256": "2ca64a734e030c64ff0b140131ede4d1538d0e96fb97f0f9637f999ddd107f57",
+      "framesOriginal": 152,
+      "referenceUnits": 7,
+      "clip": {
+        "startMs": 0,
+        "endMs": 5066,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "10",
+      "item": 192,
+      "mediaPath": "data/eqt-v4/web-test/10.mp4",
+      "mediaSha256": "971ee77c8c112efe9e889ba294d814e8b6943ae9e1ef3fb74b2a5d59bbe20487",
+      "framesOriginal": 107,
+      "referenceUnits": 4,
+      "clip": {
+        "startMs": 0,
+        "endMs": 3566,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    },
+    {
+      "id": "11",
+      "item": 20,
+      "mediaPath": "data/eqt-v4/web-test/11.mp4",
+      "mediaSha256": "dd4ce2946b08fa2feae28b78b54d2093aff382a9eefa9d61c9a4b05fd74dda22",
+      "framesOriginal": 191,
+      "referenceUnits": 10,
+      "clip": {
+        "startMs": 0,
+        "endMs": 6366,
+        "sampleMs": 100,
+        "canvasMaxWidth": 640
+      }
+    }
+  ]
+}

@@ -186,6 +186,28 @@ node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
 
 Use os caminhos dos MP4 indicados no protocolo. O comando preserva a velocidade dos trechos, remove o áudio e usa uma porta de loopback temporária.
 
+### Frases do EQT fora do vocabulário
+
+A triagem leu as 5.335 referências oficiais do EQT-UECE v4. A busca por palavras inteiras, incluindo flexões de Amarelo, Espelho e Aluno, além de `cinco` e `5`, encontrou zero frases com esses termos. Os campos de glosas vieram vazios. A busca mede a cobertura do vocabulário nas referências em português. A anotação em português deixa em aberto a identidade dos sinais produzidos em cada trecho. [Release v4, CC BY-NC 4.0](https://zenodo.org/records/21398895) · [Protocolo e lista de termos](../ml/evidence/ufsc-boundaries/eqt-outside-catalog-protocol.json)
+
+O ensaio reaproveitou os mesmos 12 vídeos integrais do teste oficial usados na paridade do gerador EQT. No Chromium, o Holistic encontrou mãos em 425 de 483 quadros amostrados a 10 Hz. As quatro condições usaram o classificador combinado, o mesmo tradutor e as mesmas imagens.
+
+| Detector | Propostas | Propostas rotuladas | Frases com sugestão |
+| --- | ---: | ---: | ---: |
+| Original | 92 | 13 | 0 de 12 |
+| Holistic sem controle de fragmentação | 81 | 12 | 0 de 12 |
+| Holistic com penalidade de corte | 61 | 12 | 0 de 12 |
+| Holistic com penalidade e piso de cinco posições | 61 | 15 | 0 de 12 |
+
+Cada tentativa teve pelo menos um trecho inconclusivo. A configuração da prévia experimental, com penalidade de corte, rotulou sete trechos como Espelho, três como Cinco e dois como Amarelo. O mesmo fluxo, na captura do Chromium com os vídeos 00 e 11 em Y4M, manteve “Texto conferido.” nos dois casos. Esses ensaios medem a abstenção do fluxo em um conjunto de frases fora do vocabulário nominal. A avaliação de glosas e de tradução em sequências anotadas dentro da cobertura continua pendente. [Resultados por vídeo](../ml/evidence/ufsc-boundaries/eqt-outside-catalog-browser.json)
+
+Use os MP4 locais de `data/eqt-v4/web-test`, preparados conforme a seção de reprodução. O comando confere os hashes, abre os vídeos sem cortes no Chromium e registra as propostas com tempos. Os logs da Área livre ficam em `data/continuous-natural-eval/eqt-camera/{00,11}.log`.
+
+~~~bash
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
+  data/continuous-natural-eval/eqt-outside-catalog.json --eqt
+~~~
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)
