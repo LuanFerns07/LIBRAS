@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-27",
+  "scope": "first-confirmation-without-retuning",
+  "confirmationSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "sources": {
+    "ifpa-numerais": {
+      "name": "Vídeo aula nº 6: O uso dos numerais em Língua de Sinais",
+      "publisher": "Instituto Federal do Pará (IFPA)",
+      "credits": "Prof. Hermínio Tavares Santos. Introdução à Libras, licenciaturas.",
+      "page": "https://educapes.capes.gov.br/handle/capes/586563?mode=full",
+      "licensePage": "https://educapes.capes.gov.br/handle/capes/586563?mode=full",
+      "license": "CC BY-NC-SA 3.0 Brasil",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/3.0/br/",
+      "url": "https://www.youtube.com/watch?v=74EMOUejwz4",
+      "downloadFormat": "134",
+      "filename": "ifpa-numerais.mp4",
+      "sha256": "8462dbefd7a419ea51ecd532d74e47ecbf3a0c3988e25df9271400e255c88f62"
+    }
+  },
+  "selection": {
+    "method": "Quadro original da demonstração de numerais, lido com o algarismo sobreposto e a mudança de configuração da mão.",
+    "framing": "A mesma câmera aproximada mantém mão, parte do tronco e parte inferior do rosto. A cabeça e um dos ombros estão parcialmente fora do quadro.",
+    "positiveRule": "Usar duas janelas do Cinco isolado, da mesma ocorrência.",
+    "negativeRule": "Fixar três durações por transição sem Cinco, com a mesma âncora visual.",
+    "shortDurationsMs": [
+      600,
+      1000,
+      1500
+    ]
+  },
+  "criterion": "Manter os Cinco corretos do combinado e vetar todas as janelas falsamente aceitas de pelo menos uma transição pareada.",
+  "clips": [
+    {
+      "id": "ifpa-cinco-longo",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": "cinco",
+      "startMs": 183350,
+      "durationMs": 1750,
+      "cue": "Algarismo 5 sobreposto, com indicador e médio fletidos e configuração estabilizada."
+    },
+    {
+      "id": "ifpa-cinco-central",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": "cinco",
+      "startMs": 183700,
+      "durationMs": 1100,
+      "cue": "Parte central do mesmo gesto de Cinco, antes da entrada em Seis."
+    },
+    {
+      "id": "ifpa-tres-quatro-600",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 180500,
+      "durationMs": 600,
+      "stratum": "tres-quatro",
+      "sourceLabel": "Três → Quatro",
+      "anchorMs": 180800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-tres-quatro-1000",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 180300,
+      "durationMs": 1000,
+      "stratum": "tres-quatro",
+      "sourceLabel": "Três → Quatro",
+      "anchorMs": 180800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-tres-quatro-1500",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 180050,
+      "durationMs": 1500,
+      "stratum": "tres-quatro",
+      "sourceLabel": "Três → Quatro",
+      "anchorMs": 180800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-seis-sete-600",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 189950,
+      "durationMs": 600,
+      "stratum": "seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "anchorMs": 190250,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-seis-sete-1000",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 189750,
+      "durationMs": 1000,
+      "stratum": "seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "anchorMs": 190250,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-seis-sete-1500",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 189500,
+      "durationMs": 1500,
+      "stratum": "seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "anchorMs": 190250,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-sete-oito-600",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 192500,
+      "durationMs": 600,
+      "stratum": "sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "anchorMs": 192800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-sete-oito-1000",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 192300,
+      "durationMs": 1000,
+      "stratum": "sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "anchorMs": 192800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-sete-oito-1500",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 192050,
+      "durationMs": 1500,
+      "stratum": "sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "anchorMs": 192800,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-oito-nove-600",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 195200,
+      "durationMs": 600,
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "anchorMs": 195500,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-oito-nove-1000",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 195000,
+      "durationMs": 1000,
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "anchorMs": 195500,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-oito-nove-1500",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 194750,
+      "durationMs": 1500,
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "anchorMs": 195500,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-nove-zero-600",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 198300,
+      "durationMs": 600,
+      "stratum": "nove-zero",
+      "sourceLabel": "Nove → Zero",
+      "anchorMs": 198600,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-nove-zero-1000",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 198100,
+      "durationMs": 1000,
+      "stratum": "nove-zero",
+      "sourceLabel": "Nove → Zero",
+      "anchorMs": 198600,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    },
+    {
+      "id": "ifpa-nove-zero-1500",
+      "source": "ifpa-numerais",
+      "signer": 909,
+      "session": "ifpa-numerais-2020",
+      "label": null,
+      "startMs": 197850,
+      "durationMs": 1500,
+      "stratum": "nove-zero",
+      "sourceLabel": "Nove → Zero",
+      "anchorMs": 198600,
+      "cue": "Configuração muda entre os dois algarismos sobrepostos."
+    }
+  ],
+  "models": {
+    "combined": {
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "threshold": 0.525
+    }
+  }
+}
