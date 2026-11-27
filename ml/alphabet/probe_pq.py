@@ -57,7 +57,7 @@ def read_clips(references):
                 yield clip, image, world
 
 
-def probe(base, references):
+def probe(base, references, coordinates="world"):
     metadata_path = base / "alphabet.json"
     metadata = json.loads(metadata_path.read_text())
     labels = np.array(metadata["labels"])
@@ -73,9 +73,14 @@ def probe(base, references):
     ]
     torch.set_num_threads(2)
     clips = list(read_clips(references))
-    train = [(clip, points[np.linspace(0, len(points) - 1, 16).round().astype(int)])
-             for clip, _, points in clips if clip["split"] == "train" and clip["label"] in ("P", "Q")]
-    points = torch.from_numpy(np.concatenate([world for _, world in train]))
+    train = []
+    for clip, image, world in clips:
+        if clip["split"] != "train" or clip["label"] not in ("P", "Q"):
+            continue
+        points = image if coordinates == "image" else world
+        indices = np.linspace(0, len(points) - 1, 16).round().astype(int)
+        train.append((clip, points[indices]))
+    points = torch.from_numpy(np.concatenate([hand for _, hand in train]))
     target = np.repeat([clip["label"] == "Q" for clip, _ in train], 16)
     measures = {"local": local_features, "orientacao": directed_features}
     models = {name: ShapeConfirmation(measure, *fit_linear(measure(points), target)).eval()
@@ -90,8 +95,9 @@ def probe(base, references):
         p_accepted = first_ok & second_ok & (first == "P") & (second == "P")
         if clip["label"] not in ("P", "Q") and not p_accepted.any():
             continue
+        points = image if coordinates == "image" else world
         with torch.inference_mode():
-            variants = {name: model(torch.from_numpy(world)).numpy().ravel() for name, model in models.items()}
+            variants = {name: model(torch.from_numpy(points)).numpy().ravel() for name, model in models.items()}
         variants["q_atual"] = existing_q.run(["scores"], {"world": world.reshape(-1, FEATURES)})[0].ravel()
         rows.append({
             **{key: clip[key] for key in ("source", "split", "label", "startMs", "endMs")},
@@ -110,8 +116,9 @@ def probe(base, references):
         "manifestSha256": checksum(metadata_path),
         "references": [checksum(path) for path in references],
         "threshold": THRESHOLD,
-        "training": [{"source": clip["source"], "label": clip["label"], "frames": len(world)}
-                     for clip, world in train],
+        "coordinates": coordinates,
+        "training": [{"source": clip["source"], "label": clip["label"], "frames": len(hand)}
+                     for clip, hand in train],
         "evaluatedWindows": sum(clip["split"] != "train" for clip, _, _ in clips),
         "results": rows,
     }
@@ -121,5 +128,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("base", type=Path)
     parser.add_argument("references", type=Path, nargs="+")
+    parser.add_argument("--coordinates", choices=("world", "image"), default="world")
     args = parser.parse_args()
-    print(json.dumps(probe(args.base, args.references), ensure_ascii=False, indent=2))
+    print(json.dumps(probe(args.base, args.references, args.coordinates), ensure_ascii=False, indent=2))

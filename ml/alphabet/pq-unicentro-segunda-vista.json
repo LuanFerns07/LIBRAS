@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "milliseconds",
+  "windowEnd": "exclusive",
+  "selection": "Controle de vista para o Q de 177390–178530 ms. A segunda vista ficou fora do treino, como a primeira.",
+  "sources": [
+    {
+      "id": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "title": "[PED] Libras - Alfabeto Explicativo",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro"
+      },
+      "page": "https://www.youtube.com/watch?v=hxnpSXVWkGU",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-download/unicentro-alfabeto.mp4",
+      "sha256": "cdbdadecc5f5d072f3c6daa0353fe44ed9c9d2018ac055263dcc0fa56453b52f",
+      "downloadFormats": "YouTube 137 (H.264, 1920 × 1080, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=hxnpSXVWkGU&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Vista posterior à primeira pose de Q, na mesma demonstração. A mão se aproxima da câmera e permanece com o indicador orientado para baixo.",
+      "windows": [
+        {
+          "label": "Q",
+          "startMs": 179080,
+          "endMs": 180230,
+          "anchorMs": 179620,
+          "view": "segunda vista de Q no mesmo plano, com o cotovelo elevado e menor encurtamento do indicador"
+        }
+      ],
+      "captionSha256": "9259b15257512545737c64818bf00a0e60a3122f27606e17e0292efe5376bfc2"
+    }
+  ]
+}
