@@ -1,0 +1,33 @@
+{
+  "sourceSha256": "a2995cb3af683a0bc65b14969e5b7675378aaaf8257e247392c3f08a9a04dbd6",
+  "referenceSha256": "05a3ec873238def0bd998b559fc2ac0ca532d4d5e0bb251ddcbccff3c0b2c6d5",
+  "verifierSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+  "previousSupplementSha256": "b4476c4aa73cd96e28396c7d65e1a086d3f56c39424cf9f2955c80b7888f4004",
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "onnx": "1.19.0",
+    "onnxruntime": "1.23.2"
+  },
+  "supplement": {
+    "labels": [
+      "E",
+      "O"
+    ],
+    "threshold": 0.95,
+    "modelSha256": "95d1934f414f53e9f1b155680fec64457f54b017d6192689ce2c089dcc05feb2"
+  },
+  "validation": {
+    "LibraSign": {
+      "examples": 2500,
+      "positives": 125,
+      "acceptedO": 70,
+      "falseO": 0
+    },
+    "video": {
+      "examples": 273,
+      "positives": 16,
+      "acceptedO": 16,
+      "falseO": 0
+    }
+  }
+}
