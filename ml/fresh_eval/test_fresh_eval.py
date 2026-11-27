@@ -20,3 +20,11 @@ class PositiveMetricsTests(TestCase):
     def test_model_without_label_is_recorded(self):
         case = {"expected": "aluno", "signer": 1, "captureState": "ready"}
         self.assertEqual(case_decision(case, None, [None, "cinco"]), "unsupported")
+
+    def test_explicit_negatives_distinguish_rejection_false_accept_and_capture(self):
+        case = {"expected": None, "signer": 1, "captureState": "ready"}
+        labels = [None, "cinco"]
+        self.assertEqual(case_decision(case, None, labels), "rejected")
+        self.assertEqual(case_decision(case, "cinco", labels), "false-accept")
+        self.assertEqual(case_decision({**case, "captureState": "no-hand"}, None, labels), "capture-inconclusive")
+        self.assertEqual(summarize([case]), {})

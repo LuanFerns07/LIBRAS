@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-27",
+  "scope": "exploratory-external-didactic-clips",
+  "sources": {
+    "ufsm-cores": {
+      "name": "Cores",
+      "publisher": "Universidade Federal de Santa Maria, NTE",
+      "credits": "Grupo de Produção de Material Didático em Língua de Sinais. Câmera e edição Matheus Fighera. Câmera Julien Moretto. Produção Ronaldo Palma.",
+      "page": "https://ntetube.nte.ufsm.br/v/1536678082",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license": "CC-BY-NC-SA-4.0",
+      "url": "https://ntetube.nte.ufsm.br/repositorio/b803553b06fe9d3affc2a30614598f71/480p.mp4",
+      "sha256": "6d1511cb40c9f7b589c87f397639ec276d9bd505d45e9391db9c8e58b7674561",
+      "filename": "ufsm-cores-480.mp4"
+    },
+    "cecierj-12": {
+      "filename": "aula-12.mp4",
+      "title": "Libras aula 12 -estação do ano, meses, dias da semana e cores",
+      "credits": "Fundação Cecierj/Consórcio Cederj e UFF. Roteiro Mariana da Cunha Teixeira de Souza; atuação Vanessa Rodrigues Ildefonso e Cíntia Ingrid Macedo Ribeiro.",
+      "page": "https://canal.cecierj.edu.br/recurso/13766",
+      "licensePage": "https://www.youtube.com/watch?v=4NVpij6RvGg",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "license": "CC-BY-3.0",
+      "url": "https://canal.cecierj.edu.br/012016/8f96e3c6238f88dd167ee2b5a8818e80.mp4",
+      "sha256": "288c24e947b08c7c3e3fc6156cef6e64ea3e828107d8d9e43559d56aeeebfe9a"
+    },
+    "fiocruz-numeros": {
+      "name": "Números Cardinais",
+      "publisher": "Fundação Oswaldo Cruz, Campus Virtual, Icict",
+      "credits": "Thiago Cardoso Alves, professor de Libras. Curso Acessibilidade e os Princípios do SUS, módulo 6.",
+      "page": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/modulo_6_video_3.html",
+      "licenseUrl": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/",
+      "license": "CC-BY-NC-SA",
+      "url": "https://mooc.campusvirtual.fiocruz.br/rea/acessibilidade-sus/downloads/modulo_6/004-Numeros-cardinais.mp4",
+      "sha256": "259a28f593df2f690435c5337f187a56a00fef89a3e145770eb1e721f013971f",
+      "filename": "fiocruz-cardinais.mp4"
+    }
+  },
+  "clips": [
+    {
+      "id": "ufsm-cores-baixa",
+      "source": "ufsm-cores",
+      "signer": 301,
+      "label": null,
+      "stratum": "repouso",
+      "sourceLabel": "mãos abaixo do quadro",
+      "startMs": 16500,
+      "durationMs": 1600,
+      "cue": "Permanece em pé depois de abaixar as mãos, antes de iniciar a demonstração seguinte."
+    },
+    {
+      "id": "ufsm-vermelho",
+      "source": "ufsm-cores",
+      "signer": 301,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "vermelho",
+      "startMs": 21850,
+      "durationMs": 1400,
+      "cue": "Legenda VERMELHO e execução diante da boca antes de baixar a mão."
+    },
+    {
+      "id": "ufsm-laranja",
+      "source": "ufsm-cores",
+      "signer": 301,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "laranja",
+      "startMs": 25350,
+      "durationMs": 1600,
+      "cue": "Legenda LARANJA e execução diante da boca, com a mão visível."
+    },
+    {
+      "id": "ufsm-azul",
+      "source": "ufsm-cores",
+      "signer": 301,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "azul",
+      "startMs": 28850,
+      "durationMs": 1450,
+      "cue": "Legenda AZUL e execução com a mão à frente do tronco."
+    },
+    {
+      "id": "cecierj-laranja",
+      "source": "cecierj-12",
+      "signer": 302,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "laranja",
+      "startMs": 120000,
+      "durationMs": 1550,
+      "cue": "Legenda Laranja na sequência de cores e mão junto à boca."
+    },
+    {
+      "id": "cecierj-azul",
+      "source": "cecierj-12",
+      "signer": 302,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "azul",
+      "startMs": 132100,
+      "durationMs": 1650,
+      "cue": "Legenda Azul, com a mão próxima ao rosto."
+    },
+    {
+      "id": "cecierj-vermelho",
+      "source": "cecierj-12",
+      "signer": 302,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "vermelho",
+      "startMs": 135850,
+      "durationMs": 1650,
+      "cue": "Legenda Vermelho, com o indicador junto à boca."
+    },
+    {
+      "id": "fiocruz-dois",
+      "source": "fiocruz-numeros",
+      "signer": 303,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "dois",
+      "startMs": 50150,
+      "durationMs": 1900,
+      "cue": "Algarismo 2 na tela e pose ilustrativa mantida."
+    },
+    {
+      "id": "fiocruz-tres",
+      "source": "fiocruz-numeros",
+      "signer": 303,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "três",
+      "startMs": 54150,
+      "durationMs": 2500,
+      "cue": "Algarismo 3 na tela e pose ilustrativa mantida."
+    },
+    {
+      "id": "fiocruz-seis",
+      "source": "fiocruz-numeros",
+      "signer": 303,
+      "label": null,
+      "stratum": "fora-do-catalogo",
+      "sourceLabel": "seis",
+      "startMs": 66000,
+      "durationMs": 3200,
+      "cue": "Algarismo 6 na tela e pose ilustrativa mantida."
+    },
+    {
+      "id": "cecierj-rosa-marrom",
+      "source": "cecierj-12",
+      "signer": 302,
+      "label": null,
+      "stratum": "transicao",
+      "sourceLabel": "rosa → marrom",
+      "startMs": 127650,
+      "durationMs": 1000,
+      "cue": "Mão sai da região da bochecha, desce e inicia a configuração bimanual."
+    },
+    {
+      "id": "fiocruz-dois-tres",
+      "source": "fiocruz-numeros",
+      "signer": 303,
+      "label": null,
+      "stratum": "transicao",
+      "sourceLabel": "dois → três",
+      "startMs": 52250,
+      "durationMs": 1500,
+      "cue": "Os dedos mudam de configuração entre as duas demonstrações e a cartela muda."
+    },
+    {
+      "id": "fiocruz-sete-oito",
+      "source": "fiocruz-numeros",
+      "signer": 303,
+      "label": null,
+      "stratum": "transicao",
+      "sourceLabel": "sete → oito",
+      "startMs": 73500,
+      "durationMs": 2150,
+      "cue": "A mão muda de configuração e posição enquanto passa de 7 para 8."
+    }
+  ],
+  "models": {
+    "geometry": {
+      "threshold": 0.64,
+      "onnxSha256": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifestSha256": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac"
+    },
+    "partials": {
+      "threshold": 0.6,
+      "onnxSha256": "0aae75ca27ef370ccc8c6f846035b9d3c03a9b9b2a7a86ccf966145e01af0f5a",
+      "manifestSha256": "68dce0ae3d95075fc0f54f82a1fec356a6b7d3efdf00a6a06b8ddc2df5647e3a"
+    },
+    "combined": {
+      "threshold": 0.525,
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b"
+    }
+  }
+}

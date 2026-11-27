@@ -139,11 +139,12 @@ def prepare(protocol, root, *, source_path=SOURCE, development=False, archives_d
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--protocol", type=Path, default=SOURCE)
     parser.add_argument("--development", action="store_true", help="Prepara apenas as pessoas reservadas a treino.")
     parser.add_argument("--archives", type=Path)
     args = parser.parse_args()
-    protocol = json.loads(SOURCE.read_text(encoding="utf-8"))
-    source_path = SOURCE
+    source_path = args.protocol
+    protocol = json.loads(source_path.read_text(encoding="utf-8"))
     if args.development:
         protocol["clips"] = json.loads(DEVELOPMENT.read_text(encoding="utf-8"))
         source_path = DEVELOPMENT

@@ -1,4 +1,4 @@
-"""Executa modelos ONNX congelados e conta acertos e perdas de demonstrações didáticas."""
+"""Executa modelos ONNX congelados em demonstrações didáticas com referência."""
 
 import argparse
 from collections import Counter
@@ -6,12 +6,13 @@ from pathlib import Path
 
 from dataset import FEATURE_COUNTS, digest, write_json
 from ml.external_eval.evaluate import classified, load_json, verified_model
+from ml.external_eval.evaluate import summarize as summarize_rejections
 from ml.fresh_eval.prepare import PROTOCOL
 
 
 def summarize(rows):
     by_label = {}
-    for label in sorted({row["expected"] for row in rows}):
+    for label in sorted({row["expected"] for row in rows if row["expected"] is not None}):
         samples = [row for row in rows if row["expected"] == label]
         counts = Counter(row["decision"] for row in samples)
         by_label[label] = {
@@ -27,6 +28,10 @@ def summarize(rows):
 
 
 def case_decision(case, prediction, available):
+    if case["expected"] is None:
+        if case["captureState"] != "ready":
+            return "capture-inconclusive"
+        return "rejected" if prediction is None else "false-accept"
     if case["expected"] not in available:
         return "unsupported"
     if case["captureState"] != "ready":
@@ -74,10 +79,20 @@ def evaluate(manifest_path, features_path, runs, protocol_path=PROTOCOL):
                 "predicted": prediction, "confidence": confidence, "captureState": extraction["state"],
             }
             case["decision"] = case_decision(case, prediction, model["labels"])
+            if case["expected"] is None:
+                case["stratum"] = clip["stratum"]
+                case["sourceLabel"] = clip["sourceLabel"]
             decisions.append(case)
         result[version] = {
             **fixed, "perLabel": summarize(decisions), "decisions": decisions,
         }
+        negatives = [{**row, "subject": row["signer"]} for row in decisions if row["expected"] is None]
+        if negatives:
+            result[version]["negativeOverall"] = summarize_rejections(negatives)
+            result[version]["negativeByStratum"] = {
+                group: summarize_rejections([row for row in negatives if row["stratum"] == group])
+                for group in sorted({row["stratum"] for row in negatives})
+            }
     return {
         "scope": "exploratory-external-didactic-clips", "device": "CPUExecutionProvider",
         "protocolSha256": digest(protocol_path), "manifestSha256": manifest_sha,
@@ -97,7 +112,7 @@ def main():
     report = evaluate(args.manifest, args.features, args.runs, args.protocol)
     write_json(args.out, report)
     for version, results in report["models"].items():
-        print(version, results["perLabel"])
+        print(version, results.get("negativeByStratum", results["perLabel"]))
 
 
 if __name__ == "__main__":

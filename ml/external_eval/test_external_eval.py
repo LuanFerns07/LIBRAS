@@ -66,3 +66,13 @@ class ExternalMetricsTests(TestCase):
         validate_clips(development, minimum_people=1)
         with self.assertRaisesRegex(ValueError, "separadas"):
             prepare(protocol, Path("."), source_path=DEVELOPMENT, development=True)
+
+    def test_posture_variants_use_new_videos_of_the_same_test_actors(self):
+        protocol = json.loads(SOURCE.read_text(encoding="utf-8"))
+        variants = json.loads(SOURCE.with_name("clad-variants.json").read_text(encoding="utf-8"))
+        clips = variants["clips"]
+        self.assertEqual(variants["source"], protocol["source"])
+        self.assertEqual(variants["developmentReservedSubjectIds"], protocol["developmentReservedSubjectIds"])
+        self.assertEqual({row["subject"] for row in clips}, set(protocol["testSubjectIds"]))
+        self.assertTrue({row["video"] for row in clips}.isdisjoint(row["video"] for row in protocol["clips"]))
+        validate_clips(clips)

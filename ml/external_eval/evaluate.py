@@ -87,15 +87,20 @@ def summarize(rows):
     }
 
 
-def evaluate(manifest_path, features_path, run):
+def evaluate(manifest_path, features_path, run, protocol_path=SOURCE):
+    protocol = load_json(protocol_path)
     manifest = load_json(manifest_path)
     features = load_json(features_path)
-    if (manifest["protocolSha256"] != digest(SOURCE) or features["sourceManifestSha256"] != digest(manifest_path)
+    if (manifest["protocolSha256"] != digest(protocol_path) or manifest["source"] != protocol["source"]
+            or features["sourceManifestSha256"] != digest(manifest_path)
             or features["preprocess"] not in FEATURE_COUNTS or features["mediapipe"] != "0.10.32"):
         raise ValueError("Manifesto ou versão da extração incompatível.")
+    planned = {clip["id"]: clip for clip in protocol["clips"]}
     expected = {clip["sha256"]: clip for clip in manifest["clips"]}
-    if len(expected) != len(manifest["clips"]) or len(expected) != len(features["clips"]):
-        raise ValueError("Clipes duplicados ou ausentes na extração.")
+    if (len(expected) != len(manifest["clips"]) or len(expected) != len(features["clips"])
+            or len(planned) != len(expected) or {clip["id"] for clip in expected.values()} != set(planned)
+            or any(clip.get(key) != value for clip in expected.values() for key, value in planned[clip["id"]].items())):
+        raise ValueError("A extração diverge dos clipes fixados no protocolo.")
     session, model, model_manifest_hash = verified_model(run, features)
     seen = set()
     decisions = []
@@ -118,7 +123,7 @@ def evaluate(manifest_path, features_path, run):
         })
     return {
         "dataset": manifest["source"]["doi"], "manifestSha256": digest(manifest_path),
-        "protocolSha256": digest(SOURCE), "featuresManifestSha256": digest(features_path),
+        "protocolSha256": digest(protocol_path), "featuresManifestSha256": digest(features_path),
         "extractorRecipe": features["recipe"], "modelSha256": model["modelSha256"],
         "modelManifestSha256": model_manifest_hash,
         "threshold": model["threshold"], "runtime": {"device": "CPUExecutionProvider", "onnxruntime": ort.__version__},
@@ -130,12 +135,13 @@ def evaluate(manifest_path, features_path, run):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--protocol", type=Path, default=SOURCE)
     parser.add_argument("--manifest", type=Path, default=Path("data/external-negative/manifest.json"))
     parser.add_argument("--features", type=Path, default=Path("data/external-negative/features/index.json"))
     parser.add_argument("--run", type=Path, default=Path("data/models/isolated-v1"))
     parser.add_argument("--out", type=Path, default=Path("data/external-negative/report.json"))
     args = parser.parse_args()
-    report = evaluate(args.manifest, args.features, args.run)
+    report = evaluate(args.manifest, args.features, args.run, args.protocol)
     write_json(args.out, report)
     print(json.dumps(report["byStratum"], ensure_ascii=False, indent=2))
 
