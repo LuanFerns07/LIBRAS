@@ -244,6 +244,18 @@ node ml/verify-wasm.mjs --run data/models/isolated-combined
 LIBRASIA_PORTA=4175 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
 ```
 
+### Modelo combinado na partição reservada
+
+Com os pesos congelados e o limiar 0,525, o modelo combinado acertou 32 dos 33 clipes dos sinais suportados na partição MINDS reservada, de três pessoas. O F1 macro foi 0,972, a cobertura foi 97,0% e houve uma falsa aceitação em 18 negativos. O clipe de Banco foi aceito como Espelho e um dos nove clipes de Cinco ficou inconclusivo. As métricas de reconhecimento passam os limites numéricos nesse conjunto. [Resultados e matriz por sinal](../ml/evidence/isolated-combined/reserved-onnx.json) · [Metas de aceite](protocolo-aceite.md#metas-de-aceite)
+
+Em 19 novos recortes externos, o mesmo modelo registrou seis falsas aceitações. A avaliação na webcam com pessoas independentes e a revisão das dicas continuam necessárias para o aceite. [Rejeição em novas gravações](negativos.md#novas-posturas-transições-e-glosas-externas)
+
+```bash
+PYTHONPATH=ml .venv/bin/python -m ml.evaluate_frozen \
+  --features data/minds-expanded/features/index.json --run data/models/isolated-combined \
+  --out data/models/isolated-combined/reserved-onnx.json
+```
+
 ## Orientação e movimento de pontos das mãos
 
 Espelho combina a orientação e a rotação da palma. Amarelo combina a configuração da mão e o deslocamento do indicador na região do rosto. O candidato `ConvSequenceMotion` acrescenta a normal da palma e a variação entre instantes consecutivos dessa normal, do pulso e da ponta do indicador. Cada variação requer os pontos presentes nos dois quadros. A entrada do modelo no navegador segue sendo o tensor Holistic de 24 × 192. [Descrição dos sinais](animacoes.md)
