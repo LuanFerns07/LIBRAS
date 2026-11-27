@@ -140,6 +140,16 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       await evaluate('(' + useVoiceFixture + ')(' + JSON.stringify(voiceMode) + ')')
       await waitUntil('!!document.querySelector("#transcription")')
     }
+    if (!target) {
+      const response = await fetch(new URL('models/isolated.json', base))
+      assert.ok(response.ok)
+      const { labels } = await response.json()
+      const names = recognitionCatalog.filter(signal => labels.includes(signal.text)).map(signal => signal.label)
+      const coverage = JSON.stringify(`Sinais disponíveis. ${names.join(', ')}.`)
+      await waitUntil('document.querySelector("[data-recognition-coverage]")?.textContent === ' + coverage)
+      assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
+      assert.equal(seenAssets.has('/models/isolated.onnx'), false)
+    }
     if (target) {
       const select = '(id => { const field = document.querySelector("[data-signal]"); field.value = id; field.dispatchEvent(new Event("change")); })'
       await evaluate(select + '(' + JSON.stringify(target) + ')')

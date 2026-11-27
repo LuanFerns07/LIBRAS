@@ -1,6 +1,7 @@
-import { lesson, recognitionCatalog } from '../catalog.js'
+import { recognitionCatalog } from '../catalog.js'
 import { captureMarkup, mountCapture } from '../capture-panel.js'
 import { appendTranscription, freeFeedback } from '../recognition/feedback.js'
+import { readSignalManifest } from '../recognition/model-assets.js'
 import { mountSpeech } from '../speech.js'
 import { glossReviewMarkup, mountGlossReview } from './gloss-review.js'
 
@@ -37,7 +38,7 @@ export function mountFree(main, openEngine, draft) {
         ${continuousEnabled ? glossReviewMarkup() : ''}
         <div class="coverage">
           <h3>Catálogo experimental</h3>
-          <p data-recognition-coverage>Modelo inicial: ${lesson.map(signal => signal.label).join(', ')}.</p>
+          <p data-recognition-coverage>Carregando o catálogo de sinais.</p>
         </div>
       </section>
     </div>`
@@ -64,25 +65,41 @@ export function mountFree(main, openEngine, draft) {
     transcription.focus()
   }) : undefined
   let currentLetter = null
-  let signalNames = lesson.map(signal => signal.label)
+  let signalNames
   let supportedLetters
   const currentMode = () => mode.value === 'letter' ? 'letter'
     : continuous?.checked ? 'continuous' : sequence.checked ? 'sequence' : 'isolated'
   function renderCoverage() {
-    coverage.textContent = currentMode() === 'letter'
-      ? supportedLetters?.length ? `Leitura experimental de ${supportedLetters.join(', ')}.`
+    if (currentMode() === 'letter') {
+      coverage.textContent = supportedLetters?.length ? `Leitura experimental de ${supportedLetters.join(', ')}.`
         : supportedLetters ? 'O modelo local de alfabeto está indisponível.'
           : 'Ative a câmera para carregar a leitura do alfabeto.'
-      : `Sinais disponíveis. ${signalNames.join(', ')}.`
+      return
+    }
+    coverage.textContent = signalNames?.length ? `Sinais disponíveis. ${signalNames.join(', ')}.`
+      : signalNames ? 'O modelo local de sinais está indisponível.' : 'Carregando o catálogo de sinais.'
   }
+
+  function showSignalNames(labels) {
+    signalNames = recognitionCatalog.filter(signal => labels.includes(signal.text)).map(signal => signal.label)
+    renderCoverage()
+  }
+
+  readSignalManifest().then(manifest => {
+    if (!signalNames) showSignalNames(manifest.labels)
+  }, () => {
+    if (!signalNames) showSignalNames([])
+  })
+
   const capture = mountCapture(main, {
     openEngine,
     captureMode: currentMode,
     interpret: result => result.glosses ? result : freeFeedback(result),
     onReady(engine, kind) {
-      if (kind === 'letter') supportedLetters = engine.alphabetCatalog
-      else signalNames = recognitionCatalog.filter(signal => engine.catalog.includes(signal.text)).map(signal => signal.label)
-      renderCoverage()
+      if (kind === 'letter') {
+        supportedLetters = engine.alphabetCatalog
+        renderCoverage()
+      } else showSignalNames(engine.catalog)
     },
     onLetter(label) {
       currentLetter = label

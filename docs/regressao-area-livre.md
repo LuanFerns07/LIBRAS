@@ -127,3 +127,9 @@ m5_run LIBRASIA_TEST_SYNC=1 LIBRASIA_TEST_TRIALS=2 LIBRASIA_EXPECT_REASON=low-co
 Para reproduzir a tentativa de baixa confiança com o arquivo de velocidade original, troque o Y4M do último comando por banco-s12-2.y4m. A aceitação observada faz falhar a asserção de rejeição. Troque por espelho-s09-3.y4m para investigar a variação de motivo no mesmo estado inconclusivo.
 
 Os logs da execução de referência ficam em data/evidence. A audição por uma pessoa, a sinalização diretamente na webcam e os critérios de aceitação de sinais e rejeição continuam no protocolo da demonstração.
+
+## Aceite técnico de M5
+
+A Área livre passou a ler o manifesto antes de ativar a câmera. O teste confirmou Cinco, Espelho, Amarelo e Aluno na lista, com a câmera desligada e sem carregar os pesos ONNX. Ao simular a falta do manifesto, o navegador mostrou que o modelo local estava indisponível e manteve o texto editável. [Teste no Chromium](../tests/e2e/recognition.test.mjs)
+
+Com gravações, duas tentativas distintas produziram “cinco espelho” e a voz local em pt-BR concluiu a leitura da edição. A sequência com pausa produziu “cinco alunos”. Duas tentativas de Cinco sustentado acrescentaram uma palavra cada, a ausência de mãos preservou a transcrição e a ausência simulada de voz preservou a edição. Os logs ficam em `data/evidence/demonstracao/m5-area-livre/`. O teste confirmou o término da síntese pelo navegador. A audição por pessoas e a coleta de transições adicionais ficam nas pendências. [Preparar Cinco e Espelho](roteiro-validacao.md#dois-sinais-em-tentativas-isoladas-com-voz-local) · [Pendências de M5](pendencias-futuras.md#m4-e-m5--alfabeto-sinais-área-livre-e-voz)

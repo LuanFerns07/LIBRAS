@@ -1,7 +1,7 @@
 import { env, InferenceSession, Tensor } from 'onnxruntime-web/wasm'
 import ortWasm from 'onnxruntime-web/ort-wasm-simd-threaded.wasm?url'
 import ortModule from 'onnxruntime-web/ort-wasm-simd-threaded.mjs?url'
-import { checkAlunoPosition, decide, readModelManifest } from './decision.js'
+import { checkAlunoPosition, decide } from './decision.js'
 import { observePalm, observeVerticalTrajectory } from './feedback.js'
 import { frameForRecognition } from './framing.js'
 import { openHolistic } from './holistic.js'
@@ -10,12 +10,7 @@ import { segmentFrames } from './segmentation.js'
 import { alphabetFeatureCount, letterFeatures } from './alphabet.js'
 import { matchMotion, motionVectorSize } from './alphabet-motion.js'
 import { createTrajectoryMatcher, trajectorySize } from './alphabet-trajectory.js'
-
-async function localAsset(path) {
-  const response = await fetch(import.meta.env.BASE_URL + path)
-  if (!response.ok) throw new Error('O arquivo local do modelo está indisponível.')
-  return response
-}
+import { localAsset, readSignalManifest } from './model-assets.js'
 
 async function verifiedBytes(path, expected) {
   const bytes = await (await localAsset(path)).arrayBuffer()
@@ -219,7 +214,7 @@ export async function openAlphabetEngine() {
 }
 
 export async function openEngine() {
-  const manifest = readModelManifest(await (await localAsset('models/isolated.json')).json())
+  const manifest = await readSignalManifest()
   const bytes = await verifiedBytes('models/isolated.onnx', manifest.modelSha256)
 
   configureWasm()
