@@ -133,7 +133,10 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Rodar o pacote experimental para Azul de ponta a ponta no Chromium. O candidato exibiu os mesmos quatro Z em cinco janelas, preservou as letras esperadas nos controles C/Ç/H/J/K/X/Y e registrou zero Z nas três repetições de Azul e nos 19 controles fora do alfabeto. [Ensaios do candidato](docs/dados-alfabeto.md#ensaio-do-candidato-de-z-em-azul)
 - [x] Comparar as duas versões nas dez janelas adicionais. Preservar Ç e U e reproduzir o Z do Cecierj em uma de duas repetições com cada versão. Integrar a regra de Z à prévia 4177 e testar Z, a troca M → N e a sobreposição de duas mãos no Chromium. [Comparação e compilação adotada](docs/dados-alfabeto.md#ensaio-do-candidato-de-z-em-azul)
 - [x] Diagnosticar o Z curto da aula `1536677587` da UFSM. Em seis capturas sem Z no painel, duas detecções de mão sobrepostas interrompiam um traço. O candidato recuperou Z no replay dos mesmos pontos com os pesos da prévia. [Diagnóstico e replays pareados](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
-- [ ] Confirmar a retomada de Z em novas capturas do Chromium e nos controles de Azul, X e Y. Verificar também as trocas transitórias nas fontes reservadas.
+- [x] Confirmar o Z curto nas três novas capturas do candidato no Chromium, em Praticar e na Área livre. Comparar os mesmos pontos de 19 negativos, três repetições de Azul e os outros quatro Z já reconhecidos. [Ensaios do candidato](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
+- [x] Comparar três Z e três Y de outras pessoas no Chromium. Os três Z apareceram nas duas versões. O Y de Tel baixinha apareceu nas duas versões e os dois outros Y ficaram sem leitura. [Gravações independentes](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
+- [ ] Completar o reteste em novas capturas de Azul, X e os negativos antes de adotar o candidato.
+- [ ] Investigar os Y sem leitura de Uéslei Paterno e da Unicentro e as trocas breves nos recortes de movimento.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
