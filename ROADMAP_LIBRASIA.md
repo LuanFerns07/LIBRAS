@@ -56,7 +56,7 @@ As demais etapas, a publicação na Vercel e a finalização do memorial ficam p
 - [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [x] Conferir os três sinais iniciais no catálogo, no player 3D e no manifesto da prévia. Verificar partições, atribuição da base e paridade WebAssembly. Reunir as fontes e bases em um índice para citação. [Revisão técnica de M1](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências](docs/referencias.md)
-- [ ] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com uma amostra exploratória, com essa condição registrada nas evidências.
+- [x] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com a amostra exploratória registrada. [Aceite técnico de M1](docs/dados.md#aceite-técnico-de-m1)
 
 ### M2 · Primeiro sinal com webcam e avatar reais
 

@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import test from 'node:test'
+import { createPlayback } from '../src/avatar/playback.js'
+import { lesson } from '../src/catalog.js'
 import { decide, readModelManifest } from '../src/recognition/decision.js'
 
 const model = {
@@ -33,4 +36,20 @@ test('o manifesto rejeita tensores que não correspondem a um esquema de extraç
   ]) {
     assert.throws(() => readModelManifest({ ...model, ...dimensions }), /Manifesto do classificador incompatível/)
   }
+})
+
+test('os sinais da lição usam o mesmo identificador no modelo combinado e no avatar', () => {
+  const combined = new URL('../ml/evidence/isolated-combined/model.json', import.meta.url)
+  const manifest = readModelManifest(JSON.parse(readFileSync(combined, 'utf8')))
+  let selected
+  const player = createPlayback({ paint() {}, onStep(step) { selected = step } })
+  for (const signal of lesson) {
+    const index = manifest.labels.indexOf(signal.text)
+    assert.ok(index > 0, signal.text)
+    const logits = manifest.labels.map((_, position) => position === index ? 8 : 0)
+    assert.equal(decide(logits, manifest).id, signal.id)
+    player.setSequence([signal])
+    assert.equal(selected.id, signal.id)
+  }
+  player.dispose()
 })
