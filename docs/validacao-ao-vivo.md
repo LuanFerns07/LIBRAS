@@ -25,7 +25,7 @@ LC_ALL=C find . -maxdepth 1 -type f -name 'alphabet*' -printf '%f\n' |
   LC_ALL=C sort | xargs -r sha256sum -- | sha256sum
 ~~~
 
-Se iniciou a aplicação diretamente de um checkout, registre o resultado de `git rev-parse HEAD` na hora de compilar. A prévia empacotada serve o commit da compilação em `/commit.txt`.
+Se compilou a aplicação diretamente de um checkout limpo, registre o resultado de `git rev-parse HEAD` obtido na hora da compilação. A prévia empacotada serve a revisão em `/commit.txt`. Quando o pacote foi compilado com alterações locais, **Preencher versão do pacote** exibe um aviso de rascunho e deixa o preenchimento da versão em aberto. [Recompilar a prévia](previa-estavel.md#recompilar-com-os-modelos-verificados)
 
 Com a câmera ligada, use a identificação e a resolução da trilha exibidas no painel da câmera. No reconhecedor atual, o intervalo configurado de amostragem é 100 ms.
 

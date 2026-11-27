@@ -11,6 +11,7 @@ import { finish } from './recorded-capture.mjs'
 
 const appUrl = process.env.LIBRASIA_TEST_URL
 const testValidation = process.env.LIBRASIA_TEST_VALIDATION === '1'
+const draftUrl = process.env.LIBRASIA_TEST_DRAFT_URL
 const timingReport = process.env.LIBRASIA_TEST_TIMING_REPORT
 const copyTiming = process.env.LIBRASIA_TEST_COPY_TIMING === '1'
 const videoFile = process.env.LIBRASIA_TEST_VIDEO
@@ -74,6 +75,7 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
   }))
   const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
   const commit = commitFile.toString().trim()
+  assert.match(commit, /^[a-f0-9]{40}$/u)
   const version = { commit, catalog: catalogVersion, avatar: commit, modelSha256: sha256(model), manifestSha256: sha256(manifest) }
   const alphabetManifest = await fetch(new URL('/models/alphabet.json', url))
   if (alphabetManifest.ok) {
@@ -181,4 +183,29 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     assert.ok(requests.every(request => new URL(request.url).origin === url.origin && request.method === 'GET'))
     assert.deepEqual(await evaluate('[localStorage.length, sessionStorage.length]'), [0, 0])
   }, { videoFile: copyTiming ? videoFile : undefined })
+})
+
+test('a ficha identifica o pacote compilado com alterações locais como rascunho', {
+  skip: !draftUrl,
+  timeout: 15000,
+}, async () => {
+  const url = new URL('/validacao/', draftUrl)
+  const response = await fetch(new URL('/commit.txt', url))
+  assert.ok(response.ok)
+  const revision = (await response.text()).trim()
+  assert.match(revision, /^rascunho [a-f0-9]{40}$/u)
+  const metadata = await fetch(new URL('versao.json', url))
+  assert.ok(metadata.ok)
+  assert.equal((await metadata.json()).commit, revision)
+
+  await withChromium(async ({ navigate, evaluate, waitUntil }) => {
+    await navigate(url.href)
+    await evaluate('document.querySelector("#load-version").click()')
+    await waitUntil('document.querySelector("#version-status").textContent.startsWith("Pacote de rascunho.")')
+    assert.deepEqual(await evaluate(`(() => {
+      const fields = document.querySelector('#session-form').elements
+      return [fields.commit.value, fields.avatar.value, fields.modelSha256.value]
+    })()`), ['', '', ''])
+    assert.equal(await evaluate('document.querySelector("#load-version").disabled'), false)
+  })
 })

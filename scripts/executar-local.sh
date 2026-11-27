@@ -24,6 +24,11 @@ node --input-type=module -e '
   }
 '
 
+if [[ -n "$pacote" ]]; then
+  revisao=$(git rev-parse --verify HEAD)
+  alteracoes=$(git status --porcelain=v1 --untracked-files=normal)
+fi
+
 mkdir -p .cache
 previa=$(mktemp -d "$PWD/.cache/previa.XXXXXX")
 trap 'rm -rf -- "$previa"' EXIT
@@ -110,23 +115,29 @@ JS
 
 if [[ -n "$pacote" ]]; then
   test -f "$previa/dist/models/isolated.json"
-  git rev-parse HEAD > "$previa/dist/commit.txt"
   mkdir -- "$previa/dist/validacao"
   cp qa/{index.html,interface.js,registro.css,registro.js} "$previa/dist/validacao/"
-  node --input-type=module - "$previa/dist" <<'JS'
+  cp scripts/servir-previa.py "$previa/iniciar.py"
+  cp vercel.json "$previa/vercel.json"
+  node --input-type=module - "$previa/dist" "$revisao" "${alteracoes:+rascunho}" <<'JS'
+import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { catalogVersion } from './src/catalog.js'
 
-const directory = process.argv[2]
-const [commitFile, model, manifest] = await Promise.all([
-  readFile(join(directory, 'commit.txt'), 'utf8'),
+const [, , directory, revision, initialState] = process.argv
+const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim()
+const finalRevision = git('rev-parse', '--verify', 'HEAD')
+const finalChanges = git('status', '--porcelain=v1', '--untracked-files=normal')
+const draft = initialState === 'rascunho' || finalChanges.length > 0 || revision !== finalRevision
+const commit = draft ? `rascunho ${revision}` : revision
+if (draft) console.log('Pacote de rascunho. A ficha de validação sinalizará as alterações locais.')
+const [model, manifest] = await Promise.all([
   readFile(join(directory, 'models/isolated.onnx')),
   readFile(join(directory, 'models/isolated.json')),
 ])
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
-const commit = commitFile.trim()
 const version = {
   commit,
   catalog: catalogVersion,
@@ -142,14 +153,14 @@ if (alphabetFiles.includes('alphabet.json')) {
   }))
   version.alphabetSha256 = sha256(checksums.join(''))
 }
+await writeFile(join(directory, 'commit.txt'), commit + '\n')
 await writeFile(join(directory, 'validacao/versao.json'), JSON.stringify(version, null, 2) + '\n')
 JS
   mkdir -p -- "$(dirname -- "$pacote")"
   mkdir -- "$pacote"
   trap 'rm -rf -- "$previa" "$pacote"' EXIT
   cp -a "$previa/dist" "$pacote/site"
-  cp scripts/servir-previa.py "$pacote/iniciar.py"
-  cp vercel.json "$pacote/vercel.json"
+  cp "$previa/"{iniciar.py,vercel.json} "$pacote/"
   (
     cd -- "$pacote"
     { printf '%s\0' iniciar.py vercel.json; find site -type f -print0; } |

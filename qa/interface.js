@@ -102,6 +102,10 @@ loadVersion.addEventListener('click', async () => {
     if (!response.ok) throw new Error('Não foi possível carregar a versão.')
     const version = await response.json()
     if (session) return
+    if (version.commit?.startsWith('rascunho ')) {
+      show('version-status', 'Pacote de rascunho. Use uma compilação de um checkout limpo para preencher a versão automaticamente.', true)
+      return
+    }
     for (const name of ['commit', 'catalog', 'avatar', 'modelSha256', 'manifestSha256']) {
       sessionForm.elements[name].value = version[name]
     }

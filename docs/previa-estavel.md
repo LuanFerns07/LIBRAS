@@ -20,7 +20,7 @@ Abra a ficha em outra janela do Chromium para manter a captura visível. **Preen
 
 No pacote `180711c`, o reteste no Chromium percorreu as seis etapas do roteiro com vídeos gravados e verificou o encaixe e a retomada dos pontos das duas mãos. Em ensaios separados, a webcam Acer foi aberta e liberada e a síntese local em pt-BR chegou ao fim. O aceite com participantes na webcam e a compreensão do áudio continuam pendentes. Os logs ficam em `data/evidence/demonstracao`, nos arquivos `roteiro-180711c-reteste.log`, `pontos-180711c.log`, `fisico-180711c.log` e `ficha-validacao-180711c.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Teste dos pontos](teste-pontos-ao-vivo.md)
 
-O servidor local informa o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`.
+O pacote registra o código compilado em `site/commit.txt`. Se o Git detectar alterações locais ou mudança de revisão durante a compilação, o arquivo começa com `rascunho` seguido do hash de base. O rascunho abre normalmente para testes e a ficha sinaliza a origem ao tentar preencher a versão. Para registrar evidência vinculada a um commit, use um pacote gerado de um checkout limpo. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`.
 
 ### Recompilar com os modelos verificados
 
@@ -37,6 +37,8 @@ Para abrir essa cópia ao lado da demonstração, execute `python3 "$destino/ini
 O empacotador instala as dependências e busca as versões fixadas do MediaPipe quando necessário. Para reutilizar arquivos dos extratores, informe os caminhos em `LIBRASIA_HOLISTIC_FILE` e `LIBRASIA_HAND_FILE`. Caso os pesos do LibrasIA estejam em outras pastas locais, defina `LIBRASIA_MODELO`, `LIBRASIA_ALFABETO_MODELO` e `LIBRASIA_ALFABETO_MOVIMENTO`. As somas versionadas cobrem os arquivos copiados dessas pastas. Os pesos ficam fora do Git. [Somas dos modelos](../ml/evidence/demonstracao-modelos.sha256) · [Treinamento e exportação do combinado](avaliacao.md#combinação-de-geometria-e-flexão) · [Pesos do alfabeto](dados-alfabeto.md#compilar-neste-linux)
 
 Uma cópia existente do pacote também serve como origem dos pesos. Aponte as três variáveis dos modelos para a pasta `site/models` da cópia e mantenha `LIBRASIA_DEMONSTRACAO=1` para conferir os arquivos.
+
+O checkout limpo de `7759cc7` instalou as dependências do lockfile, reutilizou os pesos e os extratores do pacote `cb3adf2` e verificou os 34 arquivos. A comparação encontrou os mesmos arquivos do aplicativo, da ficha e dos modelos. Mudaram o commit, os metadados de versão da ficha e o arquivo de somas. Um ensaio separado compilou o checkout com alterações locais e conferiu o aviso de rascunho na ficha do Chromium. Os registros ficam em `data/evidence/demonstracao/m1-m2-reproducao/`. [Teste da ficha](../tests/e2e/validation.test.mjs)
 
 Em 27/11/2026, o pacote `599f341` foi gerado em checkout limpo, com instalação a partir do lockfile, pesos de `data/models` e extratores MediaPipe de cópias locais verificadas. A aplicação, a ficha e os modelos reproduziram os arquivos do pacote anterior byte a byte, com os identificadores de compilação atualizados. A verificação cobriu 34 arquivos. A tentativa com o classificador inicial divergente encerrou antes de criar o pacote.
 
