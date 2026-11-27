@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "manifest": "ml/alphabet/independent-a-q-r-windows.json",
+  "manifestSha256": "15136ed3c3d85780e2255cc287ffbc39d482273ffdf95a0c8a808722d29ba2ee",
+  "build": {
+    "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "environment": {
+    "chromium": "156.0.8078.79",
+    "ffmpeg": "7.1.5-0+deb13u1",
+    "gpu": false,
+    "workers": 1
+  },
+  "offlineExtraction": {
+    "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+    "pointsSha256": "b5e0c21ceaf378876235c5610cd15ce8d345afa4cd7923dbcb09e18eca964f32",
+    "windows": [
+      {
+        "source": "tel-baixinha-chzje8vmc1i",
+        "label": "A",
+        "startMs": 70320,
+        "endMs": 71420,
+        "sampledFrames": 17,
+        "oneHandFrames": 17,
+        "twoHandFrames": 0,
+        "selectableFrames": 17,
+        "medianHandHeightFraction": 0.1475
+      },
+      {
+        "source": "tel-baixinha-chzje8vmc1i",
+        "label": "Q",
+        "startMs": 110780,
+        "endMs": 111880,
+        "sampledFrames": 17,
+        "oneHandFrames": 17,
+        "twoHandFrames": 0,
+        "selectableFrames": 17,
+        "medianHandHeightFraction": 0.2846
+      },
+      {
+        "source": "tel-baixinha-chzje8vmc1i",
+        "label": "R",
+        "startMs": 112900,
+        "endMs": 114000,
+        "sampledFrames": 17,
+        "oneHandFrames": 16,
+        "twoHandFrames": 1,
+        "selectableFrames": 16,
+        "medianHandHeightFraction": 0.2608
+      },
+      {
+        "source": "unicentro-hxnpsxvwkgu",
+        "label": "A",
+        "startMs": 88380,
+        "endMs": 89480,
+        "sampledFrames": 17,
+        "oneHandFrames": 0,
+        "twoHandFrames": 17,
+        "selectableFrames": 17,
+        "medianHandHeightFraction": 0.1102
+      },
+      {
+        "source": "unicentro-hxnpsxvwkgu",
+        "label": "A",
+        "startMs": 92280,
+        "endMs": 93380,
+        "sampledFrames": 17,
+        "oneHandFrames": 17,
+        "twoHandFrames": 0,
+        "selectableFrames": 17,
+        "medianHandHeightFraction": 0.1405
+      }
+    ]
+  },
+  "replay": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "A",
+      "startMs": 70320,
+      "endMs": 71420,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 222
+        }
+      ],
+      "workerFrames": 83,
+      "framesWithHand": 21,
+      "lastHandAfterVideoMs": 1111
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "readings": [],
+      "workerFrames": 89,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1139
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 297
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 1082
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "A",
+      "startMs": 88380,
+      "endMs": 89480,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 212
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1097
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "A",
+      "startMs": 92280,
+      "endMs": 93380,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 276
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 1114
+    }
+  ],
+  "repeatQR": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "readings": [],
+      "workerFrames": 92,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1129
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 283
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1075
+    }
+  ]
+}
