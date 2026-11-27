@@ -1,0 +1,2053 @@
+{
+  "schemaVersion": 1,
+  "device": "CPUExecutionProvider",
+  "frozenRuleSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "modelSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "modelManifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "threshold": 0.525,
+  "groups": {
+    "minds-test": {
+      "index": "minds-expanded/features/index.json",
+      "indexSha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+      "baseline": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            17,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            9,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            6,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            9
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 1.0,
+            "recall": 0.8888888888888888,
+            "f1": 0.9411764705882353,
+            "support": 9,
+            "accepted": 8,
+            "predicted": 8,
+            "truePositives": 8
+          },
+          "espelho": {
+            "precision": 0.9,
+            "recall": 1.0,
+            "f1": 0.9473684210526316,
+            "support": 9,
+            "accepted": 9,
+            "predicted": 10,
+            "truePositives": 9
+          },
+          "amarelo": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 6,
+            "accepted": 6,
+            "predicted": 6,
+            "truePositives": 6
+          },
+          "aluno": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 9,
+            "accepted": 9,
+            "predicted": 9,
+            "truePositives": 9
+          }
+        },
+        "f1Macro": 0.9721362229102167,
+        "coverage": {
+          "count": 32,
+          "total": 33,
+          "rate": 0.9696969696969697
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 18,
+          "rate": 0.05555555555555555
+        },
+        "inconclusive": {
+          "count": 18,
+          "total": 51,
+          "rate": 0.35294117647058826
+        }
+      },
+      "withVeto": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            17,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            6,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            9,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            6,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            9
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "support": 9,
+            "accepted": 3,
+            "predicted": 3,
+            "truePositives": 3
+          },
+          "espelho": {
+            "precision": 0.9,
+            "recall": 1.0,
+            "f1": 0.9473684210526316,
+            "support": 9,
+            "accepted": 9,
+            "predicted": 10,
+            "truePositives": 9
+          },
+          "amarelo": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 6,
+            "accepted": 6,
+            "predicted": 6,
+            "truePositives": 6
+          },
+          "aluno": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 9,
+            "accepted": 9,
+            "predicted": 9,
+            "truePositives": 9
+          }
+        },
+        "f1Macro": 0.861842105263158,
+        "coverage": {
+          "count": 27,
+          "total": 33,
+          "rate": 0.8181818181818182
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 18,
+          "rate": 0.05555555555555555
+        },
+        "inconclusive": {
+          "count": 23,
+          "total": 51,
+          "rate": 0.45098039215686275
+        }
+      },
+      "decisions": [
+        {
+          "sha256": "bc2cebc72d546e85dc58309c9bade1068aa11b8cff95624dea49c1fc78659a90",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9552763651915319,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "978e08f48855f9bab058b6f978646e02cb90679cb7f68057fffeedf7f4549d79",
+          "signer": 9,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.9933885999318514,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "90118b17e3df5daccd4be13de43869ae59e355eae3ef773fd40b5ba26b269c2c",
+          "signer": 9,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.9869248335789257,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "147207b44b15ff3db65ecba614e215757ac1025547b6af9d7887e572ec107509",
+          "signer": 9,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.9908587018743229,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "f91046b8d3e0be1d58ca4e35b877f5be3387497221607b457e8c9a56794a5ebd",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9919299271889386,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "b0a29520c30472b0149e9aebe72b1c95e98b80d2ff4005f2a1a7fc3a648e2f5f",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.6159446806170256,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "0e6b15306983bbeb00cf6c5328eb9666aa0e6f77f332a448503d18c8daf17f17",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.49377341077597525,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "307c7cf850d2e3442c2a6547dc94ec231aecfb39ba6ac8436a3f14912c83bca4",
+          "signer": 9,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.9404872867018371,
+          "scores": {
+            "shape": 1.1687606814442915,
+            "shape-and-motion": 1.1480657455408942
+          },
+          "afterVeto": "cinco"
+        },
+        {
+          "sha256": "b8606a69c187a8c670290070a85af5a037956ef29a06c28cd44f6d9827935414",
+          "signer": 9,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.9581251733765469,
+          "scores": {
+            "shape": 1.158680866422046,
+            "shape-and-motion": 1.209787334934428
+          },
+          "afterVeto": "cinco"
+        },
+        {
+          "sha256": "4844f12d1982806baa45174bbdc79dd45516f2c504e7881ccafa99701e8db916",
+          "signer": 9,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.9532767271422359,
+          "scores": {
+            "shape": 0.8427498040719573,
+            "shape-and-motion": 0.774443007974813
+          },
+          "afterVeto": "cinco"
+        },
+        {
+          "sha256": "6ea6659a4543f254e78528596ecddb37f45f05e4b52f223f57f2f627d5f57d73",
+          "signer": 9,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9911429686945611,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "4d7847f2f2ebbbe2e123f95e32ecb995c463f600d77237dc41247d8672bfa11b",
+          "signer": 9,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9769433563123655,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "d87abb4975d8f4ff659a365ddb2e03c3545d8236b86708c47948cc4e4df1e962",
+          "signer": 9,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9595434244902059,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "f3c4b83cd22ea6456a3aa1762c0f45b8bd4874aa45c90e5be60e4927fe4c9b1e",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.7700391310246139,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "12ff1ef42cadd94a2789951ed6fda39f464038b976e6df7bf5eabebcab679be4",
+          "signer": 9,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.4326008165125516,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "24ffa81cb3a20b46036e875ea7f45da44306553efc5005db857938abafdd6015",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.8670613637959204,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "d7d3c1ff10a436737f36d87ed4f8436ff65b11a60e35b4bf7e0a3d7007de5f94",
+          "signer": 11,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.620845900891461,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "ff380eb96dafde2bf968c99db8c559b6e28e08f1020f2aa8a9e77e0e457455cc",
+          "signer": 11,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.6518435246979634,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "d98c66f100c06a1c335afe73f20ff568ebf43644e35b6c8539c9df8c34441d0f",
+          "signer": 11,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.6146241653319875,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "8b6bc3b50f8622b0cf4c7ff012b34e43e55e3e9bab7df4b745d725ca7efc9647",
+          "signer": 11,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.5709007237789604,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "2c4e618db0ef18d8e88dd9991967083ef5efac8a435314af352cb43bed037016",
+          "signer": 11,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.5517254608497691,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "0c411ba043f18a814a4af54b246c72daf05999034392e443c96db0c96a2069ca",
+          "signer": 11,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.5339102463347368,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "f74c5d2d6bd983d1b489a1c0d9afb68bed918c873bb5426ac4b0c2458e20dfaf",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9659691121489625,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "fe5bd3ed21cb16c4b920f31fe6c080d9bc6925a88594457aad02014b87032fbb",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.45770286669235843,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "3a0abc0298ed024af0f4f20fcc73fdaec65a1702ace5158b7c92b9d600c4f577",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.39427033912430337,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "ccee74e0ee607b73d8746c00cdf7d8d23ef0159a5ea41b84ed23e62558a1cfe0",
+          "signer": 11,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.7527018147392994,
+          "scores": {
+            "shape": -0.3225547778065942,
+            "shape-and-motion": -0.19165245638426387
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "ac597b4c69a312082648810037498c137a605a873cea7c55cda1f7f3cde34b85",
+          "signer": 11,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.6951965418040492,
+          "scores": {
+            "shape": -0.3117978936420486,
+            "shape-and-motion": -0.20027153587632557
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "fd1fe6e03d2de032beab4844209062520f9972bbf3e6c95f434123318bf23e56",
+          "signer": 11,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.7077110656435648,
+          "scores": {
+            "shape": -0.35239904828950896,
+            "shape-and-motion": -0.24849563441781045
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "5f03937b7ee81c169b4e3a4dd53d678d834dd370904a117ee7d8b39b9318c009",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.39390473968897616,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "f1182e9b50cf59d39b4216eb8da72398c7e1ceb6d65191662552d466c6fc74e3",
+          "signer": 11,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9451785544436447,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "c07f49e5f70f07f4305d22d163c7ca4878212d0c598f9c5cb6f0c328f59f603b",
+          "signer": 11,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9389881589694716,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "9ad43177d8b124ea1999cc689e95f1fa50d7e03d14e50ec0ea2ea5ff8efe73f2",
+          "signer": 11,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.8750753597791544,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "93aa1215196b78fdd1a0bf68d074723770c12bcd8c25148b8bd8d48c72656228",
+          "signer": 11,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.7526995646943199,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "4b210ca2fd1b66d6f91d4e19f5ea327d8a0157964b7f7a161dc7250f6f1fd43f",
+          "signer": 12,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.6763554306176439,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "311a9cf08a67e31d85740da9d14d50212c2c00c2ad5fa17495024f5fc44bb1d5",
+          "signer": 12,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.6945204552054874,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "d77ad8903c7f1753e8f4557bc7d575a537eaa2ca3bc81170e292982308c35294",
+          "signer": 12,
+          "expected": "aluno",
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.6651720812160609,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        },
+        {
+          "sha256": "42d066a09a46ba811cdda70a2fa8abc7b824ba43cecc54840d5af1dfad8c9519",
+          "signer": 12,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.5998897954280679,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "0a7ec5d737fde9f7aa77ff30c11affc5410293b8fa5ce397ddb19abf033d9bc7",
+          "signer": 12,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.6881548789694723,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "dfbe6d1cc274adc3b6049b275fde4de4ac5a470a5679d6127341cf6d2ba484be",
+          "signer": 12,
+          "expected": "amarelo",
+          "captureState": "ready",
+          "predicted": "amarelo",
+          "confidence": 0.7406080560507444,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "amarelo"
+        },
+        {
+          "sha256": "ed185153dfd8145a2d8534da47bbb9a0123766d4602e2aa685869d2e1bc92ff3",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9548442727796493,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "128bc200991777f65b4185c48a8c5e14fecfecbcf40293c269813077a6ca2e7a",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.4801417246934927,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "c3b63449036d5d236338ec1dd20aca201d6eca300c85ba0a43cbcf08dfccaed2",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.595032530136925,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "2f47038df45a50c255ce92aba19235acd6d437465f3daa9d354c6db48c89a1aa",
+          "signer": 12,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.5802672391806505,
+          "scores": {
+            "shape": -0.5078955847573579,
+            "shape-and-motion": -0.4022773783783257
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "3043bb6560a3e3c1bc8a4d2c89de3989c3b093b7b9dab76e5772e1a92ed52f44",
+          "signer": 12,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.632925839702788,
+          "scores": {
+            "shape": -0.5561914960149867,
+            "shape-and-motion": -0.4177236933310106
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "681983ea1634a79fa5fae565c59317dee73e1dc0a84e2a1571ac044979598417",
+          "signer": 12,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.5099099944037457,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "640bb911032c0bd98fe14fc31f82d42e96182fde40119fbf060a27366919f488",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.4647208442499216,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "8902e2df9fd5cf9d6967d86287ede68611ace6b9f8651d411dee33a9217df36c",
+          "signer": 12,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.970555051373109,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "fa33e4d740156e6c58a9bd7b9e3bd0aea70074e7349b321968c7e0714f705c19",
+          "signer": 12,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9506926723200272,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "fb9b3e5b12fbe790780c2acc6c4d0b7d6d992e7d2cb73f6f046f3888a0943183",
+          "signer": 12,
+          "expected": "espelho",
+          "captureState": "ready",
+          "predicted": "espelho",
+          "confidence": 0.9727056414342474,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "espelho"
+        },
+        {
+          "sha256": "9120392223c276c6f4758280994c3e434b2fea03a81834ba3a0da0ee8a1e0f75",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9776227413052521,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "sha256": "dd14da3ea1f7e84d7e9a4d867985a7c64ec0cb9433e62c1b81869850b4d5399d",
+          "signer": 12,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.6519536688762584,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        }
+      ]
+    },
+    "fiocruz-cinco": {
+      "index": "fresh-sign/features/index.json",
+      "indexSha256": "8b16cce249d578027d578824dde6930c7ad470baf7dc3276eaa658a241abfafd",
+      "baseline": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1,
+            "accepted": 1,
+            "predicted": 1,
+            "truePositives": 1
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.25,
+        "coverage": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0
+        },
+        "falseAcceptance": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "inconclusive": {
+          "count": 0,
+          "total": 1,
+          "rate": 0.0
+        }
+      },
+      "withVeto": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1,
+            "accepted": 1,
+            "predicted": 1,
+            "truePositives": 1
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.25,
+        "coverage": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0
+        },
+        "falseAcceptance": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "inconclusive": {
+          "count": 0,
+          "total": 1,
+          "rate": 0.0
+        }
+      },
+      "decisions": [
+        {
+          "id": "fiocruz-cinco",
+          "sha256": "733c486ff3cb5811b70d1d389e95071e8538aaa7df72b93736603957d9d2ecbc",
+          "signer": 2,
+          "expected": "cinco",
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.9467724658314371,
+          "scores": {
+            "shape": 0.7883554448590789,
+            "shape-and-motion": 0.7404398303089248
+          },
+          "afterVeto": "cinco"
+        }
+      ]
+    },
+    "fiocruz-sete-oito": {
+      "index": "isolated-negative-audit/didactic/features/index.json",
+      "indexSha256": "5c5f4a87a72e70a542ca17f73bcb896316ba4d06d53e22d1d61b1874083ed239",
+      "baseline": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 1,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0
+        },
+        "inconclusive": {
+          "count": 0,
+          "total": 1,
+          "rate": 0.0
+        }
+      },
+      "withVeto": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 0,
+          "total": 1,
+          "rate": 0.0
+        },
+        "inconclusive": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0
+        }
+      },
+      "decisions": [
+        {
+          "id": "fiocruz-sete-oito",
+          "sha256": "c0c06a9e9dc671cea0becfbf4a6bdcbedb3db38ca9d56d6cbbac3dd5f32c77a9",
+          "signer": 303,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": "cinco",
+          "confidence": 0.7333095782081112,
+          "scores": {
+            "shape": -0.894442752576071,
+            "shape-and-motion": -0.9797045649560068
+          },
+          "afterVeto": null
+        }
+      ]
+    },
+    "clad": {
+      "index": "external-negative/features/index.json",
+      "indexSha256": "45439738d3ce0abea10ce444c2a31e194f95b0f2b8b00103fc6221f1e75f852e",
+      "baseline": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            11,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 1,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 12,
+          "rate": 0.08333333333333333
+        },
+        "inconclusive": {
+          "count": 11,
+          "total": 12,
+          "rate": 0.9166666666666666
+        }
+      },
+      "withVeto": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            11,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 1,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 12,
+          "rate": 0.08333333333333333
+        },
+        "inconclusive": {
+          "count": 11,
+          "total": 12,
+          "rate": 0.9166666666666666
+        }
+      },
+      "decisions": [
+        {
+          "id": "clad-repouso-01a",
+          "sha256": "adb38e13b9ca4d7d6d08cabe14f7732ad6372d6d2950bc4241ca1a4aee69fe3c",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.8394354557396414,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-01b",
+          "sha256": "16b42609bda5b683df52011565c7770fd1b40ad167238285fb782e34095fd8d0",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.5789504619938927,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-02a",
+          "sha256": "f82cdf39f45c08234d6793801cf70a81e71822137a689e58809e216b1e538a1e",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.544790999738035,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-02b",
+          "sha256": "186107a2efcf1dbbb0c2abb032a1ab331fd6b4580efafec54d7d0064f8792006",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.3499138295342044,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-03a",
+          "sha256": "6dbd498ba154ea5a98cc679aa03ffee4dc37967a45737b7ca380297d09ae68a0",
+          "signer": 3,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.28131317228379965,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-03b",
+          "sha256": "43a17a1f207481ac68e767c9560c743749fca1245536731d586dda05eb7ecfed",
+          "signer": 3,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.8201800574252565,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-01a",
+          "sha256": "7d38b09065af6429275cf521d5d7ddc669b058a15d3bc290b299fa3c43b1d748",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.9112643424075965,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-01b",
+          "sha256": "3e3fc0e73e8d9eaa174db1de0cecefc7b6e9a4ab8f3e35d7d9a621ac9c26150d",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.3805102705335757,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-02a",
+          "sha256": "7da5de002b702eb097ec6661d40ee4ae323331ca21f7d72d219ad375c44a4db3",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.4887228894155089,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-02b",
+          "sha256": "4b7b2c9b4b865ffb79d26b94409f60e340eee0abfcb64482c750c63f64ff9055",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.4815890535216411,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-03a",
+          "sha256": "85f435ce814e1308f02889d6a08934798c283e1977e3898d36f542da92039cb9",
+          "signer": 3,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.7793899453924075,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-03b",
+          "sha256": "1a3ca7572a9beca3aec194b905530efa14ffd04a1e6647f6f2a525ce492863f5",
+          "signer": 3,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.7569389544489901,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        }
+      ]
+    },
+    "clad-variantes": {
+      "index": "isolated-negative-audit/clad/features/index.json",
+      "indexSha256": "53a885f2dd08dcdf07f0151d0418e0a448f2ddb93000ed2905a6b717dadf32a6",
+      "baseline": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            5,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 1,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 6,
+          "rate": 0.16666666666666666
+        },
+        "inconclusive": {
+          "count": 5,
+          "total": 6,
+          "rate": 0.8333333333333334
+        }
+      },
+      "withVeto": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            5,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "espelho": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "amarelo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 0,
+            "truePositives": 0
+          },
+          "aluno": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0,
+            "accepted": 0,
+            "predicted": 1,
+            "truePositives": 0
+          }
+        },
+        "f1Macro": 0.0,
+        "coverage": {
+          "count": 0,
+          "total": 0,
+          "rate": 0.0
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 6,
+          "rate": 0.16666666666666666
+        },
+        "inconclusive": {
+          "count": 5,
+          "total": 6,
+          "rate": 0.8333333333333334
+        }
+      },
+      "decisions": [
+        {
+          "id": "clad-repouso-01-mao-rosto",
+          "sha256": "f6ca643447473470f07caaa6f0cdb43713ca8656e1fd24aefb0b50488eb26463",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.8907036165212064,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-02-oclusao-rosto",
+          "sha256": "8e17227ddf885f0e23f9734355ba918c350ca56b3c75207ae0555cb4b24675f6",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.5764028683777943,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-repouso-03-celular",
+          "sha256": "ed4d32bd3896b86610f4fce86e8b3921cd5129f78f3cbd532140ef9f94e8aef7",
+          "signer": 3,
+          "expected": null,
+          "captureState": "insufficient",
+          "predicted": null,
+          "confidence": null,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-01-headset",
+          "sha256": "50f0865d86ea3079088dbb17359abb9db557676e189dfa15fd11ad551855df8d",
+          "signer": 1,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.5309205638585004,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-02-usb",
+          "sha256": "918c3c6cf1141f39177095d4dadcff6188cccc127f4aef0b16c01252009a171b",
+          "signer": 2,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": null,
+          "confidence": 0.354548112521827,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": null
+        },
+        {
+          "id": "clad-movimento-03-queixo-teclado",
+          "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+          "signer": 3,
+          "expected": null,
+          "captureState": "ready",
+          "predicted": "aluno",
+          "confidence": 0.8009176711470568,
+          "scores": {
+            "shape": null,
+            "shape-and-motion": null
+          },
+          "afterVeto": "aluno"
+        }
+      ]
+    }
+  }
+}

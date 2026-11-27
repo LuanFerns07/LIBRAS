@@ -1,0 +1,216 @@
+{
+  "scope": "first-confirmation-without-retuning",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "eb068565777caf15d33ac83232a2b3c7c0698dfa64e14aa5bdc5df1a68b75dd8",
+  "manifestSha256": "9ecf2010f90b2ef1af3521e5f4a83001a0d800a99ae8a321cf605dbee5f24260",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "featuresManifestSha256": "073f78a852d02c12b0844ca4954b5dfe489f559d796b7656f0d1dd980be62759",
+  "schemaVersion": 1,
+  "frozenRuleSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "model": {
+    "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+    "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+    "threshold": 0.525
+  },
+  "outcome": "first-independent-confirmation-passed",
+  "sessions": [
+    {
+      "signer": 905,
+      "session": "ufac-niead-quantidade-2019",
+      "correctCinco": [
+        "ufac-quantidade-cinco-inicial",
+        "ufac-quantidade-cinco-final"
+      ],
+      "correctCincoLost": [],
+      "falseCincoByMovement": {
+        "seis-sete-oito": {
+          "ufac-quantidade-seis-sete-oito-600": true,
+          "ufac-quantidade-seis-sete-oito-800": true,
+          "ufac-quantidade-seis-sete-oito-1000": true
+        }
+      },
+      "falseCincoMovementsVetoed": [
+        "seis-sete-oito"
+      ],
+      "informative": true
+    }
+  ],
+  "decisions": [
+    {
+      "id": "ufac-quantidade-cinco-inicial",
+      "signer": 905,
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9170110084061439,
+      "captureState": "ready",
+      "decision": "correct",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "90b97c8960e3c0fc4a2b3035ef32db601fb6c9458ba6ea71fbbcec84c8280874",
+      "scores": {
+        "shape": 0.5265904246219205,
+        "shape-and-motion": 0.6561568893649392
+      },
+      "afterVeto": "cinco"
+    },
+    {
+      "id": "ufac-quantidade-cinco-final",
+      "signer": 905,
+      "expected": "cinco",
+      "predicted": "cinco",
+      "confidence": 0.9360698328564336,
+      "captureState": "ready",
+      "decision": "correct",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "9eb5cbccd70b25a0ddad19b48777273714aeacd6682c21fb955b179aa5626b62",
+      "scores": {
+        "shape": 0.7274366330396983,
+        "shape-and-motion": 0.7327475437419129
+      },
+      "afterVeto": "cinco"
+    },
+    {
+      "id": "ufac-quantidade-seis-sete-oito-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": "cinco",
+      "confidence": 0.8677699297771646,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "seis-sete-oito",
+      "sourceLabel": "Passagem de Seis por Sete a Oito",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "3ebfbf8a8979f21564ecc0af9870eaca9cf433001e888e79899d9039e8b92cfb",
+      "scores": {
+        "shape": -0.76707759102478,
+        "shape-and-motion": -0.5327861382028101
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-seis-sete-oito-800",
+      "signer": 905,
+      "expected": null,
+      "predicted": "cinco",
+      "confidence": 0.8709011757731399,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "seis-sete-oito",
+      "sourceLabel": "Passagem de Seis por Sete a Oito",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "842a8dffc6ae240b52520840cbd8a2afcd00c01370b4a4d1ea6a72cc38b477eb",
+      "scores": {
+        "shape": -0.7378936051809084,
+        "shape-and-motion": -0.6091122763107003
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-seis-sete-oito-1000",
+      "signer": 905,
+      "expected": null,
+      "predicted": "cinco",
+      "confidence": 0.8590935351179445,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "seis-sete-oito",
+      "sourceLabel": "Passagem de Seis por Sete a Oito",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "3a2f53691b585b40138257afc8682b5a1292abca6c4d90c94345b0dc4b6b007b",
+      "scores": {
+        "shape": -0.7778953032081843,
+        "shape-and-motion": -0.5448488106320741
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-oito-nove-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.42423526898582326,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "bace60ea03f34f0c3affc7724877f59d43b0f8b58a6423a6665defebb7b936b1",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-oito-nove-800",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.371787428616146,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "90ac843c727704f1ad5bbae148bb0eeae8beae98bc5d6213d89cdbdc3837c399",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-oito-nove-1000",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.3393683820901844,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "fec4f35e525af6702a0d1a2224b7f2b33281738a132658951d41bb611ad090d9",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-nove-dez-600",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.5064331910079193,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "nove-dez",
+      "sourceLabel": "Nove → Dez",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "67b461a5ec79df2fb52f06b544b6696a09a3a6d8a9de484e1f71fdfe470b9e58",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ufac-quantidade-nove-dez-800",
+      "signer": 905,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.508204159682925,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "nove-dez",
+      "sourceLabel": "Nove → Dez",
+      "session": "ufac-niead-quantidade-2019",
+      "sha256": "4058c63a6d4cc40b59bb3042ff873a7412e77ae808897bef1c7effcb3e3859a1",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    }
+  ]
+}

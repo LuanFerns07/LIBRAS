@@ -185,7 +185,7 @@ O relatório local fica em `$out/report.json`. Os vídeos e pontos ficam em `dat
 
 A videoaula **Numerais Libras**, de Uéslei Paterno, está indicada no módulo de numerais cardinais do curso **Comunicação Inclusiva: Introdução à Libras**. A publicação declara Creative Commons Atribuição. A pessoa e a sessão ficaram fora do ajuste dos vetos de Cinco. O commit `02a2c69` fixou dois blocos didáticos com quatro janelas de Cinco e três durações para cada uma das seis transições. A inspeção das configurações usou apoio das legendas automáticas. [Curso do IFSC](https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178) · [Videoaula de Uéslei Paterno](https://www.youtube.com/watch?v=4_xeQ-U8bPI) · [Protocolo](../ml/fresh_eval/protocol-numerais-ifsc.json)
 
-O Holistic entregou pontos utilizáveis nas 22 janelas. Com o limiar 0,525, o combinado deixou as quatro janelas de Cinco inconclusivas, com confiança máxima de 0,398 a 0,510. Nas 18 janelas de transição, rejeitou 15 e aceitou como Espelho as três durações sobrepostas de Seis → Sete do primeiro bloco. Os vetos congelados de Cinco conservaram as decisões desta sessão. Ainda falta uma sessão externa com Cinco válido e falso Cinco no combinado para medir o efeito dos vetos. [Relatório por janela](../ml/fresh_eval/evidence-numerais-ifsc/report.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-ifsc/manifest.json)
+O Holistic entregou pontos utilizáveis nas 22 janelas. Com o limiar 0,525, o combinado deixou as quatro janelas de Cinco inconclusivas, com confiança máxima de 0,398 a 0,510. Nas 18 janelas de transição, rejeitou 15 e aceitou como Espelho as três durações sobrepostas de Seis → Sete do primeiro bloco. Os vetos congelados de Cinco conservaram as decisões desta sessão. [Relatório por janela](../ml/fresh_eval/evidence-numerais-ifsc/report.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-ifsc/manifest.json)
 
 ```bash
 out=data/transition-gate-m5/ifsc-sonda
@@ -198,4 +198,39 @@ ffmpeg -v error -nostdin -i "$out/4_xeQ-U8bPI.mp4" -map 0:v:0 -an -map_metadata 
 node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --workers 1
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_numeric_veto_confirmation \
   --protocol "$protocol" --session-dir "$out"
+```
+
+### Ensaios com IFPA e UFAC
+
+O commit `ce05de4` fixou 17 janelas a partir dos algarismos exibidos na aula do professor Hermínio Tavares Santos, do IFPA, licenciada em CC BY-NC-SA 3.0 Brasil. A gravação corta parte da cabeça e dos ombros. Das 17 janelas, cinco chegaram ao classificador, nove tiveram pontos insuficientes e três ficaram sem mão, incluindo as duas de Cinco. Duas durações da mesma transição Nove → Zero foram aceitas como Espelho. [Ficha e licença no eduCAPES](https://educapes.capes.gov.br/handle/capes/586563?mode=full) · [Protocolo](../ml/fresh_eval/protocol-numerais-ifpa.json) · [Relatório](../ml/fresh_eval/evidence-numerais-ifpa/report.json) · [Manifesto](../ml/fresh_eval/evidence-numerais-ifpa/manifest.json)
+
+O commit `9613582` fixou dez janelas de **Números para quantidade**, uma aula do professor Israel Queiroz de Lima, produzida pelo Niead da UFAC e publicada sob licença CC BY. É o mesmo professor da primeira avaliação externa de cardinais, em outra gravação. Ambas ficaram fora do ajuste dos vetos. O rastreamento entregou pontos utilizáveis nas dez janelas. [Aula e licença declarada](https://www.youtube.com/watch?v=RIhEs2U8XxM) · [Protocolo](../ml/fresh_eval/protocol-numerais-ufac-quantidade.json) · [Manifesto](../ml/fresh_eval/evidence-numerais-ufac-quantidade/manifest.json)
+
+| Janelas da UFAC | Total | Aceites como Cinco no combinado | Aceites como Cinco com veto |
+| --- | ---: | ---: | ---: |
+| Cinco isolado | 2 | 2 | 2 |
+| Seis → Sete → Oito | 3 | 3 | 0 |
+| Oito → Nove | 3 | 0 | 0 |
+| Nove → Dez | 2 | 0 | 0 |
+
+As três janelas de Seis → Sete → Oito recortam o mesmo movimento, com durações de 600, 800 e 1.000 ms. A gravação atende ao critério da confirmação externa congelada. Foram preservados todos os Cinco corretos da sessão e suprimidas todas as janelas confundidas com Cinco de um movimento. O resultado vale para a inferência offline sobre o vídeo. [Decisões e escores por janela](../ml/fresh_eval/evidence-numerais-ufac-quantidade/report.json)
+
+### Avaliação na reserva
+
+Depois da confirmação externa, aplicamos os mesmos pesos e limiares à reserva, em CPU. Usamos o Cinco isolado e a transição Sete → Oito da Fiocruz, os 18 recortes de atividade cotidiana do CLAD e os 51 recortes do MINDS teste. [Proveniência dos recortes](negativos.md#novas-posturas-transições-e-glosas-externas) · [Relatório completo](../ml/fresh_eval/evidence-numerais-ajuste/reserve.json)
+
+| Conjunto e medida | Combinado | Com veto |
+| --- | ---: | ---: |
+| Fiocruz, Cinco correto | 1/1 | 1/1 |
+| Fiocruz, Sete → Oito aceito como Cinco | 1/1 | 0/1 |
+| CLAD, falsos aceites de atividade cotidiana | 2/18 | 2/18 |
+| MINDS teste, Cinco correto | 8/9 | 3/9 |
+| MINDS teste, falsos aceites entre negativos | 1/18 | 1/18 |
+| MINDS teste, F1 macro | 0,9721 | 0,8618 |
+
+Os cinco Cinco perdidos no MINDS pertencem a duas pessoas. Por causa dessa regressão, o veto permanece experimental e o combinado original segue na demonstração. A correção dos falsos aceites de transições e atividades cotidianas continua em aberto, assim como o aceite com participantes independentes na webcam.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_numeric_veto_reserve \
+  --out data/transition-gate-m5/numeric-veto-reserve.json
 ```

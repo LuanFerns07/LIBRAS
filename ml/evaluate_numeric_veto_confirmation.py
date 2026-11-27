@@ -34,20 +34,25 @@ def estimates_from(frozen):
     }
 
 
+def apply_veto(label, values, estimates):
+    if label != "cinco" or values is None:
+        return label, dict.fromkeys(estimates)
+    case = {"baseline": label, "attributes": adjustment.shape_features(values)}
+    checks = {name: adjustment.check(case, name, estimate) for name, estimate in estimates.items()}
+    scores = {name: result["score"] for name, result in checks.items()}
+    vetoed = all(result["afterVeto"] is None for result in checks.values())
+    return None if vetoed else label, scores
+
+
 def decide(clip, metadata, features, estimates):
     label = clip["predicted"]
-    scores = dict.fromkeys(estimates)
-    vetoed = False
+    values = None
     if label == "cinco":
         extracted = load_json(features.parent / metadata["features"])
         values = np.asarray(extracted["values"], dtype=np.float32).reshape(FRAMES, 192)
-        attributes = adjustment.shape_features(values)
-        case = {"baseline": label, "attributes": attributes}
-        checks = {name: adjustment.check(case, name, estimate) for name, estimate in estimates.items()}
-        scores = {name: result["score"] for name, result in checks.items()}
-        vetoed = all(result["afterVeto"] is None for result in checks.values())
+    accepted, scores = apply_veto(label, values, estimates)
     return {**clip, "session": metadata["session"], "sha256": metadata["sha256"], "scores": scores,
-            "afterVeto": None if vetoed else label}
+            "afterVeto": accepted}
 
 
 def summarize(rows):
