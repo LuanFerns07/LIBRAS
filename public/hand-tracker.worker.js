@@ -64,6 +64,9 @@ async function start() {
         const other = preferred === 'leftHand' ? 'rightHand' : 'leftHand'
         const key = hands[preferred].length ? other : preferred
         hands[key] = points
+        if (readLetters && result.worldLandmarks[index]?.length === 21) {
+          hands[key === 'leftHand' ? 'leftWorld' : 'rightWorld'] = result.worldLandmarks[index]
+        }
       }
       const alternateHand = readLetters ? confirmN(frame, timestamp, result) : undefined
       self.postMessage({ type: 'frame', hands, alternateHand })

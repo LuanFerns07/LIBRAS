@@ -121,7 +121,8 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       pending = true
       try {
         const alternateValues = letterFeatures(frame.alternateHand, frame.aspect)
-        const label = await predict(values, alternateValues)
+        const worldHand = hand === frame.leftHand ? frame.leftWorld : frame.rightWorld
+        const label = await predict(values, alternateValues, worldHand)
         if (current !== generation) return
         // Uma leitura inconclusiva isolada da mesma mão não interrompe um N já confirmado.
         if (label === null && shown === 'N' && alternateValues && !missedN) {
