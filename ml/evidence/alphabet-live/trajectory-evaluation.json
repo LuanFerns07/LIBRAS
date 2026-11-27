@@ -1,0 +1,193 @@
+{
+  "datasets": [
+    {
+      "manifestSha256": "490c5b6663636e413fcf90fd39bab7ff15c9dc242216f7ec384820057a808da5",
+      "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "featuresSha256": "d67db7e71ec593ded05ead9f94f427c974ea93f9b1c18e82fcb05cd43ae0c085"
+    },
+    {
+      "manifestSha256": "36701b4c0a4a0c470ed1dcd38cc952665d88cdfbc4b8c328e4a72eb450a23286",
+      "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "featuresSha256": "f1c3d087c43462a3f4fd7cc47d8aca21ef723e7360038f257ddc5a235569e7dc"
+    },
+    {
+      "manifestSha256": "3ba0d4ef536aeee54e4cb712eca385692017222aa9455532a308cd0e68ce0e44",
+      "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "featuresSha256": "983e41586c5cc6770fe5564e8d94c72c2c9443a7b45343c003d55571017782ab"
+    }
+  ],
+  "limits": {
+    "Ç": 0.153,
+    "H": 0.229,
+    "K": 0.225,
+    "X": 0.378
+  },
+  "templateCount": 79,
+  "sourcesInTemplates": [
+    "1527000916",
+    "1536677587",
+    "cecierj-13757",
+    "unesp-222981"
+  ],
+  "results": [
+    {
+      "source": "1535641159",
+      "label": "A",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "B",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "Ç",
+      "readings": [
+        "Ç"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "H",
+      "readings": [
+        "H"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "J",
+      "readings": [
+        "J"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "K",
+      "readings": [
+        "K"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "X",
+      "readings": [
+        "X"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "Y",
+      "readings": [
+        "Y"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "Z",
+      "readings": [
+        "Z"
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "B",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "C",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "D",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "E",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "F",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "G",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "I",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "L",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "M",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "N",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "O",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "P",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "Q",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "R",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "S",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "T",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "U",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "V",
+      "readings": []
+    },
+    {
+      "source": "1535641159",
+      "label": "W",
+      "readings": []
+    }
+  ]
+}

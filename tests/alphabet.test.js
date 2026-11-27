@@ -27,3 +27,25 @@ test('a letra aparece no fluxo de quadros após três leituras iguais e some sem
   await reader.read({ ...frame(540), rightHand: [] })
   assert.equal(readings.at(-1), null)
 })
+
+test('a trajetória usa quadros entre leituras e prevalece sobre uma previsão estática atrasada', async () => {
+  const readings = []
+  const windows = []
+  let finishPrediction
+  const prediction = new Promise(resolve => { finishPrediction = resolve })
+  const reader = createLiveLetterReader(() => prediction, value => readings.push(value), frames => {
+    windows.push(frames.map(item => item.timestamp))
+    return frames.length >= 3 ? 'K' : null
+  })
+
+  const pending = reader.read(frame(0))
+  for (const time of [30, 60, 90, 120]) await reader.read(frame(time))
+  assert.deepEqual(windows, [[0], [0, 30, 60], [0, 30, 60, 90, 120]])
+  assert.deepEqual(readings, ['K'])
+
+  finishPrediction('V')
+  await pending
+  assert.deepEqual(readings, ['K'])
+  await reader.read({ ...frame(150), rightHand: [] })
+  assert.deepEqual(readings, ['K', null])
+})

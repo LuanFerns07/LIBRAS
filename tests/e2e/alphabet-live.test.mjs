@@ -5,6 +5,8 @@ import { withChromium } from './chromium.mjs'
 const appUrl = process.env.LIBRASIA_TEST_URL
 const videoFile = process.env.LIBRASIA_TEST_LETTER_VIDEO
 const letter = process.env.LIBRASIA_TEST_EXPECT_LETTER || 'B'
+const forbidden = process.env.LIBRASIA_TEST_FORBIDDEN_LETTER
+const testPractice = letter === 'B' || process.env.LIBRASIA_TEST_ALPHABET_PRACTICE === '1'
 
 test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
   skip: !appUrl || !videoFile,
@@ -19,6 +21,10 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
       const mode = document.querySelector('[data-free-mode]')
       mode.value = 'letter'
       mode.dispatchEvent(new Event('change'))
+      const live = document.querySelector('[data-live-character]')
+      window.alphabetReadings = []
+      new MutationObserver(() => window.alphabetReadings.push(live.textContent))
+        .observe(live, { childList: true, characterData: true, subtree: true })
       document.querySelector('[data-hand-points]').click()
       document.querySelector('[data-camera-toggle]').click()
     })()`, true)
@@ -38,13 +44,14 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
     await evaluate('document.querySelector("[data-add-letter]").click()', true)
     assert.equal(await evaluate('document.querySelector("#transcription").value'), letter)
     await waitUntil(`${live} === '—'`, 8000)
+    if (forbidden) assert.ok(!(await evaluate('window.alphabetReadings')).includes(forbidden))
     await evaluate('document.querySelector("[data-page=saiba-mais]").click()', true)
     await waitUntil('window.cameraTrack.readyState === "ended"')
   }, { videoFile })
 })
 
 test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra como alvo', {
-  skip: !appUrl || !videoFile || letter !== 'B',
+  skip: !appUrl || !videoFile || !testPractice,
   timeout: 35_000,
 }, async () => {
   const url = new URL('/#praticar', appUrl)
@@ -64,7 +71,7 @@ test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra
       document.querySelector('[data-stage="1"]').click()
       document.querySelector('[data-camera-toggle]').click()
     })()`, true)
-    await waitUntil('document.querySelector("[data-live-character]").textContent === "B"', 18_000)
+    await waitUntil('document.querySelector("[data-live-character]").textContent === ' + JSON.stringify(letter), 18_000)
     assert.equal(await evaluate('document.querySelector("[data-signal]").value'), 'letter-a')
     assert.equal(await evaluate('document.querySelector("[data-attempt]").hidden'), true)
   }, { videoFile })

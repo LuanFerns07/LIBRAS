@@ -57,7 +57,11 @@ if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; the
   if [[ -f "$alfabeto/alphabet-check.onnx" ]]; then
     cp "$alfabeto/alphabet-check.onnx" "$previa/public/models/"
   fi
-  movimento="${LIBRASIA_ALFABETO_MOVIMENTO:-data/models/alphabet-motion}"
+  movimento_padrao=data/models/alphabet-motion
+  if [[ -f data/models/alphabet-trajectory/alphabet-motion.json ]]; then
+    movimento_padrao=data/models/alphabet-trajectory
+  fi
+  movimento="${LIBRASIA_ALFABETO_MOVIMENTO:-$movimento_padrao}"
   if [[ -n "${LIBRASIA_ALFABETO_MOVIMENTO:-}" || -f "$movimento/alphabet-motion.json" ]]; then
     cp "$movimento/alphabet-motion.json" "$previa/public/models/"
   fi

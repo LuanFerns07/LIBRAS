@@ -8,6 +8,7 @@ import { preprocessFrames } from './preprocess.js'
 import { segmentFrames } from './segmentation.js'
 import { alphabetFeatureCount } from './alphabet.js'
 import { matchMotion, motionVectorSize } from './alphabet-motion.js'
+import { createTrajectoryMatcher, trajectorySize } from './alphabet-trajectory.js'
 
 async function localAsset(path) {
   const response = await fetch(import.meta.env.BASE_URL + path)
@@ -54,6 +55,19 @@ export async function openAlphabetEngine() {
         !Number.isFinite(limit) || limit <= 0 || limit > .4))) {
     throw new TypeError('O modelo de letras com movimento está incompatível.')
   }
+  const trajectory = motion?.trajectory
+  const trajectoryLabels = ['Ç', 'H', 'K', 'X']
+  if (trajectory && (trajectory.version !== 1 || !Array.isArray(trajectory.templates) || !trajectory.limits ||
+      Object.keys(trajectory.limits).length !== trajectoryLabels.length ||
+      trajectoryLabels.some(label => !trajectory.templates.some(item => item?.label === label) ||
+        !Number.isFinite(trajectory.limits[label]) || !(trajectory.limits[label] > 0 && trajectory.limits[label] <= .5)) ||
+      trajectory.templates.some(item => !trajectoryLabels.includes(item?.label) ||
+        !Array.isArray(item.vector) || item.vector.length !== trajectorySize || !item.vector.every(Number.isFinite)))) {
+    throw new TypeError('O modelo de trajetórias do alfabeto está incompatível.')
+  }
+  const recognizeTrajectory = trajectory ? createTrajectoryMatcher(trajectory) : null
+  const legacyLetters = Object.keys(motion?.limits ?? {})
+  const motionLetters = trajectory ? [...trajectoryLabels, 'J', 'Z', ...legacyLetters] : legacyLetters
   const bytes = await verifiedBytes('models/alphabet.onnx', modelSha256)
   const checkBytes = agreementSha256 ? await verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null
   const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
@@ -77,8 +91,9 @@ export async function openAlphabetEngine() {
   }
 
   return {
-    alphabetCatalog: [...new Set([...labels, ...Object.keys(motion?.limits ?? {})])].sort(),
-    findMotion: motion && Object.keys(motion.limits).length ? frames => matchMotion(frames, motion) : undefined,
+    alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
+    findMotion: motionLetters.length ? frames =>
+      recognizeTrajectory?.(frames) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
     predictLetter(values) {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {

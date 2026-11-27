@@ -46,7 +46,7 @@ As três aulas do NTE da UFSM têm licença CC BY-NC-SA 4.0 e rotulam em tela as
 - A aula do Grupo de Produção de Material Didático entra em validação. O quadro inclui o tronco e a cartela de letras. [Aula 1536677587](https://ntetube.nte.ufsm.br/v/1536677587)
 - A aula de Giovana Fracari Hautrive fica reservada para teste. O manifesto inclui a pose estática de A de 3,66 a 4,37 s e de B de 5,06 a 6,14 s. A transição ocorre entre as duas janelas no vídeo original. [Aula 1535641159](https://ntetube.nte.ufsm.br/v/1535641159)
 
-Há uma demonstração por letra em cada aula. Reutilizar ou transformar os quadros dessa demonstração mantém a mesma origem. A avaliação mede cobertura entre essas três gravações.
+Há uma demonstração por letra em cada aula da UFSM. A versão atual também usa 12 recortes rotulados de duas aulas institucionais. A Fundação Cecierj oferece seis demonstrações, incluindo Ç. O acervo da Unesp oferece H, J, K, X e Z, com duas execuções de K na mesma aula. Os créditos, licenças, intervalos e hashes estão no manifesto. [Cecierj](https://canal.cecierj.edu.br/recurso/13757) · [Unesp](https://acervodigital.unesp.br/handle/unesp/222981) · [Manifesto das aulas adicionais](../ml/alphabet/institutional-temporal-windows.json)
 
 ## Praticar e ler letras ao vivo
 
@@ -54,17 +54,20 @@ Abra **http://127.0.0.1:4177/#area-livre** no Chromium e selecione **Alfabeto** 
 
 Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Praticar com ajuda** para ver a leitura ao lado da câmera e a demonstração no avatar. O modelo escolhe a letra usando os pontos da mão. A escolha no exercício serve para comparar o resultado com o alvo e registrar o progresso.
 
-O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento usam uma janela recente de pontos da mão.
+O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
 ### Compilar neste Linux
 
-Depois de baixar e conferir os arquivos de vídeo dos manifestos da UFSM e preparar o LibraSign, execute a extração e o treino na raiz. A opção `--device cpu` também é aceita.
+Depois de baixar e conferir os vídeos dos manifestos e preparar o LibraSign, execute a extração e o treino na raiz. A opção `--device cpu` também é aceita.
 
 ```bash
 npm run setup:vision
 .venv/bin/python -m ml.alphabet.extract_motion \
   --manifest ml/alphabet/ufsm-static-windows.json --out data/alphabet/static-video-final.json
 .venv/bin/python -m ml.alphabet.extract_motion --out data/alphabet/motion-final.json
+mkdir -p data/alphabet/institutional
+.venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/institutional-temporal-windows.json --out data/alphabet/institutional/motion-frames.json
 .venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
   --device cuda --out data/models/alphabet-ufsm-final
 .venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
@@ -72,6 +75,7 @@ npm run setup:vision
 .venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-ufsm-final \
   --check data/models/alphabet-geometry-final --reference data/alphabet/static-video-final.json
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
+node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
   --pacote data/releases/librasia-alfabeto-ao-vivo
 python3 data/releases/librasia-alfabeto-ao-vivo/iniciar.py --porta 4177
@@ -81,10 +85,10 @@ Os vídeos de origem, os pontos extraídos e os modelos ficam no ambiente local.
 
 ### Cobertura e verificação
 
-A prévia usa 20 classes estáticas e dois padrões de movimento, Ç e Y. A Prática oferece também H, J, K, X e Z com o avatar. O detector de movimento confundiu algumas dessas letras entre as aulas e elas ficaram fora da leitura automática. A interface mostra a lista das classes do modelo local.
+A prévia tenta reconhecer A–Z e Ç na Área livre e em Praticar. H, K, X e Ç comparam a flexão dos dedos, a orientação da palma e o percurso da mão com recortes de referência. Em J, o leitor acompanha o percurso do dedo mínimo. Em Z, acompanha os três traços do indicador. Y usa o detector anterior. Os limiares são experimentais.
 
-Treinamos os dois modelos estáticos com o LibraSign e quadros da aula do Libras ON. A validação usou outra aula da UFSM. Na terceira aula, a concordância dos modelos aceitou 250 de 290 quadros e acertou 243. Os quadros são correlacionados dentro de cada demonstração. O A da aula de teste ficou sem acertos nessa avaliação. [Matriz e resultado por letra](../ml/evidence/alphabet-live/agreement.json)
+Os modelos estáticos foram treinados com o LibraSign e quadros da aula do Libras ON. A validação usou outra aula da UFSM. Na terceira aula, a concordância dos modelos aceitou 250 de 290 quadros e acertou 243. Os quadros são correlacionados dentro de cada demonstração. O A da terceira aula ficou sem acertos nessa avaliação. [Matriz e resultado por letra](../ml/evidence/alphabet-live/agreement.json)
 
-O detector temporal usa trajetórias das duas primeiras aulas e separa classes pelo formato da mão e deslocamento do pulso. Ç e Y passaram pelo recorte de seleção em gravações conhecidas. A seleção usou o resultado dos recortes, e a verificação em pessoas fora dessas aulas continua pendente. [Resultado por letra](../ml/evidence/alphabet-live/motion-evaluation.json)
+No replay dos pontos da terceira aula, o leitor temporal exibiu H, J, K, X, Y, Z e Ç nas respectivas janelas e não exibiu nenhuma letra de movimento nas 20 janelas estáticas dessa aula. Essa gravação fica fora das referências, mas foi consultada ao ajustar os critérios. Os resultados medem apenas esses recortes. [Resultado do replay](../ml/evidence/alphabet-live/trajectory-evaluation.json)
 
-O Chromium leu B, Ç e Y no vídeo reservado e mostrou o resultado ao lado da câmera sem o botão de tentativa. A transcrição recebeu a letra pelo botão **Adicionar letra**. O teste de Prática manteve A como alvo enquanto a câmera mostrava B. O vídeo entrou como câmera simulada nos testes automatizados. A confirmação com movimentos feitos na webcam do PC fica pendente. [Teste de navegador](../tests/e2e/alphabet-live.test.mjs)
+Os testes automatizados no Chromium usaram gravações rotuladas como entrada da câmera. A Área livre exibiu B, H, J, K, X, Y, Z e Ç ao lado do vídeo durante a captura. O vídeo de C mostrou C sem acionar Ç. Os testes também verificaram X e Z separadamente, sem acionar um pelo outro. Em Praticar, B e K apareceram mesmo com A selecionado como alvo. O teste confirmou que a transcrição recebe a letra pelo botão **Adicionar letra** e que sair da Área livre encerra a câmera. A sobreposição acompanhou duas mãos no vídeo antes, durante e depois de uma tentativa. A validação dessas letras com uma pessoa sinalizando na webcam do PC segue pendente. [Teste do alfabeto](../tests/e2e/alphabet-live.test.mjs) · [Teste da sobreposição](../tests/e2e/hand-overlay-live.test.mjs)

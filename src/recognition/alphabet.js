@@ -26,10 +26,13 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let generation = 0
   let pending = false
   let lastSample = -Infinity
+  let lastMotionSample = -Infinity
   let candidate = null
   let votes = 0
   let shown = null
   let movingUntil = -Infinity
+  let movingCandidate = null
+  let lastFrame = -Infinity
   let history = []
 
   function show(value) {
@@ -43,6 +46,9 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     candidate = null
     votes = 0
     lastSample = -Infinity
+    lastMotionSample = -Infinity
+    lastFrame = -Infinity
+    movingCandidate = null
     movingUntil = -Infinity
     history = []
     show(null)
@@ -56,28 +62,35 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
         clear()
         return
       }
-      if (pending || frame.timestamp - lastSample < 75) return
-      if (frame.timestamp - lastSample > 350) {
-        clear()
+      if (frame.timestamp - lastFrame > 350) clear()
+      if (frame.timestamp <= lastFrame) return
+      lastFrame = frame.timestamp
+      if (findMotion) {
+        history = history.filter(previous => previous.timestamp >= frame.timestamp - 1850)
+        history.push(frame)
       }
+      if (findMotion && frame.timestamp - lastMotionSample >= 60) {
+        lastMotionSample = frame.timestamp
+        const motion = findMotion(history)
+        const confirmed = motion && (motion === movingCandidate || motion === 'J' || motion === 'Z')
+        movingCandidate = motion
+        if (confirmed) {
+          generation += 1
+          movingCandidate = null
+          candidate = null
+          votes = 0
+          movingUntil = frame.timestamp + 600
+          history = [frame]
+          show(motion)
+          return
+        }
+      }
+      if (movingCandidate || frame.timestamp < movingUntil || pending || frame.timestamp - lastSample < 75) return
       lastSample = frame.timestamp
       const values = letterFeatures(hand, frame.aspect)
       if (!values) {
         clear()
         return
-      }
-      if (findMotion) {
-        history = history.filter(previous => previous.timestamp >= frame.timestamp - 1850)
-        history.push(frame)
-        const motion = findMotion(history)
-        if (motion) {
-          candidate = null
-          votes = 0
-          movingUntil = frame.timestamp + 700
-          show(motion)
-          return
-        }
-        if (frame.timestamp < movingUntil) return
       }
       const current = generation
       pending = true
