@@ -112,27 +112,55 @@ test('o leitor pode completar Z após um X inicial e uma perda breve da mão', a
   assert.deepEqual(windows.at(-1), [[600], [600]])
 })
 
-test('o traçado de Z distingue o polegar aberto durante as três passagens', () => {
-  const matcher = createTrajectoryMatcher({
+function zTrace(thumbX) {
+  const pose = [
+    [.48, .53], [.42, .51], [.40, .49], [.40, .47], [thumbX, .45],
+    [.40, .40], [.40, .37], [.40, .34], [.40, .31],
+    [.44, .39], [.44, .37], [.44, .39], [.44, .43],
+    [.48, .39], [.48, .37], [.48, .39], [.48, .43],
+    [.52, .40], [.52, .38], [.52, .40], [.52, .43],
+  ]
+  const positions = [[0, 0], [-.06, 0], [-.13, .005], [-.05, .065], [.01, .10], [-.08, .10], [-.19, .105]]
+  return positions.map(([x, y], index) => ({
+    timestamp: index * 100,
+    aspect: 1,
+    leftHand: [],
+    rightHand: pose.map(([px, py]) => ({ x: px + x, y: py + y, z: 0 })),
+  }))
+}
+
+function trajectoryOnly() {
+  return createTrajectoryMatcher({
     templates: ['X', 'H'].map(label => ({ label, vector: new Float32Array(trajectorySize) })),
     limits: {},
   })
-  function trace(thumbX) {
-    const pose = [
-      [.48, .53], [.42, .51], [.40, .49], [.40, .47], [thumbX, .45],
-      [.40, .40], [.40, .37], [.40, .34], [.40, .31],
-      [.44, .39], [.44, .37], [.44, .39], [.44, .43],
-      [.48, .39], [.48, .37], [.48, .39], [.48, .43],
-      [.52, .40], [.52, .38], [.52, .40], [.52, .43],
-    ]
-    const positions = [[0, 0], [-.06, 0], [-.13, .005], [-.05, .065], [.01, .10], [-.05, .10], [-.13, .105]]
-    return positions.map(([x, y], index) => ({
-      timestamp: index * 100,
-      aspect: 1,
-      leftHand: [],
-      rightHand: pose.map(([px, py]) => ({ x: px + x, y: py + y, z: 0 })),
-    }))
+}
+
+test('o traçado de Z distingue o polegar aberto durante as três passagens', () => {
+  const matcher = trajectoryOnly()
+  assert.equal(matcher(zTrace(.43)), 'Z')
+  assert.equal(matcher(zTrace(.32)), null)
+})
+
+test('Z retoma um traço interrompido por uma sobreposição breve da mesma mão', async () => {
+  const trace = zTrace(.43)
+  const before = trace.at(-2)
+  const end = trace.at(-1)
+  const overlap = { ...before, timestamp: 550, leftHand: before.rightHand }
+  const matcher = trajectoryOnly()
+
+  async function read(tail) {
+    const readings = []
+    const reader = createLiveLetterReader(async () => 'G', value => readings.push(value), matcher)
+    for (const sample of [...trace.slice(0, -1), ...tail]) await reader.read(sample)
+    return readings
   }
-  assert.equal(matcher(trace(.43)), 'Z')
-  assert.equal(matcher(trace(.32)), null)
+
+  assert.deepEqual(await read([overlap, end]), ['G', null, 'Z'])
+  assert.deepEqual(await read([{ ...overlap, leftHand: [], rightHand: [] }, end]), ['G', null])
+  const other = before.rightHand.map(point => ({ ...point, x: point.x + .30 }))
+  assert.deepEqual(await read([{ ...overlap, leftHand: other }, end]), ['G', null])
+  assert.deepEqual(await read([overlap, { ...overlap, timestamp: 575 }, end]), ['G', null])
+  assert.deepEqual(await read([overlap, { ...end, timestamp: 725 }]), ['G', null])
+  assert.deepEqual(await read([overlap, { ...end, leftHand: end.rightHand, rightHand: [] }]), ['G', null])
 })

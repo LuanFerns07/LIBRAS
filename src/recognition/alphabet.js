@@ -9,6 +9,15 @@ export function oneHand(frame) {
   return Math.abs(separation) >= .18 ? hands[separation > 0 ? 1 : 0] : null
 }
 
+function overlappingHands({ leftHand, rightHand, aspect }) {
+  if (leftHand?.length !== 21 || rightHand?.length !== 21) return false
+  const distance = (a, b) => Math.hypot((a.x - b.x) * aspect, a.y - b.y)
+  const scale = Math.max(distance(leftHand[0], leftHand[9]), distance(leftHand[5], leftHand[17]),
+    distance(rightHand[0], rightHand[9]), distance(rightHand[5], rightHand[17]))
+  const palmJoints = [5, 9, 17]
+  return scale > 1e-4 && palmJoints.every(joint => distance(leftHand[joint], rightHand[joint]) <= .60 * scale)
+}
+
 export function letterFeatures(hand, aspect) {
   if (!hand || !Number.isFinite(aspect) || aspect <= 0) return null
   const values = new Float32Array(alphabetFeatureCount)
@@ -39,6 +48,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let history = []
   let motionStart = -Infinity
   let recoveringZ = false
+  let zDropout = null
 
   function show(value) {
     if (shown === value) return
@@ -65,6 +75,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     history = []
     motionStart = -Infinity
     recoveringZ = false
+    zDropout = null
   }
 
   return {
@@ -75,10 +86,21 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
         if (recoveringZ && frame.timestamp - lastFrame <= alphabetPathGapMs) {
           resetReadings()
           motionStart = frame.timestamp
+        } else if (findMotion && zDropout === null && history.length >= 6 &&
+            frame.timestamp - lastFrame <= alphabetPathGapMs && overlappingHands(frame)) {
+          // Reinicie as leituras. Só o traçado de Z pode usar os pontos anteriores.
+          resetReadings()
+          motionStart = frame.timestamp
+          zDropout = frame.timestamp
         } else {
           clear()
         }
         return
+      }
+      if (zDropout !== null && lastFrame < zDropout) {
+        const previous = history.at(-1)
+        if (frame.timestamp - lastFrame > alphabetPathGapMs ||
+            (hand === frame.leftHand) !== (oneHand(previous) === previous.leftHand)) clear()
       }
       if (frame.timestamp - lastFrame > 350) clear()
       if (frame.timestamp <= lastFrame) return
@@ -86,12 +108,13 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       if (findMotion) {
         history = history.filter(previous => previous.timestamp >= frame.timestamp - 1850)
         history.push(frame)
+        if (zDropout !== null && history[0].timestamp >= zDropout) zDropout = null
       }
       if (findMotion && frame.timestamp - lastMotionSample >= 60) {
         lastMotionSample = frame.timestamp
         const frames = motionStart <= history[0].timestamp ? history :
           history.filter(sample => sample.timestamp >= motionStart)
-        const motion = findMotion(frames, history)
+        const motion = findMotion(frames, history, zDropout)
         movingVotes = motion ? (motion === movingCandidate ? movingVotes + 1 : 1) : 0
         movingCandidate = motion
         const confirmed = motion && (motion === 'J' || motion === 'Z' || movingVotes >= (motion === 'Ç' ? 3 : 2))
@@ -104,7 +127,10 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
           movingUntil = frame.timestamp + 600
           // Um X inicial pode ser parte de um Z. Os demais gestos iniciam outro traçado.
           recoveringZ = motion === 'X'
-          if (!recoveringZ) history = [frame]
+          if (!recoveringZ) {
+            history = [frame]
+            zDropout = null
+          }
           motionStart = frame.timestamp
           show(motion)
           return

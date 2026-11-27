@@ -14,6 +14,7 @@ const { values: options } = parseArgs({ options: {
   letters: { type: 'string' },
   workers: { type: 'string', default: '2' },
   timeline: { type: 'boolean' },
+  trace: { type: 'boolean' },
 } })
 const url = new URL(options.url)
 const workerCount = Number(options.workers)
@@ -48,7 +49,7 @@ if (windows.length === 0 || [...selected].some(id => !windows.some(window => win
   throw new Error('As opções devem selecionar janelas de todas as fontes solicitadas.')
 }
 
-function startProbe(recordTimeline) {
+function startProbe(recordTimeline, recordTrace) {
   const mode = document.querySelector('[data-free-mode]')
   mode.value = 'letter'
   mode.dispatchEvent(new Event('change'))
@@ -57,16 +58,34 @@ function startProbe(recordTimeline) {
   const observations = { changes: [], handVisibility: [], firstWorkerFrame: null, lastHand: null,
     workerFrames: 0, framesWithHand: 0 }
   window.replayObservations = observations
+  const timing = new Map()
+  if (recordTrace) {
+    observations.frames = []
+    const request = video.requestVideoFrameCallback.bind(video)
+    video.requestVideoFrameCallback = callback => request((now, metadata) => {
+      timing.set(now, { timestamp: metadata.mediaTime * 1000, aspect: video.videoWidth / video.videoHeight })
+      if (timing.size > 8) timing.delete(timing.keys().next().value)
+      callback(now, metadata)
+    })
+  }
 
   new MutationObserver(() => {
     observations.changes.push({ letter: output.textContent, time: video.currentTime })
   }).observe(output, { childList: true })
   const send = Worker.prototype.postMessage
+  const sent = new WeakMap()
   Worker.prototype.postMessage = function (message, ...arguments_) {
+    if (recordTrace && message?.frame) {
+      if (!sent.has(this)) sent.set(this, [])
+      sent.get(this).push(timing.get(message.timestamp))
+    }
     if (message?.frame && !this.hasReplayProbe) {
       this.hasReplayProbe = true
       this.addEventListener('message', ({ data }) => {
         if (data.type !== 'frame') return
+        if (recordTrace) {
+          observations.frames.push({ timing: sent.get(this).shift(), hands: data.hands })
+        }
         observations.workerFrames += 1
         observations.firstWorkerFrame ??= video.currentTime
         const visible = data.hands.leftHand?.length === 21 || data.hands.rightHand?.length === 21
@@ -96,13 +115,16 @@ async function replay(window, index, directory) {
     return await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
       await navigate(outUrl.href)
       await permission(outUrl.origin, 'granted')
-      await evaluate(`(${startProbe})(${!!options.timeline})`, true)
+      await evaluate(`(${startProbe})(${!!options.timeline}, ${!!options.trace})`, true)
       await waitUntil('document.querySelector("[data-recognition-coverage]").textContent.startsWith("Leitura experimental")', 12000)
       await waitUntil(`document.querySelector('video').currentTime >= ${leadSeconds + duration + .55}`, 15000)
-      const { changes, handVisibility, firstWorkerFrame, lastHand, workerFrames, framesWithHand } =
+      const { changes, handVisibility, firstWorkerFrame, lastHand, workerFrames, framesWithHand, frames } =
         await evaluate('window.replayObservations')
       if (firstWorkerFrame === null || firstWorkerFrame >= leadSeconds) {
         throw new Error(`O rastreamento não iniciou antes da demonstração ${label.source}/${label.label}.`)
+      }
+      if (frames?.some(frame => !frame.timing)) {
+        throw new Error(`O rastreamento gerou um quadro sem horário em ${label.source}/${label.label}.`)
       }
       return {
         ...label, startMs, endMs,
@@ -117,6 +139,7 @@ async function replay(window, index, directory) {
         } : {}),
         workerFrames, framesWithHand,
         lastHandAfterVideoMs: lastHand === null ? null : Math.round((lastHand - leadSeconds) * 1000),
+        ...(frames ? { frames } : {}),
       }
     }, { videoFile })
   } finally {
