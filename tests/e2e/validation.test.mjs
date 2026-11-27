@@ -7,15 +7,64 @@ import { test } from 'node:test'
 import { setTimeout as delay } from 'node:timers/promises'
 import { catalogVersion } from '../../src/catalog.js'
 import { withChromium } from './chromium.mjs'
+import { finish } from './recorded-capture.mjs'
 
 const appUrl = process.env.LIBRASIA_TEST_URL
 const testValidation = process.env.LIBRASIA_TEST_VALIDATION === '1'
 const timingReport = process.env.LIBRASIA_TEST_TIMING_REPORT
+const copyTiming = process.env.LIBRASIA_TEST_COPY_TIMING === '1'
+const videoFile = process.env.LIBRASIA_TEST_VIDEO
+
+async function copyRecordedTiming({ navigate, evaluate, waitUntil, page, permission }, url) {
+  const normal = new URL('/#area-livre', url).href
+  const capture = new URL('/?validacao=1#area-livre', url).href
+  const panel = 'document.querySelector("[data-validation-measurement]")'
+  const click = selector => evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`, true)
+  await navigate(normal)
+  assert.equal(await evaluate(`!!${panel}`), false)
+  await navigate(capture)
+  await waitUntil(`${panel}?.hidden`)
+  await permission(url.origin, 'granted')
+  await page('Browser.setPermission', { permission: { name: 'clipboard-read' }, setting: 'granted', origin: url.origin })
+  await click('[data-camera-toggle]')
+  await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
+  assert.match(await evaluate('document.querySelector("[data-validation-camera]:not([hidden])").textContent'), /\d+ × \d+ px$/)
+  await click('[data-attempt]')
+  await waitUntil('document.querySelector("[data-capture-status]").dataset.state === "recording"', 15000)
+  assert.equal(await evaluate(`${panel}.hidden`), true)
+  const stopAt = await evaluate('Math.round(document.querySelector("video").currentTime * 1000) + 1000')
+  const result = await evaluate(`(${finish})(false, ${stopAt})`, true, 15000)
+  assert.equal(result.reason, 'no-hand')
+  assert.equal(result.timing.trigger, 'manual')
+  assert.equal(result.timing.classifierCalls, 0)
+  assert.ok(result.timing.initialLoadMs > 0 && result.timing.extractionMs.length > 0)
+  assert.equal(await evaluate(`${panel}.hidden`), false)
+
+  const raw = JSON.stringify(result.timing)
+  const status = 'document.querySelector("[data-copy-status]").textContent'
+  await click('[data-copy-measurement]')
+  await waitUntil(`${status} === "Medição copiada."`)
+  assert.equal(await evaluate('navigator.clipboard.readText()', true), raw)
+
+  await evaluate('navigator.clipboard.writeText = () => Promise.reject(new Error("clipboard indisponível"))')
+  await click('[data-copy-measurement]')
+  await waitUntil(`${status} === "Copie o JSON selecionado."`)
+  assert.deepEqual(await evaluate(`(() => {
+    const input = document.querySelector('[data-manual-copy]:not([hidden]) textarea')
+    return [input.readOnly, input === document.activeElement, input.value.slice(input.selectionStart, input.selectionEnd)]
+  })()`), [true, true, raw])
+
+  await click('[data-attempt]')
+  assert.equal(await evaluate(`${panel}.hidden`), true)
+  assert.equal(await evaluate('document.querySelector("[data-manual-copy] textarea").value'), '')
+  return result.timing
+}
 
 test('a ficha local abre no pacote e exporta observações com a versão servida', {
   skip: !appUrl || !testValidation,
-  timeout: 25000,
+  timeout: copyTiming ? 50000 : 25000,
 }, async context => {
+  if (copyTiming) assert.ok(videoFile && !timingReport, 'Use um vídeo sem mãos e dispense o relatório de medição anterior.')
   const url = new URL('/validacao/', appUrl)
   const files = ['/commit.txt', '/models/isolated.onnx', '/models/isolated.json']
   const [commitFile, model, manifest] = await Promise.all(files.map(async file => {
@@ -53,12 +102,20 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
   const downloads = await mkdtemp(join(tmpdir(), 'librasia-validacao-'))
   context.after(() => rm(downloads, { recursive: true, force: true }))
 
-  await withChromium(async ({ navigate, evaluate, waitUntil, page, listen }) => {
+  await withChromium(async browser => {
+    const { navigate, evaluate, waitUntil, page, listen } = browser
     const requests = []
     listen('Network.requestWillBeSent', ({ request }) => requests.push(request))
     await page('Network.enable')
     await page('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: downloads })
+    if (copyTiming) timing = await copyRecordedTiming(browser, url)
     await navigate(url.href)
+    if (copyTiming) {
+      assert.deepEqual(await evaluate(`Array.from(document.querySelectorAll('#capture-links:not([hidden]) a'), link =>
+        [link.getAttribute('href'), link.target])`), [
+        ['/?validacao=1#praticar', '_blank'], ['/?validacao=1#area-livre', '_blank'],
+      ])
+    }
     await evaluate('document.querySelector("#load-version").click()')
     await waitUntil('document.querySelector("#version-status").textContent === "Versão do pacote preenchida."')
     assert.deepEqual(await evaluate(`(() => {
@@ -123,5 +180,5 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     assert.ok(requests.some(({ url: requested }) => requested === new URL('versao.json', url).href))
     assert.ok(requests.every(request => new URL(request.url).origin === url.origin && request.method === 'GET'))
     assert.deepEqual(await evaluate('[localStorage.length, sessionStorage.length]'), [0, 0])
-  })
+  }, { videoFile: copyTiming ? videoFile : undefined })
 })

@@ -93,6 +93,7 @@ for (const [id, title] of checkpoints) {
 }
 
 loadVersion.hidden = !location.pathname.startsWith('/validacao/')
+document.querySelector('#capture-links').hidden = loadVersion.hidden
 loadVersion.addEventListener('click', async () => {
   loadVersion.disabled = true
   show('version-status', 'Carregando a versão do pacote…')

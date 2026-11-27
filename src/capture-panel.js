@@ -6,6 +6,7 @@ import { createLiveLetterReader } from './recognition/alphabet.js'
 import { captureSequence } from './recognition/sequence.js'
 
 export function captureMarkup() {
+  const validation = new URLSearchParams(location.search).get('validacao') === '1'
   return `
     <section class="panel media-card" aria-label="Sua câmera">
       <div class="panel-header"><h2>Sua câmera</h2><span class="media-status" data-camera-state>Desligada</span></div>
@@ -31,6 +32,15 @@ export function captureMarkup() {
       <p class="capture-privacy">A imagem fica no seu dispositivo.</p>
       <p class="inline-status" data-hand-status role="status" hidden></p>
       <p class="inline-status" data-capture-status data-state="idle" role="status">Mostre a mão e a parte superior do corpo.</p>
+      ${validation ? `
+        <p class="capture-privacy" data-validation-camera hidden></p>
+        <div class="toolbar panel-toolbar" data-validation-measurement hidden>
+          <button type="button" class="button" data-copy-measurement>Copiar medição</button>
+          <span class="muted" role="status" data-copy-status></span>
+          <label data-manual-copy hidden>JSON da medição
+            <textarea rows="3" readonly spellcheck="false"></textarea>
+          </label>
+        </div>` : ''}
     </section>`
 }
 
@@ -58,6 +68,12 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   const handStatus = main.querySelector('[data-hand-status]')
   const letterPanel = main.querySelector('[data-live-letter]')
   const letterOutput = main.querySelector('[data-live-character]')
+  const validationCamera = main.querySelector('[data-validation-camera]')
+  const measurementPanel = main.querySelector('[data-validation-measurement]')
+  const copyMeasurement = measurementPanel?.querySelector('[data-copy-measurement]')
+  const copyStatus = measurementPanel?.querySelector('[data-copy-status]')
+  const manualCopy = measurementPanel?.querySelector('[data-manual-copy]')
+  const measurementText = manualCopy?.querySelector('textarea')
   const overlay = handOverlay(canvas, video)
   const letterMode = () => captureMode?.() === 'letter'
   let cameraState = 'idle'
@@ -69,10 +85,19 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   let ticket = 0
   let disposed = false
 
+  function resetMeasurementPanel() {
+    if (!measurementPanel) return
+    measurementPanel.hidden = true
+    copyStatus.textContent = ''
+    manualCopy.hidden = true
+    measurementText.value = ''
+  }
+
   function show(state, message) {
     status.dataset.state = state
     delete status.dataset.reason
     delete status.dataset.timing
+    resetMeasurementPanel()
     const title = resultLabels[state]
     status.textContent = title ? `${title}. ${message}` : message
   }
@@ -90,7 +115,32 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     button.hidden = !letterPanel.hidden
     button.disabled = !enabled || !ready || phase === 'loading' || phase === 'inferring'
     button.textContent = phase === 'recording' ? 'Concluir tentativa' : 'Iniciar tentativa'
+    if (validationCamera) {
+      const track = ready ? video.srcObject?.getVideoTracks()[0] : undefined
+      const { width, height } = track?.getSettings() ?? {}
+      validationCamera.hidden = !(width && height)
+      validationCamera.textContent = width && height ? `${track.label || 'Câmera'} · ${width} × ${height} px` : ''
+    }
   }
+
+  copyMeasurement?.addEventListener('click', async () => {
+    const measurement = status.dataset.timing
+    if (!measurement) return
+    try {
+      await navigator.clipboard.writeText(measurement)
+      if (disposed || status.dataset.timing !== measurement) return
+      manualCopy.hidden = true
+      measurementText.value = ''
+      copyStatus.textContent = 'Medição copiada.'
+    } catch {
+      if (disposed || status.dataset.timing !== measurement) return
+      measurementText.value = measurement
+      manualCopy.hidden = false
+      copyStatus.textContent = 'Copie o JSON selecionado.'
+      measurementText.focus()
+      measurementText.select()
+    }
+  })
 
   function cancel() {
     ticket += 1
@@ -261,6 +311,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
       extractionMs: timing.extractionMs,
       classifierCalls,
     })
+    if (measurementPanel) measurementPanel.hidden = false
   }
 
   async function attempt() {

@@ -4,8 +4,8 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
 
 ## Abrir no Linux
 
-1. Inicie o pacote local da demonstração e abra a Área livre em uma janela do Chromium. [Abrir Área livre](http://127.0.0.1:4177/#area-livre) · [Executar o pacote](previa-estavel.md#demonstração-atual-no-pc)
-2. Abra a ficha de validação em uma segunda janela. Coloque as duas lado a lado para manter a aba do aplicativo visível, pois o LibrasIA encerra a captura quando a aba é ocultada. Use a webcam e o botão **Ouvir** na janela do LibrasIA. [Abrir a ficha local](http://127.0.0.1:4177/validacao/)
+1. Inicie o pacote local da demonstração e abra a ficha de validação no Chromium. [Abrir a ficha local](http://127.0.0.1:4177/validacao/) · [Executar o pacote](previa-estavel.md#demonstração-atual-no-pc)
+2. Na ficha, escolha **Abrir Praticar para medir** ou **Abrir Área livre para medir**. Coloque a ficha e o aplicativo em janelas lado a lado para manter a captura ativa. O LibrasIA libera a câmera quando a aba fica oculta. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
 3. Na ficha, clique em **Preencher versão do pacote**. O código da compilação identifica também a revisão do avatar. O pacote preenche a versão do catálogo, as somas do modelo de sinais e a soma do conjunto de modelos do alfabeto quando ele estiver instalado. Informe o ambiente observado e o consentimento da pessoa participante.
 4. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
 
@@ -27,12 +27,7 @@ LC_ALL=C find . -maxdepth 1 -type f -name 'alphabet*' -printf '%f\n' |
 
 Se iniciou a aplicação diretamente de um checkout, registre o resultado de `git rev-parse HEAD` na hora de compilar. A prévia empacotada serve o commit da compilação em `/commit.txt`.
 
-Use a resolução da trilha observada e o intervalo de amostragem da versão instalada. No reconhecedor atual, o intervalo configurado é 100 ms. Para conferir a resolução, após a pessoa ligar a câmera, leia os valores width e height no console da aba do aplicativo.
-
-~~~js
-const { width, height } = document.querySelector('video').srcObject.getVideoTracks()[0].getSettings();
-({ width, height })
-~~~
+Com a câmera ligada, use a identificação e a resolução da trilha exibidas no painel da câmera. No reconhecedor atual, o intervalo configurado de amostragem é 100 ms.
 
 ## Observar e registrar
 
@@ -47,18 +42,15 @@ Para uma avaliação independente, mantenha a referência humana separada da dec
 
 ### Medir no Chromium
 
-Depois que a tentativa mostrar sua resposta, use o comando abaixo no console da aba do LibrasIA para copiar a medição. Cole o conteúdo em **JSON da medição no Chromium** na ficha. Faça isso antes de iniciar a próxima tentativa.
-
-~~~js
-const measurement = document.querySelector('[data-capture-status]').dataset.timing
-if (measurement) copy(measurement)
-~~~
+Nas telas abertas pelos links da ficha, clique em **Copiar medição** assim que aparecer a resposta da tentativa. Cole o conteúdo em **JSON da medição no Chromium** antes de iniciar outra tentativa. Se o navegador impedir a cópia automática, o aplicativo seleciona o JSON para copiar com `Ctrl+C`.
 
 O JSON guarda três medidas. `decisionMs` mede o intervalo entre concluir e exibir a decisão. `initialLoadMs` mede o carregamento inicial do reconhecedor na primeira tentativa da captura. `extractionMs` contém uma duração por quadro processado. Para o critério de latência da lição, use as tentativas manuais com o avatar em reprodução. O resumo de latência usa as conclusões manuais. Carregamento e extração também são registrados em tentativas encerradas automaticamente.
 
 O valor `classifierCalls` acompanha a medição. Zero indica que a tentativa terminou antes da classificação, como num quadro sem mãos. Um ou mais indica quantas vezes o classificador de sinais foi chamado, inclusive quando o resultado ficou inconclusivo. Nos modos de sequência, o valor soma as chamadas de todos os trechos analisados. A medição da última tentativa fica em memória até o próximo estado da captura.
 
 Com o campo do JSON vazio, a ficha permite anotar manualmente as chamadas ao classificador, a latência e o método usado para obtê-la. Deixe em branco os campos de valores ausentes.
+
+O teste em Chromium usou um vídeo gravado sem mãos. Conferiu a resolução mostrada, copiou a medição pela área de transferência e simulou o bloqueio da cópia automática para verificar a seleção manual. A ficha exportou os mesmos tempos e zero chamadas ao classificador. O teste registrou apenas requisições locais de leitura e confirmou que o armazenamento do navegador ficou vazio. [Teste no Chromium](../tests/e2e/validation.test.mjs)
 
 ## Exportar
 

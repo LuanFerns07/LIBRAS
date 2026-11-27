@@ -37,7 +37,7 @@ As demais etapas, a publicação na Vercel e a finalização do memorial ficam p
 - [x] Confirmar o PC de referência, o navegador, a webcam e a disponibilidade de uma voz gratuita em português brasileiro. Registrar o ambiente usado para os testes e o plano de síntese local se faltar uma voz compatível.
 - [x] Inicializar o Git local, criar o primeiro commit e documentar como instalar, executar e testar a aplicação. Se a pasta principal estiver protegida, preservar os arquivos de origem e inicializar a pasta gravável da aplicação dentro do espaço de trabalho.
 - [x] Versionar código, documentação, configurações e manifestos de dados, modelos e animações. Manter vídeos brutos, segredos e artefatos pesados fora do histórico. Definir como recuperar a versão exata de cada artefato usado na demonstração.
-- [x] Concentrar a implementação, os testes e a atualização do roadmap na `main`, com commits verificados e push no remoto do projeto.
+- [x] Concentrar a implementação, os testes e a atualização do roadmap na `main`, agrupando os commits por marco ou meia etapa verificada e enviando cada grupo ao remoto do projeto.
 - [x] **Aceite.** A revisão técnica independente iniciou a base em um checkout limpo e executou a verificação inicial. Git, voz e webcam têm um caminho de configuração documentado.
 
 ### M1 · Dados, vocabulário e protocolo de validação
@@ -50,6 +50,7 @@ As demais etapas, a publicação na Vercel e a finalização do memorial ficam p
 - [x] Verificar os modelos congelados em amostras de sinais de videoaulas licenciadas. Registrar variantes, falhas de rastreamento e tamanho da amostra. [Verificação externa de Cinco e Amarelo](docs/sinais-independentes.md)
 - [x] Medir a rejeição em 19 novos recortes externos de repouso, atividade cotidiana, transições e glosas fora do catálogo. Reproduzir três decisões na Área livre usando as gravações como câmera. [Resultados por estrato](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
 - [x] Medir chamadas ao classificador por tentativa. Verificar no Chromium a diferença entre ausência de mãos e rejeição após classificação, guardar o valor na ficha e resumir a cobertura por cenário. [Verificação com gravações](docs/validacao-ao-vivo.md#verificação-das-chamadas-no-chromium)
+- [x] Conferir a resolução da câmera e a cópia da medição pelo aplicativo. Exportar os valores na ficha local e verificar o caminho de cópia manual quando o Chromium bloqueia a área de transferência. [Medição na ficha](docs/validacao-ao-vivo.md#medir-no-chromium)
 - [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [x] Conferir os três sinais iniciais no catálogo, no player 3D e no manifesto da prévia. Verificar partições, atribuição da base e paridade WebAssembly. Reunir as fontes e bases em um índice para citação. [Revisão técnica de M1](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências](docs/referencias.md)
