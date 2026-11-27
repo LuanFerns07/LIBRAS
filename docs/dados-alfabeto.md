@@ -1,4 +1,4 @@
-# Dados das letras estáticas de Libras
+# Alfabeto ao vivo de Libras
 
 O ensaio inicial usa o **Libras Landmark Dataset (A-Z), versão 1**, de Heitor Câmara Costa Fernandes (IFSP). O depósito do Kaggle declara licença GPL 3. O ZIP contém 26 CSVs de 1.000 linhas, cada linha com os 63 valores dos 21 pontos da mão obtidos com MediaPipe. A coleta usou webcam e gestos do alfabeto de Libras. O depósito fornece apenas coordenadas. Os vídeos ou imagens originais, a lateralidade, as pessoas e as sessões de captura ficam desconhecidos para cada amostra. [Dataset](https://www.kaggle.com/datasets/heitorccf/librasign/versions/1) · [Metadados oficiais](https://www.kaggle.com/api/v1/datasets/view/heitorccf/librasign) · [Metodologia, seção 4.1](https://github.com/Heitorccf/librasign/blob/36468650171e260282103ef411eb49fbe156ba35/HeitorFernandes-TCC_BSI.pdf)
 
@@ -47,3 +47,44 @@ As três aulas do NTE da UFSM têm licença CC BY-NC-SA 4.0 e rotulam em tela as
 - A aula de Giovana Fracari Hautrive fica reservada para teste. O manifesto inclui a pose estática de A de 3,66 a 4,37 s e de B de 5,06 a 6,14 s. A transição ocorre entre as duas janelas no vídeo original. [Aula 1535641159](https://ntetube.nte.ufsm.br/v/1535641159)
 
 Há uma demonstração por letra em cada aula. Reutilizar ou transformar os quadros dessa demonstração mantém a mesma origem. A avaliação mede cobertura entre essas três gravações.
+
+## Praticar e ler letras ao vivo
+
+Abra **http://127.0.0.1:4177/#area-livre** no Chromium e selecione **Alfabeto** no campo **Conteúdo**. Ative a câmera e mostre uma letra com uma mão. A leitura aparece ao lado do vídeo assim que fica estável. Use **Adicionar letra** para levar o caractere à transcrição. **Inserir espaço** separa palavras.
+
+Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Praticar com ajuda** para ver a leitura ao lado da câmera e a demonstração no avatar. O modelo escolhe a letra usando os pontos da mão. A escolha no exercício serve para comparar o resultado com o alvo e registrar o progresso.
+
+O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento usam uma janela recente de pontos da mão.
+
+### Compilar neste Linux
+
+Depois de baixar e conferir os arquivos de vídeo dos manifestos da UFSM e preparar o LibraSign, execute a extração e o treino na raiz. A opção `--device cpu` também é aceita.
+
+```bash
+npm run setup:vision
+.venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/ufsm-static-windows.json --out data/alphabet/static-video-final.json
+.venv/bin/python -m ml.alphabet.extract_motion --out data/alphabet/motion-final.json
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
+  --device cuda --out data/models/alphabet-ufsm-final
+.venv/bin/python -m ml.alphabet.train --reference data/alphabet/static-video-final.json \
+  --geometry --device cuda --out data/models/alphabet-geometry-final
+.venv/bin/python -m ml.alphabet.agreement --primary data/models/alphabet-ufsm-final \
+  --check data/models/alphabet-geometry-final --reference data/alphabet/static-video-final.json
+node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
+LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
+  --pacote data/releases/librasia-alfabeto-ao-vivo
+python3 data/releases/librasia-alfabeto-ao-vivo/iniciar.py --porta 4177
+```
+
+Os vídeos de origem, os pontos extraídos e os modelos ficam no ambiente local. Os manifestos documentam os créditos dos autores, os intervalos rotulados e os hashes em cada partição. [Janelas estáticas](../ml/alphabet/ufsm-static-windows.json) · [Janelas de movimento](../ml/alphabet/ufsm-temporal-windows.json)
+
+### Cobertura e verificação
+
+A prévia usa 20 classes estáticas e dois padrões de movimento, Ç e Y. A Prática oferece também H, J, K, X e Z com o avatar. O detector de movimento confundiu algumas dessas letras entre as aulas e elas ficaram fora da leitura automática. A interface mostra a lista das classes do modelo local.
+
+Treinamos os dois modelos estáticos com o LibraSign e quadros da aula do Libras ON. A validação usou outra aula da UFSM. Na terceira aula, a concordância dos modelos aceitou 250 de 290 quadros e acertou 243. Os quadros são correlacionados dentro de cada demonstração. O A da aula de teste ficou sem acertos nessa avaliação. [Matriz e resultado por letra](../ml/evidence/alphabet-live/agreement.json)
+
+O detector temporal usa trajetórias das duas primeiras aulas e separa classes pelo formato da mão e deslocamento do pulso. Ç e Y passaram pelo recorte de seleção em gravações conhecidas. A seleção usou o resultado dos recortes, e a verificação em pessoas fora dessas aulas continua pendente. [Resultado por letra](../ml/evidence/alphabet-live/motion-evaluation.json)
+
+O Chromium leu B, Ç e Y no vídeo reservado e mostrou o resultado ao lado da câmera sem o botão de tentativa. A transcrição recebeu a letra pelo botão **Adicionar letra**. O teste de Prática manteve A como alvo enquanto a câmera mostrava B. O vídeo entrou como câmera simulada nos testes automatizados. A confirmação com movimentos feitos na webcam do PC fica pendente. [Teste de navegador](../tests/e2e/alphabet-live.test.mjs)

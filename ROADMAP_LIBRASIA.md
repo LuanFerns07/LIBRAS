@@ -77,6 +77,10 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 
 ### M4 · Alfabeto, palavras, frases e nomes
 
+- [x] Oferecer A–Z e Ç no seletor de Prática, com demonstração no avatar e progresso separado. [Modo alfabeto](docs/dados-alfabeto.md#praticar-e-ler-letras-ao-vivo)
+- [x] Exibir a letra detectada ao lado da webcam na Prática e na Área livre, sem iniciar tentativa. Verificar B, Ç e Y com gravação rotulada no Chromium. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
+- [ ] Completar o reconhecimento por webcam com vídeos independentes das letras em movimento e validar todas as letras com pessoas sinalizantes.
+
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
 - [x] Implementar a grade navegável por teclado, seleção de letra, pausa, repetição e velocidade. Reusar o player 3D no tradutor.
 - [x] Implementar as sequências de palavras e frases do catálogo, as mensagens de cobertura e a soletração de nomes isolados ou em frases suportadas.

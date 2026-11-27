@@ -1,0 +1,73 @@
+{
+  "featuresSha256": "d67db7e71ec593ded05ead9f94f427c974ea93f9b1c18e82fcb05cd43ae0c085",
+  "manifestSha256": "490c5b6663636e413fcf90fd39bab7ff15c9dc242216f7ec384820057a808da5",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "limits": {
+    "Ç": 0.20877308576894404,
+    "H": 0.3246510224218101,
+    "J": 0.4,
+    "K": 0.2658997078007237,
+    "Y": 0.28723340856694846
+  },
+  "released": {
+    "Ç": 0.20877308576894404,
+    "Y": 0.28723340856694846
+  },
+  "tests": [
+    {
+      "label": "A",
+      "prediction": "Z",
+      "live": {}
+    },
+    {
+      "label": "B",
+      "prediction": "Ç",
+      "live": {}
+    },
+    {
+      "label": "Ç",
+      "prediction": "Ç",
+      "live": {
+        "Ç": 10
+      }
+    },
+    {
+      "label": "H",
+      "prediction": "H",
+      "live": {
+        "H": 14
+      }
+    },
+    {
+      "label": "J",
+      "prediction": "J",
+      "live": {}
+    },
+    {
+      "label": "K",
+      "prediction": "K",
+      "live": {
+        "H": 4
+      }
+    },
+    {
+      "label": "X",
+      "prediction": "K",
+      "live": {}
+    },
+    {
+      "label": "Y",
+      "prediction": "Y",
+      "live": {
+        "Y": 6
+      }
+    },
+    {
+      "label": "Z",
+      "prediction": "K",
+      "live": {
+        "K": 14
+      }
+    }
+  ]
+}
