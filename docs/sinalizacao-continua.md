@@ -6,7 +6,7 @@ Os experimentos usam gravações contínuas reais. A tradução inicial é avali
 
 ## Fluxo contínuo experimental na câmera
 
-O modo local usa os quadros do Holistic em uma grade de 100 ms. O detector ONNX propõe fronteiras, o classificador já usado na área livre reconhece cada trecho e o tradutor monotônico propõe texto a partir da sequência de glosas. A interface exibe as glosas detectadas. Um trecho inconclusivo preserva a transcrição anterior. [Treino do detector de fronteiras](fronteiras.md) · [Treino da tradução de glosas](comparacao-glosas.md)
+O modo local usa os quadros do Holistic em uma grade de 100 ms. O detector ONNX propõe fronteiras, o classificador já usado na área livre reconhece cada trecho e o tradutor monotônico propõe texto a partir da sequência de glosas. A interface exibe as glosas detectadas e permite revisar a sequência. A transcrição recebe a sugestão quando a pessoa a confirma. [Treino do detector de fronteiras](fronteiras.md) · [Treino da tradução de glosas](comparacao-glosas.md)
 
 Com os pesos de fronteiras, o corpus textual e a validação local preparados conforme os ensaios acima, execute na raiz do projeto.
 
@@ -18,9 +18,27 @@ LIBRASIA_CONTINUO=1 LIBRASIA_PORTA=4201 \
   LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh
 ```
 
-Abra **http://127.0.0.1:4201/** e selecione **Área livre → Sinalização contínua experimental**. Ative a câmera e abra uma tentativa. Confira os sinais detectados e revise o texto antes de ouvi-lo. A sessão usa os quatro sinais do modelo combinado, Cinco, Espelho, Amarelo e Aluno.
+Abra [Área livre](http://127.0.0.1:4201/#area-livre) e selecione **Sinalização contínua experimental**. Ative a câmera e abra uma tentativa. Confira os sinais detectados. Para ajustar a sequência, edite os nomes no campo de revisão, substitua ou remova os trechos marcados com `?` e use **Gerar sugestão**. Use **Acrescentar à transcrição** para confirmar. No modelo combinado, o catálogo tem Cinco, Espelho, Amarelo e Aluno.
 
 Os pesos de fronteiras são mantidos no ambiente local de pesquisa. O detector congelado tem SHA-256 `c6fc6ba3f013c2d551eb9e0614a1dff326bb028b2d81c84cb4442eed9154b610`. O artefato monotônico deriva de 14.000 pares de treino do VLibrasBD v2, sob CC BY-SA 4.0, e tem SHA-256 `99cee189d6fd05402cf0a04c4dac706fd25470933240c3e8929aab927e421b11`. Cada carregamento confere os hashes. [Condições da fonte UFSC](fronteiras.md#proveniência-e-condições-de-uso) · [VLibrasBD v2 e atribuição](glosas-texto.md)
+
+### Revisão dos sinais detectados
+
+Na prévia experimental do Chromium, o controle com Amarelo e Espelho apresentou sete trechos, incluindo Amarelo repetido, Espelho, Cinco e três trechos inconclusivos. O texto anterior permaneceu intacto. A revisão substituiu a sequência por “amarelo espelho”, mostrou a sugestão e acrescentou o texto uma vez após a confirmação. Uma nova edição invalidou a sugestão anterior. No recorte de repouso do CLAD, dois trechos ficaram inconclusivos e o texto também foi preservado.
+
+Na webcam física Acer HD User Facing a 640 × 480, a tentativa em repouso ficou inconclusiva, sem fronteiras detectadas. A trilha foi liberada ao sair da Área livre. O ensaio com Amarelo e Espelho usou clipes de treino unidos. A avaliação de sequências naturais com anotação de referência e a revisão do sentido em português seguem pendentes. A geração também pode omitir palavras quando recebe glosas válidas. No artefato atual, “cinco espelho” gera “o espelho”.
+
+Para repetir o controle com vídeo, sirva a prévia com o detector Holistic com penalidade de corte e use:
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 \
+  LIBRASIA_TEST_CONTINUOUS=1 LIBRASIA_TEST_CAPTURE_MS=7900 LIBRASIA_TEST_GLOSS_REVIEW=1 \
+  LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO=data/evidence/continuo-integrado/amarelo-espelho-s04.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+Os logs ficam em `data/evidence/continuo-integrado`, nos arquivos `revisao-amarelo-espelho.log`, `revisao-repouso.log` e `revisao-webcam.log`. [Configuração do detector com penalidade](#controle-de-fragmentação-no-navegador)
 
 ### Ensaio da integração no Chromium
 

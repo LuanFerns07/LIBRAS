@@ -259,7 +259,8 @@ export async function openEngine() {
     recognize,
     prepareContinuous: import.meta.env.VITE_LIBRASIA_CONTINUO === '1' ? () => {
       if (continuous) return continuous
-      const opening = import('./continuous.js').then(({ openContinuous }) => openContinuous(localAsset, verifiedBytes, recognize))
+      const opening = import('./continuous.js').then(({ openContinuous }) =>
+        openContinuous(localAsset, verifiedBytes, recognize, manifest.labels.slice(1)))
       continuous = opening
       opening.catch(() => {
         if (continuous === opening) continuous = undefined

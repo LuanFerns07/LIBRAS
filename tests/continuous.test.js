@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { continuousResult, regularizeBoundaryFrames } from '../src/recognition/continuous.js'
+import { continuousResult, regularizeBoundaryFrames, suggestFromReview } from '../src/recognition/continuous.js'
 
 test('a grade mantém posições temporais sem repetir quadros durante a perda de captura', () => {
   const frames = [20, 117, 324, 417, 563].map(timestamp => ({ timestamp }))
@@ -38,4 +38,18 @@ test('a sequência incerta exibe glosas conhecidas e evita produzir texto parcia
   assert.equal(result.reason, 'partial-sequence')
   assert.deepEqual(result.glosses, ['cinco', null])
   assert.equal(result.text, undefined)
+})
+
+test('a revisão só traduz uma sequência completa com sinais do modelo carregado', () => {
+  const vocabulary = new Set(['amarelo', 'espelho'])
+  const translate = signs => {
+    assert.deepEqual(signs, ['amarelo', 'espelho'])
+    return ['amarelo', 'espelho']
+  }
+  assert.deepEqual(suggestFromReview('  AMARELO \n Espelho ', vocabulary, translate),
+    { state: 'accepted', text: 'amarelo espelho' })
+  for (const invalid of ['', 'amarelo ?', 'amarelo aluno']) {
+    assert.equal(suggestFromReview(invalid, vocabulary, () => assert.fail('A revisão deve rejeitar a entrada.')).state,
+      'inconclusive')
+  }
 })

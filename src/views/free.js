@@ -2,6 +2,7 @@ import { lesson, recognitionCatalog } from '../catalog.js'
 import { captureMarkup, mountCapture } from '../capture-panel.js'
 import { appendTranscription, freeFeedback } from '../recognition/feedback.js'
 import { mountSpeech } from '../speech.js'
+import { glossReviewMarkup, mountGlossReview } from './gloss-review.js'
 
 export function mountFree(main, openEngine) {
   const continuousEnabled = import.meta.env.VITE_LIBRASIA_CONTINUO === '1'
@@ -24,7 +25,6 @@ export function mountFree(main, openEngine) {
       ${captureMarkup()}
       <section class="panel content-panel">
         <h2>Transcrição</h2>
-        ${continuousEnabled ? '<p class="muted" data-continuous-glosses hidden></p>' : ''}
         <label for="transcription" class="field-label">Texto editável</label>
         <textarea id="transcription" rows="7" placeholder="Os sinais reconhecidos aparecem aqui."></textarea>
         <div class="toolbar">
@@ -34,6 +34,7 @@ export function mountFree(main, openEngine) {
           <button class="button" type="button" data-clear>Limpar texto</button>
         </div>
         <p class="inline-status" role="status" data-voice-status hidden></p>
+        ${continuousEnabled ? glossReviewMarkup() : ''}
         <div class="coverage">
           <h3>Catálogo experimental</h3>
           <p data-recognition-coverage>Modelo inicial: ${lesson.map(signal => signal.label).join(', ')}.</p>
@@ -45,7 +46,6 @@ export function mountFree(main, openEngine) {
   const voiceStatus = main.querySelector('[data-voice-status]')
   const sequence = main.querySelector('[data-sequence-mode]')
   const continuous = main.querySelector('[data-continuous-mode]')
-  const glossTrail = main.querySelector('[data-continuous-glosses]')
   const modeHelp = main.querySelector('[data-mode-help]')
   const coverage = main.querySelector('[data-recognition-coverage]')
   const mode = main.querySelector('[data-free-mode]')
@@ -53,6 +53,10 @@ export function mountFree(main, openEngine) {
   const addLetter = main.querySelector('[data-add-letter]')
   const addSpace = main.querySelector('[data-add-space]')
   const voice = mountSpeech(voiceStatus)
+  const glossReview = continuousEnabled ? mountGlossReview(main, text => {
+    transcription.value = appendTranscription(transcription.value, { state: 'accepted', text })
+    transcription.focus()
+  }) : undefined
   let currentLetter = null
   let signalNames = lesson.map(signal => signal.label)
   let supportedLetters
@@ -79,24 +83,18 @@ export function mountFree(main, openEngine) {
       addLetter.disabled = !label
     },
     onResult(result) {
-      transcription.value = appendTranscription(transcription.value, result)
-      if (glossTrail) {
-        glossTrail.hidden = !result.glosses?.length
-        if (!glossTrail.hidden) {
-          const trail = result.glosses.map(gloss => gloss ?? '[trecho inconclusivo]').join(' · ')
-          glossTrail.textContent = `Sinais detectados — ${trail}`
-        }
-      }
+      if (result.glosses) glossReview?.show(result)
+      else transcription.value = appendTranscription(transcription.value, result)
     },
   })
   function changeMode() {
     capture.reset()
-    if (glossTrail) glossTrail.hidden = true
+    glossReview?.clear()
     const instructions = {
       isolated: 'Por padrão, faça um sinal por tentativa.',
       letter: 'Mostre uma letra com uma mão. Quando ela aparecer, você pode adicioná-la ao texto.',
       sequence: 'Função experimental. Abaixe as mãos entre os sinais do catálogo.',
-      continuous: 'Use sinais do catálogo. Confira os sinais detectados e revise a sugestão de texto antes de ouvir.',
+      continuous: 'Use sinais do catálogo. Depois da tentativa, revise os sinais e confirme a sugestão para acrescentá-la ao texto.',
     }
     const current = currentMode()
     modeHelp.textContent = instructions[current]
@@ -124,7 +122,7 @@ export function mountFree(main, openEngine) {
   main.querySelector('[data-clear]').addEventListener('click', () => {
     voice.stop()
     capture.reset()
-    if (glossTrail) glossTrail.hidden = true
+    glossReview?.clear()
     transcription.value = ''
     voiceStatus.hidden = false
     voiceStatus.dataset.state = 'idle'

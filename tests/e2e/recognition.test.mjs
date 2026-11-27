@@ -12,6 +12,7 @@ const secondText = process.env.LIBRASIA_TEST_SECOND_TEXT?.trim()
 const multiple = process.env.LIBRASIA_TEST_SEQUENCE === '1'
 const continuous = process.env.LIBRASIA_TEST_CONTINUOUS === '1'
 const expectedGlosses = process.env.LIBRASIA_EXPECT_GLOSSES
+const reviewGlosses = process.env.LIBRASIA_TEST_GLOSS_REVIEW === '1'
 const sync = multiple || continuous || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
 const lessonFlow = process.env.LIBRASIA_TEST_LESSON_FLOW === '1'
@@ -60,6 +61,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (secondText) assert.ok(expected && sync && trials === 2 && !target && !multiple && !continuous,
     'Use duas tentativas isoladas e marcadores verde e azul para verificar sinais diferentes.')
   if (continuous) assert.ok(!multiple && !target && !autoFinish && !offline, 'Use a área livre no cenário contínuo.')
+  if (reviewGlosses) assert.ok(continuous && !expected && trials === 1,
+    'Use uma tentativa contínua inconclusiva para verificar a revisão.')
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (lessonFlow) assert.ok(target === 'signal-cinco' && expected === 'cinco' && sync && trials === 2,
     'Use duas tentativas com o clipe sincronizado de Cinco para verificar a lição inteira.')
@@ -217,11 +220,14 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       if (target && !(lessonFlow && trial === 1)) await evaluate('document.querySelector("[data-restart]").click()', true)
       const endAtMediaMs = fixedCaptureMs === null ? null : marked.startMs + fixedCaptureMs
       const decision = await evaluate('(' + finish + ')(' + autoFinish + ',' + endAtMediaMs + ')', true)
-      const transcript = target ? null : await getTranscript()
       const glosses = continuous ? await evaluate(`(() => {
         const trail = document.querySelector("[data-continuous-glosses]")
         return trail.hidden ? '' : trail.textContent.split(' — ')[1]
       })()`) : null
+      if (continuous && expected && decision.state === 'accepted') {
+        await evaluate('document.querySelector("[data-apply-gloss-suggestion]").click()', true)
+      }
+      const transcript = target ? null : await getTranscript()
       const window = fixedCaptureMs === null || !Number.isFinite(decision.endMs) ? null : {
         offsetMs: marked.startMs - marked.markerMs,
         durationMs: decision.endMs - marked.startMs,
@@ -303,6 +309,38 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
     assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
+
+    if (reviewGlosses) {
+      const field = 'document.querySelector("#gloss-review-input")'
+      const output = 'document.querySelector("[data-gloss-suggestion]")'
+      const apply = 'document.querySelector("[data-apply-gloss-suggestion]")'
+      const generate = () => evaluate('document.querySelector("[data-generate-gloss-suggestion]").click()', true)
+      const edit = async text => {
+        await evaluate(field + '.select()')
+        await page('Input.insertText', { text })
+      }
+      assert.match(await evaluate(field + '.value'), /\?/u)
+      assert.match(decisions[0].glosses, /amarelo|espelho/u)
+      await generate()
+      assert.equal(await evaluate(output + '.dataset.state'), 'inconclusive')
+      assert.equal(await evaluate(apply + '.disabled'), true)
+      await edit('amarelo espelho')
+      await generate()
+      assert.equal(await evaluate(output + '.textContent'), 'Sugestão de texto — amarelo espelho')
+      assert.equal(await getTranscript(), prefix)
+      await edit('amarelo ?')
+      assert.equal(await evaluate(apply + '.disabled'), true, 'Uma edição deve invalidar a sugestão anterior.')
+      await edit('amarelo espelho')
+      await generate()
+      await evaluate(apply + '.click()', true)
+      await evaluate(apply + '.click()', true)
+      const separator = prefix && !/\s$/u.test(prefix) ? ' ' : ''
+      assert.equal(await getTranscript(), prefix + separator + 'amarelo espelho')
+      assert.equal(await evaluate('document.querySelector("[data-gloss-review]").hidden'), true)
+      assert.equal(await evaluate('document.activeElement.id'), 'transcription')
+      assert.deepEqual(otherRequests, [], 'A revisão também deve ser local.')
+      context.diagnostic('A revisão rejeitou os trechos em aberto, invalidou sugestões antigas e acrescentou somente a sugestão confirmada.')
+    }
 
     if (expectedHint) {
       const progress = await evaluate('JSON.parse(localStorage.getItem("librasia:progress:v1"))[' + JSON.stringify(target) + ']')

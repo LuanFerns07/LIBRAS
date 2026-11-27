@@ -49,7 +49,7 @@ export async function continuousResult(intervals, frames, recognize, translate) 
   const glosses = decisions.map(result => result.state === 'accepted' ? labelById.get(result.id) ?? null : null)
   if (glosses.includes(null)) {
     return { state: 'inconclusive', reason: 'partial-sequence', glosses, intervals,
-      message: 'Alguns trechos ficaram inconclusivos. Repita a sequência com sinais do catálogo.' }
+      message: 'Alguns trechos ficaram inconclusivos. Revise os sinais detectados ou repita a sequência.' }
   }
   const text = translate(glosses).join(' ')
   if (!text) {
@@ -57,10 +57,20 @@ export async function continuousResult(intervals, frames, recognize, translate) 
       message: 'A sequência foi detectada, mas ficou sem sugestão de texto.' }
   }
   return { state: 'accepted', glosses, intervals, text,
-    message: `“${text}” foi acrescentado como sugestão de texto. Revise antes de ouvir.` }
+    message: 'Sequência detectada. Confira os sinais e a sugestão antes de acrescentar ao texto.' }
 }
 
-export async function openContinuous(localAsset, verifiedBytes, recognize) {
+export function suggestFromReview(value, vocabulary, translate) {
+  const signs = value.toLocaleLowerCase('pt-BR').trim().split(/\s+/u).filter(Boolean)
+  if (!signs.length || signs.some(sign => !vocabulary.has(sign))) {
+    return { state: 'inconclusive', message: 'Use os nomes dos sinais do catálogo. Substitua ou remova os pontos de interrogação.' }
+  }
+  const text = translate(signs).join(' ')
+  return text ? { state: 'accepted', text }
+    : { state: 'inconclusive', message: 'A sequência revisada ficou sem sugestão de texto.' }
+}
+
+export async function openContinuous(localAsset, verifiedBytes, recognize, catalog = labelById.values()) {
   async function readJson(file) {
     return (await localAsset(directory + file)).json()
   }
@@ -77,6 +87,8 @@ export async function openContinuous(localAsset, verifiedBytes, recognize) {
     verifiedBytes(directory + 'monotone-web.json', gloss.sha256),
   ])
   const translate = createGlossTranslator(JSON.parse(new TextDecoder().decode(glossBytes)))
+  const vocabulary = new Set(catalog)
+  const review = value => suggestFromReview(value, vocabulary, translate)
   const session = await InferenceSession.create(onnx, { executionProviders: ['wasm'] })
   let working = Promise.resolve()
 
@@ -93,7 +105,7 @@ export async function openContinuous(localAsset, verifiedBytes, recognize) {
 
   return {
     recognize(frames) {
-      const run = working.then(() => analyze(frames))
+      const run = working.then(async () => ({ ...await analyze(frames), review }))
       working = run.catch(() => {})
       return run
     },
