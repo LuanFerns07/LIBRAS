@@ -180,3 +180,22 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.ev
 ```
 
 O relatório local fica em `$out/report.json`. Os vídeos e pontos ficam em `data/`.
+
+### Segunda avaliação externa com videoaula do IFSC
+
+A videoaula **Numerais Libras**, de Uéslei Paterno, está indicada no módulo de numerais cardinais do curso **Comunicação Inclusiva: Introdução à Libras**. A publicação declara Creative Commons Atribuição. A pessoa e a sessão ficaram fora do ajuste dos vetos de Cinco. O commit `02a2c69` fixou dois blocos didáticos com quatro janelas de Cinco e três durações para cada uma das seis transições. A inspeção das configurações usou apoio das legendas automáticas. [Curso do IFSC](https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178) · [Videoaula de Uéslei Paterno](https://www.youtube.com/watch?v=4_xeQ-U8bPI) · [Protocolo](../ml/fresh_eval/protocol-numerais-ifsc.json)
+
+O Holistic entregou pontos utilizáveis nas 22 janelas. Com o limiar 0,525, o combinado deixou as quatro janelas de Cinco inconclusivas, com confiança máxima de 0,398 a 0,510. Nas 18 janelas de transição, rejeitou 15 e aceitou como Espelho as três durações sobrepostas de Seis → Sete do primeiro bloco. Os vetos congelados de Cinco conservaram as decisões desta sessão. Ainda falta uma sessão externa com Cinco válido e falso Cinco no combinado para medir o efeito dos vetos. [Relatório por janela](../ml/fresh_eval/evidence-numerais-ifsc/report.json) · [Manifesto executado](../ml/fresh_eval/evidence-numerais-ifsc/manifest.json)
+
+```bash
+out=data/transition-gate-m5/ifsc-sonda
+protocol=ml/fresh_eval/protocol-numerais-ifsc.json
+mkdir -p "$out/source"
+yt-dlp --no-playlist -f 136 -o "$out/4_xeQ-U8bPI.mp4" 'https://www.youtube.com/watch?v=4_xeQ-U8bPI'
+ffmpeg -v error -nostdin -i "$out/4_xeQ-U8bPI.mp4" -map 0:v:0 -an -map_metadata -1 \
+  -c:v copy -fflags +bitexact -movflags +faststart "$out/source/ifsc-numerais.mp4"
+.venv/bin/python -m ml.fresh_eval.prepare --protocol "$protocol" --out "$out"
+node ml/extract.mjs --manifest "$out/manifest.json" --out "$out/features" --workers 1
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=ml .venv/bin/python -m ml.evaluate_numeric_veto_confirmation \
+  --protocol "$protocol" --session-dir "$out"
+```

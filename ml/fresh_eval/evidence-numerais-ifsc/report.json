@@ -1,0 +1,417 @@
+{
+  "scope": "first-confirmation-without-retuning",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "10d72c55b5b8c0ff4bbd8d747b5b895f552b04297dd79a8467b80f26659d2e84",
+  "manifestSha256": "8bb5d84026c15e43b7ee81d678003b2854fefc12b9ab352cebb817b9fe8f0aec",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "featuresManifestSha256": "a2cbd79719bafc61bf5a592e0f3506659f35c797254c7dc97615d8e43ecde984",
+  "schemaVersion": 1,
+  "frozenRuleSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "model": {
+    "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+    "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+    "threshold": 0.525
+  },
+  "outcome": "insufficient-baseline-pair",
+  "sessions": [
+    {
+      "signer": 906,
+      "session": "ifsc-ueslei-paterno-numerais",
+      "correctCinco": [],
+      "correctCincoLost": [],
+      "falseCincoByMovement": {},
+      "falseCincoMovementsVetoed": [],
+      "informative": false
+    }
+  ],
+  "decisions": [
+    {
+      "id": "ifsc-cinco-bloco-1-longo",
+      "signer": 906,
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.5081886371815092,
+      "captureState": "ready",
+      "decision": "inconclusive",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "f7ffebe97aae927ceb10f0c27cc89cd4aee567a3e20e386d95a55ef24703a1f0",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-cinco-bloco-1-central",
+      "signer": 906,
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.5097120958520506,
+      "captureState": "ready",
+      "decision": "inconclusive",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "fc580f64535fb2ce749ac4b95dc8ac6c1c765430cbf077d95703d5205f2fea7b",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-cinco-bloco-2-inicio",
+      "signer": 906,
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.39766780628803333,
+      "captureState": "ready",
+      "decision": "inconclusive",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "06e7199abe56c1c4e05311182488114b777e3db3e34146f47425457ef0a44371",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-cinco-bloco-2-fim",
+      "signer": 906,
+      "expected": "cinco",
+      "predicted": null,
+      "confidence": 0.4358525088188538,
+      "captureState": "ready",
+      "decision": "inconclusive",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "15bd87b1c70e92a40c80c66940a0cc3ce274ad980cb1f5317d06bae857fbd1c1",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-seis-sete-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": "espelho",
+      "confidence": 0.5997648119741681,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "b1-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "f6ad6a94d0b54868ed02cd33438a61a90bf11599a15af503830ac7e6dcdee329",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": "espelho"
+    },
+    {
+      "id": "ifsc-b1-seis-sete-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": "espelho",
+      "confidence": 0.5858531438825256,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "b1-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "35df270c75b216ee20add60c16fda90b5c5740f55da256a483dbc31bd4678c86",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": "espelho"
+    },
+    {
+      "id": "ifsc-b1-seis-sete-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": "espelho",
+      "confidence": 0.5824689128676164,
+      "captureState": "ready",
+      "decision": "false-accept",
+      "stratum": "b1-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "417df62fcb4ccb65f91a66553e123febd1767029f98d20c27fa88e95df11d6e7",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": "espelho"
+    },
+    {
+      "id": "ifsc-b1-sete-oito-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.46994860879290995,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "bb0389f6ae1560fb648358b3bcbe07acc14f943cc3cb0e563c75f19a989a5c1f",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-sete-oito-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.46769776685482695,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "640b6ec650d6879dcfeecd65e59459df7a281fcb952f2dc71d85e6e0381c6b59",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-sete-oito-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4661147120024163,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "f2963acef690e90e851120d61131e3cc291e32f7f762d8e5e73ce762453ff543",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-oito-nove-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.47488285879434844,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "b9fdbcfce92199afc551b11383122fbfd921792aad6ffc0449403b7cfc944f1c",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-oito-nove-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4755644808389648,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "060ed18e5eac73e8cd3a1d729df12032d008fa19f6ba48efa9a2e3cb3672294c",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b1-oito-nove-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4812118306048845,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b1-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "e6d70984ad0ef469d31b5d334104dfc7597f37bad6c85c67ded0d08106b9b721",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-seis-sete-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.3906589195729193,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "afe8276ca990692200cff465215163d8589c9f0f124e5cd19a563007dc7f02fa",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-seis-sete-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.39827679975496016,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "603da7ab88f4e9e09de4546fd8b5aaae5cec83a0fed15d34abce772769e4d828",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-seis-sete-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.3572328382626617,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-seis-sete",
+      "sourceLabel": "Seis → Sete",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "5851cca5fb64832303209a512d50c26d6cd9fa79367613b410c1bc045c648ea7",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-sete-oito-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.4400002402496443,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "16efdf9659909b3f170231d4c60a055aed8ba891e39c1c6d5ce4b959b5d39b2a",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-sete-oito-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.44929177675087206,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "3f9ff794c57bc38f1024c3b6e9b852c9f419526cefe740fcb07d068676dd58e6",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-sete-oito-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.451462503836158,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-sete-oito",
+      "sourceLabel": "Sete → Oito",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "d7acb2b50f5a203d8fb21549546bc7a799202ca633a4b485b2efd7da6758a7be",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-oito-nove-600",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.43315922535605783,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "ae5ca354316386e949e70af2463444873a377f2c641e5fb03127f8631c937a22",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-oito-nove-1000",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.43655985510461076,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "95808480bdabb35da2ef6365b80f7b51dbd6553a5acfdf9eb0ff2bd8757d571e",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    },
+    {
+      "id": "ifsc-b2-oito-nove-1500",
+      "signer": 906,
+      "expected": null,
+      "predicted": null,
+      "confidence": 0.43801136980807426,
+      "captureState": "ready",
+      "decision": "rejected",
+      "stratum": "b2-oito-nove",
+      "sourceLabel": "Oito → Nove",
+      "session": "ifsc-ueslei-paterno-numerais",
+      "sha256": "b34bfb991de16bae92e06cd6607539b5e799a2e508cdf45247e3d5e2d644dbf0",
+      "scores": {
+        "shape": null,
+        "shape-and-motion": null
+      },
+      "afterVeto": null
+    }
+  ]
+}
