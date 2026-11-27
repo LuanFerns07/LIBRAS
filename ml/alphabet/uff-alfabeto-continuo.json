@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Fonte reservada antes da inferência, ausente dos manifestos usados para o ajuste da prévia. Uma janela por letra impressa. Na mesma captura, preservam-se as transições e cartelas originais.",
+  "sources": [
+    {
+      "id": "uff-ffjzgofrtsg",
+      "split": "test",
+      "title": "Alfabeto Manual em 1 minuto: Libras super fácil!!!",
+      "project": "Núcleo de Estudos em Diversidade e Inclusão de Surdos, Universidade Federal Fluminense",
+      "credits": {
+        "sinalizante": "Thiago Cardoso Alves",
+        "publicação": "NUEDIS LIBRAS UFF"
+      },
+      "page": "https://www.youtube.com/watch?v=ffJZgofrtSg",
+      "published": "2025-09-01",
+      "file": "data/alphabet/independent/uff-2025-download/uff-2025-alfabeto.mp4",
+      "sha256": "7f68b3de2aa2c18565e35f5531b1dd26b949f93f384e464b78544027bc3fc044",
+      "mediaFormat": "MP4, H.264 em 1280 × 720 a 30000/1001 fps, áudio AAC",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=ffJZgofrtSg&hl=pt-BR",
+      "licenseEvidence": "O campo license dos metadados da publicação do canal NUEDIS LIBRAS UFF diz Creative Commons Attribution license (reuse allowed).",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "As 26 letras latinas aparecem em preto no canto esquerdo, em ordem. O crédito do sinalizante aparece na abertura. A área das cartelas foi inspecionada a cada três quadros e os rótulos foram conferidos visualmente. A janela considera a cartela estável.",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 6807,
+          "endMs": 9409
+        },
+        {
+          "label": "B",
+          "startMs": 10410,
+          "endMs": 12012
+        },
+        {
+          "label": "C",
+          "startMs": 12913,
+          "endMs": 15015
+        },
+        {
+          "label": "D",
+          "startMs": 15816,
+          "endMs": 18318
+        },
+        {
+          "label": "E",
+          "startMs": 19319,
+          "endMs": 21722
+        },
+        {
+          "label": "F",
+          "startMs": 22723,
+          "endMs": 25325
+        },
+        {
+          "label": "G",
+          "startMs": 26326,
+          "endMs": 28629
+        },
+        {
+          "label": "H",
+          "startMs": 29630,
+          "endMs": 32933
+        },
+        {
+          "label": "I",
+          "startMs": 34134,
+          "endMs": 36436
+        },
+        {
+          "label": "J",
+          "startMs": 38038,
+          "endMs": 41241
+        },
+        {
+          "label": "K",
+          "startMs": 42142,
+          "endMs": 44344
+        },
+        {
+          "label": "L",
+          "startMs": 45345,
+          "endMs": 48148
+        },
+        {
+          "label": "M",
+          "startMs": 49249,
+          "endMs": 51652
+        },
+        {
+          "label": "N",
+          "startMs": 52753,
+          "endMs": 54955
+        },
+        {
+          "label": "O",
+          "startMs": 56056,
+          "endMs": 59059
+        },
+        {
+          "label": "P",
+          "startMs": 60060,
+          "endMs": 63864
+        },
+        {
+          "label": "Q",
+          "startMs": 65165,
+          "endMs": 66967
+        },
+        {
+          "label": "R",
+          "startMs": 68268,
+          "endMs": 71271
+        },
+        {
+          "label": "S",
+          "startMs": 72573,
+          "endMs": 75175
+        },
+        {
+          "label": "T",
+          "startMs": 76376,
+          "endMs": 78979
+        },
+        {
+          "label": "U",
+          "startMs": 80180,
+          "endMs": 82783
+        },
+        {
+          "label": "V",
+          "startMs": 84084,
+          "endMs": 86086
+        },
+        {
+          "label": "W",
+          "startMs": 87287,
+          "endMs": 89990
+        },
+        {
+          "label": "X",
+          "startMs": 91191,
+          "endMs": 94695
+        },
+        {
+          "label": "Y",
+          "startMs": 95696,
+          "endMs": 98498
+        },
+        {
+          "label": "Z",
+          "startMs": 99499,
+          "endMs": 101101
+        }
+      ]
+    }
+  ]
+}
