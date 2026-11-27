@@ -1,0 +1,225 @@
+{
+  "scope": "exploratory-external-didactic-clips",
+  "device": "CPUExecutionProvider",
+  "protocolSha256": "4fac40bb19f38188eb51eb1ea9bbf09726239f0b93f60960713d9b789ac4d7d1",
+  "manifestSha256": "89bce2ec69e3d2f430fde37037792e882981f8c0526e46fc988e89f68669b599",
+  "extractorRecipe": "2a94eb2d71f76d1143818e9ba3e9b0b3602630263ec15452b5cc9b4667dadd54",
+  "featuresManifestSha256": "cf6f3cf4c662a9d473a976e71ba1d7128202b957a73e21450ea7b72c1ff934ca",
+  "models": {
+    "combined": {
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "threshold": 0.525,
+      "perLabel": {
+        "cinco": {
+          "examples": 2,
+          "signers": 2,
+          "correct": 1,
+          "wrongLabel": 0,
+          "inconclusive": 1,
+          "withoutModelCoverage": 0,
+          "captureInconclusive": 0
+        }
+      },
+      "decisions": [
+        {
+          "id": "ufsm-libras-d-cinco",
+          "signer": 902,
+          "expected": "cinco",
+          "predicted": null,
+          "confidence": 0.47850307562480054,
+          "captureState": "ready",
+          "decision": "inconclusive"
+        },
+        {
+          "id": "ufsm-libras-d-seis-sete",
+          "signer": 902,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.9821894808441182,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-controle",
+          "sourceLabel": "Seis → Sete"
+        },
+        {
+          "id": "ufsm-libras-d-sete-oito-600",
+          "signer": 902,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.6720157710961809,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-libras-d-sete-oito-1000",
+          "signer": 902,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.7250425927066455,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-libras-d-sete-oito-1500",
+          "signer": 902,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8331047487666752,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-libras-d-oito-nove",
+          "signer": 902,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8958001161202739,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-controle",
+          "sourceLabel": "Oito → Nove"
+        },
+        {
+          "id": "ufsm-grupo-cinco",
+          "signer": 903,
+          "expected": "cinco",
+          "predicted": "cinco",
+          "confidence": 0.9701564421799358,
+          "captureState": "ready",
+          "decision": "correct"
+        },
+        {
+          "id": "ufsm-grupo-seis-sete",
+          "signer": 903,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.8838535705788167,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-controle",
+          "sourceLabel": "Seis → Sete"
+        },
+        {
+          "id": "ufsm-grupo-sete-oito-600",
+          "signer": 903,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.7783523416380869,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-grupo-sete-oito-1000",
+          "signer": 903,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.6790346044529806,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-grupo-sete-oito-1500",
+          "signer": 903,
+          "expected": null,
+          "predicted": null,
+          "confidence": 0.65338471521834,
+          "captureState": "ready",
+          "decision": "rejected",
+          "stratum": "transicao-sete-oito",
+          "sourceLabel": "Sete → Oito"
+        },
+        {
+          "id": "ufsm-grupo-oito-nove",
+          "signer": 903,
+          "expected": null,
+          "predicted": "cinco",
+          "confidence": 0.6817391353612173,
+          "captureState": "ready",
+          "decision": "false-accept",
+          "stratum": "transicao-controle",
+          "sourceLabel": "Oito → Nove"
+        }
+      ],
+      "negativeOverall": {
+        "captureStates": {
+          "ready": 10
+        },
+        "falseAcceptance": {
+          "count": 1,
+          "total": 10,
+          "rate": 0.1
+        },
+        "falseAcceptanceGivenUsableTracking": {
+          "count": 1,
+          "total": 10,
+          "rate": 0.1
+        },
+        "subjectsWithAnyFalseAcceptance": {
+          "count": 1,
+          "total": 2,
+          "rate": 0.5
+        },
+        "falsePredictions": {
+          "cinco": 1
+        }
+      },
+      "negativeByStratum": {
+        "transicao-controle": {
+          "captureStates": {
+            "ready": 4
+          },
+          "falseAcceptance": {
+            "count": 1,
+            "total": 4,
+            "rate": 0.25
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 1,
+            "total": 4,
+            "rate": 0.25
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "falsePredictions": {
+            "cinco": 1
+          }
+        },
+        "transicao-sete-oito": {
+          "captureStates": {
+            "ready": 6
+          },
+          "falseAcceptance": {
+            "count": 0,
+            "total": 6,
+            "rate": 0.0
+          },
+          "falseAcceptanceGivenUsableTracking": {
+            "count": 0,
+            "total": 6,
+            "rate": 0.0
+          },
+          "subjectsWithAnyFalseAcceptance": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "falsePredictions": {}
+        }
+      }
+    }
+  }
+}
