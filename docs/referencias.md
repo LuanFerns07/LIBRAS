@@ -18,6 +18,7 @@ Este índice reúne as fontes registradas no Git para uso em citações posterio
 ## Consultas e materiais de apoio
 
 - As referências de poses, movimentos e variantes estão reunidas com as páginas ou seções consultadas. Incluem a tese de Tamires Martins Rezende sobre o MINDS-Libras, o material de Anderson Duarte, o artigo de Heloise Gripp Diniz e o alfabeto do INES. [Animações e referências](animacoes.md)
+- A sequência da primeira trilha de aulas usa a Unidade 1 do curso básico da Enap e as seções iniciais do Livro Estudo 1 do IFSC. [Comparação e recorte didático](roadmap-aulas-libras.md#o-que-os-cursos-fazem-no-início)
 - Os vídeos de instituições e as aulas usadas no alfabeto ou como controles externos têm origem, intervalo, crédito e condições no protocolo de cada ensaio. [Vídeos do alfabeto](dados-alfabeto.md) · [Sinais independentes](sinais-independentes.md) · [Controles de movimento](amarelo-espelho-externos.md) · [Transições entre numerais](transicao-sete-oito.md) · [Protocolos de avaliação externa](../ml/fresh_eval/)
 - As consultas técnicas abrangem MediaPipe, ONNX Runtime Web, PyTorch, captura no navegador, Web Speech e implantação web. [Implementação](../PROMPT_LIBRASIA.md) · [Avaliação e paridade](avaliacao.md) · [Publicação](publicacao.md)
 - Os sete materiais de **Saiba mais** têm autoria e título no catálogo de referências da aplicação. [Fontes exibidas](../src/references.js) · [Conferência dos destinos](roteiro-validacao.md#conferência-dos-sete-links-de-saiba-mais)
@@ -79,6 +80,8 @@ Cada endereço abaixo aponta para uma fonte externa com pelo menos um registro i
 
 ### clubedelibras.ufc.br
 
+- [Luciana Marques Vale, Curso Básico de Libras, Unidade 1, pp. 7–16, acervo do Clube de Libras da UFC](<https://clubedelibras.ufc.br/wp-content/uploads/2022/10/cursobasicoenap-apostila-libras.pdf#page=7>) · [roadmap-aulas-libras.md](roadmap-aulas-libras.md)
+- [Exercício de diálogo, p. 15](<https://clubedelibras.ufc.br/wp-content/uploads/2022/10/cursobasicoenap-apostila-libras.pdf#page=15>) · [roadmap-aulas-libras.md](roadmap-aulas-libras.md#recorte-para-a-primeira-trilha)
 - [wp-content/uploads/2021/04/livro-librasparaacademicos-basico1-profandersonduarte.pdf](<https://clubedelibras.ufc.br/wp-content/uploads/2021/04/livro-librasparaacademicos-basico1-profandersonduarte.pdf>) · [catalog.js](../src/catalog.js)
 - [Acervo do Clube de Libras da UFC](<https://clubedelibras.ufc.br/wp-content/uploads/2021/04/livro-librasparaacademicos-basico1-profandersonduarte.pdf#page=14>) · [animacoes.md](../docs/animacoes.md)
 - [Duarte, Libras para Acadêmicos, pp. 24–25, acervo do Clube de Libras da UFC](<https://clubedelibras.ufc.br/wp-content/uploads/2021/04/livro-librasparaacademicos-basico1-profandersonduarte.pdf#page=22>) · [animacoes.md](../docs/animacoes.md)
@@ -235,7 +238,7 @@ Cada endereço abaixo aponta para uma fonte externa com pelo menos um registro i
 
 ### moodle4.ifsc.edu.br
 
-- [Curso do IFSC](<https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178>) · [transicao-sete-oito.md](../docs/transicao-sete-oito.md) · [protocol-numerais-ifsc.json](../ml/fresh_eval/protocol-numerais-ifsc.json)
+- [Livro Estudo 1 do IFSC](<https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178>) · [roadmap-aulas-libras.md](roadmap-aulas-libras.md) · [transicao-sete-oito.md](../docs/transicao-sete-oito.md) · [protocol-numerais-ifsc.json](../ml/fresh_eval/protocol-numerais-ifsc.json)
 - [Unidade didática do IFSC](<https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178#ch50538>) · [README.md](../ml/evidence/alphabet-o-s-independent/README.md) · [independent-p-q-windows.json](../ml/alphabet/independent-p-q-windows.json)
 
 ### mozilladatacollective.com

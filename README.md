@@ -14,6 +14,8 @@ A prévia de trabalho inclui a comparação de sinais e a apresentação de nome
 
 [Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prioridades da retomada](ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Prompt de implementação](PROMPT_LIBRASIA.md)
 
+[Roadmap da trilha inicial de aulas de Libras](docs/roadmap-aulas-libras.md)
+
 [Referências, bases e consultas](docs/referencias.md)
 
 [Pendências para próximas versões](docs/pendencias-futuras.md)

@@ -268,6 +268,10 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 | **M10 · Sinalização contínua** | A testar | Modo experimental local com fronteiras, glosas, tradução e confirmação. Os controles com gravações passaram. Faltam dados naturais anotados com cobertura para medir o reconhecimento e revisar o sentido. |
 | **M11 · Web móvel na Vercel** | A testar | Toque, telas estreitas e rotação testados no Chromium local. A publicação HTTPS e os testes em Android e iPhone reais dependem de acesso e autorização. |
 
+### Trilha de aulas · Primeiro encontro
+
+- [ ] Implementar a trilha inicial de soletração do nome, saudação, apresentação, pedido de repetição e agradecimento. Começar pelas duas primeiras aulas com o avatar e a apresentação de M9. [Roadmap das aulas, fontes e critérios de aceite](docs/roadmap-aulas-libras.md)
+
 ### M8 e M9 · Checklist de conteúdo e aprendizagem
 
 - [x] Disponibilizar a comparação de itens no avatar, o progresso da lição e a revisão local que prioriza tentativas pendentes. Verificar a ordem depois de um acerto e a persistência após recarga.
