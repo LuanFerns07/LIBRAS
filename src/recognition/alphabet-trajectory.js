@@ -1,4 +1,4 @@
-import { alphabetFeatureCount, alphabetPathGapMs, letterFeatures, oneHand } from './alphabet.js'
+import { alphabetFeatureCount, alphabetPathGapMs, alphabetZDropoutMs, letterFeatures, oneHand } from './alphabet.js'
 
 const steps = 12
 const tips = [4, 8, 12, 16, 20]
@@ -218,7 +218,18 @@ function turnsInIndexPath(samples, scale) {
   return turns
 }
 
-function tracesZ(samples) {
+function continuesZStroke(active, first, second, end, dropout, scale) {
+  const [start, finish] = dropout < second.time ? [first, second] : [second, end]
+  if (start.time >= dropout || finish.time <= dropout) return false
+  const before = active.findLast(sample => sample.time < dropout)
+  const after = active.find(sample => sample.time > dropout)
+  if (!before || !after || after.time - before.time > alphabetZDropoutMs) return false
+  const approach = (before.positions[2][0] - start.positions[2][0]) / scale
+  const continuation = (after.positions[2][0] - before.positions[2][0]) / scale
+  return Math.abs(approach) >= .50 && Math.sign(approach) * continuation >= .50
+}
+
+function tracesZ(samples, dropout) {
   if (samples.length < 7 || samples.at(-1).time - samples[0].time < 370 ||
       samples.some((sample, index) => index && sample.time - samples[index - 1].time > alphabetPathGapMs)) return false
   const scale = medianScale(samples)
@@ -231,6 +242,8 @@ function tracesZ(samples) {
     const diagonal = (second.positions[2][1] - first.positions[2][1]) / scale
     if (descent < .55 || diagonal < .28) continue
     const active = samples.filter(({ time }) => time >= start.time && time <= end.time)
+    if (dropout !== null && start.time < dropout &&
+        !continuesZStroke(active, first, second, end, dropout, scale)) continue
     // Azul pode ter o mesmo percurso do indicador com o polegar aberto.
     if (median(active.map(thumbProjection)) <= .20) return true
   }
@@ -278,11 +291,11 @@ export function createTrajectoryMatcher(model) {
   const pathDurations = [500, 750, 1050, 1350, 1700]
   const followsPath = (samples, trace, time) => pathDurations.some(duration =>
     trace(samples.filter(sample => sample.time >= time - duration)))
-  return (frames, indexHistory = frames) => {
+  return (frames, indexHistory = frames, zDropout = null) => {
     const path = indexHistory.map(trajectorySample).filter(Boolean)
     const time = frames.at(-1)?.timestamp
     if (!path.length || path.at(-1).time !== time) return null
-    if (followsPath(path, tracesZ, time)) return 'Z'
+    if (followsPath(path, samples => tracesZ(samples, zDropout), time)) return 'Z'
     const samples = frames === indexHistory ? path : path.filter(sample => sample.time >= frames[0].timestamp)
     if (followsPath(samples, tracesJ, time)) return 'J'
     let match = null
