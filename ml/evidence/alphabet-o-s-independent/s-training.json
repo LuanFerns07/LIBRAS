@@ -1,0 +1,26 @@
+{
+  "dataSha256": "a2995cb3af683a0bc65b14969e5b7675378aaaf8257e247392c3f08a9a04dbd6",
+  "referenceSha256": "d1b4e870933349b7a2e90f5c02fabf1e82f31f6a013c2435c3e4a4a164f05ede",
+  "previousSupplementSha256": "bbe7a7d6d5211db99aa3bb59daffbf6faaae3e8a67eae9b490fb45bfd30bd1b2",
+  "supplement": {
+    "labels": [
+      "E",
+      "O",
+      "S"
+    ],
+    "threshold": 0.95,
+    "modelSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885"
+  },
+  "primarySha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+  "verifierSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+  "training": {
+    "A": 2780,
+    "S": 3132
+  },
+  "validation": {
+    "frames": 2500,
+    "S": 125,
+    "addedS": 0,
+    "addedFalseS": 0
+  }
+}

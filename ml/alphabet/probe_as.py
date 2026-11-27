@@ -25,10 +25,23 @@ def thumb_features(points, finger_flexion):
     forward = ((thumb - points[:, 0]) * palm).sum(dim=1) / palm.square().sum(dim=1).clamp_min(1e-6)
     middle = torch.linalg.vector_norm(thumb - points[:, 9], dim=1)
     span = torch.linalg.vector_norm(thumb - points[:, 2], dim=1)
-    measures = torch.column_stack((side, forward, middle, span))
+    measures = torch.stack((side, forward, middle, span), dim=1)
     if finger_flexion:
         return torch.cat((measures, shape_features(points)[:, 7:11]), dim=1)
     return measures
+
+
+class ThumbShape(nn.Module):
+    def __init__(self, linear, mean, scale, finger_flexion):
+        super().__init__()
+        self.linear = linear
+        self.register_buffer("mean", mean)
+        self.register_buffer("scale", scale)
+        self.finger_flexion = finger_flexion
+
+    def forward(self, hand):
+        values = thumb_features(hand.reshape(-1, 21, 3), self.finger_flexion)
+        return self.linear((values - self.mean) / self.scale).sigmoid()
 
 
 def fit(hands, labels, finger_flexion):
@@ -50,13 +63,19 @@ def fit(hands, labels, finger_flexion):
         return objective
 
     optimizer.step(loss)
+    return ThumbShape(model, mean, scale, finger_flexion).eval()
 
-    @torch.inference_mode()
-    def predicts_s(points):
-        values = (thumb_features(torch.from_numpy(points), finger_flexion) - mean) / scale
-        return model(values).sigmoid().numpy().ravel() >= THUMB_SCORE
 
-    return predicts_s
+def training_examples(data, reference):
+    if checksum(data) != json.loads(data.with_suffix(".json").read_text())["dataSha256"]:
+        raise ValueError("Os dados LibraSign divergem do manifesto.")
+    with np.load(data, allow_pickle=False) as packed:
+        rows = (packed["splits"] == "train") & np.isin(packed["labels"], ("A", "S"))
+        hands = centered(packed["points"][rows])
+        labels = packed["labels"][rows] == "S"
+    extra, actual = reference_data(reference, ["A", "S"])["train"]
+    return (np.concatenate((hands, np.repeat(extra, 32, axis=0))),
+            np.concatenate((labels, np.repeat(actual == 1, 32))))
 
 
 def normalized_frames(frames):
@@ -84,15 +103,7 @@ def report(base, data, reference, evaluations):
     verifier = load_model(base, "alphabet-check.onnx", metadata["agreementSha256"])
     a, s = (metadata["labels"].index(letter) for letter in ("A", "S"))
     threshold = metadata["threshold"]
-    if checksum(data) != json.loads(data.with_suffix(".json").read_text())["dataSha256"]:
-        raise ValueError("Os dados LibraSign divergem do manifesto.")
-    with np.load(data, allow_pickle=False) as packed:
-        rows = (packed["splits"] == "train") & np.isin(packed["labels"], ("A", "S"))
-        hands = centered(packed["points"][rows])
-        labels = packed["labels"][rows] == "S"
-    extra, actual = reference_data(reference, ["A", "S"])["train"]
-    hands = np.concatenate((hands, np.repeat(extra, 32, axis=0)))
-    labels = np.concatenate((labels, np.repeat(actual == 1, 32)))
+    hands, labels = training_examples(data, reference)
     four_measures = fit(hands, labels, finger_flexion=False)
     eight_measures = fit(hands, labels, finger_flexion=True)
     options = ort.SessionOptions()
@@ -115,7 +126,9 @@ def report(base, data, reference, evaluations):
             pair = np.isin(principal, (a, s)) & np.isin(verification, (a, s))
             permissive = pair & (np.maximum(first.max(axis=1), second.max(axis=1)) >= threshold) & ~old_s
             confirms_s = pair & (second[:, s] >= threshold) & ~old_s
-            small_shape, large_shape = four_measures(points), eight_measures(points)
+            with torch.inference_mode():
+                small_shape, large_shape = (shape(torch.from_numpy(points)).numpy().ravel() >= THUMB_SCORE
+                                            for shape in (four_measures, eight_measures))
             variants = {
                 "fourMeasures": summary(small_shape & permissive, old_s, old_a, valid),
                 "fourMeasuresWithVerifierS": summary(small_shape & confirms_s, old_s, old_a, valid),
