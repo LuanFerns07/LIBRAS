@@ -1,0 +1,422 @@
+{
+  "references": [
+    "2591a22f858783ef81f0a4d88dc3eb61e38c308b56955422832548ff1971e85c",
+    "8b43c8b04d53a5502a20f755ff666fc469bfbd83528f45ed48cc74f02e5e1e07",
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "f692d68fdb8c148ef1a05d86247f7d088360a6d5bc0fc82785d516a7438de7c0",
+    "8c0209d2b19e086db0dd73c32849888fa7cef57ef4ea3a0e02f48bb6743131ac",
+    "45a0df13d05801d8390d0cbfe4d523f65e102076cf187889b8ffb53e9a8dbaf9",
+    "f6e82c6a400d9bf84305fa394e04955322245f73e30c61e1263b04b4ac0047ef",
+    "b50da4ed2705a108644acc806d871f725630eddadda8004491746e7aa9a37c79",
+    "923d2b4e674b447b18201cabad28d6cfb3f69bd8e2f41259438302d3eced99b4"
+  ],
+  "rShapeSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+  "trainingU": 3,
+  "trainingOther": 29,
+  "trainingSources": [
+    "1527000916",
+    "cecierj-13757",
+    "unesp-222981"
+  ],
+  "uLimit": 0.95,
+  "rVeto": 0.2,
+  "rConfirmation": 0.95,
+  "results": [
+    {
+      "source": "1536677587",
+      "split": "test",
+      "label": "R",
+      "startMs": 32220,
+      "endMs": 33000,
+      "frames": 20,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 1,
+        "newU": 0
+      }
+    },
+    {
+      "source": "1536677587",
+      "split": "test",
+      "label": "U",
+      "startMs": 36630,
+      "endMs": 37590,
+      "frames": 24,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 16,
+        "newU": 0
+      }
+    },
+    {
+      "source": "1535641159",
+      "split": "test",
+      "label": "R",
+      "startMs": 31660,
+      "endMs": 32620,
+      "frames": 23,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "1535641159",
+      "split": "test",
+      "label": "U",
+      "startMs": 36500,
+      "endMs": 37280,
+      "frames": 19,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 2,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 18,
+        "newU": 0
+      }
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "label": "U",
+      "startMs": 120180,
+      "endMs": 121660,
+      "frames": 37,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 37,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 21,
+        "newU": 0
+      }
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "label": "U",
+      "startMs": 214450,
+      "endMs": 215350,
+      "frames": 22,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "split": "test",
+      "label": "R",
+      "startMs": 151660,
+      "endMs": 152660,
+      "frames": 25,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "split": "test",
+      "label": "U",
+      "startMs": 156030,
+      "endMs": 156960,
+      "frames": 24,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 24,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 24,
+        "newU": 0
+      }
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "split": "test",
+      "label": "R",
+      "startMs": 65000,
+      "endMs": 65680,
+      "frames": 17,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "split": "test",
+      "label": "U",
+      "startMs": 74460,
+      "endMs": 75190,
+      "frames": 18,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 9,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 14,
+        "newU": 0
+      }
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "split": "test",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "frames": 43,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 1,
+        "newU": 0
+      }
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "split": "test",
+      "label": "R",
+      "startMs": 84050,
+      "endMs": 85200,
+      "frames": 27,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "split": "test",
+      "label": "U",
+      "startMs": 94730,
+      "endMs": 95870,
+      "frames": 27,
+      "rVetoed": 23,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 24,
+        "newU": 22
+      }
+    },
+    {
+      "source": "uff-nuedis-sdcvqodwh0o",
+      "split": "test",
+      "label": "R",
+      "startMs": 78160,
+      "endMs": 80450,
+      "frames": 56,
+      "rVetoed": 0,
+      "rInDisagreement": 42,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "uff-nuedis-sdcvqodwh0o",
+      "split": "test",
+      "label": "U",
+      "startMs": 90360,
+      "endMs": 92420,
+      "frames": 51,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 51,
+        "newU": 0
+      }
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "frames": 27,
+      "rVetoed": 0,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado-replay-1",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 73,
+      "rVetoed": 4,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado-replay-2",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 69,
+      "rVetoed": 7,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado-replay-3",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 80,
+      "rVetoed": 6,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado-replay-4",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 79,
+      "rVetoed": 5,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado-replay-5",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 77,
+      "rVetoed": 7,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "split": "test",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "frames": 73,
+      "rVetoed": 7,
+      "rInDisagreement": 0,
+      "image": {
+        "shapeVotes": 0,
+        "newU": 0
+      },
+      "world": {
+        "shapeVotes": 0,
+        "newU": 0
+      }
+    }
+  ]
+}

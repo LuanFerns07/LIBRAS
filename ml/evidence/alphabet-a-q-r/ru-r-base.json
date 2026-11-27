@@ -1,0 +1,356 @@
+{
+  "build": {
+    "commit": "59c47db574dd52f1bdc87653b8e7e8108fe67ac5",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/ufsm-static-windows.json",
+    "ml/alphabet/institutional-static-n-m-u.json",
+    "ml/alphabet/independent-m-n-u-q-windows.json",
+    "ml/alphabet/independent-q-r-u-controls.json",
+    "ml/alphabet/ufac-static-windows.json",
+    "ml/alphabet/independent-r-u-obliquo.json",
+    "ml/evidence/alphabet-a-q-r/tel-r-repetido.json"
+  ],
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "R",
+      "startMs": 32210,
+      "endMs": 33060,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 224
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 902
+    },
+    {
+      "source": "1527000916",
+      "label": "U",
+      "startMs": 36950,
+      "endMs": 37680,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 229
+        }
+      ],
+      "workerFrames": 82,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 765
+    },
+    {
+      "source": "1536677587",
+      "label": "R",
+      "startMs": 32220,
+      "endMs": 33000,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 675
+        }
+      ],
+      "workerFrames": 84,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 794
+    },
+    {
+      "source": "1536677587",
+      "label": "U",
+      "startMs": 36630,
+      "endMs": 37590,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 267
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 954
+    },
+    {
+      "source": "1535641159",
+      "label": "R",
+      "startMs": 31660,
+      "endMs": 32620,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 955
+    },
+    {
+      "source": "1535641159",
+      "label": "U",
+      "startMs": 36500,
+      "endMs": 37280,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 275
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 799
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 234
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 967
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1600
+    },
+    {
+      "source": "unesp-222981",
+      "label": "U",
+      "startMs": 105630,
+      "endMs": 106630,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 277
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 977
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "U",
+      "startMs": 120180,
+      "endMs": 121660,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 225
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 959
+        }
+      ],
+      "workerFrames": 102,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1521
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "U",
+      "startMs": 214450,
+      "endMs": 215350,
+      "readings": [],
+      "workerFrames": 88,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 915
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "R",
+      "startMs": 151660,
+      "endMs": 152660,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1010
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "U",
+      "startMs": 156030,
+      "endMs": 156960,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 241
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 949
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "R",
+      "startMs": 65000,
+      "endMs": 65680,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 354
+        }
+      ],
+      "workerFrames": 81,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 729
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "U",
+      "startMs": 74460,
+      "endMs": 75190,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 265
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 598
+        }
+      ],
+      "workerFrames": 84,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 717
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 1047
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 43,
+      "lastHandAfterVideoMs": 1672
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "R",
+      "startMs": 84050,
+      "endMs": 85200,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 249
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1161
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "U",
+      "startMs": 94730,
+      "endMs": 95870,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 563
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1166
+    },
+    {
+      "source": "uff-nuedis-sdcvqodwh0o",
+      "label": "R",
+      "startMs": 78160,
+      "endMs": 80450,
+      "readings": [],
+      "workerFrames": 119,
+      "framesWithHand": 56,
+      "lastHandAfterVideoMs": 2313
+    },
+    {
+      "source": "uff-nuedis-sdcvqodwh0o",
+      "label": "U",
+      "startMs": 90360,
+      "endMs": 92420,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 230
+        }
+      ],
+      "workerFrames": 117,
+      "framesWithHand": 52,
+      "lastHandAfterVideoMs": 2096
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 271
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1088
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 230
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1079
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "R",
+      "startMs": 112900,
+      "endMs": 114000,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 269
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1079
+    }
+  ]
+}

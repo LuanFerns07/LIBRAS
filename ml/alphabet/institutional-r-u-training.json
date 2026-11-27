@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Pares de treino para medir a distinção de U e R pela forma da mão. Foram usados os cartões das duas aulas. A Uníntese e a UFF ficam reservadas para a comparação.",
+  "sources": [
+    {
+      "id": "cecierj-13757",
+      "split": "train",
+      "title": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
+      "project": "UFF, Fundação Cecierj e Consórcio Cederj",
+      "credits": {
+        "roteiro": "Mariana da Cunha Teixeira de Souza",
+        "coordenação geral": "Luiz Manoel Figueiredo",
+        "atuação": [
+          "Vanessa Rodrigues Ildefonso",
+          "Cíntia Ingrid Macedo Ribeiro"
+        ],
+        "filmagem e edição": "Leandro Lima de Souza"
+      },
+      "page": "https://canal.cecierj.edu.br/recurso/13757",
+      "download": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
+      "licenseEvidence": "O campo Licença da publicação oficial de 20 de julho de 2015 declara a licença de atribuição Creative Commons e permite reutilização.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra impressa ao lado da mão durante o gesto.",
+      "windows": [
+        {
+          "label": "R",
+          "startMs": 97160,
+          "endMs": 99160,
+          "anchorMs": 98260
+        },
+        {
+          "label": "U",
+          "startMs": 109940,
+          "endMs": 111520,
+          "anchorMs": 110700,
+          "fixture": "data/evidence/alphabet-n-m-u/cecierj-13757-u.y4m",
+          "fixtureSha256": "ff9210310988d91409c385fb50e04b84e77402cb8d3c3fa02717acabaad8555d"
+        }
+      ]
+    },
+    {
+      "id": "unesp-222981",
+      "split": "train",
+      "title": "Conteúdos e didática de Libras - Alfabeto, numerais, pronomes, advérbios...",
+      "project": "NEaD Unesp e Univesp TV",
+      "credits": {
+        "intérprete de Libras": "Laís dos Santos di Benedetto",
+        "direção, produção e roteiro": "Univesp TV",
+        "coordenação": [
+          "NEaD Unesp",
+          "Univesp TV"
+        ]
+      },
+      "page": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "download": "https://acervodigital.unesp.br/bitstream/unesp/222981/8/unesp-nead_libras_graduacao_aula1.flv",
+      "file": "data/alphabet/institutional/unesp-222981.flv",
+      "sha256": "110d7d9c829d8a0bfa78a92a1c892e10e058e7385a796cc5cf52def8381acfbc",
+      "license": "CC-BY-NC-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licensePublication": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "licenseEvidence": "O campo Rights do Acervo Digital da Unesp indica CC BY-NC-SA 4.0 para o item.",
+      "labelEvidence": "Letra impressa ao lado da mão durante o gesto.",
+      "windows": [
+        {
+          "label": "R",
+          "startMs": 98870,
+          "endMs": 100190,
+          "anchorMs": 99540
+        },
+        {
+          "label": "U",
+          "startMs": 105630,
+          "endMs": 106630,
+          "anchorMs": 106100,
+          "fixture": "data/evidence/alphabet-n-m-u/unesp-222981-u.y4m",
+          "fixtureSha256": "2c4add3d6f1284da987d0ba6aa9fa5c70004599544b6ef6f770038c5b78d2669"
+        }
+      ]
+    }
+  ],
+  "fixture": {
+    "videoWidth": 640,
+    "videoHeight": 360,
+    "fps": 25,
+    "leadingBlackMs": 800,
+    "trailingBlackMs": 1000,
+    "spatialScaling": "Lanczos com o enquadramento original",
+    "audio": false
+  }
+}

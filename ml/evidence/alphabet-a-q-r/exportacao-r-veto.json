@@ -1,0 +1,16 @@
+{
+  "references": [
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "b50da4ed2705a108644acc806d871f725630eddadda8004491746e7aa9a37c79"
+  ],
+  "alphabetManifestSha256": "ddbd5ed13af1814a3183ed8850d5fa29a912a0217d6549605fd03b5b19cbaaa3",
+  "confirmations": {
+    "imageR": {
+      "preprocess": "hand-wrist-palm-v1",
+      "threshold": 0.95,
+      "modelSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+      "vetoThreshold": 0.2,
+      "allowU": false
+    }
+  }
+}

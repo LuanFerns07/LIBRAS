@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "file": "data/isolated-negative-audit/clad/raw/clad-movimento-03-queixo-teclado.mp4",
+      "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "protocol": "ml/external_eval/clad-variants.json",
+      "stratum": "movimento-comum",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    }
+  ],
+  "selection": "Cinco repetições do clip do queixo para o teclado."
+}

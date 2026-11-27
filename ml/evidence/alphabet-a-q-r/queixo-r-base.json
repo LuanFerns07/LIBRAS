@@ -1,0 +1,133 @@
+{
+  "build": {
+    "commit": "59c47db574dd52f1bdc87653b8e7e8108fe67ac5",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "imageYSha256": "4e45f4e78167fd5b4415701ca6934f61ca8f309024c8441ed603752bfcf496af",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-a-q-r/queixo-repetido.json"
+  ],
+  "results": [
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1499
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2211
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3945
+        }
+      ],
+      "workerFrames": 158,
+      "framesWithHand": 84,
+      "lastHandAfterVideoMs": 3986
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 630
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 1445
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2229
+        }
+      ],
+      "workerFrames": 150,
+      "framesWithHand": 77,
+      "lastHandAfterVideoMs": 3972
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1509
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2256
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3963
+        }
+      ],
+      "workerFrames": 152,
+      "framesWithHand": 84,
+      "lastHandAfterVideoMs": 4004
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1495
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2207
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3970
+        }
+      ],
+      "workerFrames": 159,
+      "framesWithHand": 85,
+      "lastHandAfterVideoMs": 3970
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1543
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2204
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3835
+        }
+      ],
+      "workerFrames": 158,
+      "framesWithHand": 84,
+      "lastHandAfterVideoMs": 3996
+    }
+  ]
+}

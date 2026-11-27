@@ -1,0 +1,55 @@
+{
+  "staticModelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+  "verifierSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+  "shapeModelSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+  "references": [
+    "8c0209d2b19e086db0dd73c32849888fa7cef57ef4ea3a0e02f48bb6743131ac"
+  ],
+  "thresholds": [
+    0.01,
+    0.05,
+    0.2,
+    0.5,
+    0.95
+  ],
+  "results": [
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "R",
+      "split": "test",
+      "startMs": 84050,
+      "endMs": 85200,
+      "acceptedR": 17,
+      "scoreRange": [
+        0.898126,
+        1.0
+      ],
+      "preserved": [
+        17,
+        17,
+        17,
+        17,
+        15
+      ]
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "U",
+      "split": "test",
+      "startMs": 94730,
+      "endMs": 95870,
+      "acceptedR": 15,
+      "scoreRange": [
+        0.000425,
+        0.041889
+      ],
+      "preserved": [
+        12,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

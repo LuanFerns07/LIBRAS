@@ -124,3 +124,22 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
 No movimento do queixo ao teclado, a prévia `9d5d6fe` exibiu R com o complemento experimental desabilitado. O replay dos pontos capturados pelo Chromium mostrou que as duas redes estáticas aceitaram R em sete quadros. Nesses quadros, o escore do complemento de forma de R foi de 0,000032 a 0,002111. Os 49 quadros em que as redes já aceitavam um R rotulado tiveram escore a partir de 0,409425. Desses 49, 35 vieram de gravações fora do treino do complemento.
 
 No ensaio offline, limiares de 0,01 a 0,20 preservaram os 49 R e bloquearam os sete quadros do controle. A comparação usa um único recorte difícil de atividade cotidiana e mede somente o caso em que as redes já concordam em R. A recuperação de R quando ambas aceitam U continua em avaliação. [Escore por janela e hashes](confirmacao-r-nativo.json) · [Código da sonda](https://github.com/LuanFerns07/LIBRAS/blob/4a309c6/ml/alphabet/diagnose_r.py)
+
+### Confirmação de R no Chromium
+
+Os dois pacotes experimentais `b95a5da` usam o mesmo ONNX de R. Quando as duas redes estáticas aceitam R, a confirmação de forma exige escore de pelo menos 0,20. O segundo pacote também pode trocar U por R a partir de 0,95, quando as duas redes concordam em U. O relatório de cada captura registra qual dessas rotas estava habilitada, junto dos hashes dos demais modelos. [Exportação com veto](exportacao-r-veto.json) · [Exportação com veto e recuperação](exportacao-r-completo.json)
+
+| Cenário | Prévia `59c47db` | Veto de R | Veto e recuperação |
+| --- | ---: | ---: | ---: |
+| R nos dez recortes rotulados, incluindo três repetições de Tel baixinha | 6 | 6 | 9 |
+| U nos 12 recortes rotulados | 10 | 10 | 10 |
+| R indevido nos 12 recortes de U | 1 | 0 | 0 |
+| R indevido em cinco replays de queixo → teclado | 1 | 0 | 0 |
+
+Nas três reproduções de Tel baixinha, a prévia exibiu U e o pacote com recuperação exibiu R. Os dois candidatos preservaram o R da Uníntese e o U oblíquo da UFF. O U da Uníntese ficou sem leitura após a remoção do R indevido. O U em perfil da aula explicativa da Unicentro e o R da UFF ficaram sem leitura nas três versões. [Anotações da Uníntese e da UFF](../../alphabet/independent-r-u-obliquo.json) · [Prévia](ru-r-base.json) · [Veto](ru-r-veto.json) · [Veto e recuperação](ru-r-completo.json) · [Queixo na prévia](queixo-r-base.json) · [Queixo com veto](queixo-r-veto.json) · [Queixo com recuperação](queixo-r-completo.json)
+
+### Casos restantes de U e R
+
+No vídeo original da Uníntese, as redes aceitaram R em 15 quadros do U. Todos esses votos ficaram abaixo de 0,20 no modelo de forma. No ensaio com pontos da câmera virtual houve 23 votos assim. Duas regressões para U foram treinadas com amostras da primeira aula da UFSM, da Unesp e do Cecierj. O modelo 3D confirmou U em 22 dos 23 quadros da Uníntese. O modelo de imagem ficou abaixo do limiar em todos os 23. Nenhuma das duas regressões acrescentou U nas capturas do controle de queixo para o teclado. [Ensaio no vídeo original](ru-obliqo-veto-offline.json) · [Referências de treino](../../alphabet/institutional-r-u-training.json) · [Comparação nos pontos do Chromium](complemento-u-quadros-web.json)
+
+No R da UFF, a primeira rede aceitou R e a segunda preferiu U em 42 dos quadros selecionáveis que também passaram pelo limiar de forma de R. Uma regra experimental pode confirmar essa combinação. Ela e o modelo de U precisam de testes com novas gravações e de ponta a ponta antes de uso. [Código da sonda](https://github.com/LuanFerns07/LIBRAS/blob/f60058b/ml/alphabet/probe_u.py)
