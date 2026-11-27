@@ -1,0 +1,132 @@
+{
+  "build": {
+    "commit": "81e20b9f11397db89aee586c2b4decbaf6fda545",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/independent-p-q-windows.json"
+  ],
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "P",
+      "startMs": 108040,
+      "endMs": 109680,
+      "readings": [],
+      "workerFrames": 108,
+      "framesWithHand": 42,
+      "lastHandAfterVideoMs": 1681
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "readings": [
+        {
+          "letter": "Q",
+          "afterVideoMs": 232
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1117
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "P",
+      "startMs": 173650,
+      "endMs": 176740,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 2919
+        }
+      ],
+      "workerFrames": 140,
+      "framesWithHand": 74,
+      "lastHandAfterVideoMs": 3113
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "label": "Q",
+      "startMs": 177390,
+      "endMs": 178530,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 550
+        }
+      ],
+      "workerFrames": 94,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1182
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "P",
+      "startMs": 148470,
+      "endMs": 149330,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 458
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 858
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "Q",
+      "startMs": 149680,
+      "endMs": 150920,
+      "readings": [
+        {
+          "letter": "Q",
+          "afterVideoMs": 316
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1263
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "P",
+      "startMs": 58790,
+      "endMs": 59730,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 492
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 957
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "Q",
+      "startMs": 62480,
+      "endMs": 63220,
+      "readings": [
+        {
+          "letter": "Q",
+          "afterVideoMs": 257
+        }
+      ],
+      "workerFrames": 80,
+      "framesWithHand": 15,
+      "lastHandAfterVideoMs": 771
+    }
+  ]
+}

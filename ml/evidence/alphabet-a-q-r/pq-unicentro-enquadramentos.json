@@ -1,0 +1,398 @@
+{
+  "source": "unicentro-hxnpsxvwkgu",
+  "crop": {
+    "offsetMs": 173000,
+    "width": 896,
+    "height": 504,
+    "x": 192,
+    "y": 90,
+    "scaledWidth": 1280,
+    "scaledHeight": 720
+  },
+  "variants": {
+    "full": {
+      "manifestSha256": "a0dbac1779ad8b96a5c74370af8543ab338f507e299377130487c4bf8a55aa54",
+      "references": [
+        "ec0245c76b0692ffea9d87429baa2ba1b214aee0a9ee210e4bb3835e6a05fde7",
+        "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+        "69802000571d7aa44ecca7db13215b68538d16ecebd16ed9cf3a60db4cacf905"
+      ],
+      "threshold": 0.95,
+      "training": [
+        {
+          "source": "1527000916",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "1527000916",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "Q",
+          "frames": 16
+        }
+      ],
+      "evaluatedWindows": 73,
+      "results": [
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "P",
+          "startMs": 173650,
+          "endMs": 176740,
+          "selected": 48,
+          "pAccepted": 0,
+          "models": {
+            "local": {
+              "median": 0.000035,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.003307,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.875349,
+              "shapeVotes": 7,
+              "changesFromP": 0
+            }
+          }
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "Q",
+          "startMs": 177390,
+          "endMs": 178530,
+          "selected": 18,
+          "pAccepted": 14,
+          "models": {
+            "local": {
+              "median": 0.006871,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.006333,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.047276,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            }
+          }
+        }
+      ]
+    },
+    "mirrored": {
+      "manifestSha256": "a0dbac1779ad8b96a5c74370af8543ab338f507e299377130487c4bf8a55aa54",
+      "references": [
+        "c16cbe39e51a8a84b8a9512390a2f70d7aece64dcbf5ac4c89f8e57294b66f72",
+        "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+        "69802000571d7aa44ecca7db13215b68538d16ecebd16ed9cf3a60db4cacf905"
+      ],
+      "threshold": 0.95,
+      "training": [
+        {
+          "source": "1527000916",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "1527000916",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "Q",
+          "frames": 16
+        }
+      ],
+      "evaluatedWindows": 73,
+      "results": [
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "P",
+          "startMs": 173650,
+          "endMs": 176740,
+          "selected": 48,
+          "pAccepted": 0,
+          "models": {
+            "local": {
+              "median": 0.000118,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.006495,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.981476,
+              "shapeVotes": 42,
+              "changesFromP": 0
+            }
+          }
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "Q",
+          "startMs": 177390,
+          "endMs": 178530,
+          "selected": 18,
+          "pAccepted": 13,
+          "models": {
+            "local": {
+              "median": 0.002012,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.00168,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.327077,
+              "shapeVotes": 4,
+              "changesFromP": 1
+            }
+          }
+        }
+      ]
+    },
+    "enlarged": {
+      "manifestSha256": "a0dbac1779ad8b96a5c74370af8543ab338f507e299377130487c4bf8a55aa54",
+      "references": [
+        "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+        "ca1f2313d03a1c5689fce7d5eaf97a8f6144ce1ccd58bc6fea36f34e7d468b5d",
+        "69802000571d7aa44ecca7db13215b68538d16ecebd16ed9cf3a60db4cacf905"
+      ],
+      "threshold": 0.95,
+      "training": [
+        {
+          "source": "1527000916",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "1527000916",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "Q",
+          "frames": 16
+        }
+      ],
+      "evaluatedWindows": 68,
+      "results": [
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "P",
+          "startMs": 650,
+          "endMs": 3740,
+          "selected": 48,
+          "pAccepted": 0,
+          "models": {
+            "local": {
+              "median": 0.000024,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.002413,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.876943,
+              "shapeVotes": 9,
+              "changesFromP": 0
+            }
+          }
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "Q",
+          "startMs": 4390,
+          "endMs": 5530,
+          "selected": 2,
+          "pAccepted": 1,
+          "models": {
+            "local": {
+              "median": 0.516123,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.498331,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.871313,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            }
+          }
+        }
+      ]
+    },
+    "enlargedMirrored": {
+      "manifestSha256": "a0dbac1779ad8b96a5c74370af8543ab338f507e299377130487c4bf8a55aa54",
+      "references": [
+        "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+        "7fdda240c6c37660811eea7e30aae973f1774b81d7541081a3b25cf6873c0d3d",
+        "69802000571d7aa44ecca7db13215b68538d16ecebd16ed9cf3a60db4cacf905"
+      ],
+      "threshold": 0.95,
+      "training": [
+        {
+          "source": "1527000916",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "1527000916",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Q",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "P",
+          "frames": 16
+        },
+        {
+          "source": "unesp-222981",
+          "label": "Q",
+          "frames": 16
+        }
+      ],
+      "evaluatedWindows": 68,
+      "results": [
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "P",
+          "startMs": 650,
+          "endMs": 3740,
+          "selected": 48,
+          "pAccepted": 0,
+          "models": {
+            "local": {
+              "median": 0.000126,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.008014,
+              "shapeVotes": 0,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.986004,
+              "shapeVotes": 45,
+              "changesFromP": 0
+            }
+          }
+        },
+        {
+          "source": "unicentro-hxnpsxvwkgu",
+          "split": "test",
+          "label": "Q",
+          "startMs": 4390,
+          "endMs": 5530,
+          "selected": 2,
+          "pAccepted": 1,
+          "models": {
+            "local": {
+              "median": 0.543678,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            },
+            "orientacao": {
+              "median": 0.508684,
+              "shapeVotes": 1,
+              "changesFromP": 0
+            },
+            "q_atual": {
+              "median": 0.602469,
+              "shapeVotes": 1,
+              "changesFromP": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

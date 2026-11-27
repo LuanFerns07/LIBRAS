@@ -1,0 +1,15 @@
+{
+  "references": [
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "b50da4ed2705a108644acc806d871f725630eddadda8004491746e7aa9a37c79"
+  ],
+  "alphabetManifestSha256": "2187fe8eb8c5908e524e7f190c7e791746a839b46bf082bace629e4e92975d1e",
+  "threshold": 0.95,
+  "confirmations": {
+    "worldQ": {
+      "preprocess": "hand-world-wrist-palm-v1",
+      "threshold": 0.95,
+      "modelSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd"
+    }
+  }
+}

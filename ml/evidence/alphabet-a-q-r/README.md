@@ -88,3 +88,33 @@ Nenhuma das quatro janelas de U exibiu R. No U em perfil da aula explicativa, ho
 ### Teste do complemento de Q em separado
 
 O manifesto da compilação `81e20b9` inclui `worldQ`. O complemento experimental de R ficou desabilitado. O Chromium exibiu Q em três replays do recorte de Tel baixinha. Os três testes de ponta a ponta passaram com gravações, incluindo a leitura de Q na Área livre e em Praticar e a troca de M para N na mesma captura. No recorte do queixo para o teclado, o painel exibiu somente M. A regressão completa ainda precisa passar para esse pacote substituir a prévia. [Repetições de Q](tel-q-81e20b9.json) · [Recorte do queixo para o teclado](queixo-81e20b9.json)
+
+### Bateria do pacote com Q
+
+O candidato `81e20b9` preservou a letra esperada em 88 dos 89 recortes. No Z do Cecierj, o painel mostrou G com a mão rastreada. Nas três novas reproduções com um processo Chromium, Z apareceu duas vezes na prévia e três no candidato. Em algumas capturas também surgiram G, X ou Y. O teste da sobreposição de duas mãos passou. Nos 19 recortes fora do alfabeto, nenhum exibiu Q. Apareceram R junto de M no movimento do queixo ao teclado, M junto de J no repouso com celular e O no sinal Laranja. A compilação estava com o complemento de R desabilitado. [Positivos](positivos-81e20b9.json) · [Negativos](negativos-81e20b9.json) · [Reteste de Z na prévia](z-cecierj-b7b8d21.json) · [Reteste de Z no candidato](z-cecierj-81e20b9.json) · [Controles adicionais](controles-81e20b9.json)
+
+### Diagnóstico de Q aceito como P
+
+As duas compilações exibiram P no Q da aula explicativa da Unicentro, K na janela mais longa de P da mesma aula e P e Q nas janelas correspondentes de Uéslei Paterno e da sequência da Unicentro. Na gravação de Tel baixinha, P ficou sem leitura nas duas compilações e Q apareceu no candidato. São quatro gravações de três pessoas, com P e Q anotados antes da inferência dos novos recortes. [Janelas pareadas](../../alphabet/independent-p-q-windows.json) · [Replay na prévia](pares-pq-b7b8d21.json) · [Replay no candidato](pares-pq-81e20b9.json)
+
+No vídeo original da aula explicativa, as duas redes concordaram em P em 14 de 18 quadros do Q. A confirmação de Q/N existente deu escore acima do limiar em 21 de 26 quadros do P de Tel baixinha quando executada separadamente. Seu uso segue restrito à divergência entre N e Q. Treinamos duas regressões logísticas, uma com medidas relativas à palma e outra com duas medidas adicionais de direção no vídeo. O treino usou os pares de P/Q da primeira aula da UFSM, do Cecierj e da Unesp, com 16 entradas por recorte. Nenhuma das sondas mudou os 42 quadros corretamente aceitos como P nem recuperou os 14 quadros de Q aceitos como P. [Novas janelas de treino](../../alphabet/institutional-p-q-training.json) · [Relatório por janela](pq-forma.json)
+
+Espelhar a entrada antes da extração preservou 18 quadros selecionáveis do Q da aula explicativa. Os modelos P/Q continuaram sem recuperar os quadros aceitos como P. O recorte de 896 × 504 a partir de (192, 90) ampliado para 1.280 × 720 conservou apenas dois quadros selecionáveis de Q em cada orientação. As ampliações reaproveitaram os pixels da própria gravação. [Comparação de enquadramentos](pq-unicentro-enquadramentos.json) · [Código da sonda](https://github.com/LuanFerns07/LIBRAS/blob/a101693/ml/alphabet/probe_pq.py)
+
+### Reteste pareado e adoção de Q
+
+Os recortes com diferenças entre as versões foram repetidos três vezes com um processo Chromium por captura. No repouso com celular, M apareceu nas três repetições de cada versão e J apareceu em três da base e duas do pacote com Q. No movimento do queixo ao teclado, M apareceu nas seis capturas e R em duas da base. No Laranja, O apareceu em duas repetições de cada versão. As duas compilações tinham o complemento experimental de R desabilitado. Nenhum recorte negativo exibiu Q. [Manifesto](negativos-q-repetidos.json) · [Reteste da base](negativos-q-repetidos-b7b8d21.json) · [Reteste do pacote com Q](negativos-q-repetidos-81e20b9.json)
+
+A prévia em 4177 passou a servir o pacote `81e20b9`. Os testes do Chromium com Q de Tel baixinha em Praticar e na Área livre e com a transição M → N da Unesp foram repetidos na porta 4177. O manifesto confere o SHA-256 do complemento 3D de Q. [Prévia local](http://127.0.0.1:4177/#area-livre) · [Exportação de Q](exportacao-q-81e20b9.json) · [Teste de ponta a ponta](../../../tests/e2e/alphabet-live.test.mjs)
+
+Para reconstruir o pacote a partir dos modelos da prévia anterior e dos dados extraídos, use a exportação seletiva e indique um destino novo.
+
+```sh
+base="$PWD/data/releases/librasia-a-3d-teste/site/models"
+.venv/bin/python -m ml.alphabet.probe_qr "$base" \
+  data/alphabet/a-oculto/referencia-3d.json data/alphabet/q-r-diagnostico/mnuq-3d.json \
+  --out data/models/alphabet-q-candidate --export-letters Q
+LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
+  LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-q-candidate" \
+  ./scripts/executar-local.sh --pacote data/releases/librasia-q-reconstruido
+```

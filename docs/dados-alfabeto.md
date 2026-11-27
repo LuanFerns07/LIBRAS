@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `b7b8d21`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia em 4177 usa a compilação `81e20b9`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-a-3d-teste/iniciar.py --porta 4177
+python3 data/releases/librasia-q-teste/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -177,6 +177,12 @@ Na compilação `b7b8d21`, o complemento recebe os pontos 3D da mesma mão que o
 No recorte de A da terceira aula da UFSM, a compilação anterior ficou sem leitura nas três repetições. A prévia com o complemento exibiu A nas três, entre 543 e 552 ms após o início do recorte. Os testes de ponta a ponta exibiram A sem iniciar tentativa na Área livre e em Praticar com B como alvo. A transição M → N e o ensaio de duas mãos também passaram com gravações. [Replays da base](../ml/evidence/alphabet-a-e-independent/ufsm-a-058a990.json) · [Replays da prévia](../ml/evidence/alphabet-a-e-independent/ufsm-a-b7b8d21.json) · [Testes de ponta a ponta](../tests/e2e/alphabet-live.test.mjs)
 
 Na rodada de 89 recortes rotulados, a letra esperada apareceu em todos. Q de Tel baixinha continuou sem leitura, e o R da mesma gravação continuou sendo exibido como U nos controles dedicados. Entre os 19 recortes fora do alfabeto, A apareceu no mesmo recorte da base. O aceite com pessoas sinalizantes na webcam continua pendente. [Recortes rotulados](../ml/evidence/alphabet-a-e-independent/positivos-b7b8d21.json) · [Controles A/Q/R](../ml/evidence/alphabet-a-e-independent/controle-aqr-b7b8d21.json) · [Recortes fora do alfabeto](../ml/evidence/alphabet-a-e-independent/negativos-b7b8d21.json)
+
+### Confirmação de Q na prévia local
+
+A compilação `81e20b9` usa coordenadas 3D para confirmar Q quando a rede principal prefere N, o verificador aceita Q e as rotas anteriores ficam sem leitura. Na gravação de Tel baixinha, Q apareceu nas três repetições. A Área livre exibiu Q antes de iniciar uma tentativa e Praticar exibiu Q com outra letra selecionada. O complemento de R está desabilitado. [Testes, regressão e hashes](../ml/evidence/alphabet-a-q-r/README.md#reteste-pareado-e-adoção-de-q)
+
+No recorte da aula explicativa da Unicentro em que as redes aceitam P, a regra segue sem confirmar Q. Os ensaios com pessoas sinalizantes na webcam e a revisão das poses seguem pendentes. [Diagnóstico de P e Q](../ml/evidence/alphabet-a-q-r/README.md#diagnóstico-de-q-aceito-como-p)
 
 ### Resultado da prévia com o complemento de E
 

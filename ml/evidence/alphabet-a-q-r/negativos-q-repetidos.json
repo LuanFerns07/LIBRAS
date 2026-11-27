@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "clad-repouso-03-celular",
+      "file": "data/isolated-negative-audit/clad/raw/clad-repouso-03-celular.mp4",
+      "sha256": "ed4d32bd3896b86610f4fce86e8b3921cd5129f78f3cbd532140ef9f94e8aef7",
+      "protocol": "ml/external_eval/clad-variants.json",
+      "stratum": "repouso",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    },
+    {
+      "id": "clad-movimento-03-queixo-teclado",
+      "file": "data/isolated-negative-audit/clad/raw/clad-movimento-03-queixo-teclado.mp4",
+      "sha256": "6c1aed7700ecc87ec4b69fda8595cc4f82508b8d87cb63bd78279e94b3716d73",
+      "protocol": "ml/external_eval/clad-variants.json",
+      "stratum": "movimento-comum",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 4000
+        }
+      ]
+    },
+    {
+      "id": "cecierj-laranja",
+      "file": "data/isolated-negative-audit/didactic/raw/cecierj-laranja.mp4",
+      "sha256": "9f123535a76d4adc1eef4002bce742a9245f5f76a486e5da6f73d93480dece3d",
+      "protocol": "ml/fresh_eval/protocol-negatives.json",
+      "stratum": "fora-do-catalogo",
+      "windows": [
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1550
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1550
+        },
+        {
+          "label": "fora-do-alfabeto",
+          "startMs": 0,
+          "endMs": 1550
+        }
+      ]
+    }
+  ],
+  "selection": "Três reproduções de cada alteração observada nos negativos do pacote com Q."
+}

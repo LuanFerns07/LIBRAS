@@ -1,0 +1,186 @@
+{
+  "build": {
+    "commit": "b7b8d216691c2fcf22fff0d008cd3193bc94c6c8",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-a-q-r/negativos-q-repetidos.json"
+  ],
+  "results": [
+    {
+      "source": "clad-repouso-03-celular",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 940
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1403
+        }
+      ],
+      "workerFrames": 160,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 3975
+    },
+    {
+      "source": "clad-repouso-03-celular",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 947
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1304
+        }
+      ],
+      "workerFrames": 161,
+      "framesWithHand": 15,
+      "lastHandAfterVideoMs": 3979
+    },
+    {
+      "source": "clad-repouso-03-celular",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 949
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1733
+        }
+      ],
+      "workerFrames": 152,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 2991
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 2177
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3962
+        }
+      ],
+      "workerFrames": 159,
+      "framesWithHand": 86,
+      "lastHandAfterVideoMs": 4003
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 573
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 1543
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2175
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3944
+        }
+      ],
+      "workerFrames": 157,
+      "framesWithHand": 83,
+      "lastHandAfterVideoMs": 3984
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 587
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 1471
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2209
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3999
+        }
+      ],
+      "workerFrames": 156,
+      "framesWithHand": 82,
+      "lastHandAfterVideoMs": 3999
+    },
+    {
+      "source": "cecierj-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1550,
+      "readings": [],
+      "workerFrames": 106,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1607
+    },
+    {
+      "source": "cecierj-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1550,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 1118
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1572
+    },
+    {
+      "source": "cecierj-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1550,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 746
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1610
+    }
+  ]
+}

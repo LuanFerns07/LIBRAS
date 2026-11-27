@@ -1,0 +1,356 @@
+{
+  "manifestSha256": "a0dbac1779ad8b96a5c74370af8543ab338f507e299377130487c4bf8a55aa54",
+  "references": [
+    "ec0245c76b0692ffea9d87429baa2ba1b214aee0a9ee210e4bb3835e6a05fde7",
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "69802000571d7aa44ecca7db13215b68538d16ecebd16ed9cf3a60db4cacf905"
+  ],
+  "threshold": 0.95,
+  "training": [
+    {
+      "source": "1527000916",
+      "label": "P",
+      "frames": 16
+    },
+    {
+      "source": "1527000916",
+      "label": "Q",
+      "frames": 16
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "P",
+      "frames": 16
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Q",
+      "frames": 16
+    },
+    {
+      "source": "unesp-222981",
+      "label": "P",
+      "frames": 16
+    },
+    {
+      "source": "unesp-222981",
+      "label": "Q",
+      "frames": 16
+    }
+  ],
+  "evaluatedWindows": 73,
+  "results": [
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "label": "P",
+      "startMs": 108040,
+      "endMs": 109680,
+      "selected": 26,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 1e-05,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.003417,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.968834,
+          "shapeVotes": 21,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "label": "Q",
+      "startMs": 110780,
+      "endMs": 111880,
+      "selected": 17,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 0.738547,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.971908,
+          "shapeVotes": 14,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.972201,
+          "shapeVotes": 17,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "label": "P",
+      "startMs": 173650,
+      "endMs": 176740,
+      "selected": 48,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 3.5e-05,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.003307,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.875349,
+          "shapeVotes": 7,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "unicentro-hxnpsxvwkgu",
+      "split": "test",
+      "label": "Q",
+      "startMs": 177390,
+      "endMs": 178530,
+      "selected": 18,
+      "pAccepted": 14,
+      "models": {
+        "local": {
+          "median": 0.006871,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.006333,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.047276,
+          "shapeVotes": 1,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "split": "test",
+      "label": "P",
+      "startMs": 148470,
+      "endMs": 149330,
+      "selected": 14,
+      "pAccepted": 10,
+      "models": {
+        "local": {
+          "median": 0.009036,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.002804,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.630789,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "split": "test",
+      "label": "Q",
+      "startMs": 149680,
+      "endMs": 150920,
+      "selected": 20,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 0.999994,
+          "shapeVotes": 18,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.999985,
+          "shapeVotes": 19,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.904306,
+          "shapeVotes": 3,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "split": "test",
+      "label": "P",
+      "startMs": 58790,
+      "endMs": 59730,
+      "selected": 15,
+      "pAccepted": 12,
+      "models": {
+        "local": {
+          "median": 0.000912,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.000577,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.02504,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "split": "test",
+      "label": "Q",
+      "startMs": 62480,
+      "endMs": 63220,
+      "selected": 11,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 0.990951,
+          "shapeVotes": 6,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.999407,
+          "shapeVotes": 11,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.211333,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "1536677587",
+      "split": "val",
+      "label": "P",
+      "startMs": 28920,
+      "endMs": 29630,
+      "selected": 11,
+      "pAccepted": 11,
+      "models": {
+        "local": {
+          "median": 0.001697,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.003837,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.042079,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "1536677587",
+      "split": "val",
+      "label": "Q",
+      "startMs": 30480,
+      "endMs": 31480,
+      "selected": 15,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 0.024315,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.763608,
+          "shapeVotes": 2,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.997342,
+          "shapeVotes": 15,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "split": "test",
+      "label": "P",
+      "startMs": 28470,
+      "endMs": 29090,
+      "selected": 10,
+      "pAccepted": 9,
+      "models": {
+        "local": {
+          "median": 0.002067,
+          "shapeVotes": 1,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.000398,
+          "shapeVotes": 1,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.785197,
+          "shapeVotes": 0,
+          "changesFromP": 0
+        }
+      }
+    },
+    {
+      "source": "1535641159",
+      "split": "test",
+      "label": "Q",
+      "startMs": 29870,
+      "endMs": 30940,
+      "selected": 17,
+      "pAccepted": 0,
+      "models": {
+        "local": {
+          "median": 0.999995,
+          "shapeVotes": 17,
+          "changesFromP": 0
+        },
+        "orientacao": {
+          "median": 0.999982,
+          "shapeVotes": 17,
+          "changesFromP": 0
+        },
+        "q_atual": {
+          "median": 0.943346,
+          "shapeVotes": 4,
+          "changesFromP": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1402 @@
+{
+  "build": {
+    "commit": "81e20b9f11397db89aee586c2b4decbaf6fda545",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "data/evidence/alphabet-paterno-o-e/replay-manifest.json",
+    "ml/alphabet/ifes-static-windows.json",
+    "ml/alphabet/institutional-static-a-e-s-o.json",
+    "ml/alphabet/institutional-static-n-m-u.json",
+    "ml/alphabet/institutional-static-o-s-holdout.json",
+    "ml/alphabet/institutional-temporal-windows.json",
+    "ml/alphabet/tel-baixinha-static-e-o.json",
+    "ml/alphabet/ufac-static-windows.json",
+    "ml/alphabet/ufsm-static-windows.json",
+    "ml/alphabet/ufsm-temporal-windows.json",
+    "ml/alphabet/unintese-static-windows.json"
+  ],
+  "results": [
+    {
+      "source": "o-primeira-inteiro",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 224
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 988
+    },
+    {
+      "source": "o-primeira-sem-repouso",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 274
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 1000
+    },
+    {
+      "source": "o-primeira-ampliado",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 244
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 969
+    },
+    {
+      "source": "o-primeira-ampliado-sem-repouso",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 272
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1004
+    },
+    {
+      "source": "o-primeira-mao-ativa-2x",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 232
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 968
+    },
+    {
+      "source": "e-segunda-inteiro",
+      "label": "E",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 233
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 993
+    },
+    {
+      "source": "e-segunda-sem-repouso",
+      "label": "E",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 227
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 989
+    },
+    {
+      "source": "e-segunda-ampliado",
+      "label": "E",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 977
+    },
+    {
+      "source": "e-segunda-ampliado-sem-repouso",
+      "label": "E",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 268
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1007
+    },
+    {
+      "source": "e-segunda-mao-ativa-2x",
+      "label": "E",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 262
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 992
+    },
+    {
+      "source": "o-segunda-inteiro",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 252
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 973
+    },
+    {
+      "source": "o-segunda-sem-repouso",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 239
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 994
+    },
+    {
+      "source": "o-segunda-ampliado",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 1004
+    },
+    {
+      "source": "o-segunda-ampliado-sem-repouso",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 230
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 999
+    },
+    {
+      "source": "o-segunda-mao-ativa-2x",
+      "label": "O",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 264
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 986
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "A",
+      "startMs": 23400,
+      "endMs": 25300,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 238
+        }
+      ],
+      "workerFrames": 114,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 1908
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "C",
+      "startMs": 50240,
+      "endMs": 51480,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 242
+        }
+      ],
+      "workerFrames": 97,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1267
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "E",
+      "startMs": 87200,
+      "endMs": 89600,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 238
+        }
+      ],
+      "workerFrames": 125,
+      "framesWithHand": 59,
+      "lastHandAfterVideoMs": 2423
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "O",
+      "startMs": 283780,
+      "endMs": 285880,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 115,
+      "framesWithHand": 49,
+      "lastHandAfterVideoMs": 2071
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "O",
+      "startMs": 292600,
+      "endMs": 293680,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 267
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1143
+    },
+    {
+      "source": "ifes-mfl8r4t36fe",
+      "label": "S",
+      "startMs": 360220,
+      "endMs": 362500,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 241
+        }
+      ],
+      "workerFrames": 124,
+      "framesWithHand": 57,
+      "lastHandAfterVideoMs": 2283
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "A",
+      "startMs": 41600,
+      "endMs": 43200,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 223
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1632
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "E",
+      "startMs": 57100,
+      "endMs": 58820,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 236
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 41,
+      "lastHandAfterVideoMs": 1752
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "O",
+      "startMs": 87440,
+      "endMs": 89100,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 231
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1672
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "S",
+      "startMs": 102680,
+      "endMs": 104120,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 266
+        }
+      ],
+      "workerFrames": 100,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1513
+    },
+    {
+      "source": "unesp-222981",
+      "label": "A",
+      "startMs": 56880,
+      "endMs": 58550,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 223
+        }
+      ],
+      "workerFrames": 107,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1670
+    },
+    {
+      "source": "unesp-222981",
+      "label": "E",
+      "startMs": 68670,
+      "endMs": 70250,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 219
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1584
+    },
+    {
+      "source": "unesp-222981",
+      "label": "O",
+      "startMs": 91120,
+      "endMs": 92280,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 405
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1140
+    },
+    {
+      "source": "unesp-222981",
+      "label": "S",
+      "startMs": 101050,
+      "endMs": 102550,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 219
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1472
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "M",
+      "startMs": 81300,
+      "endMs": 82950,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 277
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1719
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "N",
+      "startMs": 84000,
+      "endMs": 85750,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 280
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1790
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 269
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 935
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1589
+    },
+    {
+      "source": "unesp-222981",
+      "label": "M",
+      "startMs": 86850,
+      "endMs": 88200,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 274
+        }
+      ],
+      "workerFrames": 87,
+      "framesWithHand": 21,
+      "lastHandAfterVideoMs": 1345
+    },
+    {
+      "source": "unesp-222981",
+      "label": "N",
+      "startMs": 88780,
+      "endMs": 90360,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 277
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 1608
+    },
+    {
+      "source": "unesp-222981",
+      "label": "U",
+      "startMs": 105630,
+      "endMs": 106630,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 264
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 985
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "O",
+      "startMs": 147000,
+      "endMs": 148000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 225
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 996
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "S",
+      "startMs": 68340,
+      "endMs": 69380,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 264
+        }
+      ],
+      "workerFrames": 75,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 1118
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Ç",
+      "startMs": 50240,
+      "endMs": 51720,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 817
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 1157
+        }
+      ],
+      "workerFrames": 81,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 1500
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "H",
+      "startMs": 66040,
+      "endMs": 67730,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 572
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1698
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "J",
+      "startMs": 71550,
+      "endMs": 73130,
+      "readings": [
+        {
+          "letter": "I",
+          "afterVideoMs": 244
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 643
+        }
+      ],
+      "workerFrames": 94,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1631
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "K",
+      "startMs": 74900,
+      "endMs": 76350,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 720
+        }
+      ],
+      "workerFrames": 102,
+      "framesWithHand": 35,
+      "lastHandAfterVideoMs": 1442
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "X",
+      "startMs": 117320,
+      "endMs": 119330,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 553
+        }
+      ],
+      "workerFrames": 115,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 2079
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 266
+        }
+      ],
+      "workerFrames": 108,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1717
+    },
+    {
+      "source": "unesp-222981",
+      "label": "H",
+      "startMs": 75020,
+      "endMs": 76650,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 825
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 1567
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1608
+    },
+    {
+      "source": "unesp-222981",
+      "label": "J",
+      "startMs": 79040,
+      "endMs": 80570,
+      "readings": [
+        {
+          "letter": "I",
+          "afterVideoMs": 295
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 592
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1459
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1540
+    },
+    {
+      "source": "unesp-222981",
+      "label": "K",
+      "startMs": 82040,
+      "endMs": 83540,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 690
+        }
+      ],
+      "workerFrames": 100,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1468
+    },
+    {
+      "source": "unesp-222981",
+      "label": "X",
+      "startMs": 108030,
+      "endMs": 109570,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 464
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1563
+    },
+    {
+      "source": "unesp-222981",
+      "label": "Z",
+      "startMs": 113560,
+      "endMs": 115100,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 891
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1591
+    },
+    {
+      "source": "unesp-222981",
+      "label": "K",
+      "startMs": 191650,
+      "endMs": 193140,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 480
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1473
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "E",
+      "startMs": 79800,
+      "endMs": 81300,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 277
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1473
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "O",
+      "startMs": 105940,
+      "endMs": 107440,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 267
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1512
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "A",
+      "startMs": 80580,
+      "endMs": 83350,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 230
+        }
+      ],
+      "workerFrames": 135,
+      "framesWithHand": 67,
+      "lastHandAfterVideoMs": 2781
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "E",
+      "startMs": 117520,
+      "endMs": 119750,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 247
+        }
+      ],
+      "workerFrames": 119,
+      "framesWithHand": 53,
+      "lastHandAfterVideoMs": 2248
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "M",
+      "startMs": 181440,
+      "endMs": 183320,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 271
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1900
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "N",
+      "startMs": 189160,
+      "endMs": 191240,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 284
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 2103
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "O",
+      "startMs": 197600,
+      "endMs": 199840,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 223
+        }
+      ],
+      "workerFrames": 118,
+      "framesWithHand": 54,
+      "lastHandAfterVideoMs": 2273
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 695
+        },
+        {
+          "letter": "U",
+          "afterVideoMs": 1215
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1687
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 578
+        }
+      ],
+      "workerFrames": 82,
+      "framesWithHand": 16,
+      "lastHandAfterVideoMs": 720
+    },
+    {
+      "source": "1535641159",
+      "label": "B",
+      "startMs": 5060,
+      "endMs": 6140,
+      "readings": [
+        {
+          "letter": "B",
+          "afterVideoMs": 237
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1086
+    },
+    {
+      "source": "1535641159",
+      "label": "C",
+      "startMs": 6610,
+      "endMs": 7580,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 232
+        }
+      ],
+      "workerFrames": 88,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 1035
+    },
+    {
+      "source": "1535641159",
+      "label": "D",
+      "startMs": 9500,
+      "endMs": 10360,
+      "readings": [
+        {
+          "letter": "D",
+          "afterVideoMs": 241
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 835
+    },
+    {
+      "source": "1535641159",
+      "label": "E",
+      "startMs": 10590,
+      "endMs": 11320,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 326
+        }
+      ],
+      "workerFrames": 83,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 743
+    },
+    {
+      "source": "1535641159",
+      "label": "F",
+      "startMs": 11900,
+      "endMs": 12840,
+      "readings": [
+        {
+          "letter": "F",
+          "afterVideoMs": 431
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 949
+    },
+    {
+      "source": "1535641159",
+      "label": "G",
+      "startMs": 13530,
+      "endMs": 14610,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 429
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1117
+    },
+    {
+      "source": "1535641159",
+      "label": "I",
+      "startMs": 16830,
+      "endMs": 17590,
+      "readings": [
+        {
+          "letter": "I",
+          "afterVideoMs": 242
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 798
+    },
+    {
+      "source": "1535641159",
+      "label": "L",
+      "startMs": 21620,
+      "endMs": 22630,
+      "readings": [
+        {
+          "letter": "L",
+          "afterVideoMs": 235
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 1028
+    },
+    {
+      "source": "1535641159",
+      "label": "M",
+      "startMs": 23150,
+      "endMs": 24350,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 240
+        }
+      ],
+      "workerFrames": 97,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1167
+    },
+    {
+      "source": "1535641159",
+      "label": "N",
+      "startMs": 24820,
+      "endMs": 25770,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 243
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 952
+    },
+    {
+      "source": "1535641159",
+      "label": "O",
+      "startMs": 26360,
+      "endMs": 27650,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 242
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1272
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1311
+    },
+    {
+      "source": "1535641159",
+      "label": "P",
+      "startMs": 28470,
+      "endMs": 29090,
+      "readings": [
+        {
+          "letter": "P",
+          "afterVideoMs": 231
+        }
+      ],
+      "workerFrames": 84,
+      "framesWithHand": 17,
+      "lastHandAfterVideoMs": 659
+    },
+    {
+      "source": "1535641159",
+      "label": "Q",
+      "startMs": 29870,
+      "endMs": 30940,
+      "readings": [
+        {
+          "letter": "Q",
+          "afterVideoMs": 245
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1113
+    },
+    {
+      "source": "1535641159",
+      "label": "R",
+      "startMs": 31660,
+      "endMs": 32620,
+      "readings": [
+        {
+          "letter": "R",
+          "afterVideoMs": 232
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 935
+    },
+    {
+      "source": "1535641159",
+      "label": "S",
+      "startMs": 33280,
+      "endMs": 34180,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 236
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 938
+    },
+    {
+      "source": "1535641159",
+      "label": "T",
+      "startMs": 35100,
+      "endMs": 35980,
+      "readings": [
+        {
+          "letter": "T",
+          "afterVideoMs": 430
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 895
+    },
+    {
+      "source": "1535641159",
+      "label": "U",
+      "startMs": 36500,
+      "endMs": 37280,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 240
+        }
+      ],
+      "workerFrames": 87,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 781
+    },
+    {
+      "source": "1535641159",
+      "label": "V",
+      "startMs": 37480,
+      "endMs": 38390,
+      "readings": [
+        {
+          "letter": "V",
+          "afterVideoMs": 243
+        }
+      ],
+      "workerFrames": 90,
+      "framesWithHand": 24,
+      "lastHandAfterVideoMs": 948
+    },
+    {
+      "source": "1535641159",
+      "label": "W",
+      "startMs": 38920,
+      "endMs": 39590,
+      "readings": [
+        {
+          "letter": "W",
+          "afterVideoMs": 229
+        }
+      ],
+      "workerFrames": 83,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 739
+    },
+    {
+      "source": "1535641159",
+      "label": "Ç",
+      "startMs": 7770,
+      "endMs": 8950,
+      "readings": [
+        {
+          "letter": "Ç",
+          "afterVideoMs": 562
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1205
+    },
+    {
+      "source": "1535641159",
+      "label": "H",
+      "startMs": 14850,
+      "endMs": 16280,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 476
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1477
+    },
+    {
+      "source": "1535641159",
+      "label": "J",
+      "startMs": 17850,
+      "endMs": 19400,
+      "readings": [
+        {
+          "letter": "J",
+          "afterVideoMs": 473
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1593
+    },
+    {
+      "source": "1535641159",
+      "label": "K",
+      "startMs": 19820,
+      "endMs": 21250,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 514
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1464
+    },
+    {
+      "source": "1535641159",
+      "label": "X",
+      "startMs": 40220,
+      "endMs": 41680,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 435
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1467
+    },
+    {
+      "source": "1535641159",
+      "label": "Y",
+      "startMs": 41900,
+      "endMs": 43500,
+      "readings": [
+        {
+          "letter": "Y",
+          "afterVideoMs": 819
+        }
+      ],
+      "workerFrames": 103,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1607
+    },
+    {
+      "source": "1535641159",
+      "label": "Z",
+      "startMs": 43650,
+      "endMs": 45550,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 356
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1100
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 47,
+      "lastHandAfterVideoMs": 1938
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "A",
+      "startMs": 40500,
+      "endMs": 41400,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 241
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 21,
+      "lastHandAfterVideoMs": 875
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "C",
+      "startMs": 45400,
+      "endMs": 46300,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 244
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 728
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 909
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "E",
+      "startMs": 50560,
+      "endMs": 51260,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 267
+        }
+      ],
+      "workerFrames": 84,
+      "framesWithHand": 17,
+      "lastHandAfterVideoMs": 679
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "O",
+      "startMs": 75320,
+      "endMs": 76200,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 463
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 20,
+      "lastHandAfterVideoMs": 939
+    },
+    {
+      "source": "unintese-ncfjw-0-mro",
+      "label": "S",
+      "startMs": 87380,
+      "endMs": 88620,
+      "readings": [
+        {
+          "letter": "S",
+          "afterVideoMs": 518
+        }
+      ],
+      "workerFrames": 91,
+      "framesWithHand": 26,
+      "lastHandAfterVideoMs": 1278
+    }
+  ]
+}
