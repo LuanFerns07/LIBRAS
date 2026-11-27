@@ -142,3 +142,11 @@ O leitor temporal de X passou a exigir separação sustentada entre a ponta do i
 Com o classificador estático da prévia do retreino de N, as oito janelas novas de A, E, O e S tiveram seis acertos e duas rejeições, E do Cecierj e O da Unesp. Um candidato acrescentou ao treino os quatro recortes do Cecierj e preservou os da Unesp fora do ajuste estático. No replay das duas aulas institucionais, o candidato mostrou a letra esperada nas 14 janelas, incluindo M, N e U. Na terceira aula da UFSM, recuperou E (12/12 quadros no modelo estático) e perdeu R (0/15). [Janelas de A, E, O e S](../ml/alphabet/institutional-static-a-e-s-o.json) · [Replays do candidato](../ml/evidence/alphabet-a-e-s-o/replay-candidate.json)
 
 A prévia consulta as redes do candidato apenas para recuperar E em quadros em que as redes originais se abstêm. Para recomendar E, a menor probabilidade das duas redes candidatas precisa chegar a 0,95. A confirmação da letra continua exigindo três leituras seguidas. As duas redes originais continuam decidindo seus aceites com o limiar 0,80. O complemento roda no dispositivo no mesmo modo ao vivo de Praticar e da Área livre.
+
+### Resultado da prévia com o complemento de E
+
+Na compilação `dbda17e`, o Chromium exibiu a letra esperada em 26 das 27 janelas da terceira aula da UFSM usadas como câmera. A ficou sem leitura. Nas janelas de Ç e Z, também apareceram C e G, respectivamente. O replay exibiu E, R e N nas respectivas janelas. [Replays da UFSM](../ml/evidence/alphabet-a-e-s-o/replay-supplement-ufsm.json)
+
+Nos recortes do Cecierj e da Unesp, 13 das 14 janelas exibiram a letra esperada. E, M e N apareceram nas duas aulas. O da Unesp ficou sem leitura, e os dois recortes de U também exibiram H. A Unesp ficou fora do treino e do ajuste do classificador estático para esses recortes. [Replays das aulas institucionais](../ml/evidence/alphabet-a-e-s-o/replay-supplement-institutional.json)
+
+Na mesma compilação, o Chromium mostrou E sem iniciar uma tentativa em Área livre e com outra letra selecionada em Praticar. O teste da sobreposição de duas mãos antes, durante e depois da tentativa passou com vídeo gravado. O reteste de N na webcam física e a revisão da pose do avatar seguem pendentes. [Teste da leitura](../tests/e2e/alphabet-live.test.mjs) · [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs)
