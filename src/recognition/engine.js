@@ -6,7 +6,7 @@ import { observePalm, observeVerticalTrajectory } from './feedback.js'
 import { openHolistic } from './holistic.js'
 import { preprocessFrames } from './preprocess.js'
 import { segmentFrames } from './segmentation.js'
-import { alphabetFeatureCount } from './alphabet.js'
+import { alphabetFeatureCount, letterFeatures } from './alphabet.js'
 import { matchMotion, motionVectorSize } from './alphabet-motion.js'
 import { createTrajectoryMatcher, trajectorySize } from './alphabet-trajectory.js'
 
@@ -36,7 +36,8 @@ export async function openAlphabetEngine() {
   const response = await fetch(import.meta.env.BASE_URL + 'models/alphabet.json')
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
-  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256, supplement, contrast } = await response.json()
+  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256,
+    supplement, contrast, worldA } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
@@ -55,6 +56,12 @@ export async function openAlphabetEngine() {
       contrast.from === contrast.to || !Number.isFinite(contrast.threshold) ||
       !(contrast.threshold > .5 && contrast.threshold <= 1) || !/^[a-f0-9]{64}$/u.test(contrast.modelSha256))) {
     throw new TypeError('Manifesto da distinção de letras incompatível.')
+  }
+  const worldCandidates = ['A', 'Q', 'R']
+  if (worldA !== undefined && (!worldA || !agreementSha256 || worldCandidates.some(label => !labels.includes(label)) ||
+      worldA.preprocess !== 'hand-world-wrist-palm-v1' || !Number.isFinite(worldA.threshold) ||
+      !(worldA.threshold >= .5 && worldA.threshold <= 1) || !/^[a-f0-9]{64}$/u.test(worldA.modelSha256))) {
+    throw new TypeError('Manifesto do complemento 3D de A incompatível.')
   }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
@@ -80,22 +87,26 @@ export async function openAlphabetEngine() {
   const recognizeTrajectory = trajectory ? createTrajectoryMatcher(trajectory) : null
   const legacyLetters = Object.keys(motion?.limits ?? {})
   const motionLetters = trajectory ? [...trajectoryLabels, 'J', 'Z', ...legacyLetters] : legacyLetters
-  const [bytes, checkBytes, supplementBytes, contrastBytes] = await Promise.all([
+  const [bytes, checkBytes, supplementBytes, contrastBytes, worldBytes] = await Promise.all([
     verifiedBytes('models/alphabet.onnx', modelSha256),
     agreementSha256 ? verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null,
     supplement ? verifiedBytes('models/alphabet-supplement.onnx', supplement.modelSha256) : null,
     contrast ? verifiedBytes('models/alphabet-contrast.onnx', contrast.modelSha256) : null,
+    worldA ? verifiedBytes('models/alphabet-a-world.onnx', worldA.modelSha256) : null,
   ])
   const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
   let verifier
   let refiner
   let contrastModel
+  let worldModel
   try {
     if (checkBytes) verifier = await InferenceSession.create(checkBytes, { executionProviders: ['wasm'] })
     if (supplementBytes) refiner = await InferenceSession.create(supplementBytes, { executionProviders: ['wasm'] })
     if (contrastBytes) contrastModel = await InferenceSession.create(contrastBytes, { executionProviders: ['wasm'] })
+    if (worldBytes) worldModel = await InferenceSession.create(worldBytes, { executionProviders: ['wasm'] })
   } catch (error) {
-    await Promise.allSettled([session.release(), verifier?.release(), refiner?.release()])
+    await Promise.allSettled([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release(),
+      worldModel?.release()])
     throw error
   }
   let pending = Promise.resolve()
@@ -123,11 +134,12 @@ export async function openAlphabetEngine() {
     alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
     findMotion: motionLetters.length ? (frames, indexHistory) =>
       recognizeTrajectory?.(frames, indexHistory) ?? (legacyLetters.length ? matchMotion(frames, motion) : null) : undefined,
-    predictLetter(values, alternateValues) {
+    predictLetter(values, alternateValues, worldHand) {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
         const first = await letterVote(session, input)
-        const second = verifier && first.accepted ? await letterVote(verifier, input) : null
+        const checkWorld = worldModel && worldHand?.length === 21 && worldCandidates.includes(first.label)
+        const second = verifier && (first.accepted || checkWorld) ? await letterVote(verifier, input) : null
         if (first.accepted && (!verifier || second.accepted && second.label === first.label)) {
           return refinedLetter(first.label, input)
         }
@@ -139,6 +151,15 @@ export async function openAlphabetEngine() {
           }
           const best = scores.data.indexOf(Math.max(...scores.data))
           if (scores.data[best] >= supplement.threshold) return refinedLetter(supplement.labels[best], input)
+        }
+        if (checkWorld && worldCandidates.includes(second.label)) {
+          const world = letterFeatures(worldHand, 1)
+          if (!world) return null
+          const { scores } = await worldModel.run({ world: new Tensor('float32', world, [1, features]) })
+          if (scores?.data.length !== 1 || !scores.data.every(value => value >= 0 && value <= 1)) {
+            throw new TypeError('Saída do complemento 3D de A incompatível.')
+          }
+          return scores.data[0] >= worldA.threshold ? 'A' : null
         }
         if (!alternateValues || !second || first.label !== 'N' || !['M', 'N'].includes(second.label)) return null
         const alternate = new Tensor('float32', alternateValues, [1, features])
@@ -153,7 +174,8 @@ export async function openAlphabetEngine() {
     },
     async close() {
       await pending
-      await Promise.all([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release()])
+      await Promise.all([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release(),
+        worldModel?.release()])
     },
   }
 }

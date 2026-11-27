@@ -4,15 +4,31 @@ import argparse
 from itertools import groupby
 import json
 from pathlib import Path
+from shutil import copyfile
+from tempfile import TemporaryDirectory
 
 import numpy as np
+import onnx
 import onnxruntime as ort
 import torch
+from torch import nn
 
 from .probe_as import fit_linear
 from .refine_o import shape_features
 from .supplement import load_model
 from .train import FEATURES, centered, checksum
+
+
+class FlexionA(nn.Module):
+    def __init__(self, model, mean, scale):
+        super().__init__()
+        self.model = model
+        self.register_buffer("mean", mean)
+        self.register_buffer("scale", scale)
+
+    def forward(self, world):
+        flexion = shape_features(world)[:, 7:11]
+        return self.model((flexion - self.mean) / self.scale).sigmoid()
 
 
 def observations(sample):
@@ -30,7 +46,7 @@ def observations(sample):
         yield centered(xyz[0], frame["aspect"])[0], centered(xyz[1], 1.)[0]
 
 
-def probe(base, reference):
+def probe(base, reference, output=None):
     meta = json.loads((base / "alphabet.json").read_text())
     data = json.loads(reference.read_text())
     allowed = [meta["labels"].index(label) for label in "AQR"]
@@ -44,7 +60,7 @@ def probe(base, reference):
     x = np.concatenate([world for world, _ in training])
     y = np.concatenate([np.full(len(world), is_a) for world, is_a in training])
     torch.set_num_threads(2)
-    model, mean, scale = fit_linear(shape_features(torch.from_numpy(x))[:, 7:11], y)
+    model = FlexionA(*fit_linear(shape_features(torch.from_numpy(x))[:, 7:11], y)).eval()
 
     options = ort.SessionOptions()
     options.intra_op_num_threads = 1
@@ -65,8 +81,7 @@ def probe(base, reference):
         eligible = (~agreement & (other.max(1) < meta["supplement"]["threshold"])
                     & np.isin(first, allowed) & np.isin(second, allowed))
         with torch.inference_mode():
-            flexion = shape_features(torch.from_numpy(world))[:, 7:11]
-            score = model((flexion - mean) / scale).sigmoid().numpy().ravel()
+            score = model(torch.from_numpy(world)).numpy().ravel()
         added = eligible & (score >= .5)
         run = max((len(list(group)) for vote, group in groupby(added) if vote), default=0)
         windows.append({
@@ -74,17 +89,56 @@ def probe(base, reference):
             "selected": len(score), "eligible": int(eligible.sum()), "addedA": int(added.sum()),
             "longestRunBySelectedFrame": run,
         })
-    return {
+    report = {
         "referenceSha256": checksum(reference), "manifests": data["sourceManifests"],
         "landmarkerSha256": data["landmarkerSha256"],
         "models": {key: meta[key] for key in ("modelSha256", "agreementSha256", "supplement")},
         "threshold": .5, "training": {"A": int(y.sum()), "others": int((~y).sum())}, "windows": windows,
     }
+    if output is not None:
+        report["worldA"] = export(base, output, meta, model, np.concatenate([world for _, _, world in clips]))
+    return report
+
+
+def export(base, output, metadata, model, points):
+    if base.resolve() == output.resolve() or "worldA" in metadata:
+        raise ValueError("Use uma base sem complemento 3D e uma pasta de destino distinta.")
+    output.mkdir(parents=True, exist_ok=True)
+    assets = [load_model(base, name, expected) for name, expected in (
+        ("alphabet.onnx", metadata["modelSha256"]),
+        ("alphabet-check.onnx", metadata["agreementSha256"]),
+        ("alphabet-supplement.onnx", metadata["supplement"]["modelSha256"]),
+        ("alphabet-contrast.onnx", metadata.get("contrast", {}).get("modelSha256")),
+    ) if expected is not None]
+    features = points.reshape(-1, FEATURES)
+    with TemporaryDirectory(dir=output) as temporary:
+        folder = Path(temporary)
+        target = folder / "alphabet-a-world.onnx"
+        torch.onnx.export(model, torch.from_numpy(features[:1]), str(target), input_names=["world"],
+                          output_names=["scores"], opset_version=17, dynamo=False,
+                          dynamic_axes={"world": {0: "frames"}, "scores": {0: "frames"}})
+        onnx.checker.check_model(target, full_check=True)
+        options = ort.SessionOptions()
+        options.intra_op_num_threads = 1
+        session = ort.InferenceSession(target, options, providers=["CPUExecutionProvider"])
+        scores, = session.run(["scores"], {"world": features})
+        with torch.inference_mode():
+            expected = model(torch.from_numpy(features)).numpy()
+        np.testing.assert_allclose(scores, expected, atol=1e-6, rtol=2e-5)
+        np.testing.assert_array_equal(scores >= .5, expected >= .5)
+        manifest = {"preprocess": "hand-world-wrist-palm-v1", "threshold": .5, "modelSha256": checksum(target)}
+        for asset in assets:
+            copyfile(asset, folder / asset.name)
+        (folder / "alphabet.json").write_text(json.dumps({**metadata, "worldA": manifest}, indent=2) + "\n")
+        for name in (*(asset.name for asset in assets), target.name, "alphabet.json"):
+            (folder / name).replace(output / name)
+    return manifest
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("base", type=Path, help="Pasta dos modelos da prévia.")
     parser.add_argument("reference", type=Path, help="Referência com coordenadas 3D e partições.")
+    parser.add_argument("--out", type=Path, help="Pasta para exportar o complemento ONNX e os modelos da base.")
     args = parser.parse_args()
-    print(json.dumps(probe(args.base, args.reference), ensure_ascii=False, indent=2))
+    print(json.dumps(probe(args.base, args.reference, args.out), ensure_ascii=False, indent=2))

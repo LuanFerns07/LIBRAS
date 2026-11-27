@@ -45,3 +45,19 @@ OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extrac
   --manifest ml/alphabet/independent-a-q-r-windows.json \
   --out data/evidence/alphabet-a-q-r/static-frames.json
 ```
+
+## Ensaios de Q/N e R/U
+
+Duas regressões logísticas foram treinadas nos quadros da primeira aula da UFSM. Para Q, os descritores usam a flexão de indicador, médio e anelar, a direção vertical das pontas e a separação entre indicador e médio, calculadas nas coordenadas 3D. O complemento só acrescenta Q quando a rede principal prefere N, o verificador confirma Q e o complemento anterior fica sem leitura. Para R, os descritores da imagem medem a projeção das pontas de indicador e médio no eixo das bases dos dedos, a distância entre as pontas e as flexões. A confirmação só pode substituir um U aceito pelas duas redes. Ambos usam limiar 0,95, com os recortes da UFSM de validação e os de Tel baixinha fora do treino.
+
+Na avaliação offline em 74 recortes e 1.324 quadros selecionáveis, o complemento acrescentou Q nos 17 quadros de Q de Tel baixinha e recuperou R nos oito quadros em que as redes aceitavam U no recorte de R. Nenhum outro rótulo recebeu esses votos. A regra de Q ainda deixa o Q da Unicentro como P. A forma de U em perfil da mesma aula obteve pontuação alta no verificador experimental de R. Nesse recorte, as redes principais ficaram sem leitura, então a confirmação de R ficou inativa. Os ensaios dependem dos controles de U em perfil antes de uma integração. [Relatório de treino e avaliação](contrastes-q-r.json) · [Controle de U em perfil](../../../docs/dados-alfabeto.md#m-n-u-e-q-em-duas-gravações-reservadas)
+
+Use a referência 3D do [ensaio de A](../alphabet-a-e-independent/README.md#ensaio-de-flexão-em-coordenadas-3d).
+
+```sh
+mkdir -p data/alphabet/q-r-diagnostico
+OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extract_motion --world \
+  --manifest ml/alphabet/independent-m-n-u-q-windows.json --out data/alphabet/q-r-diagnostico/mnuq-3d.json
+.venv/bin/python -m ml.alphabet.probe_qr data/releases/librasia-n-confirmacao/site/models \
+  data/alphabet/a-oculto/referencia-3d.json data/alphabet/q-r-diagnostico/mnuq-3d.json
+```
