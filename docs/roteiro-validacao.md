@@ -24,7 +24,7 @@ No Chromium, abra **Praticar**, escolha **Amarelo** e entre em **Praticar com aj
 
 O avatar em WebGL e a webcam física ficaram lado a lado na janela de 1.280 × 900. A sessão de interrupção solicitou apenas arquivos estáticos do servidor local. Os logs estão em `data/evidence/demonstracao/m1-m2-dfb045b/`. [Reprodução da dica](#dica-de-trajetória-de-amarelo)
 
-Para o aceite com pessoa sinalizante, registre a execução esperada e a correção intencional na webcam e peça a uma pessoa fluente em Libras que confira a dica. Na Área livre, registre a retirada e o retorno de uma mão, a oclusão e o alinhamento dos pontos ao redimensionar. Na coleta de M1, registre também repouso, movimento cotidiano e sinais fora do catálogo com pessoas independentes, incluindo chamadas ao classificador. [Ficha local](http://127.0.0.1:4177/validacao/) · [Como registrar](validacao-ao-vivo.md)
+Na 1.0 local, o aceite técnico usa as gravações para as decisões do modelo e a webcam física para a falha de permissão e a retomada. A validação pós-1.0 inclui execução e correção intencional com revisão da dica por pessoa fluente em Libras, retirada e retorno de uma mão, oclusão, alinhamento dos pontos ao redimensionar e coleta de negativos com pessoas independentes. [Validações pós-1.0](../ROADMAP_LIBRASIA.md#validações-pós-10) · [Ficha local](http://127.0.0.1:4177/validacao/)
 
 ### Da dica à conclusão da lição de Amarelo
 

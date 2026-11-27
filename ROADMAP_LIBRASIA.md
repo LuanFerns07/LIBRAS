@@ -4,15 +4,15 @@ O projeto de Luan Fernandes e Wellington Sales é uma iniciativa educacional sem
 
 ## Marcos e dependências
 
-O coordenador integra as entregas e atualiza a coluna **Status**, que alimenta o painel do README. **A fazer** indica implementação pendente ou em curso. **A testar** indica implementação concluída com validação pendente. **Pronto** indica que os critérios de aceite foram cumpridos. O revisor independente confere as evidências antes da versão de demonstração.
+O coordenador integra as entregas e atualiza a coluna **Status**, que alimenta o painel do README. **A fazer** indica implementação pendente ou em curso. **A testar** indica implementação concluída com validação pendente. **Pronto** indica que os critérios de aceite da entrega foram cumpridos. As validações reservadas para depois da 1.0 estão na checklist pós-1.0.
 
 Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/status.svg` no mesmo commit.
 
 | Marco | Status | Entrega | Responsáveis principais | Quando avançar |
 | --- | --- | --- | --- | --- |
 | **M0 · Fundação** | Pronto | Git local, aplicação inicial e ambiente definido | Git e ambiente, coordenador | Um segundo integrante consegue executar a base a partir do README. |
-| **M1 · Dados e critérios** | A testar | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
-| **M2 · Um sinal de ponta a ponta** | A testar | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
+| **M1 · Dados e critérios** | Pronto | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | O aceite técnico confirma a base, o catálogo e as partições para a versão exploratória local. |
+| **M2 · Um sinal de ponta a ponta** | Pronto | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Os ensaios da 1.0 confirmam quatro respostas distintas para Amarelo e a recuperação da webcam no Chromium. |
 | **M3 · Lição e reconhecimento** | A testar | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
 | **M4 · Alfabeto e texto para Libras** | A testar | A–Z e Ç no avatar e na leitura ao vivo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | As poses, a leitura pela webcam e os exemplos de tradução e soletração passam pela revisão. |
 | **M5 · Área livre e voz** | A testar | Sinalização sem alvo pré-selecionado, transcrição editável e leitura gratuita | Integração, Dados e ML, UX | O texto vem de sinais reais, casos incertos ficam visíveis e o áudio usa o texto confirmado no PC. |
@@ -23,12 +23,12 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ## Prioridades da retomada
 
-A rodada atual se concentra em M1 e M2 para entregar uma prática guiada funcional no PC com webcam. [Abrir Praticar](http://127.0.0.1:4177/#praticar)
+A versão 1.0 local conclui M1 e M2 com uma prática guiada funcional no PC com webcam. [Abrir Praticar](http://127.0.0.1:4177/#praticar)
 
-1. **M1.** Conferir as referências, o catálogo, a separação dos dados e o contrato entre o modelo e o avatar. Completar os negativos na webcam com pessoas independentes assim que houver disponibilidade. [Revisão técnica](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências e bases](docs/referencias.md)
-2. **M2.** Confirmar que uma execução esperada, uma correção intencional e uma falha de captura têm respostas distintas em **Praticar com ajuda**. Registrar a retirada e o retorno de uma mão e conferir o alinhamento da sobreposição ao redimensionar a janela. [Roteiro curto](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Ficha de validação](docs/validacao-ao-vivo.md)
+1. **M1.** Catálogo, licenças, partições e contrato entre o modelo e o avatar conferidos para o uso exploratório. [Revisão técnica](docs/dados.md#aceite-técnico-de-m1) · [Referências e bases](docs/referencias.md)
+2. **M2.** A prática de Amarelo distingue reconhecimento, ajuste, tentativa inconclusiva e falha de captura. Os ensaios de sinalização usaram gravações. A recuperação de permissão foi conferida na webcam física. [Roteiro curto](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Ficha de validação](docs/validacao-ao-vivo.md)
 
-As demais etapas, a publicação na Vercel e a finalização do memorial ficam para outra rodada.
+Os testes com participantes, os demais marcos, a publicação na Vercel e a finalização do memorial ficam para outra rodada. [Validações pós-1.0](#validações-pós-10)
 
 ## Implementação e aceite por marco
 
@@ -53,7 +53,6 @@ As demais etapas, a publicação na Vercel e a finalização do memorial ficam p
 - [x] Medir chamadas ao classificador por tentativa. Verificar no Chromium a diferença entre ausência de mãos e rejeição após classificação, guardar o valor na ficha e resumir a cobertura por cenário. [Verificação com gravações](docs/validacao-ao-vivo.md#verificação-das-chamadas-no-chromium)
 - [x] Conferir a resolução da câmera e a cópia da medição pelo aplicativo. Exportar os valores na ficha local e verificar o caminho de cópia manual quando o Chromium bloqueia a área de transferência. [Medição na ficha](docs/validacao-ao-vivo.md#medir-no-chromium)
 - [x] Recompilar a prévia a partir de um checkout limpo, conferir os modelos e validar no Chromium o preenchimento da versão pela ficha. Sinalizar como rascunho a compilação com alterações locais. [Reprodução da prévia local](docs/previa-estavel.md#recompilar-com-os-modelos-verificados)
-- [ ] Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
 - [x] Definir antes do teste final as metas de reconhecimento, rejeição e latência, com base no tamanho do conjunto e no PC de referência. Ajustar o limiar de confiança somente com a validação. Preservar o teste final para a versão escolhida.
 - [x] Conferir os três sinais iniciais no catálogo, no player 3D e no manifesto da prévia. Verificar partições, atribuição da base e paridade WebAssembly. Reunir as fontes e bases em um índice para citação. [Revisão técnica de M1](docs/dados.md#contrato-e-revisão-técnica-de-m1) · [Referências](docs/referencias.md)
 - [x] **Aceite.** Catálogo inicial, registro de licenças, protocolo de avaliação e interfaces do player e do modelo revisados. O protótipo pode avançar com a amostra exploratória registrada. [Aceite técnico de M1](docs/dados.md#aceite-técnico-de-m1)
@@ -72,9 +71,14 @@ As demais etapas, a publicação na Vercel e a finalização do memorial ficam p
 - [x] Interromper a tentativa se o vídeo parar de chegar com a trilha ativa. Verificar no Chromium a mensagem, a limpeza dos pontos, a liberação da câmera e a retomada. [Interrupção do vídeo](docs/roteiro-validacao.md#interrupção-do-vídeo-durante-a-prática)
 - [x] **Vídeo gravado no Chromium.** Verificar 21 pontos por mão, movimento das duas mãos antes, durante e depois de uma tentativa, oclusão e retorno de uma mão, opção ligada por padrão e alternância durante a captura. Conferir o encaixe e o espelhamento em 1.280 e 390 px e a liberação da trilha ao navegar. [Vídeo e cenário](docs/teste-pontos-ao-vivo.md) · [Teste automatizado](tests/e2e/hand-overlay-live.test.mjs)
 - [x] **Relato de uso na webcam.** A pessoa usuária confirmou que a sobreposição acompanhou bem os movimentos em tempo real.
-- [ ] **Aceite visual na webcam física.** Na Área livre, registrar a retirada e o retorno de uma mão e conferir o alinhamento ao redimensionar a janela.
-- [ ] Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
-- [ ] **Aceite.** No PC, uma pessoa usa a câmera real para demonstrar o sinal, recebe uma dica adequada em uma tentativa com erro observável e vê um aviso distinto quando a captura falha. Registrar a versão e a evidência desse fluxo.
+- [x] **Aceite da 1.0 local.** Reconhecimento de Amarelo, dica de trajetória e ausência de mãos verificados com gravações. Falha de permissão e retomada verificadas na webcam física. [Evidências da prática guiada](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2)
+
+### Validações pós-1.0
+
+- [ ] **M1.** Completar as amostras de repouso, movimentos comuns e sinais fora do catálogo com pessoas independentes na webcam. Registrar quantos casos chegaram ao classificador.
+- [ ] **M2.** Na Área livre, registrar a retirada e o retorno de uma mão na webcam física e conferir o alinhamento ao redimensionar a janela.
+- [ ] **M2.** Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
+- [ ] **M2.** Observar uma pessoa sinalizando com a câmera real, revisar a adequação da dica com uma pessoa fluente em Libras e registrar a resposta a uma falha de captura. [Ficha local](docs/validacao-ao-vivo.md)
 
 ### M3 · Modelo avaliado e lição utilizável
 

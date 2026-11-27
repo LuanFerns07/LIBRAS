@@ -2,12 +2,14 @@
 
 ## Demonstração atual no PC
 
+A tag `v1.0.0` identifica a versão local que conclui M1 e M2. O aceite técnico usou gravações para a lição de Amarelo e a webcam ACER para a recuperação de permissão no Chromium. A coleta de negativos com participantes, a conferência visual dos pontos na webcam e a revisão linguística das dicas ficam para depois da 1.0. [Aceite e próximos testes](../ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Roteiro verificado](roteiro-validacao.md#prática-guiada-mínima-m1-e-m2)
+
 Abra [Área livre](http://127.0.0.1:4177/#area-livre) ou [Praticar](http://127.0.0.1:4177/#praticar) no Chromium. Na Área livre, selecione **Alfabeto** para ler letras ao vivo ao lado da câmera. Em **Sinais**, inicie e conclua cada tentativa para acrescentar uma palavra.
 
 Se o servidor estiver encerrado, execute na raiz do projeto:
 
 ~~~bash
-python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
+python3 data/releases/librasia-1.0.0/iniciar.py --porta 4177
 ~~~
 
 A prévia usa os pesos locais verificados. Em **Praticar com ajuda**, a etapa atual de M2 verifica o enquadramento da mão e dos ombros. Abra **Amarelo** para seguir o roteiro curto com o avatar. [Prática guiada mínima](roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Enquadramento e oclusão](roteiro-validacao.md#enquadramento-e-oclusão-na-prática)
