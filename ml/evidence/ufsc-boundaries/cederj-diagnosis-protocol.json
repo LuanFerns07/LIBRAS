@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "baselineReportSha256": "5987e33ea4eed53e8fcc3b7dfccdc8a68af48fb75082a46631b2f61a379b1c0e",
+  "purpose": "Localizar as falhas observadas no recorte já avaliado, usando as mesmas referências e ativos. As janelas de contexto adjacente não têm anotação lexical.",
+  "framing": [
+    {
+      "id": "full",
+      "start": 0,
+      "width": 1
+    },
+    {
+      "id": "left",
+      "start": 0,
+      "width": 0.5
+    },
+    {
+      "id": "right",
+      "start": 0.5,
+      "width": 0.5
+    }
+  ],
+  "contexts": [
+    {
+      "id": "right_before",
+      "startMs": 212000,
+      "endMs": 213000
+    },
+    {
+      "id": "right_after",
+      "startMs": 214000,
+      "endMs": 215000
+    },
+    {
+      "id": "left_before",
+      "startMs": 216500,
+      "endMs": 217500
+    },
+    {
+      "id": "left_after",
+      "startMs": 218100,
+      "endMs": 219100
+    }
+  ],
+  "controls": [
+    {
+      "id": "cederj_demonstration",
+      "expected": "amarelo",
+      "startMs": 118000,
+      "endMs": 119750
+    },
+    {
+      "id": "minds_training",
+      "expected": "amarelo",
+      "startMs": 700,
+      "endMs": 4400,
+      "mediaPath": "data/minds/raw/03AmareloSinalizador01-1.mp4",
+      "mediaSha256": "3d2e66138d33aeb7da7a9002c0cadfa4fd4381ab5a5aaef40ad5e9a5f27ebf3a"
+    }
+  ],
+  "measures": [
+    "Classificar as janelas fixas e propostas sobrepostas no mesmo conjunto de quadros do replay, a 10 fps. Registrar decisão, distribuição softmax, cobertura de mão e lado do centro dos ombros por quadro.",
+    "Extrair cada metade desde o início do recorte com um Holistic novo por enquadramento. As duas metades mantêm a altura e a escala de pixels do quadro original. O recorte pode excluir partes de uma pessoa e altera o contexto que o rastreador recebe.",
+    "Reexpressar horizontalmente os mesmos landmarks do quadro original no sistema de coordenadas da metade da pessoa de referência, sem reextrair, e comparar tensores pré-processados e decisões. No pré-processamento, converter também a proporção do quadro e a escala da profundidade.",
+    "Repetir a demonstração legendada da mesma aula e um controle do treino MINDS com o mesmo extrator, grade e modelo. Os controles servem à sonda diagnóstica."
+  ]
+}
