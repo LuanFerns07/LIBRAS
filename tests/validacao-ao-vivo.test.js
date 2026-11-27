@@ -19,13 +19,15 @@ const observed = {
 }
 
 test('a sessão conserva pseudônimos e versão do modelo e deixa etapas pendentes', () => {
-  const session = createSession({ ...setup, frames: [1, 2], participantName: 'Ignorado' }, time)
+  const session = createSession({ ...setup, alphabetSha256: 'c'.repeat(64), frames: [1, 2], participantName: 'Ignorado' }, time)
   assert.equal(session.startedAt, time.toISOString())
   assert.equal(session.source, 'live-manual-observation')
   assert.deepEqual(session.participant, { id: 'P01', outsideTraining: 'yes', consent: true })
   assert.deepEqual(session.reviewer, { id: 'R01', profile: 'fluent', independent: 'yes' })
   assert.equal(session.version.modelSha256, 'a'.repeat(64))
   assert.equal(session.version.manifestSha256, 'b'.repeat(64))
+  assert.equal(session.version.alphabetSha256, 'c'.repeat(64))
+  assert.equal('alphabetSha256' in createSession({ ...setup, alphabetSha256: '' }, time).version, false)
   assert.equal(session.environment.sampleIntervalMs, 100)
   assert.ok(Object.values(session.checkpoints).every(value => value === 'pending'))
   assert.equal('frames' in session, false)
@@ -37,6 +39,7 @@ test('consentimento, pseudônimo, ambiente e hashes são verificados', () => {
   assert.throws(() => createSession({ ...setup, participantId: 'Nome de participante' }), /identificador/u)
   assert.throws(() => createSession({ ...setup, modelSha256: '123' }), /SHA-256/u)
   assert.throws(() => createSession({ ...setup, manifestSha256: '123' }), /manifesto/u)
+  assert.throws(() => createSession({ ...setup, alphabetSha256: '123' }), /SHA-256 do alfabeto/u)
   assert.throws(() => createSession({ ...setup, cameraWidth: '0' }), /largura/u)
   assert.throws(() => createSession({ ...setup, reviewerIndependent: '' }), /independência/u)
 })

@@ -179,6 +179,7 @@ function readApplicationTiming(input) {
 
 export function createSession(input, now = new Date()) {
   if (input.consent !== true) throw new TypeError('Confirme o consentimento para registrar a sessão.')
+  const alphabetSha256 = typeof input.alphabetSha256 === 'string' ? input.alphabetSha256.trim() : input.alphabetSha256
   return {
     schema: 'librasia-live-review/v1',
     source: 'live-manual-observation',
@@ -200,6 +201,7 @@ export function createSession(input, now = new Date()) {
       manifestSha256: readMatch(input.manifestSha256, /^[a-f0-9]{64}$/u, 'o SHA-256 do manifesto do modelo'),
       catalog: readText(input.catalog, 'a versão do catálogo'),
       avatar: readText(input.avatar, 'a versão do avatar'),
+      ...(alphabetSha256 ? { alphabetSha256: readMatch(alphabetSha256, /^[a-f0-9]{64}$/u, 'o SHA-256 do alfabeto') } : {}),
     },
     environment: {
       system: readText(input.system, 'o sistema'),

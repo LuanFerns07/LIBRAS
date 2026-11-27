@@ -104,6 +104,7 @@ loadVersion.addEventListener('click', async () => {
     for (const name of ['commit', 'catalog', 'avatar', 'modelSha256', 'manifestSha256']) {
       sessionForm.elements[name].value = version[name]
     }
+    if (version.alphabetSha256) sessionForm.elements.alphabetSha256.value = version.alphabetSha256
     show('version-status', 'Versão do pacote preenchida.')
   } catch {
     show('version-status', 'Confira a versão do pacote e preencha os campos manualmente.', true)

@@ -26,6 +26,20 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
   const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
   const commit = commitFile.toString().trim()
   const version = { commit, catalog: catalogVersion, avatar: commit, modelSha256: sha256(model), manifestSha256: sha256(manifest) }
+  const alphabetManifest = await fetch(new URL('/models/alphabet.json', url))
+  if (alphabetManifest.ok) {
+    const reference = await readFile(new URL('../../ml/evidence/demonstracao-modelos.sha256', import.meta.url), 'utf8')
+    const names = reference.split('\n').map(line => line.split('  ')[1]).filter(name => name?.startsWith('alphabet'))
+    const checksums = await Promise.all(names.map(async name => {
+      const response = await fetch(new URL('/models/' + name, url))
+      if (response.status === 404 && !['alphabet.json', 'alphabet.onnx'].includes(name)) return ''
+      assert.ok(response.ok, name)
+      return sha256(Buffer.from(await response.arrayBuffer())) + '  ' + name + '\n'
+    }))
+    version.alphabetSha256 = sha256(checksums.join(''))
+  } else {
+    assert.equal(alphabetManifest.status, 404)
+  }
   let timing = { trigger: 'manual', decisionMs: 17.25, initialLoadMs: 300, extractionMs: [12.5, 14], classifierCalls: 0 }
   if (timingReport) {
     const report = JSON.parse(await readFile(timingReport, 'utf8'))

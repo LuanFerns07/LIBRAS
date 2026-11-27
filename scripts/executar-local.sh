@@ -115,7 +115,7 @@ if [[ -n "$pacote" ]]; then
   cp qa/{index.html,interface.js,registro.css,registro.js} "$previa/dist/validacao/"
   node --input-type=module - "$previa/dist" <<'JS'
 import { createHash } from 'node:crypto'
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { catalogVersion } from './src/catalog.js'
 
@@ -133,6 +133,14 @@ const version = {
   avatar: commit,
   modelSha256: sha256(model),
   manifestSha256: sha256(manifest),
+}
+const models = join(directory, 'models')
+const alphabetFiles = (await readdir(models)).filter(name => /^alphabet(?:-[a-z-]+)?\.(?:json|onnx)$/u.test(name)).sort()
+if (alphabetFiles.includes('alphabet.json')) {
+  const checksums = await Promise.all(alphabetFiles.map(async name => {
+    return sha256(await readFile(join(models, name))) + '  ' + name + '\n'
+  }))
+  version.alphabetSha256 = sha256(checksums.join(''))
 }
 await writeFile(join(directory, 'validacao/versao.json'), JSON.stringify(version, null, 2) + '\n')
 JS

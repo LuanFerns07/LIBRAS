@@ -54,6 +54,9 @@ def checked_session(session, model, manifest_hash):
     version = session["version"]
     if (version["modelSha256"] != model["modelSha256"] or version["manifestSha256"] != manifest_hash):
         raise ValueError("Uma ficha não corresponde aos pesos e ao manifesto informados.")
+    if "alphabetSha256" in version and (
+            not isinstance(version["alphabetSha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", version["alphabetSha256"])):
+        raise ValueError("Há um SHA-256 do alfabeto inválido na ficha.")
     for value, pattern in (
         (session["sessionId"], r"S\d{2,6}"), (session["participant"]["id"], r"P\d{2,6}"),
         (session["reviewer"]["id"], r"R\d{2,6}"), (version["commit"], r"[a-f0-9]{7,40}"),
@@ -90,6 +93,7 @@ def analyze(sessions, model, manifest_hash):
         raise ValueError("Informe um manifesto de catálogo válido e pelo menos uma ficha.")
     groups = defaultdict(list)
     identifiers = set()
+    version_fields = ("commit", "catalog", "avatar", "alphabetSha256")
     for session in sessions:
         checked_session(session, model, manifest_hash)
         sid = session["sessionId"]
@@ -97,14 +101,15 @@ def analyze(sessions, model, manifest_hash):
             raise ValueError(f"Ficha duplicada: {sid}.")
         identifiers.add(sid)
         version = session["version"]
-        key = (version["commit"], version["catalog"], version["avatar"])
+        key = tuple(version.get(field, "") for field in version_fields)
         groups[key].append(session)
     return {
         "source": "live-manual-observation",
         "modelSha256": model["modelSha256"],
         "modelManifestSha256": manifest_hash,
         "groups": [
-            {"version": dict(zip(("commit", "catalog", "avatar"), key)), **group_report(group, labels)}
+            {"version": {field: value for field, value in zip(version_fields, key) if value},
+             **group_report(group, labels)}
             for key, group in sorted(groups.items())
         ],
     }

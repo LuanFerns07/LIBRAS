@@ -69,6 +69,16 @@ class LiveReviewTests(TestCase):
         self.assertIsNone(group["freeRecognition"]["falseAcceptance"]["rate"])
         self.assertEqual(group["timingByEnvironment"], [])
 
+    def test_alphabet_assets_distinguish_sessions_with_the_same_build(self):
+        legacy, first, second = session([]), session([], "S02"), session([], "S03")
+        first["version"]["alphabetSha256"] = "a" * 64
+        second["version"]["alphabetSha256"] = "b" * 64
+        groups = analyze([legacy, first, second], MODEL, MANIFEST_HASH)["groups"]
+        self.assertEqual([group["version"].get("alphabetSha256") for group in groups], [None, "a" * 64, "b" * 64])
+        second["version"]["alphabetSha256"] = None
+        with self.assertRaisesRegex(ValueError, "SHA-256 do alfabeto"):
+            analyze([second], MODEL, MANIFEST_HASH)
+
     def test_counts_classifier_reach_separately_from_decision_and_legacy_data(self):
         trials = [observed(number, "other", condition="out-of-catalog") for number in range(1, 4)]
         trials[0]["application"]["classifierCalls"] = 1
