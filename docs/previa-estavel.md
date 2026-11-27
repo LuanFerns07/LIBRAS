@@ -10,7 +10,9 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote atual `dfb045b` usa os pesos locais verificados e acrescenta uma verificação da posição da mão quando o modelo indica Aluno. No Chromium, o recorte de queixo para teclado ficou inconclusivo e Aluno foi reconhecido em três gravações do MINDS. O modo com pausas aplica a concordância em “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. [Verificação de Aluno](negativos.md#verificação-de-aluno-pela-posição-da-mão) · [Concordância com Cinco](regressao-area-livre.md#concordância-em-sequências-com-pausas)
+A prévia usa os pesos locais verificados. Em **Praticar com ajuda**, a etapa atual de M2 verifica o enquadramento da mão e dos ombros. Abra **Amarelo** para seguir o roteiro curto com o avatar. [Prática guiada mínima](roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Enquadramento e oclusão](roteiro-validacao.md#enquadramento-e-oclusão-na-prática)
+
+No pacote `dfb045b`, o recorte de queixo para teclado ficou inconclusivo e Aluno foi reconhecido em três gravações do MINDS. O modo com pausas aplicou a concordância em “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. [Verificação de Aluno](negativos.md#verificação-de-aluno-pela-posição-da-mão) · [Concordância com Cinco](regressao-area-livre.md#concordância-em-sequências-com-pausas)
 
 No pacote anterior `2a80645`, o Chromium percorreu as seis etapas da demonstração e exportou a ficha de teste com a soma do conjunto do alfabeto. As tentativas usaram gravações e a voz local concluiu a leitura do texto editado. Os logs locais são `roteiro-2a80645.log` e `ficha-2a80645.log`, em `data/evidence/demonstracao/`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
 

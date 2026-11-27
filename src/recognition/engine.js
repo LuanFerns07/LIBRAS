@@ -3,6 +3,7 @@ import ortWasm from 'onnxruntime-web/ort-wasm-simd-threaded.wasm?url'
 import ortModule from 'onnxruntime-web/ort-wasm-simd-threaded.mjs?url'
 import { checkAlunoPosition, decide, readModelManifest } from './decision.js'
 import { observePalm, observeVerticalTrajectory } from './feedback.js'
+import { frameForRecognition } from './framing.js'
 import { openHolistic } from './holistic.js'
 import { preprocessFrames } from './preprocess.js'
 import { segmentFrames } from './segmentation.js'
@@ -234,15 +235,19 @@ export async function openEngine() {
   let continuous
 
   function recognize(frames, onClassification) {
-    const processed = preprocessFrames(frames, manifest.preprocess)
+    const framing = frameForRecognition(frames)
+    const processed = preprocessFrames(framing.frames, manifest.preprocess)
+    if (processed.state !== 'ready' && framing.handWithShouldersOutside) {
+      return { state: 'inconclusive', reason: 'framing', message: 'Enquadre a mão e os dois ombros e repita o sinal.' }
+    }
     if (processed.state === 'no-hand') {
       return { state: 'inconclusive', reason: 'no-hand', message: 'Mostre a mão e os ombros no quadro para tentar de novo.' }
     }
     if (processed.state === 'insufficient') {
       return { state: 'inconclusive', reason: 'insufficient', message: 'Mostre a mão durante toda a tentativa e repita o sinal.' }
     }
-    const palm = observePalm(frames)
-    const trajectory = observeVerticalTrajectory(frames)
+    const palm = observePalm(framing.frames)
+    const trajectory = observeVerticalTrajectory(framing.frames)
     const input = new Tensor('float32', processed.values, [1, manifest.frames, manifest.features])
     const run = inference.then(async () => {
       onClassification?.()

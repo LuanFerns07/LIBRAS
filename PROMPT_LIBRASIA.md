@@ -8,11 +8,11 @@ Preserve o painel SVG do [README](README.md) na raiz do repositório e atualize 
 
 ## Objetivo e base de retomada
 
-Evolua a aplicação web para **demonstrar em um computador com webcam**. O objetivo é ensinar Libras com um **avatar 3D**, oferecer um **alfabeto manual navegável** e traduzir nos dois sentidos dentro da cobertura avaliada. Na lição, mantenha o avatar e a câmera lado a lado no desktop. Use dados públicos de Libras para treinar ou adaptar o reconhecimento e valide a demonstração primeiro no Chromium no Linux. Faça commits por entrega verificada e envie-os diretamente à `main` do remoto GitHub já autorizado.
+Evolua a aplicação web para **demonstrar em um computador com webcam**. O objetivo é ensinar Libras com um **avatar 3D**, oferecer um **alfabeto manual navegável** e traduzir nos dois sentidos dentro da cobertura avaliada. Na lição, mantenha o avatar e a câmera lado a lado no desktop. Use dados públicos de Libras para treinar ou adaptar o reconhecimento e valide a demonstração primeiro no Chromium no Linux. Agrupe os commits por marco ou meia etapa do roadmap e envie-os diretamente à `main` do remoto GitHub já autorizado.
 
 Nesta rodada, trabalhe apenas em M1 e M2. A entrega mínima é uma prática guiada com um sinal, avatar 3D e webcam no Chromium do Linux. Em M1, confira catálogo, licenças, partições e contratos. Em M2, verifique reconhecimento, dica específica, tentativa inconclusiva, falha de captura e retomada. Registre a origem de cada observação na ficha. [Abrir Praticar](http://127.0.0.1:4177/#praticar) · [Roteiro curto](docs/roteiro-validacao.md#prática-guiada-mínima-m1-e-m2) · [Referências e bases](docs/referencias.md)
 
-Use o pacote local `dfb045b` com o modelo combinado. O ensaio técnico com Amarelo usa gravação original, recorte com trajetória invertida e quadro sem mãos. A webcam física verifica o erro de permissão e a retomada com o avatar aberto. A execução e a correção intencional por pessoa sinalizante, a adequação da dica e os controles visuais na webcam continuam no aceite de M2. [Prévia e compilação](docs/previa-estavel.md) · [Ficha de validação](docs/validacao-ao-vivo.md)
+Use a prévia local da porta 4177 com o modelo combinado. O ensaio técnico com Amarelo usa gravação original, recorte com trajetória invertida, quadro sem mãos e recortes para testar oclusão e enquadramento. A webcam física verifica o erro de permissão e a retomada com o avatar aberto. A execução e a correção intencional por pessoa sinalizante, a adequação da dica e os controles visuais na webcam continuam no aceite de M2. [Prévia e compilação](docs/previa-estavel.md) · [Ficha de validação](docs/validacao-ao-vivo.md)
 
 A expansão, os ajustes finos do modelo e do alfabeto, a publicação na Vercel e a finalização do memorial ficam para outra rodada. O roadmap preserva os critérios e registros das demais etapas. [Prioridades atuais](ROADMAP_LIBRASIA.md#prioridades-da-retomada)
 
@@ -62,7 +62,7 @@ Mantenha o aplicativo gratuito e sem monetização. Apresente a seguinte mensage
 
 ## Organização dos agentes
 
-Concentre as mudanças na `main`. Implemente os itens do roadmap, rode os testes pertinentes e faça commit e push de cada entrega verificada. Siga o recorte de trabalho indicado nas prioridades da retomada.
+Concentre as mudanças na `main`. Reúna implementação, testes e atualização das evidências no commit de cada marco ou meia etapa verificada. Faça o push ao concluir esse conjunto. Siga o recorte de trabalho indicado nas prioridades da retomada.
 
 Quando a equipe pedir subagentes, use esforço Médio/Normal. O arquivo de configuração do projeto define `medium` como padrão. Informe a cada agente o marco, os arquivos e os critérios de aceite. Confira os resultados na prévia local antes de atualizar o roadmap e o painel. [Configuração do projeto](.codex/config.toml)
 
@@ -97,4 +97,4 @@ A sequência abaixo registra as dependências de implementação. Para a próxim
 - Classificador ONNX executado no navegador, com evidências de equivalência com o PyTorch, avaliação com pessoas sinalizantes fora do treino e validação das dicas separada da classificação.
 - Registros de arquitetura, método, testes e uso de IA generativa para embasar o memorial técnico quando essa entrega for retomada.
 
-Ao retomar, parta da versão local que funciona e dos itens abertos do roadmap. Registre comandos e resultados, atualize as evidências afetadas e faça commit e push a cada entrega verificada. Trate escolhas técnicas reversíveis no próprio trabalho e sinalize bloqueios concretos que dependam de acesso, autorização ou revisão especializada.
+Ao retomar, parta da versão local que funciona e dos itens abertos do roadmap. Registre os comandos e os resultados nos marcos ou meias etapas correspondentes. Trate escolhas técnicas reversíveis no próprio trabalho e sinalize bloqueios concretos que dependam de acesso, autorização ou revisão especializada.

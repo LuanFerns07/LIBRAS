@@ -82,7 +82,7 @@ O ensaio integrado percorre alfabeto, frase, nome, prática, transcrição com v
 
 Os procedimentos e os resultados da revisão técnica estão no roteiro de validação. O pacote local da demonstração inclui a ficha para sessões com participantes. [Roteiro e resultados](docs/roteiro-validacao.md) · [Abrir ficha local](http://127.0.0.1:4177/validacao/) · [Instruções da ficha](docs/validacao-ao-vivo.md)
 
-O desenvolvimento segue na `main`, com commits verificados e push no remoto do projeto. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
+O desenvolvimento segue na `main`. Os commits agrupam as mudanças verificadas de um marco ou meia etapa, com push no remoto do projeto. Vídeos, pesos pesados, documentos pessoais e credenciais ficam fora do Git.
 
 ## Atualizar o painel
 

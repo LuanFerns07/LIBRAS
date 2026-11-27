@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { checkAlunoPosition, decide, readModelManifest } from '../src/recognition/decision.js'
+import { frameForRecognition } from '../src/recognition/framing.js'
 import { featureCount, preprocessFrames, preprocessId, sequenceLength } from '../src/recognition/preprocess.js'
 import { segmentFrames, signingSpaceIntervals } from '../src/recognition/segmentation.js'
 
@@ -38,6 +39,24 @@ test('falta de evidência é explicitada e lacunas de tempo não repetem quadros
   assert.throws(() => preprocessFrames([makeFrame(0), makeFrame(0)]), /Quadro inválido/)
   const { values } = preprocessFrames([0, 100, 200, 300, 1600].map(timestamp => makeFrame(timestamp)))
   assert.ok(values.slice(10 * featureCount, 11 * featureCount).every(value => value === 0))
+})
+
+test('a captura preserva a amostragem e desconsidera ombros projetados fora do quadro', () => {
+  const input = Array.from({ length: 20 }, (_, index) => makeFrame(index * 100))
+  for (const frame of input.slice(4, -4)) frame.pose[11].y = 1.18
+  assert.equal(preprocessFrames(input).state, 'ready')
+
+  const framing = frameForRecognition(input)
+  assert.equal(framing.handWithShouldersOutside, true)
+  assert.equal(framing.frames[0], input[0])
+  assert.deepEqual(framing.frames.map(frame => frame.timestamp), input.map(frame => frame.timestamp))
+  assert.equal(framing.frames[4].rightHand.length, 0)
+  assert.equal(input[4].rightHand.length, 21)
+  assert.equal(preprocessFrames(framing.frames).state, 'insufficient')
+
+  const emptyCrop = makeFrame(0, { hand: false })
+  emptyCrop.pose[12].x = -.1
+  assert.equal(frameForRecognition([emptyCrop]).handWithShouldersOutside, false)
 })
 
 test('o classificador só aceita classes suportadas acima de confiança fixada', () => {

@@ -26,6 +26,26 @@ O avatar em WebGL e a webcam física ficaram lado a lado na janela de 1.280 × 9
 
 Para o aceite com pessoa sinalizante, registre a execução esperada e a correção intencional na webcam e peça a uma pessoa fluente em Libras que confira a dica. Na Área livre, registre a retirada e o retorno de uma mão, a oclusão e o alinhamento dos pontos ao redimensionar. Na coleta de M1, registre também repouso, movimento cotidiano e sinais fora do catálogo com pessoas independentes, incluindo chamadas ao classificador. [Ficha local](http://127.0.0.1:4177/validacao/) · [Como registrar](validacao-ao-vivo.md)
 
+### Enquadramento e oclusão na prática
+
+Em **Praticar com ajuda**, o pacote `dfb045b` aceitou Amarelo em uma gravação recortada acima dos ombros. Na inspeção do mesmo recorte, o Holistic detectou mão e atribuiu visibilidade aos dois ombros em seis quadros. As coordenadas verticais dos pontos fora da imagem ficaram entre 1,08 e 1,29, acima do limite numérico de 1.
+
+A aplicação passou a desconsiderar quadros com um dos ombros projetado fora da imagem, preservando o tempo da amostra. No reteste do recorte, mostrou **Tentativa inconclusiva** e pediu para enquadrar a mão e os dois ombros. Na gravação com uma máscara temporária sobre a trajetória da mão, pediu para mostrar a mão durante toda a tentativa. Cada caso fez zero chamadas ao classificador. A gravação original voltou a ser aceita, e a inversão da trajetória voltou a exibir a dica específica de Amarelo.
+
+Para repetir o recorte, use o vídeo de Amarelo S01-1 com o marcador verde já preparado. [Preparação da gravação](sinais-com-movimento-browser.md#reproduzir)
+
+~~~bash
+out=data/evidence/demonstracao/m1-m2-dfb045b
+mkdir -p "$out"
+ffmpeg -nostdin -i data/evidence/moving-sign-fixtures/amarelo-s01.y4m \
+  -vf 'crop=192:108:224:55,scale=640:360' -pix_fmt yuv420p "$out/amarelo-sem-ombros.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_TARGET=signal-amarelo LIBRASIA_EXPECT_REASON=framing LIBRASIA_EXPECT_CLASSIFIER_CALLS=0 \
+  LIBRASIA_TEST_VIDEO="$out/amarelo-sem-ombros.y4m" node --test tests/e2e/recognition.test.mjs
+~~~
+
+Para reproduzir a oclusão, substitua o filtro de vídeo por `drawbox=x=248:y=82:w=103:h=155:color=black:t=fill:enable='between(t,1.25,3.5)'`, gere `amarelo-mao-encoberta.y4m` e espere `insufficient`. Os logs do reteste estão na mesma pasta. O teste de enquadramento, oclusão e correção intencional com uma pessoa sinalizando na webcam segue no roteiro de aceite.
+
 ## Sequência principal
 
 Os resultados da sessão com participantes ficam nesta tabela. A execução automatizada, com as mesmas telas na ordem do roteiro, está registrada abaixo. [Roteiro integrado](#roteiro-integrado-em-uma-sessão-do-chromium)
