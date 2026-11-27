@@ -1,7 +1,7 @@
 import { env, InferenceSession, Tensor } from 'onnxruntime-web/wasm'
 import ortWasm from 'onnxruntime-web/ort-wasm-simd-threaded.wasm?url'
 import ortModule from 'onnxruntime-web/ort-wasm-simd-threaded.mjs?url'
-import { decide, readModelManifest } from './decision.js'
+import { checkAlunoPosition, decide, readModelManifest } from './decision.js'
 import { observePalm, observeVerticalTrajectory } from './feedback.js'
 import { openHolistic } from './holistic.js'
 import { preprocessFrames } from './preprocess.js'
@@ -247,7 +247,8 @@ export async function openEngine() {
     const run = inference.then(async () => {
       onClassification?.()
       const { logits } = await session.run({ landmarks: input })
-      return { ...decide(logits.data, manifest), palm, trajectory }
+      const result = checkAlunoPosition(decide(logits.data, manifest), processed.values, manifest)
+      return { ...result, palm, trajectory }
     })
     inference = run.catch(() => {})
     return run

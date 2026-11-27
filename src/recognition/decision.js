@@ -1,7 +1,12 @@
 import { recognitionCatalog } from '../catalog.js'
-import { preprocessFeatureCounts, sequenceLength } from './preprocess.js'
+import { featureCount, preprocessFeatureCounts, preprocessId, sequenceLength } from './preprocess.js'
 
 const signals = new Map(recognitionCatalog.map(({ text, id }) => [text, id]))
+const combinedModelSha256 = 'a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63'
+const alunoMinAbsX = Math.fround(.23)
+const alunoMinY = Math.fround(-.30)
+const alunoMaxY = .50
+const alunoMinFrames = 8
 
 export function readModelManifest(data) {
   const { labels, threshold, frames, features, inputName, outputName, preprocess, modelSha256 } = data
@@ -33,4 +38,20 @@ export function decide(logits, manifest) {
     return { state: 'inconclusive', reason: 'out-of-catalog', confidence, message: 'O sinal parece estar fora do catálogo. Tente um dos sinais disponíveis.' }
   }
   return { state: 'accepted', id: signals.get(label), confidence }
+}
+
+export function checkAlunoPosition(result, landmarks, manifest) {
+  if (result.id !== 'signal-aluno' || manifest.modelSha256 !== combinedModelSha256 ||
+      manifest.preprocess !== preprocessId || manifest.threshold !== .525) return result
+
+  // Cada mão começa no pulso e o ponto 9 é a base do dedo médio.
+  const nearShoulder = wrist => landmarks[wrist + 3] === 1 && landmarks[wrist + 9 * 4 + 3] === 1 &&
+    Math.abs(landmarks[wrist]) >= alunoMinAbsX &&
+    landmarks[wrist + 1] >= alunoMinY && landmarks[wrist + 1] <= alunoMaxY
+  let visible = 0
+  for (let offset = 0; offset < landmarks.length; offset += featureCount) {
+    if ((nearShoulder(offset + 6 * 4) || nearShoulder(offset + 27 * 4)) && ++visible >= alunoMinFrames) return result
+  }
+  return { state: 'inconclusive', reason: 'uncertain-aluno', confidence: result.confidence,
+    message: 'Repita o sinal com a mão e os ombros visíveis.' }
 }

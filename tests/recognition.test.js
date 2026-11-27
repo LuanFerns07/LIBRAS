@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { decide, readModelManifest } from '../src/recognition/decision.js'
+import { checkAlunoPosition, decide, readModelManifest } from '../src/recognition/decision.js'
 import { featureCount, preprocessFrames, preprocessId, sequenceLength } from '../src/recognition/preprocess.js'
 import { segmentFrames, signingSpaceIntervals } from '../src/recognition/segmentation.js'
 
@@ -74,4 +74,28 @@ test('a segmentação separa sinais com pausa, preserva sustentações e descart
   assert.equal(segmentFrames(Array.from({ length: 21 }, (_, index) => makeFrame(index * 100))).length, 1)
   const irregular = [...frames.slice(0, 6), makeFrame(575, { hand: false }), ...frames.slice(6)]
   assert.deepEqual(signingSpaceIntervals(irregular, 100), [{ startMs: 0, endMs: 575 }, { startMs: 1000, endMs: 1700 }])
+})
+
+test('Aluno exige oito quadros na região dos ombros para o combinado calibrado', () => {
+  const manifest = { modelSha256: 'a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63',
+    preprocess: preprocessId, threshold: .525 }
+  const values = new Float32Array(sequenceLength * featureCount)
+  const aluno = { state: 'accepted', id: 'signal-aluno', confidence: .9 }
+  const cinco = { state: 'accepted', id: 'signal-cinco', confidence: .9 }
+  function showHand(frame, joint, x, y) {
+    const wrist = frame * featureCount + joint * 4
+    values.set([x, y, 0, 1], wrist)
+    values[wrist + 9 * 4 + 3] = 1
+  }
+  for (let frame = 0; frame < 7; frame += 1) {
+    showHand(frame, 6, -.23, -.30)
+    showHand(frame, 27, .23, -.30)
+  }
+  showHand(7, 6, -.23, .6)
+  showHand(8, 27, .15, .2)
+  assert.equal(checkAlunoPosition(aluno, values, manifest).reason, 'uncertain-aluno')
+  assert.equal(checkAlunoPosition(cinco, values, manifest), cinco)
+  assert.equal(checkAlunoPosition(aluno, values, { ...manifest, threshold: .9 }), aluno)
+  showHand(7, 27, .23, .50)
+  assert.equal(checkAlunoPosition(aluno, values, manifest), aluno)
 })
