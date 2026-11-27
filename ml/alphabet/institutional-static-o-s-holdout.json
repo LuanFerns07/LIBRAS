@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "O com pouca abertura visível, de um sinalizante que não aparece nos recortes do Ifes e da Uníntese, e S com o polegar sobre os dedos. As duas gravações inteiras são reservadas à avaliação. Os intervalos foram marcados pelas imagens e pelos rótulos da fonte antes da extração.",
+  "sources": [
+    {
+      "id": "ifsc-ueslei-paterno",
+      "split": "test",
+      "title": "alfabeto_manual_Libras",
+      "project": "E-book Aprenda Libras em 5 Passos, referenciado no ambiente didático do IFSC",
+      "credits": {
+        "autor e sinalizante": "Uéslei Paterno",
+        "publicação": "Canal Uéslei Paterno"
+      },
+      "page": "https://www.youtube.com/watch?v=__fMtXL8knA",
+      "published": "2017-03-26",
+      "institutionalReference": "https://moodle4.ifsc.edu.br/mod/book/tool/print/index.php?id=274178#ch50538",
+      "file": "data/alphabet/independent/ifsc-download/ifsc-alfabeto.mp4",
+      "sha256": "356cddf6d13251d71a68e28d326e66b1cdd29ad6ba4d78e3ab6e6b3f04c7ee45",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=__fMtXL8knA&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação de Uéslei Paterno indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Na segunda sequência em ordem alfabética, a pose segue o N e precede o P. A legenda automática em português da própria publicação indica o O em 147560 ms e o P em 148760 ms. A letra não é impressa no quadro original.",
+      "captionSha256": "d61c591215fe51ae558d39d8dcac721571b8d9421c07eca42754fdc51f7805b6",
+      "windows": [
+        { "label": "O", "startMs": 147000, "endMs": 148000, "anchorMs": 147640 }
+      ]
+    },
+    {
+      "id": "unicentro-aniqxveqgns",
+      "split": "test",
+      "title": "[PED] Libras - Alfabeto Manual",
+      "project": "Pedagogia EaD, Núcleo de Educação a Distância da Universidade Estadual do Centro-Oeste",
+      "credits": {
+        "professora e sinalizante": "Eliziane Streiechen",
+        "produção": "Nead Audiovisual / Unicentro",
+        "direção, edição e finalização": "Daniel Luiz de Souza",
+        "intérprete de Libras nos créditos": "Ana Paula Silva"
+      },
+      "page": "https://www.youtube.com/watch?v=AnIqxVEqGNs",
+      "published": "2019-04-15",
+      "file": "data/alphabet/independent/unicentro-sequencia-download/unicentro-sequencia-alfabeto.mp4",
+      "sha256": "b6a5bc1dd2ec128857234cec36712b54f7fa11d669cbf24d7384544cde173cd1",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=AnIqxVEqGNs&hl=pt-BR",
+      "licenseEvidence": "O campo Licença da publicação do canal Nead Unicentro indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "S impresso em preto acompanhando a pose na imagem principal. A edição mostra também uma segunda vista da demonstração numa janela menor no canto inferior direito.",
+      "windows": [
+        { "label": "S", "startMs": 68340, "endMs": 69380, "anchorMs": 68740 }
+      ]
+    }
+  ]
+}
