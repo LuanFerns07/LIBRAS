@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-27",
+  "scope": "first-confirmation-without-retuning",
+  "confirmationSha256": "e56b0a51c70896e016bbf0f38f1004556154dba78127af3c8d2fbb321a949fa2",
+  "sources": {
+    "ufac-cardinais": {
+      "name": "Números cardinais — Libras — Ufac",
+      "publisher": "Universidade Federal do Acre, Centro de Educação, Letras e Artes e Niead",
+      "credits": "Professor Israel Queiroz de Lima, Cela/UFAC, curso Matemática EaD. Produção Núcleo de Interiorização e Educação a Distância (Niead/UFAC).",
+      "page": "https://www.youtube.com/watch?v=1i_v2a4xAhY",
+      "licensePage": "https://www.youtube.com/watch?v=1i_v2a4xAhY",
+      "licenseUrl": "https://support.google.com/youtube/answer/2797468?hl=pt-BR",
+      "license": "CC-BY",
+      "licenseNote": "O canal oficial marca a obra como Creative Commons Atribuição. A documentação atual da plataforma aponta CC BY 4.0.",
+      "referenceIndex": "https://educapes.capes.gov.br/bitstream/capes/600517/1/chegou%20um%20aluno%20surdo%20e%20agora.pdf",
+      "url": "https://www.youtube.com/watch?v=1i_v2a4xAhY",
+      "downloadFormat": "605",
+      "filename": "ufac-cardinais.mp4",
+      "sha256": "55f3d9a62dfadc7b3c26f41afb3d94dee998452887b7ec7cb4bcd02c296f4b76"
+    }
+  },
+  "selection": {
+    "method": "Marcação quadro a quadro comparando algarismo ou posição no exemplo de telefone com configuração da mão.",
+    "positiveRule": "Cinco estável e separado do numeral anterior e da saída da mão.",
+    "negativeRule": "Transições que não incluem Cinco, agrupadas pelo mesmo evento original.",
+    "shortDurationsMs": [
+      600,
+      1000,
+      1500
+    ]
+  },
+  "criterion": "Preservar todos os Cinco corretos do combinado e vetar todas as janelas falsamente aceitas de pelo menos uma transição da mesma sessão.",
+  "clips": [
+    {"id": "ufac-cinco-cardinal-longo", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": "cinco", "startMs": 91150, "durationMs": 2750, "cue": "O algarismo 5 e a ilustração aparecem ao lado da forma estabilizada de Cinco."},
+    {"id": "ufac-cinco-cardinal-central", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": "cinco", "startMs": 92000, "durationMs": 1300, "cue": "Parte central da mesma projeção de Cinco, com a configuração mantida."},
+    {"id": "ufac-cinco-telefone", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": "cinco", "startMs": 217880, "durationMs": 900, "cue": "O último algarismo do exemplo projetado é 5 e a configuração se mantém até a mão baixar."},
+    {"id": "ufac-didatico-seis-sete-3500", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-seis-sete", "sourceLabel": "Seis → pausa → Sete", "startMs": 100050, "durationMs": 3500, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-seis-sete-3200", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-seis-sete", "sourceLabel": "Seis → pausa → Sete", "startMs": 100250, "durationMs": 3200, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-sete-oito-3900", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-sete-oito", "sourceLabel": "Sete → pausa → Oito", "startMs": 106550, "durationMs": 3900, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-sete-oito-3400", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-sete-oito", "sourceLabel": "Sete → pausa → Oito", "startMs": 106900, "durationMs": 3400, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-sete-oito-3150", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-sete-oito", "sourceLabel": "Sete → pausa → Oito", "startMs": 107040, "durationMs": 3150, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-oito-nove-4250", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-oito-nove", "sourceLabel": "Oito → pausa → Nove", "startMs": 112170, "durationMs": 4250, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-didatico-nove-dez-3750", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "didatico-nove-dez", "sourceLabel": "Nove → pausa → Dez", "startMs": 118300, "durationMs": 3750, "cue": "A mão passa pelo peito entre os dois números demonstrados e identificados na tela."},
+    {"id": "ufac-telefone-um-oito-600", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-um-oito", "sourceLabel": "Um → Oito", "startMs": 212890, "durationMs": 600, "anchorMs": 213190, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-um-oito-1000", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-um-oito", "sourceLabel": "Um → Oito", "startMs": 212690, "durationMs": 1000, "anchorMs": 213190, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-um-oito-1500", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-um-oito", "sourceLabel": "Um → Oito", "startMs": 212440, "durationMs": 1500, "anchorMs": 213190, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-oito-sete-600", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-oito-sete", "sourceLabel": "Oito → Sete", "startMs": 214350, "durationMs": 600, "anchorMs": 214650, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-oito-sete-1000", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-oito-sete", "sourceLabel": "Oito → Sete", "startMs": 214150, "durationMs": 1000, "anchorMs": 214650, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-oito-sete-1500", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-oito-sete", "sourceLabel": "Oito → Sete", "startMs": 213900, "durationMs": 1500, "anchorMs": 214650, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-sete-tres-600", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-sete-tres", "sourceLabel": "Sete → Três", "startMs": 215680, "durationMs": 600, "anchorMs": 215980, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-sete-tres-1000", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-sete-tres", "sourceLabel": "Sete → Três", "startMs": 215480, "durationMs": 1000, "anchorMs": 215980, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."},
+    {"id": "ufac-telefone-sete-tres-1500", "source": "ufac-cardinais", "signer": 905, "session": "ufac-niead-cardinais-2019", "label": null, "stratum": "telefone-sete-tres", "sourceLabel": "Sete → Três", "startMs": 215230, "durationMs": 1500, "anchorMs": 215980, "cue": "A mudança contínua da mão acompanha dois algarismos adjacentes do exemplo projetado."}
+  ],
+  "models": {
+    "combined": {
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "threshold": 0.525
+    }
+  }
+}
