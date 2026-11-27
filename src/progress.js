@@ -1,12 +1,16 @@
-import { lesson } from './catalog.js'
+import { lesson, manualAlphabet } from './catalog.js'
 
-const storageKey = 'librasia:progress:v1'
+const curricula = {
+  signal: { items: lesson, storageKey: 'librasia:progress:v1' },
+  letter: { items: manualAlphabet, storageKey: 'librasia:alphabet-progress:v1' },
+}
 const count = value => Number.isSafeInteger(value) && value >= 0 ? value : 0
 
-export function readProgress(storage) {
+export function readProgress(storage, kind = 'signal') {
+  const { items, storageKey } = curricula[kind]
   let stored
   try { stored = JSON.parse(storage?.getItem(storageKey)) } catch {}
-  return Object.fromEntries(lesson.map(({ id }) => {
+  return Object.fromEntries(items.map(({ id }) => {
     const entry = stored?.[id]
     return [id, {
       observed: entry?.observed === true,
@@ -21,8 +25,8 @@ export function readProgress(storage) {
   }))
 }
 
-export function writeProgress(storage, progress) {
-  try { storage?.setItem(storageKey, JSON.stringify(progress)) } catch {}
+export function writeProgress(storage, progress, kind = 'signal') {
+  try { storage?.setItem(curricula[kind].storageKey, JSON.stringify(progress)) } catch {}
 }
 
 export function markAttempt(entry, step, result) {
@@ -39,16 +43,17 @@ export function markAttempt(entry, step, result) {
   }
 }
 
-export function isComplete(entry) {
-  return entry.observed && entry.guided && entry.independent && entry.understood
+export function isComplete(entry, kind = 'signal') {
+  return entry.observed && entry.guided && entry.independent && (kind === 'letter' || entry.understood)
 }
 
-export function reviewOrder(progress) {
-  return [...lesson].sort((left, right) => {
+export function reviewOrder(progress, kind = 'signal') {
+  return [...curricula[kind].items].sort((left, right) => {
     const a = progress[left.id]
     const b = progress[right.id]
     return b.retryStreak - a.retryStreak ||
-      Number(isComplete(a)) - Number(isComplete(b)) ||
+      (kind === 'letter' ? Number(a.observed) - Number(b.observed) : 0) ||
+      Number(isComplete(a, kind)) - Number(isComplete(b, kind)) ||
       a.accepted - b.accepted
   })
 }

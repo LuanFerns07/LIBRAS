@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { lesson } from '../src/catalog.js'
-import { markAttempt, readProgress, reviewOrder, writeProgress } from '../src/progress.js'
+import { lesson, manualAlphabet } from '../src/catalog.js'
+import { isComplete, markAttempt, readProgress, reviewOrder, writeProgress } from '../src/progress.js'
 import { appendTranscription, freeFeedback, observePalm, observeVerticalTrajectory, practiceFeedback } from '../src/recognition/feedback.js'
 import { brazilianVoice, mountSpeech } from '../src/speech.js'
+import { letterPracticeFeedback } from '../src/views/practice.js'
 
 const acceptedCinco = { state: 'accepted', id: 'signal-cinco', palm: 'front' }
 const inconclusive = { state: 'inconclusive', message: 'Pouca evidência.' }
@@ -117,4 +118,42 @@ test('a revisão prioriza tentativas pendentes e atualiza a sugestão após acer
   assert.equal(reviewOrder(progress)[0], espelho)
   markAttempt(progress[espelho.id], 1, { state: 'accepted' })
   assert.equal(reviewOrder(progress)[0], cinco)
+})
+
+test('a prática de letras só aceita uma leitura do modelo compatível com o alvo', () => {
+  const [a, b] = manualAlphabet
+  const reading = { state: 'accepted', id: a.id, text: a.label, confidence: .96 }
+  const accepted = letterPracticeFeedback(reading, a, ['A', 'B'])
+  assert.equal(accepted.state, 'accepted')
+  assert.equal(accepted.id, a.id)
+  assert.equal(accepted.confidence, reading.confidence)
+  const mismatch = letterPracticeFeedback(reading, b, ['A', 'B'])
+  assert.equal(mismatch.state, 'inconclusive')
+  assert.match(mismatch.message, /indicou A/u)
+  assert.deepEqual(letterPracticeFeedback(inconclusive, a, ['A']), inconclusive)
+  const unsupported = letterPracticeFeedback(reading, a, [])
+  assert.equal(unsupported.state, 'unavailable')
+  assert.match(unsupported.message, /avatar/u)
+  const entry = readProgress(undefined, 'letter')[a.id]
+  markAttempt(entry, 1, unsupported)
+  assert.equal(entry.accepted + entry.retries, 0)
+})
+
+test('A a Z e Ç progridem e entram em revisão sem alterar o progresso antigo de sinais', () => {
+  const entries = new Map([['librasia:progress:v1', JSON.stringify({ 'signal-cinco': { accepted: 4, guided: true } })]])
+  const storage = { getItem: key => entries.get(key), setItem: (key, value) => entries.set(key, value) }
+  const signals = readProgress(storage)
+  const letters = readProgress(storage, 'letter')
+  assert.deepEqual(manualAlphabet.map(letter => letter.label), Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÇ'))
+  assert.deepEqual(Object.keys(letters), manualAlphabet.map(letter => letter.id))
+
+  const letterA = letters['letter-a']
+  letterA.observed = true
+  assert.equal(reviewOrder(letters, 'letter')[0].id, 'letter-b')
+  markAttempt(letterA, 1, { state: 'accepted' })
+  markAttempt(letterA, 2, { state: 'accepted' })
+  assert.equal(isComplete(letterA, 'letter'), true)
+  writeProgress(storage, letters, 'letter')
+  assert.deepEqual(readProgress(storage, 'letter'), letters)
+  assert.deepEqual(readProgress(storage), signals)
 })

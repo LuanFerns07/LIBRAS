@@ -5,6 +5,7 @@ const alphabetSource = 'https://clubedelibras.ufc.br/wp-content/uploads/2021/04/
 
 export const alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ', label => ({
   id: `letter-${label.toLowerCase()}`,
+  kind: 'letter',
   label,
   text: label,
   version: catalogVersion,
@@ -14,12 +15,15 @@ export const alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ', label => ({
 
 export const cedilla = {
   id: 'letter-ç',
+  kind: 'letter',
   label: 'Ç',
   text: 'Ç',
   version: catalogVersion,
   reference: alphabetSource,
   review: 'pending',
 }
+
+export const manualAlphabet = [...alphabet, cedilla]
 
 export const lesson = [
   {
@@ -51,6 +55,7 @@ export const lesson = [
   },
 ].map(entry => ({
   ...entry,
+  kind: 'signal',
   version: catalogVersion,
   reference: thesis,
   review: 'pending',
