@@ -6,7 +6,7 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
 
 1. Inicie o pacote local da demonstração e abra a Área livre em uma janela do Chromium. [Abrir Área livre](http://127.0.0.1:4177/#area-livre) · [Executar o pacote](previa-estavel.md#demonstração-atual-no-pc)
 2. Abra a ficha de validação em uma segunda janela. Coloque as duas lado a lado para manter a aba do aplicativo visível, pois o LibrasIA encerra a captura quando a aba é ocultada. Use a webcam e o botão **Ouvir** na janela do LibrasIA. [Abrir a ficha local](http://127.0.0.1:4177/validacao/)
-3. Na ficha, clique em **Preencher versão do pacote**. O código da compilação identifica também a revisão do avatar. O pacote preenche a versão do catálogo e os hashes dos dois arquivos do modelo. Informe o ambiente observado e o consentimento da pessoa participante.
+3. Na ficha, clique em **Preencher versão do pacote**. O código da compilação identifica também a revisão do avatar. O pacote preenche a versão do catálogo, as somas do modelo de sinais e a soma do conjunto de modelos do alfabeto quando ele estiver instalado. Informe o ambiente observado e o consentimento da pessoa participante.
 4. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
 
 Para usar a ficha com um checkout de desenvolvimento ou pacote anterior, execute `python3 -m http.server 4174 --bind 127.0.0.1 --directory qa` na raiz e preencha os dados da compilação manualmente. As duas somas identificam mudanças de limiar que preservem os mesmos pesos. Ajuste a porta conforme a prévia.
@@ -15,6 +15,14 @@ Para usar a ficha com um checkout de desenvolvimento ou pacote anterior, execute
 curl -fsS http://127.0.0.1:4177/commit.txt
 curl -fsS http://127.0.0.1:4177/models/isolated.onnx | sha256sum
 curl -fsS http://127.0.0.1:4177/models/isolated.json | sha256sum
+~~~
+
+Para conferir a soma do alfabeto manualmente, entre na pasta `site/models` do pacote e execute o comando abaixo. Ele inclui os pesos ONNX, os complementos e os manifestos de leitura estática e em movimento. Se o pacote não tiver o alfabeto, deixe esse campo vazio.
+
+~~~bash
+LC_ALL=C find . -maxdepth 1 -type f -name 'alphabet*' -printf '%f\n' |
+  LC_ALL=C awk '/^alphabet(-[a-z-]+)?\.(json|onnx)$/' |
+  LC_ALL=C sort | xargs -r sha256sum -- | sha256sum
 ~~~
 
 Se iniciou a aplicação diretamente de um checkout, registre o resultado de `git rev-parse HEAD` na hora de compilar. A prévia empacotada serve o commit da compilação em `/commit.txt`.
@@ -68,7 +76,7 @@ Use o manifesto exato da sessão e passe os JSONs exportados no mesmo comando. U
   --out data/evidence/resumo-ao-vivo.json data/evidence/librasia-validacao-S*.json
 ~~~
 
-O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. Em `classifierReachByCondition`, cada cenário da Área livre com referência definida tem contagens de tentativas que chegaram ao classificador (`reached`), pararam antes dele (`notReached`) e ficaram sem medição (`unobserved`). As fichas anteriores entram nesta última contagem. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
+O resumo mostra a matriz de resultados na área livre, as rejeições por tipo de negativo, os pareceres das dicas guiadas e os tempos instrumentados por ambiente e fluxo. As fichas são agrupadas pelo commit, catálogo, avatar e, quando registrado, pelo conjunto do alfabeto. Em `classifierReachByCondition`, cada cenário da Área livre com referência definida tem contagens de tentativas que chegaram ao classificador (`reached`), pararam antes dele (`notReached`) e ficaram sem medição (`unobserved`). As fichas anteriores entram nesta última contagem. Entram nas métricas as fichas com consentimento, pessoa fora do treino e revisão independente por alguém fluente em Libras. Inspeções de permissão, interrupção de câmera e tentativas sem referência definida têm sua própria contagem. Sem amostras de todos os sinais do manifesto, o F1 macro fica vazio. A equipe ainda confere os resultados com o protocolo e o roteiro da demonstração.
 
 Em `timingByEnvironment`, cada fluxo mostra contagem, mediana e p95 para o tempo de decisão, o carregamento inicial (`initialLoad`) e a extração (`extraction`). Cada tentativa contribui com no máximo uma medida de decisão e uma de carregamento. As contagens de extração correspondem aos quadros processados. Fichas com apenas latência continuam contribuindo para o resumo do tempo de decisão.
 
@@ -90,6 +98,10 @@ Os relatórios individuais ficam em `data/evidence/demonstracao/classificador-38
 ## Verificação da importação dos tempos
 
 No pacote `04353d3`, o Chromium capturou um vídeo preto e registrou uma decisão manual, uma medição de carga inicial, 40 tempos de extração e zero chamadas ao classificador. A ficha local aceitou o JSON obtido da tentativa e exportou os valores. A execução do analisador com uma ficha de teste confirmou as contagens e a mediana e p95 por medida. Os registros locais são `tempos-04353d3-sem-maos.json`, `ficha-tempos-04353d3.log` e `fixture-resumo-tempos-04353d3.json`, em `data/evidence/demonstracao/`. [Teste no Chromium](../tests/e2e/validation.test.mjs) · [Teste do analisador](../ml/tests/test_live_review.py)
+
+## Verificação da versão do alfabeto
+
+No pacote `ff7969b`, o Chromium preencheu a soma `bb9dc0a25603249bfebb77ae5d1e2782a1772d213989d26a2e3d639c1357c6ef` e a preservou no JSON baixado. O teste recalculou a soma a partir dos dez arquivos servidos do alfabeto e verificou que as requisições da ficha ficaram no servidor local. O analisador manteve em grupos distintos as fichas com diferentes conjuntos de alfabeto e as fichas anteriores sem esse campo. O log fica em `data/evidence/demonstracao/ficha-alfabeto-ff7969b.log`. [Teste da ficha](../tests/e2e/validation.test.mjs) · [Teste do analisador](../ml/tests/test_live_review.py)
 
 ## Teste da lógica
 

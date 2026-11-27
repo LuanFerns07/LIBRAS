@@ -5,6 +5,7 @@ import { withChromium } from './chromium.mjs'
 const appUrl = process.env.LIBRASIA_TEST_URL
 const videoFile = process.env.LIBRASIA_TEST_LETTER_VIDEO
 const transitionVideo = process.env.LIBRASIA_TEST_M_N_VIDEO
+const sequenceVideo = process.env.LIBRASIA_TEST_M_N_U_VIDEO
 const letter = process.env.LIBRASIA_TEST_EXPECT_LETTER || 'B'
 const forbidden = process.env.LIBRASIA_TEST_FORBIDDEN_LETTER
 const testPractice = letter === 'B' || process.env.LIBRASIA_TEST_ALPHABET_PRACTICE === '1'
@@ -82,39 +83,65 @@ test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra
   }, { videoFile })
 })
 
+async function observeTransitions(view, videoFile, until) {
+  const url = new URL('/#' + view, appUrl)
+  assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
+  return withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
+    await navigate(url.href)
+    await permission(url.origin, 'granted')
+    await evaluate(`(() => {
+      const mode = document.querySelector('[data-free-mode], [data-practice-mode]')
+      mode.value = 'letter'
+      mode.dispatchEvent(new Event('change'))
+      document.querySelector('[data-stage="1"]')?.click()
+      const video = document.querySelector('video')
+      const output = document.querySelector('[data-live-character]')
+      window.transitionReadings = []
+      video.addEventListener('loadedmetadata', () => {
+        window.transitionTrack = video.srcObject.getVideoTracks()[0]
+      }, { once: true })
+      new MutationObserver(() => {
+        window.transitionReadings.push({ letter: output.textContent, at: video.currentTime })
+      }).observe(output, { childList: true })
+      document.querySelector('[data-camera-toggle]').click()
+    })()`, true)
+    await waitUntil(`document.querySelector("video").currentTime >= ${until}`, 20000)
+    const { readings, sameTrack } = await evaluate(`(() => {
+      const [track] = document.querySelector('video').srcObject.getVideoTracks()
+      return {
+        readings: window.transitionReadings,
+        sameTrack: window.transitionTrack === track && track.readyState === 'live',
+      }
+    })()`)
+    assert.equal(sameTrack, true, view)
+    return readings
+  }, { videoFile })
+}
+
 test('a leitura acompanha a troca de M para N na mesma captura nos dois modos', {
   skip: !appUrl || !transitionVideo,
   timeout: 55_000,
 }, async () => {
   for (const view of ['area-livre', 'praticar']) {
-    const url = new URL('/#' + view, appUrl)
-    assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
-    await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
-      await navigate(url.href)
-      await permission(url.origin, 'granted')
-      await evaluate(`(() => {
-        const mode = document.querySelector('[data-free-mode], [data-practice-mode]')
-        mode.value = 'letter'
-        mode.dispatchEvent(new Event('change'))
-        document.querySelector('[data-stage="1"]')?.click()
-        const video = document.querySelector('video')
-        const output = document.querySelector('[data-live-character]')
-        window.transitionReadings = []
-        new MutationObserver(() => {
-          window.transitionTrack ??= video.srcObject?.getVideoTracks()[0]
-          window.transitionReadings.push(output.textContent)
-        }).observe(output, { childList: true })
-        document.querySelector('[data-camera-toggle]').click()
-      })()`, true)
-      // O clipe tem 2 s de margem inicial, 3,51 s de captura e 2 s de margem final.
-      await waitUntil('document.querySelector("video").currentTime >= 6.2', 15000)
-      assert.deepEqual(await evaluate(`(() => {
-        const [track] = document.querySelector('video').srcObject.getVideoTracks()
-        return {
-          readings: window.transitionReadings,
-          sameTrack: window.transitionTrack === track && track.readyState === 'live',
-        }
-      })()`), { readings: ['M', '—', 'N', '—'], sameTrack: true }, view)
-    }, { videoFile: transitionVideo })
+    const readings = await observeTransitions(view, transitionVideo, 6.2)
+    assert.deepEqual(readings.map(({ letter }) => letter), ['M', '—', 'N', '—'], view)
+  }
+})
+
+test('a mesma trilha mostra M, N sustentado e U na Área livre e em Praticar', {
+  skip: !appUrl || !sequenceVideo,
+  timeout: 55_000,
+}, async context => {
+  for (const view of ['area-livre', 'praticar']) {
+    const readings = await observeTransitions(view, sequenceVideo, 12)
+    context.diagnostic(view + ' ' + JSON.stringify(readings.map(({ letter, at }) => ({ letter, at: +at.toFixed(3) }))))
+    assert.deepEqual(readings.map(({ letter }) => letter), ['M', '—', 'N', '—', 'U', '—'], view)
+    const [, , n, clearN, u, clearU] = readings
+    // A pose pode ser reconhecida antes de o rótulo impresso de N estabilizar.
+    const nWithinWindow = Math.min(clearN.at, 7.706) - Math.max(n.at, 5.504)
+    assert.ok(nWithinWindow >= .5, view + ' N sustentado')
+    assert.ok(clearN.at >= 7.4 && clearN.at <= 8.1, view + ' perde a leitura no fim de N')
+    assert.ok(u.at >= 8.506 && u.at < 11.109, view + ' U')
+    assert.ok(clearU.at <= 11.6, view + ' perde a leitura no fim de U')
   }
 })

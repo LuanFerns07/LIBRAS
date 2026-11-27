@@ -214,6 +214,24 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177/ \
   node --test tests/e2e/alphabet-live.test.mjs
 ```
 
+### M → N → U nos dois modos de câmera
+
+Na prévia `ff7969b`, o Chromium reproduziu as demonstrações de M, N e U de Thiago Cardoso Alves em uma única trilha por tela, sem iniciar tentativa. O vídeo preserva a transição original de M para N e acrescenta a tomada de U depois de uma margem preta. O painel mostrou M → vazio → N → vazio → U → vazio em Área livre e em Praticar. N ficou visível por 3,05 s e 3,04 s, respectivamente. Também passou o controle anterior de M → N da Unesp nos dois modos. A reprodução usa gravações, e a execução com uma pessoa na webcam física segue pendente. [Rótulos e créditos do NUEDIS/UFF](../ml/alphabet/uff-alfabeto-continuo.json) · [Teste no Chromium](../tests/e2e/alphabet-live.test.mjs)
+
+Com a fonte indicada no manifesto e a prévia aberta, prepare e reproduza o mesmo cenário.
+
+~~~bash
+destino=data/evidence/alphabet-n-m-u
+mkdir -p "$destino"
+ffmpeg -nostdin -i data/alphabet/independent/uff-2025-download/uff-2025-alfabeto.mp4 \
+  -filter_complex '[0:v]trim=start=49.249:end=54.955,setpts=PTS-STARTPTS,scale=640:360,fps=30,tpad=start_duration=2:stop_duration=0.8:color=black[mn];[0:v]trim=start=80.180:end=82.783,setpts=PTS-STARTPTS,scale=640:360,fps=30,tpad=stop_duration=1.5:color=black[u];[mn][u]concat=n=2:v=1:a=0[v]' \
+  -map '[v]' -pix_fmt yuv420p "$destino/uff-m-n-u.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_M_N_U_VIDEO="$destino/uff-m-n-u.y4m" \
+  node --test tests/e2e/alphabet-live.test.mjs
+~~~
+
+O Y4M do ensaio tem SHA-256 `7e001e7e977b14dbc8f967656cfbeebd1db1be223e57f17317df4307ff1ec01f`. As mudanças e os tempos ficaram no log local `data/evidence/demonstracao/alfabeto-mnu-ff7969b.log`.
+
 ### M, N, U e Q em duas gravações reservadas
 
 As janelas de Tel baixinha e da Unicentro foram fixadas no commit `560593b` antes da inferência. As fontes inteiras ficaram fora do ajuste do classificador. A Área livre mostrou M nos três recortes e N nos dois. No N de Tel baixinha, os dois modelos estáticos concordaram nos 21 quadros amostrados. No N da Unicentro, a rede principal preferiu N em 17 dos 18 quadros selecionáveis e o verificador preferiu M em oito. A concordância com os limiares confirmou oito quadros de N. [Manifesto](../ml/alphabet/independent-m-n-u-q-windows.json) · [Replay em Chromium](../ml/evidence/alphabet-m-n-u-q/replay-5b2d4c4.json) · [Votos por recorte](../ml/evidence/alphabet-m-n-u-q/diagnostico-estatico.json)
