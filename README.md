@@ -28,6 +28,8 @@ No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto
 
 A demonstração no PC de referência usa o modelo combinado de sinais e os pesos do alfabeto integrados. O servidor local abre a Área livre na porta 4177. Em **Conteúdo**, mantenha **Sinais** para transcrever tentativas ou selecione **Alfabeto** para a leitura de letras ao vivo. [Abrir a prévia no PC de referência](http://127.0.0.1:4177/#area-livre) · [Resultados e limites da demonstração](docs/roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
 
+O pacote da demonstração inclui a compilação e os modelos. Ele pode ser verificado e executado localmente com Python 3. [Comandos de execução e recompilação](docs/previa-estavel.md#demonstração-atual-no-pc)
+
 O modo de sinalização contínua tem ativação opcional com modelos locais e permanece em avaliação. [Executar o fluxo experimental](docs/sinalizacao-continua.md#fluxo-contínuo-experimental-na-câmera)
 
 ### Desenvolvimento

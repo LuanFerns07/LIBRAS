@@ -102,6 +102,11 @@ if [[ -n "$pacote" ]]; then
   cp -a "$previa/dist" "$pacote/site"
   cp scripts/servir-previa.py "$pacote/iniciar.py"
   cp vercel.json "$pacote/vercel.json"
+  (
+    cd -- "$pacote"
+    { printf '%s\0' iniciar.py vercel.json; find site -type f -print0; } |
+      LC_ALL=C sort -z | xargs -0 sha256sum -- > SHA256SUMS
+  )
   trap 'rm -rf -- "$previa"' EXIT
   printf 'Pacote pronto em %s. Abra com python3 %s/iniciar.py.\n' "$pacote" "$pacote"
   exit

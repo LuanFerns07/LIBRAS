@@ -10,7 +10,26 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote serve apenas o endereço local e registra o código compilado em `site/commit.txt`. [Roteiro e resultados](roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
+O pacote serve apenas o endereço local e registra o código compilado em `site/commit.txt`. A inicialização confere o arquivo `SHA256SUMS`. Para verificar a cópia sem abrir a porta, execute `python3 data/releases/librasia-demonstracao/iniciar.py --verificar`. Em cópias mais antigas, gere um novo pacote para obter o arquivo de verificação. [Roteiro e resultados](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
+
+### Recompilar com os modelos verificados
+
+Em um checkout limpo da `main`, use a pasta `models` de uma cópia local da demonstração. As somas versionadas identificam o modelo combinado, o alfabeto, os complementos e os manifestos de decisão usados no roteiro. Ajuste `origem` se os arquivos estiverem fora do checkout.
+
+~~~bash
+projeto="$PWD"
+origem="$projeto/data/releases/librasia-demonstracao/site"
+destino="$projeto/data/releases/librasia-demonstracao-recompilada"
+(
+  cd "$origem/models"
+  sha256sum --check --strict "$projeto/ml/evidence/demonstracao-modelos.sha256"
+) &&
+LIBRASIA_MODELO="$origem/models" LIBRASIA_ALFABETO_MODELO="$origem/models" \
+  LIBRASIA_ALFABETO_MOVIMENTO="$origem/models" ./scripts/executar-local.sh --pacote "$destino" &&
+python3 "$destino/iniciar.py" --verificar
+~~~
+
+O empacotador instala as dependências e busca as versões fixadas do MediaPipe quando necessário. Para reutilizar as cópias locais dos dois extratores, acrescente `LIBRASIA_HOLISTIC_FILE="$origem/runtime/holistic_landmarker.task"` e `LIBRASIA_HAND_FILE="$origem/runtime/hand_landmarker.task"` ao comando de compilação. Os pesos do classificador ficam na cópia local, e o Git guarda as somas. [Somas dos modelos](../ml/evidence/demonstracao-modelos.sha256) · [Treinamento e exportação](avaliacao.md)
 
 ## Pontos das mãos ao vivo
 
