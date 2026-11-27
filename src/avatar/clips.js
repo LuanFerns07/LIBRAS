@@ -1,4 +1,4 @@
-export const ANIMATION_VERSION = '0.2.0-preliminar';
+export const ANIMATION_VERSION = '0.2.1-preliminar';
 
 // Cada dedo usa graus: flexão da base, articulação média, distal e abertura lateral.
 const straight = [2, 3, 2, 0];
@@ -67,6 +67,7 @@ const five = fingers(
 const letterWrist = [-0.63, 1.61, 0.48];
 const front = [0, 0, 0];
 const down = [47, 0, 180];
+const downWithDorsumForward = [22, 180, 180];
 
 function pose(digits, wrist = letterWrist, rotation = front, bilateral = false) {
   const body = { digits, wrist, rotation };
@@ -128,8 +129,8 @@ export const clips = {
     [1, pose(h, [-0.61, 1.69, 0.49], [0, 3, -5])],
   ]),
   'letter-l': hold(pose(l)),
-  'letter-m': hold(pose(m, [-0.63, 1.9, 0.61], down)),
-  'letter-n': hold(pose(n, [-0.63, 1.9, 0.61], down)),
+  'letter-m': hold(pose(m, [-0.63, 1.9, 0.61], downWithDorsumForward)),
+  'letter-n': hold(pose(n, [-0.63, 1.9, 0.61], downWithDorsumForward)),
   'letter-o': hold(pose(o, letterWrist, [0, 64, 0])),
   'letter-p': motion(0.97, [
     [0, pose(h, letterWrist, [-13, 3, 56])],

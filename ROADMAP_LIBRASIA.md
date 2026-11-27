@@ -92,7 +92,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Exibir a letra detectada ao lado da webcam na Prática e na Área livre, sem iniciar tentativa. Verificar B, Ç e Y com gravação rotulada no Chromium. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
 - [x] Adicionar H, J, K, X e Z ao reconhecimento ao vivo e revisar a leitura de Ç. Testar essas seis letras no Chromium com vídeos rotulados. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
 - [x] Triar a dificuldade relatada com N. Reproduzir N, M e U com os recortes da UFSM e comparar as poses do avatar com a referência. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
-- [ ] Melhorar a legibilidade do N no avatar e preservar as diferenças em relação a M e U. Conferir indicador e médio voltados para baixo e a distinção visual em vista frontal. Retestar a letra isolada, um nome com N repetido e a leitura ao vivo de N/M/U em gravações adicionais e na webcam.
+- [x] Melhorar a legibilidade de M e N no avatar. Conferir dois dedos para baixo em N, três em M e dois para cima em U. Testar a vista frontal no Chromium e a soletração de “Anna”. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n)
+- [ ] Retestar N, M e U em gravações adicionais fora do ajuste e na webcam. Registrar a letra exibida ou a ausência de leitura e se a pose do avatar ajuda a distinguir as três letras.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)

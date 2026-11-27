@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { Box3 } from 'three';
+import { Box3, Euler, Vector3 } from 'three';
 import { clips, interpolatePose, leftRest, neutralPose, sampleClip } from '../src/avatar/clips.js';
 import { createPlayback } from '../src/avatar/playback.js';
 import { AVATAR_FRAME } from '../src/avatar/player.js';
@@ -40,6 +40,20 @@ test('as formas manuais permanecem distintas em pares próximos', () => {
     assert.deepEqual(get(a).digits, get(b).digits, a + b);
     assert.notDeepEqual(get(a).rotation, get(b).rotation, a + b);
   }
+});
+
+test('M e N deixam os dedos voltados para baixo à frente do pulso', () => {
+  const [m, n] = ['m', 'n'].map((letter) => sampleClip(clips[`letter-${letter}`], 0));
+  for (const { rotation } of [m, n]) {
+    const [pitch, yaw, roll] = rotation.map((degrees) => degrees * Math.PI / 180);
+    const wrist = new Euler(pitch, yaw, roll, 'YXZ');
+    const fingers = new Vector3(0, 1, 0).applyEuler(wrist);
+    const dorsum = new Vector3(0, 0, -1).applyEuler(wrist);
+    assert.ok(fingers.y < -0.8 && fingers.z > 0.2);
+    assert.ok(dorsum.z > 0.8);
+  }
+  assert.deepEqual(m.digits.slice(1, 3), n.digits.slice(1, 3));
+  assert.ok(m.digits[3][0] < 15 && n.digits[3][0] > 45);
 });
 
 test('todos os quadros amostrados produzem articulações e coordenadas finitas', () => {
