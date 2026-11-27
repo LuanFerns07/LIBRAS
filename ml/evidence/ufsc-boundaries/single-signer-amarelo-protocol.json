@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "cederjProtocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "cederjDiagnosisSha256": "6e920a498b21149537d4184c3d5a2dcb07b1f00b52fcf9925db65baa614517e5",
+  "selection": "Atuação didática frontal de uma pessoa por quadro. Janelas baseadas em inspeção visual a 10 fps e rótulo institucional. Tratamos apenas Amarelo como glosa de referência do catálogo. As fronteiras aproximadas e a decomposição de Febre amarela aguardam revisão fluente.",
+  "measures": [
+    "Cobertura de mãos e ombros, preparo do tensor, escore e decisão nas janelas manuais, mantendo a grade de 100 ms, o modelo e o limiar de 0,525 do Cederj.",
+    "Propostas das quatro condições de segmentação do Cederj sobre os mesmos quadros, incluindo o melhor IoU e o melhor IoU com rótulo Amarelo. O corpus contém só uma classe de referência."
+  ],
+  "cases": [
+    {
+      "id": "biocinais_reciclagem",
+      "coverage": "Amarelo sinalizado antes de Metal no item didático de associação de lixeiras, com o mesmo corpo continuamente no quadro.",
+      "source": {
+        "institution": "Universidade Federal Fluminense · BioCiNAIS · CEAD/NUEDIS",
+        "sourcePage": "https://educapes.capes.gov.br/handle/capes/431171?mode=full",
+        "credit": "Tatiane Militão, Saulo Cabral Bourguignon, Helena Carla Castro, Gildete Amorim Mendes Francisco e equipe do BioCiNAIS UFF. A atribuição é da obra, pois os créditos não individualizam a sinalização do recorte.",
+        "license": "A cartela do MP4 declara CC BY-NC-SA, sem número de versão. O registro de catálogo indica CC BY 3.0 BR. O uso preserva as condições da cartela.",
+        "title": "Biociências em Sinais: Biodegradação, cores da reciclagem",
+        "mediaPath": "data/continuous-natural-eval/single-signer/biocinais-unidade02.mp4",
+        "mediaSha256": "b46196c9d39fe234d652928f589e11029cfe26da47697e2d11b0fc9bc3bf1aa6",
+        "mediaUrl": "https://educapes.capes.gov.br/bitstream/capes/431171/2/Unidade%2002%20-%20Bioci%C3%AAncias%20em%20sinais%3A%20Biodegrada%C3%A7%C3%A3o"
+      },
+      "clip": {
+        "startMs": 140000,
+        "endMs": 146500
+      },
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 142000,
+          "endMs": 142900,
+          "cue": "Indicador junto à testa, descendo perto do nariz antes da mudança da configuração dominante para o sinal seguinte."
+        }
+      ],
+      "context": [
+        {
+          "id": "metal_e_transicao",
+          "label": "Contexto legendado Amarelo: metal, após a articulação de Amarelo",
+          "startMs": 142900,
+          "endMs": 145500
+        }
+      ]
+    },
+    {
+      "id": "biocinais_febre",
+      "coverage": "Componente semelhante a Amarelo, dentro da expressão didática Febre amarela, após a palma aberta da articulação de Febre, com transição na mesma tomada.",
+      "source": {
+        "institution": "Universidade Federal Fluminense · BioCiNAIS · CEAD/NUEDIS",
+        "sourcePage": "https://educapes.capes.gov.br/handle/capes/431171?mode=full",
+        "credit": "Tatiane Militão, Saulo Cabral Bourguignon, Helena Carla Castro, Gildete Amorim Mendes Francisco e equipe do BioCiNAIS UFF. A atribuição é da obra, pois os créditos não individualizam a sinalização do recorte.",
+        "license": "A cartela do MP4 declara CC BY-NC-SA, sem número de versão. O registro de catálogo indica CC BY 3.0 BR. O uso preserva as condições da cartela.",
+        "title": "Biociências em Sinais: Libras em Saúde, tipos de arboviroses",
+        "mediaPath": "data/continuous-natural-eval/single-signer/biocinais-unidade04.mp4",
+        "mediaSha256": "2f473afe38ce37f9eff012061fb2eda661b93d6ba0bd90139208da66c0d030e9",
+        "mediaUrl": "https://educapes.capes.gov.br/bitstream/capes/431171/4/Unidade%2004%20-%20Bioci%C3%AAncias%20em%20sinais%3A%20Materiais%20polim%C3%A9ricos",
+        "catalogNote": "O texto do link no depósito menciona Materiais poliméricos. O MP4 exibe Libras em Saúde na cartela de título."
+      },
+      "clip": {
+        "startMs": 45000,
+        "endMs": 48700
+      },
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 46300,
+          "endMs": 47400,
+          "cue": "A mão deixa a postura estendida de Febre, articula o indicador na testa e desce até a região entre o nariz e a boca."
+        }
+      ],
+      "context": [
+        {
+          "id": "febre_e_transicao",
+          "label": "Articulação inicial de Febre amarela",
+          "startMs": 45300,
+          "endMs": 46300
+        }
+      ]
+    },
+    {
+      "id": "ufsm_caderno",
+      "coverage": "Demonstração lexical com pausa antes e depois. A página credita uma apresentação individual e o vídeo imprime Amarelo ao lado da mão.",
+      "source": {
+        "title": "Cores, Caderno Didático de Libras D",
+        "institution": "UFSM · Núcleo de Tecnologia Educacional",
+        "credit": "Roteiro e apresentação Giovana Fracari Hautrive. Câmera Ronaldo Palma e Rodrigo Franco. Edição Jeferson Carvalho.",
+        "sourcePage": "https://ntetube.nte.ufsm.br/v/1543949237",
+        "license": "CC BY-NC-SA 4.0",
+        "mediaPath": "data/continuous-natural-eval/single-signer/ufsm-caderno-cores.mp4",
+        "mediaSha256": "b0813c0c2bcde443cbe2f42de80c18582693cdf1411c26813799fc844f9beffe",
+        "mediaUrl": "https://ntetube.nte.ufsm.br/repositorio/e7c191129dbc284af964433f1b874d5c/720p.mp4"
+      },
+      "clip": {
+        "startMs": 37000,
+        "endMs": 41500
+      },
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 38700,
+          "endMs": 40100,
+          "cue": "Indicador sobe diante da sobrancelha, desce ao longo do rosto e alcança a lateral inferior da bochecha."
+        }
+      ],
+      "context": [
+        {
+          "id": "fim_de_vermelho",
+          "label": "Última parte do sinal anterior e retorno à posição neutra",
+          "startMs": 37000,
+          "endMs": 38100
+        }
+      ]
+    }
+  ]
+}
