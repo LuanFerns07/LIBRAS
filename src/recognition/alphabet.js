@@ -118,7 +118,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
       const current = generation
       pending = true
       try {
-        const label = await predict(values)
+        const label = await predict(values, letterFeatures(frame.alternateHand, frame.aspect))
         if (current !== generation) return
         if (label !== candidate) {
           candidate = label

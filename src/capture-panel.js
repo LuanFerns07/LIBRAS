@@ -171,6 +171,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     handStatus.hidden = true
     try {
       if (needed && !preview) preview = trackHands(video, {
+        readLetters: letterMode,
         onFrame(frame) {
           overlay.paint(frame)
           void reading?.reader?.read(frame)
