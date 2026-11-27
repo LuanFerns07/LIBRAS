@@ -30,7 +30,7 @@ O arquivo [ufsm-a-crop.json](ufsm-a-crop.json) registra as versões, os hashes e
 
 Uma regressão logística usa a razão entre a distância da base à ponta e o comprimento das articulações de cada um dos quatro dedos, do indicador ao mínimo. O Hand Landmarker fornece as coordenadas 3D da mesma mão selecionada nas coordenadas da imagem. O treino usou 35 quadros de A e 340 das outras letras da primeira aula da UFSM e do Cecierj. A regra avaliada permite um novo voto de A a partir de 0,50 somente se as redes estáticas preferirem letras de A/Q/R e se as rotas da prévia ficarem sem leitura.
 
-Dos 11 quadros do A da terceira aula da UFSM, nove receberam voto do complemento. A maior sequência foi de cinco quadros amostrados seguidos. Nenhum dos outros 65 recortes ganhou votos, incluindo 57 recortes de outras letras e os Q e R reservados de Tel baixinha. O ensaio percorreu os pontos extraídos em CPU. A integração no navegador e os testes com movimentos fora do alfabeto ainda estão pendentes. [Contagens e hashes](ufsm-a-flexao-3d.json) · [Novos controles A/Q/R](../alphabet-a-q-r/README.md)
+Dos 11 quadros do A da terceira aula da UFSM, nove receberam voto do complemento. A maior sequência foi de cinco quadros amostrados seguidos. Nenhum dos outros 65 recortes ganhou votos, incluindo 57 recortes de outras letras e os Q e R reservados de Tel baixinha. O ensaio percorreu os pontos extraídos em CPU. A compilação `b7b8d21` inclui a confirmação 3D. [Contagens e hashes](ufsm-a-flexao-3d.json) · [Novos controles A/Q/R](../alphabet-a-q-r/README.md) · [Teste em Chromium](../../../docs/dados-alfabeto.md#confirmação-3d-de-a-na-prévia-local)
 
 ```bash
 out=data/alphabet/a-oculto
@@ -47,6 +47,16 @@ done
   --out "$out/referencia-3d.json"
 .venv/bin/python -m ml.alphabet.probe_a_world data/releases/librasia-alfabeto-z-polegar/site/models \
   "$out/referencia-3d.json"
+```
+
+Para treinar, exportar e compilar a partir da referência 3D e dos pesos da prévia anterior, use a raiz do projeto.
+
+```bash
+base=data/releases/librasia-n-confirmacao/site/models
+modelo=data/models/alphabet-a-world-candidate
+.venv/bin/python -m ml.alphabet.probe_a_world "$base" data/alphabet/a-oculto/referencia-3d.json --out "$modelo"
+LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MODELO="$modelo" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
+  ./scripts/executar-local.sh --pacote data/releases/librasia-a-3d
 ```
 
 ## Fonte independente da UFAC

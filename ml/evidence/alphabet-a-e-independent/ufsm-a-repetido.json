@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "license": "CC-BY-NC-SA-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "sources": [
+    {
+      "id": "1535641159",
+      "split": "test",
+      "title": "Alfabeto em Libras",
+      "project": "Curso de Licenciatura em Computação, UFSM",
+      "credits": {
+        "roteiro e apresentação": "Giovana Fracari Hautrive",
+        "câmera": "Rodrigo Franco",
+        "edição": "Ronaldo Palma",
+        "assistente": "Marina Chagas"
+      },
+      "page": "https://ntetube.nte.ufsm.br/v/1535641159",
+      "download": "https://ntetube.nte.ufsm.br/repositorio/b338729ecef4a7b5b4bbe96728aa7cb8/480p.mp4",
+      "file": "data/alphabet/ufsm/1535641159.mp4",
+      "sha256": "1d1be8a4fe346d004147ab258d88499c4620f95dd21312ec809748efa20f4af7",
+      "labelEvidence": "Letra verde na parte inferior esquerda.",
+      "windows": [
+        {
+          "label": "A",
+          "startMs": 3660,
+          "endMs": 4370,
+          "anchorMs": 4100
+        },
+        {
+          "label": "A",
+          "startMs": 3660,
+          "endMs": 4370,
+          "anchorMs": 4100
+        },
+        {
+          "label": "A",
+          "startMs": 3660,
+          "endMs": 4370,
+          "anchorMs": 4100
+        }
+      ]
+    }
+  ],
+  "selection": "Poses estáveis conferidas em quadros amostrados, com rótulo em tela. As janelas evitam transições e as aulas permanecem em partições distintas."
+}

@@ -1,0 +1,112 @@
+{
+  "build": {
+    "commit": "b7b8d216691c2fcf22fff0d008cd3193bc94c6c8",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-a-e-independent/ufsm-a-repetido.json"
+  ],
+  "results": [
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 543
+        }
+      ],
+      "clearedAtMs": [
+        736
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1637
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 45
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 772
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 736
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 552
+        }
+      ],
+      "clearedAtMs": [
+        748
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1641
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 41
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 748
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 710
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 547
+        }
+      ],
+      "clearedAtMs": [
+        744
+      ],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1636
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 35
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 744
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 706
+    }
+  ]
+}

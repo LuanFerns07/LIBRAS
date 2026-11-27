@@ -1,0 +1,90 @@
+{
+  "build": {
+    "commit": "058a990ff68b4837d92ec900de0f4ba87ac30acf",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-a-e-independent/ufsm-a-repetido.json"
+  ],
+  "results": [
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [],
+      "clearedAtMs": [],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1644
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 37
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 772
+        }
+      ],
+      "workerFrames": 86,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 735
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [],
+      "clearedAtMs": [],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1646
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 44
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 770
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 19,
+      "lastHandAfterVideoMs": 733
+    },
+    {
+      "source": "1535641159",
+      "label": "A",
+      "startMs": 3660,
+      "endMs": 4370,
+      "readings": [],
+      "clearedAtMs": [],
+      "handVisibility": [
+        {
+          "visible": false,
+          "afterVideoMs": -1644
+        },
+        {
+          "visible": true,
+          "afterVideoMs": 39
+        },
+        {
+          "visible": false,
+          "afterVideoMs": 744
+        }
+      ],
+      "workerFrames": 85,
+      "framesWithHand": 18,
+      "lastHandAfterVideoMs": 706
+    }
+  ]
+}

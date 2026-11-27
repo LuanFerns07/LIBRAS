@@ -1,0 +1,34 @@
+{
+  "referenceSha256": "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "manifests": [
+    "3ba0d4ef536aeee54e4cb712eca385692017222aa9455532a308cd0e68ce0e44",
+    "e4d52dbc4ff91319cf06c02d755c701f1d58e829e56d8e1fdfccd55abd0a83e6",
+    "94b64229e1433a2ac32108f316c8e296079d7ac20fafbac33712f525c64a8bb1",
+    "bd414bb4d819312bb420000e6259cccbf30d1140bc1b3eb6856139edc7a96a13",
+    "f3561b7aecf7ba33bed344db57a250ac5b0fee11c98e775446d50282abdfa683",
+    "15136ed3c3d85780e2255cc287ffbc39d482273ffdf95a0c8a808722d29ba2ee"
+  ],
+  "models": {
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplement": {
+      "labels": [
+        "E",
+        "O",
+        "S"
+      ],
+      "threshold": 0.95,
+      "modelSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885"
+    }
+  },
+  "training": {
+    "A": 35,
+    "others": 340
+  },
+  "worldA": {
+    "preprocess": "hand-world-wrist-palm-v1",
+    "threshold": 0.5,
+    "modelSha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5"
+  }
+}
