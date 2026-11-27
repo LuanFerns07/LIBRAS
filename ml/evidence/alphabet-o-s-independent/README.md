@@ -26,3 +26,18 @@ yt-dlp --no-playlist --no-mtime -f '136+140' --merge-output-format mp4 \
   -o 'data/alphabet/independent/unicentro-sequencia-download/unicentro-sequencia-alfabeto.%(ext)s' \
   'https://www.youtube.com/watch?v=AnIqxVEqGNs'
 ```
+
+## Pontos das mãos
+
+A extração em CPU foi feita depois do commit `9ec5776`, que fixou a anotação. O Hand Landmarker detectou duas mãos em todos os 16 quadros amostrados de O. A separação vertical entre elas foi suficiente para escolher a mão superior em cada quadro. Em S, detectou uma mão nos 16 quadros amostrados. Esta etapa produziu somente os pontos das mãos.
+
+- SHA-256 do Hand Landmarker `fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1`
+- SHA-256 do manifesto `2cb073aa8bdd0cfc11058e1ff8a9c4da8977de5364e2dd85b922557cded274f0`
+- SHA-256 dos pontos `de57a4ed58e9e7dbfbcc08d6bfca990e1ae6b84709fc8f08f2566ce2e2afbe39`
+
+```bash
+mkdir -p data/evidence/alphabet-o-s-independent
+.venv/bin/python -m ml.alphabet.extract_motion \
+  --manifest ml/alphabet/institutional-static-o-s-holdout.json \
+  --out data/evidence/alphabet-o-s-independent/static-frames.json
+```
