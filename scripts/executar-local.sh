@@ -41,8 +41,16 @@ mkdir -p "$previa/public"
   cp -aL --reflink=auto public/. "$previa/public/"
 ) 9> .cache/librasia-deps.lock
 
-modelo="${LIBRASIA_MODELO:-data/models/isolated-v1}"
-if [[ -n "${LIBRASIA_MODELO:-}" || -f "$modelo/isolated.onnx" || -f "$modelo/isolated.json" ]]; then
+demonstracao="${LIBRASIA_DEMONSTRACAO:-0}"
+modelo_padrao=data/models/isolated-v1
+alfabeto_padrao=data/models/alphabet-live
+if [[ "$demonstracao" == 1 ]]; then
+  modelo_padrao=data/models/isolated-combined
+  alfabeto_padrao=data/models/alphabet-r-completo
+fi
+
+modelo="${LIBRASIA_MODELO:-$modelo_padrao}"
+if [[ "$demonstracao" == 1 || -n "${LIBRASIA_MODELO:-}" || -f "$modelo/isolated.onnx" || -f "$modelo/isolated.json" ]]; then
   npm run setup:model -- "$modelo" "$previa/public/models"
 elif [[ -f "$previa/public/models/isolated.onnx" && -f "$previa/public/models/isolated.json" ]]; then
   npm run setup:model -- "$previa/public/models" "$previa/public/models"
@@ -50,8 +58,8 @@ else
   printf '%s\n' 'O avatar e as atividades sem câmera estão disponíveis. Para reconhecer sinais, instale os pesos descritos em docs/avaliacao.md.'
 fi
 
-alfabeto="${LIBRASIA_ALFABETO_MODELO:-data/models/alphabet-live}"
-if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; then
+alfabeto="${LIBRASIA_ALFABETO_MODELO:-$alfabeto_padrao}"
+if [[ "$demonstracao" == 1 || -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; then
   mkdir -p "$previa/public/models"
   cp "$alfabeto/"{alphabet.json,alphabet.onnx} "$previa/public/models/"
   for arquivo in alphabet-check.onnx alphabet-supplement.onnx alphabet-contrast.onnx alphabet-a-world.onnx \
@@ -61,12 +69,19 @@ if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; the
     fi
   done
   movimento_padrao=data/models/alphabet-motion
-  if [[ -f data/models/alphabet-trajectory/alphabet-motion.json ]]; then
+  if [[ "$demonstracao" == 1 || -f data/models/alphabet-trajectory/alphabet-motion.json ]]; then
     movimento_padrao=data/models/alphabet-trajectory
   fi
   movimento="${LIBRASIA_ALFABETO_MOVIMENTO:-$movimento_padrao}"
-  if [[ -n "${LIBRASIA_ALFABETO_MOVIMENTO:-}" || -f "$movimento/alphabet-motion.json" ]]; then
+  if [[ "$demonstracao" == 1 || -n "${LIBRASIA_ALFABETO_MOVIMENTO:-}" || -f "$movimento/alphabet-motion.json" ]]; then
     cp "$movimento/alphabet-motion.json" "$previa/public/models/"
+  fi
+fi
+if [[ "$demonstracao" == 1 ]]; then
+  somas="$PWD/ml/evidence/demonstracao-modelos.sha256"
+  if ! (cd "$previa/public/models" && sha256sum --check --strict "$somas"); then
+    printf '%s\n' 'Os modelos da demonstração divergem da versão verificada. Consulte docs/previa-estavel.md.' >&2
+    exit 1
   fi
 fi
 
