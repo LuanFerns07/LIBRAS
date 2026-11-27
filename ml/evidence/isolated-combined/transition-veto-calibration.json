@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "calibration_features_sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "calibration_dataset_sha256": "3e3e171602f17138ad2ba251a34f2d13a2f545ddd525ed650b945fb40ecc70be",
+  "calibration_signers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "snapshots": [
+    6,
+    12,
+    18
+  ],
+  "model_fingerprints": {
+    "combined": {
+      "onnx": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifest": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b"
+    },
+    "geometry": {
+      "onnx": "f1bdefccc91af325f0ee251426e00407777fd4a0a4397c7a255d871fab587e7c",
+      "manifest": "f92697594081d4a6e31a78f4ac860e6f36374af2509dfba587363e29521251ac"
+    },
+    "flexion": {
+      "onnx": "8e38930e3fb1ef7cbc308cd736f70a49a6882941bb9cbbd424c06d598b1b980c",
+      "manifest": "19d7cbf6f94b2608c9bbbd4902e5856437e3f85528ba52ff0a859a95801cb206"
+    }
+  },
+  "base_threshold": 0.525,
+  "target_labels": [
+    "cinco",
+    "aluno"
+  ],
+  "profiles": {
+    "combined-validation": {
+      "measure": "combined",
+      "splits": [
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.798,
+        "aluno": 0.861
+      },
+      "calibration_correct_clips": {
+        "cinco": 6,
+        "aluno": 6
+      }
+    },
+    "combined-train-validation": {
+      "measure": "combined",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.692,
+        "aluno": 0.861
+      },
+      "calibration_correct_clips": {
+        "cinco": 24,
+        "aluno": 24
+      }
+    },
+    "members-validation": {
+      "measure": "members",
+      "splits": [
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.662,
+        "aluno": 0.842
+      },
+      "calibration_correct_clips": {
+        "cinco": 6,
+        "aluno": 6
+      }
+    },
+    "members-train-validation": {
+      "measure": "members",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.544,
+        "aluno": 0.761
+      },
+      "calibration_correct_clips": {
+        "cinco": 24,
+        "aluno": 24
+      }
+    },
+    "snapshots-validation": {
+      "measure": "snapshots",
+      "splits": [
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.782,
+        "aluno": 0.96
+      },
+      "calibration_correct_clips": {
+        "cinco": 6,
+        "aluno": 6
+      }
+    },
+    "snapshots-train-validation": {
+      "measure": "snapshots",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "thresholds": {
+        "cinco": 0.661,
+        "aluno": 0.935
+      },
+      "calibration_correct_clips": {
+        "cinco": 24,
+        "aluno": 24
+      }
+    }
+  }
+}
