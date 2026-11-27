@@ -67,3 +67,20 @@ OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extrac
 A compilação experimental `c8193b8` exporta os dois complementos em ONNX e aplica a confirmação apenas às saídas elegíveis. O Chromium usou um recorte de Q e um de R da mesma gravação de Tel baixinha. Cada recorte foi reproduzido três vezes com câmera virtual e 28 quadros com mão em cada reprodução. O painel exibiu somente a letra esperada nos seis replays. Os testes automatizados também verificaram Q e R na Área livre e em Praticar, a troca M → N na Unesp e o movimento de duas mãos na sobreposição. [Manifesto das repetições](tel-qr-repetido.json) · [Replays e hashes](tel-qr-c8193b8.json)
 
 O ensaio verifica esses dois recortes. A adoção na prévia local depende dos controles com outras pessoas e de U em perfil.
+
+### Regressão com o pacote de Q e R
+
+Nas mesmas 89 janelas rotuladas, a prévia `b7b8d21` e o candidato `c8193b8` exibiram a letra esperada em todos os recortes. Em alguns recortes, também apareceram outras letras. Nos 19 recortes fora do alfabeto, a prévia exibiu alguma letra em sete e o candidato em oito. No movimento do queixo para o teclado, o candidato acrescentou R aos 609 ms, além do M que já aparecia na prévia. No recorte Rosa → Marrom, o candidato exibiu J. O pacote conjunto segue experimental. [Positivos do candidato](positivos-c8193b8.json) · [Negativos do candidato](negativos-c8193b8.json) · [Negativos da prévia](../alphabet-a-e-independent/negativos-b7b8d21.json)
+
+### Comparação com recortes adicionais
+
+Os mesmos replays foram executados nas duas compilações com um processo Chromium. A comparação inclui 10 recortes de quatro gravações e três pessoas sinalizantes. A professora Eliziane Streiechen aparece nos dois vídeos da Unicentro. As seis janelas da sequência da Unicentro e da demonstração de Uéslei Paterno foram fixadas antes da inferência. [Novas janelas](../../alphabet/independent-q-r-u-controls.json) · [Janelas anteriores](../../alphabet/independent-m-n-u-q-windows.json)
+
+| Gravação | Prévia `b7b8d21` | Candidato `c8193b8` |
+| --- | --- | --- |
+| IFSC, Q, R e U | Q · R · U | Q · R e H · U |
+| Unicentro, sequência com cartões de Q, R e U | Q · R · U e H | Q · R · U |
+| Tel baixinha, Q e U | Sem leitura · U e H | Q · U e H |
+| Unicentro, aula explicativa com Q e U em perfil | P · Sem leitura | P · Sem leitura |
+
+Nenhuma das quatro janelas de U exibiu R. No U em perfil da aula explicativa, houve 23 quadros com mão, com o painel vazio nas duas versões. Esse caso deixa em aberto a confirmação em outros recortes de perfil com U aceito. O Q lido como P permanece fora da regra treinada para Q/N. [Leituras da prévia](controles-b7b8d21.json) · [Leituras do candidato](controles-c8193b8.json)
