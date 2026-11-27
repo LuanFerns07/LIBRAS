@@ -6,7 +6,7 @@ Os experimentos usam gravações contínuas reais. A tradução inicial é avali
 
 ## Fluxo contínuo experimental na câmera
 
-O modo local usa os quadros do Holistic em uma grade de 100 ms. O detector ONNX propõe fronteiras, o classificador já usado na área livre reconhece cada trecho e o tradutor monotônico propõe texto a partir da sequência de glosas. A interface exibe as glosas detectadas e permite revisar a sequência. A transcrição recebe a sugestão quando a pessoa a confirma. [Treino do detector de fronteiras](fronteiras.md) · [Treino da tradução de glosas](comparacao-glosas.md)
+O modo local usa os quadros do Holistic em uma grade de 100 ms. A regra de pausas propõe trechos a partir da posição das mãos. A aplicação oferece a sequência para revisão quando há pelo menos dois trechos e ao menos um foi reconhecido. Nos demais casos, o detector ONNX propõe as fronteiras. Quando há trechos inconclusivos, a interface os marca para revisão. O tradutor monotônico sugere texto para a sequência completa, e a transcrição recebe a sugestão quando a pessoa a confirma. [Validação das pausas](#pausas-no-modo-contínuo) · [Treino das fronteiras](fronteiras.md) · [Tradução de glosas](comparacao-glosas.md)
 
 Com os pesos de fronteiras, o corpus textual e a validação local preparados conforme os ensaios acima, execute na raiz do projeto.
 
@@ -251,6 +251,43 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 \
   LIBRASIA_TEST_VIDEO=data/continuous-natural-eval/minds-pairs/s12-espelho-amarelo-800-sync.y4m \
   node --test tests/e2e/recognition.test.mjs
 ~~~
+
+### Pausas no modo contínuo
+
+O Chromium comparou a regra de pausas usada na Área livre com os quatro detectores ONNX nos mesmos 12 pares montados do MINDS-Libras. A regra usa a posição das mãos em relação aos ombros, termina o trecho após uma separação de pelo menos 400 ms e exige cinco quadros ativos. O classificador combinado, as janelas anotadas e o tradutor foram os mesmos em todas as condições. [Protocolo dos pares](../ml/evidence/ufsc-boundaries/minds-pairs-protocol.json)
+
+| Estratégia | Janelas pareadas com glosa e IoU ≥ 0,50 | Sequências exatas | Textos exatos |
+| --- | ---: | ---: | ---: |
+| Holistic com penalidade de corte | 0/24 | 0/12 | 0/12 |
+| Regra de pausas | 24/24 | 12/12 | 8/12 |
+
+A regra acertou as seis montagens com junção direta e as seis com quadro preto entre as tomadas. As quatro diferenças textuais vêm de “o espelho amarelo” diante da referência literal “espelho amarelo”. Nas 12 frases de controle do EQT, a regra de pausas produziu um único trecho por frase. A frase 02 gerou “o espelho” quando a regra foi usada sozinha. Com o mínimo de dois trechos, os 12 casos seguiram para o detector ONNX, que manteve as tentativas inconclusivas. As referências do EQT estão em português, e a base não traz glosas anotadas. [Seleção e limites das frases do EQT](#frases-do-eqt-fora-do-vocabulário)
+
+No pacote experimental `3155a95`, a captura do Chromium manteve o texto anterior até a confirmação de “cinco alunos” e “o espelho amarelo”. Cada tentativa positiva fez duas chamadas ao classificador. Cinco seguido de Vontade ficou em dois trechos, “cinco · [trecho inconclusivo]”, e bloqueou o acréscimo de texto. No pacote `8a5158a`, o mesmo controle mostrava quatro ocorrências de Cinco na revisão. A frase EQT 02 ficou inconclusiva e preservou “Texto conferido.” no pacote atual.
+
+Na webcam ACER HD User Facing a 640 × 480, a tentativa em repouso terminou sem fronteiras ou chamadas ao classificador. A captura foi liberada ao sair da Área livre. Os reconhecimentos de pares foram testados com montagens de gravações de sinais isolados. A medição com gravações naturais anotadas e pessoas sinalizando na webcam segue pendente.
+
+Para repetir a avaliação na grade de 100 ms, use as mídias locais dos dois protocolos.
+
+~~~bash
+out=data/continuous-natural-eval/pauses
+mkdir -p "$out"
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" "$out/pairs.json" --pairs --compare-pauses
+.venv/bin/python -m ml.continuous_experiment.boundaries.score_pairs "$out/pairs.json" > "$out/pairs-summary.json"
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" "$out/eqt.json" --eqt --compare-pauses
+~~~
+
+Com o vídeo de Cinco e Aluno preparado, execute a captura na prévia experimental.
+
+~~~bash
+LIBRASIA_TEST_URL=http://127.0.0.1:4201 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_CONTINUOUS=1 \
+  LIBRASIA_TEST_CAPTURE_MS=7100 LIBRASIA_EXPECT_CLASSIFIER_CALLS=2 \
+  LIBRASIA_EXPECT_GLOSSES='cinco · aluno' LIBRASIA_EXPECT_TEXT='cinco alunos' \
+  LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO="$out/s11-cinco-aluno-800-sync.y4m" node --test tests/e2e/recognition.test.mjs
+~~~
+
+Os relatórios ficam em `data/continuous-natural-eval/pauses/`. Os ensaios na interface têm sufixo `-continuo-3155a95`. O resultado da câmera física está em `webcam-fisica-3155a95.log`. [Preparação de Cinco e Aluno](regressao-area-livre.md#concordância-em-sequências-com-pausas) · [Teste no Chromium](../tests/e2e/recognition.test.mjs)
 
 ## Base de frases
 

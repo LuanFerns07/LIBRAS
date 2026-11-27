@@ -43,6 +43,28 @@ No Chromium, o teste com a webcam Acer confirmou que a trilha terminou ao sair. 
 
 No roteiro com gravações, duas tentativas reconheceram Cinco e Espelho. “cinco espelho” reapareceu depois de visitar o Alfabeto. A voz local em pt-BR concluiu a leitura da versão editada. Na prévia experimental, o controle Espelho + Amarelo ainda ficou inconclusivo e preservou o texto até a confirmação da sugestão revisada. Os logs da mesma compilação são `roteiro-bdbccc4.log` e `revisao-glosas-bdbccc4.log`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium) · [Controle da sinalização contínua](sinalizacao-continua.md#concordância-com-cinco)
 
+## Concordância em sequências com pausas
+
+O mesmo vídeo de Cinco e Aluno de S11, com 800 ms de quadro preto entre as tomadas, acrescentou “cinco aluno” no pacote `ff7969b` e “cinco alunos” no pacote `2a80645`. As duas execuções fizeram duas chamadas ao classificador na mesma janela de 7,1 s e preservaram o texto anterior. O controle Cinco + Espelho voltou a acrescentar “cinco espelhos”. O teste unitário também cobre “cinco espelhos amarelos” e mantém a saída das sequências incompletas. [Recortes do MINDS-Libras](../ml/evidence/ufsc-boundaries/minds-pairs-protocol.json) · [Teste no navegador](../tests/e2e/recognition.test.mjs)
+
+Com os clipes em `data/minds-expanded/raw`, prepare a câmera de arquivo e rode a tentativa no Chromium.
+
+~~~bash
+saida=data/continuous-natural-eval/pauses
+mkdir -p "$saida"
+ffmpeg -nostdin -threads 1 -ss 0.300 -t 2.900 -i data/minds-expanded/raw/10CincoSinalizador11-1.mp4 \
+  -threads 1 -ss 0.600 -t 3 -i data/minds-expanded/raw/02AlunoSinalizador11-1.mp4 \
+  -filter_complex_threads 1 \
+  -filter_complex '[0:v]scale=640:360,setsar=1,fps=30,tpad=start_duration=0.5:start_mode=add:stop_duration=0.8:stop_mode=add:color=black[a];[1:v]scale=640:360,setsar=1,fps=30,tpad=stop_duration=1.2:color=black[b];[a][b]concat=n=2:v=1:a=0,drawbox=x=0:y=0:w=iw:h=ih:color=lime:t=fill:enable=lt(t\,0.5)[out]' \
+  -map '[out]' -pix_fmt yuv420p "$saida/s11-cinco-aluno-800-sync.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SEQUENCE=1 \
+  LIBRASIA_TEST_CAPTURE_MS=7100 LIBRASIA_EXPECT_CLASSIFIER_CALLS=2 \
+  LIBRASIA_EXPECT_TEXT='cinco alunos' LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO="$saida/s11-cinco-aluno-800-sync.y4m" node --test tests/e2e/recognition.test.mjs
+~~~
+
+O SHA-256 do Y4M é `064460862a54f6f3920068f240f79df30e0afa7b57d84cbcd78091cca047f568`. Os logs e relatórios das duas versões ficam em `data/continuous-natural-eval/pauses/`. O ensaio usou clipes gravados.
+
 ## Reproduzir localmente
 
 Instale os ativos e inicie a prévia na porta 4193, em um checkout reservado à verificação.
