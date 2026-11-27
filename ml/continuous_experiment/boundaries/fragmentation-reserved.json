@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "sourceProtocolSha256": "54b92ac792de4f9ff274fead48bdd9c50d22adfccbf52eff98c48cfd7a8ca93c",
+  "developmentReportSha256": "d42e8ea48433070c449336985a3ebe9b53e99d4dbffdef02b3f251e459e29650",
+  "clipIds": [
+    459,
+    460,
+    462
+  ],
+  "windowSeconds": 60,
+  "sampleMs": 100,
+  "handOrder": [
+    "left",
+    "right"
+  ],
+  "visionModelSha256": "e2dab61191e2dcd0a15f943d8e3ed1dce13c82dfa597b9dd39f562975a50c3f8",
+  "developmentExtractorSha256": "326039ce61996551c4d1568d38473597fb0c48536b63e641249a6273d2dfe58d",
+  "holdoutExtractionCommit": "5fb84ed",
+  "iouThresholds": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "primaryIou": 0.5,
+  "shortCutoffMs": 500,
+  "primaryMeasures": [
+    "f1",
+    "matched_reference_under_500ms_at_iou_050",
+    "references_overlapping_multiple_predictions_at_iou_025"
+  ],
+  "conditions": [
+    {
+      "name": "published_original",
+      "checkpoint": "boundary-model.pt",
+      "checkpointSha256": "7e7088100ea48a5db71ad37d3992f90fe22ae491979e2c65befbf32f51558382",
+      "durationPriorMs": 558.0,
+      "decoder": {
+        "activity_floor": 0.68,
+        "boundary_weight": 0.3,
+        "proposal_penalty": 0.35,
+        "duration_weight": 0.25
+      },
+      "controls": {}
+    },
+    {
+      "name": "holistic_frozen",
+      "checkpoint": "holistic/boundary-model.pt",
+      "checkpointSha256": "b11b359cd6eec4edaca317537296cb10709c49ad13eedf5960e88ffadd5e7ba1",
+      "durationPriorMs": 558.0,
+      "decoder": {
+        "activity_floor": 0.68,
+        "boundary_weight": 0.1,
+        "proposal_penalty": 0.15,
+        "duration_weight": 0.25
+      },
+      "controls": {}
+    },
+    {
+      "name": "holistic_weak_cut",
+      "checkpoint": "holistic/boundary-model.pt",
+      "checkpointSha256": "b11b359cd6eec4edaca317537296cb10709c49ad13eedf5960e88ffadd5e7ba1",
+      "durationPriorMs": 558.0,
+      "decoder": {
+        "activity_floor": 0.52,
+        "boundary_weight": 0.3,
+        "proposal_penalty": 0.55,
+        "duration_weight": 0.25
+      },
+      "controls": {
+        "cut_penalty": 0.25
+      }
+    },
+    {
+      "name": "holistic_weak_cut_with_floor",
+      "checkpoint": "holistic/boundary-model.pt",
+      "checkpointSha256": "b11b359cd6eec4edaca317537296cb10709c49ad13eedf5960e88ffadd5e7ba1",
+      "durationPriorMs": 558.0,
+      "decoder": {
+        "activity_floor": 0.68,
+        "boundary_weight": 0.3,
+        "proposal_penalty": 0.35,
+        "duration_weight": 0.25
+      },
+      "controls": {
+        "min_frames": 5,
+        "cut_penalty": 0.25
+      }
+    }
+  ]
+}

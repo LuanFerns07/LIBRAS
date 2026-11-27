@@ -163,11 +163,15 @@ def key(metrics):
             -abs(metrics["reference_intervals"] - metrics["predicted_intervals"]))
 
 
-def choose_decoder(rows, probabilities, duration_prior):
+def decoder_grid():
     values = product((0.35, 0.52, 0.68), (0.1, 0.3, 0.5), (0.15, 0.35, 0.55), (0.10, 0.25))
+    return (DecodeConfig(*config) for config in values)
+
+
+def choose_decoder(rows, probabilities, duration_prior):
     selected = None
     best = None
-    for guess in (DecodeConfig(*config) for config in values):
+    for guess in decoder_grid():
         outputs = [decode(row.times, scores, duration_prior, guess) for row, scores in zip(rows, probabilities, strict=True)]
         quality = key(measure(rows, outputs, (0.5,))[0])
         if best is None or quality > best:

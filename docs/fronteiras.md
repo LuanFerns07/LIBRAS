@@ -64,3 +64,35 @@ O treino usa 80 épocas em CPU, duas threads e semente 2845. O checkpoint seleci
 Para extrair somente a partição reservada em outra pasta local, execute `node ml/continuous_experiment/boundaries/extract-web.mjs --split test`. O comando usa os mesmos módulos de visão do navegador e grava os três recortes em `data/ufsc-boundaries/holistic/test`. Em 1.138 dos 1.800 quadros houve pelo menos uma mão detectada. Fixe os parâmetros do decodificador no desenvolvimento antes de usar esses pontos para medir desempenho.
 
 No Chromium, o candidato marcou quatro trechos no Amarelo do Cederj, nove nos dois clipes unidos de Amarelo e Espelho e quatro no repouso CLAD. O detector original havia marcado quatro, oito e sete, respectivamente. Nos clipes unidos, o candidato reconheceu Amarelo e Espelho uma vez cada, com sete trechos inconclusivos. As três tentativas preservaram o texto anterior. Os registros `holistic-*.log` ficam em `data/evidence/continuo-integrado`. [Controles de câmera](sinalizacao-continua.md#ensaio-da-integração-no-chromium)
+
+## Propostas curtas e fragmentação
+
+O classificador de glosas requer pelo menos cinco quadros com mão rastreada e referência dos ombros, e exige que esses quadros sejam pelo menos 55% da janela entre o primeiro e o último válido. Em uma grade de 100 ms, uma proposta de 500 ms tem cinco posições. A captura pode perder quadros, e os dados de fronteiras guardam mãos, sem a pose de ombros. O ensaio mede separadamente duração, presença de mãos e correspondência às anotações. [Pré-processamento do reconhecedor](../src/recognition/preprocess.js) · [Relatório temporal](../ml/evidence/ufsc-boundaries/fragmentation-comparison.json)
+
+Nos dois vídeos de validação, 31 das 72 referências duram menos de 500 ms. As medidas usam pareamento um a um por IoU. A contagem de fragmentação indica quantas referências têm IoU ≥ 0,25 com mais de uma proposta. O ensaio comparou piso de cinco posições, penalidade suave de 0,45 para uma posição com redução linear até zero em cinco, e a diferença entre atividade média e piso ponderada pela razão entre duração e mediana de treino. Outro controle cobra `0,25 × (1 − √(P_início × P_fim))` em cada fronteira compartilhada por duas propostas contíguas. Duas bordas com probabilidade alta permitem manter propostas curtas adjacentes. Os dois checkpoints ficaram congelados e a partição reservada de teste ficou fora desta rodada. [Código do ensaio](../ml/continuous_experiment/boundaries/compare_fragmentation.py)
+
+| Decodificador com pesos Holistic | Propostas <500 ms | Referências curtas pareadas | Referências fragmentadas | F1 (IoU 0,25 / 0,50 / 0,75) |
+| --- | ---: | ---: | ---: | --- |
+| Original | 18/79 | 14/31 | 18 | 0,848 / 0,596 / 0,106 |
+| Piso de cinco, parâmetros originais | 0/74 | 10/31 | 14 | 0,849 / 0,575 / 0,123 |
+| Piso de cinco, recalibrado | 0/77 | 14/31 | 16 | 0,859 / 0,644 / 0,081 |
+| Penalidade suave, recalibrada | 11/78 | 14/31 | 17 | 0,840 / 0,627 / 0,093 |
+| Atividade ponderada, recalibrada | 1/69 | 12/31 | 12 | 0,851 / 0,652 / 0,113 |
+| Piso de cinco e atividade ponderada, recalibrados | 0/68 | 11/31 | 12 | 0,857 / 0,643 / 0,114 |
+| Penalidade de corte, parâmetros originais | 5/67 | 12/31 | 9 | 0,863 / 0,633 / 0,129 |
+| Penalidade de corte, recalibrada | 9/64 | 14/31 | 3 | 0,882 / 0,676 / 0,132 |
+| Penalidade de corte e piso de cinco, recalibrados | 0/64 | 13/31 | 4 | 0,868 / 0,662 / 0,132 |
+
+A penalidade de corte com pesos Holistic reduziu a fragmentação de 18 para três referências e manteve o total de 14 referências curtas pareadas em IoU ≥ 0,50. Ela preservou 11 dos 14 pareamentos curtos originais e acrescentou três outros. O piso acrescentado à penalidade eliminou as propostas abaixo de 500 ms. Nesse caso, 50 de 64 propostas continham cinco ou mais posições com mão detectada. O relatório acompanha também as propostas com IoU ≥ 0,25 com mais de uma referência, que passaram de 11 no original para sete com penalidade e seis com penalidade e piso. [Métricas por vídeo e por checkpoint](../ml/evidence/ufsc-boundaries/fragmentation-comparison.json)
+
+Na checagem cruzada dentro da mesma validação, cada variante ajustou os quatro parâmetros do decodificador em uma gravação e foi medida na outra. Com pesos Holistic, a penalidade de corte sozinha elevou o F1 em IoU ≥ 0,50 de 0,577 para 0,719 no 361 e de 0,528 para 0,571 no 362. Com o piso, os valores ficaram em 0,651 e 0,500. Os pesos Holistic e o fator de penalidade foram escolhidos com acesso aos dois vídeos. A divisão tem uma única dupla e avalia fronteiras, sem medir acertos de glosa na câmera. Os controles ficam disponíveis no Python e a prévia mantém a decodificação congelada. [Ajustes e diagnóstico cruzado](../ml/evidence/ufsc-boundaries/fragmentation-comparison.json)
+
+```bash
+.venv/bin/python -m ml.continuous_experiment.boundaries.compare_fragmentation
+```
+
+O comando usa apenas os recortes Holistic 361 e 362 e os checkpoints locais `boundary-model.pt` e `holistic/boundary-model.pt`. O JSON fica em `data/ufsc-boundaries/holistic/fragmentation-comparison.json`.
+
+### Protocolo da partição reservada
+
+Foram fixadas quatro condições antes de medir os recortes 459, 460 e 462. O decodificador publicado e o retreinado no Holistic entram com seus parâmetros originais. As duas alternativas usam os pesos Holistic, penalidade de corte de 0,25 e os parâmetros escolhidos na validação para a variante sem piso e para a variante com piso de cinco posições. A comparação principal usa F1 em IoU ≥ 0,50, pareamento de referências abaixo de 500 ms e fragmentação. O protocolo inclui os hashes dos pesos, do modelo de visão, do relatório de validação e do manifesto de origem. [Protocolo congelado](../ml/continuous_experiment/boundaries/fragmentation-reserved.json)

@@ -53,14 +53,15 @@ def load_holistic_points(path, case, times):
     return points, hashes
 
 
-def load_holistic_examples(directory):
+def load_holistic_examples(directory, *, splits=("train", "dev")):
+    selected = {split: DEV_SPLITS[split] for split in splits}
     sources = load_sources()
-    known = {case["id"]: case for case in sources["cases"] if case["split"] in DEV_SPLITS}
+    known = {case["id"]: case for case in sources["cases"] if case["split"] in selected}
     media = json.loads((directory / "media.json").read_text(encoding="utf-8"))
     cohort = [case for case in media if case["id"] in known]
     if len(cohort) != len(known) or {case["id"] for case in cohort} != set(known):
-        raise ValueError("O manifesto local deve conter todas as gravações de treino e validação, uma vez cada.")
-    rows = {split: [] for split in DEV_SPLITS}
+        raise ValueError("O manifesto local deve conter as gravações selecionadas, uma vez cada.")
+    rows = {split: [] for split in selected}
     times = np.arange(0, sources["seconds"] * 1000, SAMPLE_MS)
     recipes = set()
     video_hashes = set()
@@ -92,10 +93,10 @@ def load_holistic_examples(directory):
             case, times, points, features(points), targets(times, reference), reference,
             hand_motion(times, points[..., :2]), identity, provenance,
         ))
-    if {split: len(examples) for split, examples in rows.items()} != DEV_SPLITS:
-        raise ValueError("A adaptação requer quatro gravações de treino e duas de validação.")
+    if {split: len(examples) for split, examples in rows.items()} != selected:
+        raise ValueError("A quantidade de gravações diverge das partições selecionadas.")
     if len(recipes) != 1:
-        raise ValueError("Use a mesma receita Holistic nos seis recortes.")
+        raise ValueError("Use a mesma receita Holistic nos recortes selecionados.")
     return rows
 
 

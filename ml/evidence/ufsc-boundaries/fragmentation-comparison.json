@@ -1,0 +1,4264 @@
+{
+  "schema_version": 1,
+  "source": "Corpus de Libras UFSC, G1 D4, câmera 3, trilha 2SinaisD",
+  "reserved_test_opened": false,
+  "sample_ms": 100,
+  "gloss_recognizer_minimum_valid_frames": 5,
+  "selection": "F1 IoU ≥ 0,50, menos propostas curtas, mais referências curtas pareadas e IoU médio",
+  "reference": [
+    {
+      "id": 361,
+      "annotation_sha256": "72844aaeddcead12e1e6bb59e34acafbbf104f302335fdba1997b5893e0f5620",
+      "landmarks_sha256": "16fc87ad9c2150555f2ac969894270c37f8dcc7da386dba8ab15c24e6bc213af",
+      "intervals": 48
+    },
+    {
+      "id": 362,
+      "annotation_sha256": "1fd57734e9d64fb7768fd738e64c55293c55bbadcc296c27a938fd63c9c41305",
+      "landmarks_sha256": "0cdcacebf9650426e882a07262580bcec1e09ce74c61d992832e9aa4d3f902c4",
+      "intervals": 24
+    }
+  ],
+  "models": {
+    "original": {
+      "checkpoint_sha256": "7e7088100ea48a5db71ad37d3992f90fe22ae491979e2c65befbf32f51558382",
+      "duration_prior_train_ms": 558.0,
+      "profiles": {
+        "frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.35,
+            "duration_weight": 0.25
+          },
+          "controls": {},
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 61,
+                "precision": 0.8243243243243243,
+                "recall": 0.8472222222222222,
+                "f1": 0.8356164383561644,
+                "matched_mean_iou": 0.5785187740954842,
+                "median_start_error_ms": 90.0,
+                "median_end_error_ms": 135.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 43,
+                "precision": 0.581081081081081,
+                "recall": 0.5972222222222222,
+                "f1": 0.589041095890411,
+                "matched_mean_iou": 0.6604020815105277,
+                "median_start_error_ms": 80.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 12,
+                "precision": 0.16216216216216217,
+                "recall": 0.16666666666666666,
+                "f1": 0.1643835616438356,
+                "matched_mean_iou": 0.8458400340853193,
+                "median_start_error_ms": 43.5,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 13,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 51,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 13,
+            "references_overlapping_multiple_predictions_at_iou_025": 15,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 48,
+                  "matched": 41,
+                  "precision": 0.8541666666666666,
+                  "recall": 0.8541666666666666,
+                  "f1": 0.8541666666666666,
+                  "matched_mean_iou": 0.5884196993574198,
+                  "median_start_error_ms": 77.0,
+                  "median_end_error_ms": 148.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 48,
+                  "matched": 30,
+                  "precision": 0.625,
+                  "recall": 0.625,
+                  "f1": 0.625,
+                  "matched_mean_iou": 0.669571139356606,
+                  "median_start_error_ms": 71.0,
+                  "median_end_error_ms": 116.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 48,
+                  "matched": 9,
+                  "precision": 0.1875,
+                  "recall": 0.1875,
+                  "f1": 0.1875,
+                  "matched_mean_iou": 0.8542869657920948,
+                  "median_start_error_ms": 40.0,
+                  "median_end_error_ms": 40.0
+                }
+              ],
+              "predicted_under_500ms": 13,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 31,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 11,
+              "references_overlapping_multiple_predictions_at_iou_025": 11,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 20,
+                  "precision": 0.7692307692307693,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8,
+                  "matched_mean_iou": 0.5582218773085164,
+                  "median_start_error_ms": 177.0,
+                  "median_end_error_ms": 119.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 13,
+                  "precision": 0.5,
+                  "recall": 0.5416666666666666,
+                  "f1": 0.52,
+                  "matched_mean_iou": 0.6392427172503472,
+                  "median_start_error_ms": 158.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 3,
+                  "precision": 0.11538461538461539,
+                  "recall": 0.125,
+                  "f1": 0.12,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 20,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 13
+        },
+        "floor_frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.35,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "min_frames": 5
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 71,
+                "matched": 60,
+                "precision": 0.8450704225352113,
+                "recall": 0.8333333333333334,
+                "f1": 0.8391608391608392,
+                "matched_mean_iou": 0.5842607390912139,
+                "median_start_error_ms": 110.5,
+                "median_end_error_ms": 130.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 71,
+                "matched": 42,
+                "precision": 0.5915492957746479,
+                "recall": 0.5833333333333334,
+                "f1": 0.5874125874125874,
+                "matched_mean_iou": 0.6536952719651418,
+                "median_start_error_ms": 83.5,
+                "median_end_error_ms": 118.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 71,
+                "matched": 11,
+                "precision": 0.15492957746478872,
+                "recall": 0.1527777777777778,
+                "f1": 0.15384615384615385,
+                "matched_mean_iou": 0.8273822717195215,
+                "median_start_error_ms": 49.0,
+                "median_end_error_ms": 41.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 60,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 11,
+            "references_overlapping_multiple_predictions_at_iou_025": 11,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 45,
+                  "matched": 40,
+                  "precision": 0.8888888888888888,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8602150537634409,
+                  "matched_mean_iou": 0.5972801699825626,
+                  "median_start_error_ms": 87.0,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 45,
+                  "matched": 29,
+                  "precision": 0.6444444444444445,
+                  "recall": 0.6041666666666666,
+                  "f1": 0.6236559139784946,
+                  "matched_mean_iou": 0.6601740033890152,
+                  "median_start_error_ms": 81.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 45,
+                  "matched": 8,
+                  "precision": 0.17777777777777778,
+                  "recall": 0.16666666666666666,
+                  "f1": 0.17204301075268819,
+                  "matched_mean_iou": 0.8299634090024698,
+                  "median_start_error_ms": 46.5,
+                  "median_end_error_ms": 60.5
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 40,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 9,
+              "references_overlapping_multiple_predictions_at_iou_025": 7,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 20,
+                  "precision": 0.7692307692307693,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8,
+                  "matched_mean_iou": 0.5582218773085164,
+                  "median_start_error_ms": 177.0,
+                  "median_end_error_ms": 119.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 13,
+                  "precision": 0.5,
+                  "recall": 0.5416666666666666,
+                  "f1": 0.52,
+                  "matched_mean_iou": 0.6392427172503472,
+                  "median_start_error_ms": 158.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 26,
+                  "matched": 3,
+                  "precision": 0.11538461538461539,
+                  "recall": 0.125,
+                  "f1": 0.12,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 20,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 11
+        },
+        "weak_cut_frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.35,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 58,
+                "precision": 0.8923076923076924,
+                "recall": 0.8055555555555556,
+                "f1": 0.8467153284671532,
+                "matched_mean_iou": 0.5476038059901378,
+                "median_start_error_ms": 157.5,
+                "median_end_error_ms": 176.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 38,
+                "precision": 0.5846153846153846,
+                "recall": 0.5277777777777778,
+                "f1": 0.5547445255474452,
+                "matched_mean_iou": 0.6196799244046307,
+                "median_start_error_ms": 115.5,
+                "median_end_error_ms": 135.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 5,
+                "precision": 0.07692307692307693,
+                "recall": 0.06944444444444445,
+                "f1": 0.072992700729927,
+                "matched_mean_iou": 0.855018918918919,
+                "median_start_error_ms": 41.0,
+                "median_end_error_ms": 27.0
+              }
+            ],
+            "predicted_under_500ms": 10,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 45,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 11,
+            "references_overlapping_multiple_predictions_at_iou_025": 4,
+            "predictions_overlapping_multiple_references_at_iou_025": 10
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 39,
+                  "precision": 0.9285714285714286,
+                  "recall": 0.8125,
+                  "f1": 0.8666666666666667,
+                  "matched_mean_iou": 0.5644755887174797,
+                  "median_start_error_ms": 140.0,
+                  "median_end_error_ms": 148.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 27,
+                  "precision": 0.6428571428571429,
+                  "recall": 0.5625,
+                  "f1": 0.6,
+                  "matched_mean_iou": 0.6362533816313568,
+                  "median_start_error_ms": 90.0,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 4,
+                  "precision": 0.09523809523809523,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.08888888888888889,
+                  "matched_mean_iou": 0.8531486486486486,
+                  "median_start_error_ms": 28.0,
+                  "median_end_error_ms": 54.0
+                }
+              ],
+              "predicted_under_500ms": 8,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 30,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 9,
+              "references_overlapping_multiple_predictions_at_iou_025": 3,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 19,
+                  "precision": 0.8260869565217391,
+                  "recall": 0.7916666666666666,
+                  "f1": 0.8085106382978723,
+                  "matched_mean_iou": 0.512972251970857,
+                  "median_start_error_ms": 158.0,
+                  "median_end_error_ms": 190.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 11,
+                  "precision": 0.4782608695652174,
+                  "recall": 0.4583333333333333,
+                  "f1": 0.46808510638297873,
+                  "matched_mean_iou": 0.5789996203026665,
+                  "median_start_error_ms": 157.0,
+                  "median_end_error_ms": 141.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 1,
+                  "precision": 0.043478260869565216,
+                  "recall": 0.041666666666666664,
+                  "f1": 0.0425531914893617,
+                  "matched_mean_iou": 0.8625,
+                  "median_start_error_ms": 41.0,
+                  "median_end_error_ms": 14.0
+                }
+              ],
+              "predicted_under_500ms": 2,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 15,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 1,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 9
+        },
+        "retuned": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {},
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 76,
+                "matched": 61,
+                "precision": 0.8026315789473685,
+                "recall": 0.8472222222222222,
+                "f1": 0.8243243243243243,
+                "matched_mean_iou": 0.5801348250112204,
+                "median_start_error_ms": 90.0,
+                "median_end_error_ms": 135.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 76,
+                "matched": 45,
+                "precision": 0.5921052631578947,
+                "recall": 0.625,
+                "f1": 0.6081081081081081,
+                "matched_mean_iou": 0.653919022255976,
+                "median_start_error_ms": 83.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 76,
+                "matched": 12,
+                "precision": 0.15789473684210525,
+                "recall": 0.16666666666666666,
+                "f1": 0.16216216216216217,
+                "matched_mean_iou": 0.8365214830781719,
+                "median_start_error_ms": 46.5,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 13,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 53,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 15,
+            "references_overlapping_multiple_predictions_at_iou_025": 16,
+            "predictions_overlapping_multiple_references_at_iou_025": 12
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 41,
+                  "precision": 0.8367346938775511,
+                  "recall": 0.8541666666666666,
+                  "f1": 0.845360824742268,
+                  "matched_mean_iou": 0.5831193842778793,
+                  "median_start_error_ms": 83.0,
+                  "median_end_error_ms": 148.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 31,
+                  "precision": 0.6326530612244898,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6391752577319587,
+                  "matched_mean_iou": 0.6606835808414362,
+                  "median_start_error_ms": 77.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 9,
+                  "precision": 0.1836734693877551,
+                  "recall": 0.1875,
+                  "f1": 0.18556701030927836,
+                  "matched_mean_iou": 0.8418622311158983,
+                  "median_start_error_ms": 44.0,
+                  "median_end_error_ms": 40.0
+                }
+              ],
+              "predicted_under_500ms": 12,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 33,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 12,
+              "references_overlapping_multiple_predictions_at_iou_025": 11,
+              "predictions_overlapping_multiple_references_at_iou_025": 8
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 20,
+                  "precision": 0.7407407407407407,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7843137254901961,
+                  "matched_mean_iou": 0.5740164785145693,
+                  "median_start_error_ms": 166.0,
+                  "median_end_error_ms": 118.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 14,
+                  "precision": 0.5185185185185185,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5490196078431373,
+                  "matched_mean_iou": 0.6389403568167428,
+                  "median_start_error_ms": 156.5,
+                  "median_end_error_ms": 115.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 3,
+                  "precision": 0.1111111111111111,
+                  "recall": 0.125,
+                  "f1": 0.11764705882352941,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 1,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 20,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 5,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 13
+        },
+        "floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.1
+          },
+          "controls": {
+            "min_frames": 5
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 62,
+                "precision": 0.7948717948717948,
+                "recall": 0.8611111111111112,
+                "f1": 0.8266666666666667,
+                "matched_mean_iou": 0.5897287380827657,
+                "median_start_error_ms": 137.5,
+                "median_end_error_ms": 115.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 46,
+                "precision": 0.5897435897435898,
+                "recall": 0.6388888888888888,
+                "f1": 0.6133333333333333,
+                "matched_mean_iou": 0.6444627967243214,
+                "median_start_error_ms": 102.0,
+                "median_end_error_ms": 90.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 11,
+                "precision": 0.14102564102564102,
+                "recall": 0.1527777777777778,
+                "f1": 0.14666666666666667,
+                "matched_mean_iou": 0.8244770272917035,
+                "median_start_error_ms": 49.0,
+                "median_end_error_ms": 41.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 60,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 13,
+            "references_overlapping_multiple_predictions_at_iou_025": 16,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 42,
+                  "precision": 0.84,
+                  "recall": 0.875,
+                  "f1": 0.8571428571428571,
+                  "matched_mean_iou": 0.5932231624789188,
+                  "median_start_error_ms": 106.5,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 31,
+                  "precision": 0.62,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6326530612244898,
+                  "matched_mean_iou": 0.6491426575852128,
+                  "median_start_error_ms": 84.0,
+                  "median_end_error_ms": 90.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 8,
+                  "precision": 0.16,
+                  "recall": 0.16666666666666666,
+                  "f1": 0.16326530612244897,
+                  "matched_mean_iou": 0.8259686979142201,
+                  "median_start_error_ms": 46.5,
+                  "median_end_error_ms": 44.5
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 39,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 10,
+              "references_overlapping_multiple_predictions_at_iou_025": 10,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 20,
+                  "precision": 0.7142857142857143,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7692307692307693,
+                  "matched_mean_iou": 0.5823904468508443,
+                  "median_start_error_ms": 170.0,
+                  "median_end_error_ms": 102.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 15,
+                  "precision": 0.5357142857142857,
+                  "recall": 0.625,
+                  "f1": 0.5769230769230769,
+                  "matched_mean_iou": 0.6347910842784793,
+                  "median_start_error_ms": 158.0,
+                  "median_end_error_ms": 90.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 3,
+                  "precision": 0.10714285714285714,
+                  "recall": 0.125,
+                  "f1": 0.11538461538461539,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 12
+        },
+        "soft_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.35,
+            "duration_weight": 0.1
+          },
+          "controls": {
+            "short_penalty": 0.45
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 63,
+                "precision": 0.8181818181818182,
+                "recall": 0.875,
+                "f1": 0.8456375838926175,
+                "matched_mean_iou": 0.5853994194605051,
+                "median_start_error_ms": 107.0,
+                "median_end_error_ms": 119.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 46,
+                "precision": 0.5974025974025974,
+                "recall": 0.6388888888888888,
+                "f1": 0.6174496644295302,
+                "matched_mean_iou": 0.6518760032806583,
+                "median_start_error_ms": 83.5,
+                "median_end_error_ms": 115.5
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 11,
+                "precision": 0.14285714285714285,
+                "recall": 0.1527777777777778,
+                "f1": 0.1476510067114094,
+                "matched_mean_iou": 0.8377999803952292,
+                "median_start_error_ms": 44.0,
+                "median_end_error_ms": 41.0
+              }
+            ],
+            "predicted_under_500ms": 6,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 58,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 16,
+            "predictions_overlapping_multiple_references_at_iou_025": 12
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 43,
+                  "precision": 0.8775510204081632,
+                  "recall": 0.8958333333333334,
+                  "f1": 0.8865979381443299,
+                  "matched_mean_iou": 0.5912971648063686,
+                  "median_start_error_ms": 83.0,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 31,
+                  "precision": 0.6326530612244898,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6391752577319587,
+                  "matched_mean_iou": 0.6663823704649035,
+                  "median_start_error_ms": 81.0,
+                  "median_end_error_ms": 108.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 49,
+                  "matched": 8,
+                  "precision": 0.16326530612244897,
+                  "recall": 0.16666666666666666,
+                  "f1": 0.16494845360824742,
+                  "matched_mean_iou": 0.8442877584315679,
+                  "median_start_error_ms": 42.0,
+                  "median_end_error_ms": 45.5
+                }
+              ],
+              "predicted_under_500ms": 5,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 37,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 11,
+              "references_overlapping_multiple_predictions_at_iou_025": 10,
+              "predictions_overlapping_multiple_references_at_iou_025": 8
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 20,
+                  "precision": 0.7142857142857143,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7692307692307693,
+                  "matched_mean_iou": 0.5727192669668985,
+                  "median_start_error_ms": 170.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 15,
+                  "precision": 0.5357142857142857,
+                  "recall": 0.625,
+                  "f1": 0.5769230769230769,
+                  "matched_mean_iou": 0.6218961777665515,
+                  "median_start_error_ms": 158.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 3,
+                  "precision": 0.10714285714285714,
+                  "recall": 0.125,
+                  "f1": 0.11538461538461539,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 1,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 13
+        },
+        "linear_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "activity_power": 1
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 80,
+                "matched": 64,
+                "precision": 0.8,
+                "recall": 0.8888888888888888,
+                "f1": 0.8421052631578947,
+                "matched_mean_iou": 0.5926708479012752,
+                "median_start_error_ms": 117.0,
+                "median_end_error_ms": 113.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 80,
+                "matched": 48,
+                "precision": 0.6,
+                "recall": 0.6666666666666666,
+                "f1": 0.631578947368421,
+                "matched_mean_iou": 0.658064866864489,
+                "median_start_error_ms": 82.5,
+                "median_end_error_ms": 86.5
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 80,
+                "matched": 9,
+                "precision": 0.1125,
+                "recall": 0.125,
+                "f1": 0.11842105263157894,
+                "matched_mean_iou": 0.8494757404646275,
+                "median_start_error_ms": 43.0,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 12,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 53,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 19,
+            "predictions_overlapping_multiple_references_at_iou_025": 12
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 52,
+                  "matched": 44,
+                  "precision": 0.8461538461538461,
+                  "recall": 0.9166666666666666,
+                  "f1": 0.88,
+                  "matched_mean_iou": 0.5937347784215997,
+                  "median_start_error_ms": 97.5,
+                  "median_end_error_ms": 97.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 52,
+                  "matched": 33,
+                  "precision": 0.6346153846153846,
+                  "recall": 0.6875,
+                  "f1": 0.66,
+                  "matched_mean_iou": 0.6638318868849679,
+                  "median_start_error_ms": 80.0,
+                  "median_end_error_ms": 80.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 52,
+                  "matched": 6,
+                  "precision": 0.11538461538461539,
+                  "recall": 0.125,
+                  "f1": 0.12,
+                  "matched_mean_iou": 0.8639639912144449,
+                  "median_start_error_ms": 28.0,
+                  "median_end_error_ms": 28.0
+                }
+              ],
+              "predicted_under_500ms": 11,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 32,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 11,
+              "references_overlapping_multiple_predictions_at_iou_025": 13,
+              "predictions_overlapping_multiple_references_at_iou_025": 8
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 20,
+                  "precision": 0.7142857142857143,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7692307692307693,
+                  "matched_mean_iou": 0.5903302007565614,
+                  "median_start_error_ms": 137.5,
+                  "median_end_error_ms": 115.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 15,
+                  "precision": 0.5357142857142857,
+                  "recall": 0.625,
+                  "f1": 0.5769230769230769,
+                  "matched_mean_iou": 0.6453774228194352,
+                  "median_start_error_ms": 120.0,
+                  "median_end_error_ms": 114.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 3,
+                  "precision": 0.10714285714285714,
+                  "recall": 0.125,
+                  "f1": 0.11538461538461539,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 1,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 12
+        },
+        "linear_floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.5,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.1
+          },
+          "controls": {
+            "min_frames": 5,
+            "activity_power": 1
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 75,
+                "matched": 62,
+                "precision": 0.8266666666666667,
+                "recall": 0.8611111111111112,
+                "f1": 0.8435374149659864,
+                "matched_mean_iou": 0.6074654250378043,
+                "median_start_error_ms": 113.0,
+                "median_end_error_ms": 117.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 75,
+                "matched": 47,
+                "precision": 0.6266666666666667,
+                "recall": 0.6527777777777778,
+                "f1": 0.6394557823129252,
+                "matched_mean_iou": 0.6582548627904503,
+                "median_start_error_ms": 83.0,
+                "median_end_error_ms": 93.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 75,
+                "matched": 10,
+                "precision": 0.13333333333333333,
+                "recall": 0.1388888888888889,
+                "f1": 0.1360544217687075,
+                "matched_mean_iou": 0.8366536768156563,
+                "median_start_error_ms": 64.5,
+                "median_end_error_ms": 42.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 59,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 11,
+            "references_overlapping_multiple_predictions_at_iou_025": 13,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 42,
+                  "precision": 0.8936170212765957,
+                  "recall": 0.875,
+                  "f1": 0.8842105263157894,
+                  "matched_mean_iou": 0.6137979727115742,
+                  "median_start_error_ms": 88.0,
+                  "median_end_error_ms": 130.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 32,
+                  "precision": 0.6808510638297872,
+                  "recall": 0.6666666666666666,
+                  "f1": 0.6736842105263158,
+                  "matched_mean_iou": 0.6618931164229096,
+                  "median_start_error_ms": 80.5,
+                  "median_end_error_ms": 102.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 7,
+                  "precision": 0.14893617021276595,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.14736842105263157,
+                  "matched_mean_iou": 0.8435770073230836,
+                  "median_start_error_ms": 60.0,
+                  "median_end_error_ms": 51.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 38,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 8,
+              "references_overlapping_multiple_predictions_at_iou_025": 7,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 20,
+                  "precision": 0.7142857142857143,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7692307692307693,
+                  "matched_mean_iou": 0.5941670749228876,
+                  "median_start_error_ms": 137.5,
+                  "median_end_error_ms": 102.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 15,
+                  "precision": 0.5357142857142857,
+                  "recall": 0.625,
+                  "f1": 0.5769230769230769,
+                  "matched_mean_iou": 0.6504932550412036,
+                  "median_start_error_ms": 120.0,
+                  "median_end_error_ms": 90.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 3,
+                  "precision": 0.10714285714285714,
+                  "recall": 0.125,
+                  "f1": 0.11538461538461539,
+                  "matched_mean_iou": 0.8204992389649924,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 41.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 10
+        },
+        "weak_cut_retuned": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.5,
+            "proposal_penalty": 0.55,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 57,
+                "precision": 0.8769230769230769,
+                "recall": 0.7916666666666666,
+                "f1": 0.8321167883211679,
+                "matched_mean_iou": 0.5666649555061638,
+                "median_start_error_ms": 145.0,
+                "median_end_error_ms": 148.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 40,
+                "precision": 0.6153846153846154,
+                "recall": 0.5555555555555556,
+                "f1": 0.583941605839416,
+                "matched_mean_iou": 0.6329831221794547,
+                "median_start_error_ms": 103.5,
+                "median_end_error_ms": 125.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 65,
+                "matched": 7,
+                "precision": 0.1076923076923077,
+                "recall": 0.09722222222222222,
+                "f1": 0.10218978102189781,
+                "matched_mean_iou": 0.8516611693345518,
+                "median_start_error_ms": 19.0,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 12,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 43,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 11,
+            "references_overlapping_multiple_predictions_at_iou_025": 5,
+            "predictions_overlapping_multiple_references_at_iou_025": 8
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 38,
+                  "precision": 0.9047619047619048,
+                  "recall": 0.7916666666666666,
+                  "f1": 0.8444444444444444,
+                  "matched_mean_iou": 0.578447204883421,
+                  "median_start_error_ms": 116.5,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 27,
+                  "precision": 0.6428571428571429,
+                  "recall": 0.5625,
+                  "f1": 0.6,
+                  "matched_mean_iou": 0.6464676657953258,
+                  "median_start_error_ms": 80.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 5,
+                  "precision": 0.11904761904761904,
+                  "recall": 0.10416666666666667,
+                  "f1": 0.1111111111111111,
+                  "matched_mean_iou": 0.861409795484214,
+                  "median_start_error_ms": 19.0,
+                  "median_end_error_ms": 40.0
+                }
+              ],
+              "predicted_under_500ms": 10,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 28,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 9,
+              "references_overlapping_multiple_predictions_at_iou_025": 3,
+              "predictions_overlapping_multiple_references_at_iou_025": 5
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 19,
+                  "precision": 0.8260869565217391,
+                  "recall": 0.7916666666666666,
+                  "f1": 0.8085106382978723,
+                  "matched_mean_iou": 0.5431004567516494,
+                  "median_start_error_ms": 157.0,
+                  "median_end_error_ms": 185.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 13,
+                  "precision": 0.5652173913043478,
+                  "recall": 0.5416666666666666,
+                  "f1": 0.5531914893617021,
+                  "matched_mean_iou": 0.6049767623618764,
+                  "median_start_error_ms": 157.0,
+                  "median_end_error_ms": 124.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 2,
+                  "precision": 0.08695652173913043,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.0851063829787234,
+                  "matched_mean_iou": 0.8272896039603961,
+                  "median_start_error_ms": 28.0,
+                  "median_end_error_ms": 52.0
+                }
+              ],
+              "predicted_under_500ms": 2,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 15,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 2,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 9
+        },
+        "weak_cut_floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.5,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.1
+          },
+          "controls": {
+            "min_frames": 5,
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 62,
+                "precision": 0.8378378378378378,
+                "recall": 0.8611111111111112,
+                "f1": 0.8493150684931506,
+                "matched_mean_iou": 0.602609878109539,
+                "median_start_error_ms": 81.5,
+                "median_end_error_ms": 135.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 47,
+                "precision": 0.6351351351351351,
+                "recall": 0.6527777777777778,
+                "f1": 0.6438356164383562,
+                "matched_mean_iou": 0.6583276539082847,
+                "median_start_error_ms": 76.0,
+                "median_end_error_ms": 114.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 11,
+                "precision": 0.14864864864864866,
+                "recall": 0.1527777777777778,
+                "f1": 0.1506849315068493,
+                "matched_mean_iou": 0.8500467916768139,
+                "median_start_error_ms": 43.0,
+                "median_end_error_ms": 41.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 55,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 15,
+            "references_overlapping_multiple_predictions_at_iou_025": 9,
+            "predictions_overlapping_multiple_references_at_iou_025": 8
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 42,
+                  "precision": 0.8936170212765957,
+                  "recall": 0.875,
+                  "f1": 0.8842105263157894,
+                  "matched_mean_iou": 0.6279862015881751,
+                  "median_start_error_ms": 70.5,
+                  "median_end_error_ms": 138.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 34,
+                  "precision": 0.723404255319149,
+                  "recall": 0.7083333333333334,
+                  "f1": 0.7157894736842105,
+                  "matched_mean_iou": 0.6741160924340812,
+                  "median_start_error_ms": 55.0,
+                  "median_end_error_ms": 110.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 47,
+                  "matched": 9,
+                  "precision": 0.19148936170212766,
+                  "recall": 0.1875,
+                  "f1": 0.18947368421052632,
+                  "matched_mean_iou": 0.8591500360981453,
+                  "median_start_error_ms": 17.0,
+                  "median_end_error_ms": 27.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 35,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 12,
+              "references_overlapping_multiple_predictions_at_iou_025": 5,
+              "predictions_overlapping_multiple_references_at_iou_025": 5
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 20,
+                  "precision": 0.7407407407407407,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.7843137254901961,
+                  "matched_mean_iou": 0.5493195988044032,
+                  "median_start_error_ms": 134.5,
+                  "median_end_error_ms": 118.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 13,
+                  "precision": 0.48148148148148145,
+                  "recall": 0.5416666666666666,
+                  "f1": 0.5098039215686274,
+                  "matched_mean_iou": 0.6170348146869709,
+                  "median_start_error_ms": 90.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 2,
+                  "precision": 0.07407407407407407,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.0784313725490196,
+                  "matched_mean_iou": 0.809082191780822,
+                  "median_start_error_ms": 59.5,
+                  "median_end_error_ms": 42.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 20,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 10
+        }
+      },
+      "cross_check_within_dev": {
+        "361": {
+          "decoder_tuned_on": 362,
+          "profiles": {
+            "retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.35,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 62,
+                    "matched": 43,
+                    "precision": 0.6935483870967742,
+                    "recall": 0.8958333333333334,
+                    "f1": 0.7818181818181819,
+                    "matched_mean_iou": 0.5488504360990368,
+                    "median_start_error_ms": 107.0,
+                    "median_end_error_ms": 135.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 62,
+                    "matched": 29,
+                    "precision": 0.46774193548387094,
+                    "recall": 0.6041666666666666,
+                    "f1": 0.5272727272727272,
+                    "matched_mean_iou": 0.6391295560891653,
+                    "median_start_error_ms": 73.0,
+                    "median_end_error_ms": 134.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 62,
+                    "matched": 3,
+                    "precision": 0.04838709677419355,
+                    "recall": 0.0625,
+                    "f1": 0.05454545454545454,
+                    "matched_mean_iou": 0.8731871958757463,
+                    "median_start_error_ms": 40.0,
+                    "median_end_error_ms": 27.0
+                  }
+                ],
+                "predicted_under_500ms": 45,
+                "predicted_median_duration_ms": 400.0,
+                "predicted_with_at_least_five_hand_frames": 11,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 13,
+                "references_overlapping_multiple_predictions_at_iou_025": 16,
+                "predictions_overlapping_multiple_references_at_iou_025": 6
+              }
+            },
+            "floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.5,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.1
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 48,
+                    "matched": 41,
+                    "precision": 0.8541666666666666,
+                    "recall": 0.8541666666666666,
+                    "f1": 0.8541666666666666,
+                    "matched_mean_iou": 0.590508118903743,
+                    "median_start_error_ms": 107.0,
+                    "median_end_error_ms": 125.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 48,
+                    "matched": 29,
+                    "precision": 0.6041666666666666,
+                    "recall": 0.6041666666666666,
+                    "f1": 0.6041666666666666,
+                    "matched_mean_iou": 0.6532639873088538,
+                    "median_start_error_ms": 81.0,
+                    "median_end_error_ms": 118.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 48,
+                    "matched": 6,
+                    "precision": 0.125,
+                    "recall": 0.125,
+                    "f1": 0.125,
+                    "matched_mean_iou": 0.8732185578223538,
+                    "median_start_error_ms": 44.5,
+                    "median_end_error_ms": 19.5
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 39,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 9,
+                "references_overlapping_multiple_predictions_at_iou_025": 10,
+                "predictions_overlapping_multiple_references_at_iou_025": 8
+              }
+            },
+            "weak_cut_retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.5,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 42,
+                    "matched": 38,
+                    "precision": 0.9047619047619048,
+                    "recall": 0.7916666666666666,
+                    "f1": 0.8444444444444444,
+                    "matched_mean_iou": 0.578447204883421,
+                    "median_start_error_ms": 116.5,
+                    "median_end_error_ms": 135.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 42,
+                    "matched": 27,
+                    "precision": 0.6428571428571429,
+                    "recall": 0.5625,
+                    "f1": 0.6,
+                    "matched_mean_iou": 0.6464676657953258,
+                    "median_start_error_ms": 80.0,
+                    "median_end_error_ms": 125.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 42,
+                    "matched": 5,
+                    "precision": 0.11904761904761904,
+                    "recall": 0.10416666666666667,
+                    "f1": 0.1111111111111111,
+                    "matched_mean_iou": 0.861409795484214,
+                    "median_start_error_ms": 19.0,
+                    "median_end_error_ms": 40.0
+                  }
+                ],
+                "predicted_under_500ms": 10,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 28,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 9,
+                "references_overlapping_multiple_predictions_at_iou_025": 3,
+                "predictions_overlapping_multiple_references_at_iou_025": 5
+              }
+            },
+            "weak_cut_floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.5,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.1
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 40,
+                    "matched": 38,
+                    "precision": 0.95,
+                    "recall": 0.7916666666666666,
+                    "f1": 0.8636363636363636,
+                    "matched_mean_iou": 0.5815680391336687,
+                    "median_start_error_ms": 116.5,
+                    "median_end_error_ms": 172.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 40,
+                    "matched": 26,
+                    "precision": 0.65,
+                    "recall": 0.5416666666666666,
+                    "f1": 0.5909090909090909,
+                    "matched_mean_iou": 0.6607481987374844,
+                    "median_start_error_ms": 74.5,
+                    "median_end_error_ms": 130.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 40,
+                    "matched": 5,
+                    "precision": 0.125,
+                    "recall": 0.10416666666666667,
+                    "f1": 0.11363636363636363,
+                    "matched_mean_iou": 0.861409795484214,
+                    "median_start_error_ms": 19.0,
+                    "median_end_error_ms": 40.0
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 34,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 8,
+                "references_overlapping_multiple_predictions_at_iou_025": 3,
+                "predictions_overlapping_multiple_references_at_iou_025": 7
+              }
+            }
+          }
+        },
+        "362": {
+          "decoder_tuned_on": 361,
+          "profiles": {
+            "retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.15,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 20,
+                    "precision": 0.7407407407407407,
+                    "recall": 0.8333333333333334,
+                    "f1": 0.7843137254901961,
+                    "matched_mean_iou": 0.5740164785145693,
+                    "median_start_error_ms": 166.0,
+                    "median_end_error_ms": 118.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 14,
+                    "precision": 0.5185185185185185,
+                    "recall": 0.5833333333333334,
+                    "f1": 0.5490196078431373,
+                    "matched_mean_iou": 0.6389403568167428,
+                    "median_start_error_ms": 156.5,
+                    "median_end_error_ms": 115.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 3,
+                    "precision": 0.1111111111111111,
+                    "recall": 0.125,
+                    "f1": 0.11764705882352941,
+                    "matched_mean_iou": 0.8204992389649924,
+                    "median_start_error_ms": 69.0,
+                    "median_end_error_ms": 41.0
+                  }
+                ],
+                "predicted_under_500ms": 1,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 20,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 3,
+                "references_overlapping_multiple_predictions_at_iou_025": 5,
+                "predictions_overlapping_multiple_references_at_iou_025": 4
+              }
+            },
+            "floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.52,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.35,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 26,
+                    "matched": 20,
+                    "precision": 0.7692307692307693,
+                    "recall": 0.8333333333333334,
+                    "f1": 0.8,
+                    "matched_mean_iou": 0.5532218773085162,
+                    "median_start_error_ms": 177.0,
+                    "median_end_error_ms": 146.5
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 26,
+                    "matched": 13,
+                    "precision": 0.5,
+                    "recall": 0.5416666666666666,
+                    "f1": 0.52,
+                    "matched_mean_iou": 0.6315504095580395,
+                    "median_start_error_ms": 158.0,
+                    "median_end_error_ms": 119.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 26,
+                    "matched": 3,
+                    "precision": 0.11538461538461539,
+                    "recall": 0.125,
+                    "f1": 0.12,
+                    "matched_mean_iou": 0.8204992389649924,
+                    "median_start_error_ms": 69.0,
+                    "median_end_error_ms": 41.0
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 20,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 2,
+                "references_overlapping_multiple_predictions_at_iou_025": 4,
+                "predictions_overlapping_multiple_references_at_iou_025": 4
+              }
+            },
+            "weak_cut_retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 21,
+                    "matched": 17,
+                    "precision": 0.8095238095238095,
+                    "recall": 0.7083333333333334,
+                    "f1": 0.7555555555555555,
+                    "matched_mean_iou": 0.5036258065840391,
+                    "median_start_error_ms": 158.0,
+                    "median_end_error_ms": 219.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 21,
+                    "matched": 9,
+                    "precision": 0.42857142857142855,
+                    "recall": 0.375,
+                    "f1": 0.4,
+                    "matched_mean_iou": 0.5766645739276529,
+                    "median_start_error_ms": 157.0,
+                    "median_end_error_ms": 141.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 21,
+                    "matched": 0,
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0,
+                    "matched_mean_iou": null,
+                    "median_start_error_ms": null,
+                    "median_end_error_ms": null
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 16,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 1,
+                "references_overlapping_multiple_predictions_at_iou_025": 2,
+                "predictions_overlapping_multiple_references_at_iou_025": 3
+              }
+            },
+            "weak_cut_floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.3,
+                "proposal_penalty": 0.15,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 20,
+                    "precision": 0.7407407407407407,
+                    "recall": 0.8333333333333334,
+                    "f1": 0.7843137254901961,
+                    "matched_mean_iou": 0.5432265187120847,
+                    "median_start_error_ms": 134.5,
+                    "median_end_error_ms": 115.5
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 12,
+                    "precision": 0.4444444444444444,
+                    "recall": 0.5,
+                    "f1": 0.47058823529411764,
+                    "matched_mean_iou": 0.6240336292015746,
+                    "median_start_error_ms": 86.0,
+                    "median_end_error_ms": 115.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 2,
+                    "precision": 0.07407407407407407,
+                    "recall": 0.08333333333333333,
+                    "f1": 0.0784313725490196,
+                    "matched_mean_iou": 0.809082191780822,
+                    "median_start_error_ms": 59.5,
+                    "median_end_error_ms": 42.0
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 19,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 3,
+                "references_overlapping_multiple_predictions_at_iou_025": 4,
+                "predictions_overlapping_multiple_references_at_iou_025": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "holistic": {
+      "checkpoint_sha256": "b11b359cd6eec4edaca317537296cb10709c49ad13eedf5960e88ffadd5e7ba1",
+      "duration_prior_train_ms": 558.0,
+      "profiles": {
+        "frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {},
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 64,
+                "precision": 0.810126582278481,
+                "recall": 0.8888888888888888,
+                "f1": 0.847682119205298,
+                "matched_mean_iou": 0.5765246229393808,
+                "median_start_error_ms": 116.5,
+                "median_end_error_ms": 129.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 45,
+                "precision": 0.569620253164557,
+                "recall": 0.625,
+                "f1": 0.5960264900662252,
+                "matched_mean_iou": 0.655155633181834,
+                "median_start_error_ms": 83.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 8,
+                "precision": 0.10126582278481013,
+                "recall": 0.1111111111111111,
+                "f1": 0.10596026490066225,
+                "matched_mean_iou": 0.8719142024213306,
+                "median_start_error_ms": 31.5,
+                "median_end_error_ms": 27.0
+              }
+            ],
+            "predicted_under_500ms": 18,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 50,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 18,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 43,
+                  "precision": 0.86,
+                  "recall": 0.8958333333333334,
+                  "f1": 0.8775510204081632,
+                  "matched_mean_iou": 0.5766992287461339,
+                  "median_start_error_ms": 109.0,
+                  "median_end_error_ms": 136.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 31,
+                  "precision": 0.62,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6326530612244898,
+                  "matched_mean_iou": 0.660288706385302,
+                  "median_start_error_ms": 73.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 6,
+                  "precision": 0.12,
+                  "recall": 0.125,
+                  "f1": 0.12244897959183673,
+                  "matched_mean_iou": 0.8756884113941502,
+                  "median_start_error_ms": 31.5,
+                  "median_end_error_ms": 33.5
+                }
+              ],
+              "predicted_under_500ms": 12,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 33,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 10,
+              "references_overlapping_multiple_predictions_at_iou_025": 12,
+              "predictions_overlapping_multiple_references_at_iou_025": 8
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 21,
+                  "precision": 0.7241379310344828,
+                  "recall": 0.875,
+                  "f1": 0.7924528301886793,
+                  "matched_mean_iou": 0.5761670967636481,
+                  "median_start_error_ms": 145.0,
+                  "median_end_error_ms": 119.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 14,
+                  "precision": 0.4827586206896552,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5283018867924528,
+                  "matched_mean_iou": 0.6437895425170119,
+                  "median_start_error_ms": 132.5,
+                  "median_end_error_ms": 103.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 2,
+                  "precision": 0.06896551724137931,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.07547169811320754,
+                  "matched_mean_iou": 0.8605915755028712,
+                  "median_start_error_ms": 48.5,
+                  "median_end_error_ms": 19.0
+                }
+              ],
+              "predicted_under_500ms": 6,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 17,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 14
+        },
+        "floor_frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "min_frames": 5
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 62,
+                "precision": 0.8378378378378378,
+                "recall": 0.8611111111111112,
+                "f1": 0.8493150684931506,
+                "matched_mean_iou": 0.5827972556140286,
+                "median_start_error_ms": 133.5,
+                "median_end_error_ms": 126.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 42,
+                "precision": 0.5675675675675675,
+                "recall": 0.5833333333333334,
+                "f1": 0.5753424657534246,
+                "matched_mean_iou": 0.6618392684363934,
+                "median_start_error_ms": 81.0,
+                "median_end_error_ms": 92.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 74,
+                "matched": 9,
+                "precision": 0.12162162162162163,
+                "recall": 0.125,
+                "f1": 0.1232876712328767,
+                "matched_mean_iou": 0.8629982064919548,
+                "median_start_error_ms": 44.0,
+                "median_end_error_ms": 27.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 61,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 10,
+            "references_overlapping_multiple_predictions_at_iou_025": 14,
+            "predictions_overlapping_multiple_references_at_iou_025": 10
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 46,
+                  "matched": 41,
+                  "precision": 0.8913043478260869,
+                  "recall": 0.8541666666666666,
+                  "f1": 0.8723404255319149,
+                  "matched_mean_iou": 0.607334329225442,
+                  "median_start_error_ms": 117.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 46,
+                  "matched": 30,
+                  "precision": 0.6521739130434783,
+                  "recall": 0.625,
+                  "f1": 0.6382978723404256,
+                  "matched_mean_iou": 0.6813129883564936,
+                  "median_start_error_ms": 70.5,
+                  "median_end_error_ms": 85.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 46,
+                  "matched": 9,
+                  "precision": 0.1956521739130435,
+                  "recall": 0.1875,
+                  "f1": 0.19148936170212766,
+                  "matched_mean_iou": 0.8629982064919548,
+                  "median_start_error_ms": 44.0,
+                  "median_end_error_ms": 27.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 40,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 8,
+              "references_overlapping_multiple_predictions_at_iou_025": 8,
+              "predictions_overlapping_multiple_references_at_iou_025": 6
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 21,
+                  "precision": 0.75,
+                  "recall": 0.875,
+                  "f1": 0.8076923076923077,
+                  "matched_mean_iou": 0.534891540467936,
+                  "median_start_error_ms": 202.0,
+                  "median_end_error_ms": 127.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 12,
+                  "precision": 0.42857142857142855,
+                  "recall": 0.5,
+                  "f1": 0.46153846153846156,
+                  "matched_mean_iou": 0.6131549686361428,
+                  "median_start_error_ms": 150.5,
+                  "median_end_error_ms": 118.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 0,
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1": 0.0,
+                  "matched_mean_iou": null,
+                  "median_start_error_ms": null,
+                  "median_end_error_ms": null
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 9
+        },
+        "weak_cut_frozen": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 67,
+                "matched": 60,
+                "precision": 0.8955223880597015,
+                "recall": 0.8333333333333334,
+                "f1": 0.8633093525179856,
+                "matched_mean_iou": 0.5728284319640856,
+                "median_start_error_ms": 116.0,
+                "median_end_error_ms": 137.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 67,
+                "matched": 44,
+                "precision": 0.6567164179104478,
+                "recall": 0.6111111111111112,
+                "f1": 0.6330935251798561,
+                "matched_mean_iou": 0.6394069596053668,
+                "median_start_error_ms": 79.0,
+                "median_end_error_ms": 131.5
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 67,
+                "matched": 9,
+                "precision": 0.13432835820895522,
+                "recall": 0.125,
+                "f1": 0.12949640287769784,
+                "matched_mean_iou": 0.8557703986378212,
+                "median_start_error_ms": 28.0,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 5,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 52,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 12,
+            "references_overlapping_multiple_predictions_at_iou_025": 9,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 40,
+                  "precision": 0.9523809523809523,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8888888888888888,
+                  "matched_mean_iou": 0.5926342776164087,
+                  "median_start_error_ms": 106.0,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 31,
+                  "precision": 0.7380952380952381,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6888888888888889,
+                  "matched_mean_iou": 0.648462101695046,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 135.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 42,
+                  "matched": 7,
+                  "precision": 0.16666666666666666,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.15555555555555556,
+                  "matched_mean_iou": 0.8582548694851063,
+                  "median_start_error_ms": 28.0,
+                  "median_end_error_ms": 40.0
+                }
+              ],
+              "predicted_under_500ms": 1,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 36,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 9,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 20,
+                  "precision": 0.8,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8163265306122449,
+                  "matched_mean_iou": 0.5332167406594397,
+                  "median_start_error_ms": 181.0,
+                  "median_end_error_ms": 162.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 13,
+                  "precision": 0.52,
+                  "recall": 0.5416666666666666,
+                  "f1": 0.5306122448979592,
+                  "matched_mean_iou": 0.6178139284684389,
+                  "median_start_error_ms": 90.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 2,
+                  "precision": 0.08,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.08163265306122448,
+                  "matched_mean_iou": 0.8470747506723237,
+                  "median_start_error_ms": 22.5,
+                  "median_end_error_ms": 57.0
+                }
+              ],
+              "predicted_under_500ms": 4,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 16,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 5,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 10
+        },
+        "retuned": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {},
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 64,
+                "precision": 0.810126582278481,
+                "recall": 0.8888888888888888,
+                "f1": 0.847682119205298,
+                "matched_mean_iou": 0.5765246229393808,
+                "median_start_error_ms": 116.5,
+                "median_end_error_ms": 129.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 45,
+                "precision": 0.569620253164557,
+                "recall": 0.625,
+                "f1": 0.5960264900662252,
+                "matched_mean_iou": 0.655155633181834,
+                "median_start_error_ms": 83.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 79,
+                "matched": 8,
+                "precision": 0.10126582278481013,
+                "recall": 0.1111111111111111,
+                "f1": 0.10596026490066225,
+                "matched_mean_iou": 0.8719142024213306,
+                "median_start_error_ms": 31.5,
+                "median_end_error_ms": 27.0
+              }
+            ],
+            "predicted_under_500ms": 18,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 50,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 18,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 43,
+                  "precision": 0.86,
+                  "recall": 0.8958333333333334,
+                  "f1": 0.8775510204081632,
+                  "matched_mean_iou": 0.5766992287461339,
+                  "median_start_error_ms": 109.0,
+                  "median_end_error_ms": 136.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 31,
+                  "precision": 0.62,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6326530612244898,
+                  "matched_mean_iou": 0.660288706385302,
+                  "median_start_error_ms": 73.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 6,
+                  "precision": 0.12,
+                  "recall": 0.125,
+                  "f1": 0.12244897959183673,
+                  "matched_mean_iou": 0.8756884113941502,
+                  "median_start_error_ms": 31.5,
+                  "median_end_error_ms": 33.5
+                }
+              ],
+              "predicted_under_500ms": 12,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 33,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 10,
+              "references_overlapping_multiple_predictions_at_iou_025": 12,
+              "predictions_overlapping_multiple_references_at_iou_025": 8
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 21,
+                  "precision": 0.7241379310344828,
+                  "recall": 0.875,
+                  "f1": 0.7924528301886793,
+                  "matched_mean_iou": 0.5761670967636481,
+                  "median_start_error_ms": 145.0,
+                  "median_end_error_ms": 119.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 14,
+                  "precision": 0.4827586206896552,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5283018867924528,
+                  "matched_mean_iou": 0.6437895425170119,
+                  "median_start_error_ms": 132.5,
+                  "median_end_error_ms": 103.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 29,
+                  "matched": 2,
+                  "precision": 0.06896551724137931,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.07547169811320754,
+                  "matched_mean_iou": 0.8605915755028712,
+                  "median_start_error_ms": 48.5,
+                  "median_end_error_ms": 19.0
+                }
+              ],
+              "predicted_under_500ms": 6,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 17,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 14
+        },
+        "floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.35,
+            "boundary_weight": 0.5,
+            "proposal_penalty": 0.55,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "min_frames": 5
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 64,
+                "precision": 0.8311688311688312,
+                "recall": 0.8888888888888888,
+                "f1": 0.8590604026845637,
+                "matched_mean_iou": 0.5781648866593581,
+                "median_start_error_ms": 134.0,
+                "median_end_error_ms": 129.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 48,
+                "precision": 0.6233766233766234,
+                "recall": 0.6666666666666666,
+                "f1": 0.6442953020134228,
+                "matched_mean_iou": 0.6378840747351305,
+                "median_start_error_ms": 118.5,
+                "median_end_error_ms": 116.5
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 77,
+                "matched": 6,
+                "precision": 0.07792207792207792,
+                "recall": 0.08333333333333333,
+                "f1": 0.08053691275167785,
+                "matched_mean_iou": 0.8522586757551123,
+                "median_start_error_ms": 46.5,
+                "median_end_error_ms": 21.5
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 58,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 16,
+            "predictions_overlapping_multiple_references_at_iou_025": 11
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 43,
+                  "precision": 0.86,
+                  "recall": 0.8958333333333334,
+                  "f1": 0.8775510204081632,
+                  "matched_mean_iou": 0.6019081491816578,
+                  "median_start_error_ms": 124.0,
+                  "median_end_error_ms": 124.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 36,
+                  "precision": 0.72,
+                  "recall": 0.75,
+                  "f1": 0.7346938775510204,
+                  "matched_mean_iou": 0.6418233063417438,
+                  "median_start_error_ms": 116.5,
+                  "median_end_error_ms": 116.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 6,
+                  "precision": 0.12,
+                  "recall": 0.125,
+                  "f1": 0.12244897959183673,
+                  "matched_mean_iou": 0.8522586757551123,
+                  "median_start_error_ms": 46.5,
+                  "median_end_error_ms": 21.5
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 38,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 11,
+              "references_overlapping_multiple_predictions_at_iou_025": 9,
+              "predictions_overlapping_multiple_references_at_iou_025": 6
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 21,
+                  "precision": 0.7777777777777778,
+                  "recall": 0.875,
+                  "f1": 0.8235294117647058,
+                  "matched_mean_iou": 0.5295477300660777,
+                  "median_start_error_ms": 185.0,
+                  "median_end_error_ms": 174.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 12,
+                  "precision": 0.4444444444444444,
+                  "recall": 0.5,
+                  "f1": 0.47058823529411764,
+                  "matched_mean_iou": 0.6260663799152906,
+                  "median_start_error_ms": 151.0,
+                  "median_end_error_ms": 104.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 27,
+                  "matched": 0,
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "f1": 0.0,
+                  "matched_mean_iou": null,
+                  "median_start_error_ms": null,
+                  "median_end_error_ms": null
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 20,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 3,
+              "references_overlapping_multiple_predictions_at_iou_025": 7,
+              "predictions_overlapping_multiple_references_at_iou_025": 5
+            }
+          },
+          "short_references_also_matched_by_frozen": 11
+        },
+        "soft_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.5,
+            "proposal_penalty": 0.55,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "short_penalty": 0.45
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 63,
+                "precision": 0.8076923076923077,
+                "recall": 0.875,
+                "f1": 0.84,
+                "matched_mean_iou": 0.5733937837087465,
+                "median_start_error_ms": 124.0,
+                "median_end_error_ms": 119.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 47,
+                "precision": 0.6025641025641025,
+                "recall": 0.6527777777777778,
+                "f1": 0.6266666666666667,
+                "matched_mean_iou": 0.6359642093959685,
+                "median_start_error_ms": 96.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 78,
+                "matched": 7,
+                "precision": 0.08974358974358974,
+                "recall": 0.09722222222222222,
+                "f1": 0.09333333333333334,
+                "matched_mean_iou": 0.8505710607209711,
+                "median_start_error_ms": 49.0,
+                "median_end_error_ms": 24.0
+              }
+            ],
+            "predicted_under_500ms": 11,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 51,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 17,
+            "predictions_overlapping_multiple_references_at_iou_025": 9
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 42,
+                  "precision": 0.84,
+                  "recall": 0.875,
+                  "f1": 0.8571428571428571,
+                  "matched_mean_iou": 0.5786692285210869,
+                  "median_start_error_ms": 120.5,
+                  "median_end_error_ms": 129.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 32,
+                  "precision": 0.64,
+                  "recall": 0.6666666666666666,
+                  "f1": 0.6530612244897959,
+                  "matched_mean_iou": 0.6396383759242386,
+                  "median_start_error_ms": 81.0,
+                  "median_end_error_ms": 120.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 50,
+                  "matched": 5,
+                  "precision": 0.1,
+                  "recall": 0.10416666666666667,
+                  "f1": 0.10204081632653061,
+                  "matched_mean_iou": 0.8719352171076851,
+                  "median_start_error_ms": 44.0,
+                  "median_end_error_ms": 27.0
+                }
+              ],
+              "predicted_under_500ms": 6,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 34,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 10,
+              "references_overlapping_multiple_predictions_at_iou_025": 11,
+              "predictions_overlapping_multiple_references_at_iou_025": 7
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 21,
+                  "precision": 0.75,
+                  "recall": 0.875,
+                  "f1": 0.8076923076923077,
+                  "matched_mean_iou": 0.5628428940840655,
+                  "median_start_error_ms": 125.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 15,
+                  "precision": 0.5357142857142857,
+                  "recall": 0.625,
+                  "f1": 0.5769230769230769,
+                  "matched_mean_iou": 0.6281259874689925,
+                  "median_start_error_ms": 120.0,
+                  "median_end_error_ms": 117.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 28,
+                  "matched": 2,
+                  "precision": 0.07142857142857142,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.07692307692307693,
+                  "matched_mean_iou": 0.797160669754186,
+                  "median_start_error_ms": 128.5,
+                  "median_end_error_ms": 21.5
+                }
+              ],
+              "predicted_under_500ms": 5,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 17,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 6,
+              "predictions_overlapping_multiple_references_at_iou_025": 2
+            }
+          },
+          "short_references_also_matched_by_frozen": 11
+        },
+        "linear_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "activity_power": 1
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 69,
+                "matched": 60,
+                "precision": 0.8695652173913043,
+                "recall": 0.8333333333333334,
+                "f1": 0.851063829787234,
+                "matched_mean_iou": 0.6083962156088557,
+                "median_start_error_ms": 121.0,
+                "median_end_error_ms": 121.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 69,
+                "matched": 46,
+                "precision": 0.6666666666666666,
+                "recall": 0.6388888888888888,
+                "f1": 0.6524822695035462,
+                "matched_mean_iou": 0.6615959925652833,
+                "median_start_error_ms": 99.5,
+                "median_end_error_ms": 102.5
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 69,
+                "matched": 8,
+                "precision": 0.11594202898550725,
+                "recall": 0.1111111111111111,
+                "f1": 0.11347517730496454,
+                "matched_mean_iou": 0.8341045317521107,
+                "median_start_error_ms": 62.5,
+                "median_end_error_ms": 45.5
+              }
+            ],
+            "predicted_under_500ms": 1,
+            "predicted_median_duration_ms": 600.0,
+            "predicted_with_at_least_five_hand_frames": 62,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 12,
+            "references_overlapping_multiple_predictions_at_iou_025": 12,
+            "predictions_overlapping_multiple_references_at_iou_025": 14
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 44,
+                  "matched": 40,
+                  "precision": 0.9090909090909091,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8695652173913043,
+                  "matched_mean_iou": 0.6253798199919456,
+                  "median_start_error_ms": 114.5,
+                  "median_end_error_ms": 102.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 44,
+                  "matched": 32,
+                  "precision": 0.7272727272727273,
+                  "recall": 0.6666666666666666,
+                  "f1": 0.6956521739130435,
+                  "matched_mean_iou": 0.670380424216695,
+                  "median_start_error_ms": 110.5,
+                  "median_end_error_ms": 91.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 44,
+                  "matched": 7,
+                  "precision": 0.1590909090909091,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.15217391304347827,
+                  "matched_mean_iou": 0.8327861315262218,
+                  "median_start_error_ms": 56.0,
+                  "median_end_error_ms": 51.0
+                }
+              ],
+              "predicted_under_500ms": 1,
+              "predicted_median_duration_ms": 600.0,
+              "predicted_with_at_least_five_hand_frames": 41,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 8,
+              "references_overlapping_multiple_predictions_at_iou_025": 8,
+              "predictions_overlapping_multiple_references_at_iou_025": 10
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 20,
+                  "precision": 0.8,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8163265306122449,
+                  "matched_mean_iou": 0.5744290068426761,
+                  "median_start_error_ms": 135.0,
+                  "median_end_error_ms": 179.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 14,
+                  "precision": 0.56,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5714285714285714,
+                  "matched_mean_iou": 0.6415172916477712,
+                  "median_start_error_ms": 88.0,
+                  "median_end_error_ms": 121.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 1,
+                  "precision": 0.04,
+                  "recall": 0.041666666666666664,
+                  "f1": 0.04081632653061224,
+                  "matched_mean_iou": 0.8433333333333334,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 25.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 600.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 9
+        },
+        "linear_floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.1,
+            "proposal_penalty": 0.15,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "min_frames": 5,
+            "activity_power": 1
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 68,
+                "matched": 60,
+                "precision": 0.8823529411764706,
+                "recall": 0.8333333333333334,
+                "f1": 0.8571428571428571,
+                "matched_mean_iou": 0.5999409716579454,
+                "median_start_error_ms": 126.5,
+                "median_end_error_ms": 126.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 68,
+                "matched": 45,
+                "precision": 0.6617647058823529,
+                "recall": 0.625,
+                "f1": 0.6428571428571429,
+                "matched_mean_iou": 0.6600669042528708,
+                "median_start_error_ms": 112.0,
+                "median_end_error_ms": 93.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 68,
+                "matched": 8,
+                "precision": 0.11764705882352941,
+                "recall": 0.1111111111111111,
+                "f1": 0.11428571428571428,
+                "matched_mean_iou": 0.8341045317521107,
+                "median_start_error_ms": 62.5,
+                "median_end_error_ms": 45.5
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 600.0,
+            "predicted_with_at_least_five_hand_frames": 62,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 11,
+            "references_overlapping_multiple_predictions_at_iou_025": 12,
+            "predictions_overlapping_multiple_references_at_iou_025": 14
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 43,
+                  "matched": 40,
+                  "precision": 0.9302325581395349,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8791208791208791,
+                  "matched_mean_iou": 0.6126969540655799,
+                  "median_start_error_ms": 122.5,
+                  "median_end_error_ms": 114.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 43,
+                  "matched": 31,
+                  "precision": 0.7209302325581395,
+                  "recall": 0.6458333333333334,
+                  "f1": 0.6813186813186813,
+                  "matched_mean_iou": 0.6684441486551739,
+                  "median_start_error_ms": 117.0,
+                  "median_end_error_ms": 90.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 43,
+                  "matched": 7,
+                  "precision": 0.16279069767441862,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.15384615384615385,
+                  "matched_mean_iou": 0.8327861315262218,
+                  "median_start_error_ms": 56.0,
+                  "median_end_error_ms": 51.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 600.0,
+              "predicted_with_at_least_five_hand_frames": 41,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 7,
+              "references_overlapping_multiple_predictions_at_iou_025": 8,
+              "predictions_overlapping_multiple_references_at_iou_025": 10
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 20,
+                  "precision": 0.8,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8163265306122449,
+                  "matched_mean_iou": 0.5744290068426761,
+                  "median_start_error_ms": 135.0,
+                  "median_end_error_ms": 179.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 14,
+                  "precision": 0.56,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5714285714285714,
+                  "matched_mean_iou": 0.6415172916477712,
+                  "median_start_error_ms": 88.0,
+                  "median_end_error_ms": 121.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 25,
+                  "matched": 1,
+                  "precision": 0.04,
+                  "recall": 0.041666666666666664,
+                  "f1": 0.04081632653061224,
+                  "matched_mean_iou": 0.8433333333333334,
+                  "median_start_error_ms": 69.0,
+                  "median_end_error_ms": 25.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 600.0,
+              "predicted_with_at_least_five_hand_frames": 21,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 4,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            }
+          },
+          "short_references_also_matched_by_frozen": 8
+        },
+        "weak_cut_retuned": {
+          "decoder": {
+            "activity_floor": 0.52,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.55,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 60,
+                "precision": 0.9375,
+                "recall": 0.8333333333333334,
+                "f1": 0.8823529411764706,
+                "matched_mean_iou": 0.5974746767437082,
+                "median_start_error_ms": 126.5,
+                "median_end_error_ms": 126.5
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 46,
+                "precision": 0.71875,
+                "recall": 0.6388888888888888,
+                "f1": 0.6764705882352942,
+                "matched_mean_iou": 0.656874617020979,
+                "median_start_error_ms": 91.5,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 9,
+                "precision": 0.140625,
+                "recall": 0.125,
+                "f1": 0.1323529411764706,
+                "matched_mean_iou": 0.8604725925458614,
+                "median_start_error_ms": 19.0,
+                "median_end_error_ms": 40.0
+              }
+            ],
+            "predicted_under_500ms": 9,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 45,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 14,
+            "references_overlapping_multiple_predictions_at_iou_025": 3,
+            "predictions_overlapping_multiple_references_at_iou_025": 7
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 41,
+                  "matched": 40,
+                  "precision": 0.975609756097561,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.898876404494382,
+                  "matched_mean_iou": 0.6130886263543713,
+                  "median_start_error_ms": 116.5,
+                  "median_end_error_ms": 126.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 41,
+                  "matched": 32,
+                  "precision": 0.7804878048780488,
+                  "recall": 0.6666666666666666,
+                  "f1": 0.7191011235955056,
+                  "matched_mean_iou": 0.6633815297563123,
+                  "median_start_error_ms": 81.0,
+                  "median_end_error_ms": 120.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 41,
+                  "matched": 7,
+                  "precision": 0.17073170731707318,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.15730337078651685,
+                  "matched_mean_iou": 0.8660105186616669,
+                  "median_start_error_ms": 19.0,
+                  "median_end_error_ms": 40.0
+                }
+              ],
+              "predicted_under_500ms": 6,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 29,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 10,
+              "references_overlapping_multiple_predictions_at_iou_025": 1,
+              "predictions_overlapping_multiple_references_at_iou_025": 4
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 20,
+                  "precision": 0.8695652173913043,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.851063829787234,
+                  "matched_mean_iou": 0.5662467775223821,
+                  "median_start_error_ms": 174.5,
+                  "median_end_error_ms": 129.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 14,
+                  "precision": 0.6086956521739131,
+                  "recall": 0.5833333333333334,
+                  "f1": 0.5957446808510638,
+                  "matched_mean_iou": 0.6420016736259316,
+                  "median_start_error_ms": 107.5,
+                  "median_end_error_ms": 103.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 23,
+                  "matched": 2,
+                  "precision": 0.08695652173913043,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.0851063829787234,
+                  "matched_mean_iou": 0.8410898511405419,
+                  "median_start_error_ms": 29.5,
+                  "median_end_error_ms": 54.0
+                }
+              ],
+              "predicted_under_500ms": 3,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 16,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 4,
+              "references_overlapping_multiple_predictions_at_iou_025": 2,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 11
+        },
+        "weak_cut_floor_retuned": {
+          "decoder": {
+            "activity_floor": 0.68,
+            "boundary_weight": 0.3,
+            "proposal_penalty": 0.35,
+            "duration_weight": 0.25
+          },
+          "controls": {
+            "min_frames": 5,
+            "cut_penalty": 0.25
+          },
+          "aggregate": {
+            "scores_by_iou": [
+              {
+                "iou_threshold": 0.25,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 59,
+                "precision": 0.921875,
+                "recall": 0.8194444444444444,
+                "f1": 0.8676470588235294,
+                "matched_mean_iou": 0.5976380376835366,
+                "median_start_error_ms": 111.0,
+                "median_end_error_ms": 148.0
+              },
+              {
+                "iou_threshold": 0.5,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 45,
+                "precision": 0.703125,
+                "recall": 0.625,
+                "f1": 0.6617647058823529,
+                "matched_mean_iou": 0.6547275763683901,
+                "median_start_error_ms": 90.0,
+                "median_end_error_ms": 117.0
+              },
+              {
+                "iou_threshold": 0.75,
+                "requires_matching_label": false,
+                "reference_intervals": 72,
+                "predicted_intervals": 64,
+                "matched": 9,
+                "precision": 0.140625,
+                "recall": 0.125,
+                "f1": 0.1323529411764706,
+                "matched_mean_iou": 0.8548710841854529,
+                "median_start_error_ms": 28.0,
+                "median_end_error_ms": 36.0
+              }
+            ],
+            "predicted_under_500ms": 0,
+            "predicted_median_duration_ms": 500.0,
+            "predicted_with_at_least_five_hand_frames": 50,
+            "reference_under_500ms": 31,
+            "matched_reference_under_500ms_at_iou_050": 13,
+            "references_overlapping_multiple_predictions_at_iou_025": 4,
+            "predictions_overlapping_multiple_references_at_iou_025": 6
+          },
+          "by_case": {
+            "361": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 40,
+                  "matched": 39,
+                  "precision": 0.975,
+                  "recall": 0.8125,
+                  "f1": 0.8863636363636364,
+                  "matched_mean_iou": 0.6211345732608862,
+                  "median_start_error_ms": 103.0,
+                  "median_end_error_ms": 166.0
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 40,
+                  "matched": 33,
+                  "precision": 0.825,
+                  "recall": 0.6875,
+                  "f1": 0.75,
+                  "matched_mean_iou": 0.6585998885800847,
+                  "median_start_error_ms": 73.0,
+                  "median_end_error_ms": 125.0
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 48,
+                  "predicted_intervals": 40,
+                  "matched": 7,
+                  "precision": 0.175,
+                  "recall": 0.14583333333333334,
+                  "f1": 0.1590909090909091,
+                  "matched_mean_iou": 0.8588085793411417,
+                  "median_start_error_ms": 28.0,
+                  "median_end_error_ms": 36.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 32,
+              "reference_under_500ms": 21,
+              "matched_reference_under_500ms_at_iou_050": 11,
+              "references_overlapping_multiple_predictions_at_iou_025": 1,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            },
+            "362": {
+              "scores_by_iou": [
+                {
+                  "iou_threshold": 0.25,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 24,
+                  "matched": 20,
+                  "precision": 0.8333333333333334,
+                  "recall": 0.8333333333333334,
+                  "f1": 0.8333333333333334,
+                  "matched_mean_iou": 0.551819793307705,
+                  "median_start_error_ms": 181.0,
+                  "median_end_error_ms": 103.5
+                },
+                {
+                  "iou_threshold": 0.5,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 24,
+                  "matched": 12,
+                  "precision": 0.5,
+                  "recall": 0.5,
+                  "f1": 0.5,
+                  "matched_mean_iou": 0.64407871778623,
+                  "median_start_error_ms": 129.5,
+                  "median_end_error_ms": 89.5
+                },
+                {
+                  "iou_threshold": 0.75,
+                  "requires_matching_label": false,
+                  "reference_intervals": 24,
+                  "predicted_intervals": 24,
+                  "matched": 2,
+                  "precision": 0.08333333333333333,
+                  "recall": 0.08333333333333333,
+                  "f1": 0.08333333333333333,
+                  "matched_mean_iou": 0.8410898511405419,
+                  "median_start_error_ms": 29.5,
+                  "median_end_error_ms": 54.0
+                }
+              ],
+              "predicted_under_500ms": 0,
+              "predicted_median_duration_ms": 500.0,
+              "predicted_with_at_least_five_hand_frames": 18,
+              "reference_under_500ms": 10,
+              "matched_reference_under_500ms_at_iou_050": 2,
+              "references_overlapping_multiple_predictions_at_iou_025": 3,
+              "predictions_overlapping_multiple_references_at_iou_025": 3
+            }
+          },
+          "short_references_also_matched_by_frozen": 10
+        }
+      },
+      "cross_check_within_dev": {
+        "361": {
+          "decoder_tuned_on": 362,
+          "profiles": {
+            "retuned": {
+              "decoder": {
+                "activity_floor": 0.52,
+                "boundary_weight": 0.3,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 49,
+                    "matched": 43,
+                    "precision": 0.8775510204081632,
+                    "recall": 0.8958333333333334,
+                    "f1": 0.8865979381443299,
+                    "matched_mean_iou": 0.5653803552803895,
+                    "median_start_error_ms": 116.0,
+                    "median_end_error_ms": 134.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 49,
+                    "matched": 28,
+                    "precision": 0.5714285714285714,
+                    "recall": 0.5833333333333334,
+                    "f1": 0.5773195876288659,
+                    "matched_mean_iou": 0.6698084318062171,
+                    "median_start_error_ms": 70.5,
+                    "median_end_error_ms": 121.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 49,
+                    "matched": 7,
+                    "precision": 0.14285714285714285,
+                    "recall": 0.14583333333333334,
+                    "f1": 0.14432989690721648,
+                    "matched_mean_iou": 0.8630760061668645,
+                    "median_start_error_ms": 44.0,
+                    "median_end_error_ms": 40.0
+                  }
+                ],
+                "predicted_under_500ms": 15,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 31,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 9,
+                "references_overlapping_multiple_predictions_at_iou_025": 11,
+                "predictions_overlapping_multiple_references_at_iou_025": 9
+              }
+            },
+            "floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.1
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 45,
+                    "matched": 41,
+                    "precision": 0.9111111111111111,
+                    "recall": 0.8541666666666666,
+                    "f1": 0.8817204301075269,
+                    "matched_mean_iou": 0.5814369036534185,
+                    "median_start_error_ms": 123.0,
+                    "median_end_error_ms": 140.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 45,
+                    "matched": 26,
+                    "precision": 0.5777777777777777,
+                    "recall": 0.5416666666666666,
+                    "f1": 0.5591397849462365,
+                    "matched_mean_iou": 0.6773253298541264,
+                    "median_start_error_ms": 74.5,
+                    "median_end_error_ms": 84.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 45,
+                    "matched": 8,
+                    "precision": 0.17777777777777778,
+                    "recall": 0.16666666666666666,
+                    "f1": 0.17204301075268819,
+                    "matched_mean_iou": 0.8643333193298606,
+                    "median_start_error_ms": 46.5,
+                    "median_end_error_ms": 16.5
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 40,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 7,
+                "references_overlapping_multiple_predictions_at_iou_025": 8,
+                "predictions_overlapping_multiple_references_at_iou_025": 7
+              }
+            },
+            "weak_cut_retuned": {
+              "decoder": {
+                "activity_floor": 0.52,
+                "boundary_weight": 0.3,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 41,
+                    "matched": 40,
+                    "precision": 0.975609756097561,
+                    "recall": 0.8333333333333334,
+                    "f1": 0.898876404494382,
+                    "matched_mean_iou": 0.6130886263543713,
+                    "median_start_error_ms": 116.5,
+                    "median_end_error_ms": 126.5
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 41,
+                    "matched": 32,
+                    "precision": 0.7804878048780488,
+                    "recall": 0.6666666666666666,
+                    "f1": 0.7191011235955056,
+                    "matched_mean_iou": 0.6633815297563123,
+                    "median_start_error_ms": 81.0,
+                    "median_end_error_ms": 120.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 41,
+                    "matched": 7,
+                    "precision": 0.17073170731707318,
+                    "recall": 0.14583333333333334,
+                    "f1": 0.15730337078651685,
+                    "matched_mean_iou": 0.8660105186616669,
+                    "median_start_error_ms": 19.0,
+                    "median_end_error_ms": 40.0
+                  }
+                ],
+                "predicted_under_500ms": 6,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 29,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 10,
+                "references_overlapping_multiple_predictions_at_iou_025": 1,
+                "predictions_overlapping_multiple_references_at_iou_025": 4
+              }
+            },
+            "weak_cut_floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.5,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.1
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 38,
+                    "matched": 37,
+                    "precision": 0.9736842105263158,
+                    "recall": 0.7708333333333334,
+                    "f1": 0.8604651162790697,
+                    "matched_mean_iou": 0.5876703603751634,
+                    "median_start_error_ms": 140.0,
+                    "median_end_error_ms": 168.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 38,
+                    "matched": 28,
+                    "precision": 0.7368421052631579,
+                    "recall": 0.5833333333333334,
+                    "f1": 0.6511627906976745,
+                    "matched_mean_iou": 0.6409749073763041,
+                    "median_start_error_ms": 116.5,
+                    "median_end_error_ms": 132.0
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 48,
+                    "predicted_intervals": 38,
+                    "matched": 5,
+                    "precision": 0.13157894736842105,
+                    "recall": 0.10416666666666667,
+                    "f1": 0.11627906976744186,
+                    "matched_mean_iou": 0.8473618714307734,
+                    "median_start_error_ms": 19.0,
+                    "median_end_error_ms": 51.0
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 30,
+                "reference_under_500ms": 21,
+                "matched_reference_under_500ms_at_iou_050": 7,
+                "references_overlapping_multiple_predictions_at_iou_025": 2,
+                "predictions_overlapping_multiple_references_at_iou_025": 8
+              }
+            }
+          }
+        },
+        "362": {
+          "decoder_tuned_on": 361,
+          "profiles": {
+            "retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.1,
+                "proposal_penalty": 0.15,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 29,
+                    "matched": 21,
+                    "precision": 0.7241379310344828,
+                    "recall": 0.875,
+                    "f1": 0.7924528301886793,
+                    "matched_mean_iou": 0.5761670967636481,
+                    "median_start_error_ms": 145.0,
+                    "median_end_error_ms": 119.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 29,
+                    "matched": 14,
+                    "precision": 0.4827586206896552,
+                    "recall": 0.5833333333333334,
+                    "f1": 0.5283018867924528,
+                    "matched_mean_iou": 0.6437895425170119,
+                    "median_start_error_ms": 132.5,
+                    "median_end_error_ms": 103.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 29,
+                    "matched": 2,
+                    "precision": 0.06896551724137931,
+                    "recall": 0.08333333333333333,
+                    "f1": 0.07547169811320754,
+                    "matched_mean_iou": 0.8605915755028712,
+                    "median_start_error_ms": 48.5,
+                    "median_end_error_ms": 19.0
+                  }
+                ],
+                "predicted_under_500ms": 6,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 17,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 4,
+                "references_overlapping_multiple_predictions_at_iou_025": 6,
+                "predictions_overlapping_multiple_references_at_iou_025": 3
+              }
+            },
+            "floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.35,
+                "boundary_weight": 0.5,
+                "proposal_penalty": 0.55,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 21,
+                    "precision": 0.7777777777777778,
+                    "recall": 0.875,
+                    "f1": 0.8235294117647058,
+                    "matched_mean_iou": 0.5295477300660777,
+                    "median_start_error_ms": 185.0,
+                    "median_end_error_ms": 174.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 12,
+                    "precision": 0.4444444444444444,
+                    "recall": 0.5,
+                    "f1": 0.47058823529411764,
+                    "matched_mean_iou": 0.6260663799152906,
+                    "median_start_error_ms": 151.0,
+                    "median_end_error_ms": 104.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 27,
+                    "matched": 0,
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0,
+                    "matched_mean_iou": null,
+                    "median_start_error_ms": null,
+                    "median_end_error_ms": null
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 20,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 3,
+                "references_overlapping_multiple_predictions_at_iou_025": 7,
+                "predictions_overlapping_multiple_references_at_iou_025": 5
+              }
+            },
+            "weak_cut_retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.3,
+                "proposal_penalty": 0.35,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 25,
+                    "matched": 21,
+                    "precision": 0.84,
+                    "recall": 0.875,
+                    "f1": 0.8571428571428571,
+                    "matched_mean_iou": 0.5579839148938053,
+                    "median_start_error_ms": 169.0,
+                    "median_end_error_ms": 117.0
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 25,
+                    "matched": 14,
+                    "precision": 0.56,
+                    "recall": 0.5833333333333334,
+                    "f1": 0.5714285714285714,
+                    "matched_mean_iou": 0.6334165087907667,
+                    "median_start_error_ms": 107.5,
+                    "median_end_error_ms": 103.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 25,
+                    "matched": 2,
+                    "precision": 0.08,
+                    "recall": 0.08333333333333333,
+                    "f1": 0.08163265306122448,
+                    "matched_mean_iou": 0.8410898511405419,
+                    "median_start_error_ms": 29.5,
+                    "median_end_error_ms": 54.0
+                  }
+                ],
+                "predicted_under_500ms": 5,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 16,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 4,
+                "references_overlapping_multiple_predictions_at_iou_025": 3,
+                "predictions_overlapping_multiple_references_at_iou_025": 2
+              }
+            },
+            "weak_cut_floor_retuned": {
+              "decoder": {
+                "activity_floor": 0.68,
+                "boundary_weight": 0.3,
+                "proposal_penalty": 0.35,
+                "duration_weight": 0.25
+              },
+              "metrics": {
+                "scores_by_iou": [
+                  {
+                    "iou_threshold": 0.25,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 24,
+                    "matched": 20,
+                    "precision": 0.8333333333333334,
+                    "recall": 0.8333333333333334,
+                    "f1": 0.8333333333333334,
+                    "matched_mean_iou": 0.551819793307705,
+                    "median_start_error_ms": 181.0,
+                    "median_end_error_ms": 103.5
+                  },
+                  {
+                    "iou_threshold": 0.5,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 24,
+                    "matched": 12,
+                    "precision": 0.5,
+                    "recall": 0.5,
+                    "f1": 0.5,
+                    "matched_mean_iou": 0.64407871778623,
+                    "median_start_error_ms": 129.5,
+                    "median_end_error_ms": 89.5
+                  },
+                  {
+                    "iou_threshold": 0.75,
+                    "requires_matching_label": false,
+                    "reference_intervals": 24,
+                    "predicted_intervals": 24,
+                    "matched": 2,
+                    "precision": 0.08333333333333333,
+                    "recall": 0.08333333333333333,
+                    "f1": 0.08333333333333333,
+                    "matched_mean_iou": 0.8410898511405419,
+                    "median_start_error_ms": 29.5,
+                    "median_end_error_ms": 54.0
+                  }
+                ],
+                "predicted_under_500ms": 0,
+                "predicted_median_duration_ms": 500.0,
+                "predicted_with_at_least_five_hand_frames": 18,
+                "reference_under_500ms": 10,
+                "matched_reference_under_500ms_at_iou_050": 2,
+                "references_overlapping_multiple_predictions_at_iou_025": 3,
+                "predictions_overlapping_multiple_references_at_iou_025": 3
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
