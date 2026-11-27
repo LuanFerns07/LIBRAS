@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Complemento de treino para a configuração de Y. Os dois Y e o W da Unesp foram delimitados pelas letras em tela e pelo início e fim da configuração. As fontes independentes de Y e as duas outras aulas da UFSM ficam fora do treino.",
+  "sources": [
+    {
+      "id": "cecierj-13757",
+      "split": "train",
+      "title": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
+      "project": "UFF, Fundação Cecierj e Consórcio Cederj",
+      "credits": {
+        "roteiro": "Mariana da Cunha Teixeira de Souza",
+        "coordenação geral": "Luiz Manoel Figueiredo",
+        "atuação": [
+          "Vanessa Rodrigues Ildefonso",
+          "Cíntia Ingrid Macedo Ribeiro"
+        ],
+        "filmagem e edição": "Leandro Lima de Souza"
+      },
+      "page": "https://canal.cecierj.edu.br/recurso/13757",
+      "download": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
+      "licenseEvidence": "O campo Licença da publicação oficial de 20 de julho de 2015 declara a licença de atribuição Creative Commons e permite reutilização.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra amarela à direita da pessoa na âncora. Em X e Z a cartela aparece após o começo do gesto.",
+      "windows": [
+        {
+          "label": "Y",
+          "startMs": 120580,
+          "endMs": 122250,
+          "anchorMs": 121500
+        }
+      ]
+    },
+    {
+      "id": "unesp-222981",
+      "split": "train",
+      "title": "Conteúdos e didática de Libras - Alfabeto, numerais, pronomes, advérbios...",
+      "project": "NEaD Unesp e Univesp TV",
+      "credits": {
+        "intérprete de Libras": "Laís dos Santos di Benedetto",
+        "direção, produção e roteiro": "Univesp TV",
+        "coordenação": [
+          "NEaD Unesp",
+          "Univesp TV"
+        ]
+      },
+      "page": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "download": "https://acervodigital.unesp.br/bitstream/unesp/222981/8/unesp-nead_libras_graduacao_aula1.flv",
+      "file": "data/alphabet/institutional/unesp-222981.flv",
+      "sha256": "110d7d9c829d8a0bfa78a92a1c892e10e058e7385a796cc5cf52def8381acfbc",
+      "license": "CC-BY-NC-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licensePublication": "https://acervodigital.unesp.br/handle/unesp/222981",
+      "licenseEvidence": "O campo Rights do Acervo Digital da Unesp indica CC BY-NC-SA 4.0 para o item.",
+      "labelEvidence": "Letra branca no canto inferior esquerdo. K aparece duas vezes na mesma aula. A sequência do alfabeto passa de C diretamente para D.",
+      "windows": [
+        {
+          "label": "W",
+          "startMs": 110970,
+          "endMs": 112040,
+          "anchorMs": 111540
+        },
+        {
+          "label": "Y",
+          "startMs": 112460,
+          "endMs": 113300,
+          "anchorMs": 112920
+        }
+      ]
+    }
+  ]
+}
