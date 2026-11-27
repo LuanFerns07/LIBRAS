@@ -1,0 +1,20 @@
+{
+  "sourceManifest": "ml/alphabet/institutional-static-o-s-holdout.json",
+  "sourceManifestSha256": "2cb073aa8bdd0cfc11058e1ff8a9c4da8977de5364e2dd85b922557cded274f0",
+  "sourceId": "ifsc-ueslei-paterno",
+  "sourceSha256": "356cddf6d13251d71a68e28d326e66b1cdd29ad6ba4d78e3ab6e6b3f04c7ee45",
+  "captionSha256": "d61c591215fe51ae558d39d8dcac721571b8d9421c07eca42754fdc51f7805b6",
+  "build": "bfe194567ec9876c934b1e8b6089b3714b0cc9d0",
+  "windows": [
+    { "id": "o-primeira", "label": "O", "startMs": 65125, "endMs": 66125, "anchorMs": 65500 },
+    { "id": "e-segunda", "label": "E", "startMs": 131950, "endMs": 132950, "anchorMs": 132550 },
+    { "id": "o-segunda", "label": "O", "startMs": 147000, "endMs": 148000, "anchorMs": 147640 }
+  ],
+  "variants": {
+    "inteiro": [],
+    "sem-repouso": ["drawbox=x=530:y=460:w=320:h=260:color=black:t=fill"],
+    "ampliado": ["crop=960:540:96:174"],
+    "ampliado-sem-repouso": ["drawbox=x=530:y=460:w=320:h=260:color=black:t=fill", "crop=960:540:96:174"],
+    "mao-ativa-2x": ["crop=640:360:76:120"]
+  }
+}
