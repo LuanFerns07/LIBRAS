@@ -86,4 +86,7 @@ test('o leitor pode completar Z após um X inicial e uma perda breve da mão', a
   reader.clear()
   await reader.read(frame(500))
   assert.deepEqual(windows.at(-1), [[500], [500]])
+  await reader.read({ ...frame(550), rightHand: [] })
+  await reader.read(frame(600))
+  assert.deepEqual(windows.at(-1), [[600], [600]])
 })

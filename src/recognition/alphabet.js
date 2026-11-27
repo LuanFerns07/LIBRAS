@@ -1,4 +1,5 @@
 export const alphabetFeatureCount = 63
+export const alphabetPathGapMs = 220
 
 export function oneHand(frame) {
   const hands = [frame.leftHand, frame.rightHand].filter(hand => hand?.length === 21)
@@ -36,6 +37,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
   let lastFrame = -Infinity
   let history = []
   let motionStart = -Infinity
+  let recoveringZ = false
 
   function show(value) {
     if (shown === value) return
@@ -60,6 +62,7 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     lastFrame = -Infinity
     history = []
     motionStart = -Infinity
+    recoveringZ = false
   }
 
   return {
@@ -67,8 +70,12 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
     async read(frame) {
       const hand = oneHand(frame)
       if (!hand) {
-        resetReadings()
-        motionStart = frame.timestamp
+        if (recoveringZ && frame.timestamp - lastFrame <= alphabetPathGapMs) {
+          resetReadings()
+          motionStart = frame.timestamp
+        } else {
+          clear()
+        }
         return
       }
       if (frame.timestamp - lastFrame > 350) clear()
@@ -94,7 +101,8 @@ export function createLiveLetterReader(predict, onReading, findMotion) {
           votes = 0
           movingUntil = frame.timestamp + 600
           // Um X inicial pode ser parte de um Z. Os demais gestos iniciam outro traçado.
-          if (motion !== 'X') history = [frame]
+          recoveringZ = motion === 'X'
+          if (!recoveringZ) history = [frame]
           motionStart = frame.timestamp
           show(motion)
           return

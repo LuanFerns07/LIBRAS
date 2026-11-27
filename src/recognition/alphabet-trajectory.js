@@ -1,4 +1,4 @@
-import { alphabetFeatureCount, letterFeatures, oneHand } from './alphabet.js'
+import { alphabetFeatureCount, alphabetPathGapMs, letterFeatures, oneHand } from './alphabet.js'
 
 const steps = 12
 const tips = [4, 8, 12, 16, 20]
@@ -207,7 +207,7 @@ function turnsInIndexPath(samples, scale) {
 
 function tracesZ(samples) {
   if (samples.length < 7 || samples.at(-1).time - samples[0].time < 370 ||
-      samples.some((sample, index) => index && sample.time - samples[index - 1].time > 220)) return false
+      samples.some((sample, index) => index && sample.time - samples[index - 1].time > alphabetPathGapMs)) return false
   const scale = medianScale(samples)
   if (samples.filter(sample => sample.flexion[1] >= .85).length < samples.length * .75) return false
   // O indicador percorre três traços alternados. O trecho intermediário desce na imagem.
@@ -232,7 +232,7 @@ function signedDrop(points) {
 
 function tracesJ(samples) {
   if (samples.length < 6 || samples.at(-1).time - samples[0].time < 330 ||
-      samples.some((sample, index) => index && sample.time - samples[index - 1].time > 220)) return false
+      samples.some((sample, index) => index && sample.time - samples[index - 1].time > alphabetPathGapMs)) return false
   const scale = medianScale(samples)
   const little = samples.map(sample => sample.positions[5])
   const littleX = little.map(point => point[0])
