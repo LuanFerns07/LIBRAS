@@ -1,0 +1,54 @@
+{
+  "release": "0c0da0fc923fe87112636f65495f93c148e981d7",
+  "source": "unesp-222981",
+  "startMs": 86850,
+  "endMs": 90360,
+  "results": [
+    {
+      "view": "area-livre",
+      "readings": [
+        {
+          "label": "M",
+          "ms": 218
+        },
+        {
+          "label": "—",
+          "ms": 1649
+        },
+        {
+          "label": "N",
+          "ms": 1830
+        },
+        {
+          "label": "—",
+          "ms": 3573
+        }
+      ]
+    },
+    {
+      "view": "praticar",
+      "readings": [
+        {
+          "label": "M",
+          "ms": 265
+        },
+        {
+          "label": "—",
+          "ms": 1619
+        },
+        {
+          "label": "N",
+          "ms": 1833
+        },
+        {
+          "label": "—",
+          "ms": 3544
+        }
+      ]
+    }
+  ],
+  "sourceSha256": "110d7d9c829d8a0bfa78a92a1c892e10e058e7385a796cc5cf52def8381acfbc",
+  "fixtureSha256": "c53770fb0855a9a6ec9d7600358a4658ff73afcb6ce3fe9a194d56df62e21712",
+  "browser": "Chromium 156.0.8078.79",
+  "continuousCameraTrack": true
+}

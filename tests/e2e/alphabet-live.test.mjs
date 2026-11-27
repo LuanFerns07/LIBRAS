@@ -4,6 +4,7 @@ import { withChromium } from './chromium.mjs'
 
 const appUrl = process.env.LIBRASIA_TEST_URL
 const videoFile = process.env.LIBRASIA_TEST_LETTER_VIDEO
+const transitionVideo = process.env.LIBRASIA_TEST_M_N_VIDEO
 const letter = process.env.LIBRASIA_TEST_EXPECT_LETTER || 'B'
 const forbidden = process.env.LIBRASIA_TEST_FORBIDDEN_LETTER
 const testPractice = letter === 'B' || process.env.LIBRASIA_TEST_ALPHABET_PRACTICE === '1'
@@ -75,4 +76,41 @@ test('a Prática oferece 27 letras e mostra a leitura real mesmo com outra letra
     assert.equal(await evaluate('document.querySelector("[data-signal]").value'), 'letter-a')
     assert.equal(await evaluate('document.querySelector("[data-attempt]").hidden'), true)
   }, { videoFile })
+})
+
+test('a leitura acompanha a troca de M para N na mesma captura nos dois modos', {
+  skip: !appUrl || !transitionVideo,
+  timeout: 55_000,
+}, async () => {
+  for (const view of ['area-livre', 'praticar']) {
+    const url = new URL('/#' + view, appUrl)
+    assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
+    await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
+      await navigate(url.href)
+      await permission(url.origin, 'granted')
+      await evaluate(`(() => {
+        const mode = document.querySelector('[data-free-mode], [data-practice-mode]')
+        mode.value = 'letter'
+        mode.dispatchEvent(new Event('change'))
+        document.querySelector('[data-stage="1"]')?.click()
+        const video = document.querySelector('video')
+        const output = document.querySelector('[data-live-character]')
+        window.transitionReadings = []
+        new MutationObserver(() => {
+          window.transitionTrack ??= video.srcObject?.getVideoTracks()[0]
+          window.transitionReadings.push(output.textContent)
+        }).observe(output, { childList: true })
+        document.querySelector('[data-camera-toggle]').click()
+      })()`, true)
+      // O clipe tem 2 s de margem inicial, 3,51 s de captura e 2 s de margem final.
+      await waitUntil('document.querySelector("video").currentTime >= 6.2', 15000)
+      assert.deepEqual(await evaluate(`(() => {
+        const [track] = document.querySelector('video').srcObject.getVideoTracks()
+        return {
+          readings: window.transitionReadings,
+          sameTrack: window.transitionTrack === track && track.readyState === 'live',
+        }
+      })()`), { readings: ['M', '—', 'N', '—'], sameTrack: true }, view)
+    }, { videoFile: transitionVideo })
+  }
 })

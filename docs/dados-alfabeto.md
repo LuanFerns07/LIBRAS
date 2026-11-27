@@ -153,8 +153,20 @@ Na mesma compilação, o Chromium mostrou E sem iniciar uma tentativa em Área l
 
 ### Reteste com a pose revisada de N
 
-A compilação `0c0da0f` inclui as comparações de N com M e U no avatar. No Chromium, o N gravado na Unesp foi reconhecido na Área livre e em Praticar, com o vídeo original e com uma versão invertida horizontalmente. O vídeo invertido verifica a leitura no outro lado da imagem. A troca de letras e a execução por uma pessoa sinalizante na webcam física continuam pendentes. [Revisão do avatar](animacoes.md#triagem-da-letra-n) · [Teste da leitura](../tests/e2e/alphabet-live.test.mjs)
+A compilação `0c0da0f` inclui as comparações de N com M e U no avatar. No Chromium, o N gravado na Unesp foi reconhecido na Área livre e em Praticar, com o vídeo original e com uma versão invertida horizontalmente. O vídeo invertido verifica a leitura no outro lado da imagem. No trecho contínuo da Unesp, os dois modos exibiram M, limparam o painel durante a mudança e exibiram N na mesma captura. A execução por uma pessoa sinalizante na webcam física continua pendente. [Revisão do avatar](animacoes.md#triagem-da-letra-n) · [Leituras durante a transição](../ml/evidence/alphabet-n-m-u/replay-transition-unesp.json)
 
 Em seis janelas reservadas da UFAC, a Área livre exibiu A, E, M, N e U. O ficou sem leitura com a mão rastreada. No A da UFSM, oito condições de tamanho e resolução do quadro mantiveram a mão rastreada, com zero acertos do classificador por quadro. [Replay na compilação atual](../ml/evidence/alphabet-a-e-independent/ufac-replay-0c0da0f.json) · [Diagnóstico de A na UFSM e repetição com a UFAC](../ml/evidence/alphabet-a-e-independent/README.md)
 
 O teste da sobreposição de duas mãos passou com vídeo gravado na prévia atual. O Chromium também abriu e encerrou a captura da webcam ACER HD User Facing a 640 × 480 e concluiu a síntese de voz local em pt-BR. [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs) · [Testes de câmera e voz](../tests/e2e/browser.test.mjs)
+
+Para repetir a transição M → N, use o arquivo da Unesp indicado no manifesto estático. O recorte contínuo inclui a mudança original entre as janelas de M e N. O FFmpeg remove o áudio e acrescenta dois segundos de margem antes e depois. [Origem e SHA-256](../ml/alphabet/institutional-static-n-m-u.json) · [Teste da transição](../tests/e2e/alphabet-live.test.mjs)
+
+```bash
+mkdir -p data/evidence/alphabet-n-m-u
+ffmpeg -nostdin -ss 86.850 -i data/alphabet/institutional/unesp-222981.flv \
+  -an -pix_fmt yuv420p -vf 'trim=duration=3.51,scale=640:-2,fps=30,tpad=start_duration=2:stop_duration=2:color=black' \
+  data/evidence/alphabet-n-m-u/unesp-m-n.y4m
+LIBRASIA_TEST_URL=http://127.0.0.1:4177/ \
+  LIBRASIA_TEST_M_N_VIDEO=data/evidence/alphabet-n-m-u/unesp-m-n.y4m \
+  node --test tests/e2e/alphabet-live.test.mjs
+```
