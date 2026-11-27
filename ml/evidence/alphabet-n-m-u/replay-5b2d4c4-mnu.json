@@ -1,0 +1,155 @@
+{
+  "build": {
+    "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/institutional-static-n-m-u.json",
+    "ml/alphabet/ufac-static-windows.json"
+  ],
+  "results": [
+    {
+      "source": "cecierj-13757",
+      "label": "M",
+      "startMs": 81300,
+      "endMs": 82950,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 225
+        }
+      ],
+      "workerFrames": 109,
+      "framesWithHand": 42,
+      "lastHandAfterVideoMs": 1698
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "N",
+      "startMs": 84000,
+      "endMs": 85750,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 256
+        }
+      ],
+      "workerFrames": 112,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1752
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 221
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 974
+        }
+      ],
+      "workerFrames": 108,
+      "framesWithHand": 41,
+      "lastHandAfterVideoMs": 1601
+    },
+    {
+      "source": "unesp-222981",
+      "label": "M",
+      "startMs": 86850,
+      "endMs": 88200,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 214
+        }
+      ],
+      "workerFrames": 102,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1350
+    },
+    {
+      "source": "unesp-222981",
+      "label": "N",
+      "startMs": 88780,
+      "endMs": 90360,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 225
+        }
+      ],
+      "workerFrames": 107,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1574
+    },
+    {
+      "source": "unesp-222981",
+      "label": "U",
+      "startMs": 105630,
+      "endMs": 106630,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 217
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 25,
+      "lastHandAfterVideoMs": 971
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "M",
+      "startMs": 181440,
+      "endMs": 183320,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 258
+        }
+      ],
+      "workerFrames": 114,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 1904
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "N",
+      "startMs": 189160,
+      "endMs": 191240,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 260
+        }
+      ],
+      "workerFrames": 120,
+      "framesWithHand": 54,
+      "lastHandAfterVideoMs": 2128
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 1138
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1669
+    }
+  ]
+}

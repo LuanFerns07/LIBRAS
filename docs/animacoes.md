@@ -53,6 +53,8 @@ Na versão `0.2.2-preliminar`, o cotovelo de M e N sobe e a primeira articulaç�
 
 O Chromium exibiu as comparações **M e N** e **N e U** na página Alfabeto e reproduziu “Meu nome é Anna” com os dois Ns. Os testes do avatar verificam a orientação, a flexão do anelar e a transição do cotovelo. A revisão linguística e a execução na webcam por uma pessoa sinalizante continuam pendentes. [Teste de navegador](../tests/e2e/browser.test.mjs) · [Testes do avatar](../tests/avatar.test.js)
 
+Na comparação técnica para a retomada, a vista frontal do avatar reproduz os traços principais do N do IF Baiano. O indicador e o médio aparecem juntos, voltados para baixo, com o dorso visível e o anelar dobrado. A revisão em Libras deve conferir a inclinação do antebraço, a posição do polegar e a legibilidade em sequência. O teste da câmera deve registrar separadamente se a mão foi rastreada e qual letra o painel exibiu. [Quadro do IF Baiano, página 1](https://www.ifbaiano.edu.br/unidades/bonfim/files/2022/07/Alfabeto-manual-em-Libras-1.pdf) · [Reteste com vídeo](dados-alfabeto.md#reteste-com-a-pose-revisada-de-n)
+
 ## Expansão de vocabulário e variantes
 
 | Animação | Uso e contexto |
