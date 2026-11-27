@@ -110,7 +110,11 @@ mkdir -p data/alphabet/o-compacto
   --geometry --device cuda --out data/models/alphabet-o-compact-verifier
 .venv/bin/python -m ml.alphabet.refine_o data/models/alphabet-o-candidate \
   --reference data/alphabet/o-compacto/referencia-ifes.json \
-  --geometry-verifier data/models/alphabet-o-compact-verifier --out data/models/alphabet-live
+  --geometry-verifier data/models/alphabet-o-compact-verifier --out data/models/alphabet-o-compact-candidate
+.venv/bin/python -m ml.alphabet.refine_s data/models/alphabet-o-compact-candidate \
+  --reference data/alphabet/o-compacto/referencia-ifes.json --out data/models/alphabet-s-candidate
+.venv/bin/python -m ml.alphabet.refine_e_o data/models/alphabet-s-candidate \
+  --reference data/alphabet/o-compacto/referencia-ifes.json --out data/models/alphabet-live
 node ml/alphabet/train-motion.mjs data/alphabet/motion-final.json
 node ml/alphabet/train-trajectory.mjs
 LIBRASIA_MODELO=data/models/isolated-combined ./scripts/executar-local.sh \
@@ -216,3 +220,17 @@ node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
 A compilação `bfe1945` usa as demonstrações do Ifes para retreinar o classificador de forma e um novo verificador geométrico de O. O modelo novo só acrescenta O quando as redes principais e o complemento anterior ficam sem leitura. Os dois limiares continuam em 0,80 para a confirmação geométrica e 0,95 para a forma. A validação manteve os 70 O do LibraSign e os 16 O em vídeo aceitos pelo complemento anterior e registrou zero novos O em outras letras. A exportação conferiu a paridade com PyTorch e regenerou o complemento anterior com o mesmo SHA-256. [Verificador geométrico](../ml/evidence/alphabet-o-compact/verifier-training.json) · [Exportação e validação](../ml/evidence/alphabet-o-compact/training.json)
 
 No Chromium, a nova compilação exibiu a letra esperada em 57 das 60 janelas. As duas demonstrações do Ifes usadas no treino e a janela da Uníntese, mantida só para medir a regressão, passaram a exibir O. O da gravação reservada de Uéslei Paterno continuou a resultar em E e S da Unicentro exibiu S. A da UFSM e S da Uníntese continuam pendentes. O apareceu nos mesmos dois recortes entre os 19 controles fora do alfabeto. [Resultado por janela](../ml/evidence/alphabet-o-compact/replay-bfe1945.json) · [Controles fora do alfabeto](../ml/evidence/alphabet-o-compact/replay-negatives-bfe1945.json) · [Gravações reservadas](../ml/evidence/alphabet-o-s-independent/README.md)
+
+### Distinção de S, E e O e leitura do traçado de Z
+
+O complemento de S usa a posição e a flexão do polegar quando o modelo principal considera A ou S, o verificador confirma S e os outros classificadores ficam sem leitura. A decisão requer o limiar 0,80 do verificador e 0,95 da regressão de forma. Na validação de 2.500 quadros do LibraSign, os novos votos de S ficaram em zero. [Treino e paridade ONNX](../ml/evidence/alphabet-o-s-independent/s-training.json) · [Referência de A/S](https://revistas.ufrj.br/index.php/rl/article/download/37488/22633/114954#page=4)
+
+Nas tomadas de Uéslei Paterno, O exibia E em dois ângulos, com ou sem a outra mão visível e com a mão ampliada. Uma tomada recebia E pelo complemento e a outra pelas duas redes principais. Na compilação `5b2d4c4`, toda leitura de E passa por uma regressão logística que verifica as distâncias da ponta do polegar às pontas do indicador e do médio. O leitor troca E por O quando o resultado chega a 0,95. O treino ficou restrito às fontes já usadas pelo alfabeto, sem quadros dessas tomadas. Na validação, o modelo marcou O em zero dos 142 quadros de E. [Diagnóstico por ângulo e modelo](../ml/evidence/alphabet-paterno-o-e/README.md) · [Treino e paridade ONNX](../ml/evidence/alphabet-o-s-independent/e-o-training.json)
+
+No Chromium, as duas tomadas de O de Paterno exibiram O nos cinco enquadramentos de cada uma. E permaneceu E nos cinco enquadramentos de controle. O par reservado de Tel baixinha exibiu E e O nas respectivas janelas. Os replays de O em Praticar e na Área livre usaram a segunda tomada de Paterno. [Relatório por recorte](../ml/evidence/alphabet-o-s-independent/replay-5b2d4c4.json) · [Identificação do par reservado](../ml/evidence/alphabet-e-o-independent/README.md)
+
+O leitor pode completar o traçado de Z após exibir X. Uma perda breve do rastreamento apaga a letra imediatamente e conserva os pontos do traçado por até 220 ms quando X já apareceu. Na janela de Z do Cecierj, houve Z em um de três replays na compilação anterior e em dois de três na nova. Uma versão intermediária conservava o traçado em toda interrupção breve e produziu Z em duas atividades de mesa. A versão adotada excluiu esses dois resultados e ainda exibiu Z no sinal Azul da UFSM, já visto em um replay com o leitor anterior. [Repetições de Z e controles](../ml/evidence/alphabet-o-s-independent/z-controls.json)
+
+Nas 72 janelas do alfabeto, o Chromium exibiu a letra esperada em 71. S apareceu sozinho no recorte da Uníntese e A ficou sem leitura na terceira aula da UFSM. As 17 janelas adicionais de E e O, que incluem os enquadramentos do mesmo vídeo de Paterno, exibiram a letra esperada. Nos 19 controles fora do alfabeto, O e S apareceram nos mesmos recortes que na compilação `bfe1945`. O teste da câmera física com uma pessoa sinalizando segue pendente. [Janelas do alfabeto e variações de enquadramento](../ml/evidence/alphabet-o-s-independent/replay-5b2d4c4.json) · [Controles fora do alfabeto](../ml/evidence/alphabet-o-s-independent/replay-negatives-5b2d4c4.json)
+
+Na prévia em 4177, os testes com vídeo passaram para S da Uníntese e O de Paterno em Praticar e na Área livre. Também passaram a troca de M para N na mesma captura e a sobreposição das duas mãos. [Testes do leitor](../tests/e2e/alphabet-live.test.mjs) · [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs)

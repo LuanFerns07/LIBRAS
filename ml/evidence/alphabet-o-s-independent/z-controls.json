@@ -1,0 +1,301 @@
+{
+  "manifest": "ml/alphabet/institutional-temporal-windows.json",
+  "source": "cecierj-13757",
+  "labeledZ": {
+    "baseline": {
+      "build": {
+        "commit": "bfe194567ec9876c934b1e8b6089b3714b0cc9d0",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "bbe7a7d6d5211db99aa3bb59daffbf6faaae3e8a67eae9b490fb45bfd30bd1b2",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "recognizedZ": 1,
+      "trials": [
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 218
+            },
+            {
+              "letter": "A",
+              "afterVideoMs": 1055
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1134
+            },
+            {
+              "letter": "Y",
+              "afterVideoMs": 1644
+            }
+          ],
+          "workerFrames": 109,
+          "framesWithHand": 41,
+          "lastHandAfterVideoMs": 1722
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 223
+            },
+            {
+              "letter": "X",
+              "afterVideoMs": 816
+            },
+            {
+              "letter": "Y",
+              "afterVideoMs": 1565
+            }
+          ],
+          "workerFrames": 109,
+          "framesWithHand": 42,
+          "lastHandAfterVideoMs": 1719
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 217
+            },
+            {
+              "letter": "X",
+              "afterVideoMs": 824
+            },
+            {
+              "letter": "Y",
+              "afterVideoMs": 1469
+            }
+          ],
+          "workerFrames": 108,
+          "framesWithHand": 41,
+          "lastHandAfterVideoMs": 1708
+        }
+      ]
+    },
+    "retainedAcrossAnyLoss": {
+      "build": {
+        "commit": "005787ef03948e258f3b5fcdd3c6f73ee92ed082",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "recognizedZ": 3,
+      "trials": [
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 276
+            },
+            {
+              "letter": "X",
+              "afterVideoMs": 881
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1128
+            }
+          ],
+          "workerFrames": 102,
+          "framesWithHand": 38,
+          "lastHandAfterVideoMs": 1739
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 285
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1094
+            },
+            {
+              "letter": "Y",
+              "afterVideoMs": 1661
+            }
+          ],
+          "workerFrames": 102,
+          "framesWithHand": 36,
+          "lastHandAfterVideoMs": 1701
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 289
+            },
+            {
+              "letter": "A",
+              "afterVideoMs": 1063
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1212
+            }
+          ],
+          "workerFrames": 104,
+          "framesWithHand": 37,
+          "lastHandAfterVideoMs": 1713
+        }
+      ]
+    },
+    "retainedAfterX": {
+      "build": {
+        "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "recognizedZ": 2,
+      "trials": [
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 232
+            },
+            {
+              "letter": "X",
+              "afterVideoMs": 932
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1195
+            }
+          ],
+          "workerFrames": 96,
+          "framesWithHand": 37,
+          "lastHandAfterVideoMs": 1705
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 245
+            },
+            {
+              "letter": "A",
+              "afterVideoMs": 993
+            },
+            {
+              "letter": "Z",
+              "afterVideoMs": 1208
+            }
+          ],
+          "workerFrames": 98,
+          "framesWithHand": 34,
+          "lastHandAfterVideoMs": 1713
+        },
+        {
+          "source": "cecierj-13757",
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "readings": [
+            {
+              "letter": "G",
+              "afterVideoMs": 300
+            },
+            {
+              "letter": "A",
+              "afterVideoMs": 1008
+            },
+            {
+              "letter": "Y",
+              "afterVideoMs": 1513
+            }
+          ],
+          "workerFrames": 100,
+          "framesWithHand": 35,
+          "lastHandAfterVideoMs": 1727
+        }
+      ]
+    }
+  },
+  "outsideAlphabet": {
+    "withoutHistoryChange": {
+      "build": {
+        "commit": "1b5e4495e22a9eb46b8d5f9b2f4a35049a95060d",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "windows": 19,
+      "sources": [
+        "ufsm-azul"
+      ]
+    },
+    "retainedAcrossAnyLoss": {
+      "build": {
+        "commit": "005787ef03948e258f3b5fcdd3c6f73ee92ed082",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "windows": 19,
+      "sources": [
+        "clad-movimento-02-usb",
+        "clad-movimento-03-queixo-teclado",
+        "ufsm-azul"
+      ]
+    },
+    "retainedAfterX": {
+      "build": {
+        "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+        "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+        "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+        "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+        "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+        "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+      },
+      "windows": 19,
+      "sources": [
+        "ufsm-azul"
+      ]
+    }
+  }
+}

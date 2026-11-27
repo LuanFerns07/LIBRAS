@@ -1,0 +1,277 @@
+{
+  "build": {
+    "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-o/negative-windows.json"
+  ],
+  "results": [
+    {
+      "source": "clad-repouso-01-mao-rosto",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 140,
+      "framesWithHand": 76,
+      "lastHandAfterVideoMs": 3934
+    },
+    {
+      "source": "clad-repouso-02-oclusao-rosto",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "D",
+          "afterVideoMs": 680
+        }
+      ],
+      "workerFrames": 132,
+      "framesWithHand": 69,
+      "lastHandAfterVideoMs": 4010
+    },
+    {
+      "source": "clad-repouso-03-celular",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1072
+        },
+        {
+          "letter": "J",
+          "afterVideoMs": 1368
+        }
+      ],
+      "workerFrames": 152,
+      "framesWithHand": 14,
+      "lastHandAfterVideoMs": 3969
+    },
+    {
+      "source": "clad-movimento-01-headset",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 1884
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 3094
+        },
+        {
+          "letter": "O",
+          "afterVideoMs": 3532
+        }
+      ],
+      "workerFrames": 156,
+      "framesWithHand": 92,
+      "lastHandAfterVideoMs": 3983
+    },
+    {
+      "source": "clad-movimento-02-usb",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 151,
+      "framesWithHand": 76,
+      "lastHandAfterVideoMs": 4004
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1458
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2203
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 4008
+        }
+      ],
+      "workerFrames": 151,
+      "framesWithHand": 78,
+      "lastHandAfterVideoMs": 4008
+    },
+    {
+      "source": "ufsm-cores-baixa",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1600,
+      "readings": [],
+      "workerFrames": 113,
+      "framesWithHand": 1,
+      "lastHandAfterVideoMs": 1587
+    },
+    {
+      "source": "ufsm-vermelho",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1400,
+      "readings": [],
+      "workerFrames": 95,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1357
+    },
+    {
+      "source": "ufsm-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1600,
+      "readings": [],
+      "workerFrames": 101,
+      "framesWithHand": 31,
+      "lastHandAfterVideoMs": 1448
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 252
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 598
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 936
+        }
+      ],
+      "workerFrames": 100,
+      "framesWithHand": 28,
+      "lastHandAfterVideoMs": 1296
+    },
+    {
+      "source": "cecierj-laranja",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1550,
+      "readings": [
+        {
+          "letter": "O",
+          "afterVideoMs": 878
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1580
+    },
+    {
+      "source": "cecierj-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 696
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1607
+    },
+    {
+      "source": "cecierj-vermelho",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [],
+      "workerFrames": 103,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1648
+    },
+    {
+      "source": "fiocruz-dois",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1900,
+      "readings": [],
+      "workerFrames": 111,
+      "framesWithHand": 45,
+      "lastHandAfterVideoMs": 1879
+    },
+    {
+      "source": "fiocruz-tres",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 2500,
+      "readings": [],
+      "workerFrames": 121,
+      "framesWithHand": 58,
+      "lastHandAfterVideoMs": 2484
+    },
+    {
+      "source": "fiocruz-seis",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 3200,
+      "readings": [],
+      "workerFrames": 114,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 3147
+    },
+    {
+      "source": "cecierj-rosa-marrom",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1000,
+      "readings": [],
+      "workerFrames": 89,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 971
+    },
+    {
+      "source": "fiocruz-dois-tres",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1500,
+      "readings": [],
+      "workerFrames": 98,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1500
+    },
+    {
+      "source": "fiocruz-sete-oito",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 2150,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 639
+        },
+        {
+          "letter": "S",
+          "afterVideoMs": 1485
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 45,
+      "lastHandAfterVideoMs": 2143
+    }
+  ]
+}

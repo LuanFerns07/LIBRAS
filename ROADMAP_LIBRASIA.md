@@ -23,10 +23,10 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 
 ## Prioridades da retomada
 
-A referência é a prévia local do alfabeto no commit `bfe1945`. O Chromium leu O nos recortes do Ifes, da Uníntese, da UFAC e da Unesp. Também verificou a passagem de M para N e a sobreposição das duas mãos com vídeo. A validação dos gestos na webcam física segue pendente. [Prévia local](http://127.0.0.1:4177/#area-livre) · [Reteste do N](docs/dados-alfabeto.md#reteste-com-a-pose-revisada-de-n) · [Resultado de O](docs/dados-alfabeto.md#o-compacto-com-referências-do-ifes)
+A referência é a prévia local do alfabeto no commit `5b2d4c4`. O Chromium exibiu S da Uníntese e distinguiu E e O nas gravações de Uéslei Paterno e Tel baixinha. A letra esperada apareceu em 71 de 72 janelas do alfabeto. A validação dos gestos na webcam física segue pendente. [Prévia local](http://127.0.0.1:4177/#area-livre) · [Reteste do N](docs/dados-alfabeto.md#reteste-com-a-pose-revisada-de-n) · [Resultados de S, E, O e Z](docs/dados-alfabeto.md#distinção-de-s-e-e-o-e-leitura-do-traçado-de-z)
 
 1. **Validar N, M e U na webcam (M4).** Retestar o leitor no PC em Área livre e em Praticar. Registrar a pose observada, a letra exibida, as trocas momentâneas ou a ausência de leitura. Buscar revisão linguística quando houver uma pessoa fluente disponível. [Revisão da pose](docs/animacoes.md#triagem-da-letra-n) · [Retreino](docs/dados-alfabeto.md#retreino-de-n-m-e-u)
-2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Investigar o A da UFSM, a troca de O por E na gravação de Uéslei Paterno e a troca de S por A na Uníntese. Repetir o roteiro com A–Z e Ç, com controles de C/Ç, X/Z e E/R. Registrar a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
+2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Investigar o A da UFSM e ampliar os casos de Z, S e E/O fora do ajuste. Repetir o roteiro com A–Z e Ç, com controles de C/Ç, X/Z e E/R. Registrar a mão dominante, o enquadramento e a versão. Usar gravações adicionais enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
 3. **Fechar o roteiro da demonstração local (M3, M5 e M7).** Verificar sinais isolados, dicas, rejeição de entradas desconhecidas, transcrição e voz. Registrar quais resultados foram reproduzidos com vídeo ou webcam física. Manter a sinalização contínua em avaliação.
 
 A prévia permanece no Linux local. A publicação na Vercel e a finalização do memorial estão adiadas por orientação da equipe.
@@ -106,7 +106,9 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Verificar O com configuração mais fechada em uma pessoa fora do ajuste do complemento. A amostra da Uníntese reproduziu a ausência de leitura já observada no Ifes. [Replays comparados](ml/evidence/alphabet-o-compact/README.md)
 - [x] Retreinar O compacto com as referências do Ifes e retestar no Chromium a Uníntese, as fontes já avaliadas e os negativos. Medir O e S de duas pessoas fora do ajuste. [Resultado do retreino](docs/dados-alfabeto.md#o-compacto-com-referências-do-ifes)
 - [x] Comparar duas representações da articulação do polegar para distinguir S de A nos pontos gravados e verificar interferência em Z. [Sonda de A e S](ml/evidence/alphabet-o-s-independent/README.md#distinção-de-a-e-s-nos-pontos)
-- [ ] Investigar A da UFSM, a troca de O por E na aula de Uéslei Paterno e a troca de S por A na Uníntese. Ampliar a avaliação e verificar trocas momentâneas de C/Ç, G/Z e U/H ao entrar e sair de uma pose.
+- [x] Recuperar S da Uníntese com o verificador geométrico e distinguir E de O nos dois ângulos observados de Uéslei Paterno. Verificar o par E/O de Tel baixinha, reservado fora do treino. [Replays](docs/dados-alfabeto.md#distinção-de-s-e-e-o-e-leitura-do-traçado-de-z)
+- [x] Recuperar o traçado de Z que podia ser interrompido por uma leitura de X e verificar o caso do Cecierj em três replays e nos controles fora do alfabeto. [Repetições de Z](ml/evidence/alphabet-o-s-independent/z-controls.json)
+- [ ] Investigar A da UFSM. Ampliar a avaliação de S e E/O e verificar as trocas momentâneas de C/Ç, G/Z e U/H e o falso Z no sinal Azul da UFSM.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
