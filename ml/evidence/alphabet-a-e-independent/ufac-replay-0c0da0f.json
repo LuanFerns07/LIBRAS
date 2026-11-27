@@ -1,0 +1,103 @@
+{
+  "build": {
+    "commit": "0c0da0fc923fe87112636f65495f93c148e981d7",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "b4476c4aa73cd96e28396c7d65e1a086d3f56c39424cf9f2955c80b7888f4004",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/alphabet/ufac-static-windows.json"
+  ],
+  "results": [
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "A",
+      "startMs": 80580,
+      "endMs": 83350,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 236
+        }
+      ],
+      "workerFrames": 126,
+      "framesWithHand": 60,
+      "lastHandAfterVideoMs": 2772
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "E",
+      "startMs": 117520,
+      "endMs": 119750,
+      "readings": [
+        {
+          "letter": "E",
+          "afterVideoMs": 233
+        }
+      ],
+      "workerFrames": 117,
+      "framesWithHand": 54,
+      "lastHandAfterVideoMs": 2239
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "M",
+      "startMs": 181440,
+      "endMs": 183320,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 222
+        }
+      ],
+      "workerFrames": 116,
+      "framesWithHand": 48,
+      "lastHandAfterVideoMs": 1891
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "N",
+      "startMs": 189160,
+      "endMs": 191240,
+      "readings": [
+        {
+          "letter": "N",
+          "afterVideoMs": 225
+        }
+      ],
+      "workerFrames": 122,
+      "framesWithHand": 54,
+      "lastHandAfterVideoMs": 2137
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "O",
+      "startMs": 197600,
+      "endMs": 199840,
+      "readings": [],
+      "workerFrames": 119,
+      "framesWithHand": 52,
+      "lastHandAfterVideoMs": 2286
+    },
+    {
+      "source": "ufac-b2u7c6oxgbg",
+      "label": "U",
+      "startMs": 251590,
+      "endMs": 253240,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 1050
+        },
+        {
+          "letter": "U",
+          "afterVideoMs": 1547
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 44,
+      "lastHandAfterVideoMs": 1699
+    }
+  ]
+}

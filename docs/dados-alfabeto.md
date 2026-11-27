@@ -150,3 +150,11 @@ Na compilação `dbda17e`, o Chromium exibiu a letra esperada em 26 das 27 janel
 Nos recortes do Cecierj e da Unesp, 13 das 14 janelas exibiram a letra esperada. E, M e N apareceram nas duas aulas. O da Unesp ficou sem leitura, e os dois recortes de U também exibiram H. A Unesp ficou fora do treino e do ajuste do classificador estático para esses recortes. [Replays das aulas institucionais](../ml/evidence/alphabet-a-e-s-o/replay-supplement-institutional.json)
 
 Na mesma compilação, o Chromium mostrou E sem iniciar uma tentativa em Área livre e com outra letra selecionada em Praticar. O teste da sobreposição de duas mãos antes, durante e depois da tentativa passou com vídeo gravado. O reteste de N na webcam física e a revisão da pose do avatar seguem pendentes. [Teste da leitura](../tests/e2e/alphabet-live.test.mjs) · [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs)
+
+### Reteste com a pose revisada de N
+
+A compilação `0c0da0f` inclui as comparações de N com M e U no avatar. No Chromium, o N gravado na Unesp foi reconhecido na Área livre e em Praticar, com o vídeo original e com uma versão invertida horizontalmente. O vídeo invertido verifica a leitura no outro lado da imagem. A troca de letras e a execução por uma pessoa sinalizante na webcam física continuam pendentes. [Revisão do avatar](animacoes.md#triagem-da-letra-n) · [Teste da leitura](../tests/e2e/alphabet-live.test.mjs)
+
+Em seis janelas reservadas da UFAC, a Área livre exibiu A, E, M, N e U. O ficou sem leitura com a mão rastreada. No A da UFSM, oito condições de tamanho e resolução do quadro mantiveram a mão rastreada, com zero acertos do classificador por quadro. [Replay na compilação atual](../ml/evidence/alphabet-a-e-independent/ufac-replay-0c0da0f.json) · [Diagnóstico de A na UFSM e repetição com a UFAC](../ml/evidence/alphabet-a-e-independent/README.md)
+
+O teste da sobreposição de duas mãos passou com vídeo gravado na prévia atual. O Chromium também abriu e encerrou a captura da webcam ACER HD User Facing a 640 × 480 e concluiu a síntese de voz local em pt-BR. [Teste dos pontos](../tests/e2e/hand-overlay-live.test.mjs) · [Testes de câmera e voz](../tests/e2e/browser.test.mjs)
