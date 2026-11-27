@@ -1,7 +1,8 @@
 import { icon } from './shell.js'
 import { createCamera } from './recognition/camera.js'
 import { handOverlay } from './recognition/hand-overlay.js'
-import { captureSequence, watchLandmarks } from './recognition/sequence.js'
+import { trackHands } from './recognition/hand-tracking.js'
+import { captureSequence } from './recognition/sequence.js'
 
 export function captureMarkup() {
   return `
@@ -21,6 +22,7 @@ export function captureMarkup() {
         <label class="check-label"><input type="checkbox" data-hand-points checked> Mostrar pontos das mãos</label>
       </div>
       <p class="capture-privacy">A imagem fica no seu dispositivo.</p>
+      <p class="inline-status" data-hand-status role="status" hidden></p>
       <p class="inline-status" data-capture-status data-state="idle" role="status">Mostre a mão e a parte superior do corpo.</p>
     </section>`
 }
@@ -46,12 +48,13 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   const status = main.querySelector('[data-capture-status]')
   const canvas = main.querySelector('[data-hand-overlay]')
   const points = main.querySelector('[data-hand-points]')
+  const handStatus = main.querySelector('[data-hand-status]')
   const overlay = handOverlay(canvas, video)
   let cameraState = 'idle'
   let phase = 'idle'
   let enginePromise
   let engineLoadMs = null
-  let stopWatching
+  let preview
   let capture
   let ticket = 0
   let disposed = false
@@ -79,8 +82,6 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
 
   function cancel() {
     ticket += 1
-    stopPreview()
-    overlay.clear()
     capture?.abort()
     capture = undefined
     phase = 'idle'
@@ -107,39 +108,46 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     return pending
   }
 
-  function stopPreview() {
-    stopWatching?.()
-    stopWatching = undefined
+  function closePreview() {
+    preview?.close()
+    preview = undefined
+    overlay.clear()
+    handStatus.hidden = true
   }
 
-  const canPreview = () => !disposed && camera.active && points.checked && phase === 'idle' && !stopWatching
+  function showPreviewError() {
+    closePreview()
+    handStatus.textContent = 'Pontos das mãos indisponíveis. Desmarque a opção e marque novamente para tentar de novo.'
+    handStatus.hidden = false
+  }
 
-  async function startPreview() {
-    if (!canPreview()) return
-    const pending = getEngine()
-    let engine
-    try { engine = await pending } catch { return }
-    if (pending !== enginePromise || !canPreview()) return
-    stopWatching = watchLandmarks(video, engine, {
-      intervalMs: engine.captureOptions.intervalMs,
-      onFrame: overlay.paint,
-      onError() { stopPreview(); overlay.clear() },
-    })
+  function syncPreview() {
+    const visible = enabled && camera.active && points.checked
+    handStatus.hidden = true
+    try {
+      if (visible && !preview) preview = trackHands(video, { onFrame: overlay.paint, onError: showPreviewError })
+      preview?.setVisible(visible)
+      if (!visible) overlay.clear()
+    } catch {
+      showPreviewError()
+    }
   }
 
   const camera = createCamera(video, (state, message) => {
     cameraState = state
     if (state === 'error') {
       cancel()
+      closePreview()
       closeEngine()
     }
     show(state === 'error' ? 'capture-error' : state, message)
     renderButtons()
-    if (state === 'ready') void startPreview()
+    if (state === 'ready') syncPreview()
   })
 
   function stop(message) {
     cancel()
+    closePreview()
     camera.stop()
     closeEngine()
     cameraState = 'idle'
@@ -153,12 +161,10 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
   })
   points.addEventListener('change', () => {
     renderButtons()
-    if (points.checked) void startPreview()
-    else {
-      stopPreview()
-      overlay.clear()
-    }
+    syncPreview()
   })
+  video.addEventListener('waiting', overlay.clear)
+  video.addEventListener('resize', overlay.clear)
 
   async function complete(analyze, frames, current, timing, initialLoadMs) {
     if (current !== ticket || disposed) return
@@ -187,7 +193,6 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
       initialLoadMs,
       extractionMs: timing.extractionMs,
     })
-    void startPreview()
   }
 
   async function attempt() {
@@ -198,7 +203,6 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     if (!camera.active || phase !== 'idle') return
     const current = ++ticket
     const mode = captureMode?.() ?? 'isolated'
-    stopPreview()
     phase = 'loading'
     renderButtons()
     show('busy', 'Preparando o reconhecimento no dispositivo.')
@@ -214,7 +218,6 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
       phase = 'idle'
       renderButtons()
       show('unavailable', 'Verifique se os modelos locais estão instalados.')
-      void startPreview()
       return
     }
     if (current !== ticket || disposed) return
@@ -231,7 +234,6 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
     capture = captureSequence(video, engine, {
       ...engine.captureOptions,
       ...(mode !== 'isolated' ? { limitMs: 12_000, limitFrames: 125 } : {}),
-      onLandmarks: overlay.paint,
       onFinish(frames, timing) { void complete(analyze, frames, current, timing, initialLoadMs) },
       onError() { stop('A captura foi interrompida. Ative a câmera e tente novamente.'); show('capture-error', status.textContent) },
     })
@@ -258,13 +260,15 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, c
         renderButtons()
       }
       if (cameraState === 'ready') show('ready', 'Mostre a mão e a parte superior do corpo.')
-      void startPreview()
     },
     dispose() {
       disposed = true
       cancel()
+      closePreview()
       camera.dispose()
       closeEngine()
+      video.removeEventListener('waiting', overlay.clear)
+      video.removeEventListener('resize', overlay.clear)
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('pagehide', onPageHide)
     },

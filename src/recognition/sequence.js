@@ -40,7 +40,7 @@ export function watchLandmarks(video, extractor, { intervalMs = 90, onFrame, onE
 }
 
 export function captureSequence(video, extractor, {
-  intervalMs = 90, limitMs = 4500, limitFrames = 64, onFinish, onError, onLandmarks,
+  intervalMs = 90, limitMs = 4500, limitFrames = 64, onFinish, onError,
 }) {
   const frames = []
   const extractionMs = []
@@ -65,7 +65,6 @@ export function captureSequence(video, extractor, {
     onFrame(frame, elapsed) {
       extractionMs.push(elapsed)
       frames.push(frame)
-      onLandmarks?.(frame)
       if (frames.length >= limitFrames) finish('frame-limit')
     },
     onError(error) { abort(); onError(error) },
