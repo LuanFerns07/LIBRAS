@@ -161,3 +161,11 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
   LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-r-reproduzido" \
   ./scripts/executar-local.sh --pacote data/releases/librasia-r-reconstruido
 ```
+
+### Recuperação de R e U na divergência
+
+No candidato `f0122fa`, quando as duas redes recomendam R e a forma rejeita R, o complemento 3D pode confirmar U a partir de 0,95. Para R, a forma pode confirmar a letra ao atingir 0,95 quando a rede principal aceita R e a segunda prefere U. O treino de U usou as três aulas da sonda anterior, com o teste da Uníntese e da UFF fora do treino. O ONNX reproduziu os escores e as decisões do PyTorch nos pontos avaliados. [Exportação e hashes](exportacao-u-divergencia.json)
+
+No Chromium, o candidato exibiu o U da Uníntese e o R da UFF três vezes em três capturas de cada recorte. Também exibiu o R da Uníntese e o U da UFF nas três repetições de cada um. Os casos recuperados passaram nos dois modos de leitura. A troca M → N e o teste de duas mãos na sobreposição passaram com gravações. [Doze capturas](divergencia-f0122fa.json) · [Origem dos recortes](../../alphabet/independent-r-u-obliquo.json)
+
+Na UFAC, U apareceu nas duas versões e R ficou sem leitura. O U em perfil da aula explicativa da Unicentro também ficou sem leitura nas duas versões. [Base nos controles](ufac-perfil-b95a5da.json) · [Candidato nos controles](ufac-perfil-f0122fa.json) · [Recortes da UFAC](../../alphabet/ufac-r-u-holdout.json)

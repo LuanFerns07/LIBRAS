@@ -1,0 +1,38 @@
+{
+  "references": [
+    "2591a22f858783ef81f0a4d88dc3eb61e38c308b56955422832548ff1971e85c",
+    "8b43c8b04d53a5502a20f755ff666fc469bfbd83528f45ed48cc74f02e5e1e07",
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "f692d68fdb8c148ef1a05d86247f7d088360a6d5bc0fc82785d516a7438de7c0",
+    "8c0209d2b19e086db0dd73c32849888fa7cef57ef4ea3a0e02f48bb6743131ac",
+    "45a0df13d05801d8390d0cbfe4d523f65e102076cf187889b8ffb53e9a8dbaf9",
+    "f6e82c6a400d9bf84305fa394e04955322245f73e30c61e1263b04b4ac0047ef",
+    "b50da4ed2705a108644acc806d871f725630eddadda8004491746e7aa9a37c79",
+    "923d2b4e674b447b18201cabad28d6cfb3f69bd8e2f41259438302d3eced99b4"
+  ],
+  "rShapeSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+  "trainingU": 3,
+  "trainingOther": 29,
+  "trainingSources": [
+    "1527000916",
+    "cecierj-13757",
+    "unesp-222981"
+  ],
+  "uLimit": 0.95,
+  "rVeto": 0.2,
+  "rConfirmation": 0.95,
+  "confirmation": {
+    "imageR": {
+      "preprocess": "hand-wrist-palm-v1",
+      "threshold": 0.95,
+      "modelSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+      "vetoThreshold": 0.2,
+      "recoverDisagreement": true
+    },
+    "worldU": {
+      "preprocess": "hand-world-wrist-palm-v1",
+      "threshold": 0.95,
+      "modelSha256": "bcc69d1ba21d22945668193eeebae8d058896c043f8b2e491ba7ea77abcb63ef"
+    }
+  }
+}
