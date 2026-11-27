@@ -18,6 +18,11 @@ const letterInstructions = [
 
 const curricula = { signal: lesson, letter: manualAlphabet }
 const listLetters = new Intl.ListFormat('pt-BR', { type: 'conjunction' })
+const comparisonTargets = {
+  'signal-cinco': 'signal-espelho',
+  'signal-espelho': 'signal-cinco',
+  'signal-amarelo': 'signal-espelho',
+}
 
 const quizzes = [
   ['Como fica a palma no sinal Cinco?', ['Para a frente', 'Para baixo', 'Atrás da cabeça'], 0],
@@ -45,6 +50,7 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   let mode = 'signal'
   let step = 0
   let supportedLetters
+  let comparing = false
 
   main.innerHTML = `
     <div class="page-heading practice-heading">
@@ -77,6 +83,8 @@ export function mountPractice(main, { createPlayer, openEngine }) {
       <h2 data-stage-title></h2>
       <p data-step-intro></p>
       <p class="muted" data-observation></p>
+      <p class="muted" id="practice-contrast" role="status" hidden></p>
+      <button class="button" type="button" data-practice-compare aria-controls="practice-contrast" hidden></button>
       <p class="muted" data-letter-coverage role="status" hidden></p>
     </div>
     <div class="media-layout">
@@ -116,6 +124,8 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   const reviewButton = main.querySelector('[data-review]')
   const reviewReason = main.querySelector('[data-review-reason]')
   const observation = main.querySelector('[data-observation]')
+  const comparisonNote = main.querySelector('#practice-contrast')
+  const compare = main.querySelector('[data-practice-compare]')
   const title = main.querySelector('[data-stage-title]')
   const intro = main.querySelector('[data-step-intro]')
   const summary = main.querySelector('[data-practice-summary]')
@@ -211,6 +221,20 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     picker.value = current().id
   }
 
+  function renderDemonstration(autoplay = false) {
+    const entry = current()
+    const other = step === 0 && mode === 'signal' ? lesson.find(signal => signal.id === comparisonTargets[entry.id]) : undefined
+    const sequence = step === 2 ? [] : [entry]
+    compare.hidden = !other
+    if (other) compare.textContent = comparing ? `Exibir só ${entry.label}` : `Comparar com ${other.label}`
+    comparisonNote.hidden = !(other && comparing)
+    if (other && comparing) {
+      comparisonNote.textContent = `${other.label}. ${other.watch}`
+      sequence.push(other)
+    }
+    player.setSequence(sequence, autoplay)
+  }
+
   function render() {
     const entry = current()
     const letters = entry.kind === 'letter'
@@ -231,7 +255,8 @@ export function mountPractice(main, { createPlayer, openEngine }) {
     letterActivity.hidden = !letters || step !== 0
     quizStatus.hidden = true
     practiceNext.hidden = true
-    player.setSequence(step === 2 ? [] : [entry])
+    comparing = false
+    renderDemonstration()
     avatar.hidden = step === 2
     camera.reset()
     camera.setEnabled(step !== 0)
@@ -251,6 +276,10 @@ export function mountPractice(main, { createPlayer, openEngine }) {
   practiceNext.addEventListener('click', () => {
     tabs[1].click()
     tabs[1].focus()
+  })
+  compare.addEventListener('click', () => {
+    comparing = !comparing
+    renderDemonstration(true)
   })
   modePicker.addEventListener('change', () => {
     mode = modePicker.value

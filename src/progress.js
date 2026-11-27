@@ -59,6 +59,7 @@ export function reviewOrder(progress, kind = 'signal') {
     return b.retryStreak - a.retryStreak ||
       (kind === 'letter' ? Number(a.observed) - Number(b.observed) : 0) ||
       Number(isComplete(a, kind)) - Number(isComplete(b, kind)) ||
+      (kind === 'signal' ? Number(b.understood) - Number(a.understood) : 0) ||
       a.accepted - b.accepted
   })
 }

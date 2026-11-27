@@ -218,6 +218,12 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4203 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
   node --test tests/e2e/recognition.test.mjs
 ~~~
 
+### Comparação e revisão em M8
+
+Na etapa **Observar**, o botão de comparação reproduz o sinal selecionado e um segundo sinal da lição. O Chromium reproduziu Cinco e Espelho, mostrou a observação sobre a rotação do punho e voltou a reproduzir somente Cinco. A atividade manteve Cinco como alvo e a câmera ficou desligada. [Teste no Chromium](../tests/e2e/browser.test.mjs)
+
+A revisão dá prioridade a tentativas que precisam ser refeitas. Quando não há essas tentativas, a sugestão retoma o sinal já estudado cuja prática ainda está incompleta. O teste unitário acompanhou Espelho da observação à prática de memória. No Chromium, a revisão de Cinco voltou à etapa guiada após recarregar. O log do Chromium está em `data/evidence/demonstracao/m8-comparacao/`. O efeito das dicas sobre a aprendizagem fica para o piloto. [Teste da ordem de revisão](../tests/lesson.test.js) · [Pendências](pendencias-futuras.md#m8-a-m11--piloto-cobertura-dados-contínuos-e-publicação)
+
 ### Dica de trajetória de Amarelo
 
 Na prática guiada, o Chromium reconheceu Amarelo S01-1 em velocidade original. Ao receber o recorte com os quadros em ordem inversa, o mesmo modelo exibiu “Desloque o indicador da testa em direção ao nariz” nas três tentativas. O progresso registrou as dicas e manteve a prática guiada pendente. Em outro recorte invertido, S04-1, o aplicativo mostrou baixa confiança. São ensaios técnicos com gravações de treino e trajetória alterada. A adequação da dica a um erro intencional feito na webcam permanece no roteiro com sinalizantes.

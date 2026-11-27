@@ -171,6 +171,21 @@ test('a revisão prioriza tentativas pendentes e atualiza a sugestão após acer
   assert.equal(reviewOrder(progress)[0], cinco)
 })
 
+test('a revisão retoma um sinal estudado quando não há tentativas pendentes', () => {
+  const progress = readProgress()
+  const [cinco, espelho] = lesson
+  const entry = progress[espelho.id]
+  entry.observed = true
+  entry.understood = true
+  assert.equal(reviewOrder(progress)[0], espelho)
+  assert.equal(reviewStep(entry), 1)
+  markAttempt(entry, 1, { state: 'accepted' })
+  assert.equal(reviewOrder(progress)[0], espelho)
+  assert.equal(reviewStep(entry), 2)
+  markAttempt(entry, 2, { state: 'accepted' })
+  assert.equal(reviewOrder(progress)[0], cinco)
+})
+
 test('a revisão abre a primeira etapa pendente do sinal ou da letra', () => {
   const signal = readProgress()['signal-cinco']
   assert.equal(reviewStep(signal), 0)
