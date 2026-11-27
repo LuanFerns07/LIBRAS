@@ -1,0 +1,1234 @@
+{
+  "inputPartition": "train",
+  "sourceManifestSha256": "eca4ecef0477ed39a3130d17748c0c04a0edcaa937a471362b193f4eb0fa6363",
+  "featuresManifestSha256": "003a23160547ac16da19192d2746027d76cd3750a0c5230d89d65a664c85a070",
+  "labels": [
+    null,
+    "cinco",
+    "espelho",
+    "amarelo",
+    "aluno"
+  ],
+  "seed": 7391,
+  "epochs": 80,
+  "batchSize": 12,
+  "device": "cuda",
+  "torch": "2.6.0+cu124",
+  "comparisons": {
+    "ConvSequenceNoseMasked": {
+      "folds": [
+        {
+          "trainSigners": [
+            3,
+            6
+          ],
+          "validationSigners": [
+            2,
+            5
+          ],
+          "measurementSigners": [
+            1,
+            4,
+            7
+          ],
+          "selectedEpoch": 54,
+          "threshold": 0.575,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                16,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                3,
+                6,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                9,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                7,
+                0
+              ],
+              [
+                3,
+                0,
+                0,
+                2,
+                4
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 0.8571428571428571,
+                "recall": 0.6666666666666666,
+                "f1": 0.75,
+                "support": 9,
+                "accepted": 6,
+                "predicted": 7,
+                "truePositives": 6
+              },
+              "espelho": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 9,
+                "accepted": 9,
+                "predicted": 9,
+                "truePositives": 9
+              },
+              "amarelo": {
+                "precision": 0.7,
+                "recall": 0.7777777777777778,
+                "f1": 0.7368421052631577,
+                "support": 9,
+                "accepted": 7,
+                "predicted": 10,
+                "truePositives": 7
+              },
+              "aluno": {
+                "precision": 1.0,
+                "recall": 0.4444444444444444,
+                "f1": 0.6153846153846153,
+                "support": 9,
+                "accepted": 6,
+                "predicted": 4,
+                "truePositives": 4
+              }
+            },
+            "f1Macro": 0.7755566801619432,
+            "coverage": {
+              "count": 28,
+              "total": 36,
+              "rate": 0.7777777777777778
+            },
+            "falseAcceptance": {
+              "count": 2,
+              "total": 18,
+              "rate": 0.1111111111111111
+            },
+            "inconclusive": {
+              "count": 24,
+              "total": 54,
+              "rate": 0.4444444444444444
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 1,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 2
+            },
+            "espelho": {
+              "correct": 9,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "amarelo": {
+              "correct": 7,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 1,
+              "wrongLabelWinner": 1
+            },
+            "aluno": {
+              "correct": 4,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 1,
+              "wrongLabelWinner": 4
+            }
+          }
+        },
+        {
+          "trainSigners": [
+            1,
+            4,
+            7
+          ],
+          "validationSigners": [
+            3,
+            6
+          ],
+          "measurementSigners": [
+            2,
+            5
+          ],
+          "selectedEpoch": 39,
+          "threshold": 0.62,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                9,
+                0,
+                0,
+                0,
+                3
+              ],
+              [
+                0,
+                6,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                6,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                6,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                6
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              },
+              "espelho": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              },
+              "amarelo": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              },
+              "aluno": {
+                "precision": 0.6666666666666666,
+                "recall": 1.0,
+                "f1": 0.8,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 9,
+                "truePositives": 6
+              }
+            },
+            "f1Macro": 0.95,
+            "coverage": {
+              "count": 24,
+              "total": 24,
+              "rate": 1.0
+            },
+            "falseAcceptance": {
+              "count": 3,
+              "total": 12,
+              "rate": 0.25
+            },
+            "inconclusive": {
+              "count": 9,
+              "total": 36,
+              "rate": 0.25
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "espelho": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "amarelo": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "aluno": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            }
+          }
+        },
+        {
+          "trainSigners": [
+            2,
+            5
+          ],
+          "validationSigners": [
+            1,
+            4,
+            7
+          ],
+          "measurementSigners": [
+            3,
+            6
+          ],
+          "selectedEpoch": 26,
+          "threshold": 0.81,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                12,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                3,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                6,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                3
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 3,
+                "accepted": 3,
+                "predicted": 3,
+                "truePositives": 3
+              },
+              "espelho": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 6,
+                "accepted": 3,
+                "predicted": 3,
+                "truePositives": 3
+              },
+              "amarelo": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "support": 6,
+                "accepted": 0,
+                "predicted": 0,
+                "truePositives": 0
+              },
+              "aluno": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 3,
+                "accepted": 3,
+                "predicted": 3,
+                "truePositives": 3
+              }
+            },
+            "f1Macro": 0.6666666666666666,
+            "coverage": {
+              "count": 9,
+              "total": 18,
+              "rate": 0.5
+            },
+            "falseAcceptance": {
+              "count": 0,
+              "total": 12,
+              "rate": 0.0
+            },
+            "inconclusive": {
+              "count": 21,
+              "total": 30,
+              "rate": 0.7
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 3,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "espelho": {
+              "correct": 3,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 3,
+              "wrongLabelWinner": 0
+            },
+            "amarelo": {
+              "correct": 0,
+              "capture": 0,
+              "belowThreshold": 1,
+              "outOfCatalogWinner": 5,
+              "wrongLabelWinner": 0
+            },
+            "aluno": {
+              "correct": 3,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            }
+          }
+        }
+      ],
+      "pooled": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            37,
+            1,
+            0,
+            1,
+            3
+          ],
+          [
+            3,
+            15,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            18,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0,
+            13,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            2,
+            13
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.9375,
+            "recall": 0.8333333333333334,
+            "f1": 0.8823529411764706,
+            "support": 18,
+            "accepted": 15,
+            "predicted": 16,
+            "truePositives": 15
+          },
+          "espelho": {
+            "precision": 1.0,
+            "recall": 0.8571428571428571,
+            "f1": 0.923076923076923,
+            "support": 21,
+            "accepted": 18,
+            "predicted": 18,
+            "truePositives": 18
+          },
+          "amarelo": {
+            "precision": 0.8125,
+            "recall": 0.6190476190476191,
+            "f1": 0.7027027027027026,
+            "support": 21,
+            "accepted": 13,
+            "predicted": 16,
+            "truePositives": 13
+          },
+          "aluno": {
+            "precision": 0.8125,
+            "recall": 0.7222222222222222,
+            "f1": 0.7647058823529411,
+            "support": 18,
+            "accepted": 15,
+            "predicted": 16,
+            "truePositives": 13
+          }
+        },
+        "f1Macro": 0.8182096123272593,
+        "coverage": {
+          "count": 61,
+          "total": 78,
+          "rate": 0.782051282051282
+        },
+        "falseAcceptance": {
+          "count": 5,
+          "total": 42,
+          "rate": 0.11904761904761904
+        },
+        "inconclusive": {
+          "count": 54,
+          "total": 120,
+          "rate": 0.45
+        }
+      },
+      "recognitionBreakdown": {
+        "cinco": {
+          "correct": 15,
+          "capture": 0,
+          "belowThreshold": 1,
+          "outOfCatalogWinner": 0,
+          "wrongLabelWinner": 2
+        },
+        "espelho": {
+          "correct": 18,
+          "capture": 0,
+          "belowThreshold": 0,
+          "outOfCatalogWinner": 3,
+          "wrongLabelWinner": 0
+        },
+        "amarelo": {
+          "correct": 13,
+          "capture": 0,
+          "belowThreshold": 1,
+          "outOfCatalogWinner": 6,
+          "wrongLabelWinner": 1
+        },
+        "aluno": {
+          "correct": 13,
+          "capture": 0,
+          "belowThreshold": 0,
+          "outOfCatalogWinner": 1,
+          "wrongLabelWinner": 4
+        }
+      }
+    },
+    "ConvSequenceNoseMasked + negativos complementares": {
+      "folds": [
+        {
+          "trainSigners": [
+            3,
+            6
+          ],
+          "validationSigners": [
+            2,
+            5
+          ],
+          "measurementSigners": [
+            1,
+            4,
+            7
+          ],
+          "selectedEpoch": 65,
+          "threshold": 0.475,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                17,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                7,
+                2,
+                0,
+                0
+              ],
+              [
+                1,
+                1,
+                7,
+                0,
+                0
+              ],
+              [
+                5,
+                0,
+                0,
+                4,
+                0
+              ],
+              [
+                1,
+                0,
+                0,
+                4,
+                4
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 0.875,
+                "recall": 0.7777777777777778,
+                "f1": 0.823529411764706,
+                "support": 9,
+                "accepted": 9,
+                "predicted": 8,
+                "truePositives": 7
+              },
+              "espelho": {
+                "precision": 0.7777777777777778,
+                "recall": 0.7777777777777778,
+                "f1": 0.7777777777777778,
+                "support": 9,
+                "accepted": 8,
+                "predicted": 9,
+                "truePositives": 7
+              },
+              "amarelo": {
+                "precision": 0.4444444444444444,
+                "recall": 0.4444444444444444,
+                "f1": 0.4444444444444444,
+                "support": 9,
+                "accepted": 4,
+                "predicted": 9,
+                "truePositives": 4
+              },
+              "aluno": {
+                "precision": 1.0,
+                "recall": 0.4444444444444444,
+                "f1": 0.6153846153846153,
+                "support": 9,
+                "accepted": 8,
+                "predicted": 4,
+                "truePositives": 4
+              }
+            },
+            "f1Macro": 0.6652840623428858,
+            "coverage": {
+              "count": 29,
+              "total": 36,
+              "rate": 0.8055555555555556
+            },
+            "falseAcceptance": {
+              "count": 1,
+              "total": 18,
+              "rate": 0.05555555555555555
+            },
+            "inconclusive": {
+              "count": 24,
+              "total": 54,
+              "rate": 0.4444444444444444
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 7,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 2
+            },
+            "espelho": {
+              "correct": 7,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 1,
+              "wrongLabelWinner": 1
+            },
+            "amarelo": {
+              "correct": 4,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 5,
+              "wrongLabelWinner": 0
+            },
+            "aluno": {
+              "correct": 4,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 1,
+              "wrongLabelWinner": 4
+            }
+          }
+        },
+        {
+          "trainSigners": [
+            1,
+            4,
+            7
+          ],
+          "validationSigners": [
+            3,
+            6
+          ],
+          "measurementSigners": [
+            2,
+            5
+          ],
+          "selectedEpoch": 64,
+          "threshold": 0.74,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                11,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                6,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                6,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                6,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                6
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              },
+              "espelho": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              },
+              "amarelo": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.923076923076923,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 7,
+                "truePositives": 6
+              },
+              "aluno": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 6,
+                "accepted": 6,
+                "predicted": 6,
+                "truePositives": 6
+              }
+            },
+            "f1Macro": 0.9807692307692307,
+            "coverage": {
+              "count": 24,
+              "total": 24,
+              "rate": 1.0
+            },
+            "falseAcceptance": {
+              "count": 1,
+              "total": 12,
+              "rate": 0.08333333333333333
+            },
+            "inconclusive": {
+              "count": 11,
+              "total": 36,
+              "rate": 0.3055555555555556
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "espelho": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "amarelo": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "aluno": {
+              "correct": 6,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            }
+          }
+        },
+        {
+          "trainSigners": [
+            2,
+            5
+          ],
+          "validationSigners": [
+            1,
+            4,
+            7
+          ],
+          "measurementSigners": [
+            3,
+            6
+          ],
+          "selectedEpoch": 15,
+          "threshold": 0.435,
+          "results": {
+            "expectedLabels": [
+              "fora do catálogo",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "decisionLabels": [
+              "rejeitado",
+              "cinco",
+              "espelho",
+              "amarelo",
+              "aluno"
+            ],
+            "matrix": [
+              [
+                12,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                5,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                3
+              ]
+            ],
+            "byLabel": {
+              "cinco": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 3,
+                "accepted": 3,
+                "predicted": 3,
+                "truePositives": 3
+              },
+              "espelho": {
+                "precision": 1.0,
+                "recall": 0.3333333333333333,
+                "f1": 0.5,
+                "support": 6,
+                "accepted": 2,
+                "predicted": 2,
+                "truePositives": 2
+              },
+              "amarelo": {
+                "precision": 1.0,
+                "recall": 0.16666666666666666,
+                "f1": 0.2857142857142857,
+                "support": 6,
+                "accepted": 1,
+                "predicted": 1,
+                "truePositives": 1
+              },
+              "aluno": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 3,
+                "accepted": 3,
+                "predicted": 3,
+                "truePositives": 3
+              }
+            },
+            "f1Macro": 0.6964285714285714,
+            "coverage": {
+              "count": 9,
+              "total": 18,
+              "rate": 0.5
+            },
+            "falseAcceptance": {
+              "count": 0,
+              "total": 12,
+              "rate": 0.0
+            },
+            "inconclusive": {
+              "count": 21,
+              "total": 30,
+              "rate": 0.7
+            }
+          },
+          "recognitionBreakdown": {
+            "cinco": {
+              "correct": 3,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            },
+            "espelho": {
+              "correct": 2,
+              "capture": 0,
+              "belowThreshold": 1,
+              "outOfCatalogWinner": 3,
+              "wrongLabelWinner": 0
+            },
+            "amarelo": {
+              "correct": 1,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 5,
+              "wrongLabelWinner": 0
+            },
+            "aluno": {
+              "correct": 3,
+              "capture": 0,
+              "belowThreshold": 0,
+              "outOfCatalogWinner": 0,
+              "wrongLabelWinner": 0
+            }
+          }
+        }
+      ],
+      "pooled": {
+        "expectedLabels": [
+          "fora do catálogo",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "decisionLabels": [
+          "rejeitado",
+          "cinco",
+          "espelho",
+          "amarelo",
+          "aluno"
+        ],
+        "matrix": [
+          [
+            40,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            16,
+            2,
+            0,
+            0
+          ],
+          [
+            5,
+            1,
+            15,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0,
+            11,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            4,
+            13
+          ]
+        ],
+        "byLabel": {
+          "cinco": {
+            "precision": 0.9411764705882353,
+            "recall": 0.8888888888888888,
+            "f1": 0.9142857142857143,
+            "support": 18,
+            "accepted": 18,
+            "predicted": 17,
+            "truePositives": 16
+          },
+          "espelho": {
+            "precision": 0.8823529411764706,
+            "recall": 0.7142857142857143,
+            "f1": 0.7894736842105262,
+            "support": 21,
+            "accepted": 16,
+            "predicted": 17,
+            "truePositives": 15
+          },
+          "amarelo": {
+            "precision": 0.6470588235294118,
+            "recall": 0.5238095238095238,
+            "f1": 0.5789473684210527,
+            "support": 21,
+            "accepted": 11,
+            "predicted": 17,
+            "truePositives": 11
+          },
+          "aluno": {
+            "precision": 1.0,
+            "recall": 0.7222222222222222,
+            "f1": 0.8387096774193548,
+            "support": 18,
+            "accepted": 17,
+            "predicted": 13,
+            "truePositives": 13
+          }
+        },
+        "f1Macro": 0.7803541110841621,
+        "coverage": {
+          "count": 62,
+          "total": 78,
+          "rate": 0.7948717948717948
+        },
+        "falseAcceptance": {
+          "count": 2,
+          "total": 42,
+          "rate": 0.047619047619047616
+        },
+        "inconclusive": {
+          "count": 56,
+          "total": 120,
+          "rate": 0.4666666666666667
+        }
+      },
+      "recognitionBreakdown": {
+        "cinco": {
+          "correct": 16,
+          "capture": 0,
+          "belowThreshold": 0,
+          "outOfCatalogWinner": 0,
+          "wrongLabelWinner": 2
+        },
+        "espelho": {
+          "correct": 15,
+          "capture": 0,
+          "belowThreshold": 1,
+          "outOfCatalogWinner": 4,
+          "wrongLabelWinner": 1
+        },
+        "amarelo": {
+          "correct": 11,
+          "capture": 0,
+          "belowThreshold": 0,
+          "outOfCatalogWinner": 10,
+          "wrongLabelWinner": 0
+        },
+        "aluno": {
+          "correct": 13,
+          "capture": 0,
+          "belowThreshold": 0,
+          "outOfCatalogWinner": 1,
+          "wrongLabelWinner": 4
+        }
+      }
+    }
+  },
+  "candidateTrainingNegatives": {
+    "featuresManifestSha256": "2fc0b4601fa0524e020e0c5ed7e176941602d275157259c1710d348cee349eae",
+    "sourceManifestSha256": "e2cbf098b988651bbd4ca70afcc41bc1a119f3b332707872d3a1be6924a579b3",
+    "clips": 9,
+    "eligible": 9,
+    "signers": [
+      1004
+    ]
+  }
+}

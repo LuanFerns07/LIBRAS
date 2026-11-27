@@ -108,3 +108,24 @@ PYTHONPATH=ml .venv/bin/python -m ml.fresh_eval.evaluate \
 ```
 
 Para repetir as três capturas simuladas, use a transformação de vídeo registrada na evidência para preparar os Y4M. Execute o teste `recognition.test.mjs` do roteiro de capturas parciais com `LIBRASIA_TEST_START_OFFSET_MS=500`, a duração de cada clipe e o texto esperado na reprodução. Os rótulos esperados `aluno` e `cinco` verificam a reprodução do erro observado. [Roteiro Chromium](janelas-area-livre.md#reproduzir) · [Parâmetros das três capturas](../ml/fresh_eval/evidence-negatives/browser.json)
+
+## Negativos complementares no controle com máscara do nariz
+
+O mesmo grupo de nove clipes de desenvolvimento do CLAD entrou no treino de `ConvSequenceNoseMasked`. O controle usa a mesma arquitetura e a mesma extração, com as relações com o nariz zeradas. Mantivemos as três rodadas por pessoa do MINDS, a semente 7391 e 80 épocas por rodada. Os recortes externos de avaliação ficaram fora do ajuste.
+
+| Condição | F1 macro | Amarelo | Precisão de Amarelo | Falsos aceites |
+| --- | ---: | ---: | ---: | ---: |
+| Controle | 0,818 | 13/21 | 81,3% | 5/42 |
+| Com nove negativos de treino | 0,780 | 11/21 | 64,7% | 2/42 |
+
+A rejeição melhorou, com perda de acertos de Amarelo e Espelho. A variante ficou abaixo das metas de Amarelo e continua em avaliação local. [Matrizes e procedência](../ml/evidence/isolated-nose-masked/cross-validation-clad.json) · [Metas](protocolo-aceite.md#metas-de-aceite)
+
+```bash
+node ml/extract.mjs --manifest data/clad-development/manifest.json \
+  --preprocess holistic-shoulders-nose-v1 --out data/clad-development/features-nose
+.venv/bin/python ml/cross_validate.py --device cuda \
+  --features data/minds-expanded/features-nose-train/index.json \
+  --reference ConvSequenceNoseMasked --candidate ConvSequenceNoseMasked \
+  --candidate-negatives data/clad-development/features-nose/index.json \
+  --out data/isolated-negative-audit/experimento/cv-nose-masked-negativos.json
+```
