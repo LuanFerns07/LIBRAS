@@ -44,9 +44,8 @@ class ThumbShape(nn.Module):
         return self.linear((values - self.mean) / self.scale).sigmoid()
 
 
-def fit(hands, labels, finger_flexion):
+def fit_linear(values, labels):
     torch.manual_seed(SEED)
-    values = thumb_features(torch.from_numpy(hands), finger_flexion)
     mean = values.mean(dim=0)
     scale = values.std(dim=0).clamp_min(.03)
     values = (values - mean) / scale
@@ -63,17 +62,23 @@ def fit(hands, labels, finger_flexion):
         return objective
 
     optimizer.step(loss)
+    return model, mean, scale
+
+
+def fit(hands, labels, finger_flexion):
+    values = thumb_features(torch.from_numpy(hands), finger_flexion)
+    model, mean, scale = fit_linear(values, labels)
     return ThumbShape(model, mean, scale, finger_flexion).eval()
 
 
-def training_examples(data, reference):
+def training_examples(data, reference, pair=("A", "S")):
     if checksum(data) != json.loads(data.with_suffix(".json").read_text())["dataSha256"]:
         raise ValueError("Os dados LibraSign divergem do manifesto.")
     with np.load(data, allow_pickle=False) as packed:
-        rows = (packed["splits"] == "train") & np.isin(packed["labels"], ("A", "S"))
+        rows = (packed["splits"] == "train") & np.isin(packed["labels"], pair)
         hands = centered(packed["points"][rows])
-        labels = packed["labels"][rows] == "S"
-    extra, actual = reference_data(reference, ["A", "S"])["train"]
+        labels = packed["labels"][rows] == pair[1]
+    extra, actual = reference_data(reference, list(pair))["train"]
     return (np.concatenate((hands, np.repeat(extra, 32, axis=0))),
             np.concatenate((labels, np.repeat(actual == 1, 32))))
 

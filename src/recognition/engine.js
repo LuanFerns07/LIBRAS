@@ -36,7 +36,7 @@ export async function openAlphabetEngine() {
   const response = await fetch(import.meta.env.BASE_URL + 'models/alphabet.json')
   if (response.status === 404) return { alphabetCatalog: [], close() {} }
   if (!response.ok) throw new Error('O modelo de alfabeto está indisponível.')
-  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256, supplement } = await response.json()
+  const { version, preprocess, labels, features, threshold, modelSha256, agreementSha256, supplement, contrast } = await response.json()
   if (version !== 1 || preprocess !== 'hand-wrist-palm-v1' || features !== alphabetFeatureCount ||
       !Array.isArray(labels) || labels.length < 2 || labels.some(label => !/^[A-ZÇ]$/u.test(label)) ||
       new Set(labels).size !== labels.length || !(threshold >= .5 && threshold <= 1) ||
@@ -50,6 +50,11 @@ export async function openAlphabetEngine() {
       !(supplement.threshold > .5 && supplement.threshold <= 1) ||
       !/^[a-f0-9]{64}$/u.test(supplement.modelSha256))) {
     throw new TypeError('Manifesto do complemento de alfabeto incompatível.')
+  }
+  if (contrast !== undefined && (!contrast || !labels.includes(contrast.from) || !labels.includes(contrast.to) ||
+      contrast.from === contrast.to || !Number.isFinite(contrast.threshold) ||
+      !(contrast.threshold > .5 && contrast.threshold <= 1) || !/^[a-f0-9]{64}$/u.test(contrast.modelSha256))) {
+    throw new TypeError('Manifesto da distinção de letras incompatível.')
   }
   configureWasm()
   const motionResponse = await fetch(import.meta.env.BASE_URL + 'models/alphabet-motion.json')
@@ -75,19 +80,22 @@ export async function openAlphabetEngine() {
   const recognizeTrajectory = trajectory ? createTrajectoryMatcher(trajectory) : null
   const legacyLetters = Object.keys(motion?.limits ?? {})
   const motionLetters = trajectory ? [...trajectoryLabels, 'J', 'Z', ...legacyLetters] : legacyLetters
-  const [bytes, checkBytes, supplementBytes] = await Promise.all([
+  const [bytes, checkBytes, supplementBytes, contrastBytes] = await Promise.all([
     verifiedBytes('models/alphabet.onnx', modelSha256),
     agreementSha256 ? verifiedBytes('models/alphabet-check.onnx', agreementSha256) : null,
     supplement ? verifiedBytes('models/alphabet-supplement.onnx', supplement.modelSha256) : null,
+    contrast ? verifiedBytes('models/alphabet-contrast.onnx', contrast.modelSha256) : null,
   ])
   const session = await InferenceSession.create(bytes, { executionProviders: ['wasm'] })
   let verifier
   let refiner
+  let contrastModel
   try {
     if (checkBytes) verifier = await InferenceSession.create(checkBytes, { executionProviders: ['wasm'] })
     if (supplementBytes) refiner = await InferenceSession.create(supplementBytes, { executionProviders: ['wasm'] })
+    if (contrastBytes) contrastModel = await InferenceSession.create(contrastBytes, { executionProviders: ['wasm'] })
   } catch (error) {
-    await Promise.allSettled([session.release(), verifier?.release()])
+    await Promise.allSettled([session.release(), verifier?.release(), refiner?.release()])
     throw error
   }
   let pending = Promise.resolve()
@@ -102,6 +110,15 @@ export async function openAlphabetEngine() {
     return probability >= threshold ? labels[best] : null
   }
 
+  async function refinedLetter(letter, input) {
+    if (!contrastModel || letter !== contrast.from) return letter
+    const { scores } = await contrastModel.run({ hand: input })
+    if (scores?.data.length !== 1 || !scores.data.every(value => value >= 0 && value <= 1)) {
+      throw new TypeError('Saída da distinção de letras incompatível.')
+    }
+    return scores.data[0] >= contrast.threshold ? contrast.to : letter
+  }
+
   return {
     alphabetCatalog: [...new Set([...labels, ...motionLetters])].sort(),
     findMotion: motionLetters.length ? frames =>
@@ -110,7 +127,7 @@ export async function openAlphabetEngine() {
       const input = new Tensor('float32', values, [1, features])
       const run = pending.then(async () => {
         const letter = await predictedLetter(session, input)
-        if (letter && (!verifier || await predictedLetter(verifier, input) === letter)) return letter
+        if (letter && (!verifier || await predictedLetter(verifier, input) === letter)) return refinedLetter(letter, input)
         if (!refiner) return null
         const { scores } = await refiner.run({ hand: input })
         if (!scores || scores.data.length !== supplement.labels.length ||
@@ -118,14 +135,14 @@ export async function openAlphabetEngine() {
           throw new TypeError('Saída do complemento de alfabeto incompatível.')
         }
         const best = scores.data.indexOf(Math.max(...scores.data))
-        return scores.data[best] >= supplement.threshold ? supplement.labels[best] : null
+        return scores.data[best] >= supplement.threshold ? refinedLetter(supplement.labels[best], input) : null
       })
       pending = run.catch(() => {})
       return run
     },
     async close() {
       await pending
-      await Promise.all([session.release(), verifier?.release(), refiner?.release()])
+      await Promise.all([session.release(), verifier?.release(), refiner?.release(), contrastModel?.release()])
     },
   }
 }

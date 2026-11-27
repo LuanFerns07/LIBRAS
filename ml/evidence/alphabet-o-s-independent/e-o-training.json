@@ -1,0 +1,28 @@
+{
+  "dataSha256": "a2995cb3af683a0bc65b14969e5b7675378aaaf8257e247392c3f08a9a04dbd6",
+  "referenceSha256": "d1b4e870933349b7a2e90f5c02fabf1e82f31f6a013c2435c3e4a4a164f05ede",
+  "contrast": {
+    "from": "E",
+    "to": "O",
+    "threshold": 0.95,
+    "modelSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad"
+  },
+  "training": {
+    "E": 3196,
+    "O": 3676
+  },
+  "validation": {
+    "LibraSign": {
+      "E": 125,
+      "falseO": 0,
+      "O": 125,
+      "confirmedO": 5
+    },
+    "video": {
+      "E": 17,
+      "falseO": 0,
+      "O": 16,
+      "confirmedO": 15
+    }
+  }
+}

@@ -54,7 +54,7 @@ alfabeto="${LIBRASIA_ALFABETO_MODELO:-data/models/alphabet-live}"
 if [[ -n "${LIBRASIA_ALFABETO_MODELO:-}" || -f "$alfabeto/alphabet.json" ]]; then
   mkdir -p "$previa/public/models"
   cp "$alfabeto/"{alphabet.json,alphabet.onnx} "$previa/public/models/"
-  for arquivo in alphabet-check.onnx alphabet-supplement.onnx; do
+  for arquivo in alphabet-check.onnx alphabet-supplement.onnx alphabet-contrast.onnx; do
     if [[ -f "$alfabeto/$arquivo" ]]; then
       cp "$alfabeto/$arquivo" "$previa/public/models/"
     fi
