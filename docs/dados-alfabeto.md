@@ -347,3 +347,11 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" LIBRASIA_ALFABETO_MO
   ./scripts/executar-local.sh --pacote data/releases/librasia-z-palma-reconstruido
 python3 data/releases/librasia-z-palma-reconstruido/iniciar.py --porta 4177
 ```
+
+### Confirmação de Y pela forma da mão
+
+O leitor anterior comparava Y com sequências de movimento. Nas gravações reservadas, o Y de Uéslei Paterno e o da Unicentro ficaram sem leitura no Chromium. As redes estáticas também ficaram sem uma letra na maior parte dessas janelas. O ensaio comparou as coordenadas da imagem e as coordenadas 3D com a mesma regressão logística. Usou três demonstrações de Y e 47 recortes de outras letras, de três aulas de treino. As medidas incluem flexão, distância entre pontas dos dedos e posição do polegar e do mínimo em relação à palma. [Recortes adicionais de treino](../ml/alphabet/institutional-y-training.json) · [Replays da base](../ml/evidence/alphabet-y/y-base-9d5d6fe.json)
+
+O modelo da imagem sustentou de oito a 12 votos consecutivos entre os quadros selecionáveis de cada um dos cinco Y reservados. No mesmo teste, a versão 3D teve dois votos consecutivos no Y da Unicentro. A forma estimada pela imagem também deu um voto isolado a um Z e a quadros de dois recortes fora do alfabeto. No candidato `59c47db`, o complemento entra apenas quando as demais decisões do classificador estático ficam inconclusivas. A saída continua exigindo três votos seguidos. A exportação verificou o mesmo resultado do PyTorch no ONNX com limiar de 0,95. [Treino, avaliação e paridade](../ml/evidence/alphabet-y/treino-e-paridade.json) · [Código do treino](https://github.com/LuanFerns07/LIBRAS/blob/59c47db/ml/alphabet/probe_y.py)
+
+Na base, Y apareceu em duas de três reproduções de Tel baixinha e uma de três de Paterno e da Unicentro. O Chromium mostrou Y nas nove repetições com o candidato. As duas últimas gravações passaram nos testes em Praticar e na Área livre. As duas versões conservaram W e Y no recorte adicional da UFAC, reservado por pessoa. [Repetições na base](../ml/evidence/alphabet-y/y-base-repetido-9d5d6fe.json) · [Repetições no candidato](../ml/evidence/alphabet-y/y-candidato-59c47db.json) · [Recortes da UFAC](../ml/alphabet/ufac-w-y-holdout.json) · [UFAC no candidato](../ml/evidence/alphabet-y/ufac-59c47db.json)

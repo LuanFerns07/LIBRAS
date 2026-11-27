@@ -136,7 +136,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Confirmar o Z curto nas três novas capturas do candidato no Chromium, em Praticar e na Área livre. Comparar os mesmos pontos de 19 negativos, três repetições de Azul e os outros quatro Z já reconhecidos. [Ensaios do candidato](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
 - [x] Comparar três Z e três Y de outras pessoas no Chromium. Os três Z apareceram nas duas versões. O Y de Tel baixinha apareceu nas duas versões e os dois outros Y ficaram sem leitura. [Gravações independentes](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
 - [x] Retestar Azul, X, as demais letras de movimento e os negativos no Chromium e adotar a retomada de Z na porta 4177. A letra esperada apareceu nos 16 controles rotulados, incluindo os cinco Z. Z ficou ausente nos 19 negativos e nas três repetições de Azul. [Pacote e evidências](docs/dados-alfabeto.md#retomada-do-z-curto-da-ufsm)
-- [ ] Investigar os Y sem leitura de Uéslei Paterno e da Unicentro e as trocas breves nos recortes de movimento.
+- [x] Treinar e testar um complemento de Y pelas posições dos dedos. A base exibiu Y em quatro de nove repetições e o candidato exibiu Y nas nove repetições de três pessoas e passou em Praticar e na Área livre com os vídeos de Uéslei Paterno e da Unicentro. O par W/Y da UFAC preservou as duas leituras. [Treino e replays](docs/dados-alfabeto.md#confirmação-de-y-pela-forma-da-mão)
+- [ ] Completar a bateria de regressão do candidato de Y e verificar as trocas breves nos recortes de movimento.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
