@@ -219,6 +219,15 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
 
     if (!voiceEnabled) await evaluate('Object.defineProperty(window, "speechSynthesis", { value: undefined, configurable: true }); true')
     await open('area-livre', 'Libras para texto e voz')
+    const historyBeforeSkip = await evaluate('history.length')
+    await evaluate('document.querySelector(".skip-link").focus()')
+    await key('Enter', 13)
+    await waitUntil('document.activeElement.id === "conteudo"')
+    assert.equal(await evaluate('location.hash'), '#area-livre')
+    assert.equal(await evaluate('history.length'), historyBeforeSkip)
+    await key('Tab', 9)
+    assert.equal(await evaluate('document.activeElement.matches("[data-free-mode]")'), true)
+
     await permission(origin, 'denied')
     await click('[data-camera-toggle]')
     await waitUntil('document.querySelector("[data-capture-status]").dataset.state === "capture-error"')

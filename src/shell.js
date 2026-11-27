@@ -38,7 +38,12 @@ export function mountShell(root) {
     </header>
     <main id="conteudo" tabindex="-1"></main>
     <footer class="site-footer"><div>${credits}</div></footer>`
-  return root.querySelector('main')
+  const main = root.querySelector('main')
+  root.querySelector('.skip-link').addEventListener('click', event => {
+    event.preventDefault()
+    main.focus()
+  })
+  return main
 }
 
 export function navigate(root, main, views) {
