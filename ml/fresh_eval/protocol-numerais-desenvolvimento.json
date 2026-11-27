@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-27",
+  "scope": "desenvolvimento-numerais",
+  "sources": {
+    "ufsm-libras-d": {
+      "name": "Números Cardinais — Caderno Didático Libras D",
+      "publisher": "Universidade Federal de Santa Maria, NTE, Caderno Didático de Libras D",
+      "credits": "Roteiro e apresentação Giovana Fracari Hautrive. Câmera Ronaldo Palma e Rodrigo Franco. Edição Jeferson Carvalho.",
+      "page": "https://ntetube.nte.ufsm.br/v/1543950577",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license": "CC-BY-NC-SA-4.0",
+      "url": "https://ntetube.nte.ufsm.br/repositorio/e3a43fcb460aa8c6b074e5a6318ed526/480p.mp4",
+      "sha256": "49199da8b464ba83eb63b2f30164cfb0250e7c84e38a7eeefa85c2c30718f426",
+      "filename": "ufsm-libras-d-480.mp4"
+    },
+    "ufsm-grupo": {
+      "name": "Números Cardinais — Produção de Material Didático em Língua de Sinais",
+      "publisher": "Universidade Federal de Santa Maria, NTE, Grupo de Produção de Material Didático em Língua de Sinais",
+      "credits": "Roteiro e apresentação Grupo de Produção de Material Didático em Libras. Câmera e edição Matheus Fighera. Câmera Julien Moretto. Produção Ronaldo Palma.",
+      "page": "https://ntetube.nte.ufsm.br/v/1536688636",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license": "CC-BY-NC-SA-4.0",
+      "url": "https://ntetube.nte.ufsm.br/repositorio/f9aa723c957019c7d768a0eb3e7e6fa5/480p.mp4",
+      "sha256": "4c74ee475ca2f9ba5241c637a9500d721f073344a91690d8bf32a66ef820c348",
+      "filename": "ufsm-grupo-480.mp4"
+    }
+  },
+  "clips": [
+    {
+      "id": "ufsm-libras-d-cinco", "source": "ufsm-libras-d", "signer": 902,
+      "label": "cinco", "startMs": 15450, "durationMs": 1100,
+      "cue": "Legenda Cinco e configuração do cardinal antes da transição seguinte."
+    },
+    {
+      "id": "ufsm-libras-d-seis-sete", "source": "ufsm-libras-d", "signer": 902,
+      "label": null, "startMs": 18480, "durationMs": 900,
+      "stratum": "transicao-controle", "sourceLabel": "Seis → Sete",
+      "cue": "A mão passa da configuração de Seis à de Sete, com troca da legenda."
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-600", "source": "ufsm-libras-d", "signer": 902,
+      "label": null, "startMs": 20180, "durationMs": 600,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Mudança contínua da mão entre Sete e Oito por volta de 20,48 s."
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-1000", "source": "ufsm-libras-d", "signer": 902,
+      "label": null, "startMs": 19980, "durationMs": 1000,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Janela de 1 s centrada na mudança contínua entre as mesmas duas formas."
+    },
+    {
+      "id": "ufsm-libras-d-sete-oito-1500", "source": "ufsm-libras-d", "signer": 902,
+      "label": null, "startMs": 19730, "durationMs": 1500,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Inclui quadros das duas formas estáveis no mesmo plano contínuo."
+    },
+    {
+      "id": "ufsm-libras-d-oito-nove", "source": "ufsm-libras-d", "signer": 902,
+      "label": null, "startMs": 21670, "durationMs": 900,
+      "stratum": "transicao-controle", "sourceLabel": "Oito → Nove",
+      "cue": "A mão passa da configuração de Oito à de Nove, com troca da legenda."
+    },
+    {
+      "id": "ufsm-grupo-cinco", "source": "ufsm-grupo", "signer": 903,
+      "label": "cinco", "startMs": 16610, "durationMs": 1020,
+      "cue": "Algarismo 5 na legenda e configuração do cardinal antes da mudança para 6."
+    },
+    {
+      "id": "ufsm-grupo-seis-sete", "source": "ufsm-grupo", "signer": 903,
+      "label": null, "startMs": 18810, "durationMs": 900,
+      "stratum": "transicao-controle", "sourceLabel": "Seis → Sete",
+      "cue": "A mão passa da configuração de 6 à de 7. A legenda muda ligeiramente antes da mão."
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-600", "source": "ufsm-grupo", "signer": 903,
+      "label": null, "startMs": 20150, "durationMs": 600,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Mudança contínua da mão entre 7 e 8 por volta de 20,45 s."
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-1000", "source": "ufsm-grupo", "signer": 903,
+      "label": null, "startMs": 19950, "durationMs": 1000,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Janela de 1 s centrada na mudança contínua entre as mesmas duas formas."
+    },
+    {
+      "id": "ufsm-grupo-sete-oito-1500", "source": "ufsm-grupo", "signer": 903,
+      "label": null, "startMs": 19700, "durationMs": 1500,
+      "stratum": "transicao-sete-oito", "sourceLabel": "Sete → Oito",
+      "cue": "Inclui quadros das duas formas estáveis no mesmo plano contínuo."
+    },
+    {
+      "id": "ufsm-grupo-oito-nove", "source": "ufsm-grupo", "signer": 903,
+      "label": null, "startMs": 21630, "durationMs": 900,
+      "stratum": "transicao-controle", "sourceLabel": "Oito → Nove",
+      "cue": "A mão passa da configuração de 8 à de 9, com troca da legenda."
+    }
+  ],
+  "models": {
+    "combined": {
+      "onnxSha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+      "manifestSha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+      "threshold": 0.525
+    }
+  }
+}
