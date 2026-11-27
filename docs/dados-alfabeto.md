@@ -457,3 +457,9 @@ python3 -m ml.alphabet.compare_replays "$out/uff-mesma-camera.json" "$out/uff-re
 ~~~
 
 Para repetir a Unicentro, use o manifesto `ml/alphabet/unicentro-alfabeto-continuo.json` e a fonte `unicentro-aniqxveqgns`. Para repetir a UFSM, passe os dois manifestos `ml/alphabet/ufsm-static-windows.json` e `ml/alphabet/ufsm-temporal-windows.json` e selecione a fonte `1535641159`. [Relatórios com linhas do tempo e hashes da compilação](../ml/evidence/alphabet-sequencia)
+
+### Aceite técnico de M4
+
+O Chromium percorreu as 27 letras do avatar com controles de teclado, verificou a tradução de palavras e frases do catálogo e mostrou uma mensagem para uma entrada fora da cobertura. No nome `Ânna‑Graça`, o avatar soletrou A → N → N → A → Pausa → G → R → A → Ç → A. O teste unitário verificou a mesma soletração dentro de “Meu nome é”. O tradutor aceita hífen comum e os dois hífens tipográficos no nome composto. [Teste no Chromium](../tests/e2e/browser.test.mjs) · [Teste do tradutor](../tests/translate.test.js)
+
+Com gravações rotuladas, o Chromium exibiu H, J, K, X, Z e Ç em Praticar e na Área livre, ao lado da câmera e sem iniciar tentativa. O recorte da UFF exibiu M → N → U nos dois modos e limpou o painel durante as transições, com a mesma trilha de vídeo. Os logs do reteste estão em `data/evidence/demonstracao/m4-alfabeto/`. As perdas em gravações reservadas, o caso de N em vista dupla e a revisão em Libras seguem no arquivo de pendências. [Teste da leitura ao vivo](../tests/e2e/alphabet-live.test.mjs) · [Pendências](pendencias-futuras.md#m4-e-m5--alfabeto-sinais-área-livre-e-voz)

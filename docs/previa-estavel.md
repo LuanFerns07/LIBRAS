@@ -56,12 +56,12 @@ O Hand Landmarker acompanha até duas mãos em um worker local. A sobreposição
 
 O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confirmação visual do alinhamento com movimentos feitos na webcam integra o teste manual. [Resultados com vídeo gravado e webcam física](teste-pontos-ao-vivo.md#resultado-da-prévia-empacotada) · [Checklist de verificação](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)
 
-## Prévia de M3
+## Prévia de trabalho
 
-Na porta 4203, a lição permite passar da resposta correta para a prática com ajuda do mesmo sinal. Cinco, Espelho e Amarelo completaram as etapas no Chromium usando vídeos gravados. [Abrir Praticar em M3](http://127.0.0.1:4203/#praticar) · [Evidências da lição](roteiro-validacao.md#lição-completa-dos-três-sinais-em-m3)
+Na porta 4203, Cinco, Espelho e Amarelo completaram a lição no Chromium usando vídeos gravados. A mesma prévia inclui as 27 letras do avatar e aceita hífens tipográficos ao soletrar nomes compostos. [Abrir Praticar](http://127.0.0.1:4203/#praticar) · [Evidências da lição](roteiro-validacao.md#lição-completa-dos-três-sinais-em-m3) · [Evidências do alfabeto](dados-alfabeto.md#aceite-técnico-de-m4)
 
 ~~~bash
-python3 data/releases/librasia-m3/iniciar.py --porta 4203
+python3 data/releases/librasia-m4/iniciar.py --porta 4203
 ~~~
 
 ## Prévia v0.1.0-preview.1

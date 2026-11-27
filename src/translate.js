@@ -8,7 +8,7 @@ function unaccent(text) {
 }
 
 function spellName(text) {
-  const plain = unaccent(text).trim()
+  const plain = unaccent(text).replace(/[\u2010\u2011]/gu, '-').trim()
   if (!/^[A-Za-zÇ]+(?:[\s'’\-]+[A-Za-zÇ]+)*$/u.test(plain)) {
     return { state: 'unsupported', unsupported: text, steps: [], message: 'Use as letras do alfabeto português, espaços, hífens ou apóstrofos para soletrar um nome.' }
   }

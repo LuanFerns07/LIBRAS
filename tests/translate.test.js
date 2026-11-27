@@ -17,6 +17,16 @@ test('nomes mantêm repetições e separações, com a letra base de acentos', (
     'letter-l', 'letter-u', 'letter-i', 'letter-s', 'pause',
     'letter-d', 'pause', 'letter-a', 'letter-v', 'letter-i', 'letter-l', 'letter-a',
   ])
+  for (const separator of ['-', '\u2010', '\u2011']) {
+    const name = `Ânna${separator}Graça`
+    assert.deepEqual(ids(translate(name, 'name')), [
+      'letter-a', 'letter-n', 'letter-n', 'letter-a', 'pause',
+      'letter-g', 'letter-r', 'letter-a', 'letter-ç', 'letter-a',
+    ])
+    assert.deepEqual(ids(translate(`Meu nome é ${name}.`)), [
+      'signal-nome', 'signal-meu', 'pause', ...ids(translate(name, 'name')),
+    ])
+  }
 })
 
 test('palavras e a apresentação do nome seguem sequências explícitas', () => {

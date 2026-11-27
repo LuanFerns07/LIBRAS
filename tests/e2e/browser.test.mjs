@@ -198,6 +198,10 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.equal(await text('[data-player-step]'), 'A')
     await checkPlayback(['A', 'N', 'N', 'A', 'Pausa', 'C', 'L', 'A', 'R', 'A'])
     report('3. Nome · A → N → N → A → Pausa → C → L → A → R → A.')
+    await fill('Ânna‑Graça')
+    await submit()
+    assert.equal(await evaluate('document.querySelector("[data-translation-status]").dataset.state'), 'ready')
+    await checkPlayback(['A', 'N', 'N', 'A', 'Pausa', 'G', 'R', 'A', 'Ç', 'A'])
 
     if (demoVideo) {
       await completeRecordedDemo(browser, { open, click, origin, report })

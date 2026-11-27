@@ -11,7 +11,8 @@ Esta lista reúne o que foi adiado por depender de participantes, dados adiciona
 
 ## M4 e M5 · Alfabeto, sinais, área livre e voz
 
-- [ ] **M4.** Revisar as poses e transições das 27 letras em Libras, com atenção a N frente a M e U. Retestar na webcam a letra sustentada, a sequência M → N → U, as confusões e as letras com movimento nos dois fluxos. Incluir soletração em nomes isolados e dentro de frases. [Histórico do alfabeto](dados-alfabeto.md)
+- [ ] **M4.** Revisar as poses, as transições e as sequências catalogadas com uma pessoa fluente em Libras. Conferir especialmente a pose frontal de N ao lado de M e U, letras repetidas, nomes compostos e soletração dentro de frases.
+- [ ] **M4.** Repetir na webcam M → N → U e N sustentado em Praticar e na Área livre. Com novas pessoas e ângulos, medir os pares S/A e E/O e as letras com movimento, incluindo Y. Ampliar a avaliação independente do alfabeto. Na gravação reservada da UFF, D e T ficaram sem leitura e R apareceu como X em uma condição. A vista dupla da Unicentro ainda produziu M na janela de N. [Limites observados](dados-alfabeto.md#alfabeto-com-a-mesma-trilha-de-câmera)
 - [ ] **M5.** Gravar ou obter novos exemplos independentes de Cinco e das transições de numerais em condições comparáveis. Fixar as partições por pessoa antes de ajustar a rejeição dos falsos aceites. [Plano de coleta](transicao-sete-oito.md)
 - [ ] **M5.** Com participantes fora do treino, testar sinais suportados, entradas desconhecidas, sustentação e repetição. Uma pessoa deve confirmar que o áudio em pt-BR corresponde ao texto editado. [Roteiro de validação](roteiro-validacao.md)
 
