@@ -81,6 +81,26 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 
 O modelo carregado foi o mesmo verificado na demonstração. O log da lição fica em `data/evidence/demonstracao/licao-completa.log`. [Clipe do MINDS-Libras](https://zenodo.org/records/2667329) · [Teste da lição](../tests/e2e/recognition.test.mjs)
 
+### Dica de trajetória de Amarelo
+
+Na prática guiada, o Chromium reconheceu Amarelo S01-1 em velocidade original. Ao receber o recorte com os quadros em ordem inversa, o mesmo modelo exibiu “Desloque o indicador da testa em direção ao nariz” nas três tentativas. O progresso registrou as dicas e manteve a prática guiada pendente. Em outro recorte invertido, S04-1, o aplicativo mostrou baixa confiança. São ensaios técnicos com gravações de treino e trajetória alterada. A adequação da dica a um erro intencional feito na webcam permanece no roteiro com sinalizantes.
+
+Para reproduzir a dica, execute na raiz com os clipes locais do MINDS-Libras e a prévia na porta 4177.
+
+~~~bash
+mkdir -p data/evidence/demonstracao
+ffmpeg -filter_threads 1 -ss 0.70 -i data/minds-expanded/raw/03AmareloSinalizador01-1.mp4 \
+  -an -vf 'scale=640:-2,fps=30,trim=duration=3.45,reverse,tpad=start_duration=0.5:color=lime' \
+  -pix_fmt yuv420p data/evidence/demonstracao/amarelo-01-invertido.y4m
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_TARGET=signal-amarelo LIBRASIA_TEST_TRIALS=3 \
+  LIBRASIA_TEST_EXPECT_HINT='Desloque o indicador da testa em direção ao nariz.' \
+  LIBRASIA_TEST_VIDEO=data/evidence/demonstracao/amarelo-01-invertido.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+Os logs ficam em `data/evidence/demonstracao`, nos arquivos `aceite-amarelo.log`, `dica-amarelo.log` e `amarelo-baixa-confianca.log`. [Recortes em velocidade original](sinais-com-movimento-browser.md) · [Origem dos clipes](https://zenodo.org/records/2667329)
+
 ## Registro da prévia de 26/11/2026
 
 Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.

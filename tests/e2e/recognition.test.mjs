@@ -14,6 +14,7 @@ const expectedGlosses = process.env.LIBRASIA_EXPECT_GLOSSES
 const sync = multiple || continuous || process.env.LIBRASIA_TEST_SYNC === '1'
 const target = process.env.LIBRASIA_TEST_TARGET?.trim()
 const lessonFlow = process.env.LIBRASIA_TEST_LESSON_FLOW === '1'
+const expectedHint = process.env.LIBRASIA_TEST_EXPECT_HINT?.trim()
 const trials = Number(process.env.LIBRASIA_TEST_TRIALS || 1)
 const autoFinish = process.env.LIBRASIA_TEST_AUTO_FINISH === '1'
 const expectedReason = process.env.LIBRASIA_EXPECT_REASON
@@ -114,7 +115,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   skip: !appUrl || !enabled,
 }, async context => {
   if (videoFile) await access(videoFile)
-  if (expected) assert.ok(videoFile, 'Informe o arquivo Y4M rotulado para verificar um sinal positivo.')
+  if (expected || expectedHint) assert.ok(videoFile, 'Informe o arquivo Y4M rotulado para verificar um sinal ou uma dica.')
   if (sync) assert.ok(videoFile, 'A sincronização usa um Y4M com marcador inicial verde.')
   if (multiple) assert.ok(expected && !target, 'O teste da sequência usa o texto esperado na área livre.')
   if (secondText) assert.ok(expected && sync && trials === 2 && !target && !multiple && !continuous,
@@ -123,6 +124,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (target) assert.ok(/^signal-[a-z-]+$/u.test(target), 'Informe o identificador do sinal usado na lição.')
   if (lessonFlow) assert.ok(target === 'signal-cinco' && expected === 'cinco' && sync && trials === 2,
     'Use duas tentativas com o clipe sincronizado de Cinco para verificar a lição inteira.')
+  if (expectedHint) assert.ok(target && sync && !expected && !expectedReason,
+    'Use um clipe sincronizado e o alvo da prática guiada para verificar uma dica.')
   if (autoFinish) assert.ok(expected && sync && !multiple && !target, 'Use um clipe sincronizado na área livre para o teste de sustentação.')
   if (offline) assert.ok(expected && sync && !multiple && !target && trials >= 2,
     'Use um sinal confirmado na área livre, com clipe sincronizado e pelo menos duas tentativas.')
@@ -336,7 +339,9 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.ok(durationMs >= fixedCaptureMs && durationMs <= fixedCaptureMs + windowToleranceMs,
           'A duração real divergiu da janela planejada.')
       })
-      check('estado', () => assert.equal(decision.state, expected ? 'accepted' : 'inconclusive', decision.message))
+      const expectedState = expectedHint ? 'hint' : expected ? 'accepted' : 'inconclusive'
+      check('estado', () => assert.equal(decision.state, expectedState, decision.message))
+      if (expectedHint) check('dica', () => assert.ok(decision.message.includes(expectedHint), decision.message))
       if (expectedReason) check('motivo', () => assert.equal(decision.reason, expectedReason, decision.message))
       if (expectedGlosses !== undefined) check('glosas', () => assert.equal(decision.glosses, expectedGlosses))
       if (!target) {
@@ -359,8 +364,14 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
     assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
 
+    if (expectedHint) {
+      const progress = await evaluate('JSON.parse(localStorage.getItem("librasia:progress:v1"))[' + JSON.stringify(target) + ']')
+      assert.ok(progress.hints >= trials, 'A lição deve registrar todas as dicas exibidas.')
+      assert.equal(progress.guided, false, 'A dica mantém a prática guiada pendente.')
+    }
+
     if (lessonFlow) {
-      const progress = 'document.querySelector("[data-progress]").textContent === "1 de 3 sinais concluídos"'
+      const progress = 'document.querySelector("[data-progress]")?.textContent === "1 de 3 sinais concluídos"'
       await waitUntil(progress)
       await evaluate('window.testLessonCompleted = true')
       await page('Page.reload')
