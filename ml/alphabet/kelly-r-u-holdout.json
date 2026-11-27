@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Quatro recortes de R e U de uma pessoa fora do treino e dos ajustes. As janelas de pose quase frontal e de rotação da mão foram fixadas antes do replay.",
+  "sources": [
+    {
+      "id": "kelly-canuto-iofwsoxq2ag",
+      "split": "test",
+      "title": "Alfabeto em Libras, parte 2",
+      "credits": {
+        "publicação e demonstração": "Professora Kelly Canuto, canal Aprenda Libras I"
+      },
+      "page": "https://www.youtube.com/watch?v=IoFwSOxQ2ag",
+      "published": "2016-05-11",
+      "file": "data/alphabet/independent/kelly-canuto-download/kelly-canuto-alfabeto.mp4",
+      "sha256": "f2a4c1a6e73d11f648387c1b38bfa7f665c885fca18c0aabdb866b65a941ae5d",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 29,97 fps) + 140 (AAC), combinados sem recodificação",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=IoFwSOxQ2ag&hl=pt-BR",
+      "licenseEvidence": "O campo Licença na página da autora indica a licença de atribuição Creative Commons.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "captionSha256": "da5f3b4151f69dd90c773a19ba280543934923cb58730d3829ecbf651fc06490",
+      "labelEvidence": "A demonstração de R está entre o início de sua explicação aos 138,720 s e o anúncio de S depois de 155 s. U está na explicação que vai de 204,959 a 222,040 s. Os intervalos separam as poses e a rotação visível.",
+      "windows": [
+        {
+          "label": "R",
+          "startMs": 150240,
+          "endMs": 152170,
+          "anchorMs": 151200,
+          "view": "frontal"
+        },
+        {
+          "label": "R",
+          "startMs": 152310,
+          "endMs": 153450,
+          "anchorMs": 152990,
+          "view": "rotação e dorso"
+        },
+        {
+          "label": "U",
+          "startMs": 214140,
+          "endMs": 216850,
+          "anchorMs": 216080,
+          "view": "frontal"
+        },
+        {
+          "label": "U",
+          "startMs": 217010,
+          "endMs": 218290,
+          "anchorMs": 217390,
+          "view": "rotação e sobreposição dos dedos"
+        }
+      ]
+    }
+  ]
+}
