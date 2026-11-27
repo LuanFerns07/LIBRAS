@@ -82,7 +82,7 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     const limitMs = continuous || multiple ? 11000 : 4200
     assert.ok(Number.isInteger(fixedCaptureMs) && fixedCaptureMs >= 500 && fixedCaptureMs <= limitMs,
       `Informe uma duração de captura de 500 a ${limitMs} ms.`)
-    assert.ok(sync && !autoFinish && !target, 'Use clipe sincronizado e tentativa manual na área livre.')
+    assert.ok(sync && !autoFinish, 'Use clipe sincronizado e tentativa manual.')
   } else {
     assert.equal(markerOffsetMs, 0, 'Defina a duração da captura para deslocar o início.')
   }

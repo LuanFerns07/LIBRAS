@@ -46,6 +46,33 @@ LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TES
 
 Para reproduzir a oclusão, substitua o filtro de vídeo por `drawbox=x=248:y=82:w=103:h=155:color=black:t=fill:enable='between(t,1.25,3.5)'`, gere `amarelo-mao-encoberta.y4m` e espere `insufficient`. Os logs do reteste estão na mesma pasta. O teste de enquadramento, oclusão e correção intencional com uma pessoa sinalizando na webcam segue no roteiro de aceite.
 
+### Confirmação da trajetória na lição de Amarelo
+
+O pacote `29f6c36` aceitou como Amarelo duas gravações de outros sinais na prática guiada. A lição passou a pedir outra tentativa quando o classificador sugere Amarelo e faltam evidências do movimento descendente do indicador, conforme a execução mostrada pelo avatar. A dica de trajetória contrária continua disponível em **Praticar com ajuda** quando o movimento ascendente é observado. A revisão de variantes e da adequação da dica na webcam continua pendente. [Origem das gravações da UFSM](negativos.md#novas-posturas-transições-e-glosas-externas) · [Controles de Amarelo](#dica-de-trajetória-de-amarelo)
+
+| Gravação na prática guiada | Resultado com a confirmação da trajetória |
+| --- | --- |
+| Laranja e Vermelho, UFSM | Duas tentativas inconclusivas. Uma chamada ao classificador em cada tentativa. |
+| Amarelo S01-1 e S04-1, MINDS-Libras | Dois reconhecimentos. |
+| Amarelo S01-1, vídeo espelhado horizontalmente | Reconhecimento com a trajetória na mão oposta na imagem. |
+| Amarelo S01-1 com quadros invertidos | Dica de deslocar o indicador da testa em direção ao nariz. |
+
+O teste também reconheceu o Cinco cardinal da Fiocruz na prática guiada, com uma chamada ao classificador. Os pesos ficaram iguais nos dois pacotes. [Origem do Cinco da Fiocruz](sinais-independentes.md)
+
+Para reproduzir Laranja, prepare o MP4 local conforme o manifesto dos negativos. O marcador verde precede o vídeo em 500 ms e a duplicação dos quadros finais dá tempo para concluir a captura sem repetir o clipe. Os resultados antes e depois da alteração ficam em `data/evidence/demonstracao/m2-trajetoria/`. [Preparo dos recortes](negativos.md#reprodução-dos-novos-recortes)
+
+~~~bash
+out=data/evidence/demonstracao/m2-trajetoria
+mkdir -p "$out"
+ffmpeg -nostdin -i data/isolated-negative-audit/didactic/raw/ufsm-laranja.mp4 -an \
+  -vf 'scale=640:360,fps=30,tpad=start_duration=0.5:color=lime:stop_mode=clone:stop_duration=0.5' \
+  -pix_fmt yuv420p "$out/ufsm-laranja.y4m"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_TARGET=signal-amarelo LIBRASIA_TEST_START_OFFSET_MS=500 LIBRASIA_TEST_CAPTURE_MS=1600 \
+  LIBRASIA_EXPECT_REASON=trajectory LIBRASIA_EXPECT_CLASSIFIER_CALLS=1 \
+  LIBRASIA_TEST_VIDEO="$out/ufsm-laranja.y4m" node --test tests/e2e/recognition.test.mjs
+~~~
+
 ### Interrupção do vídeo durante a prática
 
 Na compilação `a65817e`, o Chromium manteve a tentativa em andamento quando a trilha continuou ativa e deixou de enviar imagens. A prática agora encerra a tentativa após cerca de um segundo sem quadros, exibe **Problema de captura** e libera a câmera. Se o vídeo parar fora de uma tentativa, a sobreposição é apagada e volta a acompanhar a mão quando chegam novos quadros.

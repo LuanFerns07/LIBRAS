@@ -38,16 +38,23 @@ export function observePalm(frames) {
 
 export function observeVerticalTrajectory(frames) {
   const heights = []
+  let handSide
   for (const frame of frames) {
-    const tip = frame.rightHand[8]
+    const side = frame.rightHand.length && !frame.leftHand.length ? 'right'
+      : frame.leftHand.length && !frame.rightHand.length ? 'left' : null
+    if (!side) continue
+    const tip = frame[`${side}Hand`][8]
     const [nose, leftShoulder, rightShoulder] = [frame.pose[0], frame.pose[11], frame.pose[12]]
-    if (!tip || !nose || !leftShoulder || !rightShoulder || frame.leftHand.length) continue
+    if (!tip || !nose || !leftShoulder || !rightShoulder) continue
     if ([nose, leftShoulder, rightShoulder].some(point => (point.visibility ?? 1) < .6)) continue
     const aspect = frame.aspect
     const scale = Math.hypot((leftShoulder.x - rightShoulder.x) * aspect, leftShoulder.y - rightShoulder.y)
     if (!(scale >= .04)) continue
     const y = (tip.y - nose.y) / scale
-    if (Math.abs(tip.x - nose.x) * aspect <= .5 * scale && y >= -.85 && y <= .45) heights.push(y)
+    if (!(Math.abs(tip.x - nose.x) * aspect <= .5 * scale && y >= -.85 && y <= .45)) continue
+    if (handSide && handSide !== side) return 'uncertain'
+    handSide = side
+    heights.push(y)
   }
   if (heights.length < 5) return 'uncertain'
   const width = Math.max(2, Math.floor(heights.length / 4))
@@ -70,6 +77,9 @@ export function practiceFeedback(result, target, step) {
   }[target.id]
   if (step === 1 && target.hint && adjustment) {
     return { state: 'hint', message: `${target.hint} Dica em revisão.` }
+  }
+  if (target.id === 'signal-amarelo' && result.trajectory !== 'downward') {
+    return { state: 'inconclusive', reason: 'trajectory', message: 'Repita o movimento mostrado pelo avatar com a mão e o rosto visíveis.' }
   }
   return { state: 'accepted', message: `${target.label} foi reconhecido.`, id: target.id }
 }

@@ -38,6 +38,19 @@ test('a prática distingue reconhecimento, dica, incerteza e falhas', () => {
   assert.deepEqual(practiceFeedback(captureError, cinco, 1), captureError)
 })
 
+test('a lição de Amarelo requer evidência da trajetória antes de concluir a etapa', () => {
+  const amarelo = lesson.find(signal => signal.id === 'signal-amarelo')
+  const prediction = { state: 'accepted', id: amarelo.id }
+  for (const step of [1, 2]) {
+    assert.equal(practiceFeedback({ ...prediction, trajectory: 'downward' }, amarelo, step).state, 'accepted')
+    const result = practiceFeedback({ ...prediction, trajectory: 'uncertain' }, amarelo, step)
+    assert.equal(result.state, 'inconclusive')
+    assert.equal(result.reason, 'trajectory')
+  }
+  assert.equal(practiceFeedback({ ...prediction, trajectory: 'upward' }, amarelo, 2).state, 'inconclusive')
+  assert.equal(freeFeedback({ ...prediction, trajectory: 'uncertain' }).text, 'amarelo')
+})
+
 test('a trajetória do indicador usa referência ao nariz e requer evidência temporal', () => {
   const frames = Array.from({ length: 6 }, (_, index) => {
     const pose = [{ x: .5, y: .5, visibility: .9 }]
@@ -50,6 +63,10 @@ test('a trajetória do indicador usa referência ao nariz e requer evidência te
   assert.equal(observeVerticalTrajectory(frames), 'upward')
   assert.equal(observeVerticalTrajectory([...frames].reverse()), 'downward')
   assert.equal(observeVerticalTrajectory(frames.slice(0, 3)), 'uncertain')
+  const left = frames.map(frame => ({ ...frame, leftHand: frame.rightHand, rightHand: [] }))
+  assert.equal(observeVerticalTrajectory(left), 'upward')
+  assert.equal(observeVerticalTrajectory([...left].reverse()), 'downward')
+  assert.equal(observeVerticalTrajectory([...left.slice(0, 3), ...frames.slice(3)]), 'uncertain')
 })
 
 test('a área livre mantém a edição e acrescenta uma palavra por decisão aceita', () => {
