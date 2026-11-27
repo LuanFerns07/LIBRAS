@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `9d5d6fe`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia em 4177 usa a compilação `59c47db`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-z-palma-teste/iniciar.py --porta 4177
+python3 data/releases/librasia-y-forma-teste/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -355,3 +355,23 @@ O leitor anterior comparava Y com sequências de movimento. Nas gravações rese
 O modelo da imagem sustentou de oito a 12 votos consecutivos entre os quadros selecionáveis de cada um dos cinco Y reservados. No mesmo teste, a versão 3D teve dois votos consecutivos no Y da Unicentro. A forma estimada pela imagem também deu um voto isolado a um Z e a quadros de dois recortes fora do alfabeto. No candidato `59c47db`, o complemento entra apenas quando as demais decisões do classificador estático ficam inconclusivas. A saída continua exigindo três votos seguidos. A exportação verificou o mesmo resultado do PyTorch no ONNX com limiar de 0,95. [Treino, avaliação e paridade](../ml/evidence/alphabet-y/treino-e-paridade.json) · [Código do treino](https://github.com/LuanFerns07/LIBRAS/blob/59c47db/ml/alphabet/probe_y.py)
 
 Na base, Y apareceu em duas de três reproduções de Tel baixinha e uma de três de Paterno e da Unicentro. O Chromium mostrou Y nas nove repetições com o candidato. As duas últimas gravações passaram nos testes em Praticar e na Área livre. As duas versões conservaram W e Y no recorte adicional da UFAC, reservado por pessoa. [Repetições na base](../ml/evidence/alphabet-y/y-base-repetido-9d5d6fe.json) · [Repetições no candidato](../ml/evidence/alphabet-y/y-candidato-59c47db.json) · [Recortes da UFAC](../ml/alphabet/ufac-w-y-holdout.json) · [UFAC no candidato](../ml/evidence/alphabet-y/ufac-59c47db.json)
+
+A compilação `59c47db` passou a servir a prévia em 4177. O Chromium exibiu a letra esperada nos 89 recortes rotulados da bateria. No Z do Cecierj, a leitura breve de Y já aparecia na referência anterior. O Z curto da UFSM apareceu nas três repetições e nenhum dos 19 recortes fora do alfabeto exibiu Y. A sobreposição de duas mãos passou com vídeo gravado. Na porta 4177, também passaram os retestes gravados de Y, Q e da transição M → N. O aceite com pessoas sinalizantes na webcam permanece pendente. [Bateria de letras](../ml/evidence/alphabet-y/positivos-59c47db.json) · [Controles fora do alfabeto](../ml/evidence/alphabet-y/negativos-59c47db.json) · [Repetições do Z curto](../ml/evidence/alphabet-y/z-curto-59c47db.json)
+
+Para reconstruir o complemento e empacotar a prévia com os modelos anteriores, use as gravações verificadas nos manifestos. O comando reutiliza a extração de [referência 3D de A](../ml/evidence/alphabet-a-e-independent/README.md#ensaio-de-flexão-em-coordenadas-3d).
+
+```bash
+out=data/alphabet/y-reproducao
+base="$PWD/data/releases/librasia-z-palma-teste/site/models"
+mkdir -p "$out"
+for name in ufsm-temporal-windows institutional-y-training institutional-temporal-windows independent-y-z-windows; do
+  OPENCV_FFMPEG_CAPTURE_OPTIONS='threads;1' .venv/bin/python -m ml.alphabet.extract_motion \
+    --world --manifest "ml/alphabet/$name.json" --out "$out/$name.json"
+done
+.venv/bin/python -m ml.alphabet.probe_y data/alphabet/a-oculto/referencia-3d.json \
+  "$out/"{ufsm-temporal-windows,institutional-y-training,institutional-temporal-windows,independent-y-z-windows}.json \
+  --base "$base" --out data/models/alphabet-y-reproduzido
+LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
+  LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-y-reproduzido" \
+  ./scripts/executar-local.sh --pacote data/releases/librasia-y-reconstruido
+```

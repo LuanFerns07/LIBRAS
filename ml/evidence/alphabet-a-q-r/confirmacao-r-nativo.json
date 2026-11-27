@@ -1,0 +1,135 @@
+{
+  "staticModelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+  "verifierSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+  "shapeModelSha256": "794b3c7b3546e3f8257e6910edd082e05517ef8b18a0d39f18c8605ad4278d84",
+  "references": [
+    "74a7d9ef1cdd540e43379e6f260bea76c6b61bce9fafd1a668a80f6054a77b66",
+    "45a0df13d05801d8390d0cbfe4d523f65e102076cf187889b8ffb53e9a8dbaf9",
+    "f6e82c6a400d9bf84305fa394e04955322245f73e30c61e1263b04b4ac0047ef",
+    "b50da4ed2705a108644acc806d871f725630eddadda8004491746e7aa9a37c79",
+    "923d2b4e674b447b18201cabad28d6cfb3f69bd8e2f41259438302d3eced99b4"
+  ],
+  "thresholds": [
+    0.01,
+    0.05,
+    0.2,
+    0.5,
+    0.95
+  ],
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "R",
+      "split": "train",
+      "startMs": 32210,
+      "endMs": 33060,
+      "acceptedR": 14,
+      "scoreRange": [
+        0.922797,
+        0.993157
+      ],
+      "preserved": [
+        14,
+        14,
+        14,
+        14,
+        13
+      ]
+    },
+    {
+      "source": "1536677587",
+      "label": "R",
+      "split": "val",
+      "startMs": 32220,
+      "endMs": 33000,
+      "acceptedR": 6,
+      "scoreRange": [
+        0.748539,
+        0.999945
+      ],
+      "preserved": [
+        6,
+        6,
+        6,
+        6,
+        5
+      ]
+    },
+    {
+      "source": "1535641159",
+      "label": "R",
+      "split": "test",
+      "startMs": 31660,
+      "endMs": 32620,
+      "acceptedR": 14,
+      "scoreRange": [
+        0.993599,
+        0.999972
+      ],
+      "preserved": [
+        14,
+        14,
+        14,
+        14,
+        14
+      ]
+    },
+    {
+      "source": "ifsc-ueslei-paterno",
+      "label": "R",
+      "split": "test",
+      "startMs": 151660,
+      "endMs": 152660,
+      "acceptedR": 6,
+      "scoreRange": [
+        0.409425,
+        0.999999
+      ],
+      "preserved": [
+        6,
+        6,
+        6,
+        5,
+        5
+      ]
+    },
+    {
+      "source": "unicentro-aniqxveqgns",
+      "label": "R",
+      "split": "test",
+      "startMs": 65000,
+      "endMs": 65680,
+      "acceptedR": 9,
+      "scoreRange": [
+        0.9412,
+        1.0
+      ],
+      "preserved": [
+        9,
+        9,
+        9,
+        9,
+        8
+      ]
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "split": "test",
+      "startMs": 0,
+      "endMs": 4000,
+      "acceptedR": 7,
+      "scoreRange": [
+        3.2e-05,
+        0.002111
+      ],
+      "preserved": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

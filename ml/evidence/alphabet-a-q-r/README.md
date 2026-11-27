@@ -118,3 +118,9 @@ LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" \
   LIBRASIA_ALFABETO_MODELO="$PWD/data/models/alphabet-q-candidate" \
   ./scripts/executar-local.sh --pacote data/releases/librasia-q-reconstruido
 ```
+
+### R indevido aceito pelas duas redes
+
+No movimento do queixo ao teclado, a prévia `9d5d6fe` exibiu R com o complemento experimental desabilitado. O replay dos pontos capturados pelo Chromium mostrou que as duas redes estáticas aceitaram R em sete quadros. Nesses quadros, o escore do complemento de forma de R foi de 0,000032 a 0,002111. Os 49 quadros em que as redes já aceitavam um R rotulado tiveram escore a partir de 0,409425. Desses 49, 35 vieram de gravações fora do treino do complemento.
+
+No ensaio offline, limiares de 0,01 a 0,20 preservaram os 49 R e bloquearam os sete quadros do controle. A comparação usa um único recorte difícil de atividade cotidiana e mede somente o caso em que as redes já concordam em R. A recuperação de R quando ambas aceitam U continua em avaliação. [Escore por janela e hashes](confirmacao-r-nativo.json) · [Código da sonda](https://github.com/LuanFerns07/LIBRAS/blob/4a309c6/ml/alphabet/diagnose_r.py)
