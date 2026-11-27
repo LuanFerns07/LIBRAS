@@ -56,6 +56,12 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
+A prévia em 4177 usa a compilação `5eccc2c`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+
+```sh
+python3 data/releases/librasia-alfabeto-z-polegar/iniciar.py --porta 4177
+```
+
 ### Compilar neste Linux
 
 Depois de baixar e conferir os vídeos dos manifestos e preparar o LibraSign, execute a extração e o treino na raiz. A opção `--device cpu` também é aceita.
@@ -263,4 +269,6 @@ Na prévia em 4177, os testes com vídeo passaram para S da Uníntese e O de Pat
 
 A regra experimental exige que a projeção lateral mediana da ponta do polegar fique até 0,20 da escala da palma durante os três traços de Z. O limite foi fixado nos controles de Z antes de abrir Azul. O replay pareado dos mesmos pontos reduziu a leitura de Z em Azul da UFSM de uma em três capturas para zero em três. [Protocolo](../ml/evidence/alphabet-z-azul/protocol.json) · [Critério congelado](../ml/evidence/alphabet-z-azul/hypothesis.json)
 
-O pacote `605cacc` compilado na branch local `diagnostico-z-azul` foi testado de ponta a ponta com câmera virtual no Chromium. Exibiu os mesmos quatro Z das cinco janelas rotuladas e as letras esperadas nos controles C, Ç, H, J, K, X e Y. O Z da aula `1536677587` ficou sem leitura nas duas compilações desta rodada. Nas três repetições de Azul da UFSM apareceram A e L, e nos 19 controles fora do alfabeto também houve zero Z. Outras leituras transitórias persistiram. O pacote permanece em avaliação antes de substituir a prévia local. [Janelas e repetições](../ml/evidence/alphabet-z-azul/replay-windows.json) · [Replay do candidato](../ml/evidence/alphabet-z-azul/e2e-605cacc.json) · [Dezenove controles](../ml/evidence/alphabet-z-azul/negativos-605cacc.json)
+O pacote candidato `605cacc` foi testado de ponta a ponta com câmera virtual no Chromium. Exibiu os mesmos quatro Z das cinco janelas rotuladas e as letras esperadas nos controles C, Ç, H, J, K, X e Y. Nas três repetições de Azul da UFSM apareceram A e L, e nos 19 controles fora do alfabeto também houve zero Z. [Janelas e repetições](../ml/evidence/alphabet-z-azul/replay-windows.json) · [Replay do candidato](../ml/evidence/alphabet-z-azul/e2e-605cacc.json) · [Dezenove controles](../ml/evidence/alphabet-z-azul/negativos-605cacc.json)
+
+No reteste com dez janelas por versão, o Z da aula `1536677587` da UFSM ficou sem leitura nas três repetições de cada versão. O Z do Cecierj apareceu em uma das duas repetições em cada versão, com leituras transitórias. Ç apareceu nas duas janelas depois de C, e U foi seguido por H nas três janelas. A prévia local adotou a regra em `5eccc2c`. O pacote integrado passou os testes de Z da Unesp na Área livre e em Praticar, da transição M → N nos dois modos e da sobreposição das duas mãos. Esses testes usaram vídeo gravado. [Janelas do reteste](../ml/evidence/alphabet-z-azul/confirmacao-janelas.json) · [Base](../ml/evidence/alphabet-z-azul/confirmacao-5b2d4c4.json) · [Candidato](../ml/evidence/alphabet-z-azul/confirmacao-605cacc.json)

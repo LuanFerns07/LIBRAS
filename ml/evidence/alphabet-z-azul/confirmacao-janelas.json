@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "timeUnit": "ms",
+  "windowEnd": "exclusive",
+  "selection": "Amostras fixadas antes do reteste das trocas de C/Ç, G/Z e U/H e do Z ausente da UFSM.",
+  "sources": [
+    {
+      "id": "1536677587",
+      "split": "val",
+      "title": "Alfabeto",
+      "project": "Grupo de Produção de Material Didático em Língua de Sinais, UFSM",
+      "credits": {
+        "roteiro e apresentação": "Grupo de Produção de Material Didático em Libras",
+        "câmera e edição": "Matheus Fighera",
+        "câmera": "Julien Moretto",
+        "produção": "Ronaldo Palma"
+      },
+      "page": "https://ntetube.nte.ufsm.br/v/1536677587",
+      "download": "https://ntetube.nte.ufsm.br/repositorio/04882a9067a5d9df9ca4172f2de7bf51/480p.mp4",
+      "file": "data/alphabet/ufsm/1536677587.mp4",
+      "sha256": "6985c1e971d1cb7667d4e009be0d6c6483eef114676f405cb7c036f526cdcf6d",
+      "labelEvidence": "Letra vermelha na cartela à esquerda. Na execução de Z, a cartela muda após o início do percurso com o indicador estendido.",
+      "windows": [
+        {
+          "label": "Z",
+          "startMs": 42500,
+          "endMs": 43950,
+          "anchorMs": 43050,
+          "trial": 1
+        },
+        {
+          "label": "Z",
+          "startMs": 42500,
+          "endMs": 43950,
+          "anchorMs": 43050,
+          "trial": 2
+        },
+        {
+          "label": "Z",
+          "startMs": 42500,
+          "endMs": 43950,
+          "anchorMs": 43050,
+          "trial": 3
+        }
+      ]
+    },
+    {
+      "id": "cecierj-13757",
+      "split": "train",
+      "title": "Libras - Aula 3 - Datilologia: alfabeto manual e números",
+      "project": "UFF, Fundação Cecierj e Consórcio Cederj",
+      "credits": {
+        "roteiro": "Mariana da Cunha Teixeira de Souza",
+        "coordenação geral": "Luiz Manoel Figueiredo",
+        "atuação": [
+          "Vanessa Rodrigues Ildefonso",
+          "Cíntia Ingrid Macedo Ribeiro"
+        ],
+        "filmagem e edição": "Leandro Lima de Souza"
+      },
+      "page": "https://canal.cecierj.edu.br/recurso/13757",
+      "download": "https://canal.cecierj.edu.br/012016/e40fae9a5d9e7ac99388b2a3eec950ef.mp4",
+      "file": "data/alphabet/institutional/cecierj-13757.mp4",
+      "sha256": "275fd540f876e9e58cf507d07f3897d95aefe29796151efd2e0f51c454934ad7",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=cT3l6iP7NXY",
+      "licenseEvidence": "O campo Licença da publicação oficial de 20 de julho de 2015 declara a licença de atribuição Creative Commons e permite reutilização.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Letra amarela à direita da pessoa na âncora. Em X e Z a cartela aparece após o começo do gesto.",
+      "windows": [
+        {
+          "label": "Ç",
+          "startMs": 50240,
+          "endMs": 51720,
+          "anchorMs": 50700,
+          "trial": 1
+        },
+        {
+          "label": "Ç",
+          "startMs": 50240,
+          "endMs": 51720,
+          "anchorMs": 50700,
+          "trial": 2
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500,
+          "trial": 1
+        },
+        {
+          "label": "Z",
+          "startMs": 122520,
+          "endMs": 124220,
+          "anchorMs": 123500,
+          "trial": 2
+        },
+        {
+          "label": "U",
+          "startMs": 109940,
+          "endMs": 111520,
+          "anchorMs": 110700,
+          "fixture": "data/evidence/alphabet-n-m-u/cecierj-13757-u.y4m",
+          "fixtureSha256": "ff9210310988d91409c385fb50e04b84e77402cb8d3c3fa02717acabaad8555d",
+          "trial": 1
+        },
+        {
+          "label": "U",
+          "startMs": 109940,
+          "endMs": 111520,
+          "anchorMs": 110700,
+          "fixture": "data/evidence/alphabet-n-m-u/cecierj-13757-u.y4m",
+          "fixtureSha256": "ff9210310988d91409c385fb50e04b84e77402cb8d3c3fa02717acabaad8555d",
+          "trial": 2
+        }
+      ]
+    },
+    {
+      "id": "tel-baixinha-chzje8vmc1i",
+      "split": "test",
+      "title": "Alfabeto em libras",
+      "credits": {
+        "publicação e demonstração": "Tel baixinha, nome usado pela autora no canal"
+      },
+      "page": "https://www.youtube.com/watch?v=chzje8VmC1I",
+      "published": "2020-07-12",
+      "file": "data/alphabet/independent/tel-baixinha-download/tel-baixinha-alfabeto.mp4",
+      "sha256": "b4d025dfe16b21d7632b13349ee169aded50dd17f14fc72c0b9c8e42f12530ae",
+      "downloadFormats": "YouTube 136 (H.264, 1280 × 720, 30 fps) + 140 (AAC), combinados sem recodificação em MP4",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "licensePublication": "https://www.youtube.com/watch?v=chzje8VmC1I&hl=pt-BR",
+      "licenseEvidence": "O campo Licença na publicação de Tel baixinha indica licença de atribuição Creative Commons com reutilização permitida.",
+      "licenseVersionEvidence": "https://blog.youtube/news-and-events/youtube-and-creative-commons-raising/",
+      "labelEvidence": "Cartões de Macaco, Noz, Queijo e Urso ao lado da sinalizante com câmera fixa. A janela de Q reaproveita o controle anterior.",
+      "windows": [
+        {
+          "label": "U",
+          "startMs": 120180,
+          "endMs": 121660,
+          "anchorMs": 121050,
+          "view": "frontal",
+          "trial": 1
+        }
+      ]
+    }
+  ]
+}

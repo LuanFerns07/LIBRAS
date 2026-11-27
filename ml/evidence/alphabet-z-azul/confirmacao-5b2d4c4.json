@@ -1,0 +1,194 @@
+{
+  "build": {
+    "commit": "5b2d4c4b0ed66fd0500466a54253046ed0a8ba22",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-z-azul/confirmacao-janelas.json"
+  ],
+  "results": [
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "endMs": 43950,
+      "readings": [],
+      "workerFrames": 100,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1464
+    },
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "endMs": 43950,
+      "readings": [],
+      "workerFrames": 99,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1437
+    },
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "endMs": 43950,
+      "readings": [],
+      "workerFrames": 99,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1446
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Ç",
+      "startMs": 50240,
+      "endMs": 51720,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 219
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 836
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 1082
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 37,
+      "lastHandAfterVideoMs": 1473
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Ç",
+      "startMs": 50240,
+      "endMs": 51720,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 284
+        },
+        {
+          "letter": "C",
+          "afterVideoMs": 699
+        },
+        {
+          "letter": "Ç",
+          "afterVideoMs": 1101
+        }
+      ],
+      "workerFrames": 97,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1499
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 219
+        },
+        {
+          "letter": "A",
+          "afterVideoMs": 1048
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 1499
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1710
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 286
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1125
+        },
+        {
+          "letter": "Y",
+          "afterVideoMs": 1658
+        }
+      ],
+      "workerFrames": 104,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1700
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 228
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 1046
+        }
+      ],
+      "workerFrames": 99,
+      "framesWithHand": 33,
+      "lastHandAfterVideoMs": 1579
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "U",
+      "startMs": 109940,
+      "endMs": 111520,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 221
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 1196
+        }
+      ],
+      "workerFrames": 94,
+      "framesWithHand": 32,
+      "lastHandAfterVideoMs": 1619
+    },
+    {
+      "source": "tel-baixinha-chzje8vmc1i",
+      "label": "U",
+      "startMs": 120180,
+      "endMs": 121660,
+      "readings": [
+        {
+          "letter": "U",
+          "afterVideoMs": 245
+        },
+        {
+          "letter": "H",
+          "afterVideoMs": 927
+        }
+      ],
+      "workerFrames": 93,
+      "framesWithHand": 30,
+      "lastHandAfterVideoMs": 1518
+    }
+  ]
+}
