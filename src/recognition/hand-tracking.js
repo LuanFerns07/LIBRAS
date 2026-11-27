@@ -9,6 +9,7 @@ export function trackHands(video, { onFrame, onError }) {
   let generation = 0
   let pending
   let inFlight
+  let latest
   let lastMediaTime = -Infinity
 
   function cancelPending() {
@@ -32,41 +33,48 @@ export function trackHands(video, { onFrame, onError }) {
   }
 
   function schedule() {
-    if (!ready || !visible || closed || inFlight || pending !== undefined) return
-    pending = videoCallback ? video.requestVideoFrameCallback(sample) : requestAnimationFrame(sample)
+    if (!ready || !visible || closed || pending !== undefined) return
+    pending = videoCallback ? video.requestVideoFrameCallback(observe) : requestAnimationFrame(observe)
   }
 
-  async function sample(now, metadata) {
+  function observe(now, metadata) {
     pending = undefined
     if (!visible || closed) return
     const mediaTime = metadata?.mediaTime ?? video.currentTime
     const { videoWidth: width, videoHeight: height } = video
-    if (video.readyState < 2 || !width || !height || mediaTime === lastMediaTime) {
-      schedule()
-      return
+    if (video.readyState >= 2 && width && height && mediaTime !== lastMediaTime) {
+      lastMediaTime = mediaTime
+      latest = { generation, width, height, timestamp: now }
+      void sendLatest()
     }
-    lastMediaTime = mediaTime
-    const request = { generation, width, height }
+    schedule()
+  }
+
+  async function sendLatest() {
+    if (closed || !visible || inFlight || !latest) return
+    const request = latest
+    latest = undefined
     inFlight = request
-    let bitmap
+    let frame
     try {
-      const scale = Math.min(1, 640 / Math.max(width, height))
-      bitmap = scale === 1 ? await createImageBitmap(video) : await createImageBitmap(video, {
-        resizeWidth: Math.round(width * scale), resizeHeight: Math.round(height * scale), resizeQuality: 'low',
-      })
+      if (typeof VideoFrame === 'function') {
+        frame = new VideoFrame(video, { timestamp: Math.round(request.timestamp * 1000) })
+      } else {
+        frame = await createImageBitmap(video)
+      }
       if (closed || generation !== request.generation) {
-        bitmap.close()
+        frame.close()
         inFlight = undefined
-        schedule()
+        void sendLatest()
         return
       }
-      worker.postMessage({ bitmap, timestamp: now }, [bitmap])
+      worker.postMessage({ frame, timestamp: request.timestamp }, [frame])
     } catch {
-      bitmap?.close()
+      frame?.close()
       if (closed) return
       inFlight = undefined
       if (generation === request.generation) fail()
-      else schedule()
+      else void sendLatest()
     }
   }
 
@@ -87,6 +95,7 @@ export function trackHands(video, { onFrame, onError }) {
           request.width === video.videoWidth && request.height === video.videoHeight) {
         onFrame(data.hands)
       }
+      void sendLatest()
     }
     schedule()
   }
@@ -96,6 +105,7 @@ export function trackHands(video, { onFrame, onError }) {
       if (visible === next || closed) return
       visible = next
       generation += 1
+      latest = undefined
       cancelPending()
       schedule()
     },

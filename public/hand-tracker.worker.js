@@ -11,9 +11,9 @@ async function start() {
     numHands: 2,
   })
 
-  self.onmessage = ({ data: { bitmap, timestamp } }) => {
+  self.onmessage = ({ data: { frame, timestamp } }) => {
     try {
-      const result = task.detectForVideo(bitmap, timestamp)
+      const result = task.detectForVideo(frame, timestamp)
       const hands = { leftHand: [], rightHand: [] }
       for (const [index, points] of result.landmarks.entries()) {
         if (points.length !== 21) continue
@@ -27,7 +27,7 @@ async function start() {
     } catch {
       self.postMessage({ type: 'error' })
     } finally {
-      bitmap.close()
+      frame.close()
     }
   }
   self.postMessage({ type: 'ready' })
