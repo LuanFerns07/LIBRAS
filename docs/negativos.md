@@ -131,3 +131,35 @@ node ml/extract.mjs --manifest data/clad-development/manifest.json \
   --candidate-negatives data/clad-development/features-nose/index.json \
   --out data/isolated-negative-audit/experimento/cv-nose-masked-negativos.json
 ```
+
+## Verificação de Aluno pela posição da mão
+
+Na prévia `dfb045b`, quando o classificador combinado de limiar 0,525 indica Aluno, a aplicação verifica se a mão ocupou a região dos ombros em pelo menos oito dos 24 quadros reamostrados. A região usa o centro e a largura entre os ombros como referência e exige pulso e palma rastreados. Uma tentativa abaixo desse mínimo fica inconclusiva. A verificação usa os pesos do combinado e se aplica à decisão de Aluno. [Região e índices congelados no commit `ee5060d`](../ml/external_eval/aluno-ombros.json)
+
+| Conjunto | Alunos corretos preservados | Falsos Alunos antes | Falsos Alunos depois |
+| --- | ---: | ---: | ---: |
+| MINDS treino e validação | 24/24 | 0 | 0 |
+| CLAD desenvolvimento | — | 2/9 | 0/9 |
+| MINDS teste | 9/9 | 0 | 0 |
+| CLAD reservado, recortes originais e novos | — | 2/18 | 0/18 |
+| Aulas reservadas de sinais externos | — | 0/13 | 0/13 |
+
+Os dois falsos Alunos do CLAD reservado vêm da mesma pessoa em duas gravações. Os cinco falsos aceites de outras classes nas aulas reservadas ficaram iguais. Em particular, o falso Cinco de Sete → Oito permanece em aberto. O teste de Aluno cobre a forma gravada no MINDS. A validação de variantes com pessoas sinalizando na webcam física segue pendente.
+
+No Chromium, a compilação anterior `2a80645` acrescentou “aluno” ao reproduzir a passagem do queixo ao teclado. O pacote `dfb045b` deixou a tentativa inconclusiva nas duas repetições do mesmo Y4M e preservou “Texto conferido.”. Aluno apareceu nas seis tentativas com as gravações S09-1, S11-1 e S12-1. Cinco + Aluno gerou “cinco alunos” no modo com pausas e na revisão do modo contínuo. [Reteste das sequências](regressao-area-livre.md#concordância-em-sequências-com-pausas)
+
+Reproduza o ensaio offline a partir dos pontos locais e a comparação no Chromium com o Y4M do recorte do CLAD.
+
+~~~bash
+out=data/isolated-negative-audit/aluno-ombros
+PYTHONPATH=ml .venv/bin/python -m ml.probe_aluno_shoulders --out "$out/desenvolvimento.json"
+PYTHONPATH=ml .venv/bin/python -m ml.probe_aluno_shoulders --reserved --out "$out/reserva.json"
+LIBRASIA_TEST_URL=http://127.0.0.1:4177 LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1 \
+  LIBRASIA_TEST_START_OFFSET_MS=500 LIBRASIA_TEST_CAPTURE_MS=4000 LIBRASIA_TEST_TRIALS=2 \
+  LIBRASIA_EXPECT_REASON=uncertain-aluno LIBRASIA_EXPECT_CLASSIFIER_CALLS=1 \
+  LIBRASIA_TEST_TRANSCRIPT_PREFIX='Texto conferido.' \
+  LIBRASIA_TEST_VIDEO=data/isolated-negative-audit/browser/clad-movimento-03-queixo-teclado.y4m \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
+Os relatórios e logs ficam em `data/isolated-negative-audit/aluno-ombros/`. [Recorte, janelas e SHA-256 do Y4M](../ml/fresh_eval/evidence-negatives/browser.json) · [Sonda de avaliação](../ml/probe_aluno_shoulders.py)

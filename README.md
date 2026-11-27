@@ -50,7 +50,7 @@ npm run setup:model -- data/models/isolated-v1
 
 Os pontos da câmera são processados na própria página. Os sinais e as dicas da lição estão em revisão linguística. Na área livre, o modo experimental de sequência delimita os sinais quando a pessoa abaixa as mãos entre eles.
 
-Na demonstração, o modelo combinado reconhece Cinco, Espelho, Amarelo e Aluno. Na partição reservada do MINDS-Libras, acertou 32 de 33 clipes dos sinais suportados e aceitou um de 18 negativos. Em 19 recortes externos, aceitou seis negativos. Entre eles estão uma transição entre numerais e um movimento cotidiano. A avaliação na webcam com participantes independentes e a revisão das dicas continuam pendentes. [Avaliação do modelo combinado](docs/avaliacao.md#modelo-combinado-na-partição-reservada) · [Recortes externos](docs/negativos.md#novas-posturas-transições-e-glosas-externas)
+Na demonstração, o modelo combinado reconhece Cinco, Espelho, Amarelo e Aluno. Na partição reservada do MINDS-Libras, acertou 32 de 33 clipes dos sinais suportados e aceitou um de 18 negativos. Em 19 recortes externos, a verificação da posição da mão em Aluno reduziu os falsos aceites de seis para cinco. A transição de Sete para Oito ainda foi aceita como Cinco. A avaliação na webcam com participantes independentes e a revisão das dicas continuam pendentes. [Avaliação do modelo combinado](docs/avaliacao.md#modelo-combinado-na-partição-reservada) · [Recortes externos e verificação de Aluno](docs/negativos.md#verificação-de-aluno-pela-posição-da-mão)
 
 O estudo de sinalização contínua usa dados de frases e anotações temporais em experimentos locais de pesquisa. [Método e resultados](docs/sinalizacao-continua.md)
 

@@ -10,9 +10,9 @@ Se o servidor estiver encerrado, execute na raiz do projeto:
 python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
 ~~~
 
-O pacote `2a80645` foi recompilado com os pesos locais verificados. O modo com pausas aplica a concordância em “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. [Reteste com gravações no Chromium](regressao-area-livre.md#concordância-em-sequências-com-pausas)
+O pacote atual `dfb045b` usa os pesos locais verificados e acrescenta uma verificação da posição da mão quando o modelo indica Aluno. No Chromium, o recorte de queixo para teclado ficou inconclusivo e Aluno foi reconhecido em três gravações do MINDS. O modo com pausas aplica a concordância em “cinco alunos”, “cinco espelhos” e “cinco espelhos amarelos”. [Verificação de Aluno](negativos.md#verificação-de-aluno-pela-posição-da-mão) · [Concordância com Cinco](regressao-area-livre.md#concordância-em-sequências-com-pausas)
 
-No mesmo pacote, o Chromium percorreu as seis etapas da demonstração e exportou a ficha de teste com a soma do conjunto do alfabeto. As tentativas usaram gravações e a voz local concluiu a leitura do texto editado. Os logs locais são `roteiro-2a80645.log` e `ficha-2a80645.log`, em `data/evidence/demonstracao/`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
+No pacote anterior `2a80645`, o Chromium percorreu as seis etapas da demonstração e exportou a ficha de teste com a soma do conjunto do alfabeto. As tentativas usaram gravações e a voz local concluiu a leitura do texto editado. Os logs locais são `roteiro-2a80645.log` e `ficha-2a80645.log`, em `data/evidence/demonstracao/`. [Roteiro integrado](roteiro-validacao.md#roteiro-integrado-em-uma-sessão-do-chromium)
 
 Abra a ficha em outra janela do Chromium para manter a captura visível. **Preencher versão do pacote** registra o commit, o catálogo, a revisão do avatar e as somas dos modelos de sinais e do conjunto do alfabeto. A ficha exporta o JSON localmente e aceita os tempos de decisão, carregamento e extração. [Abrir ficha](http://127.0.0.1:4177/validacao/) · [Verificação da versão e dos tempos](validacao-ao-vivo.md#verificação-da-versão-do-alfabeto)
 
