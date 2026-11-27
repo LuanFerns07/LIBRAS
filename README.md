@@ -6,7 +6,7 @@ O protótipo web reúne prática de Libras, alfabeto manual e tradução nos doi
 
 ![Painel de status dos marcos do LibrasIA. A versão em texto está no roadmap.](assets/status.svg)
 
-[Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prompt de implementação](PROMPT_LIBRASIA.md)
+[Roadmap e critérios de aceite](ROADMAP_LIBRASIA.md) · [Prioridades da retomada](ROADMAP_LIBRASIA.md#prioridades-da-retomada) · [Prompt de implementação](PROMPT_LIBRASIA.md)
 
 [Checklist da inscrição no prêmio](ROADMAP_LIBRASIA.md#checklist-da-inscrição) · [Preparação do memorial e dos anexos](docs/inscricao.md)
 

@@ -14,12 +14,22 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 | **M1 · Dados e critérios** | A testar | Fontes verificadas, primeiro catálogo de sinais, contrato entre componentes e plano de testes | Dados e ML, Libras e avatar, coordenador | Há base utilizável, sinais viáveis para o avatar e conjuntos de avaliação definidos antes do treino. |
 | **M2 · Um sinal de ponta a ponta** | A testar | Avatar 3D, webcam real e uma dica específica de prática | Integração, UX, Dados e ML, Libras e avatar | Uma execução esperada, uma correção e uma falha de captura têm respostas distintas no PC. |
 | **M3 · Lição e reconhecimento** | A fazer | Lição com três a cinco sinais e modelo avaliado | Dados e ML, UX, Libras e avatar, integração | A lição funciona nos três estágios e cada sinal anunciado tem evidência de reconhecimento e feedback revisado. |
-| **M4 · Alfabeto e texto para Libras** | A testar | Alfabeto completo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | Todas as letras são reproduzíveis e os exemplos de tradução e soletração passam pela revisão. |
+| **M4 · Alfabeto e texto para Libras** | A testar | A–Z e Ç no avatar e na leitura ao vivo, tradutor de textos suportados e soletração de nomes | Libras e avatar, UX, integração | As poses, a leitura pela webcam e os exemplos de tradução e soletração passam pela revisão. |
 | **M5 · Área livre e voz** | A fazer | Sinalização sem alvo pré-selecionado, transcrição editável e leitura gratuita | Integração, Dados e ML, UX | O texto vem de sinais reais, casos incertos ficam visíveis e o áudio usa o texto confirmado no PC. |
 | **M6 · Saiba mais e créditos** | Pronto | Links externos, créditos e declaração sem fins lucrativos | UX, revisão independente | Os destinos conferem com os títulos e a mensagem aparece no app e no README. |
 | **M7 · Demonstração validada** | A fazer | Versão marcada no Git, evidências, roteiro e memorial técnico | Revisão independente, Git e ambiente, coordenador | A equipe repete a demonstração seguindo o README e fecha os defeitos que impedem o uso. |
 
 **Caminho principal** · M0 → M1 → M2 → M3 → M5 → M7. A preparação das animações de M4 pode começar junto com M1, e a integração de M4 pode avançar após o player de M2. M6 pode ser feito em paralelo com M3 a M5. M7 depende do aceite de M3, M4, M5 e M6.
+
+## Prioridades da retomada
+
+A referência é a [prévia local do alfabeto](http://127.0.0.1:4177/#area-livre), compilada no commit `0a36425`. Em 27 de novembro de 2026, a pessoa usuária confirmou que os pontos acompanharam bem o movimento das mãos e que a atualização do reconhecimento funcionou bem no seu teste. O N ficou como ressalva. Os resultados dos testes com gravações estão nos registros de verificação. [Resultados do alfabeto](docs/dados-alfabeto.md#cobertura-e-verificação) · [Resultados dos pontos](docs/teste-pontos-ao-vivo.md)
+
+1. **Revisar N, M e U (M4).** Conferir a pose no avatar, tornar visível a diferença entre os dedos estendidos de N e M e comparar a orientação de N e U. Retestar a leitura em Praticar e na Área livre e usar a evidência para decidir sobre ajustes no modelo. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
+2. **Validar o alfabeto e a webcam no PC (M2 e M4).** Repetir o roteiro com A–Z e Ç e preservar a leitura ao vivo e a sobreposição. Registrar a letra esperada, a letra exibida ou a ausência de leitura, a mão dominante, o enquadramento e a versão. Usar gravações adicionais fora do ajuste enquanto a revisão com pessoas sinalizantes aguarda disponibilidade.
+3. **Fechar o roteiro da demonstração local (M3, M5 e M7).** Verificar sinais isolados, dicas, rejeição de entradas desconhecidas, transcrição e voz. Registrar quais resultados foram reproduzidos com vídeo ou webcam física. Manter a sinalização contínua em avaliação.
+
+A prévia permanece no Linux local. A publicação na Vercel e a finalização do memorial estão adiadas por orientação da equipe.
 
 ## Implementação e aceite por marco
 
@@ -50,7 +60,8 @@ Ao mudar um status, rode `python3 scripts/update_status.py` e inclua `assets/sta
 - [x] Testar concessão e negação de câmera, saída do fluxo, troca de aba e reativação. Verificar que a aplicação processa os quadros localmente, sem transmitir ou persistir as imagens.
 - [x] **Webcam física no Chromium.** Abrir a câmera ACER HD User Facing, conferir a trilha ativa e liberar a câmera ao sair da aba e da Área livre. [Prévia local dos pontos](docs/previa-estavel.md#pontos-das-mãos-ao-vivo)
 - [x] **Vídeo gravado no Chromium.** Verificar 21 pontos por mão, movimento das duas mãos antes, durante e depois de uma tentativa, oclusão e retorno de uma mão, opção ligada por padrão e alternância durante a captura. Conferir o encaixe e o espelhamento em 1.280 e 390 px e a liberação da trilha ao navegar. [Vídeo e cenário](docs/teste-pontos-ao-vivo.md) · [Teste automatizado](tests/e2e/hand-overlay-live.test.mjs)
-- [ ] **Aceite visual na webcam física.** Na Área livre, ativar a câmera, mexer dedos e pulsos das duas mãos, tirar uma mão do quadro e trazê-la de volta. Conferir o alinhamento ao redimensionar a janela.
+- [x] **Relato de uso na webcam.** A pessoa usuária confirmou que a sobreposição acompanhou bem os movimentos em tempo real.
+- [ ] **Aceite visual na webcam física.** Na Área livre, registrar a retirada e o retorno de uma mão e conferir o alinhamento ao redimensionar a janela.
 - [ ] Retestar enquadramento, mão encoberta, entrada fora da cobertura e correções intencionais em webcam com participantes. O teste reservado registrou falsas aceitações.
 - [ ] **Aceite.** No PC, uma pessoa usa a câmera real para demonstrar o sinal, recebe uma dica adequada em uma tentativa com erro observável e vê um aviso distinto quando a captura falha. Registrar a versão e a evidência desse fluxo.
 
@@ -80,6 +91,8 @@ O ensaio com a posição da mão em relação ao nariz chegou a 14/21 acertos em
 - [x] Oferecer A–Z e Ç no seletor de Prática, com demonstração no avatar e progresso separado. [Modo alfabeto](docs/dados-alfabeto.md#praticar-e-ler-letras-ao-vivo)
 - [x] Exibir a letra detectada ao lado da webcam na Prática e na Área livre, sem iniciar tentativa. Verificar B, Ç e Y com gravação rotulada no Chromium. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
 - [x] Adicionar H, J, K, X e Z ao reconhecimento ao vivo e revisar a leitura de Ç. Testar essas seis letras no Chromium com vídeos rotulados. [Cobertura e verificação](docs/dados-alfabeto.md#cobertura-e-verificação)
+- [x] Triar a dificuldade relatada com N. Reproduzir N, M e U com os recortes da UFSM e comparar as poses do avatar com a referência. [Triagem do N](docs/animacoes.md#triagem-da-letra-n)
+- [ ] Melhorar a legibilidade do N no avatar e preservar as diferenças em relação a M e U. Conferir indicador e médio voltados para baixo e a distinção visual em vista frontal. Retestar a letra isolada, um nome com N repetido e a leitura ao vivo de N/M/U em gravações adicionais e na webcam.
 - [ ] Validar a leitura das 27 letras com pessoas sinalizantes na webcam e ampliar a avaliação com gravações fora do ajuste.
 
 - [x] Construir as animações de A a Z e da cedilha, registrar as referências e verificar enquadramento, articulações e reprodução no navegador. [Animações e referências](docs/animacoes.md)
@@ -131,13 +144,15 @@ Para cada aceite, registrar data, responsável, commit, versões relevantes dos 
 
 ## Trilha da inscrição no prêmio
 
+O checklist reúne os requisitos da inscrição. A finalização do memorial fica pendente para quando a equipe orientar a retomada dessa entrega.
+
 O prazo confirmado é **30 de novembro de 2026 às 23h59, horário de Brasília**. Trabalhar com **29 de novembro** como data interna para fechar a versão que será apresentada. Esse recorte curto depende de chegar a um protótipo funcional com evidências próprias. O restante do roadmap continua após a inscrição. [Comunicado da UFC sobre a prorrogação](https://ufcinforma.ufc.br/pt/noticias/premio-inteligencia-artificial-e-formacao-universitaria-prorroga-inscricoes-projetos-e-solucoes-em-ia-ate-3011) · [Edital oficial, itens 4 a 8](https://catedraldt.virtual.ufc.br/wp-content/uploads/2026/11/edital-premio-catedra-ia-2026.pdf)
 
 | Janela proposta | Entrega para a inscrição |
 | --- | --- |
-| **26–27 de novembro** | Iniciar M0 e M1. Em paralelo, preparar os documentos da equipe, os anexos e o esqueleto do memorial técnico. |
+| **26–27 de novembro** | Base local compilada e verificada no Chromium. Registrar a ressalva sobre N e as tarefas de validação que seguem abertas. |
 | **28 de novembro** | Buscar o aceite funcional de M2, gravar apenas resultados reais e decidir quais funções adicionais já validadas entram na demonstração. |
-| **29 de novembro** | Congelar a versão de inscrição, repetir a demonstração e revisar memorial, anexos, assinaturas, PDF único e acesso aos links opcionais. |
+| **29 de novembro** | Data interna proposta para repetir a demonstração e decidir o que pode entrar na inscrição. A equipe confirma o andamento da documentação antes de fechar o pacote. |
 
 Para a **Categoria III**, apresentar a solução funcional acompanhada do memorial técnico. Usar os resultados disponíveis para explicar arquitetura, contribuições humanas, uso de IA, aplicabilidade e limitações. Se o fluxo funcional não passar pelos testes, registrar o bloqueio antes de tratar o material como protótipo pronto. Usar o [guia do prêmio](<Guia do Prêmio Cátedra IA.html>) para a conferência e o edital oficial para requisitos da inscrição.
 

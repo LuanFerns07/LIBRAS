@@ -41,6 +41,12 @@ O clipe `signal-nome` desloca os dedos indicador e médio unidos para o lado dir
 
 Os contrastes são adequados para atividades visuais sem câmera. O trio da lição inicial tem configurações e trajetórias distintas. ESPELHO e AMARELO compartilham a região do rosto e permitem observar como a configuração e o movimento se combinam. [Diniz, 2020, p. 454–455](https://revistas.ufrj.br/index.php/rl/article/download/37488/22633/114954)
 
+### Triagem da letra N
+
+Em 27 de novembro de 2026, a pessoa usuária relatou dificuldade com N. Na aula da UFSM, N mostra indicador e médio juntos voltados para baixo, M acrescenta o anelar e U mostra indicador e médio voltados para cima. Diniz identifica N e U como par que se distingue pela orientação da palma. [Aula Libras ON, UFSM](https://ntetube.nte.ufsm.br/v/1527000916) · [Diniz, 2020, p. 455](https://revistas.ufrj.br/index.php/rl/article/download/37488/22633/114954#page=4)
+
+No commit `0a36425`, o clipe de N estende indicador e médio, usa a mesma rotação para baixo de M e deixa o anelar flexionado. Na renderização frontal do Chromium, os dedos estendidos ficam parcialmente sobrepostos. A comparação visual com M fica difícil. A revisão deve conferir a rotação da mão e a visibilidade dos dedos na letra isolada e na soletração. O replay da câmera reconheceu N, M e U nos três recortes de cada letra da UFSM. A causa da dificuldade na webcam da pessoa usuária segue em aberto. [Verificação do leitor](dados-alfabeto.md#cobertura-e-verificação) · [Tarefa de revisão](../ROADMAP_LIBRASIA.md#prioridades-da-retomada)
+
 ## Expansão de vocabulário e variantes
 
 | Animação | Uso e contexto |
