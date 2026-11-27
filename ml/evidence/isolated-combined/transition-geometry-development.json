@@ -1,0 +1,813 @@
+{
+  "schema_version": 1,
+  "scope": "development-only",
+  "reserved_features_loaded": false,
+  "model_sha256": "a8e991d9cfedc23a2cf899ed68799c8006682f3306cf6fc0006eacdec1e62f63",
+  "model_manifest_sha256": "036cfed28f27f05a2f111a69fd7642ff75b56d0379f8b41ac8d72c57dd555f3b",
+  "threshold": 0.525,
+  "numeric_plan_sha256": "f094624751cbeecaff7ed451b00dc509db9504a127e26fbc3ea94d1c2285a543",
+  "numeric_features_sha256": "ba4b5bd354cd5e80bbd39ae3aefd71549ef9f901b9815a565d42bb7dd1cc4d4a",
+  "minds_features_sha256": "27ab8c3ab9e5cc7a1d4eaea6d7c1dcfa1763ecf604306f590bb0983e95c8eb90",
+  "clad_features_sha256": "13e0d766118c9e4976a87e84a266fb30e44ea6e894c996b4c7bb8e2f02a3b685",
+  "groups": {
+    "minds_train": {
+      "clips": 18,
+      "signers": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "capture_states": {
+        "ready": 18
+      },
+      "baseline_accepted_cinco": 18,
+      "score_cinco_max": 0.9809746742455947,
+      "intervals": {
+        "wrist_center_y": {
+          "min": -0.23126781731843948,
+          "max": 0.44110508263111115,
+          "measured": 18
+        },
+        "wrist_center_abs_x": {
+          "min": 0.41928374767303467,
+          "max": 0.7297329306602478,
+          "measured": 18
+        },
+        "wrist_vertical_span": {
+          "min": 0.155997908115387,
+          "max": 1.7538790553808212,
+          "measured": 18
+        },
+        "wrist_delta_y": {
+          "min": -0.1124609112739563,
+          "max": 0.980944549664855,
+          "measured": 16
+        },
+        "wrist_anisotropy": {
+          "min": 0.3420949195423737,
+          "max": 0.9936241516521797,
+          "measured": 18
+        },
+        "wrist_horizontal_share": {
+          "min": 0.009687374088858548,
+          "max": 0.38109971282949257,
+          "measured": 18
+        },
+        "fingertip_anisotropy": {
+          "min": 0.3281188692578788,
+          "max": 0.9958370966761625,
+          "measured": 18
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.003583244390774111,
+          "max": 0.8139155961055662,
+          "measured": 18
+        }
+      }
+    },
+    "minds_validation": {
+      "clips": 6,
+      "signers": [
+        8,
+        10
+      ],
+      "capture_states": {
+        "ready": 6
+      },
+      "baseline_accepted_cinco": 6,
+      "score_cinco_max": 0.9703206572053854,
+      "intervals": {
+        "wrist_center_y": {
+          "min": -0.22954435646533966,
+          "max": -0.1163511835038662,
+          "measured": 6
+        },
+        "wrist_center_abs_x": {
+          "min": 0.7313834726810455,
+          "max": 0.967091828584671,
+          "measured": 6
+        },
+        "wrist_vertical_span": {
+          "min": 0.08015145733952521,
+          "max": 0.7715451210737229,
+          "measured": 6
+        },
+        "wrist_delta_y": {
+          "min": -0.35424318723380566,
+          "max": 0.7508250437676907,
+          "measured": 6
+        },
+        "wrist_anisotropy": {
+          "min": 0.6411321119411099,
+          "max": 0.9825089650664975,
+          "measured": 6
+        },
+        "wrist_horizontal_share": {
+          "min": 0.009429735091245665,
+          "max": 0.24330274881785482,
+          "measured": 6
+        },
+        "fingertip_anisotropy": {
+          "min": 0.7463668933604917,
+          "max": 0.9977959001300516,
+          "measured": 6
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.00672460387344354,
+          "max": 0.6210107594719495,
+          "measured": 6
+        }
+      }
+    },
+    "ufsm_numeric_transitions": {
+      "clips": 27,
+      "signers": [
+        901
+      ],
+      "capture_states": {
+        "insufficient": 4,
+        "ready": 23
+      },
+      "baseline_accepted_cinco": 0,
+      "score_cinco_max": 0.00024513239838328064,
+      "intervals": {
+        "wrist_center_y": {
+          "min": -5.674428939819336,
+          "max": -1.8500244617462158,
+          "measured": 23
+        },
+        "wrist_center_abs_x": {
+          "min": 2.477841377258301,
+          "max": 6.5629987716674805,
+          "measured": 23
+        },
+        "wrist_vertical_span": {
+          "min": 1.6071968078613281,
+          "max": 6.299873888492585,
+          "measured": 23
+        },
+        "wrist_delta_y": {
+          "min": -4.650736778974533,
+          "max": 8.83153510093689,
+          "measured": 22
+        },
+        "wrist_anisotropy": {
+          "min": 0.6664663627995755,
+          "max": 0.9948606682030016,
+          "measured": 23
+        },
+        "wrist_horizontal_share": {
+          "min": 0.25345250720275164,
+          "max": 0.9329057381542385,
+          "measured": 23
+        },
+        "fingertip_anisotropy": {
+          "min": 0.20351635605760832,
+          "max": 0.9932712447072405,
+          "measured": 23
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.413833290093982,
+          "max": 0.9304322917172654,
+          "measured": 23
+        }
+      }
+    },
+    "clad_development": {
+      "clips": 9,
+      "signers": [
+        1004
+      ],
+      "capture_states": {
+        "ready": 9
+      },
+      "baseline_accepted_cinco": 0,
+      "score_cinco_max": 0.2982715727363902,
+      "intervals": {
+        "wrist_center_y": {
+          "min": 0.12030414491891861,
+          "max": 2.3303914070129395,
+          "measured": 9
+        },
+        "wrist_center_abs_x": {
+          "min": 0.01325128274038434,
+          "max": 1.1182324886322021,
+          "measured": 9
+        },
+        "wrist_vertical_span": {
+          "min": 0.17711451053619376,
+          "max": 2.0998212974518538,
+          "measured": 9
+        },
+        "wrist_delta_y": {
+          "min": -0.45690083503723145,
+          "max": 1.660078838467598,
+          "measured": 8
+        },
+        "wrist_anisotropy": {
+          "min": 0.3392061540008051,
+          "max": 0.9914009878041917,
+          "measured": 9
+        },
+        "wrist_horizontal_share": {
+          "min": 0.004854434978942576,
+          "max": 0.7383796137851829,
+          "measured": 9
+        },
+        "fingertip_anisotropy": {
+          "min": 0.23415652768107387,
+          "max": 0.8362143930977598,
+          "measured": 9
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.12389271461387315,
+          "max": 0.5177495025179808,
+          "measured": 9
+        }
+      }
+    }
+  },
+  "proposals": {
+    "wrist_position": {
+      "training_ranges": {
+        "wrist_center_y": {
+          "min": -0.23126781731843948,
+          "max": 0.44110508263111115,
+          "measured": 18
+        },
+        "wrist_center_abs_x": {
+          "min": 0.41928374767303467,
+          "max": 0.7297329306602478,
+          "measured": 18
+        },
+        "wrist_vertical_span": {
+          "min": 0.155997908115387,
+          "max": 1.7538790553808212,
+          "measured": 18
+        },
+        "wrist_delta_y": {
+          "min": -0.1124609112739563,
+          "max": 0.980944549664855,
+          "measured": 16
+        }
+      },
+      "lost_validation_cinco": [
+        "5d9f715ac847cf996a1e3a895f4e23a3ae493c5d22426120a43be61a5e10af6b",
+        "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84",
+        "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872",
+        "cdf538bc29631bbdda4ded58da01b9ef6d481d6264788cc2e826fff39685e32e",
+        "c9315cf9be751bd3ce0d1e0ef76adcdb7fea99becb4170d1a4853c7eab038e77",
+        "9bbeb3e5ec7d6b61ddfb2e2f61d219486ef3a613eb7659b3d30b22ae4b023c81"
+      ],
+      "rejected_development_cinco_errors": [],
+      "eligible": false
+    },
+    "wrist_motion": {
+      "training_ranges": {
+        "wrist_anisotropy": {
+          "min": 0.3420949195423737,
+          "max": 0.9936241516521797,
+          "measured": 18
+        },
+        "wrist_horizontal_share": {
+          "min": 0.009687374088858548,
+          "max": 0.38109971282949257,
+          "measured": 18
+        }
+      },
+      "lost_validation_cinco": [
+        "788ee68649f40224571d3acaad25fb2fbf5e03766509ceb0a69c0b239db56a84"
+      ],
+      "rejected_development_cinco_errors": [],
+      "eligible": false
+    },
+    "fingertip_motion": {
+      "training_ranges": {
+        "fingertip_anisotropy": {
+          "min": 0.3281188692578788,
+          "max": 0.9958370966761625,
+          "measured": 18
+        },
+        "fingertip_horizontal_share": {
+          "min": 0.003583244390774111,
+          "max": 0.8139155961055662,
+          "measured": 18
+        }
+      },
+      "lost_validation_cinco": [
+        "c13304e3683707ba9ba9dfdd763c03fd4db3b092dc7f63def1bff634bf0cf872"
+      ],
+      "rejected_development_cinco_errors": [],
+      "eligible": false
+    }
+  },
+  "numeric_decisions": [
+    {
+      "id": "ufsm-seis-sete-850-900",
+      "sha256": "3c343f6d9b566934aaa264224ede71c129d9a5a69d3658ae58ebb61ec9f5fa33",
+      "signer": 901,
+      "reference": null,
+      "capture": "insufficient",
+      "decision": null,
+      "confidence": null,
+      "score_cinco": null,
+      "geometry": {}
+    },
+    {
+      "id": "ufsm-seis-sete-850-1350",
+      "sha256": "9aded5f06b64fd3cca54320d7fba325dfb748887c28c7e200719d948455b301d",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5004654657145449,
+      "score_cinco": 5.4725527873442185e-11,
+      "geometry": {
+        "wrist_center_y": -4.519545078277588,
+        "wrist_center_abs_x": 6.100973129272461,
+        "wrist_vertical_span": 6.299873888492585,
+        "wrist_delta_y": -4.431077301502228,
+        "wrist_anisotropy": 0.9426494440099528,
+        "wrist_horizontal_share": 0.3886343187118901,
+        "fingertip_anisotropy": 0.46080721737750563,
+        "fingertip_horizontal_share": 0.7269765263300225
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-850-2100",
+      "sha256": "f72045ecb8d7d3a3807451d4d69eaa3f42d94fde073b52dae54e83f7dc70f05b",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5142307810179094,
+      "score_cinco": 2.426525696290841e-09,
+      "geometry": {
+        "wrist_center_y": -5.055339813232422,
+        "wrist_center_abs_x": 4.825441122055054,
+        "wrist_vertical_span": 4.584327685832978,
+        "wrist_delta_y": -3.071406066417694,
+        "wrist_anisotropy": 0.6755535110592702,
+        "wrist_horizontal_share": 0.44902750880016207,
+        "fingertip_anisotropy": 0.9130495234159363,
+        "fingertip_horizontal_share": 0.7568229258160081
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-650-900",
+      "sha256": "702ecffb51219cfa2a87d3568da7fd20db3fe9969210d6921c0ba0e8877bbb69",
+      "signer": 901,
+      "reference": null,
+      "capture": "insufficient",
+      "decision": null,
+      "confidence": null,
+      "score_cinco": null,
+      "geometry": {}
+    },
+    {
+      "id": "ufsm-seis-sete-650-1350",
+      "sha256": "414c338f08bc8a24d0f861e0a791c8fda0d3d75489ac1225a80c1a9001ff58ee",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5210690840696635,
+      "score_cinco": 3.936749558739195e-08,
+      "geometry": {
+        "wrist_center_y": -4.033178448677063,
+        "wrist_center_abs_x": 4.178470611572266,
+        "wrist_vertical_span": 4.80378183722496,
+        "wrist_delta_y": -3.941216319799423,
+        "wrist_anisotropy": 0.927378880447986,
+        "wrist_horizontal_share": 0.5991358175074833,
+        "fingertip_anisotropy": 0.9234793705009057,
+        "fingertip_horizontal_share": 0.8162519888059556
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-650-2100",
+      "sha256": "8e7aeb57de4d2839369c73550c64c01e808dd9ada7f97684f101fa1160fc7571",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5002798926737534,
+      "score_cinco": 4.4193013769785507e-10,
+      "geometry": {
+        "wrist_center_y": -5.172170162200928,
+        "wrist_center_abs_x": 5.097046136856079,
+        "wrist_vertical_span": 5.553326493501663,
+        "wrist_delta_y": -4.650736778974533,
+        "wrist_anisotropy": 0.7236940058838829,
+        "wrist_horizontal_share": 0.7134984318005725,
+        "fingertip_anisotropy": 0.8154099553609535,
+        "fingertip_horizontal_share": 0.6725203876929919
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-450-900",
+      "sha256": "2ad4168281fda0c7a294df02e62dd83f66e43d045507fe8421de52dc24eb189c",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": "amarelo",
+      "confidence": 0.5575126133643438,
+      "score_cinco": 0.00024513239838328064,
+      "geometry": {
+        "wrist_center_y": -1.8500244617462158,
+        "wrist_center_abs_x": 2.477841377258301,
+        "wrist_vertical_span": 1.898500919342041,
+        "wrist_delta_y": -1.037354290485382,
+        "wrist_anisotropy": 0.9919800814337326,
+        "wrist_horizontal_share": 0.9329057381542385,
+        "fingertip_anisotropy": 0.6121971440543197,
+        "fingertip_horizontal_share": 0.7793341288742366
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-450-1350",
+      "sha256": "28015815bb2e621f30ffa43b16a5dce3d7cb50f207d4d02228af14eb8428324d",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5050513257893976,
+      "score_cinco": 7.184468925577607e-08,
+      "geometry": {
+        "wrist_center_y": -5.674428939819336,
+        "wrist_center_abs_x": 6.295080661773682,
+        "wrist_vertical_span": 3.699869060516358,
+        "wrist_delta_y": 0.28953826427459717,
+        "wrist_anisotropy": 0.9860274324673575,
+        "wrist_horizontal_share": 0.6744777208457535,
+        "fingertip_anisotropy": 0.9932712447072405,
+        "fingertip_horizontal_share": 0.7633268532905382
+      }
+    },
+    {
+      "id": "ufsm-seis-sete-450-2100",
+      "sha256": "9dc0f5c85edf02b092fcc8c2f1efda69ef276b4719f8120202b5abae4cb22cd2",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5047430912563569,
+      "score_cinco": 1.0902914937293382e-07,
+      "geometry": {
+        "wrist_center_y": -2.9969290494918823,
+        "wrist_center_abs_x": 3.1324145793914795,
+        "wrist_vertical_span": 2.55870623588562,
+        "wrist_delta_y": null,
+        "wrist_anisotropy": 0.7798971231946542,
+        "wrist_horizontal_share": 0.683517910624689,
+        "fingertip_anisotropy": 0.890088256708933,
+        "fingertip_horizontal_share": 0.769926149173815
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-850-900",
+      "sha256": "e65550f28f4a51a455ba20d610169b422294b5058692a6c1512b6863a7985222",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.49999946671884965,
+      "score_cinco": 1.5271830857708524e-09,
+      "geometry": {
+        "wrist_center_y": -4.718749403953552,
+        "wrist_center_abs_x": 6.5629987716674805,
+        "wrist_vertical_span": 3.3416526317596436,
+        "wrist_delta_y": -0.8172297477722168,
+        "wrist_anisotropy": 0.9034233659546916,
+        "wrist_horizontal_share": 0.5718029621321427,
+        "fingertip_anisotropy": 0.9922426997935263,
+        "fingertip_horizontal_share": 0.7212922866828928
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-850-1350",
+      "sha256": "e0e3304807adce68b4c5aa5e3cd8534bbd174d9679623dd72dba4634633512d6",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000007742903976,
+      "score_cinco": 3.72611442335348e-09,
+      "geometry": {
+        "wrist_center_y": -3.568788766860962,
+        "wrist_center_abs_x": 5.288716077804565,
+        "wrist_vertical_span": 2.635466384887695,
+        "wrist_delta_y": 0.23671817779541016,
+        "wrist_anisotropy": 0.7112104460286535,
+        "wrist_horizontal_share": 0.7289941892757842,
+        "fingertip_anisotropy": 0.8012265167788041,
+        "fingertip_horizontal_share": 0.6538323832161866
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-850-2100",
+      "sha256": "c6703fb99e2fe0c1b4553c923b60361fb2a3ba903ee9f90d3476733ded06bdd8",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000060800377699,
+      "score_cinco": 7.414624517245518e-11,
+      "geometry": {
+        "wrist_center_y": -3.275395631790161,
+        "wrist_center_abs_x": 3.6700422763824463,
+        "wrist_vertical_span": 2.7519993782043457,
+        "wrist_delta_y": 1.6913119554519653,
+        "wrist_anisotropy": 0.6664663627995755,
+        "wrist_horizontal_share": 0.5874537683543085,
+        "fingertip_anisotropy": 0.9487630044525934,
+        "fingertip_horizontal_share": 0.6809596817224889
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-650-900",
+      "sha256": "cacf42ede0755d23e3d0b1d8877746c5ba7768d6f5e6c580539cf169ac76ece7",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5001349449088812,
+      "score_cinco": 4.39716651412823e-16,
+      "geometry": {
+        "wrist_center_y": -4.299046039581299,
+        "wrist_center_abs_x": 5.173996925354004,
+        "wrist_vertical_span": 6.149450325965885,
+        "wrist_delta_y": 8.83153510093689,
+        "wrist_anisotropy": 0.9587925342883722,
+        "wrist_horizontal_share": 0.3576836036873542,
+        "fingertip_anisotropy": 0.8478685118210825,
+        "fingertip_horizontal_share": 0.8168554831301218
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-650-1350",
+      "sha256": "e2235983f700a01d155e78bac216fc21c334053cf813e82a10a6e90d9c83e4b3",
+      "signer": 901,
+      "reference": null,
+      "capture": "insufficient",
+      "decision": null,
+      "confidence": null,
+      "score_cinco": null,
+      "geometry": {}
+    },
+    {
+      "id": "ufsm-sete-oito-650-2100",
+      "sha256": "58827af31f61338a590a294653155335cf5c7eedfe13f9a37122626939ac3a63",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000088257599857,
+      "score_cinco": 2.805706870405507e-09,
+      "geometry": {
+        "wrist_center_y": -4.4171106815338135,
+        "wrist_center_abs_x": 5.415577173233032,
+        "wrist_vertical_span": 1.6071968078613281,
+        "wrist_delta_y": -0.2845478057861328,
+        "wrist_anisotropy": 0.7699934447140263,
+        "wrist_horizontal_share": 0.49420929500977356,
+        "fingertip_anisotropy": 0.972121338774017,
+        "fingertip_horizontal_share": 0.8503863726485824
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-450-900",
+      "sha256": "b261e9d21bf51ff1c423ee1da202b5cb56268c32039a95c66804fe56da337c0c",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.500084190243837,
+      "score_cinco": 6.68115344634196e-10,
+      "geometry": {
+        "wrist_center_y": -4.420843601226807,
+        "wrist_center_abs_x": 6.023214340209961,
+        "wrist_vertical_span": 3.9078009128570557,
+        "wrist_delta_y": -2.3063019514083862,
+        "wrist_anisotropy": 0.832313115743881,
+        "wrist_horizontal_share": 0.25345250720275164,
+        "fingertip_anisotropy": 0.9601716750800827,
+        "fingertip_horizontal_share": 0.737490893175604
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-450-1350",
+      "sha256": "8baa00a3d160cdf4f97f453382b4b154013cc30da969c3e115a6cde0bb56c057",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": "espelho",
+      "confidence": 0.7168418990526163,
+      "score_cinco": 1.0838711801326833e-05,
+      "geometry": {
+        "wrist_center_y": -4.090335130691528,
+        "wrist_center_abs_x": 5.2588536739349365,
+        "wrist_vertical_span": 3.0196167469024657,
+        "wrist_delta_y": -0.28412020206451416,
+        "wrist_anisotropy": 0.9628366907247619,
+        "wrist_horizontal_share": 0.5082733063026217,
+        "fingertip_anisotropy": 0.25202243258344714,
+        "fingertip_horizontal_share": 0.413833290093982
+      }
+    },
+    {
+      "id": "ufsm-sete-oito-450-2100",
+      "sha256": "c98de58e7c48545f272c513b5d1378d89a62d1a8348e778dfee60e2e091170cd",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5001003088190764,
+      "score_cinco": 1.5708156720420475e-08,
+      "geometry": {
+        "wrist_center_y": -3.8250110149383545,
+        "wrist_center_abs_x": 4.245053768157959,
+        "wrist_vertical_span": 2.980365324020385,
+        "wrist_delta_y": 0.6164164543151855,
+        "wrist_anisotropy": 0.9175862630113664,
+        "wrist_horizontal_share": 0.5100508349523509,
+        "fingertip_anisotropy": 0.20351635605760832,
+        "fingertip_horizontal_share": 0.5011837830011505
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-850-900",
+      "sha256": "1e59b44d79d42995d050b5de54b6e2437050ba5161d2cbef7d3cc4ba44a2c63d",
+      "signer": 901,
+      "reference": null,
+      "capture": "insufficient",
+      "decision": null,
+      "confidence": null,
+      "score_cinco": null,
+      "geometry": {}
+    },
+    {
+      "id": "ufsm-oito-nove-850-1350",
+      "sha256": "003ec348d1d92ff55c2c53839e7284d14daca4b1035a7855061310b262ad86d1",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": "espelho",
+      "confidence": 0.6295635419833205,
+      "score_cinco": 1.0445015847428976e-06,
+      "geometry": {
+        "wrist_center_y": -3.6028980016708374,
+        "wrist_center_abs_x": 5.460078716278076,
+        "wrist_vertical_span": 2.0826830863952637,
+        "wrist_delta_y": 0.9631894826889038,
+        "wrist_anisotropy": 0.9679441504781655,
+        "wrist_horizontal_share": 0.762940136424555,
+        "fingertip_anisotropy": 0.49916302857340444,
+        "fingertip_horizontal_share": 0.729365262113824
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-850-2100",
+      "sha256": "b471b465f35abae70137bba8b50dc6f095bfa0ee378a7191c5ede3d8d48abcf6",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.500179636166679,
+      "score_cinco": 3.0254103457191654e-10,
+      "geometry": {
+        "wrist_center_y": -3.4579548835754395,
+        "wrist_center_abs_x": 5.394201755523682,
+        "wrist_vertical_span": 3.382477283477783,
+        "wrist_delta_y": 2.9755285382270813,
+        "wrist_anisotropy": 0.9620650758466788,
+        "wrist_horizontal_share": 0.6466253968681012,
+        "fingertip_anisotropy": 0.6529986843705151,
+        "fingertip_horizontal_share": 0.8263479376365325
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-650-900",
+      "sha256": "448525146ab7127a97d6395e23b589bc82ab458bb3b5241d556284f075392b84",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000012609855058,
+      "score_cinco": 1.7418046669459782e-12,
+      "geometry": {
+        "wrist_center_y": -3.918091297149658,
+        "wrist_center_abs_x": 5.230470180511475,
+        "wrist_vertical_span": 3.169542074203491,
+        "wrist_delta_y": -0.003206610679626465,
+        "wrist_anisotropy": 0.9948606682030016,
+        "wrist_horizontal_share": 0.6447610735002829,
+        "fingertip_anisotropy": 0.9162964573414125,
+        "fingertip_horizontal_share": 0.9304322917172654
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-650-1350",
+      "sha256": "f5f39b807b33ec93c5bc36bf4b76a9638810cf445eee1e8862c5c8be1efe0c50",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5003676442445433,
+      "score_cinco": 2.1264143600314903e-10,
+      "geometry": {
+        "wrist_center_y": -2.5836198329925537,
+        "wrist_center_abs_x": 3.7952075004577637,
+        "wrist_vertical_span": 2.346107006072998,
+        "wrist_delta_y": 2.210495710372925,
+        "wrist_anisotropy": 0.923060483202559,
+        "wrist_horizontal_share": 0.6382711973919013,
+        "fingertip_anisotropy": 0.25822261151928316,
+        "fingertip_horizontal_share": 0.599987081862546
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-650-2100",
+      "sha256": "f0559f0d9f9f56d77a256cbfeaccd842348d6e35fc48354ce3732bce114b3e4d",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000472600273083,
+      "score_cinco": 1.4061570351598408e-11,
+      "geometry": {
+        "wrist_center_y": -2.187021493911743,
+        "wrist_center_abs_x": 3.8969826698303223,
+        "wrist_vertical_span": 2.6882650494575495,
+        "wrist_delta_y": 1.757455289363861,
+        "wrist_anisotropy": 0.9403375597194518,
+        "wrist_horizontal_share": 0.6744667994824242,
+        "fingertip_anisotropy": 0.3683783338604065,
+        "fingertip_horizontal_share": 0.6841839319614436
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-450-900",
+      "sha256": "c4bdafeb22b5d74d19a9f2f02ce11c530252edd0f684c30aa98f53adb62de08d",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000106497322893,
+      "score_cinco": 1.1455969897612733e-10,
+      "geometry": {
+        "wrist_center_y": -3.7198808193206787,
+        "wrist_center_abs_x": 5.291049480438232,
+        "wrist_vertical_span": 1.920809268951416,
+        "wrist_delta_y": -0.1421276330947876,
+        "wrist_anisotropy": 0.972534554061031,
+        "wrist_horizontal_share": 0.7545536149137652,
+        "fingertip_anisotropy": 0.6763922089608227,
+        "fingertip_horizontal_share": 0.6968144263396238
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-450-1350",
+      "sha256": "77bb7bb6a46e6be5307c25220636392a5f84e9122e4551d35ed205d7eafa79ba",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000007725198259,
+      "score_cinco": 2.051474655420319e-12,
+      "geometry": {
+        "wrist_center_y": -2.710851550102234,
+        "wrist_center_abs_x": 4.426528692245483,
+        "wrist_vertical_span": 2.31445484161377,
+        "wrist_delta_y": 1.924647331237793,
+        "wrist_anisotropy": 0.9215194250518632,
+        "wrist_horizontal_share": 0.6692171794071567,
+        "fingertip_anisotropy": 0.8439738191901246,
+        "fingertip_horizontal_share": 0.9173412470847665
+      }
+    },
+    {
+      "id": "ufsm-oito-nove-450-2100",
+      "sha256": "0c65c4292750e52306897d8bf0ce5205d12b4328f14ad9fd670014a0ffdac346",
+      "signer": 901,
+      "reference": null,
+      "capture": "ready",
+      "decision": null,
+      "confidence": 0.5000691369175034,
+      "score_cinco": 3.83201788345158e-11,
+      "geometry": {
+        "wrist_center_y": -1.8889752626419067,
+        "wrist_center_abs_x": 3.265168070793152,
+        "wrist_vertical_span": 2.9590349912643434,
+        "wrist_delta_y": 2.1709426641464233,
+        "wrist_anisotropy": 0.9367288575653223,
+        "wrist_horizontal_share": 0.6773343041131932,
+        "fingertip_anisotropy": 0.4992688506715761,
+        "fingertip_horizontal_share": 0.7451723915713423
+      }
+    }
+  ]
+}
