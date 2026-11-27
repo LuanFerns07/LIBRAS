@@ -1,0 +1,251 @@
+{
+  "release": "759a671d434ac99cabbf6567bb9649d98f46cac8",
+  "window": {
+    "label": "A",
+    "startMs": 3660,
+    "endMs": 4370,
+    "anchorMs": 4100
+  },
+  "threshold": 0.8,
+  "manifestSha256": "3ba0d4ef536aeee54e4cb712eca385692017222aa9455532a308cd0e68ce0e44",
+  "landmarkerSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "classifierSha256": [
+    "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4"
+  ],
+  "versions": {
+    "opencv": "4.12.0",
+    "mediapipe": "0.10.32",
+    "onnxruntime": "1.23.2"
+  },
+  "videos": {
+    "480": [
+      "1535641159.mp4",
+      "1d1be8a4fe346d004147ab258d88499c4620f95dd21312ec809748efa20f4af7"
+    ],
+    "576": [
+      "1535641159-720p.mp4",
+      "a5c4dc8862e287d42841f53b13a630466d4d9f838ae639fcdbaa8bb298e62194"
+    ]
+  },
+  "variants": {
+    "480-full": {
+      "roiWidthHeightXY": null,
+      "hands": {
+        "2": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.1317,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "A": 1,
+          "R": 1,
+          "Q": 9
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.002305
+      ]
+    },
+    "480-same-scale": {
+      "roiWidthHeightXY": [
+        384,
+        216,
+        258,
+        192
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 10,
+        "R": 1
+      },
+      "medianHandHeightFraction": 0.1315,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "A": 1,
+          "R": 1,
+          "Q": 9
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.002213
+      ]
+    },
+    "480-wide": {
+      "roiWidthHeightXY": [
+        384,
+        216,
+        258,
+        192
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.2944,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "R": 1,
+          "Q": 10
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.002649
+      ]
+    },
+    "480-close": {
+      "roiWidthHeightXY": [
+        240,
+        136,
+        330,
+        232
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.4667,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "R": 1,
+          "Q": 10
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.002209
+      ]
+    },
+    "576-full": {
+      "roiWidthHeightXY": null,
+      "hands": {
+        "2": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.1309,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "A": 1,
+          "O": 1,
+          "Q": 9
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.000818
+      ]
+    },
+    "576-same-scale": {
+      "roiWidthHeightXY": [
+        460,
+        258,
+        310,
+        230
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.131,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "R": 1,
+          "Q": 10
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.000905
+      ]
+    },
+    "576-wide": {
+      "roiWidthHeightXY": [
+        460,
+        258,
+        310,
+        230
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.2923,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "R": 1,
+          "Q": 10
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.000811
+      ]
+    },
+    "576-close": {
+      "roiWidthHeightXY": [
+        288,
+        162,
+        396,
+        278
+      ],
+      "hands": {
+        "1": 11
+      },
+      "accepted": {
+        "null": 11
+      },
+      "medianHandHeightFraction": 0.4642,
+      "topLabels": [
+        {
+          "R": 11
+        },
+        {
+          "R": 1,
+          "Q": 10
+        }
+      ],
+      "aMedians": [
+        0.0,
+        0.000749
+      ]
+    }
+  }
+}
