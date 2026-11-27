@@ -147,6 +147,51 @@ No mesmo pacote, o Chromium abriu e liberou a webcam Acer e concluiu a síntese 
 
 O roteiro integrado passou novamente com o Y4M de SHA-256 `88de13b1cd6e9c1135a43e5436740d238945ef0141230375a48d7c0a9412c808`. O Chromium reproduziu a frase e o nome, reconheceu Amarelo, exibiu a dica de trajetória no recorte invertido, acrescentou “cinco espelho” em duas tentativas e concluiu a leitura de “Cinco e espelho.”. O link do INES abriu em outra aba, e as duas trilhas de câmera foram liberadas ao trocar de tela. Log local `roteiro-aa32d96.log`.
 
+### Latência da prática guiada no PC
+
+A prévia `50ad447` usou o classificador combinado com limiar 0,525, no Chromium 156.0.8078.79 em Debian 13 com Intel Core i7-13650HX. A câmera de arquivo do Chromium entregou 640 × 360 a 30 fps. O avatar usou WebGL 2 com SwiftShader. Cada cenário abriu um perfil temporário e começou com uma tentativa de aquecimento. O teste reiniciou o avatar, aguardou dois quadros de animação e confirmou que ele estava em reprodução antes de acionar **Concluir tentativa**. [Tempos por tentativa e por quadro, com hashes do modelo e das mídias](../ml/evidence/latencia-licao/combinado-50ad447.json)
+
+| Cenário | Resultado | Mediana conclusão → decisão | p95 | Mediana da extração por quadro |
+| --- | --- | ---: | ---: | ---: |
+| Cinco, S09-1 | 5/5 reconhecidas | 1,8 ms | 21,8 ms | 60,8 ms |
+| Espelho, S11-1 | 5/5 reconhecidas | 2,1 ms | 22,8 ms | 60,6 ms |
+| Amarelo, S01-1 | 5/5 reconhecidas | 1,8 ms | 22,4 ms | 61,5 ms |
+| Amarelo, S01-1 com quadros invertidos | 3/3 exibiram a dica de trajetória | 3,0 ms | 22,0 ms | 61,6 ms |
+| Vídeo preto, sem mão | 3/3 ficaram inconclusivas | 0,4 ms | 0,6 ms | 13,3 ms |
+
+Nas 15 tentativas de reconhecimento, a mediana foi 1,9 ms e o p95 foi 22,8 ms. As duas medidas ficaram abaixo das metas de 250 e 600 ms. O primeiro carregamento do reconhecedor em cada perfil levou de 295,9 a 308,5 ms. A extração dos 606 quadros dessas 15 tentativas teve mediana de 61,0 ms e p95 de 65,4 ms. Os tempos de decisão começam no clique de conclusão. O p95 usa o posto mais próximo e, neste tamanho de amostra, coincide com o maior valor. [Metas do protocolo](protocolo-aceite.md#metas-de-aceite)
+
+Cinco e Espelho vieram da partição reservada do MINDS-Libras. Amarelo veio do treino e o vídeo invertido deriva do mesmo clipe. As repetições medem a execução técnica sobre gravações. A latência com pessoas sinalizando na webcam, a adequação da dica e o comportamento em Android e iOS continuam no aceite manual. [Partições e origem](../ml/manifests/minds-expanded-v1.json) · [Medição ao vivo](validacao-ao-vivo.md#medir-no-chromium)
+
+Para repetir, use os recortes sincronizados de Cinco e Espelho descritos neste roteiro e o recorte de 0,70 s em diante de Amarelo S01-1. O comando salva o carregamento inicial, os tempos de cada quadro e a decisão no JSON. Os logs locais desta rodada ficam em `data/evidence/latencia-licao-50ad447`. [Preparação de Amarelo](sinais-com-movimento-browser.md#reproduzir) · [Preparação do recorte invertido](#dica-de-trajetória-de-amarelo)
+
+~~~bash
+out=data/evidence/latencia-licao
+mkdir -p "$out"
+export LIBRASIA_TEST_URL=http://127.0.0.1:4177
+export LIBRASIA_TEST_RECOGNITION=1 LIBRASIA_TEST_SYNC=1
+medir() {
+  LIBRASIA_TEST_TRIALS=5 LIBRASIA_TEST_TARGET="signal-$1" LIBRASIA_EXPECT_TEXT="$1" \
+    LIBRASIA_TEST_VIDEO="$2" LIBRASIA_TEST_REPORT="$out/$1.json" \
+    node --test tests/e2e/recognition.test.mjs
+}
+medir cinco data/evidence/camera-fixtures/10CincoSinalizador09-1-sync.y4m
+medir espelho data/evidence/camera-fixtures/12EspelhoSinalizador11-1-sync.y4m
+medir amarelo data/evidence/moving-sign-fixtures/amarelo-s01.y4m
+
+LIBRASIA_TEST_TRIALS=3 LIBRASIA_TEST_TARGET=signal-amarelo \
+  LIBRASIA_TEST_EXPECT_HINT='Desloque o indicador da testa em direção ao nariz.' \
+  LIBRASIA_TEST_VIDEO=data/evidence/demonstracao/amarelo-01-invertido.y4m \
+  LIBRASIA_TEST_REPORT="$out/dica.json" node --test tests/e2e/recognition.test.mjs
+
+ffmpeg -nostdin -hide_banner -loglevel error -filter_threads 1 -f lavfi \
+  -i 'color=c=black:size=640x360:rate=30:duration=4.2' \
+  -vf 'tpad=start_duration=0.5:color=lime' -pix_fmt yuv420p "$out/sem-maos-sync.y4m"
+LIBRASIA_TEST_TRIALS=3 LIBRASIA_TEST_TARGET=signal-cinco LIBRASIA_EXPECT_REASON=no-hand \
+  LIBRASIA_TEST_VIDEO="$out/sem-maos-sync.y4m" LIBRASIA_TEST_REPORT="$out/sem-maos.json" \
+  node --test tests/e2e/recognition.test.mjs
+~~~
+
 ## Registro da prévia de 26/11/2026
 
 Prévia do commit 51d9829 verificada pela frente independente de QA em um checkout limpo. O ambiente foi o PC acima, com Chromium 156.0.8078.79 em modo headless, Viewport 1280 × 900 e perfil temporário.

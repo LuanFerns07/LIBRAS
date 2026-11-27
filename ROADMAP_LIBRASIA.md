@@ -287,6 +287,7 @@ O marco de publicação na Vercel depende do aceite de M7 e da autorização dos
 
 - [ ] **Git e ambiente.** Configurar o build da Vercel, a prévia e a versão de produção. Verificar o carregamento do modelo, dos arquivos WebAssembly e do avatar no ambiente publicado. [Deploy a partir de Git na Vercel](https://vercel.com/docs/git)
 - [x] Adaptar o layout para toque e telas estreitas. Verificar o encaixe em 390 px, a recuperação após voltar à aba e os avisos de câmera e voz na prévia local do Chromium.
-- [ ] Medir a latência da câmera à decisão com o avatar aberto nos aparelhos de referência e conferir as mensagens e a recuperação de câmera e voz nesses aparelhos.
+- [x] Medir no Chromium do PC o tempo da conclusão à decisão, da extração por quadro e do primeiro carregamento, com o avatar em reprodução nas tentativas gravadas. Conferir as mensagens e a recuperação de câmera e voz no PC. [Latência da prática guiada](docs/roteiro-validacao.md#latência-da-prática-guiada-no-pc) · [Câmera e voz no pacote](docs/previa-estavel.md#demonstração-atual-no-pc)
+- [ ] Medir a latência da câmera à decisão com o avatar aberto em Android e iPhone de referência e conferir as mensagens e a recuperação de câmera e voz. Completar a medição no PC com pessoas sinalizando na webcam.
 - [ ] **Revisão independente.** Testar a prévia no PC e em pelo menos um Android com Chrome e um iPhone com Safari. Confirmar permissão de câmera, reconhecimento, animação 3D, soletração, transcrição editável e voz gratuita em português brasileiro. Registrar aparelhos, navegadores e limitações.
 - [ ] **Aceite.** Repetir os fluxos essenciais na URL de produção e acrescentar o link ao README. Manter a versão web como acesso comum entre desktop e celular.

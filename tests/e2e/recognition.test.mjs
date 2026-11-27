@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
-import { access } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { access, writeFile } from 'node:fs/promises'
 import { test } from 'node:test'
 import { withChromium } from './chromium.mjs'
 import { beginAtMarker, finish } from './recorded-capture.mjs'
@@ -27,6 +28,7 @@ const fixedCaptureMs = process.env.LIBRASIA_TEST_CAPTURE_MS === undefined
   ? null : Number(process.env.LIBRASIA_TEST_CAPTURE_MS)
 const markerOffsetMs = Number(process.env.LIBRASIA_TEST_START_OFFSET_MS ?? 0)
 const windowToleranceMs = 300
+const reportFile = process.env.LIBRASIA_TEST_REPORT
 
 const useVoiceFixture = (mode => {
   window.testSpeechCalls = 0
@@ -88,6 +90,17 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
   if (trials > 1 && videoFile) assert.ok(sync, 'Use o marcador de sincronização para repetir um clipe.')
   const base = new URL('/', appUrl)
   assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname), 'Use uma prévia local em loopback para este teste de vídeo.')
+  async function readBuild() {
+    const [release, manifest] = await Promise.all(['commit.txt', 'models/isolated.json']
+      .map(path => fetch(new URL(path, base))))
+    assert.ok(release.ok && manifest.ok, 'Use um pacote local com versão e manifesto para registrar a medição.')
+    const commit = (await release.text()).trim()
+    assert.match(commit, /^[a-f0-9]{40}$/u)
+    const bytes = Buffer.from(await manifest.arrayBuffer())
+    const { modelSha256, threshold } = JSON.parse(bytes)
+    return { commit, manifestSha256: createHash('sha256').update(bytes).digest('hex'), modelSha256, threshold }
+  }
+  const build = reportFile ? await readBuild() : null
   const otherRequests = []
   const offlineRequests = []
   const seenAssets = new Set()
@@ -138,6 +151,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     await permission(base.origin, 'granted')
     await evaluate('document.querySelector("[data-camera-toggle]").click()', true)
     await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
+    const environment = reportFile ? await evaluate(`(() => {
+      const { width, height, frameRate } = document.querySelector('video').srcObject.getVideoTracks()[0].getSettings()
+      const gl = document.querySelector('[data-avatar] canvas')?.getContext('webgl2')
+      const info = gl?.getExtension('WEBGL_debug_renderer_info')
+      return { browser: navigator.userAgent, video: { width, height, frameRate },
+        graphics: info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : null }
+    })()`) : null
     if (process.env.LIBRASIA_TEST_POINTS === '1') {
       assert.ok(videoFile && expected, 'Use um clipe rotulado para verificar os pontos da mão.')
       const hasPoints = `(() => {
@@ -170,9 +190,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     await startAttempt()
     await record()
 
+    let warmup = null
     if (sync) {
       // A primeira tentativa carrega o extrator e o classificador. A avaliação começa no marcador do clipe.
-      await evaluate('(' + finish + ')()', true)
+      const first = await evaluate('(' + finish + ')()', true)
+      warmup = first.timing
+      if (reportFile) assert.ok(Number.isFinite(warmup?.initialLoadMs) && warmup.initialLoadMs > 0,
+        'O aquecimento deve registrar o carregamento dos modelos.')
       if (!target) await evaluate('document.querySelector("[data-clear]").click()', true)
       if (multiple) await evaluate('document.querySelector("[data-sequence-mode]").click()', true)
     }
@@ -217,7 +241,13 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
         assert.equal(await evaluate('document.querySelector("[data-capture-status]").dataset.state'), 'recording')
         assert.equal(await getTranscript(), decisions.at(-1)?.transcript ?? prefix)
       }
-      if (target && !(lessonFlow && trial === 1)) await evaluate('document.querySelector("[data-restart]").click()', true)
+      const restartAvatar = target && !(lessonFlow && trial === 1)
+      if (restartAvatar) await evaluate('document.querySelector("[data-restart]").click()', true)
+      if (reportFile && restartAvatar) {
+        await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+        assert.equal(await evaluate('document.querySelector("[data-play]").textContent'), 'Pausar',
+          'O avatar deve estar em reprodução antes de concluir a tentativa.')
+      }
       const endAtMediaMs = fixedCaptureMs === null ? null : marked.startMs + fixedCaptureMs
       const decision = await evaluate('(' + finish + ')(' + autoFinish + ',' + endAtMediaMs + ')', true)
       const glosses = continuous ? await evaluate(`(() => {
@@ -308,6 +338,12 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
     }
     assert.ok(Array.from(seenAssets).some(path => /ort-wasm.*\.wasm$/u.test(path)), 'WebAssembly do ONNX Runtime carregado.')
     assert.deepEqual(otherRequests, [], 'A página deve solicitar apenas arquivos locais.')
+    if (reportFile) {
+      assert.deepEqual(await readBuild(), build, 'A compilação ou o modelo mudou durante o teste.')
+      await writeFile(reportFile, JSON.stringify({
+        build, environment, target: target ?? null, videoFile: videoFile ?? null, warmup, decisions, mismatches,
+      }, null, 2) + '\n')
+    }
     assert.deepEqual(mismatches, [], 'Divergências observadas nas tentativas.')
 
     if (reviewGlosses) {
