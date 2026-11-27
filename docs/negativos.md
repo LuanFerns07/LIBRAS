@@ -148,6 +148,8 @@ Os dois falsos Alunos do CLAD reservado vêm da mesma pessoa em duas gravações
 
 No Chromium, a compilação anterior `2a80645` acrescentou “aluno” ao reproduzir a passagem do queixo ao teclado. O pacote `dfb045b` deixou a tentativa inconclusiva nas duas repetições do mesmo Y4M e preservou “Texto conferido.”. Aluno apareceu nas seis tentativas com as gravações S09-1, S11-1 e S12-1. Cinco + Aluno gerou “cinco alunos” no modo com pausas e na revisão do modo contínuo. [Reteste das sequências](regressao-area-livre.md#concordância-em-sequências-com-pausas)
 
+Na porta 4177, o mesmo recorte do CLAD voltou a preservar a transcrição. As gravações isoladas de Espelho S11-1 e Amarelo S01-1 foram reconhecidas. Em 37 tentativas classificadas como Aluno nos dados da tabela, o JavaScript do aplicativo reproduziu todas as decisões da avaliação em Python.
+
 Reproduza o ensaio offline a partir dos pontos locais e a comparação no Chromium com o Y4M do recorte do CLAD.
 
 ~~~bash
