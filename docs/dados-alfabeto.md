@@ -56,10 +56,10 @@ Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Prati
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia em 4177 usa a compilação `81e20b9`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+A prévia em 4177 usa a compilação `9d5d6fe`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
 
 ```sh
-python3 data/releases/librasia-q-teste/iniciar.py --porta 4177
+python3 data/releases/librasia-z-palma-teste/iniciar.py --porta 4177
 ```
 
 ### Compilar neste Linux
@@ -335,4 +335,15 @@ node ml/alphabet/replay-web.mjs --url http://127.0.0.1:4177/ \
   --source 1536677587 --workers 1 --trace --timeline > data/ufsm-z-curto.json
 node ml/alphabet/replay-motion-trace.mjs data/ufsm-z-curto.json \
   data/releases/librasia-q-teste/site/models/alphabet-motion.json
+```
+
+A compilação passou a servir a prévia local em 4177. A letra esperada apareceu em todos os 16 recortes dos controles C, Ç, H, J, K, X, Y e Z. Algumas letras breves continuaram aparecendo nas janelas de Z. Nenhum dos 19 controles fora do alfabeto nem as três repetições de Azul da UFSM exibiram Z. A rodada também verificou a sobreposição das duas mãos. Após a troca da prévia, o Chromium repetiu os testes de Z, Q e da passagem M → N com gravações. [Controles rotulados e Azul](../ml/evidence/alphabet-z-azul/ufsm-z-curto-continuidade-9d5d6fe.json) · [Dezenove recortes fora do alfabeto](../ml/evidence/alphabet-z-azul/ufsm-z-curto-negativos-9d5d6fe.json)
+
+Para recompilar localmente com os mesmos pesos da prévia anterior, use um caminho de pacote livre.
+
+```sh
+base="$PWD/data/releases/librasia-q-teste/site/models"
+LIBRASIA_MODELO="$base" LIBRASIA_ALFABETO_MOVIMENTO="$base" LIBRASIA_ALFABETO_MODELO="$base" \
+  ./scripts/executar-local.sh --pacote data/releases/librasia-z-palma-reconstruido
+python3 data/releases/librasia-z-palma-reconstruido/iniciar.py --porta 4177
 ```

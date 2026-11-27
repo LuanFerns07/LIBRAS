@@ -1,0 +1,374 @@
+{
+  "build": {
+    "commit": "9d5d6fe21853cfff75d87019d98b2acbade29df4",
+    "modelSha256": "39b34d3eba08435932701b2fc8be791e6896a2b1ea2d20c768a594d13f13f544",
+    "agreementSha256": "64be70a00eb5a40879e710baee418a88de0e37e0ba75d22fb1340002225c31a4",
+    "supplementSha256": "2d1a3b794eca47a50157f947b22c286359b1609c291920f2f81ac2994de1f885",
+    "contrastSha256": "7b6a2324829ff383f10e11a77a5c48eb8566440a0f6e778019eb0130f9581fad",
+    "worldASha256": "aa7dde08ceff01864a1179b060867e4c76c6b03462e0cd1b2e122fab9a374ef5",
+    "worldQSha256": "ba791fe2aaa3b7e420ac748c82deeda0fd53c545c94220eda9b4e4799aaea0dd",
+    "motionSha256": "ec573ef2e3e66bbd4ec669823d9d33ab906495cb9d97e9403d7e73347934b407"
+  },
+  "manifests": [
+    "ml/evidence/alphabet-z-azul/replay-windows.json"
+  ],
+  "results": [
+    {
+      "source": "1527000916",
+      "label": "X",
+      "startMs": 41350,
+      "endMs": 42650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 473
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1373
+    },
+    {
+      "source": "1527000916",
+      "label": "Z",
+      "startMs": 43820,
+      "endMs": 44790,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 689
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 23,
+      "lastHandAfterVideoMs": 1000
+    },
+    {
+      "source": "1536677587",
+      "label": "X",
+      "startMs": 40380,
+      "endMs": 41260,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 462
+        }
+      ],
+      "workerFrames": 89,
+      "framesWithHand": 22,
+      "lastHandAfterVideoMs": 938
+    },
+    {
+      "source": "1536677587",
+      "label": "Z",
+      "startMs": 42500,
+      "endMs": 43950,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 765
+        }
+      ],
+      "workerFrames": 97,
+      "framesWithHand": 31,
+      "lastHandAfterVideoMs": 1471
+    },
+    {
+      "source": "1535641159",
+      "label": "Ç",
+      "startMs": 7770,
+      "endMs": 8950,
+      "readings": [
+        {
+          "letter": "Ç",
+          "afterVideoMs": 501
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 31,
+      "lastHandAfterVideoMs": 1188
+    },
+    {
+      "source": "1535641159",
+      "label": "H",
+      "startMs": 14850,
+      "endMs": 16280,
+      "readings": [
+        {
+          "letter": "H",
+          "afterVideoMs": 466
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1461
+    },
+    {
+      "source": "1535641159",
+      "label": "J",
+      "startMs": 17850,
+      "endMs": 19400,
+      "readings": [
+        {
+          "letter": "J",
+          "afterVideoMs": 463
+        }
+      ],
+      "workerFrames": 107,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1564
+    },
+    {
+      "source": "1535641159",
+      "label": "K",
+      "startMs": 19820,
+      "endMs": 21250,
+      "readings": [
+        {
+          "letter": "K",
+          "afterVideoMs": 463
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 36,
+      "lastHandAfterVideoMs": 1473
+    },
+    {
+      "source": "1535641159",
+      "label": "X",
+      "startMs": 40220,
+      "endMs": 41680,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 450
+        }
+      ],
+      "workerFrames": 95,
+      "framesWithHand": 34,
+      "lastHandAfterVideoMs": 1502
+    },
+    {
+      "source": "1535641159",
+      "label": "Y",
+      "startMs": 41900,
+      "endMs": 43500,
+      "readings": [
+        {
+          "letter": "Y",
+          "afterVideoMs": 829
+        }
+      ],
+      "workerFrames": 108,
+      "framesWithHand": 40,
+      "lastHandAfterVideoMs": 1590
+    },
+    {
+      "source": "1535641159",
+      "label": "Z",
+      "startMs": 43650,
+      "endMs": 45550,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 351
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1140
+        }
+      ],
+      "workerFrames": 116,
+      "framesWithHand": 50,
+      "lastHandAfterVideoMs": 1921
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "X",
+      "startMs": 117320,
+      "endMs": 119330,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 492
+        }
+      ],
+      "workerFrames": 119,
+      "framesWithHand": 51,
+      "lastHandAfterVideoMs": 2071
+    },
+    {
+      "source": "cecierj-13757",
+      "label": "Z",
+      "startMs": 122520,
+      "endMs": 124220,
+      "readings": [
+        {
+          "letter": "G",
+          "afterVideoMs": 216
+        },
+        {
+          "letter": "X",
+          "afterVideoMs": 872
+        },
+        {
+          "letter": "Z",
+          "afterVideoMs": 1160
+        }
+      ],
+      "workerFrames": 110,
+      "framesWithHand": 42,
+      "lastHandAfterVideoMs": 1712
+    },
+    {
+      "source": "unesp-222981",
+      "label": "X",
+      "startMs": 108030,
+      "endMs": 109570,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 435
+        }
+      ],
+      "workerFrames": 106,
+      "framesWithHand": 39,
+      "lastHandAfterVideoMs": 1543
+    },
+    {
+      "source": "unesp-222981",
+      "label": "Z",
+      "startMs": 113560,
+      "endMs": 115100,
+      "readings": [
+        {
+          "letter": "Z",
+          "afterVideoMs": 844
+        }
+      ],
+      "workerFrames": 105,
+      "framesWithHand": 38,
+      "lastHandAfterVideoMs": 1546
+    },
+    {
+      "source": "1535641159",
+      "label": "C",
+      "startMs": 6610,
+      "endMs": 7580,
+      "readings": [
+        {
+          "letter": "C",
+          "afterVideoMs": 231
+        }
+      ],
+      "workerFrames": 92,
+      "framesWithHand": 27,
+      "lastHandAfterVideoMs": 1037
+    },
+    {
+      "source": "clad-movimento-02-usb",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [],
+      "workerFrames": 155,
+      "framesWithHand": 78,
+      "lastHandAfterVideoMs": 3978
+    },
+    {
+      "source": "clad-movimento-03-queixo-teclado",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 4000,
+      "readings": [
+        {
+          "letter": "M",
+          "afterVideoMs": 1549
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 2256
+        },
+        {
+          "letter": "M",
+          "afterVideoMs": 3980
+        }
+      ],
+      "workerFrames": 158,
+      "framesWithHand": 81,
+      "lastHandAfterVideoMs": 3980
+    },
+    {
+      "source": "cecierj-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1650,
+      "readings": [
+        {
+          "letter": "X",
+          "afterVideoMs": 646
+        }
+      ],
+      "workerFrames": 111,
+      "framesWithHand": 43,
+      "lastHandAfterVideoMs": 1627
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 258
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 553
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1311
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 264
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 551
+        }
+      ],
+      "workerFrames": 101,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1304
+    },
+    {
+      "source": "ufsm-azul",
+      "label": "fora-do-alfabeto",
+      "startMs": 0,
+      "endMs": 1450,
+      "readings": [
+        {
+          "letter": "A",
+          "afterVideoMs": 269
+        },
+        {
+          "letter": "L",
+          "afterVideoMs": 556
+        }
+      ],
+      "workerFrames": 98,
+      "framesWithHand": 29,
+      "lastHandAfterVideoMs": 1330
+    }
+  ]
+}
