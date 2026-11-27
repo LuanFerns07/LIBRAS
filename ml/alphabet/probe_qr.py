@@ -47,7 +47,7 @@ def r_shape(points):
     return torch.cat((projection, separation, shape_features(points)[:, 7:9]), dim=1)
 
 
-def probe(base, references, output=None):
+def probe(base, references, output=None, export_letters="QR"):
     metadata = json.loads((base / "alphabet.json").read_text())
     labels = np.array(metadata["labels"])
     options = ort.SessionOptions()
@@ -75,7 +75,7 @@ def probe(base, references, output=None):
         points = np.concatenate([values for _, values in train])
         is_target = np.concatenate([np.full(len(values), label == target) for label, values in train])
         model = ShapeConfirmation(measure, *fit_linear(measure(torch.from_numpy(points)), is_target)).eval()
-        if output is not None:
+        if output is not None and target in export_letters:
             trained[target] = model, np.concatenate([entry[index] for entry in clips.values()]).reshape(-1, FEATURES)
         windows = []
         checked = checked_frames = new_false_frames = 0
@@ -138,6 +138,8 @@ def export(base, output, metadata, trained):
             ("Q", "worldQ", "world", "hand-world-wrist-palm-v1"),
             ("R", "imageR", "hand", "hand-wrist-palm-v1"),
         ):
+            if target not in trained:
+                continue
             model, features = trained[target]
             path = folder / f"alphabet-{target.lower()}-shape.onnx"
             torch.onnx.export(model, torch.from_numpy(features[:1]), path, input_names=[input_name],
@@ -165,5 +167,7 @@ if __name__ == "__main__":
     parser.add_argument("base", type=Path)
     parser.add_argument("references", type=Path, nargs="+")
     parser.add_argument("--out", type=Path, help="Pasta para exportar os complementos ONNX.")
+    parser.add_argument("--export-letters", choices=("Q", "R", "QR"), default="QR",
+                        help="Complementos a exportar. A avaliação offline sempre mede os dois.")
     args = parser.parse_args()
-    print(json.dumps(probe(args.base, args.references, args.out), ensure_ascii=False, indent=2))
+    print(json.dumps(probe(args.base, args.references, args.out, args.export_letters), ensure_ascii=False, indent=2))
