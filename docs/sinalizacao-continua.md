@@ -68,6 +68,31 @@ LIBRASIA_CONTINUO=1 LIBRASIA_FRONTEIRAS="$fronteiras" \
 
 Para acrescentar o piso de cinco posições ao ensaio, selecione `holistic_weak_cut_with_floor` na exportação.
 
+### Diálogo didático do Cederj
+
+O recorte de 210,500 a 220,500 s da aula 12 da UFF e do Consórcio Cederj preserva dois turnos de um diálogo roteirizado num único enquadramento. Identificamos duas ocorrências de Amarelo pela trajetória do indicador junto à testa e ao nariz, comparada à demonstração isolada da mesma aula, com apoio da legenda em português. A pessoa à direita sinaliza entre 213,000 e 214,000 s e a da esquerda entre 217,500 e 218,100 s. A anotação visual é aproximada e aguarda revisão fluente. O protocolo fixou os intervalos, o recorte e os candidatos antes da extração de pontos e da inferência. [Aula e créditos no portal da Fundação Cecierj](https://canal.cecierj.edu.br/recurso/13766) · [Publicação em CC BY 3.0](https://www.youtube.com/watch?v=4NVpij6RvGg) · [Protocolo](../ml/evidence/ufsc-boundaries/cederj-dialogue-protocol.json)
+
+O piloto usa um único diálogo com uma classe anotada do catálogo. Há outras glosas no quadro e duas pessoas simultaneamente, o que pode afetar o Holistic, que rastreia uma pessoa por quadro. A demonstração isolada da mesma aula já foi usada em outra avaliação. A inspeção dos diálogos das aulas 5 e 9 não confirmou duas classes do catálogo no mesmo trecho. Os 5.335 registros do EQT v4 vieram com `label_gloss` vazio. As anotações ELAN do Corpus Libras oferecem casos com `5` e `ALUNO` na mesma trilha. O uso formal dessas gravações continua sujeito às condições do acervo. [Aula 5](https://canal.cecierj.edu.br/recurso/13764) · [Aula 9](https://canal.cecierj.edu.br/recurso/13763) · [Triagem de fontes](dados-glosas.md) · [FAQ do Corpus Libras](https://corpuslibras.ufsc.br/espacointerativo/perguntas/view/6)
+
+O script verifica os hashes do MP4 e dos modelos, corta o trecho sem áudio e usa o Chromium para extrair uma grade fixa a 10 fps. Os quatro candidatos recebem os mesmos quadros, pelo mesmo classificador de sinais e pelo mesmo tradutor do aplicativo. O Holistic retornou pelo menos uma mão nos 100 quadros. O melhor IoU de cada anotação compara a duração da interseção temporal com a da união, independentemente do rótulo previsto.
+
+| Condição | Propostas | Melhor IoU à direita | Melhor IoU à esquerda | Amarelo com IoU ≥ 0,50 |
+| --- | ---: | ---: | ---: | ---: |
+| Detector original | 16 | 0,50 | 0,10 | 0/2 |
+| Holistic sem controle de fragmentação | 14 | 0,50 | 0,10 | 0/2 |
+| Holistic com penalidade de corte | 10 | 0,60 | 0,10 | 0/2 |
+| Holistic com penalidade e piso de cinco posições | 12 | 0,60 | 0,10 | 0/2 |
+
+As duas rodadas com SwiftShader e decodificação por CPU geraram relatórios idênticos. O primeiro ensaio com a configuração padrão do Chromium contou 11 propostas com penalidade e piso e manteve os mesmos totais para as outras condições. Em todos os casos, cada detector alinhou um dos dois intervalos com IoU ≥ 0,50, nenhuma proposta recebeu o rótulo Amarelo e o fluxo permaneceu inconclusivo, sem sugestão de texto. As condições Holistic compartilham os pesos e usam parâmetros de decodificação diferentes. A anotação parcial permite comparar os dois alvos e deixa em aberto a precisão sobre todas as glosas do trecho. A avaliação de sequência e tradução ainda precisa de anotação fluente de duas ou mais classes, texto de referência e validação em webcam física. [Resultado por intervalo](../ml/evidence/ufsc-boundaries/cederj-dialogue-browser.json)
+
+```bash
+mkdir -p data/continuous-natural-eval
+node ml/continuous_experiment/boundaries/replay-dialogue.mjs "$PWD" \
+  data/continuous-natural-eval/replay-dialogue.json
+```
+
+Execute na raiz do repositório com FFmpeg, Chromium, dependências do projeto e os ativos locais previstos no protocolo. O Vite abre uma porta de loopback temporária. Para reproduzir o Chromium com renderização por software, indique em `LIBRASIA_CHROMIUM` um executável que invoque o navegador com `--use-gl=angle --use-angle=swiftshader --disable-accelerated-video-decode`.
+
 ## Base de frases
 
 Moraes et al., *LIBRAS-EQT-UECE: A Dataset for Isolated and Continuous Brazilian Sign Language Recognition and Translation*, descrevem 55 sinais isolados e 123 frases contínuas. Cinco participantes do conjunto de sete gravam cada item. Os rótulos de pessoa são locais ao item. O uso aqui é educacional e não comercial, com atribuição e indicação de que os landmarks foram recortados, filtrados e reamostrados. [Artigo, IEEE Access](https://doi.org/10.1109/ACCESS.2026.3715086) · [Release v4](https://zenodo.org/records/21398895) · [Licença CC BY-NC 4.0](https://zenodo.org/records/21398895/files/LICENSE.txt?download=1)

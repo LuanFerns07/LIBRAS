@@ -1,0 +1,404 @@
+{
+  "protocolSha256": "da7c6a89a70b2fc632a7377e106a17b9efe792a3e921375309a56f18c9335b04",
+  "clipSha256": "ca51c2c5a8ca129a37e001191c011693535182e489893a37bca66e86b2f1f74c",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "canvas": [
+    640,
+    360
+  ],
+  "frames": 100,
+  "framesWithHands": 100,
+  "conditions": [
+    {
+      "id": "published_original",
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "suggestedText": null,
+      "proposals": [
+        {
+          "startMs": 210700,
+          "endMs": 211300,
+          "gloss": null
+        },
+        {
+          "startMs": 211300,
+          "endMs": 211900,
+          "gloss": null
+        },
+        {
+          "startMs": 211900,
+          "endMs": 212400,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 212400,
+          "endMs": 212900,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 212900,
+          "endMs": 213500,
+          "gloss": null
+        },
+        {
+          "startMs": 213500,
+          "endMs": 214000,
+          "gloss": null
+        },
+        {
+          "startMs": 214000,
+          "endMs": 214500,
+          "gloss": null
+        },
+        {
+          "startMs": 214500,
+          "endMs": 214900,
+          "gloss": null
+        },
+        {
+          "startMs": 214900,
+          "endMs": 215400,
+          "gloss": null
+        },
+        {
+          "startMs": 215400,
+          "endMs": 215900,
+          "gloss": null
+        },
+        {
+          "startMs": 215900,
+          "endMs": 216200,
+          "gloss": null
+        },
+        {
+          "startMs": 216200,
+          "endMs": 216600,
+          "gloss": null
+        },
+        {
+          "startMs": 216600,
+          "endMs": 217100,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 217100,
+          "endMs": 217600,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218000,
+          "endMs": 218600,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218600,
+          "endMs": 219100,
+          "gloss": null
+        }
+      ],
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 213000,
+          "endMs": 214000,
+          "signer": "right",
+          "cue": "A mão de quem está à direita sobe com o indicador estendido à altura da testa e desce junto ao nariz.",
+          "maxIoU": 0.5,
+          "maxLabeledIoU": 0,
+          "aligned": true,
+          "recognized": false
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 217500,
+          "endMs": 218100,
+          "signer": "left",
+          "cue": "A mão de quem está à esquerda deixa o peito e sobe com o indicador à altura da testa, depois desce à frente do nariz.",
+          "maxIoU": 0.1,
+          "maxLabeledIoU": 0,
+          "aligned": false,
+          "recognized": false
+        }
+      ]
+    },
+    {
+      "id": "holistic_frozen",
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "suggestedText": null,
+      "proposals": [
+        {
+          "startMs": 210900,
+          "endMs": 211400,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 211400,
+          "endMs": 211900,
+          "gloss": null
+        },
+        {
+          "startMs": 211900,
+          "endMs": 212400,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 212400,
+          "endMs": 213000,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 213000,
+          "endMs": 213500,
+          "gloss": null
+        },
+        {
+          "startMs": 213500,
+          "endMs": 214000,
+          "gloss": null
+        },
+        {
+          "startMs": 214000,
+          "endMs": 214500,
+          "gloss": null
+        },
+        {
+          "startMs": 214500,
+          "endMs": 215000,
+          "gloss": null
+        },
+        {
+          "startMs": 215000,
+          "endMs": 215500,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 215500,
+          "endMs": 216000,
+          "gloss": null
+        },
+        {
+          "startMs": 216000,
+          "endMs": 216600,
+          "gloss": null
+        },
+        {
+          "startMs": 216600,
+          "endMs": 217100,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218000,
+          "endMs": 218500,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218500,
+          "endMs": 219000,
+          "gloss": "aluno"
+        }
+      ],
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 213000,
+          "endMs": 214000,
+          "signer": "right",
+          "cue": "A mão de quem está à direita sobe com o indicador estendido à altura da testa e desce junto ao nariz.",
+          "maxIoU": 0.5,
+          "maxLabeledIoU": 0,
+          "aligned": true,
+          "recognized": false
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 217500,
+          "endMs": 218100,
+          "signer": "left",
+          "cue": "A mão de quem está à esquerda deixa o peito e sobe com o indicador à altura da testa, depois desce à frente do nariz.",
+          "maxIoU": 0.1,
+          "maxLabeledIoU": 0,
+          "aligned": false,
+          "recognized": false
+        }
+      ]
+    },
+    {
+      "id": "holistic_weak_cut",
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "suggestedText": null,
+      "proposals": [
+        {
+          "startMs": 211000,
+          "endMs": 211700,
+          "gloss": null
+        },
+        {
+          "startMs": 211800,
+          "endMs": 212300,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 212400,
+          "endMs": 213000,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 213100,
+          "endMs": 213700,
+          "gloss": null
+        },
+        {
+          "startMs": 213900,
+          "endMs": 214500,
+          "gloss": null
+        },
+        {
+          "startMs": 214700,
+          "endMs": 215300,
+          "gloss": null
+        },
+        {
+          "startMs": 215400,
+          "endMs": 216000,
+          "gloss": null
+        },
+        {
+          "startMs": 216200,
+          "endMs": 216700,
+          "gloss": null
+        },
+        {
+          "startMs": 218000,
+          "endMs": 218500,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218600,
+          "endMs": 219100,
+          "gloss": null
+        }
+      ],
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 213000,
+          "endMs": 214000,
+          "signer": "right",
+          "cue": "A mão de quem está à direita sobe com o indicador estendido à altura da testa e desce junto ao nariz.",
+          "maxIoU": 0.6,
+          "maxLabeledIoU": 0,
+          "aligned": true,
+          "recognized": false
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 217500,
+          "endMs": 218100,
+          "signer": "left",
+          "cue": "A mão de quem está à esquerda deixa o peito e sobe com o indicador à altura da testa, depois desce à frente do nariz.",
+          "maxIoU": 0.1,
+          "maxLabeledIoU": 0,
+          "aligned": false,
+          "recognized": false
+        }
+      ]
+    },
+    {
+      "id": "holistic_weak_cut_with_floor",
+      "state": "inconclusive",
+      "reason": "partial-sequence",
+      "suggestedText": null,
+      "proposals": [
+        {
+          "startMs": 210700,
+          "endMs": 211200,
+          "gloss": null
+        },
+        {
+          "startMs": 211300,
+          "endMs": 211800,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 211900,
+          "endMs": 212400,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 212500,
+          "endMs": 213000,
+          "gloss": "espelho"
+        },
+        {
+          "startMs": 213100,
+          "endMs": 213700,
+          "gloss": null
+        },
+        {
+          "startMs": 213900,
+          "endMs": 214500,
+          "gloss": null
+        },
+        {
+          "startMs": 214700,
+          "endMs": 215300,
+          "gloss": null
+        },
+        {
+          "startMs": 215400,
+          "endMs": 215900,
+          "gloss": null
+        },
+        {
+          "startMs": 216000,
+          "endMs": 216600,
+          "gloss": null
+        },
+        {
+          "startMs": 216600,
+          "endMs": 217100,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218000,
+          "endMs": 218500,
+          "gloss": "aluno"
+        },
+        {
+          "startMs": 218600,
+          "endMs": 219100,
+          "gloss": null
+        }
+      ],
+      "references": [
+        {
+          "gloss": "amarelo",
+          "startMs": 213000,
+          "endMs": 214000,
+          "signer": "right",
+          "cue": "A mão de quem está à direita sobe com o indicador estendido à altura da testa e desce junto ao nariz.",
+          "maxIoU": 0.6,
+          "maxLabeledIoU": 0,
+          "aligned": true,
+          "recognized": false
+        },
+        {
+          "gloss": "amarelo",
+          "startMs": 217500,
+          "endMs": 218100,
+          "signer": "left",
+          "cue": "A mão de quem está à esquerda deixa o peito e sobe com o indicador à altura da testa, depois desce à frente do nariz.",
+          "maxIoU": 0.1,
+          "maxLabeledIoU": 0,
+          "aligned": false,
+          "recognized": false
+        }
+      ]
+    }
+  ]
+}
