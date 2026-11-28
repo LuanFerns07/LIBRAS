@@ -17,14 +17,15 @@ const copyTiming = process.env.LIBRASIA_TEST_COPY_TIMING === '1'
 const videoFile = process.env.LIBRASIA_TEST_VIDEO
 
 async function copyRecordedTiming({ navigate, evaluate, waitUntil, page, permission }, url) {
-  const normal = new URL('/#area-livre', url).href
-  const capture = new URL('/?validacao=1#area-livre', url).href
+  const normal = new URL('/#praticar', url).href
+  const capture = new URL('/?validacao=1#praticar', url).href
   const panel = 'document.querySelector("[data-validation-measurement]")'
   const click = selector => evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`, true)
   await navigate(normal)
   assert.equal(await evaluate(`!!${panel}`), false)
   await navigate(capture)
   await waitUntil(`${panel}?.hidden`)
+  await click('[data-stage="1"]')
   await permission(url.origin, 'granted')
   await page('Browser.setPermission', { permission: { name: 'clipboard-read' }, setting: 'granted', origin: url.origin })
   await click('[data-camera-toggle]')
@@ -111,6 +112,8 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     await page('Network.enable')
     await page('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: downloads })
     if (copyTiming) timing = await copyRecordedTiming(browser, url)
+    const browserStorage = 'JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)])'
+    const storageBefore = copyTiming ? await evaluate(browserStorage) : '[[],[]]'
     await navigate(url.href)
     if (copyTiming) {
       assert.deepEqual(await evaluate(`Array.from(document.querySelectorAll('#capture-links:not([hidden]) a'), link =>
@@ -141,9 +144,10 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     await evaluate(`(() => {
       const form = document.querySelector('#attempt-form')
       for (const [name, value] of Object.entries({
-        flow: 'free', condition: 'no-hand', lighting: 'regular', framing: 'adequate',
+        flow: 'guided', target: 'cinco', condition: 'no-hand', lighting: 'regular', framing: 'adequate',
         referenceLabel: 'none', decision: 'inconclusive',
       })) form.elements[name].value = value
+      form.elements.flow.dispatchEvent(new Event('change', { bubbles: true }))
       form.elements.captureTiming.focus()
 
       const checkpoint = document.querySelector('select[name="hands-return"]')
@@ -181,7 +185,7 @@ test('a ficha local abre no pacote e exporta observações com a versão servida
     assert.equal(exported.summary.byCondition['no-hand'], 1)
     assert.ok(requests.some(({ url: requested }) => requested === new URL('versao.json', url).href))
     assert.ok(requests.every(request => new URL(request.url).origin === url.origin && request.method === 'GET'))
-    assert.deepEqual(await evaluate('[localStorage.length, sessionStorage.length]'), [0, 0])
+    assert.equal(await evaluate(browserStorage), storageBefore)
   }, { videoFile: copyTiming ? videoFile : undefined })
 })
 

@@ -2,13 +2,13 @@
 
 O LibrasIA é uma iniciativa educacional sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales.
 
-O protótipo web reúne prática de Libras, alfabeto manual, demonstração de frases do catálogo, soletração de nomes e transcrição de sinais isolados. O roadmap registra a implementação e o aceite de cada fluxo. [Roadmap](ROADMAP_LIBRASIA.md)
+O protótipo web reúne prática guiada de Libras, consulta ao alfabeto com leitura de letras pela câmera, demonstração de frases do catálogo e soletração de nomes. O roadmap registra a implementação e o aceite de cada fluxo. [Roadmap](ROADMAP_LIBRASIA.md)
 
 A versão 1.0 local conclui M1 e M2 com prática guiada de Amarelo, avatar 3D e webcam no Chromium. A coleta e a revisão com participantes ficam para depois da 1.0. [Abrir Praticar](http://127.0.0.1:4177/#praticar) · [Executar a versão 1.0](docs/previa-estavel.md#demonstração-atual-no-pc)
 
 A demonstração local 1.1 reúne a lição de três sinais, o alfabeto, o tradutor, a Área livre com voz e a ficha de validação. [Abrir a prévia](http://127.0.0.1:4203/) · [Evidências da demonstração](docs/roteiro-validacao.md#aceite-técnico-de-m7)
 
-A prévia de trabalho inclui a comparação de sinais e a apresentação de nome com saudação. A sinalização contínua usa uma prévia experimental separada. [Abrir a prévia de trabalho](http://127.0.0.1:4205/) · [Abrir o modo contínuo](http://127.0.0.1:4201/#area-livre)
+A prévia de trabalho reúne a consulta ao alfabeto e a leitura ao vivo na Área livre. [Abrir Área livre](http://127.0.0.1:4205/#area-livre)
 
 ![Painel de status dos marcos do LibrasIA. A versão em texto está no roadmap.](assets/status.svg)
 
@@ -38,7 +38,7 @@ Abra **http://127.0.0.1:4173/**. O comando instala as dependências quando neces
 
 No Chromium, selecione **Praticar** para usar a atividade e a webcam, **Alfabeto** ou **Tradutor** para abrir o avatar, e **Área livre** para editar e ouvir o texto. Autorize a câmera ao usar **Ativar câmera**. O endereço de loopback permite o uso local da webcam.
 
-A demonstração no PC de referência usa o modelo combinado de sinais e os pesos do alfabeto integrados. O servidor local abre a Área livre na porta 4177. Em **Conteúdo**, mantenha **Sinais** para transcrever tentativas ou selecione **Alfabeto** para a leitura de letras ao vivo. [Abrir a prévia no PC de referência](http://127.0.0.1:4177/#area-livre) · [Resultados e limites da demonstração](docs/roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
+A compilação da demonstração inclui o modelo combinado para **Praticar** e os pesos do alfabeto para **Área livre**. Para testar a leitura ao vivo, ative a câmera na Área livre e mostre uma letra de cada vez. [Compilar neste Linux](docs/previa-estavel.md#recompilar-com-os-modelos-verificados) · [Resultados da demonstração anterior](docs/roteiro-validacao.md#verificação-técnica-de-27-de-novembro-de-2026)
 
 O pacote da demonstração inclui a compilação e os modelos. Ele pode ser verificado e executado localmente com Python 3. Para montar uma nova cópia com os pesos locais, use `LIBRASIA_DEMONSTRACAO=1 ./scripts/executar-local.sh --pacote data/releases/librasia-demonstracao-recompilada`. [Comandos e arquivos de modelo](docs/previa-estavel.md#recompilar-com-os-modelos-verificados)
 

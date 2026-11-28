@@ -50,21 +50,19 @@ Há uma demonstração por letra em cada aula da UFSM. A versão atual também u
 
 ## Praticar e ler letras ao vivo
 
-Abra **http://127.0.0.1:4177/#area-livre** no Chromium e selecione **Alfabeto** no campo **Conteúdo**. Ative a câmera e mostre uma letra com uma mão. A leitura aparece ao lado do vídeo assim que fica estável. Use **Adicionar letra** para levar o caractere à transcrição. **Inserir espaço** separa palavras.
+Abra a **Área livre** no Chromium. Escolha qualquer uma das 27 letras para consultar o avatar com a câmera ativa. Mostre uma letra com uma mão. A leitura aparece ao lado do vídeo assim que fica estável. Use **Adicionar letra** para levar o caractere à transcrição. **Inserir espaço** separa palavras. [Prévia local](http://127.0.0.1:4205/#area-livre)
 
 Em **Praticar**, selecione **Alfabeto**, escolha entre A–Z e Ç e abra **Praticar com ajuda** para ver a leitura ao lado da câmera e a demonstração no avatar. O modelo escolhe a letra usando os pontos da mão. A escolha no exercício serve para comparar o resultado com o alvo e registrar o progresso.
 
 O modo segue atualizando a leitura com a sobreposição de pontos oculta. Ao perder a mão ou sair do modo, a leitura é apagada. As letras estáticas aparecem após três leituras consecutivas de mesma classe. Quando os dois modelos discordam, o aplicativo aguarda uma leitura mais estável. As letras com movimento aparecem quando os pontos registram o trecho que caracteriza o gesto. O leitor continua recebendo quadros enquanto o modelo estático processa o anterior.
 
-A prévia validada no PC usa um pacote local cuja versão aparece em `http://127.0.0.1:4177/commit.txt`. Para reabrir o pacote existente neste Linux, rode na raiz do projeto.
+O endereço antigo `#alfabeto` abre a Área livre. A versão instalada aparece em `http://127.0.0.1:4205/commit.txt`. [Iniciar a prévia local](previa-estavel.md#prévia-da-sequência-atual)
 
-```sh
-python3 data/releases/librasia-demonstracao/iniciar.py --porta 4177
-```
+No Chromium com o B gravado da UFSM, selecionar Ç no avatar manteve a mesma trilha de câmera e a leitura de B. O teste também confirmou as 27 letras na grade, os controles de comparação, a navegação por teclado e toque e o encaixe em telas de 320 e 390 px. Os logs locais estão em `data/evidence/area-livre-alfabeto/`. [Leitura ao vivo](../tests/e2e/alphabet-live.test.mjs) · [Navegação e controles](../tests/e2e/browser.test.mjs)
 
 ### Pontuação ao vivo na Área livre
 
-Quando a rede principal define a letra confirmada, **Área livre → Alfabeto** mostra a letra em destaque e as duas alternativas seguintes, em ordem de pontuação. O softmax normaliza as 20 classes da rede principal na prévia atual. As três pontuações exibidas podem somar menos de 100%, porque as outras classes também entram no cálculo. Os valores expressam a distribuição da rede para aquele quadro.
+Quando a rede principal define a letra confirmada, a **Área livre** mostra a letra em destaque e as duas alternativas seguintes, em ordem de pontuação. O softmax normaliza as 20 classes da rede principal na prévia atual. As três pontuações exibidas podem somar menos de 100%, porque as outras classes também entram no cálculo. Os valores expressam a distribuição da rede para aquele quadro.
 
 O painel acompanha as leituras confirmadas e limpa as pontuações quando perde a mão. Quando uma trajetória ou um classificador complementar determina a letra, o painel exibe só a letra confirmada. Esses caminhos têm seus próprios critérios de reconhecimento. **Adicionar letra** usa a leitura principal.
 

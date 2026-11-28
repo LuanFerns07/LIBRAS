@@ -163,7 +163,8 @@ test('os pontos das duas mãos acompanham a câmera antes, durante e depois da t
       assert.deepEqual(layout.backing, layout.source)
     }
     await page('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false })
-    await navigate(base.href + '#area-livre')
+    await navigate(base.href + '#praticar')
+    await click('[data-stage="1"]')
     await permission(base.origin, 'granted')
     await evaluate(`(${observeOverlay})()`)
     assert.equal(await evaluate(`document.querySelector(${JSON.stringify(points)}).checked`), true)

@@ -2,7 +2,7 @@
 
 O estudo de glosas para português avalia o componente textual em um corpus paralelo da UFPB, com as glosas de entrada fornecidas. A triagem de dados de vídeo identifica o que falta para medir conjuntamente segmentação, reconhecimento e tradução com pessoas fora do treino. [Glosas para português](glosas-texto.md) · [Triagem de fontes anotadas](dados-glosas.md)
 
-Os experimentos usam gravações contínuas reais. A tradução inicial é avaliada em frases roteirizadas do setor de energia. A segmentação é avaliada em trilhas temporais de uma entrevista pública do Corpus Libras. O aplicativo oferece sinais isolados e um modo experimental de sequências separadas por pausas. Os modelos deste estudo permanecem em pesquisa local enquanto a equivalência das coordenadas e o desempenho na webcam estão em avaliação.
+Os experimentos usam gravações contínuas reais. A tradução inicial é avaliada em frases roteirizadas do setor de energia. A segmentação é avaliada em trilhas temporais de uma entrevista pública do Corpus Libras. A prévia experimental de M10 oferece sinais isolados e sequências separadas por pausas. A Área livre da prévia de trabalho está dedicada ao alfabeto. Os modelos deste estudo permanecem em pesquisa local enquanto a equivalência das coordenadas e o desempenho na webcam estão em avaliação. [Prévia de trabalho](previa-estavel.md#prévia-da-sequência-atual)
 
 ## Fluxo contínuo experimental na câmera
 

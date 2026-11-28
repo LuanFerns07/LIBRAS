@@ -5,7 +5,7 @@ Use o registro para acompanhar pessoas sinalizantes e reunir observações da de
 ## Abrir no Linux
 
 1. Inicie o pacote local da demonstração e abra a ficha de validação no Chromium. [Abrir a ficha local](http://127.0.0.1:4177/validacao/) · [Executar o pacote](previa-estavel.md#demonstração-atual-no-pc)
-2. Na ficha, escolha **Abrir Praticar para medir** ou **Abrir Área livre para medir**. Coloque a ficha e o aplicativo em janelas lado a lado para manter a captura ativa. O LibrasIA libera a câmera quando a aba fica oculta. Use a webcam e o botão **Ouvir** na janela do LibrasIA.
+2. Na ficha, escolha **Abrir Praticar para medir** para medir tentativas de sinais. Use **Abrir Área livre** para verificar o alfabeto e o botão **Ouvir**. Coloque a ficha e o aplicativo em janelas lado a lado para manter a captura ativa. O LibrasIA libera a câmera quando a aba fica oculta.
 3. Na ficha, clique em **Preencher versão do pacote**. O código da compilação identifica também a revisão do avatar. O pacote preenche a versão do catálogo, as somas do modelo de sinais e a soma do conjunto de modelos do alfabeto quando ele estiver instalado. Informe o ambiente observado e o consentimento da pessoa participante.
 4. Use códigos como S01, P01 e R01 para sessão, pessoa sinalizante e revisor. Conserve a correspondência de códigos com participantes separada do registro, quando necessária. Informe se a pessoa está fora do treino, o perfil em Libras de quem revisa e se a revisão é independente.
 

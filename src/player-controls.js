@@ -1,9 +1,10 @@
-export function playerMarkup(title = 'Avatar 3D') {
+export function playerMarkup(title = 'Avatar 3D', { picker = '', extra = '' } = {}) {
   return `
     <section class="panel media-card" aria-label="${title}">
       <div class="panel-header"><h2>${title}</h2><span class="media-status" data-player-step>Pronto</span></div>
       <div class="avatar-stage" data-avatar></div>
       <p class="inline-status" data-player-alert role="status" hidden></p>
+      ${picker}
       <div class="toolbar panel-toolbar" aria-label="Controles do avatar">
         <button class="button primary" type="button" data-play>Reproduzir</button>
         <button class="button" type="button" data-restart>Repetir</button>
@@ -11,6 +12,7 @@ export function playerMarkup(title = 'Avatar 3D') {
           <select data-speed><option value="1">Normal</option><option value=".65">Reduzida</option><option value=".4">Lenta</option></select>
         </label>
       </div>
+      ${extra}
     </section>`
 }
 

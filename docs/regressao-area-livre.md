@@ -1,5 +1,7 @@
 # Regressões da área livre no Chromium
 
+Os cenários de transcrição de sinais desta página usam os pacotes históricos. A prévia de trabalho reúne a consulta ao alfabeto e a leitura de letras na Área livre. [Pacotes locais](previa-estavel.md)
+
 Os ensaios verificam a área livre com MediaPipe Holistic e ONNX no Chromium do PC de referência. O build da prévia usou a árvore de aplicação de 17c6d29, o classificador inicial com SHA-256 52bfe58f63fa1adda9815bb32fbb0e59be196e8bf24c3807eba9704cb45bdf6a e limiar 0,495. O manifesto instalado tem SHA-256 8d2e30c7c20d243f717c4fc86d1ac533988cdbb862adf8abff6a1b3fa0818b33. [Roteiro de validação](roteiro-validacao.md) · [Procedência e licença do MINDS-Libras](dados.md)
 
 São regressões dirigidas com clipes conhecidos, repetidos em uma câmera simulada a 640 × 360 e 30 fps. O quadro preto é uma imagem de ausência gerada localmente. A falha e a falta de voz foram provocadas na interface Web Speech do teste. As requisições da página se limitaram a arquivos locais. Essas medições ficam fora da avaliação por pessoa e da observação humana ao vivo.

@@ -141,6 +141,8 @@ test('a prévia faz a extração e a decisão no navegador sem transmitir quadro
       await waitUntil('!!document.querySelector("#transcription")')
     }
     if (!target) {
+      assert.equal(await evaluate('!!document.querySelector("[data-free-mode]")'), true,
+        'Use um pacote anterior à integração do alfabeto para testar a transcrição de sinais da Área livre.')
       const response = await fetch(new URL('models/isolated.json', base))
       assert.ok(response.ok)
       const { labels } = await response.json()

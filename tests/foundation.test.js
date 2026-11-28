@@ -4,9 +4,9 @@ import test from 'node:test'
 import { references } from '../src/references.js'
 import { credits, pages } from '../src/shell.js'
 
-test('a navegação tem endereços distintos e inclui as cinco áreas', () => {
+test('a navegação tem endereços distintos e reúne o alfabeto na Área livre', () => {
   assert.deepEqual(pages.map(page => page.id), [
-    'praticar', 'alfabeto', 'tradutor', 'area-livre', 'saiba-mais',
+    'praticar', 'tradutor', 'area-livre', 'saiba-mais',
   ])
 })
 

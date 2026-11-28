@@ -149,6 +149,17 @@ p { line-height: 1.55; }
   grid-template-columns: minmax(0, 40rem);
   justify-content: center;
 }
+.free-layout { grid-template-areas: "camera alphabet" "transcription alphabet"; grid-template-rows: auto 1fr; }
+.free-layout > .media-card { grid-area: camera; }
+.free-alphabet { grid-area: alphabet; min-width: 0; }
+.free-transcription { grid-area: transcription; }
+.free-alphabet .avatar-stage { aspect-ratio: 5 / 3; }
+.alphabet-picker, .alphabet-details { padding: .85rem 1rem 0; }
+.alphabet-details { border-top: 1px solid var(--line); }
+.alphabet-details h3, .alphabet-picker p, .alphabet-details p { font-size: .88rem; }
+.alphabet-details h3, .alphabet-picker p { margin-bottom: .5rem; }
+.alphabet-details p { margin: .65rem 0 .85rem; }
+.alphabet-details .inline-status { margin: .65rem 0; }
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -204,8 +215,6 @@ p { line-height: 1.55; }
 }
 .camera-placeholder p { margin: .75rem 0 0; }
 .capture-privacy { margin: 0 1rem .65rem; color: var(--muted); font-size: .88rem; }
-.capture-mode { margin: -1rem 0 .85rem; }
-.capture-mode p { margin: .2rem 0 0; font-size: .9rem; }
 
 .toolbar { display: flex; flex-wrap: wrap; gap: .58rem; align-items: center; }
 .panel-toolbar { padding: .75rem 1rem; }
@@ -288,6 +297,7 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); width
 }
 @media (max-width: 43rem) {
   .split-layout, .media-layout { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+  .free-layout { grid-template-areas: "camera" "alphabet" "transcription"; grid-template-rows: auto; }
 }
 @media (max-width: 24rem) {
   .letter-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }

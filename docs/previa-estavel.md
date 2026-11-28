@@ -68,10 +68,10 @@ python3 data/releases/librasia-1.1.0/iniciar.py --porta 4203
 
 ## Prévia da sequência atual
 
-Na porta 4205, a prévia inclui a comparação de sinais na prática, a retomada de exercícios e a apresentação de nome com saudação no tradutor. [Abrir Praticar](http://127.0.0.1:4205/#praticar) · [Abrir Tradutor](http://127.0.0.1:4205/#tradutor)
+Na porta 4205, a prévia inclui as 27 letras do avatar e a leitura ao vivo na mesma tela da Área livre. Os testes históricos de transcrição de sinais devem usar o pacote da demonstração anterior ou a prévia de sinalização contínua. [Abrir Área livre](http://127.0.0.1:4205/#area-livre) · [Pacote anterior](#prévia-de-trabalho)
 
 ~~~bash
-python3 data/releases/librasia-m11/iniciar.py --porta 4205
+python3 data/releases/librasia-area-livre-alfabeto/iniciar.py --porta 4205
 ~~~
 
 ## Prévia v0.1.0-preview.1

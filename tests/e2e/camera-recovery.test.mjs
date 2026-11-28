@@ -13,16 +13,14 @@ test('revogar a câmera durante uma tentativa cancela a captura e permite retom�
   skip: !enabled || !appUrl,
   timeout: 70000,
 }, async context => {
-  const url = new URL('/#area-livre', appUrl)
+  const url = new URL('/#praticar', appUrl)
   assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname), 'Use a prévia local para testar a câmera.')
   assert.ok(!(physical && videoFile), 'Escolha a webcam física ou a gravação.')
   if (videoFile) await access(videoFile)
 
-  await withChromium(async ({ permission, evaluate, navigate, waitUntil, page }) => {
+  await withChromium(async ({ permission, evaluate, navigate, waitUntil }) => {
     const status = 'document.querySelector("[data-capture-status]")'
     const video = 'document.querySelector("video")'
-    const transcription = 'document.querySelector("#transcription")'
-    const prefix = 'Texto conferido.'
     const click = selector => evaluate('document.querySelector(' + JSON.stringify(selector) + ').click()', true)
     const toggleCamera = () => click('[data-camera-toggle]')
     const waitForRecording = () => waitUntil(status + '.dataset.state === "recording"', 15000)
@@ -30,8 +28,7 @@ test('revogar a câmera durante uma tentativa cancela a captura e permite retom�
 
     await navigate(url.href)
     await permission(url.origin, 'granted')
-    await evaluate(transcription + '.focus()')
-    await page('Input.insertText', { text: prefix })
+    await click('[data-stage="1"]')
     await toggleCamera()
     await waitForCamera()
     const device = await evaluate(`(() => {
@@ -45,7 +42,6 @@ test('revogar a câmera durante uma tentativa cancela a captura e permite retom�
     await waitUntil(status + '.dataset.state === "capture-error" && window.interruptedTrack.readyState === "ended"')
     assert.match(await evaluate(status + '.textContent'), /Problema de captura.*interrompida/u)
     assert.equal(await evaluate(video + '.srcObject'), null)
-    assert.equal(await evaluate(transcription + '.value'), prefix)
     assert.equal(await evaluate('document.querySelector("[data-attempt]").disabled'), true)
     assert.equal(await evaluate(status + '.dataset.timing === undefined'), true)
 
@@ -61,18 +57,17 @@ test('revogar a câmera durante uma tentativa cancela a captura e permite retom�
     })()`), true)
     await click('[data-attempt]')
     await waitForRecording()
-    assert.equal(await evaluate(transcription + '.value'), prefix)
+    assert.equal(await evaluate('document.querySelector("[data-signal]").value'), 'signal-cinco')
 
     if (videoFile) {
       await evaluate('(' + finish + ')()', true)
-      assert.equal(await evaluate(transcription + '.value'), prefix)
       const marker = await evaluate('(' + beginAtMarker + ')(0, true, [false, true, false])', true, 15000)
       await waitForRecording()
       const decision = await evaluate('(' + finish + ')(false, ' + (marker.startMs + 3850) + ')', true)
       assert.equal(decision.state, 'accepted', decision.message)
       assert.equal(decision.timing.classifierCalls, 1)
-      assert.equal(await evaluate(transcription + '.value'), prefix + ' cinco')
-      context.diagnostic('Cinco foi reconhecido e acrescentado uma vez depois da retomada.')
+      assert.match(decision.message, /Cinco foi reconhecido/u)
+      context.diagnostic('Cinco foi reconhecido na prática depois da retomada.')
     }
 
     await click('[data-page="saiba-mais"]')

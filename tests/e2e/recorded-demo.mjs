@@ -5,8 +5,6 @@ import { beginAtMarker, finish } from './recorded-capture.mjs'
 const colors = {
   green: [false, true, false],
   blue: [false, false, true],
-  magenta: [true, false, true],
-  red: [true, false, false],
 }
 
 export async function completeRecordedDemo(browser, { open, click, origin, report }) {
@@ -58,19 +56,18 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
   await evaluate('window.lessonTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
   report('4. Prática de Amarelo · ' + accepted + ' ' + hint)
 
-  await open('area-livre', 'Libras para texto e voz')
+  await open('area-livre', 'Área livre')
   assert.equal(await evaluate('window.lessonTrack.readyState'), 'ended')
-  await startCamera()
-  await capture('magenta', 'accepted')
-  assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco')
-  await capture('red', 'accepted')
-  assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco espelho')
+  await click('[data-camera-toggle]')
+  await waitUntil('document.querySelector("[data-camera-state]").textContent === "Ativa"')
   await evaluate('window.freeTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
-  await open('alfabeto', 'Alfabeto manual')
+  await click('[data-alphabet-reference] .letter-button:last-child')
+  assert.equal(await evaluate('document.querySelector("[data-player-step]").textContent'), 'Ç')
+  assert.equal(await evaluate('window.freeTrack.readyState'), 'live')
+  await open('praticar', 'Pratique Libras')
   assert.equal(await evaluate('window.freeTrack.readyState'), 'ended')
-  await open('area-livre', 'Libras para texto e voz')
+  await open('area-livre', 'Área livre')
   assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
-  assert.equal(await evaluate('document.querySelector("#transcription").value'), 'cinco espelho')
   await waitUntil('speechSynthesis.getVoices().some(v => v.localService && v.lang.replaceAll("_", "-").toLowerCase() === "pt-br")')
   await evaluate(`const speak = speechSynthesis.speak.bind(speechSynthesis);
     speechSynthesis.speak = utterance => {
@@ -83,7 +80,7 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
   await click('[data-speak]')
   await waitUntil('document.querySelector("[data-voice-status]").dataset.state === "accepted"')
   assert.equal(await evaluate('window.demoUtterance'), edited)
-  report('5. Área livre · cinco espelho após voltar do Alfabeto · voz local leu a edição em pt-BR.')
+  report('5. Área livre · Ç no avatar com a câmera ativa · voz local leu o texto editado em pt-BR.')
 
   await open('saiba-mais', 'Saiba mais')
   assert.deepEqual(unexpectedRequests, [], 'A câmera e a voz devem funcionar com requisições apenas de arquivos locais.')
@@ -100,7 +97,7 @@ export async function completeRecordedDemo(browser, { open, click, origin, repor
     if (target) {
       assert.equal(await evaluate('location.hash'), '#saiba-mais')
       await page('Page.bringToFront')
-      await open('area-livre', 'Libras para texto e voz')
+      await open('area-livre', 'Área livre')
       assert.equal(await evaluate('document.querySelector("#transcription").value'), edited)
       report('6. Saiba mais · ' + target.title + ' · ' + target.url)
       return

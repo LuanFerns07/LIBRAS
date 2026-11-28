@@ -1,4 +1,4 @@
-import { alphabet, cedilla } from '../catalog.js'
+import { manualAlphabet as characters } from '../catalog.js'
 import { mountPlayerControls, playerMarkup } from '../player-controls.js'
 
 const comparisons = [
@@ -8,37 +8,33 @@ const comparisons = [
   ['N', 'U', 'Em N, indicador e médio apontam para baixo, com o dorso voltado para quem observa. Em U, apontam para cima, com a palma voltada para quem observa.'],
 ]
 
-export function mountAlphabet(main, createPlayer) {
-  const characters = [...alphabet, cedilla]
-  main.innerHTML = `
-    <div class="page-heading">
-      <h1>Alfabeto manual</h1>
-      <p>Escolha uma letra e observe a posição da mão e o movimento no avatar.</p>
-    </div>
-    <div class="split-layout">
-      <section class="panel content-panel">
-        <h2>Letras de A a Z e cedilha</h2>
-        <p class="muted">Use Tab para entrar na grade e as setas para percorrer as letras.</p>
+export function alphabetMarkup() {
+  return `<div class="free-alphabet" data-alphabet-reference>
+    ${playerMarkup('Alfabeto manual', {
+      picker: `<div class="alphabet-picker">
+        <p class="muted">Escolha uma letra. Com o teclado, use as setas para percorrer a grade.</p>
         <div class="letter-grid" aria-label="Letras do alfabeto" role="group">
           ${characters.map(({ label }, index) =>
             `<button class="letter-button" type="button" aria-pressed="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${label}</button>`).join('')}
         </div>
-        <p class="inline-status subtle">As demonstrações estão em revisão linguística.</p>
-        <div class="coverage">
+      </div>`,
+      extra: `<div class="alphabet-details">
           <h3>Compare letras parecidas</h3>
           <div class="toolbar">
             ${comparisons.map(([first, second], index) => `<button type="button" class="button" data-comparison="${index}">${first} e ${second}</button>`).join('')}
           </div>
           <p class="inline-status" data-comparison-status role="status" hidden></p>
-        </div>
-      </section>
-      ${playerMarkup('Demonstração da letra')}
-    </div>`
+          <p class="muted">As demonstrações estão em revisão linguística.</p>
+        </div>`,
+    })}
+  </div>`
+}
 
-  const player = mountPlayerControls(main, createPlayer)
-  const grid = main.querySelector('.letter-grid')
+export function mountAlphabet(reference, createPlayer) {
+  const player = mountPlayerControls(reference, createPlayer)
+  const grid = reference.querySelector('.letter-grid')
   const buttons = Array.from(grid.querySelectorAll('button'))
-  const comparisonStatus = main.querySelector('[data-comparison-status]')
+  const comparisonStatus = reference.querySelector('[data-comparison-status]')
   let selected = 0
 
   function select(index, autoplay) {
@@ -52,7 +48,7 @@ export function mountAlphabet(main, createPlayer) {
   }
 
   buttons.forEach((button, index) => button.addEventListener('click', () => select(index, true)))
-  for (const button of main.querySelectorAll('[data-comparison]')) {
+  for (const button of reference.querySelectorAll('[data-comparison]')) {
     button.addEventListener('click', () => {
       const [first, second, description] = comparisons[Number(button.dataset.comparison)]
       const firstIndex = characters.findIndex(letter => letter.label === first)

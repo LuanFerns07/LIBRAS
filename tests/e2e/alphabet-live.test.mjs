@@ -21,9 +21,6 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
     await navigate(url.href)
     await permission(url.origin, 'granted')
     await evaluate(`(() => {
-      const mode = document.querySelector('[data-free-mode]')
-      mode.value = 'letter'
-      mode.dispatchEvent(new Event('change'))
       const live = document.querySelector('[data-live-character]')
       window.alphabetReadings = []
       new MutationObserver(() => window.alphabetReadings.push(live.textContent))
@@ -37,13 +34,24 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
       const video = document.querySelector('video')
       const output = document.querySelector('[data-live-letter]')
       window.cameraTrack = video.srcObject.getVideoTracks()[0]
+      const reference = document.querySelector('[data-alphabet-reference]')
+      const selected = ${JSON.stringify(letter === 'Ç' ? 'Z' : 'Ç')}
+      Array.from(reference.querySelectorAll('.letter-button')).find(button => button.textContent === selected).click()
       return {
         beside: output.getBoundingClientRect().left >= video.getBoundingClientRect().right - 1,
+        avatarBeside: reference.getBoundingClientRect().left >= output.getBoundingClientRect().right - 1,
+        avatarLetter: reference.querySelector('[data-player-step]').textContent,
+        cameraContinues: video.srcObject.getVideoTracks()[0] === window.cameraTrack && window.cameraTrack.readyState === 'live',
+        liveLetter: output.querySelector('[data-live-character]').textContent,
         attemptHidden: document.querySelector('[data-attempt]').hidden,
+        signalControls: !!document.querySelector('[data-free-mode], [data-signal-modes]'),
         pointsHidden: document.querySelector('[data-hand-overlay]').hidden,
         written: document.querySelector('#transcription').value,
       }
-    })()`), { beside: true, attemptHidden: true, pointsHidden: true, written: '' })
+    })()`), {
+      beside: true, avatarBeside: true, avatarLetter: letter === 'Ç' ? 'Z' : 'Ç', cameraContinues: true, liveLetter: letter,
+      attemptHidden: true, signalControls: false, pointsHidden: true, written: '',
+    })
     if (expectedRanking === '1') {
       const scores = await evaluate(`(() => {
         const ranking = document.querySelector('[data-letter-ranking]')
@@ -117,10 +125,12 @@ async function observeTransitions(view, videoFile, until) {
     await navigate(url.href)
     await permission(url.origin, 'granted')
     await evaluate(`(() => {
-      const mode = document.querySelector('[data-free-mode], [data-practice-mode]')
-      mode.value = 'letter'
-      mode.dispatchEvent(new Event('change'))
-      document.querySelector('[data-stage="1"]')?.click()
+      const mode = document.querySelector('[data-practice-mode]')
+      if (mode) {
+        mode.value = 'letter'
+        mode.dispatchEvent(new Event('change'))
+        document.querySelector('[data-stage="1"]').click()
+      }
       const video = document.querySelector('video')
       const output = document.querySelector('[data-live-character]')
       window.transitionReadings = []

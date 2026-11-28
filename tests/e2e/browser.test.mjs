@@ -111,9 +111,13 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.equal(await evaluate('document.querySelector("[data-camera-toggle]").disabled'), true)
     assert.equal(await evaluate('document.querySelectorAll(".media-layout > section")[0].getBoundingClientRect().top === document.querySelectorAll(".media-layout > section")[1].getBoundingClientRect().top'), true)
 
-    await open('alfabeto', 'Alfabeto manual')
+    await page('Page.navigate', { url: base + '#alfabeto' })
+    await waitUntil('location.hash === "#area-livre" && document.querySelector("main h1")?.textContent === "Área livre"')
+    assert.equal(await evaluate('document.querySelector("[data-page=alfabeto]")'), null)
+    assert.equal(await evaluate('document.querySelector("[aria-current=page]").dataset.page'), 'area-livre')
     assert.equal(await evaluate('!!document.querySelector("[data-avatar] canvas").getContext("webgl2")'), true)
     assert.equal(await evaluate('Array.from(document.querySelectorAll(".letter-grid button"), el => el.textContent).join("")'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ')
+    await evaluate('document.querySelector("[data-hand-points]").focus()')
     await key('Tab', 9)
     assert.equal(await evaluate('document.activeElement.textContent'), 'A')
     assert.equal(await evaluate('document.activeElement.matches(":focus-visible") && getComputedStyle(document.activeElement).outlineStyle !== "none"'), true)
@@ -238,7 +242,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.match(await text('[data-stage-title]'), /Cinco · Praticar com ajuda/)
 
     if (!voiceEnabled) await evaluate('Object.defineProperty(window, "speechSynthesis", { value: undefined, configurable: true }); true')
-    await open('area-livre', 'Libras para texto e voz')
+    await open('area-livre', 'Área livre')
     const historyBeforeSkip = await evaluate('history.length')
     await evaluate('document.querySelector(".skip-link").focus()')
     await key('Enter', 13)
@@ -246,7 +250,7 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     assert.equal(await evaluate('location.hash'), '#area-livre')
     assert.equal(await evaluate('history.length'), historyBeforeSkip)
     await key('Tab', 9)
-    assert.equal(await evaluate('document.activeElement.matches("[data-free-mode]")'), true)
+    assert.equal(await evaluate('document.activeElement.matches("[data-camera-toggle]")'), true)
 
     await permission(origin, 'denied')
     await click('[data-camera-toggle]')
@@ -297,9 +301,9 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
     const draft = await evaluate(transcription + '.value')
     const storage = 'JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)])'
     const storageBefore = await evaluate(storage)
-    await open('alfabeto', 'Alfabeto manual')
+    await open('tradutor', 'Português para Libras')
     assert.equal(await evaluate('window.previousCameraTrack.readyState'), 'ended')
-    await open('area-livre', 'Libras para texto e voz')
+    await open('area-livre', 'Área livre')
     assert.equal(await evaluate(transcription + '.value'), draft)
     assert.equal(await evaluate('document.querySelector("video").srcObject'), null)
     assert.equal(await evaluate(storage), storageBefore)
@@ -316,13 +320,13 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       link.target === '_blank' && link.relList.contains('noopener') && link.relList.contains('noreferrer'))`), true)
     assert.match(await text('footer'), /sem fins lucrativos, desenvolvida por Luan Fernandes e Wellington Sales/u)
 
-    await open('area-livre', 'Libras para texto e voz')
+    await open('area-livre', 'Área livre')
     assert.equal(await evaluate(transcription + '.value'), '')
     await evaluate(transcription + '.focus()')
     const temporaryText = 'Mensagem temporária.\nSegunda linha.'
     await page('Input.insertText', { text: temporaryText })
     await open('saiba-mais', 'Saiba mais')
-    await open('area-livre', 'Libras para texto e voz')
+    await open('area-livre', 'Área livre')
     assert.equal(await evaluate(transcription + '.value'), temporaryText)
     await evaluate('window.previousDocument = true')
     await page('Page.reload')
@@ -352,12 +356,20 @@ test('aplicação compilada navega, reproduz o avatar, traduz e controla a câme
       await page('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
     }
     const fit = width => evaluate(`document.documentElement.clientWidth === ${width} && document.documentElement.scrollWidth <= ${width}`)
-    await tap('[data-page="alfabeto"]')
-    await waitUntil('document.querySelector("main h1")?.textContent === "Alfabeto manual"')
+    await tap('[data-page="area-livre"]')
+    await waitUntil('document.querySelector("main h1")?.textContent === "Área livre"')
     assert.equal(await fit(390), true)
+    assert.equal(await evaluate(`(() => {
+      const camera = document.querySelector('video').closest('.media-card').getBoundingClientRect()
+      const alphabet = document.querySelector('[data-alphabet-reference]').getBoundingClientRect()
+      const transcription = document.querySelector('.free-transcription').getBoundingClientRect()
+      return camera.bottom <= alphabet.top && alphabet.bottom <= transcription.top
+    })()`), true)
+    await tap('.letter-grid button:last-child')
+    assert.equal(await text('[data-player-step]'), 'Ç')
 
     await page('Emulation.setDeviceMetricsOverride', { width: 320, height: 680, deviceScaleFactor: 1, mobile: true })
-    for (const route of ['praticar', 'alfabeto', 'tradutor', 'saiba-mais', 'area-livre']) {
+    for (const route of ['praticar', 'tradutor', 'saiba-mais', 'area-livre']) {
       await tap(`[data-page="${route}"]`)
       await waitUntil('document.querySelector("[aria-current=page]")?.dataset.page === ' + JSON.stringify(route))
       assert.equal(await fit(320), true, route)
