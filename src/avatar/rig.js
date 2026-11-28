@@ -43,7 +43,7 @@ function coat(parent, fabric, rib) {
   mesh(parent, collar, rib, [0, 0, 0], [1, 1, 0.78]);
 }
 
-function face(parent, palette) {
+function face(parent, palette, style) {
   const { skin, lip, freckles, hair, brow, sclera, iris, pupil, shine } = palette;
   ellipse(parent, skin, [0, 1.674, 0.015], [0.133, 0.19, 0.125]);
   ellipse(parent, skin, [0, 2.066, 0.015], [0.272, 0.357, 0.246]);
@@ -60,19 +60,77 @@ function face(parent, palette) {
       [side * 0.104, 2.162, 0.236],
       [side * 0.155, 2.151, 0.216],
     ], 0.010);
-    for (const i of [0, 1, 2]) {
-      ellipse(parent, freckles, [side * (0.126 + 0.019 * i), 2.049 - 0.004 * i, 0.235 - 0.012 * i], [0.0041, 0.0034, 0.003]);
+    if (style.freckles) {
+      for (const i of [0, 1, 2]) {
+        ellipse(parent, freckles, [side * (0.126 + 0.019 * i), 2.049 - 0.004 * i, 0.235 - 0.012 * i], [0.0041, 0.0034, 0.003]);
+      }
+    }
+    if (style.lashes) {
+      line(parent, brow, [
+        [side * 0.060, 2.112, 0.252],
+        [side * 0.104, 2.124, 0.262],
+        [side * 0.152, 2.114, 0.244],
+      ], 0.0055);
+    }
+    if (style.earrings) {
+      ellipse(parent, palette.earring, [side * 0.277, 1.970, 0.030], [0.017, 0.017, 0.017]);
     }
   }
   ellipse(parent, skin, [0, 2.034, 0.25], [0.041, 0.071, 0.042]);
   ellipse(parent, skin, [0, 2.001, 0.281], [0.048, 0.032, 0.042]);
-  line(parent, lip, [[-0.068, 1.933, 0.253], [0, 1.916, 0.274], [0.069, 1.936, 0.253]], 0.009);
+  line(parent, lip, [[-0.068, 1.933, 0.253], [0, 1.916, 0.274], [0.069, 1.936, 0.253]], style.fullLips ? 0.012 : 0.009);
+  if (style.fullLips) ellipse(parent, lip, [0, 1.905, 0.262], [0.050, 0.016, 0.018]);
+  if (style.hair === 'curly') curlyHair(parent, hair);
+  else shortHair(parent, hair);
+}
+
+function shortHair(parent, hair) {
   ellipse(parent, hair, [-0.017, 2.282, -0.048], [0.278, 0.188, 0.248]);
   const fringe = ellipse(parent, hair, [-0.070, 2.320, 0.097], [0.224, 0.097, 0.181]);
   fringe.rotation.z = 0.23;
   const sideSweep = ellipse(parent, hair, [0.124, 2.302, 0.079], [0.152, 0.086, 0.164]);
   sideSweep.rotation.z = -0.39;
 }
+
+// Cabelo cacheado volumoso até a altura do queixo: um volume base e cachos esféricos
+// distribuídos por sorteio determinístico, deixando o rosto livre.
+function curlyHair(parent, hair) {
+  ellipse(parent, hair, [0, 2.150, -0.090], [0.400, 0.350, 0.330]);
+  let seed = 7;
+  const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const center = [0, 2.060, -0.050];
+  const radii = [0.450, 0.450, 0.390];
+  let placed = 0;
+  for (let attempt = 0; attempt < 1600 && placed < 300; attempt++) {
+    const u = random() * 2 - 1;
+    const angle = random() * Math.PI * 2;
+    const ring = Math.sqrt(1 - u * u);
+    const direction = [ring * Math.cos(angle), u, ring * Math.sin(angle)];
+    const point = direction.map((value, axis) => center[axis] + value * radii[axis]);
+    const [x, y, z] = point;
+    if (y < 1.72) continue;
+    const front = z > 0.06;
+    if (front && y < 2.245 && Math.abs(x) < 0.30) continue;
+    if (front && y < 2.0) continue;
+    const size = 0.066 + random() * 0.034;
+    ellipse(parent, hair, point, [size, size * 0.92, size]);
+    placed++;
+  }
+}
+
+const characters = {
+  homem: {
+    colors: { skin: 0xc47e56, nail: 0xcf936d, lip: 0x84442f, freckles: 0xa26346, hair: 0x2a1f1a, brow: 0x33241e, iris: 0x795243 },
+    style: { hair: 'short', freckles: true },
+  },
+  // Mulher brasileira parda, de cabelo cacheado.
+  mulher: {
+    colors: { skin: 0x9c603f, nail: 0xb47a5a, lip: 0x76392a, freckles: 0x86502f, hair: 0x1f1510, brow: 0x1f1510, iris: 0x4a2c1c },
+    style: { hair: 'curly', lashes: true, earrings: true, fullLips: true },
+  },
+};
+
+export const avatarCharacters = Object.freeze(Object.keys(characters));
 
 const digitGeometry = [
   { root: [0.09, 0.073, 0.002], lengths: [0.097, 0.085, 0.066], thickness: 0.037 },
@@ -174,16 +232,18 @@ function arm(parent, side, palette) {
   };
 }
 
-export function createRig() {
+export function createRig(character = 'homem') {
   const model = new Group();
   const matte = (color) => new MeshStandardMaterial({ color, roughness: 0.80 });
+  const { colors, style } = characters[character] ?? characters.homem;
   const palette = {
-    fabric: matte(0x7155af), rib: matte(0x5d458e), skin: matte(0xc47e56), nail: matte(0xcf936d),
-    lip: matte(0x84442f), freckles: matte(0xa26346), hair: matte(0x302442), brow: matte(0x39273b),
-    sclera: matte(0xfff0e9), iris: matte(0x795243), pupil: matte(0x2c2030), shine: matte(0xffffff),
+    fabric: matte(0x2b2830), rib: matte(0x1c1a20), skin: matte(colors.skin), nail: matte(colors.nail),
+    lip: matte(colors.lip), freckles: matte(colors.freckles), hair: matte(colors.hair), brow: matte(colors.brow),
+    sclera: matte(0xfff0e9), iris: matte(colors.iris), pupil: matte(0x1e1814), shine: matte(0xffffff),
+    earring: new MeshStandardMaterial({ color: 0xd9a441, roughness: 0.35, metalness: 0.6 }),
   };
   coat(model, palette.fabric, palette.rib);
-  face(model, palette);
+  face(model, palette, style);
   const rightArm = arm(model, -1, palette);
   const leftArm = arm(model, 1, palette);
 

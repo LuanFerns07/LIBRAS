@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
   font: 1rem/1.55 system-ui, sans-serif;
-  color: #252139;
-  background: #f7f6f9;
+  color: #121014;
+  background: #faf9f6;
 }
 
 body { margin: 0; }
@@ -10,13 +10,13 @@ main { max-width: 62rem; padding: 1.5rem; margin: auto; }
 h1, h2, p { margin: 0 0 1rem; }
 section {
   background: white;
-  border: 1px solid #d9d3e6;
+  border: 1px solid #e2ded6;
   border-radius: 1rem;
   margin: 1.25rem 0;
   padding: 1.25rem;
 }
 
-fieldset { margin: 0 0 1rem; border: 1px solid #d9d3e6; border-radius: .6rem; padding: .8rem; }
+fieldset { margin: 0 0 1rem; border: 1px solid #e2ded6; border-radius: .6rem; padding: .8rem; }
 legend, label, th { font-weight: 600; }
 .fields, .route { display: grid; gap: .65rem 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .check { display: flex; align-items: baseline; gap: .4rem; margin: 1rem 0 .25rem; }
@@ -27,23 +27,23 @@ input:not([type="checkbox"]), select, textarea {
   min-height: 2.7rem;
   box-sizing: border-box;
   margin-top: .15rem;
-  border: 1px solid #a89abf;
+  border: 1px solid #b9b3ab;
   background: #fff;
-  color: #252139;
+  color: #121014;
   border-radius: .45rem;
   padding: .35rem .5rem;
 }
 
-button { border: 0; border-radius: .5rem; padding: .5rem .9rem; background: #503299; color: #fff; }
+button { border: 0; border-radius: .5rem; padding: .5rem .9rem; background: #c8321a; color: #fff; }
 button:not(:disabled) { cursor: pointer; }
 #load-version:not([hidden]) { margin-bottom: .65rem; }
-:focus-visible { outline: .17rem solid #6c4bc0; outline-offset: .18rem; }
+:focus-visible { outline: .17rem solid #c8321a; outline-offset: .18rem; }
 [role="status"]:empty { margin: 0; }
 [role="status"]:not(:empty) { margin: .75rem 0 0; }
 [data-error="true"] { color: #a01632; }
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; margin: .5rem 0 1rem; }
-th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #e6e0ef; }
+th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #ebe8e1; }
 
 @media (max-width: 36rem) {
   main { padding: .75rem; }

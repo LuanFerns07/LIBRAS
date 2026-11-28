@@ -28,7 +28,7 @@ export function handOverlay(canvas, video) {
       context.moveTo(a.x * width, a.y * height)
       context.lineTo(b.x * width, b.y * height)
     }
-    context.strokeStyle = '#201733'
+    context.strokeStyle = '#121014'
     context.lineWidth = line * 2.3
     context.stroke()
     context.strokeStyle = color
@@ -38,7 +38,7 @@ export function handOverlay(canvas, video) {
       if (!validPoint(point)) continue
       context.beginPath()
       context.arc(point.x * width, point.y * height, line * 1.7, 0, 2 * Math.PI)
-      context.strokeStyle = '#201733'
+      context.strokeStyle = '#121014'
       context.lineWidth = line * 0.8
       context.stroke()
       context.fillStyle = color
@@ -55,8 +55,8 @@ export function handOverlay(canvas, video) {
         canvas.height = video.videoHeight
       }
       clear()
-      draw(frame.leftHand, '#d9b8ff')
-      draw(frame.rightHand, '#75f0ce')
+      draw(frame.leftHand, '#ffd60a')
+      draw(frame.rightHand, '#ff7a5e')
     },
   }
 }

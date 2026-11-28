@@ -1,5 +1,5 @@
 import {
-  AmbientLight, CircleGeometry, Color, DirectionalLight, HemisphereLight,
+  AmbientLight, CircleGeometry, DirectionalLight, HemisphereLight,
   Mesh, MeshBasicMaterial, OrthographicCamera, Scene, WebGLRenderer,
 } from 'three';
 import { neutralPose } from './clips.js';
@@ -12,30 +12,30 @@ export const AVATAR_FRAME = Object.freeze({
   halfWidth: 1.23,
 });
 
-export function createPlayer(container, { onStep, onState } = {}) {
-  const renderer = new WebGLRenderer({ antialias: true, powerPreference: 'low-power' });
+export function createPlayer(container, { onStep, onState, character } = {}) {
+  const renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
+  renderer.setClearColor(0x000000, 0);
   renderer.domElement.setAttribute('role', 'img');
   renderer.domElement.setAttribute('aria-label', 'Avatar 3D demonstrando sinais em Libras');
   renderer.domElement.style.cssText = 'display:block;width:100%;height:100%;';
   const scene = new Scene();
-  scene.background = new Color(0xeee9fb);
   const camera = new OrthographicCamera(-2, 2, 1.33, -1.33, 0.1, 20);
   camera.position.set(0, AVATAR_FRAME.centerY, 6);
   camera.lookAt(0, AVATAR_FRAME.centerY, 0);
 
-  const rig = createRig();
+  const rig = createRig(character);
   scene.add(rig.model);
-  scene.add(new HemisphereLight(0xfff8f3, 0xc8b7ed, 1.45));
+  scene.add(new HemisphereLight(0xfff8f3, 0xe6d3c8, 1.45));
   scene.add(new AmbientLight(0xffffff, 0.55));
   const key = new DirectionalLight(0xffffff, 2.15);
   key.position.set(-3, 4, 5);
   scene.add(key);
-  const rim = new DirectionalLight(0xded0ff, 1.18);
+  const rim = new DirectionalLight(0xffe2d8, 1.18);
   rim.position.set(2, 3, -3);
   scene.add(rim);
 
   const circleGeometry = new CircleGeometry(1.12, 64);
-  const circleMaterial = new MeshBasicMaterial({ color: 0xe5ddf8 });
+  const circleMaterial = new MeshBasicMaterial({ color: 0xff4f2e, transparent: true, opacity: 0.16 });
   const circle = new Mesh(circleGeometry, circleMaterial);
   circle.position.set(0, 1.30, -1.30);
   scene.add(circle);

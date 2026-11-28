@@ -1,4 +1,4 @@
-import { icon } from './shell.js'
+import { brandHands, icon } from './shell.js'
 import { createCamera } from './recognition/camera.js'
 import { handOverlay } from './recognition/hand-overlay.js'
 import { trackHands } from './recognition/hand-tracking.js'
@@ -14,9 +14,20 @@ export function captureMarkup({ letterRanking = false } = {}) {
         <div class="camera-stage">
           <video aria-label="Prévia da webcam" autoplay muted playsinline hidden></video>
           <canvas data-hand-overlay aria-hidden="true" hidden></canvas>
+          <svg class="stage-guide" data-stage-guide viewBox="0 0 90 160" preserveAspectRatio="xMidYMax meet" aria-hidden="true" hidden>
+            <g class="guide-body"><ellipse cx="45" cy="86" rx="12.5" ry="15.5"/><path d="M12 160C12 131 25 116 45 116S78 131 78 160"/></g>
+            <g class="guide-hand"><rect x="61" y="62" width="17" height="19" rx="6"/><path d="M63.5 62V45M68.5 62V41M73.5 62V43M78 64V49M61 73L55 64"/></g>
+          </svg>
+          <div class="stage-hud">
+            <ol class="stage-stories" data-stage-stories aria-label="Sinais da lição" hidden></ol>
+            <span class="stage-rec" data-stage-rec hidden>Gravando</span>
+            <p class="stage-caption" data-stage-caption hidden><small data-stage-cue></small><span data-stage-target></span></p>
+            <span class="stage-stamp" data-stage-stamp aria-hidden="true" hidden>Acertou!</span>
+          </div>
           <div class="camera-placeholder">
-            <span>${icon('camera')}</span>
-            <p>Ative a câmera para sinalizar.</p>
+            ${brandHands}
+            <p class="placeholder-title" data-placeholder-title>Sua vez de sinalizar</p>
+            <p class="placeholder-text" data-placeholder-text>Ative a câmera para começar.</p>
           </div>
         </div>
         <div class="live-letter" data-live-letter hidden>
@@ -34,13 +45,17 @@ export function captureMarkup({ letterRanking = false } = {}) {
         </div>
       </div>
       <div class="toolbar panel-toolbar">
-        <button class="button" type="button" data-camera-toggle>Ativar câmera</button>
-        <button class="button primary" type="button" data-attempt disabled>Iniciar tentativa</button>
+        <button class="button" type="button" data-camera-toggle><span class="button-icon">${icon('power')}</span><span data-label>Ativar câmera</span></button>
+        <button class="button primary" type="button" data-attempt disabled><span class="button-icon" data-attempt-icon>${icon('record')}</span><span data-label>Iniciar tentativa</span></button>
         <label class="check-label"><input type="checkbox" data-hand-points checked> Mostrar pontos das mãos</label>
+        <button class="button focus-toggle" type="button" data-focus-mode aria-pressed="false"><span class="button-icon">${icon('expand')}</span><span data-label>Modo foco</span></button>
       </div>
       <p class="capture-privacy">A imagem fica no seu dispositivo.</p>
-      <p class="inline-status" data-hand-status role="status" hidden></p>
-      <p class="inline-status" data-capture-status data-state="idle" role="status">Mostre a mão e a parte superior do corpo.</p>
+      <div class="capture-feedback">
+        <p class="inline-status" data-hand-status role="status" hidden></p>
+        <p class="inline-status" data-capture-status data-state="idle" role="status">Mostre a mão e a parte superior do corpo.</p>
+        <ul class="attempt-parts" data-attempt-parts aria-label="Leitura por parte do sinal" hidden></ul>
+      </div>
       ${validation ? `
         <p class="capture-privacy" data-validation-camera hidden></p>
         <div class="toolbar panel-toolbar" data-validation-measurement hidden>
@@ -67,7 +82,7 @@ const resultLabels = {
 
 const letterPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', maximumFractionDigits: 1 })
 
-export function mountCapture(main, { openEngine, interpret, onResult, onReady, onLetter, captureMode, enabled = true }) {
+export function mountCapture(main, { openEngine, interpret, onResult, onReady, onLetter, captureMode, caption, celebrateAccepted = false, handPoints, enabled = true }) {
   const video = main.querySelector('video')
   const placeholder = main.querySelector('.camera-placeholder')
   const stateLabel = main.querySelector('[data-camera-state]')
@@ -89,6 +104,21 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   const manualCopy = measurementPanel?.querySelector('[data-manual-copy]')
   const measurementText = manualCopy?.querySelector('textarea')
   const overlay = handOverlay(canvas, video)
+  const card = video.closest('.media-card')
+  const stage = video.closest('.camera-stage')
+  const rec = main.querySelector('[data-stage-rec]')
+  const captionBox = main.querySelector('[data-stage-caption]')
+  const captionCue = main.querySelector('[data-stage-cue]')
+  const captionTarget = main.querySelector('[data-stage-target]')
+  const stamp = main.querySelector('[data-stage-stamp]')
+  const focusButton = main.querySelector('[data-focus-mode]')
+  const guide = main.querySelector('[data-stage-guide]')
+  const stories = main.querySelector('[data-stage-stories]')
+  const partsList = main.querySelector('[data-attempt-parts]')
+  const placeholderTitle = main.querySelector('[data-placeholder-title]')
+  const placeholderText = main.querySelector('[data-placeholder-text]')
+  if (handPoints !== undefined) points.checked = handPoints
+  let stampTimer
   const letterMode = () => captureMode?.() === 'letter'
   let cameraState = 'idle'
   let phase = 'idle'
@@ -115,7 +145,66 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     resetMeasurementPanel()
     const title = resultLabels[state]
     status.textContent = title ? `${title}. ${message}` : message
+    stage.dataset.result = state
+    showParts([])
+    if (state === 'accepted' && celebrateAccepted) celebrate()
   }
+
+  const partStates = { ok: 'certo', adjust: 'ajustar', unmeasured: 'não medido' }
+  function showParts(parts) {
+    partsList.hidden = !parts.length
+    partsList.innerHTML = parts.map(({ label, state, note }) =>
+      `<li data-state="${state}"><span class="part-mark" aria-hidden="true"></span><strong>${label}</strong><span class="visually-hidden"> (${partStates[state]})</span> <span>${note}</span></li>`).join('')
+  }
+
+  // Selo rápido de acerto sobre a câmera, no ritmo de vídeo curto.
+  function celebrate() {
+    clearTimeout(stampTimer)
+    stamp.hidden = true
+    stage.classList.remove('flash')
+    void stamp.offsetWidth
+    stamp.hidden = false
+    stage.classList.add('flash')
+    stampTimer = setTimeout(() => {
+      stamp.hidden = true
+      stage.classList.remove('flash')
+    }, 1600)
+  }
+
+  function renderCaption() {
+    const text = caption?.()
+    const visible = Boolean(text) && enabled
+    captionBox.hidden = !visible
+    if (!visible) return
+    const [cue, target] = Array.isArray(text) ? text : ['', text]
+    if (captionCue.textContent !== cue) captionCue.textContent = cue
+    if (captionTarget.textContent !== target) captionTarget.textContent = target
+    captionCue.hidden = !cue
+  }
+
+  const fullscreenTarget = () => document.fullscreenElement === card
+  function renderFocus() {
+    const on = fullscreenTarget()
+    focusButton.hidden = !card.requestFullscreen
+    focusButton.setAttribute('aria-pressed', String(on))
+    focusButton.querySelector('[data-label]').textContent = on ? 'Sair do modo foco' : 'Modo foco'
+  }
+  focusButton.addEventListener('click', async () => {
+    try {
+      if (fullscreenTarget()) await document.exitFullscreen()
+      else await card.requestFullscreen()
+    } catch {}
+  })
+  document.addEventListener('fullscreenchange', renderFocus)
+  const onPreferences = () => {
+    let preferences
+    try { preferences = JSON.parse(localStorage.getItem('librasia-preferencias') ?? '{}') } catch { return }
+    const next = preferences?.handPoints !== false
+    if (points.checked === next) return
+    points.checked = next
+    points.dispatchEvent(new Event('change'))
+  }
+  window.addEventListener('librasia:preferencias', onPreferences)
 
   function renderButtons() {
     const ready = cameraState === 'ready'
@@ -123,13 +212,23 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     canvas.hidden = !ready || !points.checked
     points.disabled = !enabled
     placeholder.hidden = ready
+    placeholderTitle.textContent = enabled ? 'Sua vez de sinalizar' : 'Primeiro, observe'
+    placeholderText.textContent = enabled ? 'Ative a câmera para começar.' : 'Veja o avatar e responda à atividade.'
+    // SVG não tem a propriedade hidden: o atributo é trocado direto.
+    guide.toggleAttribute('hidden', !ready || !enabled || letterMode() || !['idle', 'recording'].includes(phase) || stage.dataset.result === 'accepted')
+    guide.classList.toggle('faint', phase === 'recording')
     stateLabel.textContent = cameraStates[cameraState]
-    toggle.textContent = ready || cameraState === 'starting' ? 'Desativar câmera' : 'Ativar câmera'
+    toggle.querySelector('[data-label]').textContent = ready || cameraState === 'starting' ? 'Desativar câmera' : 'Ativar câmera'
     toggle.disabled = !enabled
     letterPanel.hidden = !letterMode()
     button.hidden = !letterPanel.hidden
     button.disabled = !enabled || !ready || phase === 'loading' || phase === 'inferring'
-    button.textContent = phase === 'recording' ? 'Concluir tentativa' : 'Iniciar tentativa'
+    button.querySelector('[data-label]').textContent = phase === 'recording' ? 'Concluir tentativa' : 'Iniciar tentativa'
+    button.querySelector('[data-attempt-icon]').innerHTML = icon(phase === 'recording' ? 'stop' : 'record')
+    rec.hidden = phase !== 'recording'
+    stage.classList.toggle('recording', phase === 'recording')
+    renderCaption()
+    renderFocus()
     if (validationCamera) {
       const track = ready ? video.srcObject?.getVideoTracks()[0] : undefined
       const { width, height } = track?.getSettings() ?? {}
@@ -342,6 +441,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     const result = interpret?.(analysis) ?? analysis
     phase = 'idle'
     show(result.state, result.message)
+    if (result.parts) showParts(result.parts)
     if (result.reason) status.dataset.reason = result.reason
     renderButtons()
     onResult?.(result)
@@ -410,9 +510,23 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   window.addEventListener('pagehide', onPageHide)
 
   return {
+    celebrate,
+    refreshCaption: renderCaption,
+    // Barra no topo do vídeo, um segmento por item da lição, como nos stories.
+    setStories(items) {
+      stories.hidden = !items.length
+      stories.innerHTML = items.map(({ label, state }) =>
+        `<li data-state="${state}"><span class="visually-hidden">${label}: ${{ done: 'concluído', current: 'atual', todo: 'pendente' }[state]}</span></li>`).join('')
+      stories.querySelectorAll('li').forEach((item, index) => {
+        if (items[index].fill !== undefined) item.style.setProperty('--fill', `${Math.round(items[index].fill * 100)}%`)
+      })
+    },
     setEnabled(next) {
       enabled = next
-      if (enabled) renderButtons()
+      if (enabled) {
+        if (cameraState === 'idle') show('idle', 'Mostre a mão e a parte superior do corpo.')
+        renderButtons()
+      }
       else stop('A câmera fica desligada na etapa de observação.')
     },
     reset() {
@@ -435,6 +549,10 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
       video.removeEventListener('waiting', clearTracking)
       video.removeEventListener('resize', clearTracking)
       document.removeEventListener('visibilitychange', onVisibility)
+      document.removeEventListener('fullscreenchange', renderFocus)
+      window.removeEventListener('librasia:preferencias', onPreferences)
+      clearTimeout(stampTimer)
+      if (fullscreenTarget()) document.exitFullscreen().catch(() => {})
       window.removeEventListener('pagehide', onPageHide)
     },
   }
