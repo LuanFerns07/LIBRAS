@@ -10,6 +10,11 @@ const letter = process.env.LIBRASIA_TEST_EXPECT_LETTER || 'B'
 const forbidden = process.env.LIBRASIA_TEST_FORBIDDEN_LETTER
 const expectedRanking = process.env.LIBRASIA_TEST_LETTER_RANKING
 const testPractice = letter === 'B' || process.env.LIBRASIA_TEST_ALPHABET_PRACTICE === '1'
+const paintedPoints = `(() => {
+  const canvas = document.querySelector('[data-hand-overlay]')
+  const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data
+  return new Uint32Array(pixels.buffer).some(pixel => pixel !== 0)
+})()`
 
 test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
   skip: !appUrl || !videoFile,
@@ -25,13 +30,13 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
       window.alphabetReadings = []
       new MutationObserver(() => window.alphabetReadings.push(live.textContent))
         .observe(live, { childList: true, characterData: true, subtree: true })
-      document.querySelector('[data-hand-points]').click()
       document.querySelector('[data-camera-toggle]').click()
     })()`, true)
     const live = 'document.querySelector("[data-live-character]").textContent'
     await waitUntil(`${live} === ${JSON.stringify(letter)}`, 18_000)
     assert.deepEqual(await evaluate(`(() => {
       const video = document.querySelector('video')
+      const overlay = document.querySelector('[data-hand-overlay]')
       const output = document.querySelector('[data-live-letter]')
       window.cameraTrack = video.srcObject.getVideoTracks()[0]
       const reference = document.querySelector('[data-alphabet-reference]')
@@ -45,12 +50,14 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
         liveLetter: output.querySelector('[data-live-character]').textContent,
         attemptHidden: document.querySelector('[data-attempt]').hidden,
         signalControls: !!document.querySelector('[data-free-mode], [data-signal-modes]'),
-        pointsHidden: document.querySelector('[data-hand-overlay]').hidden,
+        pointsVisible: !overlay.hidden && document.querySelector('[data-hand-points]').checked,
+        pointsAligned: ['x', 'y', 'width', 'height'].every(key =>
+          overlay.getBoundingClientRect()[key] === video.getBoundingClientRect()[key]),
         written: document.querySelector('#transcription').value,
       }
     })()`), {
       beside: true, avatarBeside: true, avatarLetter: letter === 'Ç' ? 'Z' : 'Ç', cameraContinues: true, liveLetter: letter,
-      attemptHidden: true, signalControls: false, pointsHidden: true, written: '',
+      attemptHidden: true, signalControls: false, pointsVisible: true, pointsAligned: true, written: '',
     })
     if (expectedRanking === '1') {
       const scores = await evaluate(`(() => {
@@ -77,13 +84,61 @@ test('a Área livre lê uma letra ao vivo sem iniciar uma tentativa', {
     } else if (expectedRanking === '0') {
       assert.equal(await evaluate('document.querySelector("[data-letter-ranking]").hidden'), true)
     }
-    await evaluate('document.querySelector("[data-add-letter]").click()', true)
+    await waitUntil(paintedPoints)
+    await evaluate(`document.querySelector('[data-add-letter]').click()
+      document.querySelector('[data-hand-points]').click()`, true)
     assert.equal(await evaluate('document.querySelector("#transcription").value'), letter)
+    assert.equal(await evaluate('document.querySelector("[data-hand-overlay]").hidden'), true)
+    assert.equal(await evaluate(paintedPoints), false)
+    await evaluate('document.querySelector("[data-hand-points]").click()', true)
+    await waitUntil(paintedPoints)
+    assert.equal(await evaluate('document.querySelector("video").srcObject.getVideoTracks()[0] === window.cameraTrack'), true)
     await waitUntil(`${live} === '—'`, 8000)
     assert.equal(await evaluate('document.querySelector("[data-letter-ranking]").hidden'), true)
     if (forbidden) assert.ok(!(await evaluate('window.alphabetReadings')).includes(forbidden))
     await evaluate('document.querySelector("[data-page=saiba-mais]").click()', true)
     await waitUntil('window.cameraTrack.readyState === "ended"')
+  }, { videoFile })
+})
+
+test('a Área livre retoma os pontos quando o rastreador para de responder', {
+  skip: !appUrl || !videoFile || letter !== 'B',
+  timeout: 35_000,
+}, async () => {
+  const url = new URL('/#area-livre', appUrl)
+  assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname))
+  await withChromium(async ({ navigate, evaluate, permission, waitUntil }) => {
+    await navigate(url.href)
+    await permission(url.origin, 'granted')
+    await evaluate(`(() => {
+      const OriginalWorker = window.Worker
+      window.handTrackers = 0
+      window.droppedFrames = 0
+      window.Worker = class extends OriginalWorker {
+        constructor(url, ...options) {
+          super(url, ...options)
+          if (!new URL(url, location.href).pathname.endsWith('/hand-tracker.worker.js')) return
+          if (++window.handTrackers === 1) {
+            this.addEventListener('message', event => {
+              if (event.data.type !== 'frame') return
+              window.droppedFrames += 1
+              event.stopImmediatePropagation()
+            })
+          }
+        }
+      }
+      document.querySelector('[data-camera-toggle]').click()
+    })()`, true)
+    await waitUntil('window.droppedFrames === 1')
+    await evaluate('window.liveTrack = document.querySelector("video").srcObject.getVideoTracks()[0]')
+    assert.equal(await evaluate(paintedPoints), false)
+    await waitUntil('window.handTrackers === 2', 13_000)
+    await waitUntil(paintedPoints, 12_000)
+    await waitUntil('document.querySelector("[data-live-character]").textContent === "B"', 12_000)
+    assert.equal(await evaluate(`(() => {
+      const [track] = document.querySelector('video').srcObject.getVideoTracks()
+      return track === window.liveTrack && track.readyState === 'live'
+    })()`), true)
   }, { videoFile })
 })
 

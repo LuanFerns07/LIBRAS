@@ -1,5 +1,11 @@
 # Vídeo de referência para os pontos das mãos
 
+## Retomada na Área livre
+
+No Chromium com o B gravado da UFSM, o teste bloqueou as respostas do primeiro rastreador enquanto o vídeo seguia ativo. Na prévia anterior, o desenho ficou vazio. Com a retomada automática, o aplicativo abriu outro rastreador, voltou a desenhar os pontos e exibiu B na mesma trilha. O teste confirmou também que desmarcar e remarcar a opção apaga e restaura o desenho. A webcam Acer forneceu quadros de 640 × 480 ao rastreador e foi liberada ao desligar a câmera. A verificação visual das mãos usou vídeo gravado. [Teste no Chromium](../tests/e2e/alphabet-live.test.mjs)
+
+## Vídeo das duas mãos
+
 O teste no Chromium usa o trecho CLAD de desenvolvimento `clad-dev-58a` (Subject 4, vídeo 58, segundo inicial 0). A pessoa coloca um headset e leva ambas as mãos ao computador. A versão local desacelera o trecho, mantém a orientação original e cobre temporariamente a mão esquerda anatômica. O arquivo Y4M fica em `data/evidence/hand-overlay-live/clad-duas-maos.y4m`, com 640 × 480 pixels, 25 quadros por segundo e 10,76 s de duração. [Seleção do trecho](../ml/external_eval/clad-development.json) · [Licença e procedência](negativos.md#negativos-complementares-no-treino)
 
 | Tempo no Y4M | Marcador no vídeo | Mãos esperadas |

@@ -3,9 +3,9 @@ const maxFrameGapMs = 1000
 export function createFrameWatchdog(onTimeout) {
   let timer
   return {
-    refresh() {
+    refresh(delay = maxFrameGapMs) {
       clearTimeout(timer)
-      timer = setTimeout(onTimeout, maxFrameGapMs)
+      timer = setTimeout(onTimeout, delay)
     },
     stop() {
       clearTimeout(timer)

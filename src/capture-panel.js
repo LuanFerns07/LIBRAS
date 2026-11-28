@@ -94,6 +94,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   let phase = 'idle'
   const engines = new Map()
   let preview
+  let retryPreview = true
   let capture
   let reading
   let ticket = 0
@@ -241,12 +242,21 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
   function showPreviewError() {
     if (letterMode()) stopLetters()
     closePreview()
+    if (!needsPreview()) return
+    if (retryPreview) {
+      retryPreview = false
+      syncPreview()
+      if (preview) void prepareLetters()
+      return
+    }
     handStatus.textContent = 'Pontos das mãos indisponíveis. Desmarque a opção e marque novamente para tentar de novo.'
     handStatus.hidden = false
   }
 
+  const needsPreview = () => enabled && camera.active && (points.checked || letterMode())
+
   function syncPreview() {
-    const needed = enabled && camera.active && (points.checked || letterMode())
+    const needed = needsPreview()
     handStatus.hidden = true
     try {
       if (needed && !preview) preview = trackHands(video, {
@@ -276,6 +286,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     show(state === 'error' ? 'capture-error' : state, message)
     renderButtons()
     if (state === 'ready') {
+      retryPreview = true
       syncPreview()
       void prepareLetters()
     }
@@ -297,6 +308,7 @@ export function mountCapture(main, { openEngine, interpret, onResult, onReady, o
     else void camera.start()
   })
   points.addEventListener('change', () => {
+    retryPreview = true
     renderButtons()
     syncPreview()
     void prepareLetters()

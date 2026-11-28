@@ -50,9 +50,9 @@ Em 27/11/2026, a compilação `aea5303` partiu de um checkout limpo. Os arquivos
 
 ## Pontos das mãos ao vivo
 
-Na Área livre, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Acompanhe os pontos antes, durante e depois de iniciar uma tentativa. Durante a captura, desmarque e marque a opção para verificar a sobreposição. [Abrir Área livre](http://127.0.0.1:4177/#area-livre)
+Na Área livre, clique em **Ativar câmera** e permita o acesso. **Mostrar pontos das mãos** começa marcado. Mexa os dedos e os pulsos das duas mãos. Tire uma mão do vídeo e traga-a de volta. Durante a captura, desmarque e marque a opção para verificar a sobreposição. Se o rastreador parar de responder, a aplicação tenta retomá-lo com a câmera ainda ativa. [Abrir Área livre](http://127.0.0.1:4205/#area-livre)
 
-O Hand Landmarker acompanha até duas mãos em um worker local. A sobreposição desenha 21 pontos e suas conexões em cada mão detectada. O vídeo e a sobreposição usam o mesmo espelhamento e encaixe. Quando uma mão deixa de ser detectada, o desenho dela é apagado na próxima atualização. A decisão de sinais usa o classificador combinado da prévia. [Modelo Hand Landmarker do MediaPipe](https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/vision/README.md#hand-landmarker)
+O Hand Landmarker acompanha até duas mãos em um worker local. A sobreposição desenha 21 pontos e suas conexões em cada mão detectada. O vídeo e a sobreposição usam o mesmo espelhamento e encaixe. Quando uma mão deixa de ser detectada, o desenho dela é apagado na próxima atualização. O leitor do alfabeto usa os pontos para classificar a letra. [Modelo Hand Landmarker do MediaPipe](https://github.com/google-ai-edge/mediapipe/blob/master/mediapipe/tasks/web/vision/README.md#hand-landmarker)
 
 O Chromium abriu e liberou a webcam física do PC no teste automatizado. A confirmação visual do alinhamento com movimentos feitos na webcam integra o teste manual. [Resultados com vídeo gravado e webcam física](teste-pontos-ao-vivo.md#resultado-da-prévia-empacotada) · [Checklist de verificação](../ROADMAP_LIBRASIA.md#m2--primeiro-sinal-com-webcam-e-avatar-reais)
 
@@ -71,7 +71,7 @@ python3 data/releases/librasia-1.1.0/iniciar.py --porta 4203
 Na porta 4205, a prévia inclui as 27 letras do avatar e a leitura ao vivo na mesma tela da Área livre. Os testes históricos de transcrição de sinais devem usar o pacote da demonstração anterior ou a prévia de sinalização contínua. [Abrir Área livre](http://127.0.0.1:4205/#area-livre) · [Pacote anterior](#prévia-de-trabalho)
 
 ~~~bash
-python3 data/releases/librasia-area-livre-alfabeto/iniciar.py --porta 4205
+python3 data/releases/librasia-retomada-pontos/iniciar.py --porta 4205
 ~~~
 
 ## Prévia v0.1.0-preview.1

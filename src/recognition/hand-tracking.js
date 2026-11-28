@@ -14,6 +14,8 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
   let latest
   let lastMediaTime = -Infinity
   const watchdog = createFrameWatchdog(onStall)
+  const responseWatchdog = createFrameWatchdog(fail)
+  responseWatchdog.refresh(10_000)
 
   function discard() {
     generation += 1
@@ -32,6 +34,7 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
     if (closed) return
     closed = true
     watchdog.stop()
+    responseWatchdog.stop()
     cancelPending()
     worker.terminate()
   }
@@ -66,6 +69,7 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
     const request = latest
     latest = undefined
     inFlight = request
+    responseWatchdog.refresh(3000)
     let frame
     try {
       if (typeof VideoFrame === 'function') {
@@ -75,6 +79,7 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
       }
       if (closed || generation !== request.generation) {
         frame.close()
+        responseWatchdog.stop()
         inFlight = undefined
         void sendLatest()
         return
@@ -83,6 +88,7 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
     } catch {
       frame?.close()
       if (closed) return
+      responseWatchdog.stop()
       inFlight = undefined
       if (generation === request.generation) fail()
       else void sendLatest()
@@ -98,8 +104,10 @@ export function trackHands(video, { onFrame, onError, onStall, readLetters }) {
       return
     }
     if (data.type === 'ready') {
+      responseWatchdog.stop()
       ready = true
     } else if (data.type === 'frame') {
+      responseWatchdog.stop()
       const request = inFlight
       inFlight = undefined
       if (visible && request?.generation === generation &&
