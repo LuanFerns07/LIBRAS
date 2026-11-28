@@ -241,3 +241,30 @@ test('A a Z e Ç progridem e entram em revisão sem alterar o progresso antigo d
   assert.deepEqual(readProgress(storage, 'letter'), letters)
   assert.deepEqual(readProgress(storage), signals)
 })
+
+test('a leitura por parte usa só o que o reconhecimento mede', async () => {
+  const { attemptParts } = await import('../src/recognition/feedback.js')
+  const { lesson } = await import('../src/catalog.js')
+  const [cinco, , amarelo] = lesson
+  const states = parts => Object.fromEntries(parts.map(({ part, state }) => [part, state]))
+  assert.deepEqual(states(attemptParts({ state: 'accepted', id: cinco.id, palm: 'front' }, cinco)),
+    { framing: 'ok', sign: 'ok', palm: 'ok' })
+  assert.deepEqual(states(attemptParts({ state: 'accepted', id: cinco.id, palm: 'away' }, cinco)),
+    { framing: 'ok', sign: 'ok', palm: 'adjust' })
+  assert.deepEqual(states(attemptParts({ state: 'accepted', id: cinco.id, palm: 'uncertain' }, cinco)),
+    { framing: 'ok', sign: 'ok', palm: 'unmeasured' })
+  assert.deepEqual(states(attemptParts({ state: 'inconclusive', reason: 'framing' }, cinco)), { framing: 'adjust' })
+  assert.deepEqual(states(attemptParts({ state: 'inconclusive', reason: 'low-confidence' }, amarelo)),
+    { framing: 'ok', sign: 'adjust', motion: 'unmeasured' })
+  assert.deepEqual(states(attemptParts({ state: 'accepted', id: amarelo.id, trajectory: 'downward' }, amarelo)),
+    { framing: 'ok', sign: 'ok', motion: 'ok' })
+  assert.deepEqual(attemptParts({ state: 'unavailable' }, cinco), [])
+})
+
+test('para canhotos, a palma não medida explica o limite', async () => {
+  const { attemptParts } = await import('../src/recognition/feedback.js')
+  const [cinco] = lesson
+  const palm = attemptParts({ state: 'accepted', id: cinco.id, palm: 'uncertain' }, cinco, { hand: 'left' }).at(-1)
+  assert.equal(palm.state, 'unmeasured')
+  assert.match(palm.note, /direita/u)
+})

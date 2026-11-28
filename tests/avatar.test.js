@@ -4,7 +4,7 @@ import { Box3, Euler, Vector3 } from 'three';
 import { clips, interpolatePose, leftRest, neutralPose, sampleClip } from '../src/avatar/clips.js';
 import { createPlayback } from '../src/avatar/playback.js';
 import { AVATAR_FRAME } from '../src/avatar/player.js';
-import { createRig } from '../src/avatar/rig.js';
+import { avatarCharacters, createRig } from '../src/avatar/rig.js';
 
 test('o catálogo cobre A–Z, a cedilha e os sinais da lição e apresentação', () => {
   for (const letter of 'abcdefghijklmnopqrstuvwxyzç') {
@@ -207,4 +207,22 @@ test('uma fila vazia volta à posição de repouso', () => {
   assert.deepEqual(states, ['paused']);
   assert.equal(painted.at(-1), neutralPose);
   assert.equal(scheduled.size, 0);
+});
+
+test('as duas personagens cabem no enquadramento e deixam o rosto livre', () => {
+  assert.deepEqual(avatarCharacters, ['homem', 'mulher']);
+  const { centerY, halfHeight, halfWidth } = AVATAR_FRAME;
+  const box = new Box3();
+  for (const character of avatarCharacters) {
+    const rig = createRig(character);
+    for (const [id, clip] of Object.entries(clips)) {
+      for (const progress of [0, 0.5, 1]) {
+        rig.applyPose(sampleClip(clip, progress));
+        const { min, max } = box.setFromObject(rig.model, true);
+        assert.ok(min.x >= -halfWidth && max.x <= halfWidth, `${character} ${id} no eixo X`);
+        assert.ok(min.y >= centerY - halfHeight && max.y <= centerY + halfHeight, `${character} ${id} no eixo Y`);
+      }
+    }
+    rig.dispose();
+  }
 });

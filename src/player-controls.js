@@ -1,3 +1,14 @@
+const characterKey = 'librasia-personagem'
+const characters = ['mulher', 'homem']
+
+function readCharacter() {
+  try {
+    const saved = localStorage.getItem(characterKey)
+    if (characters.includes(saved)) return saved
+  } catch {}
+  return 'mulher'
+}
+
 export function playerMarkup(title = 'Avatar 3D', { picker = '', extra = '' } = {}) {
   return `
     <section class="panel media-card" aria-label="${title}">
@@ -26,21 +37,48 @@ export function mountPlayerControls(area, createPlayer) {
   let player
   let state = 'paused'
   let populated = false
+  let character = readCharacter()
+  let sequence = []
+  let looping = false
+  let loopTimer
 
-  try {
-    player = createPlayer(host, {
-      onStep(step) {
-        status.textContent = step?.label ?? 'Pronto'
-      },
-      onState(next) {
-        state = next
-        play.textContent = state === 'playing' ? 'Pausar' : 'Reproduzir'
-      },
-    })
-  } catch {
-    alert.hidden = false
-    alert.textContent = 'O avatar precisa de WebGL 2. Verifique a aceleração gráfica ou tente outro navegador.'
+  function build() {
+    try {
+      player = createPlayer(host, {
+        character,
+        onStep(step) {
+          status.textContent = step?.label ?? 'Pronto'
+        },
+        onState(next) {
+          state = next
+          play.textContent = state === 'playing' ? 'Pausar' : 'Reproduzir'
+          // Em loop, o sinal recomeça sozinho após uma pausa curta, como um vídeo curto.
+          clearTimeout(loopTimer)
+          if (looping && state === 'finished') loopTimer = setTimeout(() => { if (looping) player?.restart() }, 700)
+        },
+      })
+    } catch {
+      player = undefined
+      alert.hidden = false
+      alert.textContent = 'O avatar precisa de WebGL 2. Verifique a aceleração gráfica ou tente outro navegador.'
+    }
   }
+
+  build()
+  // A personagem é escolhida na configuração inicial; o avatar aberto troca na hora.
+  const onCharacter = ({ detail }) => {
+    if (!characters.includes(detail) || detail === character) return
+    character = detail
+    player?.dispose()
+    state = 'paused'
+    play.textContent = 'Reproduzir'
+    build()
+    if (!player) return
+    player.setSpeed(Number(speed.value))
+    player.setSequence(sequence)
+    renderAvailability()
+  }
+  window.addEventListener('librasia:personagem', onCharacter)
 
   function renderAvailability() {
     play.disabled = !player || !populated
@@ -59,6 +97,7 @@ export function mountPlayerControls(area, createPlayer) {
 
   return {
     setSequence(steps, autoplay = false) {
+      sequence = steps
       populated = !!steps.length
       status.textContent = steps[0]?.label ?? 'Pronto'
       renderAvailability()
@@ -69,6 +108,19 @@ export function mountPlayerControls(area, createPlayer) {
         player.play()
       }
     },
-    dispose() { player?.dispose() },
+    setLoop(on, slow = speed.value) {
+      looping = on && !globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+      area.querySelector('[data-avatar]').closest('.media-card')?.classList.toggle('looping', looping)
+      speed.value = String(slow)
+      player?.setSpeed(Number(speed.value))
+      clearTimeout(loopTimer)
+      if (looping && populated && state !== 'playing') player?.restart()
+    },
+    dispose() {
+      clearTimeout(loopTimer)
+      looping = false
+      window.removeEventListener('librasia:personagem', onCharacter)
+      player?.dispose()
+    },
   }
 }
